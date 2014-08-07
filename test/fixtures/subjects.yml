@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  max_weekily_classes: 1
+  credit_hours: 9.99
+  no_exams: false
+
+two:
+  name: MyString
+  code: MyString
+  max_weekily_classes: 1
+  credit_hours: 9.99
+  no_exams: false

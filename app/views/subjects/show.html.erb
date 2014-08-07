@@ -1,0 +1,10 @@
+<h1>Normal Subject</h1>
+
+<!-- fetch data from subject object -->
+<p><strong>Name: </strong><%= @subject.name %></p>
+<p><strong>Code: </strong><%= @subject.code %></p>
+<p><strong>Max weekily classes: </strong><%= @subject.max_weekily_classes %></p>
+<p><strong>Credit Hours: </strong><%= @subject.credit_hours %></p>
+<p><strong>No Exams: </strong><%= @subject.no_exams %></p>
+
+<%= link_to 'Back', subjects_path %>
