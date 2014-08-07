@@ -1,0 +1,13 @@
+<table style="width:200px">
+<!-- fetch data from electivegroup object -->
+<% @electivegroups.each do |elective| %>
+  <tr>
+    <td><%= elective.name %></td>
+  <!-- link to show -->
+    <td><%= link_to 'edit', edit_electivegroup_path(elective) %></td>
+  <!-- link to edit -->
+    <td><%= link_to 'delete' %></td>
+  <!-- link to delete -->
+    </tr>
+<% end %>
+</table>
