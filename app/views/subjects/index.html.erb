@@ -1,4 +1,5 @@
 <h1>Manage Subjects</h1>
+<br><br>
 <!-- link to new html page -->
 <%= link_to 'Add Normal Subject', new_subject_path %><br><br>
 
@@ -20,5 +21,6 @@
 </table>
 <br><br><br>
 <!-- link to new html page of elective group -->
-<%= link_to 'Add Elective Groups' %><br><br>
-
+<%= link_to 'Add Elective Groups', new_electivegroup_path %><br><br>
+<!-- include partial page _form in this page -->
+<%= render 'electivegroups/elective' %>

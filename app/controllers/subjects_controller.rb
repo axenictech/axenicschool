@@ -1,6 +1,8 @@
 class SubjectsController < ApplicationController
+  
   def index
   	@subjects=Subject.all
+    @electivegroups=Electivegroup.all
   end
 
   def new
