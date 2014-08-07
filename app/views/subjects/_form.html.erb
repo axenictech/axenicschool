@@ -1,0 +1,39 @@
+<!-- use partial file to avoid duplication -->
+<!-- use form_for tag to create form -->
+
+<%= form_for @subject do |f|%>
+	<% if @subject.errors.any? %>
+		<div id="error_explanation">
+		<h2>Errors prohibited this subject from being saved:</h2>
+		<ul><% @subject.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %></ul>
+		</div>
+	<% end %>
+<table style="width:500px">
+		<tr><td><%= f.label :name %></td>
+			<td><%= f.text_field :name%></td>
+		</tr>
+
+		<tr><td><%= f.label :code %></td>
+			<td><%= f.text_field :code%></td>
+		</tr>
+		
+		<tr><td><%= f.label :max_weekily_classes %></td>
+			<td><%= f.text_field :max_weekily_classes%></td>
+		</tr>
+		
+		<tr><td><%= f.label :credit_hours %></td>
+			<td><%= f.text_field :credit_hours%></td>
+		</tr>
+		
+		<tr><td><%= f.label :no_exam %></td>
+			<td><%= f.check_box :no_exams%></td>
+		</tr>
+		
+		<tr><td><%= f.submit %></td>
+		</tr>
+		<tr><td><%= link_to 'Back', subjects_path %></td>
+		</tr>
+</table>
+<% end %>
