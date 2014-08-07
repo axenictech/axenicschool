@@ -1,0 +1,43 @@
+
+<table width="100%">
+  <tr>
+     <td><h1>Student Categary</h1></td>
+      <td><h1><%= link_to 'Back', new_catgeory_path %></h1><td>
+  </tr>
+</table>
+
+ <%= form_for :catgeory, url: catgeorys_path do |f| %>
+
+    <% if @category.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@category.errors.count, "error") %> prohibited this categary from being saved:</h2>
+          <ul><% @category.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          </ul>
+        </div>
+    <% end %>
+  
+ <table>
+   <tr>
+    <td><%= f.label :enter_new_category %></td>
+    <td><%= f.text_field :name %></td>
+   </tr>
+ 
+  <tr>
+    <td></td>
+    <td><%= f.submit %></td>
+  </tr>
+</table> 
+
+<table border="1">
+  <% @categorys.each do |cat| %>
+  <tr>
+    <td><%= cat.name%></td>
+    <td><%= link_to 'Edit', edit_catgeory_path(cat) %></td>
+    <td><%= link_to 'Delete', catgeory_path(cat),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
