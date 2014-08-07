@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_name: MyString
+  code: MyString
+  section_name: MyString
+  is_deleted: false
+  grading_type: MyString
+
+two:
+  course_name: MyString
+  code: MyString
+  section_name: MyString
+  is_deleted: false
+  grading_type: MyString

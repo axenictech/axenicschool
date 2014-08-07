@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start_date: 9.99
+  end_date: 9.99
+  is_deleted: false
+  employee_id: 1
+  course_id: 
+
+two:
+  name: MyString
+  start_date: 9.99
+  end_date: 9.99
+  is_deleted: false
+  employee_id: 1
+  course_id: 
