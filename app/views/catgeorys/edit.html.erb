@@ -1,0 +1,16 @@
+
+<h1>Edititng category</h1>
+ 
+<%= form_for @category, method: :patch do |f| %>
+
+  <p>
+    <%= f.label :edit_category%><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ <%= link_to 'Back', catgeorys_path %>

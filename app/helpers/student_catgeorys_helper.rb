@@ -1,0 +1,2 @@
+module StudentCatgeorysHelper
+end
