@@ -11,23 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20140806113324) do
+=======
 ActiveRecord::Schema.define(version: 20140807065345) do
+>>>>>>> b787826bfaf5c6100c11e9ef4d59e8deefa24eda
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
+  create_table "grading_levles", force: true do |t|
+    t.string   "name"
+    t.integer  "min_score"
+    t.string   "description"
+=======
   create_table "electivegroups", force: true do |t|
     t.string   "name"
+>>>>>>> b787826bfaf5c6100c11e9ef4d59e8deefa24eda
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
+  create_table "gradinglevles", force: true do |t|
+    t.string   "name"
+    t.integer  "min_score"
+    t.string   "description"
+=======
   create_table "subjects", force: true do |t|
     t.string   "name"
     t.string   "code"
     t.integer  "max_weekily_classes"
     t.decimal  "credit_hours"
     t.boolean  "no_exams"
+>>>>>>> b787826bfaf5c6100c11e9ef4d59e8deefa24eda
     t.datetime "created_at"
     t.datetime "updated_at"
   end
