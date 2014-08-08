@@ -1,28 +1,10 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  
-  
-
-  
-
-  
-
-  resources :gradinglevles
-  
-  root 'gradinglevles#index'
-  
-=======
->>>>>>> b787826bfaf5c6100c11e9ef4d59e8deefa24eda
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   
   # You can have the root of your site routed with "root"
-<<<<<<< HEAD
-  
-=======
   root 'subjects#index'
->>>>>>> b787826bfaf5c6100c11e9ef4d59e8deefa24eda
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

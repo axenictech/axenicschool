@@ -1,13 +1,14 @@
-<table style="width:200px">
+<table style="width:300px">
 <!-- fetch data from electivegroup object -->
 <% @electivegroups.each do |elective| %>
   <tr>
     <td><%= elective.name %></td>
-  <!-- link to show -->
+<!-- link to edit -->
     <td><%= link_to 'edit', edit_electivegroup_path(elective) %></td>
-  <!-- link to edit -->
-    <td><%= link_to 'delete' %></td>
-  <!-- link to delete -->
+  <!-- link to delete --> 
+    <td><%= link_to 'delete', electivegroup_path(elective), method: :delete,
+    					data:{confirm: 'Are you sure?'}%></td>
     </tr>
+   <tr><td><%= link_to 'Add Elective Subject', new_subject_path %></td>
 <% end %>
 </table>

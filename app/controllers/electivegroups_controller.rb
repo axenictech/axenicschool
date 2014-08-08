@@ -25,6 +25,12 @@ class ElectivegroupsController < ApplicationController
 	  	redirect_to subjects_path
 	end
 
+	def destroy
+		@electivegroup=Electivegroup.find(params[:id])
+		@electivegroup.destroy
+		redirect_to subjects_path
+	end
+
 	private def electivegroup_params
 		params.require(:electivegroup).permit(:name)
 	end
