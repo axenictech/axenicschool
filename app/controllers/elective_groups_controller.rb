@@ -1,0 +1,2 @@
+class ElectiveGroupsController < ApplicationController
+end
