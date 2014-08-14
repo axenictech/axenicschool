@@ -1,0 +1,43 @@
+<h1>GradingLevles</h1>
+
+
+<%=form_for ([@batch,@grading_level]) do|f|%>
+<%= select("batch1","batch_id",Batch.all.collect{|p| [p.name,p.id]})%>
+<%= link_to 'Add Grades',new_batch_grading_level_path%>
+<input type="hidden" id="selectpath" value='<%=new_batch_grading_level_path(@batch.id)%>'>
+
+
+
+   <table border="1" style="width:500px">  
+    <tr>
+        <th>Name</th>
+        <th>Min Score</th>
+        <th>Description</th>
+    </tr>
+    <% @grading_levels.each do |gradinglevel| %>
+       <tr>
+            <td><%= gradinglevel.name %></td>
+            <td><%= gradinglevel.min_score %></td>
+            <td><%= link_to 'Destroy',[gradinglevel.batch,gradinglevel],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                 <td><%=link_to 'Edit',edit_batch_grading_level_path(gradinglevel.batch,gradinglevel)%></td>
+            
+        </tr>   
+            
+      <% end %>
+
+</table>
+
+</div>
+    
+      <script>
+	
+              $("#batch1_batch_id").change(function() {
+                   alert($(this).val());
+              });
+            
+    </script>
+<%end%>
+
+
+

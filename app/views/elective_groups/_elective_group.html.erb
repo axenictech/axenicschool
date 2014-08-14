@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Elective Groups</div>
+  <div class="panel-body">
+<table class="table" style="width:500px">
+	<tr><th>Elective Groups Name</th></tr>
+<% @elective_groups.each do |elective_group| %>
+  <tr>
+    <td><%= elective_group.name %></td>
+     <td><%= elective_group.id %></td>
+    <td><%= link_to 'edit',edit_batch_elective_group_path(elective_group.batch,elective_group)%></td>
+
+    <td><%= link_to 'delete', [elective_group.batch,elective_group],method: :delete,
+                data:{confirm:'Are you sure want to delete?'} %></td>
+    <td><%= link_to 'Add Elective Subject', new_batch_elective_group_subject_path(elective_group.batch,elective_group)%></td>
+      <% elective_subjects=elective_group.subjects.all %>
+      <% elective_subjects.each do |subject| %>
+    <tr><td><%= subject.name %></td>
+        <td><%= subject.code %></td>
+   
+    </tr>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+</div></div>

@@ -1,0 +1,19 @@
+<%=form_for ([@batch,@grading_level]) do|f|%>
+<table >
+		
+
+		<tr>
+				<td><%=f.label :name%></td>
+				<td><%=f.text_field :name%></td>
+		</tr>
+
+		<tr>
+				<td><%=f.label :min_score%></td>
+				<td><%=f.text_field :min_score%></td>
+		</tr>
+
+		<tr>
+				<td><%=f.submit%></td>
+		</tr>
+</table>
+<%end%>
