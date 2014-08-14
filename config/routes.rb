@@ -7,6 +7,15 @@ Rails.application.routes.draw do
  root 'home#index'
 
  resources :settings
+ resources :categories
+ resources :general_settings
+resources :courses do
+    resources :batches
+  end
+
+  resources :batches do
+  resources :grading_levels
+end  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -15,6 +24,12 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
 
+   resources :batches do
+    resources :subjects
+    resources :elective_groups do
+     resources :subjects 
+    end
+  end  
   # Example resource route with options:
   #   resources :products do
   #     member do

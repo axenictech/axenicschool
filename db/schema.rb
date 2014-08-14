@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813105310) do
+ActiveRecord::Schema.define(version: 20140814055614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,14 +55,28 @@ ActiveRecord::Schema.define(version: 20140813105310) do
 
   add_index "elective_groups", ["batch_id"], name: "index_elective_groups_on_batch_id", using: :btree
 
+  create_table "general_settings", force: true do |t|
+    t.string   "institution_name"
+    t.string   "institution_address"
+    t.string   "institution_phone_no"
+    t.string   "student_attendance_type"
+    t.string   "language"
+    t.string   "time_zone"
+    t.string   "country"
+    t.string   "network_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "grading_levels", force: true do |t|
     t.string   "name"
     t.integer  "batch_id"
     t.integer  "min_score"
     t.integer  "order"
-    t.boolean  "is_deleted", default: false
+    t.boolean  "is_deleted",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   add_index "grading_levels", ["batch_id"], name: "index_grading_levels_on_batch_id", using: :btree

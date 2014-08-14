@@ -6,7 +6,7 @@ class CreateGradingLevels < ActiveRecord::Migration
       t.integer    :min_score
       t.integer    :order
       t.boolean    :is_deleted, :default => false
-  
+      t.string     :description
       t.timestamps
     end
   end

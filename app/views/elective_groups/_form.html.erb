@@ -1,0 +1,21 @@
+<%= form_for ([@batch, @elective_group]) do |f|%>
+<% if @elective_group.errors.any? %>
+		<div id="error_explanation">
+		<h2>Errors prohibited this subject from being saved:</h2>
+		<ul><% @elective_group.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %></ul>
+		</div>
+	<% end %>
+<div class="modal-body">
+	<ul class="errors"></ul>
+	<div class="control-group">
+			<%= f.label :name , class: "control-label"%>
+		<div class="control">
+			<%= f.text_field :name %></div></div></div>	
+            
+<div class"modal-footer">		
+	<%= f.submit 'Submit', class: "btn btn-primary"%>
+	<%= link_to 'Cancel',batch_subjects_path, class: "btn btn-default" %></div>
+<% end %>
+<% else %>
