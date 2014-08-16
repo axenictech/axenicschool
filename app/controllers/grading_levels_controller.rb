@@ -26,7 +26,11 @@ def index
 
     def edit
     	@batch=Batch.find(params[:batch_id])
+<<<<<<< HEAD
     	@grading_level1=@batch.grading_levels.find(params[:id])
+=======
+    	@grading_level=@batch.grading_levels.find(params[:id])
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
     end
     def update
     	@batch=Batch.find(params[:batch_id])

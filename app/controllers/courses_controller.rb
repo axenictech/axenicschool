@@ -16,7 +16,11 @@ class CoursesController < ApplicationController
   def create
   	@course=Course.new(postparam)
   if @course.save
+<<<<<<< HEAD
   	redirect_to  course_path(@course)
+=======
+  	redirect_to  courses_path
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
   else
    render 'new'
   end
@@ -24,7 +28,11 @@ class CoursesController < ApplicationController
 
 # displaying the course
   def show
+<<<<<<< HEAD
   	@course=Course.find(params[:id])
+=======
+  	@courses=Course.all
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 
   end
 

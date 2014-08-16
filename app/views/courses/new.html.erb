@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 <div class="container">	
 <div class="row">
 
 <div class="col-md-1"></div>
 <div class="col-md-10">
+=======
+	
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 <%= form_for @course do |c| %>
 
 	<tr><td><% if @course.errors.any?%>
@@ -19,19 +23,31 @@
 	<!-- inserting course-->
 		<tr>
 			<td><%=c.label :course_name %></td>
+<<<<<<< HEAD
 			<td><%= c.text_field :course_name,:style =>"width: 310px", :placeholder=>"course" , class: "form-control"%></td>
+=======
+			<td><%= c.text_field :course_name %></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 		</tr>
 		
 	
 		<!-- inserting section name -->
 		<tr>
 			<td><%=c.label :section_name %></td>
+<<<<<<< HEAD
 			<td><%= c.text_field :section_name,:style =>"width: 310px", :placeholder=>"section" , class: "form-control" %></td>
+=======
+			<td><%= c.text_field :section_name %></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 		</tr>
 		<!-- inserting code -->
 		<tr>
 			<td><%=c.label :code %></td>
+<<<<<<< HEAD
 			<td><%= c.text_field :code ,:style =>"width: 310px", :placeholder=>"ncode" , class: "form-control"%></td>
+=======
+			<td><%= c.text_field :code %></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 		</tr>
 		<!-- inserting grading type -->
 		<!-- <tr>
@@ -41,12 +57,17 @@
 		</tr> -->
 		<tr>
 
+<<<<<<< HEAD
 		<td ><%=c.submit 'create', class: "btn btn-primary"%></td>
 		<td><%= link_to 'back', courses_path ,class: "btn btn-success"%></td>
+=======
+		<td ><%=c.submit%></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 		</tr>
 		<% end %>
 		
 	</tbody>	
+<<<<<<< HEAD
 	</table>	
 	
 </div>
@@ -55,6 +76,16 @@
 <div class="col-md-1"></div>
 
 
+=======
+	</table>
+	
+<%render @course.batches %>
+	
+	
+
+
+<%= link_to 'back', courses_path %>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 
 
 

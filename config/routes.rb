@@ -14,6 +14,16 @@ resources :courses do
     resources :batches
   end
 
+<<<<<<< HEAD
+=======
+ resources :settings
+ resources :categories
+ resources :general_settings
+resources :courses do
+    resources :batches
+  end
+
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
   resources :batches do
   resources :grading_levels
 end  

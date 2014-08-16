@@ -1,0 +1,6 @@
+<h2>Batch Details</h2>
+
+<%= form_for ([@course,@course.batches.build ]) do |b|%>
+<p><%=b.lable :name%></p>
+<p><%=b.text_field :name%></p>
+<%end%>

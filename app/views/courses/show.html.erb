@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
 <div class="row">
 <div class="col-md-1"></div>
@@ -14,3 +15,18 @@
 <div class="col-md-1"></div>
 </div></div>
 
+=======
+
+<% @courses.each do |disp| %>
+<table>
+	<tr>
+
+	<td ><%=disp.course_name%></td>
+	
+	<td ><%=disp.section_name%></td>
+	<td ><%= link_to 'edit',edit_course_path(disp) %></td>
+	<td ><%= link_to 'destroy',course_path(disp), method: :delete, data:{confirm: 'Delete data?'} %></td>
+	</tr>
+</table>
+<%end%>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e

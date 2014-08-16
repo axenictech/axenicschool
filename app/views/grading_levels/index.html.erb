@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 <h1 align="center">GradingLevles</h1>
+=======
+<h1>GradingLevles</h1>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 
 
 <%=form_for ([@batch,@grading_level]) do|f|%>
 <%= select("batch1","batch_id",Batch.all.collect{|p| [p.name,p.id]})%>
+<<<<<<< HEAD
 <%= link_to 'Add Grades',new_batch_grading_level_path ,class: "btn btn-primary pull-right"%>
 
+=======
+<%= link_to 'Add Grades',new_batch_grading_level_path%>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 <input type="hidden" id="selectpath" value='<%=new_batch_grading_level_path(@batch.id)%>'>
 
 
 
+<<<<<<< HEAD
    <table class="table" style="width:500px">  
+=======
+   <table border="1" style="width:500px">  
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
     <tr>
         <th>Name</th>
         <th>Min Score</th>

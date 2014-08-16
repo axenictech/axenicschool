@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
 <div class="row">
 <div class="col-md-1"></div>
@@ -8,3 +9,44 @@
 </div>
 </div>
 <div class="col-md-1"></div>
+=======
+<h1> this is new</h1>
+<%=@p%>
+<%=form_for ([@batch,@grading_level1]) do|f|%>
+<table >
+		
+		<% if @grading_level1.errors.any? %>
+  			<div id="error_explanation">
+    			<h2>
+    				<%= pluralize(@grading_level1.errors.count, "error") %> prohibited
+     			 	this Gradinglevel from being saved:
+     			</h2>
+    			<ul>
+					 <% @grading_level1.errors.full_messages.each do |msg| %>
+      				<li><%= msg %></li>
+    				<% end %>
+    			</ul>
+  			</div>
+  	<% end %>
+
+		<tr>
+				<td><%=f.label :name%></td>
+				<td><%=f.text_field :name%></td>
+		</tr>
+
+		<tr>
+				<td><%=f.label :min_score%></td>
+				<td><%=f.text_field :min_score%></td>
+		</tr>
+
+		<!-- <tr>
+				<td><=f.label :description></td>
+				<td><=f.text_field :description></td>
+		</tr> -->
+
+		<tr>
+				<td><%=f.submit%></td>
+		</tr>
+</table>
+<%end%>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e

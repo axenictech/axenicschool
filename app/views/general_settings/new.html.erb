@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <h2 align="center">General Setting</h2>
 <%= form_for @general_setting do |f| %>
@@ -8,6 +9,11 @@
 
 <%=link_to 'back' , home_index_path , class: "btn btn-primary pull-right"%>
 <table class="table">
+=======
+<h2 align="center">General Setting</h2>
+<%= form_for @general_setting do |f| %>
+<table align="center">
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 <tr>
   <td><% if @general_setting.errors.any?%>
       <div id="error_explanation">
@@ -17,6 +23,7 @@
           <% end %>
         </ul> 
       </div>
+<<<<<<< HEAD
     <% end %>
   </td>
 </tr>
@@ -27,25 +34,47 @@
     <tr>
       <td><%=f.label :school_college_Name %></td> 
       <td><%= f.text_field :institution_name,:style =>"width: 310px", :placeholder=>"name" , class: "form-control" %></td>
+=======
+    <% end %></td>
+    </tr>
+</table>
+
+  <table align="center">
+    <tr>
+      <td><%= f.label :school_college_Name %></td> 
+      <td><%= f.text_field :institution_name,:style =>"width: 310px" %></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
       
 
   <tr>
 
     <td><%= f.label :school_college_Address %></td> 
+<<<<<<< HEAD
     <td><%= f.text_field :institution_address,:style =>"width: 310px",:placeholder=>"Address" , class: "form-control"%></td>
+=======
+    <td><%= f.text_field :institution_address,:style =>"width: 310px"%></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
     
   </tr>
 
   <tr>
    
     <td><%= f.label :School_College_Phone %></td> 
+<<<<<<< HEAD
     <td><%= f.text_field :institution_phone_no,:style =>"width: 310px",:placeholder=>"Phone " , class: "form-control"%></td>
+=======
+    <td><%= f.text_field :institution_phone_no,:style =>"width: 310px"%></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
     
   </tr>
 
   <tr>
     <td><%= f.label :Student_Attendance_Type %></td> 
+<<<<<<< HEAD
     <td><%= f.select :student_attendance_type, ['SubjectWise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" ,:placeholder=>"Attendence" %></td>
+=======
+    <td><%= f.select :student_attendance_type, ['SubjectWise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" %></td>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
   </tr>
 
   <tr>
@@ -100,14 +129,19 @@
         <p> <%= f.check_box :GPA, {:checked=>false} %> 
         <%= label_tag(:GPA, "GPA") %></p>
       </td>
+<<<<<<< HEAD
   </tr>
   </tbody>
 
+=======
+    </tr>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 </table>
 
 
   <table align="center">
     <tr>
+<<<<<<< HEAD
       <td> <%= f.check_box :AddmissionNumberAutoIncreament, {:checked=>true} %>  <%= label_tag(:Enable_Auto_increment_Student_admission_no, "Enable Auto increment Student admission no. ") %>
       </td>
     </tr>
@@ -138,3 +172,26 @@
 <div class="col-md-1"></div>
 </div>
 </div>
+=======
+      <td> <%= f.check_box :AddmissionNumberAutoIncreament, {:checked=>true} %>  <%= label_tag(:Enable_Auto_increment_Student_admission_no, "Enable Auto increment Student admission no. ") %></td></tr>
+        <tr><td> <%= f.check_box :EmployeeNumberAutoIncreament, {:checked=>true} %> 
+        <%= label_tag(:Enable_Auto_increment_Employee_no, "Enable Auto increment Employee no. ") %></td></tr>
+        <tr><td> <%= f.check_box :EnableNewsCommentModeration, {:checked=>false} %> 
+        <%= label_tag(:Enable_News_Comment_Moderation, "Enable News Comment Moderation") %></td>
+      </tr>
+    </tr>
+</table>
+
+
+  <table align="center">
+    <tr>
+      <td>
+    
+        <%= f.submit :'►Update',  class: "btn btn-success"%> 
+    </tr>
+
+  </table>
+
+<% end %>
+
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
