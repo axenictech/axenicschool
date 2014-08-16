@@ -1,0 +1,140 @@
+
+<h2 align="center">General Setting</h2>
+<%= form_for @general_setting do |f| %>
+<div class="container">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+
+<%=link_to 'back' , home_index_path , class: "btn btn-primary pull-right"%>
+<table class="table">
+<tr>
+  <td><% if @general_setting.errors.any?%>
+      <div id="error_explanation">
+        <ul>
+          <% @general_setting.errors.full_messages.each do |msg| %>
+          <li><%= msg%></li>
+          <% end %>
+        </ul> 
+      </div>
+    <% end %>
+  </td>
+</tr>
+</table>
+  
+<table class="table" align="center">
+  <tbody>
+    <tr>
+      <td><%=f.label :school_college_Name %></td> 
+      <td><%= f.text_field :institution_name,:style =>"width: 310px", :placeholder=>"name" , class: "form-control" %></td>
+      
+
+  <tr>
+
+    <td><%= f.label :school_college_Address %></td> 
+    <td><%= f.text_field :institution_address,:style =>"width: 310px",:placeholder=>"Address" , class: "form-control"%></td>
+    
+  </tr>
+
+  <tr>
+   
+    <td><%= f.label :School_College_Phone %></td> 
+    <td><%= f.text_field :institution_phone_no,:style =>"width: 310px",:placeholder=>"Phone " , class: "form-control"%></td>
+    
+  </tr>
+
+  <tr>
+    <td><%= f.label :Student_Attendance_Type %></td> 
+    <td><%= f.select :student_attendance_type, ['SubjectWise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" ,:placeholder=>"Attendence" %></td>
+  </tr>
+
+  <tr>
+    <td><%= f.label :Finance_start_year_date %></td> 
+    <td><%= select_date DateTime.new(2011,06,01) , prefix: :start_date %></td>
+  </tr>
+      
+  <tr>
+    <td><%= f.label :Finance_end_year_date %></td> 
+    <td><%= select_date DateTime.new(2012,05,31) , prefix: :end_date %></td>
+  </tr>
+
+  <tr>
+    <td><%= f.label :Language %></td> 
+    <td><%= f.select :language, ['English','Spanish','मराठी','हिंदी','العربية'], :selected => 'English',  :style => "width:310px" %></td>
+  </tr>
+
+  <tr>
+
+    <td><%= f.label :Time_Zone %></td> 
+    <td><%= f.select :time_zone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], :selected => 'Indian Standard Time(IST) - GMT+05:30',  :style => "width:310px", class: "dropdown-toggle" %></td>
+  </tr>
+
+  <tr>
+    <td><%= f.label :Country %></td> 
+    <td><%= f.select :country, ['Afghanistan','Bangladesh','Canada','India','Nepal'], :selected => 'India',  :style => "width:310px" %></td>
+  </tr>
+
+
+
+  <tr>
+
+    <td><%= f.label :Upload_Logo %></td> 
+    <td> <%= f.file_field :picture %></td>
+  </tr>
+
+
+  <tr>
+
+    <td><%= f.label :Network_State %></td> 
+    <td><%= f.select :network_state, ['Online','Offline'], :selected => 'Online', :style =>"width: 310px" %></td>
+  </tr>
+  
+  <tr>
+    <td><%= f.label :Include_Grading_Systems %></td> 
+    <td>Select: <a href="#">All</a>,
+        <a href="#" >None</a>
+        <p> <%= f.check_box :CCE, {:checked=>false} %> 
+        <%= label_tag(:CCE, "CCE") %></p>
+        <p> <%= f.check_box :CWA, {:checked=>false} %> 
+        <%= label_tag(:CWA, "CWA") %></p>
+        <p> <%= f.check_box :GPA, {:checked=>false} %> 
+        <%= label_tag(:GPA, "GPA") %></p>
+      </td>
+  </tr>
+  </tbody>
+
+</table>
+
+
+  <table align="center">
+    <tr>
+      <td> <%= f.check_box :AddmissionNumberAutoIncreament, {:checked=>true} %>  <%= label_tag(:Enable_Auto_increment_Student_admission_no, "Enable Auto increment Student admission no. ") %>
+      </td>
+    </tr>
+    <tr>
+    <td> <%= f.check_box :EmployeeNumberAutoIncreament, {:checked=>true} %> 
+        <%= label_tag(:Enable_Auto_increment_Employee_no, "Enable Auto increment Employee no. ") %>
+    </td>
+    </tr>
+    <tr>
+        <td> <%= f.check_box :EnableNewsCommentModeration, {:checked=>false} %> 
+        <%= label_tag(:Enable_News_Comment_Moderation, "Enable News Comment Moderation") %>
+        </td> 
+    </tr>
+    <tr><td>
+    <%= f.submit :'Update',  class: "btn btn-success"%> 
+    
+    </td>
+    </tr>
+    
+</table>
+
+
+      
+  
+
+<% end %>
+</div>
+<div class="col-md-1"></div>
+</div>
+</div>
