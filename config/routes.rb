@@ -5,7 +5,17 @@ Rails.application.routes.draw do
   
   # You can have the root of your site routed with "root"
  root 'home#index'
+resources :home
+ 
+ resources :categories
+ resources :general_settings
+ resources :subjects
+resources :courses do
+    resources :batches
+  end
 
+<<<<<<< HEAD
+=======
  resources :settings
  resources :categories
  resources :general_settings
@@ -13,6 +23,7 @@ Rails.application.routes.draw do
     resources :batches
   end
 
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
   resources :batches do
   resources :grading_levels
 end  

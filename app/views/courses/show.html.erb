@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+<div class="container">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<table class="table">
+
+<th><%= link_to 'back', courses_path , class: "btn btn-success pull-right"%></th>
+</table>
+<p><strong>Course Name: </strong><%= @course.course_name %></p>
+<p><strong>Course Code: </strong><%= @course.section_name %></p>
+
+<%= render 'batches/form'%>
+</div>
+<div class="col-md-1"></div>
+</div></div>
+
+=======
 
 <% @courses.each do |disp| %>
 <table>
@@ -11,3 +29,4 @@
 	</tr>
 </table>
 <%end%>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e

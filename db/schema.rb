@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 0) do
+=======
 ActiveRecord::Schema.define(version: 20140814052800) do
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
+=======
   create_table "batches", force: true do |t|
     t.string   "name"
     t.integer  "course_id"
@@ -95,4 +101,5 @@ ActiveRecord::Schema.define(version: 20140814052800) do
   add_index "subjects", ["batch_id"], name: "index_subjects_on_batch_id", using: :btree
   add_index "subjects", ["elective_group_id"], name: "index_subjects_on_elective_group_id", using: :btree
 
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 end

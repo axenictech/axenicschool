@@ -1,0 +1,9 @@
+<h1>course</h1>
+<p><strong>Course Name: </strong><%= @course.course_name %></p>
+<p><strong>Course Code: </strong><%= @course.section_name %></p>
+
+ <h1>batch</h1>
+<p><strong>Batch Name: </strong><%= @batch.name %></p>
+<p><strong>Start date: </strong><%= @batch.start_date %></p>
+<p><strong>End date: </strong><%= @batch.end_date %></p>
+<%= link_to 'back', courses_path , class: "btn btn-success pull-right"%>

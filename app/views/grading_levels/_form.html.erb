@@ -1,0 +1,40 @@
+<%=@p%>
+<%=form_for ([@batch,@grading_level1]) do|f|%>
+<table class="center">
+		
+		<% if @grading_level1.errors.any? %>
+  			<div id="error_explanation">
+    			<h2>
+    				<%= pluralize(@grading_level1.errors.count, "error") %> prohibited
+     			 	this Gradinglevel from being saved:
+     			</h2>
+    			<ul>
+					 <% @grading_level1.errors.full_messages.each do |msg| %>
+      				<li><%= msg %></li>
+    				<% end %>
+    			</ul>
+  			</div>
+  	<% end %>
+
+		<tr>
+				<td><%=f.label :name%></td>
+				<td><%=f.text_field :name,:style =>"width: 310px", :placeholder=>"name" , class: "form-control"%></td>
+		</tr>
+
+		<tr>
+				<td><%=f.label :min_score%></td>
+				<td><%=f.text_field :min_score,:style =>"width: 310px", :placeholder=>"minimum" , class: "form-control"%></td>
+		</tr>
+
+		<!-- <tr>
+				<td><=f.label :description></td>
+				<td><=f.text_field :description></td>
+		</tr> -->
+
+		<tr>
+				<td><%=f.submit 'Create' ,class: "btn btn-success"%></td>
+				<td><%= link_to 'back' ,batch_grading_levels_path, class: "btn btn-primary" %>
+		</tr>
+</table>
+
+<%end%>

@@ -1,5 +1,15 @@
+<<<<<<< HEAD
+<div class="container">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<h1 align="center"> Availble Courses</h1>
+<%=link_to 'NEW',new_course_path(@course), class: "btn btn-primary pull-right"%>
+<%= link_to 'back', home_index_path , class: "btn btn-success pull-right"%>
+=======
 <h1> Availble Courses</h1>
 <%=link_to 'NEW',new_course_path(@course), class: "btn btn-primary pull-right"%>
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 
 
 <table class="table table-hover" style="width:500px">
@@ -15,10 +25,21 @@
 			<td><%= link_to 'show' ,course_path(c), class: "btn btn-primary"%></td>
 			<td><%= link_to 'edit' ,edit_course_path(c), class: "btn btn-success	"%></td>
 			<td><%= link_to 'delete' ,course_path(c),method: :delete, data:{confirm: 'Delete data?'}, class: "btn btn-danger"%></td>
+<<<<<<< HEAD
+
+=======
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 			
 			</tr>
 	</tbody>
 <%end%>
 
 </table>
+<<<<<<< HEAD
+</div>
+</div>
+</div>
+<div class="col-md-1"></div>
+=======
+>>>>>>> bb02eeda859dd434e6da22357404ffc2d94ad70e
 
