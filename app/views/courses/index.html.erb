@@ -1,0 +1,34 @@
+<div class="container">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<h1 align="center"> Availble Courses</h1>
+<%=link_to 'NEW',new_course_path(@course), class: "btn btn-primary pull-right"%>
+<%= link_to 'back', home_index_path , class: "btn btn-success pull-right"%>
+
+
+<table class="table table-hover" style="width:500px">
+	<th>Course Name</th>
+	<th>Section Name</th>
+
+<% @courses.each do |c|%>
+	
+	<tbody>
+		<tr>
+			<td><%=c.course_name%></td>
+			<td><%=c.section_name %></td>
+			<td><%= link_to 'show' ,course_path(c), class: "btn btn-primary"%></td>
+			<td><%= link_to 'edit' ,edit_course_path(c), class: "btn btn-success	"%></td>
+			<td><%= link_to 'delete' ,course_path(c),method: :delete, data:{confirm: 'Delete data?'}, class: "btn btn-danger"%></td>
+
+			
+			</tr>
+	</tbody>
+<%end%>
+
+</table>
+</div>
+</div>
+</div>
+<div class="col-md-1"></div>
+

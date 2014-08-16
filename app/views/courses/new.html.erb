@@ -1,0 +1,63 @@
+<div class="container">	
+<div class="row">
+
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<%= form_for @course do |c| %>
+
+	<tr><td><% if @course.errors.any?%>
+				<% @course.errors.full_messages.each do |msg|%>
+				<%= msg%>
+				<%end%>
+				<%end%>
+		</td>
+
+		</tr>
+<h2>Course details</h2>
+	<table class="table" >
+	<tbody>
+	<!-- inserting course-->
+		<tr>
+			<td><%=c.label :course_name %></td>
+			<td><%= c.text_field :course_name,:style =>"width: 310px", :placeholder=>"course" , class: "form-control"%></td>
+		</tr>
+		
+	
+		<!-- inserting section name -->
+		<tr>
+			<td><%=c.label :section_name %></td>
+			<td><%= c.text_field :section_name,:style =>"width: 310px", :placeholder=>"section" , class: "form-control" %></td>
+		</tr>
+		<!-- inserting code -->
+		<tr>
+			<td><%=c.label :code %></td>
+			<td><%= c.text_field :code ,:style =>"width: 310px", :placeholder=>"ncode" , class: "form-control"%></td>
+		</tr>
+		<!-- inserting grading type -->
+		<!-- <tr>
+			<td><=c.label :grading_type></td>
+			
+			<td><=collection_select(:grading,:grading_id,Grading.all,:id,:name)></td>
+		</tr> -->
+		<tr>
+
+		<td ><%=c.submit 'create', class: "btn btn-primary"%></td>
+		<td><%= link_to 'back', courses_path ,class: "btn btn-success"%></td>
+		</tr>
+		<% end %>
+		
+	</tbody>	
+	</table>	
+	
+</div>
+</div>
+</div>
+<div class="col-md-1"></div>
+
+
+
+
+
+
+
+
