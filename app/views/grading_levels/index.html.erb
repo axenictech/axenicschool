@@ -18,6 +18,7 @@
        <tr>
             <td><%= gradinglevel.name %></td>
             <td><%= gradinglevel.min_score %></td>
+            <td><%= gradinglevel.description%></td>
             <td><%= link_to 'Destroy',[gradinglevel.batch,gradinglevel],
                     method: :delete, data: { confirm: 'Are you sure?' } %></td>
                  <td><%=link_to 'Edit',edit_batch_grading_level_path(gradinglevel.batch,gradinglevel)%></td>

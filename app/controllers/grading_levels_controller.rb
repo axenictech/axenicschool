@@ -46,6 +46,6 @@ def index
 
     private
     def params_grade
-    	params.require(:grading_level).permit(:name,:min_score)
+    	params.require(:grading_level).permit(:name,:min_score,:description)
     end
 end

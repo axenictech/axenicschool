@@ -9,7 +9,7 @@ Rails.application.routes.draw do
  resources :settings
  resources :categories
  resources :general_settings
-resources :courses do
+ resources :courses do
     resources :batches
   end
 
@@ -23,7 +23,7 @@ end
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-
+  resources :subjects
    resources :batches do
     resources :subjects
     resources :elective_groups do

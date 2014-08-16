@@ -3,11 +3,10 @@ class SubjectsController < ApplicationController
   before_action :set_subject, only:[:show,:edit,:update,:destroy]
   
 	def index
-    	@batches = Batch.all
-      @batch = Batch.find (params[:batch_id])
-      
-      @subjects=@batch.subjects.all
-      @elective_groups=@batch.elective_groups.all
+    
+      # # @batch = Batch.find(params[:batch_id])
+      # @subjects=@batch.subjects.all
+      # @elective_groups=@batch.elective_groups.all
   	end
 
   	def new
