@@ -1,6 +1,0 @@
-/.bundle
-/.database.yml
-/log/*.log
-/tmp
-/db/.schema.rb
-
