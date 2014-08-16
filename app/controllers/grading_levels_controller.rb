@@ -16,8 +16,8 @@ def index
 	end
     def create
     	@batch=Batch.find(params[:batch_id])
-    	@grading_level=@batch.grading_levels.new(params_grade)
-    	if @grading_level.save
+    	@grading_level1=@batch.grading_levels.new(params_grade)
+    	if @grading_level1.save
     	redirect_to batch_grading_levels_path
         else
             render 'new'
