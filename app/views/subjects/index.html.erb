@@ -2,8 +2,9 @@
     <div class="navbar-header"><h1>Subjects</h1></div></div></div>
   <div><%= notice %></div>
 
+<%=form_for ([@batch,@sub]) do|f|%>
 <label>Select a batch:</label>
- <%= select(:batch, :batch_id, Batch.all.collect {|p| [p.name,@p=p.id]},prompt:true) %>
+<%= select(:batch1, :batch_id, Batch.all.collect {|p| [p.name,@p=p.id]},prompt:true) %>
  
  <div> <%= link_to 'Add new Subjects',new_batch_subject_path(@p)%></div>
  <div class="panel panel-default">
@@ -18,7 +19,7 @@
       </tr>
     </thead>
     <tbody class="product-index">
-     <!--  <= render "index" > -->
+      <%= render "index" %>
     </tbody>
   </table>
 </div>
@@ -28,7 +29,7 @@
  </div>
 
 <div><%= link_to 'Add new Elective Groups',new_batch_elective_group_path(@p) %>
-<!-- <= render '/elective_groups/elective_group' > -->
+<%= render '/elective_groups/elective_group' %>
 </div>
 
-  
+<%end%>

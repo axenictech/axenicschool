@@ -72,8 +72,9 @@ ActiveRecord::Schema.define(version: 20140814052800) do
     t.string   "name"
     t.integer  "batch_id"
     t.integer  "min_score"
+    t.string   "description"
     t.integer  "order"
-    t.boolean  "is_deleted", default: false
+    t.boolean  "is_deleted",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

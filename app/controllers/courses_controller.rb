@@ -25,7 +25,7 @@ class CoursesController < ApplicationController
 # displaying the course
   def show
   	@course=Course.find(params[:id])
-
+    @batches=@course.batches.all
   end
 
 # deleting the course

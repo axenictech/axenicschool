@@ -11,13 +11,7 @@ class BatchesController < ApplicationController
    def create
    	@course=Course.find(params[:course_id])
    	@batch=@course.batches.create(postparam)
-  	redirect_to batch_path(@batch)
-  end
-
-  def show
-  	@batch=Batch.find(params[:id])
-    params[:course_id]=@batch.course_id
-    @course=Course.find(params[:course_id])
+  	redirect_to courses_path
   end
 
 private def postparam

@@ -3,13 +3,29 @@
 <div class="col-md-1"></div>
 <div class="col-md-10">
 <table class="table">
+<%= link_to 'back', courses_path , class: "btn btn-success pull-right"%>
 
-<th><%= link_to 'back', courses_path , class: "btn btn-success pull-right"%></th>
+<tbody>
+
+<tr><td><p><strong>Course Name: </strong><%= @course.course_name %></p>
+<p><strong>Course Code: </strong><%= @course.section_name %></p></td></tr>
+
+		<tr><th>Batch Name</th>
+			<th>Batch Start Date</th>
+			<th>Batch End Date</th>
+		</tr>
+<% @batches.each do |batch|%>
+	
+			<tr>
+			<td><%=batch.name%></td>
+			<td><%=batch.start_date%></td>
+			<td><%=batch.end_date%></td>	
+			</tr>
+<%end%>
+</tbody>
 </table>
-<p><strong>Course Name: </strong><%= @course.course_name %></p>
-<p><strong>Course Code: </strong><%= @course.section_name %></p>
-
 <%= render 'batches/form'%>
+
 </div>
 <div class="col-md-1"></div>
 </div></div>
