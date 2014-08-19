@@ -1,4 +1,4 @@
-<div> <%= link_to 'Add new Subjects',new_batch_subject_path(@batch)%></div>
+<div> <%= link_to 'Add new Subjects',new_batch_subject_path(@batch),remote:true %></div>
  <div class="panel panel-default">
   <div class="panel-heading">Normal Subjects</div>
   <div class="panel-body">
@@ -10,7 +10,7 @@
         <th>Subject Code</th>
       </tr>
     </thead>
-    <tbody class="product-index">
+  <tbody class="product-index">
         <% @subjects.each do |subject| %>
         <tr>
           <td><%= subject.name %></td>
@@ -27,4 +27,4 @@
 </div>
 </div>
  </div>
-
+<%= render 'elective_groups/elective_group' %>
