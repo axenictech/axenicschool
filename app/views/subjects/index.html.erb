@@ -5,8 +5,7 @@
 <div align="center">
 	<%= form_for :batch, url:{action:'select'},method: :get,remote:true do |f| %>
 	<%= f.label :search %>
-  <%= f.select :id, @batches.collect {|b| [b.name, b.id] }%>
-  <%#= f.hidden_field :batch_id , :value =>  %>
+  <%= f.select :id, @batches.collect {|b| [b.name, b.id]}%>
   <%= f.submit "GO"%>
 <% end %>
 </div>

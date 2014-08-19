@@ -1,4 +1,4 @@
-<%=@p%>
+
 <%=form_for ([@batch,@grading_level1]) do|f|%>
 <table class="center">
 		
@@ -33,7 +33,7 @@
 
 
 		<tr>
-				<td><%=f.submit 'Create' ,class: "btn btn-success"%></td>
+				<td><%=f.submit '► Save' ,class: "btn btn-success"%></td>
 				<td><%= link_to 'back' ,batch_grading_levels_path, class: "btn btn-primary" %>
 		</tr>
 </table>

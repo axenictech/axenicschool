@@ -51,7 +51,8 @@ class CoursesController < ApplicationController
 
 
 
-private def postparam
+private
+ def postparam
 params.require(:course).permit(:course_name,:section_name,:code,:grading_type)
 end
 end
