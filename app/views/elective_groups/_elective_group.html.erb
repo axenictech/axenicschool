@@ -1,3 +1,4 @@
+<div><%= link_to 'Add new Elective Groups',new_batch_elective_group_path(@batch) %>
 <div class="panel panel-default">
   <div class="panel-heading">Elective Groups</div>
   <div class="panel-body">
@@ -16,10 +17,12 @@
       <% elective_subjects.each do |subject| %>
     <tr><td><%= subject.name %></td>
         <td><%= subject.code %></td>
-   
+        <td><%= link_to 'edit'%></td>
     </tr>
     <% end %>
   </tr>
 <% end %>
 </table>
-</div></div>
+</div>
+</div>
+</div>

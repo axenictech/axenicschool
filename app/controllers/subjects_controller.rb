@@ -1,22 +1,23 @@
 class SubjectsController < ApplicationController
 
-  before_action :set_subject, only:[:show,:edit,:update,:destroy]
+  before_action :set_subject, only:[:edit,:update,:destroy]
   
-	def index
-      params[:batch_id]=1
-      @batch = Batch.find(params[:batch_id])
-      @subjects=@batch.subjects.all
-      @elective_groups=@batch.elective_groups.all
-      @sub=@batch.subjects.build
-  	end
+  	def index
+        @batches=Batch.all
+    end
+
+    def select
+        @batch = Batch.find(params[:batch_id])
+    end
 
   	def new
+
 	    @batch = Batch.find(params[:batch_id])
       @subject=@batch.subjects.build
 
       @elective_group=ElectiveGroup.find(params[:elective_group_id]) if params[:elective_group_id]
       @subject=@elective_group.subjects.build if params[:elective_group_id]
-    
+ 
   	end
   	
   	def create
@@ -25,14 +26,14 @@ class SubjectsController < ApplicationController
 
         @elective_group=ElectiveGroup.find params[:elective_group_id] if params[:elective_group_id]
         @subject=@elective_group.subjects.new(subject_params) if params[:elective_group_id]
-       if @subject.save
+        if @subject.save
          redirect_to batch_subjects_path, notice: "Subject was successfully created"
-      else
+        else
          render 'new'
-      end
+        end
   	end
 
-    def show       
+    def show
     end
 
     def edit  

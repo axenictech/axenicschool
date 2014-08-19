@@ -30,6 +30,7 @@ end
      resources :subjects 
     end
   end  
+  get "subjects/select"
   # Example resource route with options:
   #   resources :products do
   #     member do
