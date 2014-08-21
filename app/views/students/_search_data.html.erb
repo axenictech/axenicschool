@@ -1,0 +1,23 @@
+<table class="table" style="width:500px" >
+    <thead>
+      <tr>
+        <th>Sr. No.</th>
+        <th>Student First Name</th>
+        <th>Batch</th>
+        <th>Admission No.</th>
+      </tr>
+    </thead>
+  <tbody>
+  <% sr_no=1 %>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= sr_no %></td>
+          <td><%= student.first_name %></td>
+           <td><%#= student.batch.name %></td>
+          <td><%= student.admission_no %></td>
+          <td>View Profile</td>
+        </tr>
+        <% sr_no+=1 %>
+      <% end %>   
+    </tbody>
+  </table>

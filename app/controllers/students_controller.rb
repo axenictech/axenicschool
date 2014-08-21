@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
 
+<<<<<<< HEAD
 	def admission2
 		@guardian=Guardian.new
 	end
@@ -21,4 +22,11 @@ class StudentsController < ApplicationController
        :office_phone2,:mobile_phone,:office_address_line1,
        :office_address_line2,:city,:country_id,:state,:occupation,:income,:education)
 	 end
+=======
+def search_ajax
+	@students=Student.where(:first_name=> params[:student][:first_name])
+
+end
+
+>>>>>>> 24151b83b585f1f92874f6690f67dd86724c68f5
 end
