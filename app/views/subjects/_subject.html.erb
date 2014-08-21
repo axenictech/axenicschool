@@ -1,4 +1,5 @@
-<div> <%= link_to 'Add new Subjects',new_batch_subject_path(@batch),remote:true %></div>
+<div> <%= link_to 'Add new Subjects',new_batch_subject_path(@batch),remote:true,class: "btn btn-primary" %></div>
+
  <div class="panel panel-default">
   <div class="panel-heading">Normal Subjects</div>
   <div class="panel-body">
@@ -11,20 +12,10 @@
       </tr>
     </thead>
   <tbody class="product-index">
-        <% @subjects.each do |subject| %>
-        <tr>
-          <td><%= subject.name %></td>
-          <td><%= subject.code %></td>
-        <!-- link to edit -->
-          <td><%= link_to 'edit',edit_batch_subject_path(subject.batch,subject), class: "btn btn-success"%></td>
-        <!-- link to delete -->
-          <td><%= link_to 'delete', [subject.batch,subject],method: :delete,
-                      data:{confirm:'Are you sure want to delete?'}, class: "btn btn-danger"%></td>
-        </tr>
-      <% end %>    
+      <%= render 'index' %>
     </tbody>
   </table>
 </div>
 </div>
- </div>
+
 <%= render 'elective_groups/elective_group' %>
