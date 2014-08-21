@@ -39,6 +39,8 @@ resources :batch_transfers
     end  
   end 
   get "subjects/select"
+
+  
   # Example resource route with options:
   #   resources :products do
   #     member do
@@ -50,7 +52,9 @@ resources :batch_transfers
   #       get 'sold'
   #     end
   #   end
-
+  get "students/advanced_search"
+  get "students/advanced_student_search"
+  resources :students
   # Example resource route with sub-resources:
   
   # Example resource route with more complex sub-resources:
