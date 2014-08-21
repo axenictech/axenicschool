@@ -52,7 +52,10 @@ resources :batch_transfers
   #   end
 
   # Example resource route with sub-resources:
-  
+ get 'students/search' 
+ get 'students/search_ajax' 
+ resources :students
+
   # Example resource route with more complex sub-resources:
   #   resources :products do
   #     resources :comments

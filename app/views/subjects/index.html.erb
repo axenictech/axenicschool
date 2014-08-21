@@ -5,7 +5,7 @@
 <div align="center">
 	<%= form_for :batch, url:{action:'select'},method: :get,remote:true do |f| %>
 	<%= f.label :search %>
-  <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true,:onchange=>"fun()"%>
+  <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true%>
   <%= f.submit "GO"%>
 <% end %>
 </div>
