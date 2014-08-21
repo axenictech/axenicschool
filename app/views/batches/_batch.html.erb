@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<h3>batchs:</h3>
+  			<% @course.batches.each do |b| %>
+  			<table class="table">
+  				<tr><%=link_to b.name , batches_display_path(b) %></tr>
+  			</table>
+  			
+     
+		</div>
+		<div class="col-md-1"></div>
+ 		
+  
+
+  <% end %>
+  </div>		
+	</div>
+</div>

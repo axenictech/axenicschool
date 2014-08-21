@@ -1,0 +1,17 @@
+<h1>GradingLevles</h1>
+
+
+<%= form_for :batch, url:{action:'select'},method: :get,remote:true do |f| %>
+<%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name, b.id]},prompt:true %>
+<%= f.submit "GO"%>
+  
+<%end%>
+
+
+<div id="batch_div"></div>
+ <div id="myModal" class="modal fade">
+ </div>
+
+
+
+

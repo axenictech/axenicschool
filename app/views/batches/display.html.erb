@@ -1,0 +1,6 @@
+<strong> batch :<%= @batch.name %></strong>
+<%='Exams'%>
+ <%= link_to 'Edit', edit_batch_path(@batch) %>
+  <%= link_to 'Delete', batches_display_path(@batch),
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%='manage'%>

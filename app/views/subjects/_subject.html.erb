@@ -1,0 +1,36 @@
+<div class="container" style="margin-top:50px">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+<div> <%= link_to 'Add new Subjects',new_batch_subject_path(@batch),remote:true,class: "btn btn-primary" %></div>
+
+ <div class="panel panel-default">
+  <div class="panel-heading">Normal Subjects</div>
+  <div class="panel-body">
+
+  <table class="table" style="width:500px" >
+    <thead>
+      <tr>
+        <th>Subject Name</th>
+        <th>Subject Code</th>
+      </tr>
+    </thead>
+  <tbody class="product-index">
+      <% @subjects.each do |subject| %>
+        <tr>
+          <td><%= subject.name %></td>
+          <td><%= subject.code %></td>
+        <!-- link to edit -->
+          <td><%= link_to 'edit',edit_batch_subject_path(subject.batch,subject),remote: true, class: "btn btn-success"%></td>
+        <!-- link to delete -->
+          <td><%= link_to 'delete',[subject.batch,subject],remote: true,method: :delete,data:{confirm:'Are you sure want to delete?'}, class: "btn btn-danger"%></td>
+        </tr>
+      <% end %>   
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+<div class="col-md-5">
+<%= render 'elective_groups/elective_group' %>
+</div></div></div
