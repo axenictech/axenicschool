@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Student<small>&nbsp;search</small></h1>
+</div>
+<%= link_to "View all" %>
+<%= link_to "Advanced" %>
+<div align="center">
+	<%= form_for :student, url:{action:'search_ajax'}, method: :get,remote:true do |f|%>
+	<%= f.label :Search %>
+   	<%= f.text_field :first_name%>
+   	<%= f.submit "Search"%>
+ 	<% end %>
+ </div>
+
+<div id="student_search"></div>
+ 
