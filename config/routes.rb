@@ -12,10 +12,11 @@ Rails.application.routes.draw do
  resources :courses do
     resources :batches
   end
-
+resources :grading_levels
   resources :batches do
   resources :grading_levels
 end  
+  get'grading_levels/select'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

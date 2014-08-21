@@ -1,35 +1,33 @@
 <h1>GradingLevles</h1>
 
 
-<%=form_for ([@batch,@grading_level]) do|f|%>
-<%= select("batch1","batch_id",Batch.all.collect{|p| [p.name,p.id]})%>
-<%= link_to 'Add Grades',new_batch_grading_level_path%>
-<input type="hidden" id="selectpath" value='<%=new_batch_grading_level_path(@batch.id)%>'>
+<%= form_for :batch, url:{action:'select'},method: :get,remote:true do |f| %>
+<%= f.select :id, @batches.collect {|b| [b.name, b.id]}%>
+<%= f.submit "GO"%>
 
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Add Grading level</h4>
+      </div>
+      <div class="modal-body">
+        <p>&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-
-   <table border="1" style="width:500px">  
-    <tr>
-        <th>Name</th>
-        <th>Min Score</th>
-        <th>Description</th>
-    </tr>
-    <% @grading_levels.each do |gradinglevel| %>
-       <tr>
-            <td><%= gradinglevel.name %></td>
-            <td><%= gradinglevel.min_score %></td>
-            <td><%= gradinglevel.description%></td>
-            <td><%= link_to 'Destroy',[gradinglevel.batch,gradinglevel],
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                 <td><%=link_to 'Edit',edit_batch_grading_level_path(gradinglevel.batch,gradinglevel)%></td>
-            
-        </tr>   
-            
-      <% end %>
-
-</table>
-
+<div id="batch_div">
 </div>
+
+
+
   
 <%end%>
 

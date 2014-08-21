@@ -2,9 +2,7 @@ class GradingLevelsController < ApplicationController
 
 def index
 		 @batches = Batch.all
-		 @batch=Batch.find(params[:batch_id])
-		 @grading_levels=@batch.grading_levels.all
-		  @grading_level=@batch.grading_levels.build
+		
 	end
   
     def new
@@ -42,6 +40,14 @@ def index
     	@grading_level.destroy
     	redirect_to batch_grading_levels_path
     	
+    end
+
+    def select
+        
+    end
+    def show
+        @batch=Batch.find(params[:batch][:id])
+        @grading_levels=@batch.grading_levels.all
     end
 
     private

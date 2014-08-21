@@ -14,7 +14,8 @@ class BatchesController < ApplicationController
   	redirect_to courses_path
   end
 
-private def postparam
+private 
+def postparam
 
 	params.require(:batch).permit(:name,:start_date,:end_date)
 end
