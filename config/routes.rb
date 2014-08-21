@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 get 'setting/course_batch'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  
+
   # You can have the root of your site routed with "root"
  root 'home#index'
  resources :home
@@ -39,6 +39,11 @@ resources :batch_transfers
     end  
   end 
   get "subjects/select"
+
+  post 'students/adm_create'
+  get 'students/admission2'
+  get 'students/admission3'
+  resources :students
   # Example resource route with options:
   #   resources :products do
   #     member do

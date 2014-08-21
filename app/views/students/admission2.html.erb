@@ -1,0 +1,94 @@
+<div class="container">
+<div class="page-header">
+  <h1>Courses New <small>creating new course</small></h1>
+</div>
+</div>
+
+
+<div class="container">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<%= form_for :guardian ,url:{:action=>'adm_create'} do |f|%>
+	<div class="modal-body">
+
+	<div class="control-group">
+			<%= f.label :first_name , class: "control-label"%>
+		    <%= f.text_field :first_name %>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :last_name , class: "control-label"%>
+		    <%= f.text_field :last_name %>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :relation , class: "control-label"%>
+		    <%= f.text_field :relation %>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :email , class: "control-label"%>
+		    <%= f.text_field :email %>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :office_phone1 , class: "control-label"%>
+		    <%= f.text_field :office_phone1%>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :office_phone2 , class: "control-label"%>
+		    <%= f.text_field :office_phone2%>
+	</div>
+
+	
+	<div class="control-group">
+			<%= f.label :office_address_line1 , class: "control-label"%>
+		    <%= f.text_field :office_address_line1%>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :office_address_line2 , class: "control-label"%>
+		    <%= f.text_field :office_address_line2%>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :city, class: "control-label"%>
+		    <%= f.text_field :city%>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :country, class: "control-label"%>
+		   
+	</div>
+		    
+	 <div class="control-group">
+			<%= f.label :dob, class: "control-label"%>
+		    <%= f.text_field :dob%>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :occupation, class: "control-label"%>
+		    <%= f.text_field :occupation%>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :income, class: "control-label"%>
+		    <%= f.text_field :income%>
+	</div>
+
+	<div class="control-group">
+			<%= f.label :education, class: "control-label"%>
+		    <%= f.text_field :education%>
+	</div>
+
+	
+</div>	
+<div class"modal-footer" class="control-group">		
+	<%= f.submit 'Submit', class: "btn btn-primary"%>
+	<%= link_to 'Cancel','#',class: "btn btn-primary",data:{dismiss:"modal"}%></div>
+<% end %>
+</div>
+<div class="col-md-1"></div>
+</div>
+
