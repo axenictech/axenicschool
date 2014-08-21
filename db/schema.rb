@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814052800) do
+ActiveRecord::Schema.define(version: 20140821074052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,22 @@ ActiveRecord::Schema.define(version: 20140814052800) do
   end
 
   add_index "grading_levels", ["batch_id"], name: "index_grading_levels_on_batch_id", using: :btree
+
+  create_table "news", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "news_comments", force: true do |t|
+    t.text     "content"
+    t.integer  "news_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "news_comments", ["news_id"], name: "index_news_comments_on_news_id", using: :btree
 
   create_table "subjects", force: true do |t|
     t.string   "name"
