@@ -1,2 +1,0 @@
-class NewscastsController < ApplicationController
-end
