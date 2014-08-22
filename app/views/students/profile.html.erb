@@ -1,0 +1,137 @@
+<div id="content-header">
+  <img src="/images/student_details/student_details_logo.jpg" />
+  <h1>Student info</h1>
+  <h3>Student profile</h3>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+      <li>Reports</li>
+      <li>Guardians</li>
+      <li>Send email</li>
+      <li>Delete</li>
+  </ul>
+</div>
+
+<div id="page-yield">
+  <div id="student_profile_heading">
+
+    <div id="profile_picture_display">
+        <%= image_tag "master_student/profile/default_student.png" %>
+    </div>
+
+    <div id ="student_main_info">
+      <h3> <%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %>  </h3>
+      <h4> Course : <%= @student.batch.course.course_name %> </h4>
+      <h4> Batch : <%= @student.batch.name %> </h4>
+      <h4> Adm no. : <%= @student.admission_no %> </h4>
+    </div>
+
+    <div class="extender"> </div>
+
+  </div>
+
+  <div id="new_profile_info_top">
+    <div class="profile_top_banner"><%= image_tag "master_student/profile/topbanner.png" %></div>
+    <div class="profile_info_label_top"> Admission Date </div>
+    <div class="profile_info_text_top">
+      <%= @student.admission_date.strftime("%d %b, %Y") unless @student.admission_date.nil? %>
+    </div>
+
+    <div class="profile_info_label_top2">Date of birth</div>
+    <div class="profile_info_text_top2"><%= @student.date_of_birth.strftime("%d %b, %Y") unless @student.date_of_birth.nil? %></div>
+
+    <div class="profile_info_label_top">Blood group</div>
+    <div class="profile_info_text_top"><%= @student.blood_group %></div>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2">Gender</div>
+      <div class="profile_info_text_top2"> <%= @student.gender %> </div>
+
+      <div class="profile_info_label_top">Nationality</div>
+      <div class="profile_info_text_top"> <%= @student.nationality.name unless @student.nationality_id.nil? %> </div>
+    </div>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2">Language</div>
+      <div class="profile_info_text_top2"> <%= @student.language %> </div>
+
+
+      <div class="profile_info_label_top">Category</div>
+      <div class="profile_info_text_top"> <%= @student.category.name unless @student.category.nil? %> </div>
+    </div>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2">Religion</div>
+      <div class="profile_info_text_top2"> <%= @student.religion %> </div>
+
+      <div class="profile_info_label_top">Address</div>
+      <div class="profile_info_text_top"><%= @address %></div>
+
+    </div>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2">City</div>
+      <div class="profile_info_text_top2"> <%= @student.city %> </div>
+
+      <div class="profile_info_label_top">State</div>
+      <div class="profile_info_text_top"> <%= @student.state %> </div>
+    </div>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2">Country</div>
+      <div class="profile_info_text_top2"> <%= @student.country.name unless @student.country_id.nil? %> </div>
+
+      <div class="profile_info_label_top">Phone</div>
+      <div class="profile_info_text_top"> <%= @student.phone1 %> </div>
+    </div>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2">Mobile</div>
+      <div class="profile_info_text_top2"> <%= @student.phone2 %> </div>
+
+      <div class="profile_info_label_top">Email  </div>
+      <div class="profile_info_text_top"><%= @student.email %></div>
+    </div>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2">SMS Alerts</div>
+      <div class="profile_info_text_top2"> <%= @student.is_sms_enabled?? "Enabled":"Disabled" %> </div>
+    </div>
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top"></div>
+      <div class="profile_info_text_top">In case of emegencies, contact : </div>
+
+      <div class="profile_info_label_top2"> </div>
+      <div class="profile_info_text_top2">
+        <%= link_to @immediate_contact.full_name, :controller => "student", :action => "guardians", :id => @student.id \
+          unless @immediate_contact.nil? %>
+        <%= "(" + @immediate_contact.mobile_phone + ")" if @immediate_contact and !@immediate_contact.mobile_phone.empty? %>
+            <span>(<%= "Change immediate contact"%>)</span>
+  
+              <span>No Guardians added yet (<%= "Add Guardian" %>)</span>
+              <span> No Guardians added yet</span>
+            
+      </div>
+    </div>
+    <div class="new_profile_info_area1">
+     
+    </div>
+    <% unless @previous_data.nil? %>
+        <div class="new_profile_info_area1">
+      <div class="profile_info_label_top2"></div>
+      <div class="profile_info_text_top2">Previous Details</div>
+
+      <div class="profile_info_label_top">Previous Institution</div>
+      <div class="profile_info_text_top"><%= link_to @previous_data.institution,:action=>'show_previous_details', :id => @student.id %></div>
+    </div>
+    <% end %>
+    <div class="extender"></div>
+  </div>
+    <div class="buttons">
+      <%= "Edit"%>
+
+      <%= "PDF Report"%>
+    </div>
+
+</div>

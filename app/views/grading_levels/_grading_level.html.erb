@@ -1,0 +1,15 @@
+ <%= link_to 'Add Grades',new_batch_grading_level_path(@batch),remote: true,class: "btn btn-primary"%>
+
+
+ <table border="1" style="width:500px">  
+    <tr>
+        <th>Name</th>
+        <th>Min Score</th>
+        <th>Description</th>
+    </tr>
+
+    <tbody class="product-index">
+      <%= render 'index' %>
+    </tbody>
+   
+</table>
