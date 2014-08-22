@@ -1,8 +1,8 @@
-<table class="table" style="width:500px" >
+  <table class="table">
     <thead>
       <tr>
         <th>Sr. No.</th>
-        <th>Student First Name</th>
+        <th>Student Name</th>
         <th>Batch</th>
         <th>Admission No.</th>
       </tr>
@@ -13,9 +13,9 @@
         <tr>
           <td><%= sr_no %></td>
           <td><%= student.first_name %></td>
-           <td><%#= student.batch.name %></td>
+           <td><%= student.batch.course.course_name+" - "+student.batch.name %></td>
           <td><%= student.admission_no %></td>
-          <td>View Profile</td>
+          <td><%= link_to 'View Profile',students_profile_path(student) %></td>
         </tr>
         <% sr_no+=1 %>
       <% end %>   

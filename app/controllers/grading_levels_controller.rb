@@ -44,10 +44,7 @@ def index
     end
 
     def select
-        
-    end
-    def show
-        @batch=Batch.find(params[:batch][:id])
+         @batch=Batch.find(params[:batch][:id])
         @grading_levels=@batch.grading_levels.all
     end
 

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NewsCommentsTest < ActiveSupport::TestCase
+class NewscastsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

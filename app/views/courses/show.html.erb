@@ -2,37 +2,32 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-10">
-<th><%= link_to 'back', courses_path , class: "btn btn-success pull-right"%></th>
-<h1 align="center">Courses</h1>
+<h1 align="center">Course-Batch</h1>
+
+<div><%=link_to 'NEW', new_course_batch_path(@course), class: "btn btn-primary pull-right"%></div>
+<div><%= link_to 'back', courses_path , class: "btn btn-success pull-left"%></div>
+
 
 <table class="table">
 
 
-
-<table>
-
 <tbody>
-
-<tr><td><p><strong>Course Name: </strong><%= @course.course_name %></p>
-<p><strong>Course Section Name: </strong><%= @course.section_name %></p>
-<p><strong>Course code: </strong><%= @course.code%></p></td></tr>
-
-		<tr><th>Batch Name</th>
-			<th>Batch Start Date</th>
-			<th>Batch End Date</th>
+<thead>
+	<tr><th>Batch</th>
 		</tr>
+</thead>
+		
 <% @batches.each do |batch|%>
 	
 			<tr>
-			<td><%=batch.name%></td>
-			<td><%=batch.start_date%></td>
-			<td><%=batch.end_date%></td>	
+			<td><%=link_to batch.course.code+" - "+batch.name , batches_display_path(batch) %></td>
+			<td><%= link_to 'Edit', edit_batch_path(batch) %></td>
+ 			<td><%= link_to 'Delete', batch_path(batch),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			</tr>
 <%end%>
 </tbody>
 </table>
-
-<%= render 'batches/new'%>
 
 </div>
 <div class="col-md-1"></div>

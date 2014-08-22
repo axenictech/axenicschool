@@ -31,7 +31,7 @@
 				<!-- <div class="col-md-1"> -->
 					
 				<!-- </div> -->
-			<%= f.select :id, @courses.collect {|c| [c.course_name+" "+c.section_name,c.id]}%>
+		<%= f.select :id, @courses.collect {|c| [c.course_name+" "+c.section_name,c.id]},prompt:true%>
 			<%= f.submit "GO"%>
 				<!-- <div class="col-md-1"> -->
 					

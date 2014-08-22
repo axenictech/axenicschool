@@ -10,7 +10,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string     :middle_name
       t.string     :last_name
 
-      t.references :batch, index: true
+      t.references :batch,index:true
       t.date       :date_of_birth
       t.string     :gender
       t.string     :blood_group
@@ -18,7 +18,7 @@ class CreateStudents < ActiveRecord::Migration
       t.integer    :nationality_id
       t.string     :language
       t.string     :religion
-      t.references :student_category, index: true
+      t.references :category,index:true
 
       t.string     :address_line1
       t.string     :address_line2
@@ -31,7 +31,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string     :phone2
       t.string     :email
 
-      t.references :immediate_contact, index: true
+      t.references :immediate_contact,index:true
       t.boolean    :is_sms_enabled, :default=>true
 
       t.string     :photo_filename

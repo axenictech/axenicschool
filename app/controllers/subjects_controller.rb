@@ -8,6 +8,9 @@ class SubjectsController < ApplicationController
     end
 
     def select
+      @batch=Batch.find(params[:batch][:id])
+      @subjects=@batch.subjects.all
+      @elective_groups=@batch.elective_groups.all
     end
 
   	def new
@@ -30,13 +33,6 @@ class SubjectsController < ApplicationController
         @subject=@elective_group.subjects.new(subject_params) if params[:elective_group_id]
         @subject.save
   	end
-
-    def show
-          @batch=Batch.find(params[:batch][:id])
-          @subjects=@batch.subjects.all
-          @elective_groups=@batch.elective_groups.all
-          
-    end
 
     def edit  
 

@@ -13,15 +13,13 @@ class BatchesController < ApplicationController
    	@batch=@course.batches.create(postparam)
   	redirect_to course_path(@course)
   end
-   def show
-      @course = Course.find(params[:course][:id])
-   end
    
    def display
        @batch=Batch.find(params[:format])
    end
 
    def select
+     @course = Course.find(params[:course][:id])
    end
 
 
@@ -35,7 +33,7 @@ class BatchesController < ApplicationController
   
   
          if @batch.update(postparam)
-           redirect_to   batches_display_path(@batch)
+           redirect_to   course_path(@batch.course)
           else
            render 'display'
          end
@@ -44,7 +42,7 @@ class BatchesController < ApplicationController
      def destroy
      @batch = Batch.find(params[:format])
      @batch.destroy
-     redirect_to   batches_path
+     redirect_to course_path(@batch.course)
   end
 
 private 

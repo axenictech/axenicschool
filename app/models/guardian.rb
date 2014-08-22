@@ -1,4 +1,4 @@
 class Guardian < ActiveRecord::Base
 	belongs_to :country
-  belongs_to :ward, :class_name => 'Student'
+    belongs_to :student
 end

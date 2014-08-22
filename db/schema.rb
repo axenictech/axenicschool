@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821082046) do
+ActiveRecord::Schema.define(version: 20140822100721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20140821082046) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comments", force: true do |t|
+    t.text     "statement"
+    t.integer  "newscast_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["newscast_id"], name: "index_comments_on_newscast_id", using: :btree
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -98,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140821082046) do
   add_index "grading_levels", ["batch_id"], name: "index_grading_levels_on_batch_id", using: :btree
 
   create_table "guardians", force: true do |t|
+    t.integer  "student_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "relation"
@@ -119,22 +129,14 @@ ActiveRecord::Schema.define(version: 20140821082046) do
   end
 
   add_index "guardians", ["country_id"], name: "index_guardians_on_country_id", using: :btree
+  add_index "guardians", ["student_id"], name: "index_guardians_on_student_id", using: :btree
 
-  create_table "news", force: true do |t|
+  create_table "newscasts", force: true do |t|
     t.string   "title"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "news_comments", force: true do |t|
-    t.text     "content"
-    t.integer  "news_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "news_comments", ["news_id"], name: "index_news_comments_on_news_id", using: :btree
 
   create_table "student_previous_data", force: true do |t|
     t.integer  "student_id"
@@ -185,7 +187,7 @@ ActiveRecord::Schema.define(version: 20140821082046) do
     t.integer  "nationality_id"
     t.string   "language"
     t.string   "religion"
-    t.integer  "student_category_id"
+    t.integer  "category_id"
     t.string   "address_line1"
     t.string   "address_line2"
     t.string   "city"
@@ -208,8 +210,8 @@ ActiveRecord::Schema.define(version: 20140821082046) do
   end
 
   add_index "students", ["batch_id"], name: "index_students_on_batch_id", using: :btree
+  add_index "students", ["category_id"], name: "index_students_on_category_id", using: :btree
   add_index "students", ["immediate_contact_id"], name: "index_students_on_immediate_contact_id", using: :btree
-  add_index "students", ["student_category_id"], name: "index_students_on_student_category_id", using: :btree
 
   create_table "subjects", force: true do |t|
     t.string   "name"
