@@ -1,0 +1,23 @@
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sr. No.</th>
+        <th>Student Name</th>
+        <th>Batch</th>
+        <th>Admission No.</th>
+      </tr>
+    </thead>
+  <tbody>
+  <% sr_no=1 %>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= sr_no %></td>
+          <td><%= student.first_name+' '+student.last_name  %></td>
+           <td><%= student.batch.course.course_name+" - "+student.batch.name %></td>
+          <td><%= student.admission_no %></td>
+          <td><%= link_to 'View Profile',students_profile_path(student) %></td>
+        </tr>
+        <% sr_no+=1 %>
+      <% end %>   
+    </tbody>
+  </table>

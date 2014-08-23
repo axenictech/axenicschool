@@ -1,0 +1,40 @@
+<div id="content-header">
+  <h1>Batch Transfer</h1>
+  <h3>Graduation</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), batch_transfers_path %>
+  </div>
+</div>
+
+
+<div id="page-yield">
+   <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<h4>Graduating batch: <%= @batch.name %></h4>
+<%= form_for :graduate do |f| %>
+  These students will now be trasferred to former students database. Add the
+    status description for the students. e.g. 'Graduated 10th grade, 2010.
+     <div class="label-field-pair">
+          <label for="subject_id">Status description : </label>
+          <div class="text-input-bg"><%= f.text_field 'status_description' %></div>
+        </div>
+
+
+<p>From the below list uncheck the students you don't want to transfer to the new batch.</p>
+<ul id="category-list">
+  <% @batch.students.each do |student| %>
+  <li class="list<%=cycle('odd', 'even')%>">
+    <div class="category-name"><%= student.first_name %></div>
+    <div class="category-edit"><%= check_box_tag 'graduate[students][]', student.id, true %></div>
+</li>
+  <% end %>
+</ul>
+
+  <%= submit_tag %>
+
+<% end %>
+
+</div>
+  </div>

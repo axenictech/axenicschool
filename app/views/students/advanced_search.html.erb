@@ -1,0 +1,87 @@
+<div id="content-header">
+  <h1>Student</h1>
+  <h3>Advanced search</h3>
+  <div id="app-back-button">
+   <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+  <div class="show-msg"><div class="flash-msg"><%= flash[:notice] %></div> </div>
+  <% end %>
+
+<div class="container" style="margin-top:20px">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+	
+		<%=form_for :student ,url:{action:'advanced_student_search'},method: :get do |f| %>
+
+			<div class="row">
+				<div class="col-md-2"><%= f.label :first_name %></div><div class="col-md-1"></div>
+				<div class="col-md-5"><%=f.text_field :first_name,:style =>"width: 310px", :placeholder=>"course" , class: "form-control form-inline form-group"%></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-2"><%= f.label :admission_no %></div><div class="col-md-1"></div>
+				<div class="col-md-5"><%=f.text_field :admission_no,:style =>"width: 310px", :placeholder=>"course" , class: "form-control form-inline form-group"%></div>
+			</div>
+				
+			<div class="row">
+			<div class="col-md-2"><%= f.label :course_name %></div>
+			<div class="col-md-1"></div>
+			<div><%=f.select :id, @course.collect {|c| [c.course_name,c.id]},prompt:true%></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-2"><%= f.label :batch_name %></div>
+				<div class="col-md-1"></div>
+				
+			</div>
+			<div class="row">
+			<div class="col-md-2"><%= f.label :course_name %></div>
+			<div class="col-md-1"></div>
+			<div><%=f.select :course_id, @course.collect {|c| [c.course_name,c.id]},prompt:true%></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-2"><%= f.label :gender %></div><div class="col-md-1"></div>
+				<div class="col-md-1"><%=f.radio_button :is_active_equals, {:checked => false}%></div>
+				<div class="col-md-1"><%=f.radio_button :is_active_equals, {:checked => false}%></div>
+
+			</div>
+			<div class="row">
+				<div class="col-md-2"><%= f.label :blood_group %></div><div class="col-md-1"></div>
+				<div><%=f.select :id, @course.collect {|c| [c.course_name,c.id]},prompt:true%></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-2"><%= f.label :country %></div>
+				<div class="col-md-1"></div>
+				<div><%=f.select :id, @course.collect {|c| [c.course_name,c.id]},prompt:true%></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-2"><%= f.label :admission_date %></div>
+				<div class="col-md-1"></div>
+				<div><%=f.date_select :admission_date %></div>
+			</div>
+			
+
+			</div>
+			
+	</div>
+	<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-2">
+		<%= f.submit 'Search', class: "btn btn-primary"%>	
+	</div>
+	
+	</div>
+	
+	<%end%>	
+		
+<div class="col-md-1"></div>
+</div>
+</div>
