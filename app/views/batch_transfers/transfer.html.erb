@@ -1,4 +1,0 @@
-<strong>Transferring batch:<%= @batch.name %></strong>
-<p>transfer to batch</p>
-<%= select("batch","id",Batch.all.collect{|b| [b.name,b.id]})%>
-<p>Uncheck the students not eligible for graduation.</p>
