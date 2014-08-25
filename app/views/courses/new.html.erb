@@ -32,20 +32,20 @@
 			<h2>Course details</h2>
 			<div>
 				<div><%=c.label :course_name %></div>
-				<div><%= c.text_field :course_name,:style =>"width: 310px", :placeholder=>"course" , class: "form-control"%></div>
+				<div><%= c.text_field :course_name,:style =>"width: 250px", :placeholder=>"course" , class: "form-control"%></div>
 
 			</div>	
 		
 			<div>
 				<div><%=c.label :section_name %></div></td>
-				<div><%= c.text_field :section_name,:style =>"width: 310px", :placeholder=>"section" , class: "form-control" %></div>
+				<div><%= c.text_field :section_name,:style =>"width: 250px", :placeholder=>"section" , class: "form-control" %></div>
 				</div>
 			
 		
 			<div>
 			
 				<div><%=c.label :code %></div>
-				<div><%= c.text_field :code ,:style =>"width: 310px", :placeholder=>"code" , class: "form-control"%></div>
+				<div><%= c.text_field :code ,:style =>"width: 250px", :placeholder=>"code" , class: "form-control"%></div>
 			</div>
 		
 			
@@ -56,13 +56,13 @@
 				<%= c.fields_for :batches do |batch_form|%>
 
 				<div><%=batch_form.label :name%></div>
-				<div><%=batch_form.text_field :name,:style =>"width: 310px", :placeholder=>"code" , class: "form-control"%></div>
+				<div><%=batch_form.text_field :name,:style =>"width: 250px", :placeholder=>"code" , class: "form-control"%></div>
 
 				<div><%=batch_form.label :start_date%></div>
-				<div><%=batch_form.date_select :start_date,:style =>"width: 310px", :placeholder=>"code" , class: "form-control"%></div>
+				<div><%=batch_form.date_field :start_date ,:id=>'datetimepicker2',class: "form-control",:style =>"width: 250px"%></div>
 
 				<div><%=batch_form.label :end_date%></div>
-				<div><%=batch_form.date_select:end_date,:style =>"width: 310px", :placeholder=>"code" , class: "form-control"%></div>
+				<div><%=batch_form.date_field :end_date ,:id=>'datetimepicker2',class: "form-control",:style =>"width: 250px"%></div>
 				<%end%>
 				</div>	
 		</div>

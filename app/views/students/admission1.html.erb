@@ -47,18 +47,18 @@
 
      <tr>
      	 <td><%=f.label :course_and_batch%></td>
-         <td><%=f.text_field :batch%></td>
+         <td><%= f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true%></td>
      </tr>
 
      <tr>
      	 <td><%=f.label :Date_of_Birth%></td>
-          <td><%=f.date_field :date_of_birth%></td>
+          <td><%=f.date_field :date_of_birth,:id=>'datetimepicker2'%></td>
      </tr>
 
      <tr>
      	 <td><%=f.label :Gender%>
-         <td> male<%= f.radio_button  "gender","m", :checked => "checked" %></td>
-          <td>female <%= f.radio_button  "gender","f"%></td>
+         <td> Male<%= f.radio_button  "gender","Male", :checked => "checked" %></td>
+          <td>Female <%= f.radio_button  "gender","Female"%></td>
        </td>
      </tr>
 
@@ -74,7 +74,7 @@
 
      <tr>
      	 <td><%=f.label :Nationality%></td>
-          <td><%=f.text_field :nationality_id%></td>
+          <td><%=f.select :nationality_id,Country.all.collect{|c| [c.name,c.id]}%></td>
      </tr>
 
      <tr>
@@ -143,8 +143,8 @@
     <div class="field">
     <tr>
 
-     <td><%= f.label :Upload_Logo %></td> 
-      <td><%= f.file_field :image %></td>
+     <td><%= f.label :Upload_photo %></td> 
+      <td><%= f.file_field :photo_data %></td>
      </tr>
    </div>
    

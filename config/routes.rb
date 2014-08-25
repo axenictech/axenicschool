@@ -20,6 +20,8 @@ get 'students/admission1'
 get 'students/admission2'
 post 'students/adm_create'
 get 'students/admission2_1'
+get "newscasts/select"
+get "newscasts/display"
 
 root 'home#dashboard'
  resources :home
@@ -49,5 +51,9 @@ resources :batch_transfers
  resources :students do
     resources :guardians
 end
-resources :newscasts
+
+resources :newscasts do
+resources :comments
+end
+
 end

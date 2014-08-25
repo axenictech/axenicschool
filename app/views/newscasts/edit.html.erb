@@ -1,0 +1,31 @@
+<div id="content-header">
+  <h1>News</h1>
+  <h3>Read news</h3>
+  <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
+
+  <%= form_for @newscast do |f|%>
+
+    <div id="add_news_form">
+      <div class="news_label_field">
+        <%=f.label :Title %>
+        <div id="news_title_text_field_bg"><%= f.text_field :title%></div>
+      </div>
+
+      <div class="news_label_field">
+        <%=f.label :Content %>
+        <div id="news_content_text_field_bg"><%= f.text_area :content, :cols => "46", :rows => "10"%>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit :'Update'%> 
+  <% end %>
+
+</div>

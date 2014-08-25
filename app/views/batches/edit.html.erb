@@ -25,15 +25,15 @@
 
 <tbody>
 <tr><td><%=b.label :name%></td>
-<td><%=b.text_field :name%></td>
+<td><%=b.text_field :name,class: "form-control",:style =>"width: 250px"%></td>
 </tr>
 <tr>
 <td><%=b.label :start_date%></td>
-<td><%=b.text_field :start_date%></td>
+<td><%=b.date_field :start_date ,:id=>'datetimepicker2',class: "form-control",:style =>"width: 250px"%></td>
 </tr>
 <tr>
 <td><%=b.label :end_date%></td>
-<td><%= b.text_field :end_date%></td>
+<td><%=b.date_field :end_date ,:id=>'datetimepicker2',class: "form-control",:style =>"width: 250px"%></td>
 </tr>
 <tr>
 <td colspan="2" ><%=b.submit "Update",class: "btn btn-primary" %></td></tr>

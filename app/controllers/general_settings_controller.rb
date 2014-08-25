@@ -21,6 +21,8 @@ class GeneralSettingsController < ApplicationController
  
     private
     def general_setting_params
-      params.require(:general_setting).permit(:InstitutionName, :InstitutionAddress, :InstitutionPhoneNo, :StudentAttendanceType, :Finance_start_year_date, :Finance_end_year_date,:Language, :TimeZone, :image, :Country, :NetworkState)
+      params.require(:general_setting).permit(:InstitutionName, :InstitutionAddress, 
+      	:InstitutionPhoneNo, :StudentAttendanceType, :Finance_start_year_date, 
+      	:Finance_end_year_date,:Language, :TimeZone, :image, :Country, :NetworkState)
     end
 end

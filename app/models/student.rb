@@ -12,5 +12,6 @@ class Student < ActiveRecord::Base
   has_many   :fee_category ,:class_name => "FinanceFeeCategory",dependent: :destroy
 
   has_and_belongs_to_many :graduated_batches, :class_name => 'Batch', :join_table => 'batch_students',dependent: :destroy
+  has_attached_file :photo_data
 
 end

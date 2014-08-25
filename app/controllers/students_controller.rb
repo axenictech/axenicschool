@@ -1,19 +1,13 @@
 class StudentsController < ApplicationController
 
 	def admission1
-	 	# @student=Student.new
+	 	
         @student = Student.new
-        @category=Category.new
-
-		# @category=Category.find(params[:id])    
-		# @student = @category.students.build
+      
   	end
 
    	def create
      	@student = Student.new(student_params)
-	     # @category = Category.find(params[:category_id])
-	     # @category=Category.find(params[:format])    
-	     # @student = @category.students.all
 	     @student.save
 	     redirect_to students_admission2_path(@student)
     end
@@ -58,8 +52,6 @@ class StudentsController < ApplicationController
 	end
 	def advanced_student_search
 		@students=Student.where(first_name: params[:student][:first_name])
-		# admission_no: params[:student][:admission_no]})	
-		# ,course_id: params[:student][:id][:course_id]
 	end
 
 	def elective
@@ -69,8 +61,8 @@ class StudentsController < ApplicationController
 	private
 	def student_params
 	    params.require(:student).permit(:admission_no,:class_roll_no,:admission_date,:first_name,
-	    :middle_name, :last_name,:date_of_birth,:gender,:blood_group,:birth_place, 
-	    :nationality_id ,:language,:religion,:address_line1,:address_line2,:city,
+	    :middle_name, :last_name,:batch_id,:date_of_birth,:gender,:blood_group,:birth_place, 
+	    :nationality_id ,:language,:category_id,:religion,:address_line1,:address_line2,:city,
 	    :state,:pin_code,:country_id,:phone1,:phone2,:email)
 	end
 
