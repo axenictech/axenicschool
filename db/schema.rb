@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140822100721) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "batches", force: true do |t|
     t.string   "name"
     t.integer  "course_id"
@@ -198,13 +195,13 @@ ActiveRecord::Schema.define(version: 20140822100721) do
     t.string   "phone2"
     t.string   "email"
     t.integer  "immediate_contact_id"
-    t.boolean  "is_sms_enabled",       default: true
+    t.boolean  "is_sms_enabled",                        default: true
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data"
+    t.binary   "photo_data",           limit: 16777215
     t.string   "status_description"
-    t.boolean  "is_active",            default: true
-    t.boolean  "is_deleted",           default: false
+    t.boolean  "is_active",                             default: true
+    t.boolean  "is_deleted",                            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

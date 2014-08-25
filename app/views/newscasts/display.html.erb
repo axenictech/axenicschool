@@ -2,8 +2,13 @@
   <h1>School News</h1>
   <h3>Latest announcements</h3>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+    <%= link_to image_tag("buttons/back.png",:border => 0),newscasts_path(@newscast)  %>
   </div>
+</div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Add', new_newscast_path %></li>
+  </ul>
 </div>
 
 <div id="page-yield">

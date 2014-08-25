@@ -1,59 +1,48 @@
 class NewscastsController < ApplicationController
-	 def index
 
-  end
   def new
     @newscast=Newscast.new
-
-
-	end
+  end
 
   def select
     @newscast=Newscast.where(title: params[:newscast][:title])
   end
 	
 	def create
-	@newscast =Newscast.new(newscast_params)
- 
-		@newscast.save
-	
-		redirect_to newscast_path(@newscast)
+	 @newscast =Newscast.new(newscast_params)
+    if @newscast.save
+	   redirect_to newscast_path(@newscast), notice: "News added!!!"
+      else
+      render 'new'
     end
-    def edit
+  end
 
-  		@newscast = Newscast.find(params[:id])
-  		
-  	end
+  def edit
+    @newscast = Newscast.find(params[:id])
+  end
 
-  	def update
-  		@newscast=Newscast.find(params[:id])
-  		@newscast.update(newscast_params)
-  		redirect_to newscast_path(@newscast)
-  		
-  	end
+  def update
+  	@newscast=Newscast.find(params[:id])
+  	@newscast.update(newscast_params)
+  	redirect_to newscast_path(@newscast)
+  end
 
-  	def destroy
-   	 @newscast = Newscast.find(params[:id])
-    	@newscast.destroy
-    	redirect_to newscasts_display_path
-    end
+  def destroy
+   @newscast = Newscast.find(params[:id])
+  	@newscast.destroy
+   	redirect_to newscasts_path(@newscast), notice: "News item deleted succefully!"
+  end
 
-    def show
-  		
-  		@newscast = Newscast.find(params[:id])
-     
-  	end
+  def show
+  	@newscast = Newscast.find(params[:id])
+  end
 
-    def display
-        @newscasts = Newscast.all
+  def display
+    @newscasts = Newscast.all
+  end
 
-    end
-
-    private
-    def newscast_params
-      params.require(:newscast).permit(:title, :content)
-    end
-
-    
-
+  private
+  def newscast_params
+    params.require(:newscast).permit(:title, :content)
+  end
 end
