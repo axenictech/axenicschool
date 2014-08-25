@@ -1,0 +1,10 @@
+    <% @elective_groups.each do |elective_group| %>
+  <tr>
+    <td><%= elective_group.name %></td>
+    <td><%= link_to 'edit',edit_batch_elective_group_path(elective_group.batch,elective_group) %></td>
+
+    <td><%= link_to 'delete', [elective_group.batch,elective_group], method: :delete,
+                data:{confirm:'Are you sure want to delete?'} %></td>
+    <td><%= link_to 'Add Elective Subject', new_batch_elective_group_subject_path(elective_group.batch,elective_group),remote:true %></td>
+    </tr>
+    <%end%>

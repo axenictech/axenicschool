@@ -1,0 +1,157 @@
+<div id="content-header">
+  <h1>Admission</h1>
+  <h3>Step 1 - Student details</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-12">
+  
+<table class="table" >
+<%= form_for @student do |f| %>
+ 
+    <tbody>
+
+     <tr>
+         <td><%=f.label :admission_number%></td>
+          <td><%=f.text_field :admission_no%></td>
+          <td><%=f.label :admission_date %></td>
+          <td><%=f.date_field :admission_date ,:id=>'datetimepicker2'%></td>
+     <tr>
+
+    
+     <tr>
+     	 <td><%=f.label :First_name%></td>
+          <td> <%=f.text_field :first_name%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Middle_name%></td>
+        <td><%=f.text_field :middle_name%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Last_name%></td>
+         <td>  <%=f.text_field :last_name%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :course_and_batch%></td>
+         <td><%= f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Date_of_Birth%></td>
+          <td><%=f.date_field :date_of_birth,:id=>'datetimepicker2'%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Gender%>
+         <td> Male<%= f.radio_button  "gender","Male", :checked => "checked" %></td>
+          <td>Female <%= f.radio_button  "gender","Female"%></td>
+       </td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Blood_Group%></td>
+          <td>  <%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Birth_place%></td>
+           <td><%=f.text_field :birth_place%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Nationality%></td>
+          <td><%=f.select :nationality_id,Country.all.collect{|c| [c.name,c.id]}%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Mother_Tongue%></td>
+        <td><%=f.text_field :language%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Category%></td>
+          <td> <%=f.select :category_id, Category.all.collect{|c| [c.name,c.id]}%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Religion%></td>
+        <td><%=f.text_field :religion%></td>
+     </tr>
+
+     <tr>
+     	 <td><%=f.label :Address_Line1%></td>
+          <td> <%=f.text_field :address_line1%></td>
+     </tr>
+
+
+     <tr>
+     	 <td><%=f.label :Address_Line2%></td>
+        <td><%=f.text_field :address_line2%></td>
+     </tr>
+
+      <tr>
+     	 <td><%=f.label :City%></td>
+         <td>  <%=f.text_field :city%></td>
+     </tr>
+
+      <tr>
+     	 <td><%=f.label :State%></td>
+        <td><%=f.text_field :state%></td>
+     </tr>
+
+      <tr>
+     	 <td><%=f.label :PIN_code%></td>
+        <td><%=f.text_field :pin_code%></td>
+     </tr>
+
+      <tr>
+     	 <td><%=f.label :Country%></td>
+          <td><%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]}%></td>
+     </tr>
+
+      <tr>
+     	 <td><%=f.label :Phone%></td>
+         <td><%=f.text_field :phone1%></td>
+     </tr>
+
+      <tr>
+     	 <td><%=f.label :Mobile%></td>
+          <td><%=f.text_field :phone2%></td>
+     </tr>
+
+      <tr>
+     	 <td><%=f.label :Email%></td>
+          <td> <%=f.text_field :email%></td>
+     </tr>
+
+
+
+    <div class="field">
+    <tr>
+
+     <td><%= f.label :Upload_photo %></td> 
+      <td><%= f.file_field :photo_data %></td>
+     </tr>
+   </div>
+   
+     <tr><td><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
+
+<%end%>
+</tbody>
+</table>
+<div class="col-md-10">
+  </div>

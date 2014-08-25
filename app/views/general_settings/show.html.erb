@@ -1,0 +1,33 @@
+<h2>Data stored in database</h2>
+
+<table border="2">	
+	<tr>
+	<td>InstitutionName:</td><td> <%= @general_setting.InstitutionName%></td></tr>
+	<tr><td>InstitutionAddress: </td><td><%= @general_setting.InstitutionAddress%></td></tr>
+	<tr><td>InstitutionPhoneNo: </td><td><%= @general_setting.InstitutionPhoneNo%></td></tr>
+	<tr><td>StudentAttendanceType:</td><td> <%= @general_setting.StudentAttendanceType%></td>
+	</tr>
+
+	<tr><td>Finance_start_year_date:</td><td> <%= @general_setting.Finance_start_year_date%></td>
+	</tr>
+
+	<tr><td>Finance_end_year_date:</td><td> <%= @general_setting.Finance_end_year_date%></td>
+	</tr>
+
+	<tr><td>Language:</td><td> <%= @general_setting.Language%></td>
+	</tr>
+
+	<tr><td>TimeZone:</td><td> <%= @general_setting.TimeZone%></td>
+	</tr>
+
+	<tr><td>Country:</td><td> <%= @general_setting.Country%></td>
+	</tr>
+	<tr><td>NetworkState:</td><td> <%= @general_setting.NetworkState%></td>
+	</tr>
+
+	<tr><td>Logo:</td><td> <%= image_tag @general_setting.image.url(:medium)%></td>
+	</tr>
+
+
+</table>
+
