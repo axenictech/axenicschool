@@ -28,7 +28,7 @@
  <div class="box">
    <div class="bread_crumb">
     <%= link_to 'Courses', courses_path %> &raquo;
-    <%= link_to @batch.course.course_name, @course %> &raquo;
+    <%= link_to @batch.course.course_name, course_path(@batch.course) %> &raquo;
     Batch <%= @batch.name %>
         </div>
 

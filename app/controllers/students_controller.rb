@@ -26,6 +26,46 @@ class StudentsController < ApplicationController
 
 	end
 
+	def admission3
+		@student=Student.find(params[:format])
+	end
+
+	def edit
+		@student=Student.find(params[:id])
+	end
+	
+	def update
+		@student=Student.find(params[:id])
+		@student.update(student_params)
+		redirect_to students_profile_path(@student)
+	end
+
+	def update_immediate_contact
+		@student=Student.find(params[:id])
+		@student.update(student_params)
+		redirect_to students_previous_data_path(@student)
+	end
+
+	def previous_data
+		@student=Student.find(params[:format])
+	end
+
+	def previous_data_create
+		@previous_data=StudentPreviousData.create(previous_data_params)
+		@student=params[:student_previous_data][:student_id]
+		redirect_to students_profile_path(@student)
+	end
+
+	def add_subject
+		@student=Student.find(params[:format])
+	end
+
+	def previous_subject_create
+		@previous_subject=StudentPreviousSubjectMark.create(params_subject)
+		@student=params[:student_previous_subject_mark][:student_id]
+		redirect_to students_previous_data_path(@student)
+	end
+
 	def search_ajax
 
 		@students=Student.where("first_name='#{params[:search]}' OR last_name='#{params[:search]}'")
@@ -58,17 +98,34 @@ class StudentsController < ApplicationController
 		@batch=Batch.find(params[:format])
 	end
 
+	def email
+		@student=Student.find(params[:format])
+	end
+	
+	def profile_pdf
+	
+   		@student = Student.find(params[:format])
+   		@address = @student.address_line1 + ' ' + @student.address_line2
+    	@immediate_contact = Guardian.find(@student.immediate_contact) \
+
+	    respond_to do |format|
+	      format.pdf { render :layout => false }
+	    end
+	end
+
 	private
 	def student_params
 	    params.require(:student).permit(:admission_no,:class_roll_no,:admission_date,:first_name,
 	    :middle_name, :last_name,:batch_id,:date_of_birth,:gender,:blood_group,:birth_place, 
 	    :nationality_id ,:language,:category_id,:religion,:address_line1,:address_line2,:city,
-	    :state,:pin_code,:country_id,:phone1,:phone2,:email)
+	    :state,:pin_code,:country_id,:phone1,:phone2,:email,:immediate_contact)
 	end
 
-	def param
-		params.require(:guardian).permit(:first_name,:last_name,:relation,:dob,:email,:office_phone1,
-	   :office_phone2,:mobile_phone,:office_address_line1,
-	   :office_address_line2,:city,:country_id,:state,:occupation,:income,:education)
+	def previous_data_params
+		 params.require(:student_previous_data).permit(:student_id,:institution,:year,:course,:total_mark)
+	end
+
+	def params_subject
+		params.require(:student_previous_subject_mark).permit(:student_id,:subject,:mark)
 	end
 end

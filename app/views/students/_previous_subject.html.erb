@@ -1,0 +1,22 @@
+<table class="table" style="width:500px" >
+
+    <tbody>
+<%= form_for :student_previous_subject_mark,url:{action:'previous_subject_create'},remote: true do |f| %>
+    <%=f.hidden_field :student_id,value: @student.id %>
+      <tr>
+          <td><%= f.label :subject %></td>
+            <td><%= f.text_field :subject%></td>
+        </tr>
+
+      <tr>
+          <td><%= f.label :mark%></td>
+            <td><%= f.text_field :mark%></td>
+      </tr>
+
+      <tr>
+            <td><%= f.submit 'Submit', class: "btn btn-primary"%></td>
+      </tr>
+
+<% end %>
+   </tbody>
+  </table>

@@ -197,21 +197,20 @@ ActiveRecord::Schema.define(version: 20140822100721) do
     t.string   "phone1"
     t.string   "phone2"
     t.string   "email"
-    t.integer  "immediate_contact_id"
-    t.boolean  "is_sms_enabled",       default: true
+    t.integer  "immediate_contact"
+    t.boolean  "is_sms_enabled",     default: true
     t.string   "photo_filename"
     t.string   "photo_content_type"
     t.binary   "photo_data"
     t.string   "status_description"
-    t.boolean  "is_active",            default: true
-    t.boolean  "is_deleted",           default: false
+    t.boolean  "is_active",          default: true
+    t.boolean  "is_deleted",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "students", ["batch_id"], name: "index_students_on_batch_id", using: :btree
   add_index "students", ["category_id"], name: "index_students_on_category_id", using: :btree
-  add_index "students", ["immediate_contact_id"], name: "index_students_on_immediate_contact_id", using: :btree
 
   create_table "subjects", force: true do |t|
     t.string   "name"

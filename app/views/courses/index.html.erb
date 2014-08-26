@@ -34,8 +34,7 @@
 				<% @courses.each do |c|%>
 	
 				<tr>
-				<td><%= link_to c.course_name ,course_path(c) %></td>
-				<td><%=c.section_name %></td>
+				<td><%= link_to c.course_name+ " - "+c.section_name,course_path(c)  %></td>
 				<td><%= link_to 'edit' ,edit_course_path(c), class: "btn btn-success",remote:true%></td>
 				<td><%= link_to 'delete' ,course_path(c),method: :delete, data:{confirm: 'Delete data?'}, class: "btn btn-default"%></td>	
 				

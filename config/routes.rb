@@ -20,8 +20,17 @@ get 'students/admission1'
 get 'students/admission2'
 post 'students/adm_create'
 get 'students/admission2_1'
-get "newscasts/select"
-get "newscasts/display"
+get 'newscasts/select'
+get 'newscasts/display'
+get 'students/admission3'
+patch 'students/update_immediate_contact'
+get 'students/previous_data'
+post 'students/previous_data_create'
+get 'students/add_subject'
+post 'students/previous_subject_create'
+get 'students/profile_pdf'
+get 'students/report'
+get 'students/email'
 
 root 'home#dashboard'
  resources :home

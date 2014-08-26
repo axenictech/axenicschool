@@ -31,7 +31,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string     :phone2
       t.string     :email
 
-      t.references :immediate_contact,index:true
+      t.integer    :immediate_contact
       t.boolean    :is_sms_enabled, :default=>true
 
       t.string     :photo_filename
