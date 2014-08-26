@@ -1,7 +1,7 @@
 <table class="table" style="width:500px" >
 
     <tbody>
-<%= form_for :student_previous_subject_mark,url:{action:'previous_subject_create'},remote: true do |f| %>
+<%= form_for :student_previous_subject_mark,url:{action:'previous_subject_create'} do |f| %>
     <%=f.hidden_field :student_id,value: @student.id %>
       <tr>
           <td><%= f.label :subject %></td>
@@ -20,3 +20,4 @@
 <% end %>
    </tbody>
   </table>
+  <%= link_to 'Add Subject',students_add_subject_path(@student),remote:true %>

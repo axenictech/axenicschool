@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826063723) do
+ActiveRecord::Schema.define(version: 20140826075242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 20140826063723) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "class_timings", force: true do |t|
+    t.integer  "batch_id"
+    t.string   "name"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.boolean  "is_break"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "class_timings", ["batch_id"], name: "index_class_timings_on_batch_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.text     "statement"
@@ -252,5 +264,38 @@ ActiveRecord::Schema.define(version: 20140826063723) do
 
   add_index "subjects", ["batch_id"], name: "index_subjects_on_batch_id", using: :btree
   add_index "subjects", ["elective_group_id"], name: "index_subjects_on_elective_group_id", using: :btree
+
+  create_table "time_table_entries", force: true do |t|
+    t.integer  "batch_id"
+    t.integer  "week_day_id"
+    t.integer  "class_timing_id"
+    t.integer  "subject_id"
+    t.integer  "employee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "time_table_entries", ["batch_id"], name: "index_time_table_entries_on_batch_id", using: :btree
+  add_index "time_table_entries", ["class_timing_id"], name: "index_time_table_entries_on_class_timing_id", using: :btree
+  add_index "time_table_entries", ["employee_id"], name: "index_time_table_entries_on_employee_id", using: :btree
+  add_index "time_table_entries", ["subject_id"], name: "index_time_table_entries_on_subject_id", using: :btree
+  add_index "time_table_entries", ["week_day_id"], name: "index_time_table_entries_on_week_day_id", using: :btree
+
+  create_table "time_tables", force: true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "is_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "weekdays", force: true do |t|
+    t.integer  "batch_id"
+    t.string   "weekday"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "weekdays", ["batch_id"], name: "index_weekdays_on_batch_id", using: :btree
 
 end

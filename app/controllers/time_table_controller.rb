@@ -1,0 +1,2 @@
+class TimeTableController < ApplicationController
+end
