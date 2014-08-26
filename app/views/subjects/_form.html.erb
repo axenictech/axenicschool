@@ -1,0 +1,24 @@
+<%= form_for [@batch,@elective_group, @subject],remote: true, html: { class: "form-horizontal", style: "display:inline;" } do |f|%>
+
+<div class="modal-body">
+	<ul class="errors"></ul>
+	<div class="control-group">
+			<%= f.label :name , class: "control-label"%>
+		<div class="control">
+			<%= f.text_field :name %></div></div>
+	<div class="control-group">
+			<%= f.label :code , class: "control-label"%>
+		<div class="control">
+			<%= f.text_field :code %></div></div>
+	<div class="control-group">
+			<%= f.label :max_weekly_classes, class: "control-label"%>
+		<div class="control">
+			<%= f.text_field :max_weekly_classes %></div></div>
+	<div class="control-group">
+			<%= f.label :no_exams, class: "control-label"%>
+		<div class="control">
+			<%= f.check_box :no_exams %></div></div></div>	
+<div class"modal-footer">		
+	<%= f.submit 'Submit', class: "btn btn-primary"%>
+	<%= link_to 'Cancel','#', class: "btn",data:{dismiss:"modal"}%></div>
+<% end %>

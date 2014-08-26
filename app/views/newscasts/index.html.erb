@@ -1,0 +1,26 @@
+<div id="content-header">
+  <h1>School News</h1>
+  <h3>Latest announcements</h3>
+  <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "View all", newscasts_display_path %></li>
+    <li><%= link_to 'Add', new_newscast_path %></li>
+  </ul>
+</div>
+
+<% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
+ 
+<div align="center">
+	<%= form_for :newscast, url:{action:'select'},method: :get,remote:true do |f| %>
+	<%= f.label :Search %>
+  <%= f.text_field :title%>
+  <%= f.submit "GO"%>
+<% end %>
+</div>
+
+<div id="newscast_div"></div>

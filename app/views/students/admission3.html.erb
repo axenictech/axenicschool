@@ -1,0 +1,38 @@
+<div class="container">
+<div class="page-header">
+  <h1>Admission</h1>
+  <h3>Step 3 - Emergency Contact</h3>
+  <h3>- Select one of the contact for Emergency Contact</h3>
+</div>
+</div>
+
+
+
+<div class="container">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+
+
+
+<table class="table">
+   	<tbody style="center">
+
+   	<%= form_for @student, url:{action:'update_immediate_contact'},method: :patch do |f| %>
+   	<%= hidden_field_tag :id,@student.id %>	
+	<% @student.guardians.each do|g|%>
+      <tr>
+		       
+			<td><h3> <%= f.radio_button "immediate_contact",g.id, :checked =>true%>
+			 <%= g.first_name %></h3></td>
+      </tr>
+	<%end%>
+	<tr>
+			 <td><h3><%= f.submit 'Finish',class: "btn btn-primary"%></h3></td>
+	</tr>
+ <%end%>
+</tbody>
+</table>
+</div>	
+</div>
+<div class="col-md-1"></div>
+</div>

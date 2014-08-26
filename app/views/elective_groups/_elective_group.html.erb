@@ -1,0 +1,42 @@
+ <div class="add_sub">
+   <%= link_to 'Add new Elective Groups',new_batch_elective_group_path(@batch),remote:true %>
+   </div>
+<div>
+<table align="center" class="table">
+<ul id="category-list">
+<tbody>
+<thead>
+    
+  <tr class="tr-head"><th>Elective Groups Name</th>
+      <th></th><th></th><th></th><th></th><th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @elective_groups.each do |elective_group| %>
+    <tr><td><%= elective_group.name %></td>
+    <td><%= link_to 'edit',edit_batch_elective_group_path(elective_group.batch,elective_group),remote:true%></td>
+
+    <td><%= link_to 'delete', [elective_group.batch,elective_group], remote:true,
+        method: :delete, data:{confirm:'Are you sure want to delete?'} %></td>
+    <td><%= link_to 'Add Elective Subject', new_batch_elective_group_subject_path(elective_group.batch,elective_group),remote:true %></td>
+    </tr>
+
+    <tr><th></th>
+        <th>Subject Name</th>
+        <th>Subject Code</th>
+      </tr>
+<% elective_subjects=elective_group.subjects.all %>
+<% elective_subjects.each do |subject| %>
+    <tr><td></td><td><%= subject.name %></td>
+        <td><%= subject.code %></td>
+        <td><%= link_to 'edit',edit_batch_elective_group_subject_path(elective_group.batch,elective_group,subject),remote:true %></td>
+        <td><%= link_to 'delete',[elective_group.batch,elective_group,subject],remote:true,
+        method: :delete, data:{confirm:'Are you sure want to delete?'} %></td>
+         <td><%= link_to 'Assign Students',students_elective_path(elective_group.batch) %></td>
+    </tr>
+<% end %>
+<% end %>
+</table>
+</div>
+</div>
+</div>
