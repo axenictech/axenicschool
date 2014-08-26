@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822100721) do
+ActiveRecord::Schema.define(version: 20140826063723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendences", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "period_table_entry_id"
+    t.boolean  "forenoon",              default: false
+    t.boolean  "afternoon",             default: false
+    t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attendences", ["period_table_entry_id"], name: "index_attendences_on_period_table_entry_id", using: :btree
+  add_index "attendences", ["student_id"], name: "index_attendences_on_student_id", using: :btree
 
   create_table "batches", force: true do |t|
     t.string   "name"
@@ -69,6 +82,19 @@ ActiveRecord::Schema.define(version: 20140822100721) do
   end
 
   add_index "elective_groups", ["batch_id"], name: "index_elective_groups_on_batch_id", using: :btree
+
+  create_table "events", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "is_common",   default: false
+    t.boolean  "is_holiday",  default: false
+    t.boolean  "is_exam",     default: false
+    t.boolean  "is_due",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "general_settings", force: true do |t|
     t.string   "InstitutionName"
