@@ -10,6 +10,6 @@ attr_accessor :password
 	   	# salt = BCrypt::Engine.generate_salt
 	    # encrypted_password= BCrypt::Engine.hash_secret(password, salt)
 	    # hashed_password=[salt,encrypted_password].join(":")
-	    hashed_password=password
+	    self.hashed_password=self.password
 	end
 end
