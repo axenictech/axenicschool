@@ -1,16 +1,10 @@
 
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h3>New subject</h3>
-</div>
-
 <div class="modal-body">
 
 <table class="table" style="width:500px" >
 
-<tbody>
-<%= form_for @previous_subject,url:{action:'previous_subject_create'},method: :post,remote:true do |f| %>
+		<tbody>
+<%= form_for :student_previous_subject_mark,url:{action:'previous_subject_create'} ,remote: true do |f| %>
     <%=f.hidden_field :student_id,value: @student.id %>
 
 
@@ -29,21 +23,12 @@
 		    		<td><%= link_to 'Cancel','#',class: "btn btn-primary",data:{dismiss:"modal"}%></td>
 			</tr>
 
-			
-	
-
 <% end %>
 	 </tbody>
-
 	</table>
 
 </div>	
-</div></div>
 
-<script>
-$(document).ready(function(){
-	$("#mysubmit").on('click',function(){
-		alert('hello');
-	});
-})
-</script>
+
+
+

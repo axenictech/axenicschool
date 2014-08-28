@@ -18,5 +18,24 @@
     <div class="extender"> </div>
 
   </div>
+  <div class="label-field-pair">
+    <label for="email_subject">Subject</label>
+    <div class="text-input-bg"><%= text_field_tag 'subject' %></div>
+  </div>
+
+  <div class="label-field-pair">
+    <label for="email_recipients">Recipients</label>
+    <div class="text-input-bg"><%= %></div>
+  </div>
+
+  <div class="message-area">
+    <br/>
+    <label for="email_message">Message</label>
+    <%= text_area_tag 'message' %>
+  </div>
+
+  <div class="submit-area">
+    <%= submit_tag 'Create' %>
+  </div>
 
 </div>

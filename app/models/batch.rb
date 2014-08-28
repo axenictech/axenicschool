@@ -2,7 +2,7 @@ class Batch < ActiveRecord::Base
 
   belongs_to :course
 
-  has_many :students, dependent: :destroy
+  has_many :students,dependent: :destroy
   # has_many :archived_students, dependent: :destroy
   has_many :grading_levels, dependent: :destroy
   has_many :subjects, dependent: :destroy

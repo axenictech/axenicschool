@@ -16,6 +16,7 @@ class BatchesController < ApplicationController
    
    def display
        @batch=Batch.find(params[:format])
+       @students=@batch.students.all
    end
 
    def select

@@ -26,11 +26,14 @@ get 'students/admission3'
 patch 'students/update_immediate_contact'
 get 'students/previous_data'
 post 'students/previous_data_create'
-get 'students/add_subject'
+get 'students/previous_subject'
 post 'students/previous_subject_create'
 get 'students/profile_pdf'
 get 'students/report'
 get 'students/email'
+get 'students/change_to_former'
+get 'students/delete'
+get 'students/remove'
 
 root 'home#dashboard'
  resources :home
@@ -64,5 +67,6 @@ end
 resources :newscasts do
 resources :comments
 end
+resources :users
 
 end

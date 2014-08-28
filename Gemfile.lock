@@ -31,6 +31,7 @@ GEM
     aws-sdk (1.51.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
+    bcrypt (3.1.7)
     builder (3.2.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -144,6 +145,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  bcrypt (~> 3.1.7)
   coffee-rails (~> 4.0.0)
   imagemagick-binaries
   jbuilder (~> 2.0)

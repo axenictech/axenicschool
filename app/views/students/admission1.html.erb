@@ -1,6 +1,12 @@
 <div id="content-header">
+   <hr class="fancy-line"></hr>
   <h1>Admission</h1>
   <h3>Step 1 - Student details</h3>
+ 
+  <h3>Fields Marked with * must be filled</h3>
+
+  <h2>Personal Details</h2>
+   <hr class="fancy-line"></hr>
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
   </div>
@@ -19,40 +25,55 @@
   
 <table class="table" >
 <%= form_for @student do |f| %>
+
+    <% if @student.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@student.errors.count, "error") %> prohibited
+            this Student from being saved:
+          </h2>
+          <ul>
+           <% @student.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+          <% end %>
+      </div>
  
     <tbody>
-
+    
+    
      <tr>
-         <td><%=f.label :admission_number%></td>
-          <td><%=f.text_field :admission_no%></td>
-          <td><%=f.label :admission_date %></td>
-          <td><%=f.date_field :admission_date ,:id=>'datetimepicker2'%></td>
+         <td><%=f.label :admission_number%><span class="necessary-field">*</span></td>
+          <td><%=f.text_field :admission_no, :value=> @student.admission_no%></td>
+          <td><%=f.label :admission_date %><span class="necessary-field">*</span></td>
+          <td><%=f.date_field :admission_date ,:value => Time.now.strftime('%Y-%m-%d')%></td>
      <tr>
 
     
      <tr>
-     	 <td><%=f.label :First_name%></td>
+     	 <td><%=f.label :First_name%><span class="necessary-field">*</span></td>
           <td> <%=f.text_field :first_name%></td>
      </tr>
 
      <tr>
      	 <td><%=f.label :Middle_name%></td>
-        <td><%=f.text_field :middle_name%></td>
+        <td><%=f.text_field :middle_name, :required=>false%></td>
      </tr>
 
      <tr>
-     	 <td><%=f.label :Last_name%></td>
+     	 <td><%=f.label :Last_name%><span class="necessary-field">*</span></td>
          <td>  <%=f.text_field :last_name%></td>
      </tr>
 
      <tr>
-     	 <td><%=f.label :course_and_batch%></td>
+     	 <td><%=f.label :course_and_batch%><span class="necessary-field">*</span></td>
          <td><%= f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true%></td>
      </tr>
 
      <tr>
-     	 <td><%=f.label :Date_of_Birth%></td>
-          <td><%=f.date_field :date_of_birth,:id=>'datetimepicker2'%></td>
+     	 <td><%=f.label :Date_of_Birth%><span class="necessary-field">*</span></td>
+          <td><%=f.date_field :date_of_birth,:value => Time.now.strftime('%Y-%m-%d')%></td>
      </tr>
 
      <tr>
@@ -155,10 +176,3 @@
 </table>
 <div class="col-md-10">
   </div>
-
-<script>
-if (location.href.indexOf('reload')==-1)
-{
-  location.href=location.href+'?reload';
-}
-</script>

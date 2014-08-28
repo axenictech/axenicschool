@@ -2,7 +2,7 @@
 <div class="page-header">
   <h1>Admission</h1>
   <h3>Step 4 - previous Details</h3>
-  <h3>- Select one of the contact for Emergency Contact</h3>
+  <h3>- Insert previous Institution Details</h3>
 </div>
 </div>
 
@@ -12,14 +12,28 @@
 <div class="col-md-1"></div>
 <div class="col-md-10">
 
-<%= link_to 'Add Subject',students_add_subject_path(@student),remote:true%>
-<div id="previous_data"></div><br />
+
+
 <table class="table">
    	<tbody style="center">
 
-   	<%= form_for :student_previous_data,url:{action:'previous_data_create'} do |f| %>
+   	<%= form_for @previous_data,url:{action:'previous_data_create'} do |f| %>
+    <%=f.hidden_field :student_id,value: @student.id %>
 
-          <%= f.hidden_field :student_id, value: @student.id %>
+    <% if @previous_data.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@previous_data.errors.count, "error") %> prohibited
+            this previous data from being saved:
+          </h2>
+          <ul>
+           <% @previous_data.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+          <% end %>
+      </div>
+
    	  <tr>
           <td><%=f.label :institution%></td>
           <td> <%=f.text_field :institution%></td>
@@ -36,22 +50,23 @@
       </tr>
 
       <tr>    
-          <td><%=f.label :total_marks%></td>
-          <td> <%=f.text_field :total_mark %></td>
+          <td><%=f.label :'total-marks'%></td>
+          <td> <%=f.text_field :'total_mark'%></td>
      </tr>
       <tr>    
           <td><%=f.submit 'submit',class: "btn btn-primary"%></td>
+          <td><%=link_to "Add subject",students_previous_subject_path(@student),remote: true,class: "btn btn-primary"%></td>
      </tr>
+
+       
+          <div id="myModal" class="modal fade">
+          </div>
+ 
+
 </tbody>
 </table>
  <%end%>
 </div>	
 </div>
+<div class="col-md-1"></div>
 </div>
-
-<script>
-if (location.href.indexOf('reload')==-1)
-{
-  location.href=location.href+'?reload';
-}
-</script>

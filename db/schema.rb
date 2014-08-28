@@ -11,23 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826075242) do
+ActiveRecord::Schema.define(version: 20140827054824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attendences", force: true do |t|
     t.integer  "student_id"
-    t.integer  "period_table_entry_id"
-    t.boolean  "forenoon",              default: false
-    t.boolean  "afternoon",             default: false
+    t.integer  "time_table_entry_id"
+    t.boolean  "forenoon",            default: false
+    t.boolean  "afternoon",           default: false
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "attendences", ["period_table_entry_id"], name: "index_attendences_on_period_table_entry_id", using: :btree
   add_index "attendences", ["student_id"], name: "index_attendences_on_student_id", using: :btree
+  add_index "attendences", ["time_table_entry_id"], name: "index_attendences_on_time_table_entry_id", using: :btree
 
   create_table "batches", force: true do |t|
     t.string   "name"
@@ -285,6 +285,19 @@ ActiveRecord::Schema.define(version: 20140826075242) do
     t.date     "start_date"
     t.date     "end_date"
     t.boolean  "is_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "username"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "role"
+    t.string   "hashed_password"
+    t.string   "reset_password_code"
+    t.datetime "reset_password_code_until"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
