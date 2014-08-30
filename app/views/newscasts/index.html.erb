@@ -13,26 +13,14 @@
   </ul>
 </div>
 
-
-  
-<div id="content_wrapper">
-
-<div class="bread_crumb">
-<%= link_to 'Home', home_dashboard_path %> &raquo;
-<%= 'News' %>
-</div>
-
 <% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
  
 <div align="center">
 	<%= form_for :newscast, url:{action:'select'},method: :get,remote:true do |f| %>
-
-
-	<%= f.label :Search_news %>
+	<%= f.label :Search %>
   <%= f.text_field :title%>
-  <%= f.submit "Search"%>
+  <%= f.submit "GO"%>
 <% end %>
 </div>
-
 
 <div id="newscast_div"></div>

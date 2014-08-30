@@ -9,7 +9,8 @@
   <% unless flash[:notice].nil? %>
     <p class="flash-msg"> <%= flash[:notice] %> </p>
   <% end %>
-<div>
+<div class="box">
+
 <%= form_for @general_setting, :html => { :multipart => true } do |f| %>
 
 
@@ -24,55 +25,55 @@
     <% end %>
 
 
-<table class="table table-hover table-bordered" style="width:800px">
+<table class="table">
   <tbody>
     <tr>
-      <td class="col-2"><%=f.label :'school/college_Name' %></td> 
-      <td class="col-1"><%= f.text_field :InstitutionName,:style =>"width: 310px", :placeholder=>"name" , class: "form-control" %></td></tr>
+      <td><%=f.label :'school/college_Name' %></td> 
+      <td><%= f.text_field :InstitutionName,:style =>"width: 310px", :placeholder=>"name" , class: "form-control" %></td></tr>
       
 
   <tr>
 
-    <td class="col-2"><%= f.label :'school/college_Address' %></td> 
+    <td><%= f.label :'school/college_Address' %></td> 
     <td><%= f.text_field :InstitutionAddress,:style =>"width: 310px",:placeholder=>"Address" , class: "form-control"%></td>
     
   </tr>
 
   <tr>
    
-    <td class="col-2"><%= f.label :'School/College_Phone' %></td> 
+    <td><%= f.label :'School/College_Phone' %></td> 
     <td><%= f.text_field :InstitutionPhoneNo,:style =>"width: 310px",:placeholder=>"Phone " , class: "form-control"%></td>
     
   </tr>
 
   <tr>
-    <td class="col-2"><%= f.label :Student_Attendance_Type %></td> 
+    <td><%= f.label :Student_Attendance_Type %></td> 
     <td><%= f.select :StudentAttendanceType, ['SubjectWise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" ,:placeholder=>"Attendence" %></td>
   </tr>
 
   <tr>
-    <td class="col-2"><%= f.label :Finance_start_year_date %></td> 
+    <td><%= f.label :Finance_start_year_date %></td> 
     <td><%= f.date_select :Finance_start_year_date, :start_year=>1999 %></td>
   </tr>
       
   <tr>
-    <td class="col-2"><%= f.label :Finance_end_year_date %></td> 
+    <td><%= f.label :Finance_end_year_date %></td> 
     <td><%= f.date_select :Finance_end_year_date, :end_year=>2019%></td>
   </tr>
 
   <tr>
-    <td class="col-2"><%= f.label :Language %></td> 
+    <td><%= f.label :Language %></td> 
     <td><%= f.select :Language, ['English','Spanish','मराठी','हिंदी','العربية'], :selected => 'English',  :style => "width:310px" %></td>
   </tr>
 
   <tr>
 
-    <td class="col-2"><%= f.label :Time_Zone %></td> 
+    <td><%= f.label :Time_Zone %></td> 
     <td><%= f.select :TimeZone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], :selected => 'Indian Standard Time(IST) - GMT+05:30',  :style => "width:310px", class: "dropdown-toggle" %></td>
   </tr>
 
   <tr>
-    <td class="col-2"><%= f.label :Country %></td> 
+    <td><%= f.label :Country %></td> 
     <td><%= f.select :Country, ['Afghanistan','Bangladesh','Canada','India','Nepal'], :selected => 'India',  :style => "width:310px" %></td>
   </tr> 
 

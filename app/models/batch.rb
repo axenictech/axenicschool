@@ -7,6 +7,7 @@ class Batch < ActiveRecord::Base
   belongs_to :course
 
   has_many :students
+  has_many :class_timings
   # has_many :archived_students, dependent: :destroy
   has_many :grading_levels
   has_many :subjects

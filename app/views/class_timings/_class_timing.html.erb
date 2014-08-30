@@ -1,0 +1,18 @@
+<div class="add_sub",style="margin-top:200px">
+ <%= link_to 'Add', new_batch_class_timing_path(@batch),remote: true%>
+</div> 
+   <table align="center" class="table table-hover" style="width:800px">
+  <thead>
+  	<tr class="tr-head">
+        <th>Name</th>
+        <th>start time</th>
+        <th>End time</th>
+        <th>Operation</th>
+        <th></th><th></th>
+    </tr>
+  </thead>
+  
+    <tbody class="product-index">
+      <%= render 'index' %>
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+<div id="content-header">
+  <h1>All Users</h1>
+  <h3>Details about  all users</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
+
+  <div align="center">
+		<%= form_for :user, url:{action:'select'},method: :get,remote:true do |f| %>
+		<%= f.label :select %>
+	    <%= f.select :role,["Admin", "Employee", "Student"],prompt:true %>
+	    <%= f.submit "GO"%>
+		<% end %>
+	</div>
+ <div id="user_view"></div> 
+</div>

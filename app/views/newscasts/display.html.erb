@@ -1,31 +1,16 @@
-
 <div id="content-header">
   <h1>School News</h1>
   <h3>Latest announcements</h3>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),newscasts_path(@newscast)  %>
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
   </div>
 </div>
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'Add', new_newscast_path %></li>
-  </ul>
-</div>
-<div id="content_wrapper">
-   <div class="bread_crumb">
-   <%= link_to 'Home', home_dashboard_path %> &raquo;
-        <%= link_to 'News', newscasts_path %> &raquo;
-        <%= 'View all' %>
-        </div>
-
 
 <div id="page-yield">
 
   <% unless flash[:notice].nil? %>
     <p class="flash-msg"> <%= flash[:notice] %> </p>
   <% end %>
-
-
 
   <div id="all_news">
     <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
@@ -71,5 +56,5 @@
 
     </table>
   </div>
-</div>
+
 </div>

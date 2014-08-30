@@ -9,34 +9,14 @@
 			$("#expanderSign").text("+")
 		}
 	});
-		var menu = [
-		{
-        name: 'Student Details',
-     
-        title: 'create button',
-        fun: function () {
-            alert('i am add button')
-            }
-    }, 
-	{
-        name: 'Admission',
-        
-        title: 'update button',
-        fun: function () {
-            alert('i am update button')
-        }
-    } ];
- 
-//Calling context menu
-$('#addmenow').contextMenu(menu,{
-        triggerOn: 'hover'});
 
+ 
 var detailmenu = [{
         name: 'Student Details',
         
         title: 'create button',
         fun: function () {
-            alert('i am add button')
+         
         }
     }, {
         name: 'Admission',

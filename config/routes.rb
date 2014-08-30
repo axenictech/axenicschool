@@ -41,6 +41,8 @@ get 'users/search'
 get 'users/select'
 get 'users/view_all'
 get 'users/view_all_details'
+get 'class_timings/select'
+get 'events/show'
 
 root 'home#dashboard'
 
@@ -77,4 +79,10 @@ resources :comments
 end
 resources :users
 
+resources :class_timings
+  resources :batches do
+  resources :class_timings
+end  
+resources :events
+resources :calender
 end
