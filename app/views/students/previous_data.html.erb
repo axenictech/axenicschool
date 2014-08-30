@@ -55,7 +55,9 @@
      </tr>
       <tr>    
           <td><%=f.submit 'submit',class: "btn btn-primary"%></td>
-          <td><%=link_to "Add subject",students_previous_subject_path(@student),remote: true,class: "btn btn-primary"%></td>
+          <td>
+	    <%=link_to "Add subject", students_previous_subject_path(@student), remote: true, class: "btn btn-primary"%>
+	  </td>
      </tr>
 
        

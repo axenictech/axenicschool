@@ -29,6 +29,11 @@ class ElectiveGroupsController < ApplicationController
         @elective_groups=@batch.elective_groups.all
      @elective_group.destroy
     end
+    
+    def elective_subject
+      @elective_group=ElectiveGroup.find(params[:elective_group_id])
+      @elective_subjects=@elective_group.subjects.all
+    end
 
   	private
      def set_elective_group

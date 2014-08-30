@@ -4,26 +4,26 @@
                   <h4 class="modal-title">Edit Course</h4>
             </div>
             <div class="modal-body">
-            	<%= form_for @course do |c| %>
-    <table>
-    <!-- inserting course-->
+        <ul class="errors"></ul>
+                <%= form_for @course, remote:true do |c| %>
+    <table class="table" style="width:80%">
         <tr>
             <td><%=c.label :course_name %></td>
-            <td><%=c.text_field :course_name ,:style =>"width: 310px", class: "form-control"%></td>
+            <td><%=c.text_field :course_name ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
         
         <tr>
             <td><%=c.label :section_name %></td>
-            <td><%=c.text_field :section_name,:style =>"width: 310px", class: "form-control" %></td>
+            <td><%=c.text_field :section_name,:style =>"width: 250px", class: "form-control" %></td>
         </tr>
         
         <tr>
             <td><%=c.label :code %></td>
-            <td><%=c.text_field :code ,:style =>"width: 310px", class: "form-control"%></td>
+            <td><%=c.text_field :code ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
         <tr>
-        <td><%=c.submit 'update', class: "btn btn-primary"%></td>
-        <td><%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        <td colspan="2"><%=c.submit 'update', class: "btn btn-primary"%>
+        <%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
         </tr>
     </table>
 <% end %>
@@ -32,5 +32,4 @@
             
         </div>
     </div>
-
 

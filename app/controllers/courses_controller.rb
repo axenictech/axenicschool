@@ -16,18 +16,12 @@ class CoursesController < ApplicationController
   def create
     @course=Course.new(postparam)
       
-
-     if  @course.save 
-      
-      flash[:success] = "Welcome to the Sample App!"
+    if  @course.save 
+      flash[:notice] = 'Course was successfully created!'
       redirect_to courses_path
-    
-       else
-    render action: 'new'
-        
-    
-       end
-    # end
+    else
+      render action: 'new'
+    end
   end
 
 # displaying the course
@@ -45,9 +39,13 @@ class CoursesController < ApplicationController
 # deleting the course
   def destroy
     @course=Course.find(params[:id])
-	  @course.destroy
-
-	  redirect_to courses_path
+	  if @course.destroy
+       flash[:notice] = 'Course was successfully deleted!'
+      redirect_to courses_path
+    else
+       flash[:notice] = 'Course was unable to delete!'
+      redirect_to courses_path
+    end
   end
 
 # edting the course
@@ -58,21 +56,13 @@ class CoursesController < ApplicationController
 # updating the course
   def update
   @course=Course.find(params[:id])		
-	@course.update(postp)
-	redirect_to courses_path
+	@course.update(postparam)
 
   end
+  
+  private 
+  def postparam
+  params.require(:course).permit(:course_name,:section_name,:code,:grading_type,batches_attributes: [:name,:start_date,:end_date] )
+  end
 
-
-
-
-private 
-def postparam
-params.require(:course).permit(:course_name,:section_name,:code,:grading_type,batches_attributes: [:name,:start_date,:end_date] )
-end
-private
-def postp
-params.require(:course).permit(:course_name,:section_name,:code,:grading_type)
-
-end
 end

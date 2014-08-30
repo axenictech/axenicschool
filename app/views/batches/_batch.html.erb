@@ -1,9 +1,11 @@
-
-<table align="center" class="table" style="width:500px">
+<% if @course.batches.empty? %>
+<h4 align="center">No Record Found </h4>
+<% else %>
+<table align="center" class="table table-hover table-bordered" style="width:500px">
 <ul id="category-list">
 <tbody>
 <thead>
-	<tr><th>Batch</th>
+	<tr class="tr-head"><th>Batch</th>
 		</tr>
 </thead>
 		
@@ -16,3 +18,4 @@
 </tbody>
 </ul>
 </table>
+<% end %>

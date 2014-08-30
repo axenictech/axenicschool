@@ -4,6 +4,6 @@ $("ul.errors").html("")
 		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>
- $(".product-index").html("<%= escape_javascript(render 'index') %>")
+$('#batch_div').html("<%= j render 'grading_level'%>");
   $("#myModal").modal("hide")
 <% end %>

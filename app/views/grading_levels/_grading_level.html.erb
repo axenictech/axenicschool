@@ -1,7 +1,10 @@
-<div style="margin-top:30px">
+ <div class="add_sub",style="margin-top:200px">
  <%= link_to 'Add Grades',new_batch_grading_level_path(@batch),remote: true%>
 </div>
-  <table class="table">
+<% if @grading_levels.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %> 
+   <table align="center" class="table table-hover" style="width:800px">
   <thead>
   	<tr class="tr-head">
         <th>Name</th>
@@ -16,3 +19,4 @@
     </tbody>
    
 </table>
+<%end%>

@@ -5,12 +5,29 @@
   <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
   </div>
 </div>
+<div id="content_wrapper">
+<div class="bread_crumb">
+<%= link_to 'Home', home_dashboard_path %> &raquo;
+        <%= link_to 'News', newscasts_path %> &raquo;
+        <%= link_to @newscast.title, newscast_path %> &raquo;
+        <%= 'edit'%>
+        </div>
 
 <div id="page-yield">
 
   <% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
 
   <%= form_for @newscast do |f|%>
+
+  <% if @newscast.errors.any?%>
+      <div class ="errorExplanation" id="error_explanation">
+        <ul>
+          <% @newscast.errors.full_messages.each do |msg| %>
+          <li><%= msg%></li>
+          <% end %>
+        </ul> 
+      </div>
+  <% end %>
 
     <div id="add_news_form">
       <div class="news_label_field">
@@ -25,7 +42,7 @@
       </div>
     </div>
 
-    <%= f.submit :'Update'%> 
+  <div align="center">  <%= f.submit :'Update', class: "btn btn-success"%></div> 
   <% end %>
-
+</div>
 </div>

@@ -6,16 +6,22 @@ class BatchesController < ApplicationController
 
   def new
     @course=Course.find(params[:course_id])
+    @batch=@course.batches.build
   end
 
    def create
    	@course=Course.find(params[:course_id])
-   	@batch=@course.batches.create(postparam)
-  	redirect_to course_path(@course)
+   	@batch=@course.batches.new(postparam)
+      if @batch.save
+       flash[:notice] = 'Batch was successfully created!'
+  	   redirect_to course_path(@course)
+    else
+      render 'new'
+    end
   end
    
    def display
-       @batch=Batch.find(params[:format])
+       @batch=Batch.find(params[:id])
        @students=@batch.students.all
    end
 
@@ -32,18 +38,23 @@ class BatchesController < ApplicationController
    def update
       @batch = Batch.find(params[:id])
   
-  
          if @batch.update(postparam)
+            flash[:notice] = 'Batch was successfully updated!'
            redirect_to   course_path(@batch.course)
           else
-           render 'display'
+           render 'edit'
          end
      end
 
      def destroy
-     @batch = Batch.find(params[:format])
-     @batch.destroy
-     redirect_to course_path(@batch.course)
+     @batch = Batch.find(params[:id])
+     if @batch.destroy
+      flash[:notice] = 'Batch was successfully deleted!'
+       redirect_to course_path(@batch.course)
+    else
+       flash[:notice] = 'Batch was unable to delete!'
+       redirect_to course_path(@batch.course)
+    end
   end
 
 private 

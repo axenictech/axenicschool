@@ -4,6 +4,7 @@
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), 'setting' %>
   </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
 <div id="page-yield">
@@ -12,13 +13,12 @@
   <% end %>
 <div class="box">
 
-<div align="center">
-	<%= form_for :batch, url:{action:'select'},method: :get,remote:true do |f| %>
+<div class="text-input-bg">
+	<%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "subject_form"}  do |f| %>
 	<%= f.label :select_batch %>
-  <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true%>
-  <%= f.submit "GO"%>
+  <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true},{onchange:"$('#subject_form').submit();"}%>
 <% end %>
-</div>
+</div><br /><br /><br/>
  
 <div id="subject_div"></div>
  <div id="myModal" class="modal fade">

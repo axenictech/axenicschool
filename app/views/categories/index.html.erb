@@ -4,19 +4,20 @@
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), 'setting' %>
   </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
 <div id="page-yield">
- <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
+
   
   <div class="box">
-   
+    <% unless flash[:notice].nil? %>
+    <div align="center" style="width:500px" class="alert alert-success"> <%= flash[:notice] %> </div>
+  <% end %>
    <%= form_for :category, url:  categories_path do |f| %>
         <% if @category.errors.any? %>
-            <div id="error_explanation">
-            <h2><%= pluralize(@category.errors.count, "error") %> prohibited this categary from being saved:</h2>
+            <div class="alert alert-danger">
+            <h3>Error prohibited to being saved:</h3>
             <ul><% @category.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
                 <% end %>
@@ -25,13 +26,15 @@
         <% end %>
 
         <div><%= f.label :enter_new_category %>
-             <%= f.text_field :name ,:style =>"width: 310px", :placeholder=>"course" , class: "form-control", :required=>true%>
-           <%= f.submit 'Create',class: "btn btn-primary"%></div>
+             <%= f.text_field :name ,:style =>"width: 250px", class: "form-control"%></div>
+           <div><%= f.submit 'Create',class: "btn btn-primary"%></div>
 <%end%>
-</div></div>
-
+</div></div><br/><br/>
+<div>
+<% if @categorys.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
       <table align="center" class="table" style="width:500px">
-      
         <tr class="tr-head"><th>Student Category</th>
         <th></th><th></th>
         </tr>
@@ -41,8 +44,10 @@
           <td><%= cat.name%></td>
           <td><%= link_to 'Edit', edit_category_path(cat) %></td>
           <td><%= link_to 'Delete', category_path(cat),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    method: :delete, data: { confirm: "Are you sure to delete #{cat.name} category"} %></td>
 
           </tr>
         <% end %>
       </table>
+      <%end%>
+      </div>

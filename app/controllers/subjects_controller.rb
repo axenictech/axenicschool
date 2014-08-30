@@ -1,7 +1,6 @@
 class SubjectsController < ApplicationController
 
   before_action :set_subject, only:[:edit,:update,:destroy]
-  respond_to :html, :js
 
   	def index
         @batches=Batch.all
@@ -9,6 +8,12 @@ class SubjectsController < ApplicationController
 
     def select
       @batch=Batch.find(params[:batch][:id])
+      @subjects=@batch.subjects.all
+      @elective_groups=@batch.elective_groups.all
+    end
+
+    def subject
+      @batch=Batch.find(params[:batch_id])
       @subjects=@batch.subjects.all
       @elective_groups=@batch.elective_groups.all
     end
@@ -31,6 +36,7 @@ class SubjectsController < ApplicationController
 
         @elective_group=ElectiveGroup.find params[:elective_group_id] if params[:elective_group_id]
         @subject=@elective_group.subjects.new(subject_params) if params[:elective_group_id]
+        @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
         @subject.save
   	end
 
@@ -41,13 +47,14 @@ class SubjectsController < ApplicationController
     def update
         @subjects=@batch.subjects.all
           @elective_groups=@batch.elective_groups.all
-          
+           @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
       @subject.update(subject_params)
     end
 
     def destroy
        @subjects=@batch.subjects.all
           @elective_groups=@batch.elective_groups.all
+           @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
       @subject.destroy
     end
 

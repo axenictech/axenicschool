@@ -4,5 +4,5 @@ $("ul.errors").html("")
     $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
   <% end %>
 <% else %>
-   $("#").modal("hide")
+   $("#editmodal").modal("hide")
 <% end %>

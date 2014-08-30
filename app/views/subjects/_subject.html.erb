@@ -2,14 +2,16 @@
      <%= link_to 'Add new Subjects',new_batch_subject_path(@batch),remote:true%>
   </div>
 
-<table align="center" class="table">
+<% if @subjects.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+<table align="center" class="table table-hover" style="width:800px">
 <ul id="category-list" >
 <tbody>
 <thead>
   <tr class="tr-head">
-      <th>Subject Name</th>
-      <th>Subject Code</th>
-      <th></th><th></th>
+      <th>Normal Subjects</th>
+      <th colspan="3"></th>
   </tr>
 </thead>
   <tbody class="product-index">
@@ -25,4 +27,5 @@
       <% end %>   
     </tbody>
   </table>
+<%end%><br/><br/>
  <%=render 'elective_groups/elective_group'%>

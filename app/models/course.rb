@@ -1,10 +1,10 @@
 class Course < ActiveRecord::Base
-	
-	has_many :batches, dependent: :destroy
-	accepts_nested_attributes_for :batches 
 
-	validates :course_name,presence:true ,length:{maximum:20}
-	validates :code,presence:true
-	validates :section_name,presence:true
+	validates :course_name,presence:true ,length:{minimum:3, maximum:20}, format:{ with: /\A[a-zA-Z0-9" "]+\Z/}
+	validates :section_name,presence:true,length:{minimum:3, maximum:20}, format:{ with: /\A[a-zA-Z0-9" "]+\Z/}
+	validates :code,presence:true,length:{minimum:3, maximum:20}, format:{ with: /\A[a-zA-Z0-9 -]+\Z/}
+
+	has_many :batches
+	accepts_nested_attributes_for :batches 
 
 end

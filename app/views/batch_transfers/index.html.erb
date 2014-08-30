@@ -4,6 +4,7 @@
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), batches_path %>
   </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
  
@@ -11,30 +12,16 @@
    <% unless flash[:notice].nil? %>
     <p class="flash-msg"> <%= flash[:notice] %> </p>
   <% end %>
-
-<div>
-<%= form_for :batch_transfer, url: batch_transfers_path do |f| %>
-Select Course
-<%= select("course1","id",Course.all.collect{|p| [p.course_name,p.id]},prompt:true)%>
-</div>
-
- <div id="stage">      
- </div>
-</div>
-<script type="text/javascript">
-   $(document).ready(function() {
-      $("#course1_id").change(function(event){
-
-            var a = $("#course1_id").val();
-           $.ajax( {
-             url:'/batch_transfers/'+a,
-             success:function(data) {
-                $('#stage').html(data);
-             }
-          });
-      });
-   });
-</script>
+<div class="box">
+<div class="text-input-bg">
+<%= form_for :batch_transfer,url:{action:'select'},method: :get,remote:true,html:{id: "transfer"} do |f| %>
+<%= f.label :select_course %>
+<%= f.select :id,Course.all.collect{|p| [p.course_name,p.id]},
+         {prompt:true},{onchange:"$('#transfer').submit();"}%>
 <% end %>
- 
+</div>
+
+ <div id="stage"></div>
+</div></div>
+
  

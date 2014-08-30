@@ -5,19 +5,19 @@ class BatchTransfersController < ApplicationController
      @course=Course.new
         
   end
-  def show
-     @course = Course.find(params[:id])
-     render :layout=>false
+  def select
+     @course = Course.find(params[:batch_transfer][:id])
+
   end
   
   def transfer
-      @batch=Batch.find(params[:format])
+      @batch=Batch.find(params[:batch_id])
       @batchs=Batch.all
       
  
   end
 
   def graduation
-     @batch=Batch.find(params[:format])
+     @batch=Batch.find(params[:batch_id])
   end
 end

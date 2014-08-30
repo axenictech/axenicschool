@@ -1,0 +1,23 @@
+<% if @elective_subjects.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+<table align="center" class="table table-hover" style="width:800px">
+<ul id="category-list">
+<thead>
+  <tr class="tr-head"><th colspan="5">Elective Subject</th>
+  </tr>
+    </thead>
+   <% @elective_subjects.each do |subject| %>
+   <tbody>
+    <tr><td><%= subject.name %></td>
+        <td><%= subject.code %></td>
+        <td><%= link_to 'edit',edit_batch_elective_group_subject_path(@elective_group.batch,
+            @elective_group,subject),remote:true %></td>
+        <td><%= link_to 'delete',[@elective_group.batch,@elective_group,subject],remote:true,
+        method: :delete, data:{confirm:'Are you sure want to delete?'} %></td>
+         <td><%= link_to 'Assign Students',students_elective_path(subject) %></td>
+    </tr>
+    </tbody>
+<% end %>
+</table>
+<%end%>

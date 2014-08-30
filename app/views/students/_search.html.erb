@@ -1,7 +1,8 @@
-  <% @students.each_with_index do |student, i| %>
+  <% @students.each_with_index do |student,i| %>
     <div id="ajax_result">
       <%= link_to student.first_name+' '+student.last_name,students_profile_path(student)%><br />
       <small>Course & Batch: <%= student.batch.course.course_name+" - "+student.batch.name %></small>
       <small><br/>Adm No.<%= student.admission_no %></small>
     </div>
+      <%= '</div>' if i%4 == 3 %>
   <% end %>
