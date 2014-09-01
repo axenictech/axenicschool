@@ -2,8 +2,11 @@ class CommentsController < ApplicationController
 
 	def create
     @newscast = Newscast.find(params[:newscast_id])
-    @comments = @newscast.comments.create(comment_params)
+    if @comments = @newscast.comments.create(comment_params)
     redirect_to newscast_path(@newscast)
+  else
+    render 'show'
+  end
   end
 
 
