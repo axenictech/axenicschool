@@ -12,6 +12,7 @@ class Batch < ActiveRecord::Base
   has_many :grading_levels, dependent: :destroy
   has_many :subjects, dependent: :destroy
   has_many :elective_groups, dependent: :destroy
+  has_many :weekdays
   # has_many :exam_groups, dependent: :destroy
   # has_many :fee_category , :class_name => "FinanceFeeCategory"
   # has_many :additional_exam_groups, dependent: :destroy

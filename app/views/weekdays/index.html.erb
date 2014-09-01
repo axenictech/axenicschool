@@ -1,0 +1,16 @@
+
+<div id="content-header">
+   <img src="/images/show_timetable.png" />
+  <h1>Timetable</h1>
+  <h3>Weekdays</h3>
+  <div id="app-back-button">
+   </div>
+</div>
+
+<%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
+
+<%= f.select :id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#batch_form').submit();"}%>
+
+<%end%>
+
+<div id="batch_div"></div>

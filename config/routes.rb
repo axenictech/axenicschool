@@ -50,6 +50,9 @@ get 'users/view_all'
 get 'users/view_all_details'
 get 'class_timings/select'
 get 'events/show'
+get 'weekdays/select'
+get 'weekdays/index'
+post'weekdays/create'
 
 root 'home#dashboard'
 

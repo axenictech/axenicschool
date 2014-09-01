@@ -59,16 +59,16 @@ ActiveRecord::Schema.define(version: 20140831062856) do
 
   create_table "attendences", force: true do |t|
     t.integer  "student_id"
-    t.integer  "time_table_entry_id"
-    t.boolean  "forenoon",            default: false
-    t.boolean  "afternoon",           default: false
+    t.integer  "period_table_entry_id"
+    t.boolean  "forenoon",              default: false
+    t.boolean  "afternoon",             default: false
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "attendences", ["period_table_entry_id"], name: "index_attendences_on_period_table_entry_id", using: :btree
   add_index "attendences", ["student_id"], name: "index_attendences_on_student_id", using: :btree
-  add_index "attendences", ["time_table_entry_id"], name: "index_attendences_on_time_table_entry_id", using: :btree
 
   create_table "batches", force: true do |t|
     t.string   "name"
