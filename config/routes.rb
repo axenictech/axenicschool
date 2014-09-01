@@ -51,8 +51,7 @@ get 'users/view_all_details'
 get 'class_timings/select'
 get 'events/show'
 get 'weekdays/select'
-get 'weekdays/index'
-post'weekdays/create'
+get 'time_table_entries/select'
 
 root 'home#dashboard'
 
@@ -95,4 +94,13 @@ resources :class_timings
 end  
 resources :events
 resources :calender
+resources :weekdays
+resources :time_tables
+
+resources :time_table_entries
+
+  resources :batches do
+  resources :time_table_entries
+end  
+
 end
