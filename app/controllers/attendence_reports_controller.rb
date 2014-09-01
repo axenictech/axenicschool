@@ -1,2 +1,0 @@
-class AttendenceReportsController < ApplicationController
-end
