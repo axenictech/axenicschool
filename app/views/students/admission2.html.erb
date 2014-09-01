@@ -1,0 +1,113 @@
+<div id="content-header">
+  <h1>Admission</h1>
+  <h3>Step 2 - Parent/guardian details<br/>
+<small><font color="red">Fields Marked with * must be filled</font></small></h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+	
+<table align="center" class="table table-hover" style="width:1000px">
+
+		<tbody>
+<%= form_for ([@student,@guardian]) do |f|%>
+<div align="center">
+	<% if @guardian.errors.any? %>
+  			 <div class="alert alert-danger" style="width:500px" >
+    			<h2>Error prohibited to being saved:</h2>
+    			<ul>
+					 <% @guardian.errors.full_messages.each do |msg| %>
+      				<li style="width:500px" align="left"><%= msg %></li>
+    				<% end %>
+    			</ul>
+    			<% end %>
+  		</div></div>
+
+			<tr>
+				<td class="col-2"><%= f.label :first_name %><span class="necessary-field">*</span></td>
+		    	<td class="col-2"><%= f.text_field :first_name %></td>
+		    </tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :last_name %><span class="necessary-field">*</span></td>
+		   		<td class="col-2"><%= f.text_field :last_name %></td>
+			</tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :relation%><span class="necessary-field">*</span></td>
+		    	<td class="col-2"><%= f.text_field :relation %></td>
+			</tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :email %></td>
+		   		<td class="col-2"><%= f.text_field :email %></td>
+			</tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :office_phone1 %></td>
+		    	<td class="col-2"><%= f.text_field :office_phone1%></td>
+			</tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :office_phone2 %></td>
+		    	<td class="col-2"><%= f.text_field :office_phone2%></td>
+			</tr>
+
+	
+			<tr>
+				<td class="col-2"><%= f.label :office_address_line1 %></td>
+		   		<td class="col-2"><%= f.text_field :office_address_line1%></td>
+			</tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :office_address_line2 %></td>
+		   		<td class="col-2"><%= f.text_field :office_address_line2%></td>
+		   	</tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :city%></td>
+		   		<td class="col-2"><%= f.text_field :city%></td>
+			</tr>
+
+			<tr>
+				<td class="col-2"><%= f.label :country%></td>
+				<td class="col-2"> <%=f.select :id, Country.all.collect{|c| [c.name, c.id]}%></td>
+		   </tr>
+		    
+	 		<tr>
+					<td class="col-2"><%= f.label :dob%></td>
+		    		<td class="col-2"><%= f.date_field :dob%></td>
+			</tr>
+	
+			<tr>
+					<td class="col-2"><%= f.label :occupation%></td>
+		 		    <td class="col-2"><%= f.text_field :occupation%></td>
+			</tr>
+
+			<tr>
+					<td class="col-2"><%= f.label :income%></td>
+		    		<td class="col-2"><%= f.text_field :income%></td>
+			</tr>
+
+			<tr>
+					<td class="col-2"><%= f.label :education%></td>
+		    		<td class="col-2"><%= f.text_field :education%></td>
+			</tr>
+
+			<tr>	
+					<td colspan="2"><%= f.submit 'Submit', class: "btn btn-primary"%></td>
+			</tr>
+
+<% end %>
+	 </tbody>
+	</table>
+</div>	
+
+</div>
+<div class="col-md-1"></div>

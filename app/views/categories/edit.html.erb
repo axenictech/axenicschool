@@ -1,0 +1,31 @@
+
+<div id="content-header">
+  <h1>Students</h1>
+  <h3>Categories<small>&nbsp;&nbsp;&nbsp;edit</small></h3>
+
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), categories_path %>
+  </div>
+</div>
+
+<div id="page-yield">
+ <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  
+  <div class="box">
+  
+		<%= form_for @category do |f| %>
+ 				<div><%= f.label :edit_category%>
+ 	          <%= f.text_field :name ,:style =>"width: 310px",  class: "form-control"%>
+		        <%= f.submit 'update', class: "btn btn-success"%>
+	      </div>
+	
+  		<% end %>
+
+ 		
+		</div>
+		
+	</div>
+
+

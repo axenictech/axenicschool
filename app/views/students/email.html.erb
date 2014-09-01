@@ -1,0 +1,42 @@
+<div id="content-header">
+  <h1>Students</h1>
+  <h3>Send email</h3>
+  <div id="app-back-button">
+   <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+   <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+
+  <div id="student_profile_heading">
+
+      <span class="name"> <%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %>  </span>
+      <span class="course"> Course & Batch: <%= @student.batch.course.course_name+" "+@student.batch.course.section_name+" "+@student.batch.name %> </span>
+      <span class="adm"> Adm no : <%= @student.admission_no %> </span>
+
+
+    <div class="extender"> </div>
+
+  </div>
+  <div class="label-field-pair">
+    <label for="email_subject">Subject</label>
+    <div class="text-input-bg"><%= text_field_tag 'subject' %></div>
+  </div>
+
+  <div class="label-field-pair">
+    <label for="email_recipients">Recipients</label>
+    <div class="text-input-bg"><%= %></div>
+  </div>
+
+  <div class="message-area">
+    <br/>
+    <label for="email_message">Message</label>
+    <%= text_area_tag 'message' %>
+  </div>
+
+  <div class="submit-area">
+    <%= submit_tag 'Create' %>
+  </div>
+
+</div>

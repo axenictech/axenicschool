@@ -1,0 +1,13 @@
+ <% @class_timings.each do |c| %>
+        
+            <td class="col-2"><%= c.name %></td>
+            <td class="col-2"><%= c.start_time.strftime("%I:%M %p")%></td>
+            <td class="col-2"><%= c.end_time.strftime("%I:%M %p")%></td>
+            <td><%=link_to 'Edit',edit_batch_class_timing_path(c.batch,c),remote: true%></td>
+            <td><%= link_to 'Destroy',[c.batch,c],remote: true,
+                    method: :delete, data: { confirm: "Are you sure to delete ?" } %>
+                    </td>
+            
+        </tr>   
+            
+      <% end %>

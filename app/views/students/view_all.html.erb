@@ -1,0 +1,39 @@
+<div id="content-header">
+  <h1>Student Details</h1>
+  <h3>View Details</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+<div id="box">
+ 	<div class="text-input-bg">
+		<%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form_this"} do |f| %>
+		<%= f.label :select %>
+	    <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#batch_form_this').submit();"}%>
+		<% end %>
+	</div></div><br /><br />
+<div class="col-md-4"></div> 	
+				
+<div class="container">
+<div class="row"> 
+<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div id="student_view_all" style="margin-top:20px">
+		</div>	
+ 	</div>
+<div class="col-md-2" class="table table-striped"></div> 	
+				
+</div>
+</div>
+	
+<div class="col-md-1"></div>
+</div>
+			
+

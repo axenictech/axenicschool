@@ -1,0 +1,38 @@
+<div id="content-header">
+  <h1>Courses</h1>
+  <h3>New Batch</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), course_path(@course)%>
+  </div>
+   <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
+
+  <div class="box">
+    <div class="bread_crumb">
+      <%= link_to 'Courses', courses_path %> &raquo;
+      <%= link_to @course.course_name, @course %> &raquo;
+      New batch
+    </div>
+<%= form_for ([@course,@batch ]) do |b|%>
+<% if @batch.errors.any?%>
+    <div class="alert alert-danger">
+    <h4>Errors prohibited to being saved:</h4>
+    <ul><% @batch.errors.full_messages.each do |msg|%>
+      <li style="width:800px"><%= msg %></li>
+      <%end%></ul>
+      </div>  
+      <%end%>
+<div><%=b.label :name%></div>
+<div><%=b.text_field :name,:style =>"width: 250px", class: "form-control"%></div>
+
+			<div><%=b.label :start_date%></div>
+			<div><%=b.date_field :start_date ,:id=>'datetimepicker2',class: "form-control",:style =>"width: 250px"%></div>
+
+			<div><%=b.label :end_date%></div>
+			<div><%=b.date_field :end_date ,:id=>'datetimepicker2',class: "form-control",:style =>"width: 250px"%></div>
+
+			<div><%=b.submit 'create',class: "btn btn-primary"%></div>
+
+<%end%> 
+</div></div>

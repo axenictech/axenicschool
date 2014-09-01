@@ -1,0 +1,24 @@
+<div id="content-header">
+  <h1>Students</h1>
+  <h3>Remove student</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+   <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+ <div id="student-details">
+    <h3><%= @student.first_name+" "+@student.last_name %></h3>
+    <h4>Adm no : <%= @student.admission_no %></h4>
+    <h4>Class : <%= @student.batch.course.course_name %></h4>
+  </div>
+  <div id="delete-student">
+    <h4>Delete student</h4>
+    <p>Completely delete student's records from the school's databases. Use this option only if you created the student record by accident and want to remove it completely.</p>
+
+    <p class="warning">(Warning: All records will be deleted for the student and cannot be recovered.)</p>
+    <%= link_to 'Delete',@student,method: :delete,data:{confirm:'Are you sure want to delete?'} %>
+  </div>
+
+</div>
