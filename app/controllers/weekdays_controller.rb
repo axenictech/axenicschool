@@ -21,7 +21,7 @@ class WeekdaysController < ApplicationController
          		@weekday.save
           end
 		  
-		  redirect_to weekdays_index_path
+		  redirect_to weekdays_path
 		
 	end
 

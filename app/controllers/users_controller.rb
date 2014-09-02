@@ -18,7 +18,10 @@ class UsersController < ApplicationController
 	end
 
 	def search
-		@users=User.where("first_name Like '%#{params[:search]}%' OR last_name Like '%#{params[:search]}%'")
+	  name=params[:search].split(" ")
+      @users=User.where("first_name like '%#{name[0]}%' OR last_name like '%#{name[1]}%'
+                            OR first_name like '%#{name[1]}%' OR last_name like '%#{name[0]}%'")
+
 	end
 
 	def edit

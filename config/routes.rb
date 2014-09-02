@@ -43,6 +43,9 @@ get 'students/remove'
 get 'students/dispguardian'
 get 'students/archived_student_guardian'
 get 'students/addguardian'
+post 'students/assign_elective'
+get 'students/:subject_id/assign_all',to: 'students#assign_all',as: 'students_assign_all'
+get 'students/:subject_id/remove_all',to: 'students#remove_all',as: 'students_remove_all'
 post 'guardians/addguardian_create',to: 'guardians#addguardian_create',as: 'guardians_addguardian_create'
 get 'users/search'
 get 'users/select'
@@ -55,7 +58,11 @@ get 'weekdays/index'
 post'weekdays/create'
 get 'time_tables/select'
 get 'time_tables/sub'
+get 'time_tables/new'
 get 'time_tables/timetable'
+get 'time_table_entries/select'
+
+
 root 'home#dashboard'
 
 
@@ -100,4 +107,13 @@ resources :class_timings
 end  
 resources :events
 resources :calender
+resources :weekdays
+resources :time_tables
+
+resources :time_table_entries
+
+  resources :batches do
+  resources :time_table_entries
+end  
+
 end

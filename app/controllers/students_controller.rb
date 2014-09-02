@@ -122,8 +122,9 @@ class StudentsController < ApplicationController
   def advanced_student_search
      name=params[:student][:student_name].split(" ")
     if params[:student][:status].eql? "present"
-      @students=Student.where("first_name like '#{name[0]}' OR last_name like '#{name[1]}'
-                            OR first_name like '#{name[1]}' OR last_name like '#{name[0]}'")
+      @students=Student.where("(first_name like '#{name[0]}' OR last_name like '#{name[1]}'
+                            OR first_name like '#{name[1]}' OR last_name like '#{name[0]}')
+       AND (admission_no='#{params[:student][:admission_no]} Or #{params[:student][:admission_no]} is NULL')")
     end  
     if params[:student][:status].eql? "former"
       @students=ArchivedStudent.where("first_name like '#{name[0]}' OR last_name like '#{name[1]}'
@@ -133,6 +134,44 @@ class StudentsController < ApplicationController
 
   def elective
     @subject=Subject.find(params[:subject_id])
+    @students=@subject.elective_group.batch.students.all 
+  end
+
+  def assign_all
+    @subject=Subject.find(params[:subject_id])
+    @students=@subject.elective_group.batch.students.all 
+  end
+  
+  def remove_all
+    @subject=Subject.find(params[:subject_id])
+    @students=@subject.elective_group.batch.students.all 
+  end
+  
+  def assign_elective
+
+      @subject= Subject.find(params[:student_subject][:subject_id])
+      @batch=@subject.elective_group.batch
+      @student_subject_delete= StudentSubject.where(subject_id: @subject.id)
+      students=[]
+      students= params[:students]
+    if students.present?
+       unless @student_subject_delete.empty?
+       @student_subject_delete.each  do |student_sub|
+           student_sub.destroy
+          end
+        end
+         students.each  do |student|
+            @student_subject= StudentSubject.new(batch_id: @batch.id,
+                            subject_id: @subject.id,student_id: student)
+            @student_subject.save
+          end
+    else
+       @student_subject_delete.each  do |student_sub|
+           student_sub.destroy
+          end
+    end
+     flash[:notice] = 'Elective subject assigned to student successfully!'
+      redirect_to students_elective_path(@subject)
   end
 
   def email

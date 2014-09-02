@@ -4,6 +4,7 @@
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), new_newscast_path(@newscast) %>
   </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
 <div id="inner-tab-menu">
@@ -13,17 +14,20 @@
   </ul>
 </div>
 
-<div id="content_wrapper">
+
+
+<div id="page-yield">
+<div id="box"%>
+
+  <% unless flash[:notice].nil? %>
+  <div class="alert alert-success"> <%= flash[:notice] %> </div><% end %>
+
+  <div id="content_wrapper">
 <div class="bread_crumb">
 <%= link_to 'Home', home_dashboard_path %> &raquo;
         <%= link_to 'News', newscasts_path %> &raquo;
         <%= @newscast.title %>
-        </div>
-
-<div id="page-yield">
-
-  <% unless flash[:notice].nil? %>
-  <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
+        </div></div></div>
 
     <div id="news_title">
       <%= @newscast.title %>
@@ -34,10 +38,7 @@
     <div id="news_content">
       <%= sanitize @newscast.content , :tags => %w[b i a h1 h2 h3 u strike p], :attributes => %w[href]%>
     </div>
-  <div align="center">
-    
-    </div>
-    </div>
+  
   <ul id="comments-list">
   <h3 id="comments-heading">Comments</h3>
       <%= render @newscast.comments %>

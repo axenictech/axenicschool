@@ -1,10 +1,7 @@
 class TimeTablesController < ApplicationController
 
-	def view
-		
-	end
-
-	def index
+	
+	def new
  		 @batches=Batch.all
 	end
 
