@@ -1,5 +1,5 @@
 <% if @users.nil? or @users.empty? %>
-  <div id="user_no_result">No users found</div>
+  <div align="center"><h4>No users found</h4></div>
 <% else %>
   <div class="students-table">
     <table id="listing" align="center" width="60%" cellpadding="1" cellspacing="1">
@@ -10,13 +10,13 @@
         <td class="col-2">
           Name
         </td>
-        <td class="col-2">
+        <td class="col-3">
          Username
         </td>
-        <td class="col-3">
+        <td class="col-2">
         Role
         </td>
-        <td class="col-3"></td>
+        <td></td>
          <tr class="tr-blank"></tr>
       <% @users.each_with_index do |user,i| %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
@@ -26,13 +26,13 @@
           <td class="col-2">
       <%=  user.first_name + " " + user.last_name %>
           </td>
-          <td class="col-2">
+          <td class="col-3">
             <%= user.username %>
           </td>
-          <td class="col-3">
+          <td class="col-2">
           <%= user.role %>
           </td>
-          <td class="col-3">
+          <td >
             <%= link_to 'View Profile' ,user_path(user)%>
           </td>
 

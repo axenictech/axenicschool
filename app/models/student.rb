@@ -21,5 +21,17 @@ class Student < ActiveRecord::Base
   
   validates :date_of_birth, presence: true
   validates :batch_id, presence: true
-  
+  after_save :create_user_account
+
+  private
+  def create_user_account
+    user = User.new do |u|
+      u.first_name, u.last_name, u.username = first_name, last_name, first_name+last_name
+      u.password = "#{admission_no.to_s}123"
+      u.role = 'Student'
+      u.email = ( email == '' or User.find_by_email(email) ) ? "#{first_name+last_name+admission_no.to_s}@axenic.com" : email
+    end
+    user.save
+  end
+
 end

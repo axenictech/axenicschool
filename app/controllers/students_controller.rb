@@ -120,16 +120,36 @@ class StudentsController < ApplicationController
   end
   
   def advanced_student_search
-     name=params[:student][:student_name].split(" ")
-    if params[:student][:status].eql? "present"
-      @students=Student.where("(first_name like '#{name[0]}' OR last_name like '#{name[1]}'
-                            OR first_name like '#{name[1]}' OR last_name like '#{name[0]}')
-       AND (admission_no='#{params[:student][:admission_no]} Or #{params[:student][:admission_no]} is NULL')")
-    end  
-    if params[:student][:status].eql? "former"
-      @students=ArchivedStudent.where("first_name like '#{name[0]}' OR last_name like '#{name[1]}'
-                            OR first_name like '#{name[1]}' OR last_name like '#{name[0]}'")
-    end  
+    @search = Student.where(params[:student])
+    if params[:student]
+      unless params[:student][:course_id_equals].empty?
+        if params[:student][:batch_id_equals].empty?
+          flash[:notice] ="Please select a batch."
+          redirect_to 'advanced_search'
+        end
+      end
+    end
+      if params[:student][:status_equals]=="present"
+        @search = Student.where(params[:search])
+        @students = @search.all
+      elsif params[:student][:status_equals]=="former"
+        @search = ArchivedStudent.where(params[:search])
+        @students = @search.all
+      else
+        @search1 = Student.where(params[:student])
+        @search2 = ArchivedStudent.where(params[:student])
+        @students = @search1+@search2
+      end
+    #  name=params[:student][:student_name].split(" ")
+    # if params[:student][:status].eql? "present"
+    #   @students=Student.where("(first_name like '#{name[0]}' OR last_name like '#{name[1]}'
+    #                         OR first_name like '#{name[1]}' OR last_name like '#{name[0]}')
+    #    AND (admission_no='#{params[:student][:admission_no]} Or #{params[:student][:admission_no]} is NULL')")
+    # end  
+    # if params[:student][:status].eql? "former"
+    #   @students=ArchivedStudent.where("first_name like '#{name[0]}' OR last_name like '#{name[1]}'
+    #                         OR first_name like '#{name[1]}' OR last_name like '#{name[0]}'")
+    # end  
   end
 
   def elective

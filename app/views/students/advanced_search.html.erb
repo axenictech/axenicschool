@@ -8,34 +8,38 @@
 </div>
 
 <div id="page-yield">
+<div id="box">
+<% unless flash[:notice].nil? %>
+    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+  <% end %></div>
 		<%=form_for :student ,url:{action:'advanced_student_search'},method: :get do |f| %>
 <table align="center" class="table table-hover " style="width:500px">
 
 			<tr><td class="col-2"><%= f.label :student_name %></td>
-				<td class="col-2"><%=f.text_field :student_name%></td></tr>
+				<td class="col-2"><%=f.text_field :first_name_like%></td></tr>
 
 			<tr><td class="col-2"><%= f.label :admission_no %></td>		
-			<td class="col-2"><%=f.text_field :admission_no%></td></tr>
+			<td class="col-2"><%=f.text_field :admission_no_equals %></td></tr>
 
 			<tr><td class="col-2"><%= f.label :course_name %></td>
-				<td class="col-2"><%=f.select :course_id, @courses.collect {|c| [c.course_name,c.id]},prompt:true%></td></tr>
+				<td class="col-2"><%=f.select :course_id_equals, @courses.collect {|c| [c.course_name,c.id]},prompt:true%></td></tr>
 			
 			<tr><td class="col-2"><%= f.label :batch_name %></td>
-				<td class="col-2"><%=f.select :batch_id, @batches.collect {|b| [b.name,b.id]},prompt:true%></td></tr>
+				<td class="col-2"><%=f.select :batch_id_equals, @batches.collect {|b| [b.name,b.id]},prompt:true%></td></tr>
 				
 			<tr><td class="col-2"><%= f.label :category %></td>
-				<td class="col-2"><%=f.select :category_id, Category.all.collect {|c| [c.name,c.id]},prompt:true %></td></tr>
+				<td class="col-2"><%=f.select :category_id_eqauls, Category.all.collect {|c| [c.name,c.id]},prompt:true %></td></tr>
 
 			<tr><td class="col-2"><%= f.label :gender%></td>
-				<td class="col-2"><%=f.radio_button :gender,"", :checked => "checked" %>All
-					<%=f.radio_button :gender,"Male"%>Male
-					<%=f.radio_button :gender,"Female"%>Female</td></tr>
+				<td class="col-2"><%=f.radio_button :gender_like,"", :checked => "checked" %>All
+					<%=f.radio_button :gender_like,"Male"%>Male
+					<%=f.radio_button :gender_like,"Female"%>Female</td></tr>
 			
 			<tr><td class="col-2"><%=f.label :Blood_Group%></td>
-          		<td class="col-2"><%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %></td></tr>
+          		<td class="col-2"><%=f.select :blood_group_like, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],prompt:true%></td></tr>
 
 			<tr><td class="col-2"><%= f.label :country %></td>
-				<td class="col-2"><%=f.select :country_id, Country.all.collect {|c| [c.name,c.id]},prompt:true%></td></tr>
+				<td class="col-2"><%=f.select :country_id_equals, Country.all.collect {|c| [c.name,c.id]},prompt:true%></td></tr>
 
 			<tr><td class="col-2"><%= f.label :admission_date %></td>
 				<td class="col-2"><%=f.date_field :admission_date%></td></tr>
@@ -44,9 +48,11 @@
 				<td class="col-2"><%=f.date_field :date_of_birth%></td></tr>
 
 			<tr><td class="col-2"><%= f.label :status%></td>
-				<td class="col-2"><%= f.radio_button  "status","present", :checked => "checked" %>
-									Present Students<br/>
-			   		<%= f.radio_button  "status","former"%>Former Students</td></tr>
+				<td class="col-2"><%= f.radio_button  :status_equals,"all",:checked => "checked" %>All
+				<br/>
+				<%= f.radio_button :status_equals,"present"%>
+				Present Students<br/>
+			   		<%= f.radio_button  :status_equals,"former"%>Former Students</td></tr>
 
 			<tr><td colspan="2"><%= f.submit 'Search', class: "btn btn-primary"%></td></tr>
 	</table>
