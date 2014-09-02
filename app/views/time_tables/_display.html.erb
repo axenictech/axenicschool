@@ -1,0 +1,16 @@
+<table class="table">
+<tr>
+<% @batch.class_timings.each do |c|%>
+	
+<td></td>
+<td><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></td>
+<%end%>
+</tr>
+<% @batch.weekdays.each do |w|%>
+	
+		    <tr>	
+			<td><%=w.weekday%>
+			</td>
+			</tr>
+<%end%>
+</table>

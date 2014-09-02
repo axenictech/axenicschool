@@ -53,9 +53,13 @@ get 'events/show'
 get 'weekdays/select'
 get 'weekdays/index'
 post'weekdays/create'
-
+get 'time_tables/select'
+get 'time_tables/sub'
+get 'time_tables/timetable'
 root 'home#dashboard'
 
+
+ 
  resources :home
  resources :setting
  resources :categories
@@ -89,6 +93,7 @@ resources :comments
 end
 resources :users
 
+resources :time_tables
 resources :class_timings
   resources :batches do
   resources :class_timings

@@ -1,0 +1,39 @@
+<div id="content-header">
+  <h1>Timetable</h1>
+  <h3>Institutional Timetable</h3>
+  <div id="app-back-button">
+  </div>
+</div>
+
+
+<div id="box">
+ <table align="center" class="table table-hover table-bordered" style="width:800px">
+
+			
+<% @batches.each do |b| %>
+		<tr>
+					<td class="col-2" >Time </td>
+			
+      <%# @timetable = TimeTableEntry.where(batch_id:b.id) %>
+      <% b.class_timings.each do |c|%>
+
+     		
+      		
+     				
+     				<td><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></td>
+            
+            <%end%>
+            </tr>
+
+		<tr  class="tr-head">
+		<td class="col-2"> <%= b.course.code + ' - ' + b.name %> </td>
+		</tr>
+          <%end%>
+      
+     
+</table>
+</div>    
+    
+
+
+       
