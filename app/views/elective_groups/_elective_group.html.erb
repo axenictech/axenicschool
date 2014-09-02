@@ -13,11 +13,12 @@
     </thead>
    <% @elective_groups.each do |elective_group| %>
   <tbody>
-    <tr><td><%=link_to elective_group.name,elective_groups_elective_subject_path(elective_group) %></td>
+    <tr><td><%= elective_group.name%></td>
     <td><%= link_to 'edit',edit_batch_elective_group_path(elective_group.batch,elective_group),remote:true%></td>
 
     <td><%= link_to 'delete', [elective_group.batch,elective_group], remote:true,
         method: :delete, data:{confirm:'Are you sure want to delete?'} %></td>
+    <td><%=link_to 'Add Elective Subject',elective_groups_elective_subject_path(elective_group) %></td>
     </tr>
 </tbody>
 <% end %>

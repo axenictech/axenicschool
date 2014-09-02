@@ -4,19 +4,20 @@
   <div id="app-back-button">
   <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
   </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
+
+
+<div id="page-yield">
+<div id="box">
+  <% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
 <div id="content_wrapper">
 <div class="bread_crumb">
 <%= link_to 'Home', home_dashboard_path %> &raquo;
         <%= link_to 'News', newscasts_path %> &raquo;
         <%= link_to @newscast.title, newscast_path %> &raquo;
         <%= 'edit'%>
-        </div>
-
-<div id="page-yield">
-
-  <% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
-
+        </div></div></div>
   <%= form_for @newscast do |f|%>
 
   <% if @newscast.errors.any?%>

@@ -5,7 +5,7 @@ class NewscastsController < ApplicationController
   end
 
   def select
-    @newscast=Newscast.where(title: params[:newscast][:title])
+    @newscasts=Newscast.where("title like '%#{params[:newscast][:title]}%'")
   end
 	
 	def create

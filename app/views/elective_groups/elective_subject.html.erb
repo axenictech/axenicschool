@@ -15,7 +15,7 @@
     <div class="bread_crumb">
     <%= link_to "Batch "+@elective_group.batch.name, batches_display_path(@elective_group.batch) %> &raquo;
      <%= link_to "Elective Group "+@elective_group.name,batches_subjects_subject_path(@elective_group.batch) %> &raquo;Elective Subjects
-    </div></div><br/>
+    </div><br/>
 
 <div class="add_sub",style="margin-top:20px">
      <%= link_to 'Add Elective Subjects',new_batch_elective_group_subject_path(@elective_group.batch,
@@ -26,4 +26,4 @@
 <%= render 'view_elective_subjects' %>
 </div>
  <div id="myModal" class="modal fade">
- </div> </div>
+ </div> </div></div>

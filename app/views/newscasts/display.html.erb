@@ -5,28 +5,33 @@
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0),newscasts_path(@newscast)  %>
   </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 <div id="inner-tab-menu">
   <ul>
     <li><%= link_to 'Add', new_newscast_path %></li>
   </ul>
 </div>
+
+
+
+<div id="page-yield">
+
+<div id="box">
 <div id="content_wrapper">
    <div class="bread_crumb">
    <%= link_to 'Home', home_dashboard_path %> &raquo;
         <%= link_to 'News', newscasts_path %> &raquo;
         <%= 'View all' %>
-        </div>
-
-
-<div id="page-yield">
+        </div></div></div>
 
   <% unless flash[:notice].nil? %>
     <p class="flash-msg"> <%= flash[:notice] %> </p>
   <% end %>
 
-
-
+<% if @newscasts.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
   <div id="all_news">
     <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
       <tr class="tr-head">
@@ -70,6 +75,5 @@
       <% end %>
 
     </table>
+<%end%>
   </div>
-</div>
-</div>
