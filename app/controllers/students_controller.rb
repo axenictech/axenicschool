@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
     
     @student = Student.new
     if Student.first.nil?
-      @student.admission_no=1
+      @student.admission_no=111
     else
       @last_student=Student.last
       @student.admission_no=@last_student.admission_no.next

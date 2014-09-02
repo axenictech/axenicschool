@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 
 	def show
 		@user=User.find(params[:id])
+		@student=Student.find_by_admission_no(@user.username.to_s)
+		p @student
 	end
 
 	def search
@@ -29,9 +31,12 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		@user=User.find(params[:id])
-		@user.update(user_params)
-		redirect_to user_path(@user)
+			@user=User.find(params[:id])
+		if @user.update(user_params)
+			redirect_to user_path(@user)
+		else 
+			render 'edit'
+		end 
 	end
 
 	def select

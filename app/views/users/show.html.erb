@@ -8,7 +8,18 @@
 </div>
 
   <div id="inner-tab-menu">
-    <ul><li><%= link_to "View Profile" %></li>
+    <ul>
+      <% if @user.role.eql? "Student" %>
+      <% unless @student.nil? %>
+        <% if @student.status_description.nil? %>
+          <li><%= link_to "View Profile",students_profile_path(@student) %></li>
+        <% else %>
+          <li><%= link_to "View Profile",students_archived_student_profile_path(@student) %></li>
+        <%end%>
+        <% end %>
+      <% else %>
+        <li><%= link_to "View Profile" %></li>
+      <% end %>
         <li><%= link_to "Edit", edit_user_path(@user)%></li>
         <li><%= link_to "Delete",@user,method: :delete,data:{confirm:'Are you sure want to delete?'} %></li></ul>
   </div>
@@ -30,6 +41,7 @@
         <tr class="tr-head">
         <td class="col-2">Email ID</td><td class="col-2"><%= @user.email %></td></tr>
             <tr class="tr-blank"></tr>
+            <td>password</td><td><%= @user.hashed_password %></td>
   </tbody>
   </table> 
 

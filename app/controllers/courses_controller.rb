@@ -57,7 +57,7 @@ class CoursesController < ApplicationController
   def update
   @course=Course.find(params[:id])		
 	@course.update(postparam)
-
+    @courses=Course.all
   end
   
   private 
