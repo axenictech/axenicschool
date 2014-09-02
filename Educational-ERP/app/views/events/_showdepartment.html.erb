@@ -1,0 +1,9 @@
+<table class="table" style="width:500px">
+
+<%@departments.each do |b|%>
+<tr>
+		<td><%=b.name%></td>
+		<td><%=check_box_tag "batch[]",false%></td>
+</tr>
+<% end %>
+</table>

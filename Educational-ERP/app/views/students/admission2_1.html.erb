@@ -1,0 +1,22 @@
+<div id="content-header">
+  <h1>Admission</h1>
+  <h3>Step 2.1 - Parent/guardian details</h3>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+ 
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+   <div align="center">
+  		
+        <h4>Following guardians has been saved for <%= @student.first_name + ' ' + @student.last_name %> </h4>
+        <ul>
+        <% @student.guardians.each do |p| %>
+          <li><h5><%= p.first_name+' '+p.last_name %> - <%= p.relation %></h5></li>
+        <%  end %>
+        </ul>
+        <div>
+        <%= link_to "Add Another Guardian", students_admission2_path(@student),class: "btn btn-primary"%>
+        <%= link_to "Finish",students_admission3_path(@student),class: "btn btn-default"%>
+        </div>
+ </div>

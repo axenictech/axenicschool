@@ -1,0 +1,27 @@
+<div id="content-header">
+  <h1>Batch Transfer</h1>
+  <h3>Home</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), batches_path %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+ 
+<div id="page-yield">
+   <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+<div class="box">
+<div class="text-input-bg">
+<%= form_for :batch_transfer,url:{action:'select'},method: :get,remote:true,html:{id: "transfer"} do |f| %>
+<%= f.label :select_course %>
+<%= f.select :id,Course.all.collect{|p| [p.course_name,p.id]},
+         {prompt:true},{onchange:"$('#transfer').submit();"}%>
+<% end %>
+</div>
+
+ <div id="stage"></div>
+</div></div>
+
+ 

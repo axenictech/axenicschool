@@ -1,0 +1,35 @@
+<div id="content-header">
+  <h1>School News</h1>
+  <h3>Latest announcements</h3>
+  <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "View all", newscasts_display_path %></li>
+    <li><%= link_to 'Add', new_newscast_path %></li>
+  </ul>
+</div>
+
+<div id="box">  
+<div id="content_wrapper">
+
+<div class="bread_crumb">
+<%= link_to 'Home', home_dashboard_path %> &raquo;
+<%= 'News' %>
+</div>
+
+<% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
+ 
+<div align="center">
+	<%= form_for :newscast, url:{action:'select'},method: :get,html:{id: 'newscast_form'},remote:true do |f| %>
+	<%= f.label :Search_news %>
+  <%= f.text_field :title,{onkeypress:"$('#newscast_form').submit();"}%>
+<% end %>
+</div>
+
+
+<div id="newscast_div"></div></div>
