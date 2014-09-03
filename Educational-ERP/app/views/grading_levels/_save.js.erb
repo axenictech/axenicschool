@@ -1,9 +1,0 @@
-$("ul.errors").html("")
-<% if  @grading_level1.errors.any? %>
-		<%  @grading_level1.errors.full_messages.each do |message| %>
-		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
-		<% end %>
-<% else %>
-$('#batch_div').html("<%= j render 'grading_level'%>");
-  $("#myModal").modal("hide")
-<% end %>

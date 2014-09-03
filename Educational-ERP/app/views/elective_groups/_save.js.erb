@@ -1,9 +1,0 @@
-$("ul.errors").html("")
-<% if @elective_group.errors.any? %>
-		<% @elective_group.errors.full_messages.each do |message| %>
-		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
-		<% end %>
-<% else %>
-  $("#myModal").modal("hide")
-  $('#subject_div').html("<%= j render 'subjects/subject'%>");
-<% end %>
