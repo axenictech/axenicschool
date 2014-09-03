@@ -1,21 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'exam_reports/index'
-
-  get 'exam_setting/index'
-
-  get 'online_exam_scores/index'
-
-  get 'online_exams/index'
-
-  get 'online_exam_groups/index'
-
-  get 'exam_scores/index'
-
-  get 'exams/index'
-
-  get 'exam_groups/index'
-
 get 'setting/course_batch'
 get 'batches/:id/display', to: 'batches#display', as: 'batches_display'
 get 'batches/select' 
@@ -77,7 +61,9 @@ get 'time_tables/sub'
 get 'time_tables/new'
 get 'time_tables/timetable'
 get 'time_table_entries/select'
-
+get 'exam_reports/report_center'
+get 'exam_reports/exam_wise_report'
+get 'exam_reports/generate_exam_report'
 
 root 'home#dashboard'
 
@@ -132,4 +118,9 @@ resources :time_table_entries
   resources :time_table_entries
 end  
 
+resources :exams
+resources :exam_setting
+resources :exam_groups
+resources :online_exam_groups
+resources :exam_reports
 end

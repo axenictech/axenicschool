@@ -1,0 +1,36 @@
+<div id="content-header">
+  <h1>Exams</h1>
+  <h3>Exam Wise Report</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
+
+  
+  <div class="box">
+
+  <div class="bread_crumb">
+    <%= link_to 'Exams', '/exams' %> &raquo;
+    <%= link_to 'Report Center', '/exam_report/report_center' %> &raquo;
+    Exam Wise Report
+  </div>
+<%= form_for :exam_report, :url=>{:action=>'generate_exam_report'} do |f| %>
+  
+ <div class="label-field-pair">
+  <%= f.label :select_batch %>
+      <div class="text-input-bg">
+      <%= f.select :batch_id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}%>
+      </div></div>
+
+    <div class="label-field-pair">
+    <%= f.label :select_exam_group %>
+    <div class="text-input-bg">
+    <%= f.select :exam_group_id, @subjects.collect {|subject| [subject.name,subject.id]},{prompt:true}%>
+    </div></div>
+   
+      <div><%= f.submit "View", class: 'btn btn-default'%></div>
+<% end %>
+  </div>
+</div>

@@ -1,2 +1,38 @@
-<h1>Exams#index</h1>
-<p>Find me in app/views/exams/index.html.erb</p>
+<div id="content-header">
+  <h1>Examinations</h1>
+  <h3>Home</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+
+    <div class="box">
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Settings' ,'/exam_setting' %></div>
+        <div class="link-descr">Manage Grading Levels, Ranking Levels and Class Designations</div>
+      </div>
+  
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Exam Management','/exam_groups' %>  </div>
+        <div class="link-descr">Create new exams, enter results.</div>
+      </div>
+   
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Generate Reports','' %></div>
+        <div class="link-descr">Generates Student Reports for Grouped Exams</div>
+      </div>
+  
+    <div class="link-box">
+      <div class="link-heading"><%= link_to 'Report Center', '/exam_reports/report_center' %></div>
+      <div class="link-descr">View Student Reports</div>
+    </div>
+
+      <div class="link-box">
+          <div class="link-heading"><%= link_to 'Online Exam','/online_exam_groups' %></div>
+          <div class="link-descr">Manage Online Exam System</div>
+    </div>
+  </div>
+</div>
