@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'exam_reports/index'
+
   get 'exam_setting/index'
 
   get 'online_exam_scores/index'
