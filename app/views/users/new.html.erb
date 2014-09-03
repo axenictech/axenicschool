@@ -13,35 +13,36 @@
 
   <%= form_for @user do |f| %>
 <% if @user.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-danger">
     <h2>Errors prohibited this subject from being saved:</h2>
     <ul><% @user.errors.full_messages.each do |message| %>
     <li><%= message %></li>
     <% end %></ul>
     </div>
   <% end %>
-    <div id="create_user_form">
-
-      <div id="necessary-field-notification"> Fields marked with <span class="necessary-field">*</span> must be filled.</div>
-
-        <div><%= f.label :username %> <span class="necessary-field">*</span></div>
-        <div><%= f.text_field :username %></div>
-
-        <div><%= f.label :first_name %></div>
-        <div><%= f.text_field :first_name %></div>
-
-        <div><%= f.label :last_name %></div>
-        <div><%= f.text_field :last_name %></div>
-
-        <div><%= f.label :password %> <span class="necessary-field">*</span></div>
-        <div><%= f.password_field :password %></div>
-
-        <div><%= f.label :email %> <span class="necessary-field">*</span></div>
-        <div><%= f.text_field :email %></div>
-        <%= f.hidden_field :role, value: 'Admin' %>
-      <div><%= f.submit "Create",class: "btn btn-primary" %></div>
-      
-    </div>
+   <div id="necessary-field-notification"> Fields marked with <span class="necessary-field">*</span> must be filled.</div>
+    <table align="center" class="table" style="width:500px">
+       <tbody>
+            <tr>
+              <td class="col-2"><%= f.label :username %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.text_field :username %></td></tr>
+              <tr>
+              <td class="col-2"><%= f.label :first_name %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.text_field :first_name %></td></tr>
+              <tr>
+              <td class="col-2"><%= f.label :last_name %></td>
+              <td class="col-2"><%= f.text_field :last_name %></td></tr>
+              <tr>
+              <td class="col-2"><%= f.label :email %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.text_field :email%></td></tr>
+              <tr>
+              <td class="col-2"><%= f.label :password %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.password_field :password %></td></tr>
+               <%= f.hidden_field :role, value: 'Admin' %>
+              <tr>
+              <td colspan="2"><%= f.submit "Create",class: "btn btn-primary" %></td></tr>
+        </tbody>
+    </table> 
 
   <% end  %>
 
