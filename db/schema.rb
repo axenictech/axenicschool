@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831062856) do
+ActiveRecord::Schema.define(version: 20140903071642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,16 +59,16 @@ ActiveRecord::Schema.define(version: 20140831062856) do
 
   create_table "attendences", force: true do |t|
     t.integer  "student_id"
-    t.integer  "period_table_entry_id"
-    t.boolean  "forenoon",              default: false
-    t.boolean  "afternoon",             default: false
+    t.integer  "time_table_entry_id"
+    t.boolean  "forenoon",            default: false
+    t.boolean  "afternoon",           default: false
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "attendences", ["period_table_entry_id"], name: "index_attendences_on_period_table_entry_id", using: :btree
   add_index "attendences", ["student_id"], name: "index_attendences_on_student_id", using: :btree
+  add_index "attendences", ["time_table_entry_id"], name: "index_attendences_on_time_table_entry_id", using: :btree
 
   create_table "batches", force: true do |t|
     t.string   "name"
@@ -88,6 +88,17 @@ ActiveRecord::Schema.define(version: 20140831062856) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "class_designations", force: true do |t|
+    t.string   "name"
+    t.decimal  "cgpa"
+    t.decimal  "marks"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "class_designations", ["course_id"], name: "index_class_designations_on_course_id", using: :btree
 
   create_table "class_timings", force: true do |t|
     t.integer  "batch_id"
@@ -148,6 +159,52 @@ ActiveRecord::Schema.define(version: 20140831062856) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "exam_groups", force: true do |t|
+    t.string   "name"
+    t.integer  "batch_id"
+    t.string   "exam_type"
+    t.boolean  "is_published",     default: false
+    t.boolean  "result_published", default: false
+    t.date     "exam_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exam_groups", ["batch_id"], name: "index_exam_groups_on_batch_id", using: :btree
+
+  create_table "exam_scores", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "exam_id"
+    t.decimal  "marks"
+    t.integer  "grading_level_id"
+    t.string   "remarks"
+    t.boolean  "is_failed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exam_scores", ["exam_id"], name: "index_exam_scores_on_exam_id", using: :btree
+  add_index "exam_scores", ["student_id"], name: "index_exam_scores_on_student_id", using: :btree
+
+  create_table "exams", force: true do |t|
+    t.integer  "exam_group_id"
+    t.integer  "subject_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "maximum_marks"
+    t.integer  "minimum_marks"
+    t.integer  "grading_level_id"
+    t.integer  "weightage",        default: 0
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exams", ["event_id"], name: "index_exams_on_event_id", using: :btree
+  add_index "exams", ["exam_group_id"], name: "index_exams_on_exam_group_id", using: :btree
+  add_index "exams", ["grading_level_id"], name: "index_exams_on_grading_level_id", using: :btree
+  add_index "exams", ["subject_id"], name: "index_exams_on_subject_id", using: :btree
 
   create_table "general_settings", force: true do |t|
     t.string   "InstitutionName"
@@ -216,6 +273,70 @@ ActiveRecord::Schema.define(version: 20140831062856) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "online_exam_groups", force: true do |t|
+    t.string   "name"
+    t.integer  "batch_id"
+    t.string   "exam_type"
+    t.boolean  "is_published",     default: false
+    t.boolean  "result_published", default: false
+    t.string   "students_list"
+    t.date     "exam_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "online_exam_groups", ["batch_id"], name: "index_online_exam_groups_on_batch_id", using: :btree
+
+  create_table "online_exam_scores", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "online_exam_id"
+    t.decimal  "marks"
+    t.integer  "grading_level_id"
+    t.string   "remarks"
+    t.boolean  "is_failed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "online_exam_scores", ["grading_level_id"], name: "index_online_exam_scores_on_grading_level_id", using: :btree
+  add_index "online_exam_scores", ["online_exam_id"], name: "index_online_exam_scores_on_online_exam_id", using: :btree
+  add_index "online_exam_scores", ["student_id"], name: "index_online_exam_scores_on_student_id", using: :btree
+
+  create_table "online_exams", force: true do |t|
+    t.integer  "online_exam_group_id"
+    t.integer  "subject_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "maximum_marks"
+    t.integer  "minimum_marks"
+    t.integer  "grading_level_id"
+    t.integer  "weightage",            default: 0
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "online_exams", ["event_id"], name: "index_online_exams_on_event_id", using: :btree
+  add_index "online_exams", ["grading_level_id"], name: "index_online_exams_on_grading_level_id", using: :btree
+  add_index "online_exams", ["online_exam_group_id"], name: "index_online_exams_on_online_exam_group_id", using: :btree
+  add_index "online_exams", ["subject_id"], name: "index_online_exams_on_subject_id", using: :btree
+
+  create_table "ranking_levels", force: true do |t|
+    t.string   "name"
+    t.decimal  "gpa"
+    t.decimal  "marks"
+    t.integer  "subject_count"
+    t.integer  "prioriy"
+    t.boolean  "full_course"
+    t.integer  "course_id"
+    t.string   "subject_limit_type"
+    t.string   "marks_limit_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ranking_levels", ["course_id"], name: "index_ranking_levels_on_course_id", using: :btree
 
   create_table "student_previous_data", force: true do |t|
     t.integer  "student_id"

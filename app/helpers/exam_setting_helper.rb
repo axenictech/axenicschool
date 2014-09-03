@@ -1,0 +1,2 @@
+module ExamSettingHelper
+end

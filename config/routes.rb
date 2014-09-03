@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'exam_setting/index'
+
+  get 'online_exam_scores/index'
+
+  get 'online_exams/index'
+
+  get 'online_exam_groups/index'
+
+  get 'exam_scores/index'
+
+  get 'exams/index'
+
+  get 'exam_groups/index'
+
 get 'setting/course_batch'
 get 'batches/:id/display', to: 'batches#display', as: 'batches_display'
 get 'batches/select' 
