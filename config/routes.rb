@@ -16,6 +16,11 @@ Rails.application.routes.draw do
 
   get 'exam_groups/index'
 
+  get 'exam_reports/genrate_reports'
+  get 'exam_reports/select'
+  get 'exam_reports/genrate_previous_reports'
+
+
 get 'setting/course_batch'
 get 'batches/:id/display', to: 'batches#display', as: 'batches_display'
 get 'batches/select' 
