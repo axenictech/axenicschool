@@ -1,0 +1,45 @@
+<div id="content-header">
+  <h1>User</h1>
+  <h3>Edit User</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+  <%= form_for @user do |f| %>
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+    <h2>Errors prohibited this subject from being saved:</h2>
+    <ul><% @user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %></ul>
+    </div>
+  <% end %>
+    <div id="create_user_form">
+
+      <div id="necessary-field-notification"> Fields marked with <span class="necessary-field">*</span> must be filled.</div>
+
+        <div><%= f.label :username %> <span class="necessary-field">*</span></div>
+        <div><%= f.text_field :username %></div>
+
+        <div><%= f.label :first_name %></div>
+        <div><%= f.text_field :first_name %></div>
+
+        <div><%= f.label :last_name %></div>
+        <div><%= f.text_field :last_name %></div>
+
+        <div><%= f.label :email %> <span class="necessary-field">*</span></div>
+        <div><%= f.text_field :email %></div>
+
+      <div><%= f.submit "Update",class: "btn btn-primary" %></div>
+      
+    </div>
+
+  <% end  %>
+
+</div>

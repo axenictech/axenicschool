@@ -1,0 +1,48 @@
+<div id="content-header">
+  <h1>Add News</h1>
+  <h3>Publish school news</h3>
+  <div id="app-back-button">
+	 <%= link_to image_tag("buttons/back.png",:border => 0),newscasts_path(@newscast) %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div id="box"
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
+
+<div id="content_wrapper">
+<div class="bread_crumb">
+ <%= link_to 'Home', home_dashboard_path %> &raquo;
+        <%= link_to 'News', newscasts_path %> &raquo;
+        <%= 'Add' %></div></div>
+
+  <%= form_for :newscast, url: newscasts_path do |f| %>
+
+
+  <% if @newscast.errors.any?%>
+      <div class ="errorExplanation" id="error_explanation">
+        <ul>
+          <% @newscast.errors.full_messages.each do |msg| %>
+          <li><%= msg%></li>
+          <% end %>
+        </ul> 
+      </div>
+  <% end %>
+
+  <div id="add_news_form">
+    <div class="news_label_field">
+      <%=f.label :Title %>
+      <div id="news_title_text_field_bg"><%= f.text_field :title%></div>
+    </div>
+
+    <div class="news_label_field">
+     <%=f.label :Content %>
+      <div id="news_content_text_field_bg"><%= f.text_area :content, :cols => "70", :rows => "12"%>
+        </div>
+      </div>
+    </div>
+    <div align="center"><%= f.submit :'Publish News', class: "btn btn-success", data: { disable_with: "Please wait" }%> </div>
+  <% end %>
+</div>
+</div>

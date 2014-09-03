@@ -1,0 +1,56 @@
+<div id="content-header">
+  <h1>News</h1>
+  <h3>Read news</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), new_newscast_path(@newscast) %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Edit News', edit_newscast_path(@newscast)%></li>
+    <li><%= link_to 'Delete News',newscast_path(@newscast),method: :delete, data: { confirm: "Are you sure delete #{@newscast.title}?" } %></li>
+  </ul>
+</div>
+
+
+
+<div id="page-yield">
+<div id="box"%>
+
+  <% unless flash[:notice].nil? %>
+  <div class="alert alert-success"> <%= flash[:notice] %> </div><% end %>
+
+  <div id="content_wrapper">
+<div class="bread_crumb">
+<%= link_to 'Home', home_dashboard_path %> &raquo;
+        <%= link_to 'News', newscasts_path %> &raquo;
+        <%= @newscast.title %>
+        </div></div></div>
+
+    <div id="news_title">
+      <%= @newscast.title %>
+    </div>
+    <div id="create_date">
+      Posted on <%= @newscast.created_at.strftime("%A, %d %B, %Y") %>
+    </div>
+    <div id="news_content">
+      <%= sanitize @newscast.content , :tags => %w[b i a h1 h2 h3 u strike p], :attributes => %w[href]%>
+    </div>
+  
+  <ul id="comments-list">
+  <h3 id="comments-heading">Comments</h3>
+      <%= render @newscast.comments %>
+  </ul>
+		<%= form_for([@newscast, @newscast.comments.build]) do |f| %>
+  
+        <%= f.label :leave_a_comment %>
+		    <div class="comment-content"><%= f.text_area :statement, class: "comment-content"%></div>
+		    <div align="center"><%= f.submit 'Submit', class: "btn btn-success" %></div>
+
+		<% end %>
+</div>
+
+		  
+

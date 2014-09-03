@@ -1,0 +1,13 @@
+
+
+<ul id="comments-list" >
+<li id="comment-item-290">
+  <div class="comment-details">
+    <div class="commenter"><%#= comment.author.first_name %><%= 'Admin' %> </div>
+    <div class="delete-comment"><%= link_to  'Delete',[comment.newscast,comment],	method: :delete, data: { confirm: "Are you sure delete"}%></div>
+    <div class="comment-posted-at">posted <%= time_ago_in_words(comment.created_at) %> ago</div>
+  </div>
+  <div class="comment-content"><%= sanitize  comment.statement.strip.gsub("\n", "<br/>"),:tags => %w[b i a ], :attributes => %w[href] %></div>
+</li>
+</ul>
+

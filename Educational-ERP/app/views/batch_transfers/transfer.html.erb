@@ -1,0 +1,32 @@
+ <div id="content-header">
+  <h1>Batch Transfer</h1>
+  <h3>Transfer</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0),batch_transfers_path %>
+  </div>
+</div>
+
+
+<div id="page-yield">
+   <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<p>Transferring batch: <%= @batch.name %></p>
+
+<div>
+    <%= select("batch","id",Batch.all.collect{|b| [b.name,b.id]})%>
+</div>
+
+  <p>From the below list uncheck the students you don't want to transfer to the new batch.</p>
+
+    <ul id="category-list">
+  <% @batch.students.each do |student| %>
+  <li class="list<%=cycle('odd', 'even')%>">
+    <div class="category-name"><%= student.first_name %></div>
+    <div class="category-edit"><%= check_box_tag 'transfer[students][]', student.id, true %></div>
+</li>
+  <% end %>
+</ul>
+
+ <%= submit_tag %></div>

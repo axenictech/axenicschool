@@ -1,0 +1,113 @@
+<div id="content-header">
+  <h1>Parents info</h1>
+  <h3>Parents profile</h3>
+  <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+ </div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to "Student profile", students_archived_profile_path(@student)%></li>	
+  </ul>
+</div>
+
+<div id="student-details">
+    <h3><%= @student.first_name+" "+@student.last_name %></h3>
+    <h4>Adm no : <%= @student.admission_no %></h4>
+    <h4>Class : <%= @student.batch.course.course_name %></h4>
+  </div>
+
+  <div id="guardians-links">
+
+    <ul>
+      <span>Parents/Guardian:</span>
+      <% @guards.each do |p| %>
+        <li><a href="#guardian-details-id-<%= p.id %>"><%= p.first_name %> <%= p.last_name %></a> (<%= p.relation %>)</li>
+      <% end %>
+    </ul>
+
+  </div>
+
+    <% @guards.each do |p| %>
+ 
+<a name="guardian-details-id-<%= p.id %>"> </a>
+  <div id="new_profile_info_top">
+    <table class="table table-hover table-bordered" align="center" style="width:800px">
+    <tbody>
+
+
+    <tr>
+    			<td class="col-2">  Name</td>
+        		<td class="col-2"> <%= p.first_name %> <%= p.last_name %></td>
+        
+    </tr>
+
+     <tr>
+    			<td class="col-2"> Relation</td>
+        		<td class="col-2"> <%= p.relation %></td>
+        
+    </tr>
+
+     <tr>
+    			<td class="col-2">  DOB</td>
+        		<td class="col-2"><%= p.dob.strftime('%d %B, %Y') unless p.dob.nil? %></td>
+        
+    </tr>
+
+     <tr>
+    			<td class="col-2"> Email</td>
+        		<td class="col-2"> <%= p.email %></td>
+        
+    </tr>
+
+     <tr>
+    			<td class="col-2"> Phone1</td>
+        		<td class="col-2"> <%= p.office_phone1 %></td>
+        
+    </tr>
+
+
+     <tr>
+    			<td class="col-2"> Phone2</td>
+        		<td class="col-2"> <%= p.office_phone2 %></td>
+        
+    </tr>
+
+
+     <tr>
+    			<td class="col-2"> Mobile </td>
+        		<td class="col-2"> <%= p.mobile_phone %></td>
+        
+    </tr>
+
+        
+     <tr>
+    			<td class="col-2"> Address</td>
+        		<td class="col-2"> <%= p.office_address_line1%>,<%= p.office_address_line2%></td>
+        
+    </tr>
+
+     <tr>
+    			
+        		<td class="col-2"> <%= p.city %> <%= p.state %> <%= p.country%></td>
+        
+    </tr>
+
+    <tr>
+    			<td class="col-2"> Income</td>
+        		<td class="col-2"> <%= p.income %></td>
+        
+    </tr>
+
+    <tr>
+    			<td class="col-2"> Occupation</td>
+        		<td class="col-2"> <%= p.occupation %></td>
+        
+    </tr>
+    </tbody>
+</table>
+</div>
+<br/><br/>
+    <% end %>

@@ -1,0 +1,21 @@
+<% if @students.nil? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+<% if @students.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+  <% @students.each_with_index do |student,i| %>
+      <% unless student.batch.nil? %>
+    <div id="ajax_result">
+    <% if student.status_description.nil? %>
+      <%= link_to student.first_name+' '+student.last_name,students_profile_path(student)%><br />
+      <% else %>
+      <%= link_to student.first_name+' '+student.last_name,students_archived_profile_path(student)%><br />
+    <%end%>
+      <small>Course & Batch: <%= student.batch.course.course_name+" - "+student.batch.name %></small>
+      <small><br/>Adm No.<%= student.admission_no %></small>
+    </div>
+  <% end %>
+  <% end %>
+  <% end %>
+  <% end %>

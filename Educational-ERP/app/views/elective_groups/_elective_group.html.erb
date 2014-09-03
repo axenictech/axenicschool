@@ -1,0 +1,29 @@
+ <div class="add_sub">
+   <%= link_to 'Add new Elective Groups',new_batch_elective_group_path(@batch),remote:true %>
+   </div>
+<div>
+<% if @elective_groups.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+<table align="center" class="table table-hover" style="width:800px">
+<ul id="category-list">
+<thead>
+  <tr class="tr-head"><th colspan="6">Elective Groups Name</th>
+  </tr>
+    </thead>
+   <% @elective_groups.each do |elective_group| %>
+  <tbody>
+    <tr><td><%= elective_group.name%></td>
+    <td><%= link_to 'edit',edit_batch_elective_group_path(elective_group.batch,elective_group),remote:true%></td>
+
+    <td><%= link_to 'delete', [elective_group.batch,elective_group], remote:true,
+        method: :delete, data:{confirm:'Are you sure want to delete?'} %></td>
+    <td><%=link_to 'Add Elective Subject',elective_groups_elective_subject_path(elective_group) %></td>
+    </tr>
+</tbody>
+<% end %>
+</table>
+<%end%>
+</div>
+</div>
+</div>

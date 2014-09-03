@@ -1,0 +1,58 @@
+<div id="content-header">
+  <h1>Admission</h1>
+  <h3>Step 4 - previous Details<br/>
+<small><font color="red">Insert previous Institution Details</font></small></h3>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+<div id="box">
+ <div class="add_sub",style="margin-top:20px">
+ <div id="display_subject_mark"></div>
+     <%=link_to "Add subject", students_previous_subject_path(@student), remote: true %>
+  </div></div>
+<table align="center" class="table table-hover" style="width:800px">
+   	<tbody>
+
+   	<%= form_for @previous_data,url:{action:'previous_data_create'} do |f| %>
+    <%=f.hidden_field :student_id,value: @student.id %>
+
+   <div align="center">
+  <% if  @previous_data.errors.any? %>
+         <div class="alert alert-danger" style="width:500px" >
+          <h2>Error prohibited to being saved:</h2>
+          <ul>
+           <%  @previous_data.errors.full_messages.each do |msg| %>
+              <li style="width:500px" align="left"><%= msg %></li>
+            <% end %>
+          </ul>
+          <% end %>
+      </div></div>
+
+   	  <tr>
+          <td class="col-2"><%=f.label :institution%></td>
+          <td class="col-2"> <%=f.text_field :institution%></td>
+      </tr>
+
+      <tr>    
+          <td class="col-2"><%=f.label :year%></td>
+          <td class="col-2"> <%=f.text_field :year%></td>
+     </tr>	
+
+      <tr>
+          <td class="col-2"><%=f.label :course%></td>
+          <td class="col-2"> <%=f.text_field :course%></td>
+      </tr>
+
+      <tr>    
+          <td class="col-2"><%=f.label :'total-marks'%></td>
+          <td class="col-2"> <%=f.text_field :'total_mark'%></td>
+     </tr>
+      <tr>    
+          <td colspan="2"><%=f.submit 'submit',class: "btn btn-primary"%></td>
+     </tr>
+</tbody>
+</table>
+ <%end%>
+<div id="myModal" class="modal fade">
+          </div>
+ 
+
