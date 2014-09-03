@@ -1,0 +1,804 @@
+
+
+Started GET "/home/dashboard" for 127.0.0.1 at 2014-09-03 11:29:46 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#dashboard as HTML
+  Rendered home/dashboard.html.erb within layouts/application (26.0ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+Completed 200 OK in 1340ms (Views: 1339.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/attendence_reports.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/attendences.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/batch_transfers.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/batches.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/calender.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/elective_groups.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/contextMenu.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/courses.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/graduation.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/application_old.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/subject_transfer.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batches/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batches/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batches/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batches/new.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/batches/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/calendar/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/calendar/view.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/configuration/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/courses/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/configuration/settings.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/courses/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/courses/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/courses/manage_batches.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/courses/manage_course.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/courses/new.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:48 +0530
+
+
+Started GET "/assets/fedena/courses/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/elective_groups/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/elective_groups/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/elective_groups/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/elective_groups/new.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/grading_levels/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/news/add.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/news/all.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/news/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/news/view.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/news/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/academic_report.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/academic_report_all.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/add_additional_details.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/academic_reports.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/add_guardian.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/admission1.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/admission2.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/admission3.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/admission3_1.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/admission4.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/advanced_search.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/categories.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/change_to_former.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/delete.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/edit_additional_details.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/edit_guardian.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/electives.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/edit_admission4.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/email.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/exam_report.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/guardians.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/previous_data.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/previous_years_marks_overview.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/profile.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/remove.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/show_previous_details.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/reports.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/subject_wise_report.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/student/view_all.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/subject/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/subject/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/subjects/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/subject/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/timetable/timetable.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/fedena/timetable/view.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/general_settings.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/grading_levels.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/guardians.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/newscasts.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/setting.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/static_pages.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/student_catgeorys.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/subjects.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/time_table_entries.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/time_tables.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:49 +0530
+
+
+Started GET "/assets/attendence_reports.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/attendences.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/batch_transfers.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/batches.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/calender.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/contextMenu.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/courses.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/elective_groups.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/grading_levels.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/general_settings.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/newscasts.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/guardians.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/quick_link_script.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/script.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/static_pages.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/student_catgeorys.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/subjects.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/time_table_entries.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/time_tables.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/admission_page_logo.jpg" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/student_details_logo.jpg" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/show_settings.png" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/manage_news_logo.png" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/manage_user.jpg" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/show_timetable.png" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/assets/calender.png" for 127.0.0.1 at 2014-09-03 11:29:50 +0530
+
+
+Started GET "/users" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (34.2ms)
+  Rendered layouts/_header.html.erb (0.1ms)
+Completed 200 OK in 94ms (Views: 93.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/attendence_reports.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/batch_transfers.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/attendences.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/calender.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/batches.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/contextMenu.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/courses.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/elective_groups.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/events.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/application_old.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/graduation.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batch_transfers/subject_transfer.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batches/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batches/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batches/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batches/new.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/batches/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/calendar/view.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:55 +0530
+
+
+Started GET "/assets/fedena/calendar/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/configuration/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/configuration/settings.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/courses/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/courses/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/courses/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/courses/manage_batches.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/courses/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/courses/manage_course.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/courses/new.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/elective_groups/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/elective_groups/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/elective_groups/new.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/elective_groups/show.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/grading_levels/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/news/add.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/news/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/news/all.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/news/view.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/news/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/academic_report.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/academic_report_all.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/academic_reports.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/add_guardian.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/add_additional_details.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/admission1.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/admission3_1.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/admission3.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/admission2.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/admission4.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/advanced_search.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/categories.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/change_to_former.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/delete.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/edit_additional_details.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/edit_admission4.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/edit_guardian.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/electives.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/email.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/exam_report.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/guardians.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/previous_data.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/previous_years_marks_overview.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/profile.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/reports.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/remove.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/show_previous_details.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/subject_wise_report.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/subject/create.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/student/view_all.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/subject/edit.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/subject/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/subjects/index.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/timetable/view.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/fedena/timetable/timetable.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/grading_levels.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/guardians.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/general_settings.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/setting.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/static_pages.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/newscasts.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/student_catgeorys.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/style.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/subjects.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/time_table_entries.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/time_tables.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/attendence_reports.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/attendences.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/batches.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/batch_transfers.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/calender.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/contextMenu.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/courses.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/elective_groups.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/events.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/general_settings.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/guardians.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/grading_levels.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/quick_link_script.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/newscasts.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/script.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/static_pages.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:56 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/student_catgeorys.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/subjects.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/time_table_entries.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/time_tables.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/buttons/back.png" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/assets/underline.jpg" for 127.0.0.1 at 2014-09-03 11:29:57 +0530
+
+
+Started GET "/users/search?utf8=%E2%9C%93&search=" for 127.0.0.1 at 2014-09-03 11:29:58 +0530
+Processing by UsersController#search as JS
+  Parameters: {"utf8"=>"✓", "search"=>""}
+  [1m[35m (27.6ms)[0m  SELECT COUNT(*) FROM "users"  WHERE (first_name like '%%' OR last_name like '%%'
+                            OR first_name like '%%' OR last_name like '%%')
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users"  WHERE (first_name like '%%' OR last_name like '%%'
+                            OR first_name like '%%' OR last_name like '%%')[0m
+  Rendered users/_search_all.html.erb (51.4ms)
+  Rendered users/search.js.erb (58.3ms)
+Completed 200 OK in 68ms (Views: 34.0ms | ActiveRecord: 30.5ms)

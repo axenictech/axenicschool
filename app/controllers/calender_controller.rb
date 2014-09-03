@@ -1,7 +1,7 @@
 class CalenderController < ApplicationController
  
  def index
- 	if params[:new_month].nil?
+  if params[:new_month].nil?
       @show_month = Date.today
     else
       d = params[:new_month].to_i
@@ -19,4 +19,3 @@ class CalenderController < ApplicationController
  end
 
 end
-	

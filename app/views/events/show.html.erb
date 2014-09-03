@@ -28,13 +28,23 @@
 			<td> End Date---></td>
 			<td><%=@event.end_date%></td>
 	</tr>
+
+	<tr>
+		<td><h3><%= link_to 'Select Batch',event_path,class: "btn btn-primary",remote: true%></h3></td>
+<tr><td><h3><%= link_to 'select department',event_path,class: "btn btn-primary",remote: true%></h3></td></tr>
+
+	</tr>
 	
 	<tr>
 				
- 			<td><h3><%= link_to '► Finish',calender_index_path,class: "btn btn-primary"%></h3></td>
+ 			<td><h3><%= link_to '► Confirm',calender_index_path,class: "btn btn-primary"%></h3></td>
  			<td><h3><%= link_to '► Cancel',new_event_path,class: "btn btn-primary"%></h3></td>
 
 	</tr>
-	 </tbody>
+	 
+
+</tbody>
 </table>
 
+<div id="kankya"></div>
+<div id ="kankya2"></div>

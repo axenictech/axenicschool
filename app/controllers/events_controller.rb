@@ -14,10 +14,13 @@ def create
 end
 
 def show
-	@event=Event.find(params[:id]) 
+	@event=Event.find(params[:id])
+	@batches=Batch.all
+
 end
-private
-def params_event
-  params.require(:event).permit(:start_date,:end_date,:title,:description,:is_holiday,:is_common)
-end
+
+	private
+	def params_event
+	  params.require(:event).permit(:start_date,:end_date,:title,:description,:is_holiday,:is_common)
+	end
 end
