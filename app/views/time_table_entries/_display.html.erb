@@ -3,28 +3,30 @@
 
   <table border="0" align="center" width="100%" id="table" cellspacing="0"  >
     <tr>
-      <td class="loader">
-      <td class="td-blank"></td>
+    <td class="col-4"></td>
      <% @batch.class_timings.each do |c|%>
-     <td class="td"><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></div></td>
+     <td class="td"><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></td>
       <% end %>
-    </tr> <!-- timetable_tr -->
-    <tr class="blank">
-      <td></td>
-      <td></td>
-     <% @batch.class_timings.each do |c|%>
-        <td></td>
-      <% end %>
-    </tr>
+    </tr> 
+  
+ 
+    
    <% @batch.weekdays.each do |w|%>
       <tr>
         <td class="td"><div class="name"><%=w.weekday%></div></td>
-        <td class="td-blank"></td>
+        <% @batch.class_timings.each do |c|%>
+     <td ></td>
+      <% end %>
       </tr><!--timetable_tr -->
     <% end %>
   </table><br/><br/><br/>
-  <%= form_for :batch do |f| %>
+  <%= form_for :form do |f| %>
 <%= f.label :select_subjects %>
-<%= f.select :id, @subjects.collect {|b| [b.name, b.id]}%>
+<%= f.select :subject_id, @subjects.collect {|b| [b.name, b.id]},prompt:true%>
+
+<%= f.label :"class timing"%>
+<%= f.select :batch_id, @batch.class_timings.collect {|b| [b.start_time.strftime("%I:%M %p")+"-"+b.end_time.strftime("%I:%M %p"), b.id]},{prompt:true}%>
+<%=f.submit :"set subject"%>
+
 <%end%>
 </div>

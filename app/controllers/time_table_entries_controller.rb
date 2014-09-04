@@ -1,6 +1,8 @@
 class TimeTableEntriesController < ApplicationController
 def index
-  @batches=Batch.all
+  	@batches=Batch.all
+  	 @sub=params[:sub_id]
+  	 @times=params[:time_id]
 end
 
 def select
@@ -8,7 +10,7 @@ def select
 	    @subjects = @batch.subjects.all
         
 end
-def sub
+def subs
    @subject=@batch.subjects.find(params[:subject][:id])
 end
 end
