@@ -1,0 +1,26 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing" %></h3>
+</div>
+
+<div class="modal-body">
+        <ul class="errors"></ul>
+<%= form_for [@course,@class_des1],url:{:action=>'update'},method: :patch,remote: true do |f|%>
+ <table class="table" style="width:85%">
+        <tr>
+            <td class="col-2"><%= f.label :name , class: "control-label"%></td>
+            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+        
+        <tr>
+            <td class="col-2"><%= f.label :marks , class: "control-label"%></td>
+             <td><%=f.text_field :marks ,:style =>"width: 250px", class: "form-control"%></td>
+        <tr>
+        <td colspan="2"><%= f.submit 'Submit', class: "btn btn-primary"%>
+        <%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        </tr>
+    </table>
+<% end %>
+</div>
+</div></div>

@@ -64,10 +64,22 @@ get 'time_table_entries/select'
 get 'exam_reports/report_center'
 get 'exam_reports/exam_wise_report'
 get 'exam_reports/generate_exam_report'
+get 'exam_reports/select_batch'
+get 'calender/next'
+get 'calender/demo' 
+get 'calender/holiday_event_view'
+get 'exam_setting/:course_id/setting',to: 'exam_setting#setting', as: 'course_class_designations'
+get 'exam_setting/select'
+get 'exam_setting/selectrank'
+get 'exam_setting/:course_id/settingrank',to: 'exam_setting#settingrank',as: 'course_ranking_levels'
+get 'exam_setting/newrank'
+post 'exam_setting/createrank'
+get 'exam_setting/:course_id/editRank/:id',to:'exam_setting#editRank',as:'course_ranking_level'
+patch 'exam_setting/updateRank'
+delete 'exam_setting/:id/destroyRank', to:'exam_setting#destroyRank', as:'exam_setting_destroyRank'
+get 'exam_groups/select'
 
 root 'home#dashboard'
-
-
  
  resources :home
  resources :setting
@@ -120,7 +132,14 @@ end
 
 resources :exams
 resources :exam_setting
-resources :exam_groups
+resources :exam_groups do
+  resources :exams
+end
 resources :online_exam_groups
 resources :exam_reports
+
+resources :courses do
+  resources :exam_setting
+end  
+
 end

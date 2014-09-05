@@ -16,6 +16,22 @@ class CalenderController < ApplicationController
     @start_date_day = @start_date.wday
     @last_day = @show_month.end_of_month
 
+
  end
+
+ def demo
+end
+
+def next
+   @show_month = Date.today
+
+   @show_month=params[:next].to_date
+  
+end
+
+def holiday_event_view
+    @event=Event.find(params[:event_id])
+
+end
 
 end

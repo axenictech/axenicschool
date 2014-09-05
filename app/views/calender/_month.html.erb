@@ -1,3 +1,4 @@
+
 <div id="calendar-legend">
   <div id="legend-entry">
     <div id="legend-symbol"> <div style='width:12px;height:12px;background:#000000; -moz-border-radius:2px; -webkit-border-radius:2px; margin:4px 3px 3px 3px; float:left;'></div></div>
@@ -20,34 +21,26 @@
 <div id="head-month">
   <div class="header">
     <div class="prev">
-    <%= link_to "◄",
-        
-        :url=>{:controller=>"calendar", :action=>"new_calendar"},
-        :with   => "'new_month=#{@show_month.month-1}'+ '&passed_date=#{@show_month}'"%>
-    </div>is_common
+      <%= link_to "◄", calender_next_path(@show_month-1.month),remote:true%>
     <div class="month">
       <%= @show_month.strftime('%B %Y') %>
     </div>
     <div class="next">
-      <%= link_to "►",
-        
-        :url=>{:controller=>"calendar", :action=>"new_calendar"},
-        :with   => "'new_month=#{@show_month.month+1}'+ '&passed_date=#{@show_month}'"%>
+      <%= link_to "►", calender_next_path(@show_month+1.month),remote:true%>
     </div>
     <div class="extender"></div>
   </div>
 </div>
 
-
 <table id="calendar-table" align="center" width="100%">
   <tbody>
-    <tr class="week">
+    <tr class="blank"></tr>
+    <tr>
       <% @days_of_week= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] %>
       <% @days_of_week.each do |d| %>
         <td><span><%= d %></span></td>
       <% end %>
     </tr>
-    <tr class="blank"></tr>
     <% (1..6).each do |r|%>
       <tr class="day">
         <% (1..7).each do |c|%>
@@ -55,8 +48,24 @@
             <% dt = c - @start_date_day + (r-1)*7 %>
             <% unless (r == 1 and c <= @start_date_day) %>
               <% unless dt > @last_day.day %>
-                  <div class="link"><%= link_to 'Add',new_event_path(Date.parse("#{@show_month.year}-#{@show_month.month}-#{dt}"))%>
-                  <span><%= dt  %></span></div>
+                  <% current_date="#{@show_month.year}-#{@show_month.month}-#{dt}".to_date %>
+                  <div ><%= link_to 'Add',new_event_path(current_date)%>
+                  </div>
+
+                  <span><%= dt  %></span>
+
+                  <% @event=Event.find_by_start_date(current_date)%>
+                  <% unless @event.nil? %>
+                  <% if @event.is_holiday? %>
+                  <%= form_for :calendar, url:{action:'holiday_event_view',event_id:@event.id },method: :get,remote:true,html:{id: "calender_form#{@event.id}",style: 'width:12px;height:12px;background:#00b400; -moz-border-radius:2px;  -webkit-border-radius:2px;margin:2px;'} do |f| %>
+                  <%= link_to ".",'',{onmouseover:"$('#calender_form#{@event.id}').submit();"}%>
+                  <%end%>
+                  <% else%>
+                  <%= form_for :calendar, url:{action:'holiday_event_view',event_id:@event.id },method: :get,remote:true,html:{id: "calender_form#{@event.id}",style: 'width:12px;height:12px;background:#000000; -moz-border-radius:2px;  -webkit-border-radius:2px;margin:2px;'} do |f| %>
+                  <%= link_to ".",'',{onmouseover:"$('#calender_form#{@event.id}').submit();"}%>
+                  <%end%>
+                  <%end%>
+                  <% end %>
 
                 <% date = "#{@show_month.year}-#{@show_month.month}-#{dt}".to_date
                 first_day = date.beginning_of_month

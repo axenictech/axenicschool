@@ -1,0 +1,14 @@
+<div class="add_sub",style="margin-top:200px">
+ <%= link_to 'Add',course_class_designations_path(@course),remote: true%>
+</div> 
+   <table align="center" class="table table-hover" style="width:800px">
+  <thead>
+  	<tr class="tr-head">
+        <th>Class Designations</th>
+     </tr>
+  </thead>
+    <tbody class="product-index">
+      <%= render 'new' %>
+    </tbody>
+
+</table>

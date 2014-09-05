@@ -1,2 +1,25 @@
-<h1>ExamSetting#index</h1>
-<p>Find me in app/views/exam_setting/index.html.erb</p>
+<div id="content-header">
+  <h1>Exams</h1>
+  <h3>Setting</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+  <div class="box">
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Set grading levels' ,'/grading_levels'%> </div>
+        <div class="link-descr">Set grading levels</div>
+      </div>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Ranking Levels' ,'/exam_setting/newrank' %> </div>
+        <div class="link-descr">Manage ranking levels</div>
+      </div>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to 'Class Designations' ,'/exam_setting/new' %> </div>
+        <div class="link-descr">Manage class designations</div>
+      </div>
+        
+</div>

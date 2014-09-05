@@ -6,5 +6,6 @@ class Course < ActiveRecord::Base
 
 	has_many :batches
 	accepts_nested_attributes_for :batches 
-
+	has_many :class_designations
+	has_many :ranking_levels
 end

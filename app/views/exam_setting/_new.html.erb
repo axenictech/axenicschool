@@ -1,0 +1,11 @@
+ <% @class_dess.each do |c| %>
+        <tr>
+            <td class="col-2"><%= c.name %></td>
+               <td class="col-2"><%= c.marks %></td>
+
+                <td><%=link_to 'Edit',edit_course_exam_setting_path(c.course,c),remote: true%></td>
+                 <td><%= link_to 'Delete', course_exam_setting_path(c.course,c),remote:true,
+                    method: :delete, data: { confirm: "Are you sure to delete"} %></td>
+          </tr>   
+            
+      <% end %>

@@ -1,0 +1,12 @@
+ <%   @rank_levels.each do |r| %>
+        <tr>
+            <td class="col-2"><%= r.name %></td>
+                 <td><%=link_to 'Edit', course_ranking_level_path(r.course,r),remote: true%></td>
+            <td><%= link_to 'Delete', exam_setting_destroyRank_path(r),remote:true,
+                    method: :delete, data: { confirm: "Are you sure to delete"} %></td>
+                
+          </tr>   
+            
+      <% end %>
+
+     

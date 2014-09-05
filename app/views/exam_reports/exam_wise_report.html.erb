@@ -16,21 +16,17 @@
     <%= link_to 'Report Center', '/exam_report/report_center' %> &raquo;
     Exam Wise Report
   </div>
-<%= form_for :exam_report, :url=>{:action=>'generate_exam_report'} do |f| %>
+   <% unless flash[:notice].nil? %>
+    <div class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+    <%end %>
+<%= form_for :batch_select, :url=>{:action=>'select_batch'},html:{id: 'form_batch'},remote:true,method: :get do |f| %>
   
  <div class="label-field-pair">
   <%= f.label :select_batch %>
       <div class="text-input-bg">
-      <%= f.select :batch_id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}%>
+      <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_batch').submit();"}%>
       </div></div>
-
-    <div class="label-field-pair">
-    <%= f.label :select_exam_group %>
-    <div class="text-input-bg">
-    <%= f.select :exam_group_id, @subjects.collect {|subject| [subject.name,subject.id]},{prompt:true}%>
-    </div></div>
-   
-      <div><%= f.submit "View", class: 'btn btn-default'%></div>
-<% end %>
+  <% end %>
+      <div id="exam_report"><%= render 'exam_group' %></div>
   </div>
 </div>
