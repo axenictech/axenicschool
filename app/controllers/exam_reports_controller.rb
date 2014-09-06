@@ -28,5 +28,17 @@ class ExamReportsController < ApplicationController
     
      @exam_group=ExamGroup.find(params[:exam_group_select][:id])
      @batch=@exam_group.batch
+     @student=@batch.students.last
   end
+
+  def student_exam_report
+      @exam_group=ExamGroup.find(params[:exam_group_id])
+      @student=Student.find(params[:student_id])
+  end
+
+  def consolidated_report
+       @exam_group=ExamGroup.find(params[:exam_group_id])
+       @batch=@exam_group.batch
+  end
+
 end

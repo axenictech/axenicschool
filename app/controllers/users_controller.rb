@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 	def search
 	  name=params[:search].split(" ")
       @users=User.where("first_name like '%#{name[0]}%' OR last_name like '%#{name[1]}%'
-                            OR first_name like '%#{name[1]}%' OR last_name like '%#{name[0]}%'")
+                            OR first_name like  '%#{name[1]}%' OR last_name like  '%#{name[0]}%'")
 
 	end
 

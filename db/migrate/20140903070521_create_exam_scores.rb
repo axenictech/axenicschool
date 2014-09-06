@@ -8,7 +8,6 @@ class CreateExamScores < ActiveRecord::Migration
       t.references :grading_level
       t.string     :remarks
       t.boolean    :is_failed
-      
    
       t.timestamps
     end
