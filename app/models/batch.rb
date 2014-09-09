@@ -5,10 +5,10 @@ class Batch < ActiveRecord::Base
   validates :end_date, presence: true
   validate  :end_date_cannot_be_less_than_start_date
   belongs_to :course
-
+  
   has_many :students
   has_many :class_timings, dependent: :destroy
-  # has_many :archived_students, dependent: :destroy
+  has_many :archived_students, dependent: :destroy
   has_many :grading_levels, dependent: :destroy
   has_many :subjects, dependent: :destroy
   has_many :elective_groups, dependent: :destroy

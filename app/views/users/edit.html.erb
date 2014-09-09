@@ -7,17 +7,18 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
-<div id="page-yield">
-
   <div id="inner-tab-menu">
-    <ul><li><%= link_to "Change Password", edit_user_path(@user)%></li></ul></div>
-
-  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
-
+    <ul><li style="width:150px"><%= link_to "Change Password", users_change_password_path(@user)%></li>
+    </ul></div>
+<div id="page-yield">
+<div id="box">
+<% unless flash[:notice].nil? %>
+    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+  <% end %>
   <%= form_for @user do |f| %>
 <% if @user.errors.any? %>
-    <div id="error_explanation">
-    <h2>Errors prohibited this subject from being saved:</h2>
+    <div class="alert alert-danger">
+    <h2>Errors prohibited to being saved:</h2>
     <ul><% @user.errors.full_messages.each do |message| %>
     <li><%= message %></li>
     <% end %></ul>
@@ -43,5 +44,5 @@
     </table> 
 
   <% end  %>
-
+</div>
 </div>

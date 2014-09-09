@@ -1,0 +1,8 @@
+<%= form_for :batch_select,url:{action: 'generate_archived_report'},method: :get do |f| %>
+ <div class="label-field-pair">
+  <%= f.label :select_batch %>
+      <div class="text-input-bg">
+      <%= f.select :id, @batches.collect {|b| [b.name,b.id]}, {prompt:true}%>
+      </div></div>
+ <%= f.submit "View", class: "btn btn-default" %>
+  <% end %>

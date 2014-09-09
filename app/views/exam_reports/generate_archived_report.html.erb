@@ -1,0 +1,31 @@
+<div id="content-header">
+  <h1>Exam Reports</h1>
+  <h3>Archived Student Report</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="inner-tab-menu">
+<ul>
+      <li style="width:150px"><%= link_to 'Consolidated Report',exam_reports_consolidated_archived_report_path(@batch.id)%></li>
+      <li><%= link_to 'Pdf Report','' %></li>
+  </ul>
+</div>
+<div id="page-yield">
+<div class="box">
+
+  <div class="bread_crumb">
+ <%= link_to 'Exams',  '/exams'  %> &raquo;
+    <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
+    <%= link_to 'Archived student report', '/exam_reports/archived_student_report' %> &raquo;
+    Generated report
+    </div>
+
+  <h4 align="center"><%= @batch.name %> - <%= @batch.course.course_name %></h4>
+  <div id="student_list" align="left">
+    <%= render 'archived_student_list' %>
+  </div>
+  <div id="archived_student_report" align="right">
+    <%= render 'archived_student_report' %>
+</div></div>

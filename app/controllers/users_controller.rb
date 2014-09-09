@@ -16,14 +16,13 @@ class UsersController < ApplicationController
 	def show
 		@user=User.find(params[:id])
 		@student=Student.find_by_admission_no(@user.username.to_s)
-		p @student
 	end
 
 	def search
-	  name=params[:search].split(" ")
-      @users=User.where("first_name like '%#{name[0]}%' OR last_name like '%#{name[1]}%'
-                            OR first_name like  '%#{name[1]}%' OR last_name like  '%#{name[0]}%'")
-
+	  unless params[:search].empty?
+	  	@users=User.where("first_name like'#{params[:search]}%' 
+      			OR last_name like'#{params[:search]}%'")
+	  end
 	end
 
 	def edit
@@ -37,6 +36,31 @@ class UsersController < ApplicationController
 		else 
 			render 'edit'
 		end 
+	end
+
+	def change_password
+		@user=User.find(params[:id])
+	end
+
+	def update_password
+		@user=User.find(params[:id])
+		if User.authenticate?(@user.username, params[:user][:old_password])
+		        if params[:user][:new_password] == params[:user][:confirm_password]
+		        	@user.password=params[:user][:new_password] 
+		            if @user.update(user_params)
+			           flash[:notice] = "password update successfully"
+		        	   redirect_to edit_user_path(@user)
+		        	else
+		        		render 'change_password'
+		        	end
+		        else
+		          flash[:notice] = "New password and confirm password not match"
+	        	  render 'change_password'	       
+	        	end
+	    else
+        flash[:notice] = "Please Enter correct password"
+        render 'change_password'
+      end
 	end
 
 	def select

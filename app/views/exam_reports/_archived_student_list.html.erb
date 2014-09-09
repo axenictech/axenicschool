@@ -1,0 +1,14 @@
+<% unless @students.empty?  %>
+  <div class="list_name">
+    Students In Batch
+  </div>
+  <ul class="student_list">
+    <% @students.each do |s| %>
+      <li class="student_names">
+        <%=link_to s.first_name+" "+s.last_name,exam_reports_archived_student_path(s),remote:true%>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h4>Students Not Found</h4>
+<% end %>

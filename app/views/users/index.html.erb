@@ -18,7 +18,7 @@
    <div align="center">
     <%= form_for :user, url:{action:'search'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
         <%= f.label :Search %>
-          <%= text_field_tag :search,"",{onkeypress:"$('#user_form').submit();"}%>
+          <%= text_field_tag :search,"",{oninput:"$('#user_form').submit();"}%>
         <% end %>
   </div>
   <div id="user_search"></div>

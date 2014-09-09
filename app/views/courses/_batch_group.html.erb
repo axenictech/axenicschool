@@ -1,0 +1,17 @@
+<% if @batch_groups.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+ <table align="center" class="table table-hover table-bordered" style="width:300px">
+				<tr class="tr-head"><th>Batch Group Name</th>
+        </tr>
+				
+			<tbody>
+				<% @batch_groups.each do |bg|%>
+	
+				<tr>
+				<td class="col-2"><%= bg.name %></td>
+				</tr>
+				<%end%>
+        	</tbody>
+        	</table>
+  <% end %>

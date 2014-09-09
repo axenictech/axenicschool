@@ -1,0 +1,8 @@
+ <% if @batches.empty? %>
+  <h4 align="center">No Record Found </h4>
+   <% else %>
+  <% @batches.each do |batch| %> 
+      <%= batch.name%>&nbsp;&nbsp;&nbsp;
+      <%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%>
+  <%end%>
+  <%end%>

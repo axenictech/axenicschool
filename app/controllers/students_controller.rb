@@ -86,15 +86,16 @@ class StudentsController < ApplicationController
 
 
   def search_ajax
-    name=params[:search].split(" ")
-    if params[:student][:status].eql? "present"
-      @students=Student.where("first_name like '%#{name[0]}%' OR last_name like '%#{name[1]}%'
-                            OR first_name like '%#{name[1]}%' OR last_name like '%#{name[0]}%'")
-    end  
-    if params[:student][:status].eql? "former"
-      @students=ArchivedStudent.where("first_name like '%#{name[0]}%' OR last_name like '%#{name[1]}%'
-                            OR first_name like '%#{name[1]}%' OR last_name like '%#{name[0]}%'")
-    end  
+    unless params[:search].empty?
+      if params[:student][:status].eql? "present"
+        @students=Student.where("first_name like '#{params[:search]}%' 
+                                  OR last_name like '#{params[:search]}%'")
+      end  
+      if params[:student][:status].eql? "former"
+        @students=ArchivedStudent.where("first_name like '#{params[:search]}%' 
+                                      OR last_name like '#{params[:search]}%'")
+      end 
+    end 
   end
 
   def view_all

@@ -1,0 +1,58 @@
+<div id="content-header">
+  <h1>Exam Reports</h1>
+  <h3>Student Ranking Per School</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Pdf report', '' %></li>
+  </ul>
+</div>
+<div id="page-yield">
+  <div class="box">
+
+  <div class="bread_crumb">
+    <%= link_to 'Exams', '/exams' %> &raquo;
+    <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
+    Student Ranking Per School
+  </div><br/><br/>
+ <h4>Overall school rankings : </h4>
+    <div id="score-table">
+      <% unless @courses.empty? %>
+        <% unless @students.empty? %>
+          <% unless @exam_groups.empty? %>
+            <table id="listing" width="100%" cellpadding="1" cellspacing="1">
+              <tr class="tr-head">  
+              <th>Sr.No.</th>
+              <th>Admission no</th>
+              <th>Student Name</th>  
+              <th>Batch</th>       
+              <th>Marks</th>
+              <th>Rank</th>
+            </tr>
+              <% @students.each_with_index do |student,i| %>
+          <tr class="tr-<%= cycle('odd', 'even') %>">
+            <td class="col-1"><%= i+1 %></td>
+            <td class="col-3"><%= student.admission_no.present? ? student.admission_no : "-" %></td>
+            <td class="col-4"><%= student.first_name+" "+student.last_name %></td>
+            <% c=student.batch.course %>
+            <td><%= c.course_name+" "+c.section_name+"-"+student.batch.name %></td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        <% end %>
+            </table>
+          <% else %>
+            <h5>No grouped exams in this school</h5>
+          <% end %>
+        <% else %>
+          <h5>No students in this school</h5>
+        <% end %>
+      <% else %>
+       <h5>No courses for this school</h5>
+      <% end %>
+    </div>
+</div></div>

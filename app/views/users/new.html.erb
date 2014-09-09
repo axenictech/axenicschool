@@ -9,34 +9,31 @@
 
 <div id="page-yield">
 
-  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
-
   <%= form_for @user do |f| %>
 <% if @user.errors.any? %>
     <div class="alert alert-danger">
-    <h2>Errors prohibited this subject from being saved:</h2>
+    <h2>Errors prohibited to being saved:</h2>
     <ul><% @user.errors.full_messages.each do |message| %>
     <li><%= message %></li>
     <% end %></ul>
     </div>
   <% end %>
-   <div id="necessary-field-notification"> Fields marked with <span class="necessary-field">*</span> must be filled.</div>
     <table align="center" class="table" style="width:500px">
        <tbody>
             <tr>
-              <td class="col-2"><%= f.label :username %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.label :username %></td>
               <td class="col-2"><%= f.text_field :username %></td></tr>
               <tr>
-              <td class="col-2"><%= f.label :first_name %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.label :first_name %></td>
               <td class="col-2"><%= f.text_field :first_name %></td></tr>
               <tr>
               <td class="col-2"><%= f.label :last_name %></td>
               <td class="col-2"><%= f.text_field :last_name %></td></tr>
               <tr>
-              <td class="col-2"><%= f.label :email %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.label :email %></td>
               <td class="col-2"><%= f.text_field :email%></td></tr>
               <tr>
-              <td class="col-2"><%= f.label :password %><span class="necessary-field">*</span></td>
+              <td class="col-2"><%= f.label :password %></td>
               <td class="col-2"><%= f.password_field :password %></td></tr>
                <%= f.hidden_field :role, value: 'Admin' %>
               <tr>
