@@ -13,6 +13,7 @@ class ElectiveGroupsController < ApplicationController
         @elective_groups=@batch.elective_groups.all
   	    @elective_group=@batch.elective_groups.new(elective_group_params)
         @elective_group.save
+         flash[:notice]="Elective group Created Successfully"
   	end
 
     def edit  
@@ -22,12 +23,14 @@ class ElectiveGroupsController < ApplicationController
       @subjects=@batch.subjects.all
         @elective_groups=@batch.elective_groups.all
     @elective_group.update(elective_group_params)
+     flash[:notice]="Elective group updated Successfully"
     end
 
     def destroy
       @subjects=@batch.subjects.all
         @elective_groups=@batch.elective_groups.all
      @elective_group.destroy
+      flash[:notice]="Elective group deleted Successfully"
     end
     
     def elective_subject

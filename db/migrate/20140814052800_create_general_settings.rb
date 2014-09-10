@@ -19,5 +19,10 @@ class CreateGeneralSettings < ActiveRecord::Migration
       
       t.timestamps
     end
+    create_default
   end
+  def create_default
+   GeneralSetting.create :InstitutionName=>""
+  end
+
 end

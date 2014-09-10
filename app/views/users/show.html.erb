@@ -26,8 +26,9 @@
 
 <div id="page-yield">
 
-  <% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
-
+  <% unless flash[:user].nil? %>
+    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:user] %> </div>
+  <% end %>
 	<table align="center" class="table" style="width:500px">
   <tbody><tr class="tr-blank"></tr>
       <tr class="tr-head">

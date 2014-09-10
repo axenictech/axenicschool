@@ -1,23 +1,18 @@
 class GeneralSettingsController < ApplicationController
 	def new
-    @general_setting=GeneralSetting.new
+    @general_setting=GeneralSetting.first
 	end
 	
+	def update
+    @general_setting=GeneralSetting.find(params[:id])
 
-	def create
-	@general_setting =GeneralSetting.new(general_setting_params)
- 
-		if @general_setting.save
-		redirect_to general_setting_path(@general_setting)
+		if @general_setting.update(general_setting_params)
+      flash[:msg]="General settings updated successfully"
+		redirect_to new_general_setting_path
 		else
 		render 'new'
 		end
     end
-
-   def show
-
-  	@general_setting = GeneralSetting.find(params[:id])
-  end
  
     private
     def general_setting_params

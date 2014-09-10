@@ -1,93 +1,37 @@
+				
+<% if @subjects.empty? %>
+ <h4 align="center">No subject Found </h4>
+<% else %>
 
+<%=form_for @exam_group , url:{action: 'exam_group_create',exam_group_id:@exam_group.id}, method: :post do |f| %>  
+<table class="table table-hover" style="width:700px">
+  <tr class="tr-head">
+    <td >Subjects</td>
+    <td >Max marks</td>
+    <td >Min marks</td>
+    <td >start time</td>
+    <td>end time</td>
+    <td >Do not create</td>
+  </tr> 
 
-<!-- name -->
-<div class="row" style="margin-top:40px">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-	<div class="col-md-2"></div>
-	<div class="col-md-2">
-		Name
-	</div>
-	<div class="col-md-2">
-		<%=@exam_group.name%>		
-	</div>
-</div>
-<div class="col-md-1"></div>	
-</div>
-
-	
-<!-- type -->
-<div class="row" style="margin-top:10px">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-	<div class="col-md-2"></div>
-	<div class="col-md-2">
-		Exam type
-	</div>
-	<div class="col-md-2">
-		<%=@exam_group.exam_type%>		
-	</div>
-	<div class="col-md-2">
-		<a href="" >change type</a>
-	</div>
-</div>
-<div class="col-md-1"></div>	
-</div>
-<!-- maximum marks -->
-<div class="row" style="margin-top:10px">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-	<div class="col-md-2"></div>
-	<div class="col-md-2">
-		maximum marks
-	</div>
-	<div class="col-md-2">
-		
-	</div>
-	
-</div>
-<div class="col-md-1"></div>	
-</div>
-<!-- minimum marks -->
-<div class="row" style="margin-top:10px">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-	<div class="col-md-2"></div>
-	<div class="col-md-2">
-		minimum marks
-	</div>
-	<div class="col-md-2">
-		
-	</div>
-	
- </div>
-<div class="col-md-1"></div>	
-</div>
-
-<!--table for subjects  -->
-<div class="container">
-<div class="row">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-<h3>Exam Releted Details Here</h3>				
-<div class="table">
-<th>Subject</th>
-	<th>Max marks</th>
-	<th>Min marks</th>
-	<th>Start time</th>
-	<th>End time</th>
-	<th>Do no create</th>
-
-<tr>
 <% @subjects.each do |subject| %>
-<%= subject.name %>
-</tr>
+<%= f.fields_for  :exams do |exam| %>
+    <tr>
+     
+      <td class="col-1"><%= subject.name %></td>
+      <%= exam.hidden_field :subject_id, value: subject.id%>
+      <td class="col-1"><%= exam.text_field :maximum_marks%></td>
+      <td class="col-1"><%= exam.text_field :minimum_marks%></td>
+      <td class="col-1"><%= exam.text_field :start_time%></td>
+      <td class="col-1"><%= exam.text_field :end_time%></td>
+      
+
+    </tr>
 <%end%>
-</div>
-</div>
+  <% end %>
 
-
-<div class="col-md-1"></div>
-</div>
-</div>
-
+ <tr class="tr-head"><td colspan="6">
+<%= f.submit 'create', class: "btn btn-primary" %></td></tr>
+</table>
+<% end %>
+<%end%>

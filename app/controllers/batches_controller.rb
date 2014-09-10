@@ -39,7 +39,7 @@ class BatchesController < ApplicationController
       @batch = Batch.find(params[:id])
   
          if @batch.update(postparam)
-            flash[:notice] = 'Batch was successfully updated!'
+            flash[:notice] = 'Batch updated successfully!'
            redirect_to   course_path(@batch.course)
           else
            render 'edit'
@@ -49,7 +49,7 @@ class BatchesController < ApplicationController
      def destroy
      @batch = Batch.find(params[:id])
      if @batch.destroy
-      flash[:notice] = 'Batch was successfully deleted!'
+      flash[:notice] = 'Batch deleted successfully!'
        redirect_to course_path(@batch.course)
     else
        flash[:notice] = 'Batch was unable to delete!'

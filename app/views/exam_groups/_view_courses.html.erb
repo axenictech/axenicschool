@@ -11,7 +11,7 @@
   <tbody class="product-index">
       <% @batches.each do |batch| %>
         <tr>
-          <td><%= link_to batch.course.code+ " " +batch.course.course_name+ " "+batch.course.section_name+" - "+batch.name,new_exam_group_path(batch)%>
+          <td><%= link_to batch.course.code+ " " +batch.course.course_name+ " "+batch.course.section_name+" - "+batch.name,exam_group_path(batch)%>
        </tr>
       <% end %>   
     </tbody>

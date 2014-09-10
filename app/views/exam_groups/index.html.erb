@@ -6,6 +6,11 @@
   </div>
   <div><%= image_tag("underline.jpg",width: "100%")%></div>  
 </div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Previous Batch Exams', new_course_path(@course) %> </li>
+  </ul>
+</div>
 
 <div id="page-yield">
   <% unless flash[:notice].nil? %>
@@ -17,7 +22,9 @@
 	<%= form_for :course, url:{action:'select'},method: :get,remote:true,html:{id: "exam_form"}  do |f| %>
 	<%= f.label :select_course %>
   <%= f.select :id, Course.all.collect {|b| [b.course_name+" "+b.section_name,b.id]}, {prompt:true},{onchange:"$('#exam_form').submit();"}%>
+
 <% end %>
+
 </div><br /><br /><br/>
  
  </div></div>

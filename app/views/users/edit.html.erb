@@ -12,8 +12,8 @@
     </ul></div>
 <div id="page-yield">
 <div id="box">
-<% unless flash[:notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+<% unless flash[:edit].nil? %>
+    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:edit] %> </div>
   <% end %>
   <%= form_for @user do |f| %>
 <% if @user.errors.any? %>

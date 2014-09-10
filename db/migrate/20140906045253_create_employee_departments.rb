@@ -3,7 +3,7 @@ class CreateEmployeeDepartments < ActiveRecord::Migration
     create_table :employee_departments do |t|
       t.string  :code
       t.string  :name
-      t.boolean :status
+      t.string :status
       
       t.timestamps
     end

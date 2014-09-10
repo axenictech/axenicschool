@@ -44,11 +44,12 @@ class CoursesController < ApplicationController
   end
 
   def create_batch_group
-    @course=Course.find(params[:batch_group][:course_id])
+     @course=Course.find(params[:batch_group][:course_id])
+     batches=params[:batches]
+    unless batches.nil?
     @batch_groups=@course.batch_groups.all
     name=params[:batch_group][:name]
-    batches=params[:batches]
-
+   
       @batch_group=BatchGroup.new(name: name,course_id: @course.id)
       @batch_group.save
 
@@ -56,6 +57,9 @@ class CoursesController < ApplicationController
             @group_batch=GroupBatch.new(batch_group_id:@batch_group.id,batch_id: batch)
             @group_batch.save
           end
+    else
+        flash[:notice] = 'Please Select batches'
+    end
       redirect_to courses_grouped_batches_path(@course)
   end
 
@@ -72,7 +76,7 @@ class CoursesController < ApplicationController
   def destroy
     @course=Course.find(params[:id])
 	  if @course.destroy
-       flash[:notice] = 'Course was successfully deleted!'
+       flash[:notice] = 'Course deleted successfully!'
       redirect_to courses_path
     else
        flash[:notice] = 'Course was unable to delete!'
@@ -90,6 +94,7 @@ class CoursesController < ApplicationController
   @course=Course.find(params[:id])		
 	@course.update(postparam)
     @courses=Course.all
+  flash[:notice] = 'Course updated successfully!'
   end
   
   private 

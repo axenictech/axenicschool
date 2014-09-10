@@ -165,4 +165,16 @@ class ExamReportsController < ApplicationController
     @end_date=params[:rank_report][:end_date]
   end
 
+  def generate_view_transcripts
+     @batch=Batch.find(params[:transcript][:batch_id])
+     @students=@batch.students.all
+     @student=@batch.students.last
+  end
+
+  def student_view_transcripts
+     @student=Student.find(params[:student_id])
+     @batch=@student.batch
+     @students=@batch.students.all
+  end
+
 end

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 get 'setting/course_batch'
+get 'general_settings/all'
+get 'general_settings/none'
 get 'courses/:id/grouped_batches',to: 'courses#grouped_batches',as: 'courses_grouped_batches'
 post 'courses/create_batch_group'
 get 'courses/:id/assign_all',to: 'courses#assign_all',as: 'courses_assign_all'
@@ -97,7 +99,10 @@ get 'exam_reports/generate_student_ranking_report2'
 get 'exam_reports/student_ranking_per_school'
 get 'exam_reports/student_ranking_per_attendance'
 get 'exam_reports/generate_student_ranking_report3'
+get 'exam_reports/view_transcripts'
+get 'exam_reports/generate_view_transcripts'
 get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
+get 'exam_reports/:student_id/student_view_transcripts/',to: 'exam_reports#student_view_transcripts',as: 'exam_reports_student_view_transcripts'
 get 'calender/next'
 get 'calender/demo' 
 get 'calender/holiday_event_view'
@@ -111,6 +116,8 @@ get 'exam_setting/:course_id/editRank/:id',to:'exam_setting#editRank',as:'course
 patch 'exam_setting/updateRank'
 delete 'exam_setting/:id/destroyRank', to:'exam_setting#destroyRank', as:'exam_setting_destroyRank'
 get 'exam_groups/select'
+post 'exam_groups/:exam_group_id/exam_group_create',to: 'exam_groups#exam_group_create',as: 'exam_groups_exam_group_create'
+get 'exam_groups/:id/exam_show', to:'exam_groups#exam_show', as:'exam_groups_exam_show'
 
 root 'home#dashboard'
  

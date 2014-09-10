@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 	def create
 		@user=User.new(user_params)
 		if @user.save
+			flash[:user]="User created successfully!"
 			redirect_to user_path(@user)
 		else
 			render 'new'
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
 			@user=User.find(params[:id])
 		if @user.update(user_params)
 			redirect_to user_path(@user)
+			flash[:user]="User updated successfully!"
 		else 
 			render 'edit'
 		end 
@@ -48,7 +50,7 @@ class UsersController < ApplicationController
 		        if params[:user][:new_password] == params[:user][:confirm_password]
 		        	@user.password=params[:user][:new_password] 
 		            if @user.update(user_params)
-			           flash[:notice] = "password update successfully"
+			           flash[:edit] = "password update successfully"
 		        	   redirect_to edit_user_path(@user)
 		        	else
 		        		render 'change_password'
@@ -58,7 +60,7 @@ class UsersController < ApplicationController
 	        	  render 'change_password'	       
 	        	end
 	    else
-        flash[:notice] = "Please Enter correct password"
+        flash[:notice] = "Please Enter correct old password"
         render 'change_password'
       end
 	end
@@ -70,6 +72,7 @@ class UsersController < ApplicationController
 	def destroy
 		@user=User.find(params[:id])
 		@user.destroy
+		flash[:user_delete]="User deleted successfully!"
 		redirect_to users_path
 	end
 

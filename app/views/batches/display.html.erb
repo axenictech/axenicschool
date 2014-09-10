@@ -6,11 +6,12 @@
 </div>
  <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Exams',batches_display_path(@batch)%> </li>
+    <li><%= link_to 'Exams',exam_group_path(@batch)%> </li>
     <li><%= link_to 'Edit', edit_batch_path(@batch) %></li>
     <li><%= link_to 'Delete', batches_display_path(@batch),
                     method: :delete, data: { confirm: "Are you sure to delete #{@batch.course.code+" - "+@batch.name }?" } %></li>
-    <li><%= link_to 'Subject',batches_subjects_subject_path(@batch)%></li>
+    <li style="width:150px"><%= link_to 'Manage Subject',batches_subjects_subject_path(@batch)%></li>
+    <li style="width:150px"><%= link_to 'Assign Tutor',''%></li>
   </ul>
 </div>
 

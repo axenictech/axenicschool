@@ -38,6 +38,9 @@ class SubjectsController < ApplicationController
         @subject=@elective_group.subjects.new(subject_params) if params[:elective_group_id]
         @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
         @subject.save
+
+        flash[:notice]="Subject Created Successfully"
+        flash[:notice2]="Elective Subject Created Successfully" if params[:elective_group_id] 
   	end
 
     def edit  
@@ -50,6 +53,8 @@ class SubjectsController < ApplicationController
           
            @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
       @subject.update(subject_params)
+       flash[:notice]="Subject updated Successfully"
+         flash[:notice2]="Elective Subject updated Successfully" if params[:elective_group_id] 
     end
 
     def destroy
@@ -58,6 +63,8 @@ class SubjectsController < ApplicationController
          
            @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
       @subject.destroy
+       flash[:notice]="Subject deleted Successfully"
+         flash[:notice2]="Elective Subject deleted Successfully" if params[:elective_group_id] 
     end
 
   	private

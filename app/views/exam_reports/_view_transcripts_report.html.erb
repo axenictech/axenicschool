@@ -1,0 +1,51 @@
+ <% unless @students.empty?  %>
+ <div id="score-table" align="left" style="width:70%">
+    <div class="info">
+      <div class="info-left">
+        <div class="info1">
+          <label class="field-label">Name</label>: <label class="infolbl themed_text"> <%= @student.first_name+" "+@student.last_name %></label>
+        </div>
+        <div class="info1">
+          <label class="field-label">Course Text</label>: <label class="infolbl themed_text"> <%= @student.batch.course.course_name %></label>
+        </div>
+      </div>
+      <div class="info-right">
+        <div class="info1">
+          <label class="field-label">Addmission No</label>: <label class="infolbl themed_text"> <%= @student.admission_no.present? ? @student.admission_no : "-" %></label>
+        </div>
+      </div>
+    </div>
+          <% general_subjects = @batch.subjects.all %>
+          <% student_electives = StudentSubject.where(student_id: @student.id,batch_id: @batch.id) %>
+          <% elective_subjects = [] %>
+          <% student_electives.each do |elect| %>
+            <% elective_subjects.push Subject.find(elect.subject_id) %>
+          <% end %>
+          <% @subjects = general_subjects + elective_subjects %>
+          <% unless @subjects.empty? %>
+            <div class="batch-name"><%= @batch.name %></div>
+            <% total_credits=0 %>
+            <table id="listing" width="100%" cellpadding="1" cellspacing="1">
+              <tr class="tr-head">
+                <td class="col-1">Subject Code</td>
+                <td class="col-2">Subject Title</td>
+                <td class="col-3">Percentage(%)</td>
+              </tr>
+              <% @subjects.each do |s| %>
+                  <tr class="tr-<%= cycle('odd', 'even') %>">
+                    <td class="col-1"> <%= s.code %></td>
+                    <td class="col-2"> <%= s.name %></td>
+                    <td class="col-3">-</td>
+                  </tr>
+                <% end %>
+                <tr class="tr-blank"></tr>
+                <tr class="tr-head">
+                  <td colspan="2" align="right">Total</td>
+                  <td>-</td>
+                </tr>
+            </table>
+           <%else%>
+           <h4>Subject Not Found</h4>
+           <%end%>
+</div>
+<% end %>

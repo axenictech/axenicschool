@@ -19,7 +19,7 @@
             <div class="alert alert-danger">
             <h3>Error prohibited to being saved:</h3>
             <ul><% @category.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
+                <li style="width:300px"><%= msg %></li>
                 <% end %>
             </ul>
             </div>
@@ -31,6 +31,7 @@
 <%end%>
 </div></div><br/><br/>
 <div>
+<%unless @categorys.nil?%>
 <% if @categorys.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
@@ -49,5 +50,5 @@
           </tr>
         <% end %>
       </table>
-      <%end%>
+      <%end%><%end%>
       </div>

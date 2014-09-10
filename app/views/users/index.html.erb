@@ -15,6 +15,9 @@
 </div>
 
 <div id="page-yield">
+ <% unless flash[:user_delete].nil? %>
+    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:user_delete] %> </div>
+  <% end %>
    <div align="center">
     <%= form_for :user, url:{action:'search'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
         <%= f.label :Search %>

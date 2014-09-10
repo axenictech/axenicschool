@@ -2,7 +2,7 @@ class ClassTiming < ActiveRecord::Base
 	has_many :timetable_entries
     belongs_to :batch
    
-    validates :name, presence: true,length:{minimum:3, maximum:20}, format:{ with: /\A[a-zA-Z0-9" "-]+\Z/}
+    validates :name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z0-9" "-]+\Z/}
     validates :start_time, presence: true
     validates :end_time, presence: true
     validate  :end_time_cannot_be_less_than_start_time
