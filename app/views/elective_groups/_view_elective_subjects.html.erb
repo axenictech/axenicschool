@@ -1,10 +1,6 @@
 <% unless flash[:notice2].nil? %>
     <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice2] %> </div>
   <% end %>
-<div class="add_sub",style="margin-top:20px">
-     <%= link_to 'Add Elective Subjects',new_batch_elective_group_subject_path(@elective_group.batch,
-                @elective_group),remote:true%>
-  </div>
 <% if @elective_subjects.present? %>
 <% if @elective_subjects.empty? %>
  <h4 align="center">No Record Found </h4>

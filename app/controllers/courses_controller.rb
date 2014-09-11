@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
     @course=Course.new(postparam)
       
     if  @course.save 
-      flash[:notice] = 'Course was successfully created!'
+      flash[:notice] = 'Course successfully created!'
       redirect_to courses_path
     else
       render action: 'new'
@@ -79,7 +79,7 @@ class CoursesController < ApplicationController
        flash[:notice] = 'Course deleted successfully!'
       redirect_to courses_path
     else
-       flash[:notice] = 'Course was unable to delete!'
+       flash[:notice] = 'Course unable to delete!'
       redirect_to courses_path
     end
   end

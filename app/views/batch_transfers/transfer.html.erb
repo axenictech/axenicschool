@@ -4,10 +4,12 @@
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0),batch_transfers_path %>
   </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
 
 <div id="page-yield">
+<div id="box">
    <% unless flash[:notice].nil? %>
     <p class="flash-msg"> <%= flash[:notice] %> </p>
   <% end %>
@@ -15,18 +17,14 @@
 <p>Transferring batch: <%= @batch.name %></p>
 
 <div>
-    <%= select("batch","id",Batch.all.collect{|b| [b.name,b.id]})%>
-</div>
+    <%= select("batch","id",Batch.all.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]})%>
+<p>From the below list uncheck the students you don't want to transfer to the new batch.</p>
 
-  <p>From the below list uncheck the students you don't want to transfer to the new batch.</p>
-
-    <ul id="category-list">
-  <% @batch.students.each do |student| %>
-  <li class="list<%=cycle('odd', 'even')%>">
-    <div class="category-name"><%= student.first_name %></div>
-    <div class="category-edit"><%= check_box_tag 'transfer[students][]', student.id, true %></div>
-</li>
-  <% end %>
-</ul>
-
- <%= submit_tag %></div>
+</div><br/><br/><br/>
+<div class="linker">
+      <%= link_to "Assign All",batch_transfers_assign_all_path(@batch),remote:true%>
+      <%= link_to "Remove All",batch_transfers_remove_all_path(@batch),remote:true %></div>
+    <div id="students">
+        <%= render 'students_list' %>
+    </div>
+ </div></div>

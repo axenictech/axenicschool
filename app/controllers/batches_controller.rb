@@ -13,7 +13,7 @@ class BatchesController < ApplicationController
    	@course=Course.find(params[:course_id])
    	@batch=@course.batches.new(postparam)
       if @batch.save
-       flash[:notice] = 'Batch was successfully created!'
+       flash[:notice] = 'Batch successfully created!'
   	   redirect_to course_path(@course)
     else
       render 'new'
@@ -52,7 +52,7 @@ class BatchesController < ApplicationController
       flash[:notice] = 'Batch deleted successfully!'
        redirect_to course_path(@batch.course)
     else
-       flash[:notice] = 'Batch was unable to delete!'
+       flash[:notice] = 'Batch unable to delete!'
        redirect_to course_path(@batch.course)
     end
   end

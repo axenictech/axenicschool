@@ -23,7 +23,7 @@ class ExamGroupsController < ApplicationController
    end
 
   def exam_group_create
-    @exam_group=ExamGroup.find(params[:exam_group_id])
+    @exam_group=ExamGroup.find(params[:id])
     @exam_group.update(paramsexamgp)
     redirect_to exam_group_path(@exam_group.batch)
   end
@@ -32,15 +32,17 @@ class ExamGroupsController < ApplicationController
 
     @batch=Batch.find(params[:id])
     @exam_groups=@batch.exam_groups.all
-
   end
 
   def exam_show
-    @exam_group=ExamGroup.find(params[:id])
-    @exams=@exam_group.exams.all
+
+   @exam_group=ExamGroup.find(params[:id])
+   @exams=@exam_group.exams.all
+    
   end
 
   private 
+
   def paramexam
     params.require(:exam_group).permit(:name,:exam_type)
   end
@@ -48,5 +50,6 @@ class ExamGroupsController < ApplicationController
   def paramsexamgp
     params.require(:exam_group).permit(:name,:exam_type,exams_attributes: [:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
   end
+
 end
   

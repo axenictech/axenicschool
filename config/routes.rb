@@ -11,6 +11,9 @@ get 'batches/:id/display', to: 'batches#display', as: 'batches_display'
 get 'batches/select' 
 get 'grading_levels/select'
 get 'batch_transfers/select'
+get 'batch_transfers/assign_all'
+get 'batch_transfers/remove_all'
+get 'batch_transfers/student_transfer'
 get 'batch_transfers/:batch_id/graduation',to: 'batch_transfers#graduation', as: 'batch_transfers_graduation'
 get 'batch_transfers/:batch_id/transfer',to: 'batch_transfers#transfer', as: 'batch_transfers_transfer'
 get 'subjects/select'
@@ -103,6 +106,9 @@ get 'exam_reports/view_transcripts'
 get 'exam_reports/generate_view_transcripts'
 get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
 get 'exam_reports/:student_id/student_view_transcripts/',to: 'exam_reports#student_view_transcripts',as: 'exam_reports_student_view_transcripts'
+get 'exam_reports/ranking_level_report'
+get 'exam_reports/select_mode'
+get 'exam_reports/generate_ranking_level_report'
 get 'calender/next'
 get 'calender/demo' 
 get 'calender/holiday_event_view'
@@ -116,8 +122,25 @@ get 'exam_setting/:course_id/editRank/:id',to:'exam_setting#editRank',as:'course
 patch 'exam_setting/updateRank'
 delete 'exam_setting/:id/destroyRank', to:'exam_setting#destroyRank', as:'exam_setting_destroyRank'
 get 'exam_groups/select'
-post 'exam_groups/:exam_group_id/exam_group_create',to: 'exam_groups#exam_group_create',as: 'exam_groups_exam_group_create'
+post 'exam_groups/:id/exam_group_create',to: 'exam_groups#exam_group_create',as: 'exam_groups_exam_group_create'
 get 'exam_groups/:id/exam_show', to:'exam_groups#exam_show', as:'exam_groups_exam_show'
+get 'online_exams/assign_all'
+get 'online_exams/remove_all'
+get 'online_exams/queAns'
+post 'online_exams/createQue'
+get 'employees/new_category'
+post 'employees/add_category'
+get 'employees/:category_id/edit_category', to:'employees#edit_category', as:'employees_edit_category'
+patch 'employees/:category_id/update_category', to:'employees#update_category', as:'employees_update_category'
+delete 'employees/:id/destroy_category', to:'employees#destroy_category', as:'employees_destroy_category'
+get 'employees/new_department'
+post 'employees/add_department'
+get 'employees/:department_id/edit_department', to:'employees#edit_department', as:'employees_edit_department'
+patch 'employees/:department_id/update_department', to:'employees#update_department', as:'employees_update_department'
+get 'employees/new_position'
+post 'employees/add_position'
+get 'employees/:position_id/edit_position', to:'employees#edit_position', as:'employees_edit_position'
+patch 'employees/:position_id/update_position', to:'employees#update_position', as:'employees_update_position'
 
 root 'home#dashboard'
  
@@ -170,16 +193,20 @@ resources :time_table_entries
   resources :time_table_entries
 end  
 
-resources :exams
 resources :exam_setting
 resources :exam_groups do
-  resources :exams
+  resources :exams 
 end
+resources :exams do
+    resources :exam_scores
+end
+
 resources :online_exam_groups
 resources :exam_reports
 
 resources :courses do
   resources :exam_setting
 end  
-
+resources :online_exams
+resources :employees
 end

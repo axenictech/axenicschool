@@ -11,7 +11,7 @@
 <div id="inner-tab-menu">
   <ul>
     <li><%= link_to 'Publish Results', '' %> </li>
-    <li><%= link_to 'New', '' %> </li>
+    <li><%= link_to 'New', new_exam_path(@exam_group) %> </li>
   </ul>
 </div>
 
@@ -19,24 +19,25 @@
   <div class="bread_crumb">
     <%= link_to 'Courses' %> &raquo;
   </div></div><br/>
-        
-
-
+<% unless flash[:notice_exam].nil? %>
+    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice_exam] %> </div>
+  <% end %>        
 <table align="center" class="table table-hover table-bordered" style="width:800px">
-        <tr class="tr-head"><th colspan="3">Name</th>
-          
+        <tr class="tr-head">
+        <th>Subject Name</th>
+        <th>Maximum Marks</th>
+        <th>Minimum Marks</th>  
         </tr>
         
       <tbody>
-        
         <% @exams.each do |exam| %>
         <tr>
         
-        
-        <td><%= exam.minimum_marks %></td>
+        <td class="col-2"><%= link_to exam.subject.name, new_exam_exam_score_path(exam) %></td>
         <td><%= exam.maximum_marks %></td>  
-        
+        <td><%= exam.minimum_marks %></td>
         </tr>
          <%end%>
+         
       </tbody>
 </table>

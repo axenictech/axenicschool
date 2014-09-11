@@ -177,4 +177,9 @@ class ExamReportsController < ApplicationController
      @students=@batch.students.all
   end
 
+  def select_mode
+    @mode=params[:mode][:wise]
+    @courses=Course.all
+    @batches=Batch.all
+  end
 end

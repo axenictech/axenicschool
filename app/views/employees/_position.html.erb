@@ -1,0 +1,40 @@
+
+
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="3">Active Position</th>
+    </tr>
+	<tbody>
+		
+		<%@positions1.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%> </td>
+			<td><%= link_to 'edit',''%></td>
+			<td><%= link_to 'delete' ,''%></td>	 
+			</tr>
+		<%end%>
+		  
+		
+	 </tbody>
+</table>
+ 
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="3">Inactive Position</th>
+    </tr>
+	<tbody>
+	
+		<%@positions2.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%> </td>
+			<td><%= link_to 'edit', ''%></td>
+			<td><%= link_to 'delete' ,''%></td>	
+			</tr>
+		<%end%>
+		
+		   
+		  	
+	 </tbody>
+</table>
+
+
