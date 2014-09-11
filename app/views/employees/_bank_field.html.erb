@@ -1,0 +1,35 @@
+
+<% if @bank_fields1.empty? and @bank_fields2.empty?%>
+<h3 align="center">No records</h3>
+<%else%>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="3">Active Bank fields</th>
+    </tr>
+	<tbody>
+		<%@bank_fields1.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%></td>
+			<td><%= link_to 'edit',employees_edit_bank_field_path(c),remote:true%></td>
+			<td><%= link_to 'delete' ,employees_destroy_bank_field_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete?"}%></td>	 
+			</tr>
+		<%end%>
+	 </tbody>
+</table>
+
+
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="3">Inactive Bank fields</th>
+    </tr>
+	<tbody>
+		<%@bank_fields2.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%></td>
+			<td><%= link_to 'edit',employees_edit_bank_field_path(c),remote:true%></td>
+			<td><%= link_to 'delete' ,employees_destroy_bank_field_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete?"}%></td>	 
+			</tr>
+		<%end%>
+	 </tbody>
+</table>
+ <%end%>

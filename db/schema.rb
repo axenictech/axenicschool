@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20140909103214) do
 
   create_table "bank_fields", force: true do |t|
     t.string   "name"
-    t.boolean  "status"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

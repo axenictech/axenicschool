@@ -5,6 +5,7 @@
 </div>
 
 <div id="page-yield">
+<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
 <div align="center">
 
 	<%= form_for @employee_department, url:{action:'add_department'},remote:true do |c|%>
@@ -32,12 +33,3 @@
  </div>
  
 </div>
-
-
-<script type="text/javascript">
- $(document).ready(function() {
-setTimeout("Refresh()", 10000); 
-});
-
-</script>
-
