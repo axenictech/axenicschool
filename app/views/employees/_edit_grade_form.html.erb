@@ -1,0 +1,46 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing" %></h3>
+</div>
+
+
+<div class="modal-body">
+
+<%= form_for @employee_grade,url:{:action=>'update_grade',grade_id: @employee_grade.id},method: :patch,remote: true do |f|%>
+ <table class="table" style="width:85%">
+        <tr>
+            <td class="col-2"><%= f.label :Name , class: "control-label"%></td>
+            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+        
+        <tr>
+            <td class="col-2"><%= f.label :Priority , class: "control-label"%></td>
+             <td><%=f.text_field :priority ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+
+       <tr>
+            <td class="col-2"><%= f.label :Max_period_per_day , class: "control-label"%></td>
+             <td><%=f.text_field :max_hours_day ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+
+        <tr>
+            <td class="col-2"><%= f.label :Max_period_per_week , class: "control-label"%></td>
+             <td><%=f.text_field :max_hours_week  ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+
+
+
+        <tr>
+             <td><%= f.radio_button "status", "active", checked: true %><%=f.label :Active%></td>
+             <td><%= f.radio_button "status", "inactive"%><%=f.label :Inactive%></td>
+        </tr>
+
+
+        <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%>
+        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        </tr>
+    </table>
+<% end %>
+
+</div></div></div>

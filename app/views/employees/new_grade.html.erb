@@ -1,0 +1,44 @@
+
+<div id="content-header">
+  <h1>Employee Settings</h1>
+  <h3>Employee grade</h3>
+</div>
+
+<div id="page-yield">
+<div align="center">
+
+<%= form_for @employee_grade ,url:{action:'add_grade'},remote:true do |f| %>
+
+    <div><%=f.label :Name %>
+     <%= f.text_field :name %></div>
+
+
+    <div>
+        <%= f.label :'Priority' %>
+        <%= f.text_field :priority%></div>
+    
+    <div>
+        <%= f.label :'Max period per day' %>
+        <%= f.text_field :max_hours_day%></div>
+    <div>
+    <%=f.label :'Max period per week'%>
+    <%=f.text_field :max_hours_week%>
+    </div>
+    <div>
+    <%=f.label :Status%>
+    Active<%= f.radio_button  "status","Active", :checked => "checked" %>
+          &nbsp;&nbsp;&nbsp;Inactive <%= f.radio_button  "status","Inactive"%>
+    </div>
+    <div>
+    <%= f.submit :'Create'%> </div>
+
+<% end %>
+</div>
+
+<div id ="add_grade">
+<%=render 'grade'%>
+</div>
+
+<div id ="myModal" class="modal fade">
+</div>
+</div>

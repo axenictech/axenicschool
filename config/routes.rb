@@ -141,7 +141,12 @@ get 'employees/new_position'
 post 'employees/add_position'
 get 'employees/:position_id/edit_position', to:'employees#edit_position', as:'employees_edit_position'
 patch 'employees/:position_id/update_position', to:'employees#update_position', as:'employees_update_position'
-
+get 'employees/new_grade'
+post 'employees/add_grade'
+get 'employees/:grade_id/edit_grade',to:'employees#edit_grade', as:'employees_edit_grade' 
+patch 'employeess/:grade_id/update_grade',to:'employees#update_grade',as:'employees_update_grade' 
+delete 'employees/:id/destroy_grade', to:'employees#destroy_grade', as:'employees_destroy_grade'
+get 'employees/new_payroll'
 root 'home#dashboard'
  
  resources :home

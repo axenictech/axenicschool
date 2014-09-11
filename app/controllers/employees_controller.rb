@@ -80,6 +80,33 @@ class EmployeesController < ApplicationController
     
   end
 
+  def new_grade
+    @employee_grade=EmployeeGrade.new
+    @grade1 = EmployeeGrade.where(status: "active")
+    @grade2 = EmployeeGrade.where(status: "inactive")
+  end
+
+  def add_grade
+     @employee_grade=EmployeeGrade.new(grade_params)
+     @employee_grade.save 
+     @grade1 = EmployeeGrade.where(status: "active")
+     @grade2 = EmployeeGrade.where(status: "inactive")
+   end
+  
+  def edit_grade
+    @employee_grade=EmployeeGrade.find(params[:grade_id])
+  end
+
+  def update_grade 
+    @employee_grade=EmployeeGrade.find(params[:grade_id])
+    @employee_grade.update(grade_params) 
+  end 
+  
+  def destroy_grade
+     @employee_grade=EmployeeGrade.find(params[:id])
+     @employee_grade.destroy
+   end   
+
   private 
   def category_params
     params.require(:employee_category).permit(:name, :prefix, :status)
@@ -92,4 +119,8 @@ class EmployeesController < ApplicationController
   def position_params
     params.require(:employee_position).permit(:name, :employee_category_id, :status)
   end 
+   private
+  def grade_params
+    params.require(:employee_grade).permit(:name,:priority,:status,:max_hours_day,:max_hours_week)
+  end
 end
