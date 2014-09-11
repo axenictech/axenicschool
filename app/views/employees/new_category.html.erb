@@ -5,6 +5,7 @@
 </div>
 
 <div id="page-yield">
+<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
 <div align="center">
 
 	<%= form_for @employee_category, url:{action:'add_category'},remote:true do |c|%>

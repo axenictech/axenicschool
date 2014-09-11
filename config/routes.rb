@@ -137,11 +137,17 @@ get 'employees/new_department'
 post 'employees/add_department'
 get 'employees/:department_id/edit_department', to:'employees#edit_department', as:'employees_edit_department'
 patch 'employees/:department_id/update_department', to:'employees#update_department', as:'employees_update_department'
+delete 'employees/:id/destroy_department', to:'employees#destroy_department', as:'employees_destroy_department'
 get 'employees/new_position'
 post 'employees/add_position'
 get 'employees/:position_id/edit_position', to:'employees#edit_position', as:'employees_edit_position'
 patch 'employees/:position_id/update_position', to:'employees#update_position', as:'employees_update_position'
-
+delete 'employees/:id/destroy_position', to:'employees#destroy_position', as:'employees_destroy_position'
+get 'employees/new_bank_field'
+post 'employees/add_bank_field'
+get 'employees/:bank_field_id/edit_bank_field', to:'employees#edit_bank_field', as:'employees_edit_bank_field'
+patch 'employees/:bank_field_id/update_bank_field', to:'employees#update_bank_field', as:'employees_update_bank_field'
+delete 'employees/:id/destroy_bank_field', to:'employees#destroy_bank_field', as:'employees_destroy_bank_field'
 root 'home#dashboard'
  
  resources :home

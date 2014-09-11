@@ -19,9 +19,9 @@
              <td><%=f.text_field :prefix ,:style =>"width: 250px", class: "form-control"%></td>
         <tr>
 
-        <tr>
-             <td><%= f.radio_button "status", "active", checked: true %><%=f.label :Active%></td>
-             <td><%= f.radio_button "status", "inactive"%><%=f.label :Inactive%></td>
+        <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
+             <td><%= f.radio_button "status", "active", checked: true %><%=f.label :Active%>
+            <%= f.radio_button "status", "inactive"%><%=f.label :Inactive%></td>
         <tr>
 
 
