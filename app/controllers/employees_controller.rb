@@ -114,7 +114,6 @@ class EmployeesController < ApplicationController
     
   end
 
-<<<<<<< HEAD
   def new_grade
     @employee_grade=EmployeeGrade.new
     @grade1 = EmployeeGrade.where(status: "active")
@@ -141,7 +140,7 @@ class EmployeesController < ApplicationController
      @employee_grade=EmployeeGrade.find(params[:id])
      @employee_grade.destroy
    end   
-=======
+
   def destroy_position
     @employee_position = EmployeePosition.find(params[:id])
     if @employee_position.destroy
@@ -189,31 +188,24 @@ class EmployeesController < ApplicationController
     @bank_fields1 = BankField.where(status: "active")
     @bank_fields2 = BankField.where(status: "inactive")
   end
->>>>>>> 8e693d8068a3b50267f4dc5872cdf7b4b690a268
 
   private 
   def category_params
     params.require(:employee_category).permit(:name, :prefix, :status)
   end 
-  
-  private
+
   def department_params
     params.require(:employee_department).permit(:name, :code, :status)
   end 
   
-  private
   def position_params
     params.require(:employee_position).permit(:name, :employee_category_id, :status)
   end 
-<<<<<<< HEAD
-   private
+
   def grade_params
     params.require(:employee_grade).permit(:name,:priority,:status,:max_hours_day,:max_hours_week)
-=======
 
-  private
   def bank_field_params
     params.require(:bank_field).permit(:name, :status)
->>>>>>> 8e693d8068a3b50267f4dc5872cdf7b4b690a268
   end
 end

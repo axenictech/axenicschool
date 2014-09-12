@@ -1,5 +1,5 @@
  <% @batches.each do |batch| %> 
       <%= batch.name%>&nbsp;&nbsp;&nbsp;
-      <%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%>
+      <%= check_box_tag "batches[]", batch.id,false,class: 'check'%>
   <%end%>
 

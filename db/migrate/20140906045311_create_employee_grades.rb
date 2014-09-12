@@ -3,7 +3,7 @@ class CreateEmployeeGrades < ActiveRecord::Migration
     create_table :employee_grades do |t|
       t.string :name
       t.integer :priority
-      t.string :status
+      t.boolean :status
       t.integer :max_hours_day
       t.integer :max_hours_week
 

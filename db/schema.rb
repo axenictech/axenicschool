@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140912074249) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
     t.integer  "employee_leave_types_id"
@@ -57,13 +60,13 @@ ActiveRecord::Schema.define(version: 20140912074249) do
     t.string   "phone2"
     t.string   "email"
     t.integer  "immediate_contact"
-    t.boolean  "is_sms_enabled",                      default: true
+    t.boolean  "is_sms_enabled",     default: true
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data",         limit: 16777215
+    t.binary   "photo_data"
     t.string   "status_description"
-    t.boolean  "is_active",                           default: true
-    t.boolean  "is_deleted",                          default: false
+    t.boolean  "is_active",          default: true
+    t.boolean  "is_deleted",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -86,7 +89,7 @@ ActiveRecord::Schema.define(version: 20140912074249) do
 
   create_table "bank_fields", force: true do |t|
     t.string   "name"
-    t.string   "status"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -131,8 +134,8 @@ ActiveRecord::Schema.define(version: 20140912074249) do
 
   create_table "class_designations", force: true do |t|
     t.string   "name"
-    t.decimal  "cgpa",       precision: 10, scale: 0
-    t.decimal  "marks",      precision: 10, scale: 0
+    t.decimal  "cgpa"
+    t.decimal  "marks"
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -240,7 +243,7 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   create_table "employee_grades", force: true do |t|
     t.string   "name"
     t.integer  "priority"
-    t.string   "status"
+    t.boolean  "status"
     t.integer  "max_hours_day"
     t.integer  "max_hours_week"
     t.datetime "created_at"
@@ -264,7 +267,7 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   create_table "employee_positions", force: true do |t|
     t.string   "name"
     t.integer  "employee_category_id"
-    t.string   "status"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -339,7 +342,7 @@ ActiveRecord::Schema.define(version: 20140912074249) do
     t.string   "fax"
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data",             limit: 16777215
+    t.binary   "photo_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -379,7 +382,7 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   create_table "exam_scores", force: true do |t|
     t.integer  "student_id"
     t.integer  "exam_id"
-    t.decimal  "marks",            precision: 10, scale: 0
+    t.decimal  "marks"
     t.integer  "grading_level_id"
     t.string   "remarks"
     t.boolean  "is_failed"
@@ -520,7 +523,7 @@ ActiveRecord::Schema.define(version: 20140912074249) do
     t.string   "question"
     t.integer  "marks"
     t.integer  "is_answer"
-    t.string   "option_group"
+    t.string   "option_group",   array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -532,7 +535,7 @@ ActiveRecord::Schema.define(version: 20140912074249) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.time     "maximum_time"
-    t.decimal  "percentage",          precision: 10, scale: 0
+    t.decimal  "percentage"
     t.integer  "option_per_question"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -552,8 +555,8 @@ ActiveRecord::Schema.define(version: 20140912074249) do
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
-    t.decimal  "gpa",                precision: 10, scale: 0
-    t.decimal  "marks",              precision: 10, scale: 0
+    t.decimal  "gpa"
+    t.decimal  "marks"
     t.integer  "subject_count"
     t.integer  "prioriy"
     t.boolean  "full_course"
@@ -626,13 +629,13 @@ ActiveRecord::Schema.define(version: 20140912074249) do
     t.string   "phone2"
     t.string   "email"
     t.integer  "immediate_contact"
-    t.boolean  "is_sms_enabled",                      default: true
+    t.boolean  "is_sms_enabled",     default: true
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data",         limit: 16777215
+    t.binary   "photo_data"
     t.string   "status_description"
-    t.boolean  "is_active",                           default: true
-    t.boolean  "is_deleted",                          default: false
+    t.boolean  "is_active",          default: true
+    t.boolean  "is_deleted",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

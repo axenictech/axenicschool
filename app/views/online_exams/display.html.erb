@@ -1,0 +1,34 @@
+
+<table align="center" class="table table-hover table-bordered" style="width:500px">
+<ul id="category-list">
+<tbody>
+
+		
+<% @online_que.each do |que|%>
+             
+             <% i=1 %>
+	
+			<tr>
+			<td>Question:</td>
+			</tr>
+			<tr>
+			<td></td>
+			<td><%= que.question %></td>
+             </tr>
+             <tr>
+			<td></td>
+			<td>marks:<%= que.marks %></td>
+             </tr>
+
+			<tr>
+			<td>options:</td>
+			</tr>
+			<tr>
+			<td></td>
+			<td><%= que.option_group%></td>
+			</tr>
+
+<%end%>
+</tbody>
+</ul>
+</table>
