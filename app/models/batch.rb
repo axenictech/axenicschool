@@ -15,6 +15,7 @@ class Batch < ActiveRecord::Base
   has_many :weekdays
   has_many :time_table_entries
   has_many :exam_groups, dependent: :destroy
+  has_and_belongs_to_many :online_exams
   # has_many :fee_category , :class_name => "FinanceFeeCategory"
   # has_many :additional_exam_groups, dependent: :destroy
   # has_and_belongs_to_many :graduated_students, :class_name => 'Student', :join_table => 'batch_students'

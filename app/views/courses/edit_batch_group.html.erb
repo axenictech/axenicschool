@@ -1,6 +1,6 @@
 <div id="content-header">
   <h1>Courses</h1>
-  <h3>Grouped Batches</h3>
+  <h3>Edit Grouped Batche</h3>
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), courses_path %>
   </div>
@@ -16,9 +16,10 @@
         <div class="bread_crumb">
         <%= link_to 'Courses', courses_path %> &raquo;
         <%=link_to @course.course_name, course_path(@course) %>&raquo;
-        Grouped Batches
+        <%=link_to @batch_group.name, courses_grouped_batches_path(@course)  %>&raquo;
+        Edit
         </div>
-<%= form_for @batch_group,url:{action:'create_batch_group'} do |c| %>
+<%= form_for @batch_group,url:{action:'update_batch_group'},method: :patch do |c| %>
 	<% if @batch_group.errors.any?%>
 		<div class="alert alert-danger">
 		<h4>Errors prohibited to being saved:</h4>
@@ -28,7 +29,7 @@
 		</div>	
 	<%end%>
     <table class="table" style="width:80%">
-    	<%= c.hidden_field :course_id, value: @course.id%>
+    	<%= c.hidden_field :batch_group_id, value: @batch_group.id%>
         <tr>
             <td><%=c.label :name %></td>
             <td><%=c.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
@@ -39,9 +40,8 @@
 			<p id="batch_view"><%= render 'all_batch' %></p>
         </td></tr>
         <tr>
-        <td colspan="2"><%=c.submit 'Submit', class: "btn btn-primary"%></td>
+        <td colspan="2"><%=c.submit 'Update', class: "btn btn-success"%></td>
         </tr>
     </table>
-<div id="batch_group_details"><%= render 'batch_group'%></div>
 <% end %>
 </div></div>

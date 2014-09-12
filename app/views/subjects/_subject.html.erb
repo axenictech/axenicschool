@@ -25,7 +25,7 @@
         <!-- link to edit -->
           <td><%= link_to 'edit',edit_batch_subject_path(subject.batch,subject),remote: true%></td>
         <!-- link to delete -->
-          <td><%= link_to 'delete',[subject.batch,subject],remote: true,method: :delete,data:{confirm:'Are you sure want to delete?'}%></td>
+          <td><%= link_to 'delete',[subject.batch,subject],remote: true,method: :delete,data:{confirm:"Are you sure to delete subject: #{subject.name}?"}%></td>
         </tr>
       <% end %>   
     </tbody>

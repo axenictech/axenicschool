@@ -13,7 +13,7 @@ class BatchesController < ApplicationController
    	@course=Course.find(params[:course_id])
    	@batch=@course.batches.new(postparam)
       if @batch.save
-       flash[:notice] = 'Batch successfully created!'
+       flash[:notice] = 'Batch created successfully'
   	   redirect_to course_path(@course)
     else
       render 'new'

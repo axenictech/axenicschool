@@ -4,7 +4,7 @@ class CreateOnlineExams < ActiveRecord::Migration
       t.string 	 	:name
       t.datetime	:start_date
       t.datetime	:end_date
-      t.time 		:maximum_time
+      t.time 		  :maximum_time
       t.decimal		:percentage
       t.integer		:option_per_question
 

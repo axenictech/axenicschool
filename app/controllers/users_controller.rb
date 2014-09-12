@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user=User.find(params[:id])
-		@student=Student.find_by_admission_no(@user.username.to_s)
+		@student=Student.find(@user.student_id)
 	end
 
 	def search

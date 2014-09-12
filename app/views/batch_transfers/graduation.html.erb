@@ -2,38 +2,41 @@
   <h1>Batch Transfer</h1>
   <h3>Graduation</h3>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), batch_transfers_path %>
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back%>
   </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
 
 <div id="page-yield">
-   <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
+<div id="box">
+   <% unless flash[:notice_gradute].nil? %>
+    <div align="center" class="alert alert-danger" style="width:50%"> <%= flash[:notice_gradute] %> </div>
   <% end %>
 
-<h4>Graduating batch: <%= @batch.name %></h4>
-<%= form_for :graduate do |f| %>
-  These students will now be trasferred to former students database. Add the
-    status description for the students. e.g. 'Graduated 10th grade, 2010.
-     <div class="label-field-pair">
-          <label for="subject_id">Status description : </label>
-          <div class="text-input-bg"><%= f.text_field 'status_description' %></div>
-        </div>
+<h4>Graduating batch: <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %></h4>
+  <p>These students will now be trasferred to former students database. Add the
+    status description for the students. e.g. 'Graduated 10th grade, 2010.</p><br/><br/><br/>
 
-
-<p>From the below list uncheck the students you don't want to transfer to the new batch.</p>
-<ul id="category-list">
-  <% @batch.students.each do |student| %>
-  <li class="list<%=cycle('odd', 'even')%>">
-    <div class="category-name"><%= student.first_name %></div>
-    <div class="category-edit"><%= check_box_tag 'graduate[students][]', student.id, true %></div>
-</li>
+<%= form_for :graduate,:url => {:action=> 'former_student'},method: :get do |f| %>
+          <%= f.label 'status_description' %>
+          <%= f.text_field 'status_description' %>
+<%= f.hidden_field :batch_id, value: @batch.id%>
+<br/>
+<p>From the below list uncheck the students you don't want to transfer to former students.</p><br/>
+ <% if @students.empty? %>
+  <h4 align="center">No Record Found </h4>
+   <% else %>
+  <table align="center" class="table table-hover" style="width:500px">
+  <tr class="tr-head"><td colspan="2" class="col-2">Student Name</td></tr>
+  <% @students.each do |student| %> 
+     <tr>
+      <td class="col-2"><%= student.first_name+" "+student.last_name  %></td>
+      <td class="col-3"><%= check_box_tag "students[]", student.id,true,class: 'check_box'%></td>
+    <% end %>
+    </table>
   <% end %>
-</ul>
-
-  <%= submit_tag %>
-
+  <div align="center"><%= f.submit "Graduate Student", class: 'btn btn-success'%></div>
 <% end %>
 
 </div>

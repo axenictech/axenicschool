@@ -3,7 +3,7 @@
   <h3>Home<br/>
  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), '/setting' %>
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
   </div>
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
@@ -31,53 +31,53 @@
 
   <tbody>
     <tr>
-      <td class="col-2"><%=f.label :'school/college_Name' %><span class="necessary-field">*</span></td> 
-      <td><%= f.text_field :InstitutionName,:style =>"width: 310px", :placeholder=>"name" , class: "form-control" %></td></tr>
+      <td class="col-2">School/College Name<span class="necessary-field">*</span></td> 
+      <td><%= f.text_field :school_or_college_name,:style =>"width: 310px" , class: "form-control" %></td></tr>
       
 
   <tr>
 
-    <td class="col-2"><%= f.label :'school/college_Address' %><span class="necessary-field">*</span></td> 
-    <td><%= f.text_field :InstitutionAddress,:style =>"width: 310px",:placeholder=>"Address" , class: "form-control"%></td>
+    <td class="col-2">School/College Address<span class="necessary-field">*</span></td> 
+    <td><%= f.text_field :school_or_college_address,:style =>"width: 310px",class: "form-control"%></td>
     
   </tr>
 
   <tr>
    
-    <td class="col-2"><%= f.label :'School/College_Phone' %><span class="necessary-field">*</span></td> 
-    <td><%= f.text_field :InstitutionPhoneNo,:style =>"width: 310px",:placeholder=>"Phone " , class: "form-control"%></td>
+    <td class="col-2">School/College Phone No.<span class="necessary-field">*</span></td> 
+    <td><%= f.text_field :school_or_college_phone_no,:style =>"width: 310px", class: "form-control"%></td>
     
   </tr>
 
   <tr>
     <td class="col-2"><%= f.label :Student_Attendance_Type %></td> 
-    <td class="col-2"><%= f.select :StudentAttendanceType, ['SubjectWise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" ,:placeholder=>"Attendence" %></td>
+    <td class="col-2"><%= f.select :student_attendance_type, ['SubjectWise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" %></td>
   </tr>
 
   <tr>
     <td class="col-2"><%= f.label :Finance_start_year_date %></td> 
-    <td class="col-2"><%= f.date_select :Finance_start_year_date, :start_year=>1999 %></td>
+    <td class="col-2"><%= f.date_select :finance_start_year_date, :start_year=>1999 %></td>
   </tr>
       
   <tr>
     <td class="col-2"><%= f.label :Finance_end_year_date %></td> 
-    <td class="col-2"><%= f.date_select :Finance_end_year_date, :end_year=>2019%></td>
+    <td class="col-2"><%= f.date_select :finance_end_year_date, :end_year=>2019%></td>
   </tr>
 
   <tr>
     <td class="col-2"><%= f.label :Language %></td> 
-    <td class="col-2"><%= f.select :Language, ['English','Spanish','मराठी','हिंदी','العربية'], :selected => 'English',  :style => "width:310px" %></td>
+    <td class="col-2"><%= f.select :language, ['English','Spanish','मराठी','हिंदी','العربية'], :selected => 'English',  :style => "width:310px" %></td>
   </tr>
 
   <tr>
 
     <td class="col-2"><%= f.label :Time_Zone %></td> 
-    <td class="col-2"><%= f.select :TimeZone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], :selected => 'Indian Standard Time(IST) - GMT+05:30',  :style => "width:310px", class: "dropdown-toggle" %></td>
+    <td class="col-2"><%= f.select :time_zone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], :selected => 'Indian Standard Time(IST) - GMT+05:30',  :style => "width:310px", class: "dropdown-toggle" %></td>
   </tr>
 
   <tr>
     <td class="col-2"><%= f.label :Country %></td> 
-    <td class="col-2"><%= f.select :Country, ['Afghanistan','Bangladesh','Canada','India','Nepal'], :selected => 'India',  :style => "width:310px" %></td>
+    <td class="col-2"><%= f.select :country, ['Afghanistan','Bangladesh','Canada','India','Nepal'], :selected => 'India',  :style => "width:310px" %></td>
   </tr> 
   <tr>
     <td class="col-2"><%= f.label :Upload_Logo %></td> 
@@ -85,7 +85,7 @@
   </tr>
   <tr>
     <td class="col-2"><%= f.label :Network_State %></td> 
-    <td class="col-2"><%= f.select :NetworkState, ['Online','Offline'], :selected => 'Online', :style =>"width: 310px" %></td>
+    <td class="col-2"><%= f.select :network_state, ['Online','Offline'], :selected => 'Online', :style =>"width: 310px" %></td>
   </tr>
   <tr>
     <td class="col-2"><%= f.label :Include_Grading_Systems %></td> 
@@ -96,16 +96,16 @@
       </td>
   </tr>
     <tr><td></td>
-      <td class="col-2"> <%= f.check_box :AddmissionNumberAutoIncreament, {:checked=>true} %>  <%= label_tag(:Enable_Auto_increment_Student_admission_no, "Enable Auto increment Student admission no. ") %>
+      <td class="col-2"> <%= f.check_box :addmission_number_auto_increament, {:checked=>true} %>  <%= label_tag(:Enable_Auto_increment_Student_admission_no, "Enable Auto increment Student admission no. ") %>
       </td>
     </tr>
     <tr><td></td>
-    <td class="col-2"> <%= f.check_box :EmployeeNumberAutoIncreament, {:checked=>true} %> 
+    <td class="col-2"> <%= f.check_box :employee_number_auto_increament, {:checked=>true} %> 
         <%= label_tag(:Enable_Auto_increment_Employee_no, "Enable Auto increment Employee no. ") %>
     </td>
     </tr>
     <tr><td></td>
-        <td class="col-2"> <%= f.check_box :EnableNewsCommentModeration, {:checked=>false} %> 
+        <td class="col-2"> <%= f.check_box :enable_news_comment_moderation, {:checked=>false} %> 
         <%= label_tag(:Enable_News_Comment_Moderation, "Enable News Comment Moderation") %>
         </td> 
     </tr>

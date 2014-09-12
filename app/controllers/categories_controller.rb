@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
         @categorys = Category.all
    	 @category = Category.new(category_params)
    	  if @category.save
-         flash[:notice]="Category was successfully created"
+         flash[:notice]="Student category created successfully"
          redirect_to categories_path
        else
       	  render 'index'
@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
       @category = Category.find(params[:id])
   
          if @category.update(category_params)
-          flash[:notice]="Category updated successfully"
+          flash[:notice]="Student category updated successfully"
            redirect_to  categories_path(@category)
           else
            render 'edit'
@@ -35,10 +35,10 @@ class CategoriesController < ApplicationController
    def destroy
      @category = Category.find(params[:id])
     if @category.destroy
-      flash[:notice]="Category deleted successfully "
+      flash[:notice]="Student category deleted successfully "
      redirect_to  categories_path
    else
-    flash[:notice]="Category was unable to delete"
+    flash[:notice]="Student category unable to delete"
       redirect_to  categories_path
   end
   end

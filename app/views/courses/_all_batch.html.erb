@@ -3,6 +3,15 @@
    <% else %>
   <% @batches.each do |batch| %> 
       <%= batch.name%>&nbsp;&nbsp;&nbsp;
-      <%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%>
+    <%if @batch_group.nil? %>
+    	<%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%><br/>
+	  <%else%>
+       <%group_batch=GroupBatch.find_by_batch_group_id_and_batch_id(@batch_group.id,batch)%>
+	      <%if group_batch.nil?%>
+	      	<%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%><br/>
+	      <%else%>
+	      	<%= check_box_tag "batches[]", batch.id,true,class: 'check_box'%><br/>
+	      <%end%>
+      <%end%>
   <%end%>
   <%end%>

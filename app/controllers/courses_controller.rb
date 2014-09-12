@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
     @course=Course.new(postparam)
       
     if  @course.save 
-      flash[:notice] = 'Course successfully created!'
+      flash[:notice] = 'Course created successfully'
       redirect_to courses_path
     else
       render action: 'new'
@@ -46,21 +46,59 @@ class CoursesController < ApplicationController
   def create_batch_group
      @course=Course.find(params[:batch_group][:course_id])
      batches=params[:batches]
+     @batches=@course.batches.all
     unless batches.nil?
     @batch_groups=@course.batch_groups.all
     name=params[:batch_group][:name]
    
       @batch_group=BatchGroup.new(name: name,course_id: @course.id)
-      @batch_group.save
+      if @batch_group.save
 
        batches.each  do |batch|
             @group_batch=GroupBatch.new(batch_group_id:@batch_group.id,batch_id: batch)
             @group_batch.save
           end
-    else
-        flash[:notice] = 'Please Select batches'
-    end
-      redirect_to courses_grouped_batches_path(@course)
+          flash[:notice_batch_group] = 'Batch group created successfully'
+          redirect_to courses_grouped_batches_path(@course)
+      else
+        render template: 'courses/grouped_batches'
+      end
+      else
+          flash[:notice_batch_group] = 'Please Select batches'
+          redirect_to courses_grouped_batches_path(@course)
+      end
+        
+  end
+
+  def edit_batch_group
+      @batch_group=BatchGroup.find(params[:format])
+      @course=@batch_group.course
+      @batches=@course.batches.all
+  end
+
+  def update_batch_group
+     @batch_group=BatchGroup.find(params[:batch_group][:batch_group_id])
+     batches=params[:batches]
+     group_batch_delete=GroupBatch.where(batch_group_id:@batch_group.id)
+    unless batches.nil?
+      if @batch_group.update(name: params[:batch_group][:name])
+
+          group_batch_delete.each do |group_batch|
+              group_batch.destroy
+          end
+          batches.each  do |batch|
+                @group_batch=GroupBatch.new(batch_group_id:@batch_group.id,batch_id: batch)
+                @group_batch.save
+              end
+              flash[:notice_batch_group] = 'Batch group update successfully'
+              redirect_to courses_grouped_batches_path(@batch_group.course)
+        else
+          render template: 'courses/grouped_batches'
+        end
+      else
+          flash[:notice_batch_group] = 'Please Select batches'
+          redirect_to courses_grouped_batches_path(@batch_group.course)
+      end
   end
 
   def assign_all

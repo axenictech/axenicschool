@@ -41,7 +41,7 @@
       </td>
 			<td><%= link_to 'Edit', edit_batch_path(batch) %></td>
  			<td><%= link_to 'Delete',batch,
-                    method: :delete, data: { confirm: "Are you sure to delete #{batch.course.code+" - "+batch.name }?" } %></td>
+                    method: :delete, data: { confirm: "Are you sure to delete Batch #{batch.course.course_name+" "+batch.course.section_name+" - "+batch.name }?" } %></td>
 			</tr>
 <%end%>
 </tbody>

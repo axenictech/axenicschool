@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909103214) do
+ActiveRecord::Schema.define(version: 20140912074249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,16 +103,6 @@ ActiveRecord::Schema.define(version: 20140909103214) do
 
   add_index "batch_groups", ["course_id"], name: "index_batch_groups_on_course_id", using: :btree
 
-  create_table "batch_online_exams", force: true do |t|
-    t.integer  "online_exam_id"
-    t.integer  "batch_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "batch_online_exams", ["batch_id"], name: "index_batch_online_exams_on_batch_id", using: :btree
-  add_index "batch_online_exams", ["online_exam_id"], name: "index_batch_online_exams_on_online_exam_id", using: :btree
-
   create_table "batches", force: true do |t|
     t.string   "name"
     t.integer  "course_id"
@@ -125,6 +115,16 @@ ActiveRecord::Schema.define(version: 20140909103214) do
   end
 
   add_index "batches", ["course_id"], name: "index_batches_on_course_id", using: :btree
+
+  create_table "batches_online_exams", force: true do |t|
+    t.integer  "online_exam_id"
+    t.integer  "batch_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "batches_online_exams", ["batch_id"], name: "index_batches_online_exams_on_batch_id", using: :btree
+  add_index "batches_online_exams", ["online_exam_id"], name: "index_batches_online_exams_on_online_exam_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 20140909103214) do
   create_table "employee_categories", force: true do |t|
     t.string   "name"
     t.string   "prefix"
-    t.string   "status"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 20140909103214) do
   create_table "employee_departments", force: true do |t|
     t.string   "code"
     t.string   "name"
-    t.string   "status"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(version: 20140909103214) do
   create_table "employee_positions", force: true do |t|
     t.string   "name"
     t.integer  "employee_category_id"
-    t.boolean  "status"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -413,20 +413,20 @@ ActiveRecord::Schema.define(version: 20140909103214) do
   add_index "exams", ["subject_id"], name: "index_exams_on_subject_id", using: :btree
 
   create_table "general_settings", force: true do |t|
-    t.string   "InstitutionName"
-    t.string   "InstitutionAddress"
-    t.string   "InstitutionPhoneNo"
-    t.string   "StudentAttendanceType"
-    t.date     "Finance_start_year_date"
-    t.date     "Finance_end_year_date"
-    t.string   "Language"
-    t.string   "TimeZone"
-    t.string   "Country"
-    t.string   "NetworkState"
-    t.string   "IncludeGradingSystem"
-    t.integer  "AddmissionNumberAutoIncreament"
-    t.integer  "EmployeeNumberAutoIncreament"
-    t.string   "EnableNewsCommentModeration"
+    t.string   "school_or_college_name"
+    t.string   "school_or_college_address"
+    t.string   "school_or_college_phone_no"
+    t.string   "student_attendance_type"
+    t.date     "finance_start_year_date"
+    t.date     "finance_end_year_date"
+    t.string   "language"
+    t.string   "time_zone"
+    t.string   "country"
+    t.string   "network_state"
+    t.string   "include_grading_system"
+    t.integer  "addmission_number_auto_increament"
+    t.integer  "employee_number_auto_increament"
+    t.string   "enable_news_comment_moderation"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -690,6 +690,8 @@ ActiveRecord::Schema.define(version: 20140909103214) do
     t.string   "role"
     t.string   "hashed_password"
     t.string   "reset_password_code"
+    t.string   "student_id"
+    t.string   "employee_id"
     t.datetime "reset_password_code_until"
     t.datetime "created_at"
     t.datetime "updated_at"

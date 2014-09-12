@@ -1,8 +1,8 @@
 <% if @batch_groups.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
- <table align="center" class="table table-hover table-bordered" style="width:300px">
-				<tr class="tr-head"><th>Batch Group Name</th>
+ <table align="center" class="table table-hover table-bordered" style="width:500px">
+				<tr class="tr-head"><th colspan="3">Batch Group Name</th>
         </tr>
 				
 			<tbody>
@@ -10,6 +10,8 @@
 	
 				<tr>
 				<td class="col-2"><%= bg.name %></td>
+				<td><%= link_to 'Edit',courses_edit_batch_group_path(bg)%></td>
+				<td><%= link_to 'Delete',''%></td>
 				</tr>
 				<%end%>
         	</tbody>

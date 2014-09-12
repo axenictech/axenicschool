@@ -2,7 +2,7 @@
   <h1>Manage Users</h1>
   <h3>Details about users</h3>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+    <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
   </div>
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
@@ -20,7 +20,7 @@
   <% end %>
    <div align="center">
     <%= form_for :user, url:{action:'search'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
-        <%= f.label :Search %>
+       <b> Search User</b>
           <%= text_field_tag :search,"",{oninput:"$('#user_form').submit();"}%>
         <% end %>
   </div>

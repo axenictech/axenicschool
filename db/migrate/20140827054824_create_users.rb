@@ -9,6 +9,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :role
       t.string   :hashed_password
       t.string   :reset_password_code
+      t.string   :student_id
+      t.string   :employee_id
       t.datetime :reset_password_code_until
       
       t.timestamps

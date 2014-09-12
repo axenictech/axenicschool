@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BatchOnlineExamTest < ActiveSupport::TestCase
+class BatchesOnlineExamTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

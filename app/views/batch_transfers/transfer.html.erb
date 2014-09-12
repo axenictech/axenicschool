@@ -2,7 +2,7 @@
   <h1>Batch Transfer</h1>
   <h3>Transfer</h3>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),batch_transfers_path %>
+    <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
   </div>
   <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
@@ -10,21 +10,24 @@
 
 <div id="page-yield">
 <div id="box">
-   <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
+   <% unless flash[:notice_transfer].nil? %>
+    <div align="center" class="alert alert-danger" style="width:50%"> <%= flash[:notice_transfer] %> </div>
   <% end %>
 
-<p>Transferring batch: <%= @batch.name %></p>
+<p>Transferring batch: <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %></p>
 
-<div>
-    <%= select("batch","id",Batch.all.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]})%>
+<%=form_for :transfer, :url => {:action=> 'student_transfer'},method: :get do |f| %>
+        <%= f.hidden_field :batch_id, value: @batch.id%>
+<%= f.select :id,Batch.all.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}%>
+<br/><br/>
 <p>From the below list uncheck the students you don't want to transfer to the new batch.</p>
-
-</div><br/><br/><br/>
+<br/><br/>
 <div class="linker">
       <%= link_to "Assign All",batch_transfers_assign_all_path(@batch),remote:true%>
       <%= link_to "Remove All",batch_transfers_remove_all_path(@batch),remote:true %></div>
-    <div id="students">
+    <div id="students_list">
         <%= render 'students_list' %>
     </div>
+ <div align="center"><%= f.submit "Transfer Student", class: 'btn btn-success'%></div>
+  <% end %>
  </div></div>

@@ -1,6 +1,6 @@
-class CreateBatchOnlineExams < ActiveRecord::Migration
+class CreateBatchesOnlineExams < ActiveRecord::Migration
   def change
-    create_table :batch_online_exams do |t|
+    create_table :batches_online_exams do |t|
       t.references :online_exam, index: true
       t.references :batch, index: true
 

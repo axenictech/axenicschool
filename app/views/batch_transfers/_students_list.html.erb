@@ -1,9 +1,7 @@
   <% if @students.empty? %>
   <h4 align="center">No Record Found </h4>
    <% else %>
-
-<%=form_for(:transfer, :url => {:action=> 'student_transfer'}) do |f| %>
-	<table align="center" class="table table-hover" style="width:500px">
+  <table align="center" class="table table-hover" style="width:500px">
   <tr class="tr-head"><td colspan="2" class="col-2">Student Name</td></tr>
   <% @students.each do |student| %> 
      <tr>
@@ -11,6 +9,4 @@
       <td class="col-3"><%= check_box_tag "students[]", student.id,false,class: 'check_box'%>Assign</td>
     <% end %>
     </table>
-<%= f.submit "Transfer Student", class: 'btn btn-success'%>
-  <% end %>
   <% end %>

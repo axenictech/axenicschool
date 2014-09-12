@@ -18,7 +18,7 @@
         <td><%= link_to 'edit',edit_batch_elective_group_subject_path(@elective_group.batch,
             @elective_group,subject),remote:true %></td>
         <td><%= link_to 'delete',[@elective_group.batch,@elective_group,subject],remote:true,
-        method: :delete, data:{confirm:'Are you sure want to delete?'} %></td>
+        method: :delete, data:{confirm:"Are you sure to delete elective subject: #{subject.name}?"} %></td>
          <td><%= link_to 'Assign Students',students_elective_path(subject) %></td>
     </tr>
     </tbody>

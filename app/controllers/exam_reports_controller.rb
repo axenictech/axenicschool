@@ -182,4 +182,13 @@ class ExamReportsController < ApplicationController
     @courses=Course.all
     @batches=Batch.all
   end
+
+  def select_rank
+   @p="course" if params[:mode1]
+   @p="batch" if params[:mode2]
+  end
+
+  def generate_ranking_level_report
+
+  end
 end

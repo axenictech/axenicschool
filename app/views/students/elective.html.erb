@@ -2,7 +2,7 @@
   <h1>Student</h1>
   <h3>Electives</h3>
 <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), elective_groups_elective_subject_path(@subject.elective_group) %>
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back ) %>
   </div>
  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
@@ -15,7 +15,7 @@
  	<%= link_to "Elective Subject "+@subject.name,elective_groups_elective_subject_path(@subject.elective_group)%> &raquo; Assign Students
         </div>
  <% unless flash[:notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
   <% end %></div></div><br/>
 <div class="linker">
 <%= link_to "Assign All",students_assign_all_path(@subject),remote:true%>

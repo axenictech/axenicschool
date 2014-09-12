@@ -17,7 +17,8 @@ def index
     	@batch=Batch.find(params[:batch_id])
         @grading_levels=@batch.grading_levels.all
     	@grading_level1=@batch.grading_levels.new(params_grade)
-    	 @grading_level1.save
+        flash[:grading_level_notice]="Grade created successfully"
+    	@grading_level1.save
     	
     end
 
@@ -29,6 +30,7 @@ def index
     	@batch=Batch.find(params[:batch_id])
         @grading_levels=@batch.grading_levels.all
     	@grading_level1=@batch.grading_levels.find(params[:id])
+        flash[:grading_level_notice]="Grade updated successfully"
     	@grading_level1.update(params_grade)
     	
 
@@ -38,6 +40,7 @@ def index
     	@batch=Batch.find(params[:batch_id])
         @grading_levels=@batch.grading_levels.all
     	@grading_level1=@batch.grading_levels.find(params[:id])
+        flash[:grading_level_notice]="Grade deleted successfully"
     	@grading_level1.destroy
     	
     	
