@@ -7,19 +7,14 @@
 
 <div class="modal-body">
 
-<%= form_for @employee_department,url:{:action=>'update_department',department_id: @employee_department.id},method: :patch,remote: true do |f|%>
+<%= form_for @bank_field,url:{:action=>'update_bank_field',bank_field_id: @bank_field.id},method: :patch,remote: true do |f|%>
  <table class="table" style="width:85%">
         <tr>
             <td class="col-2"><%= f.label :Name , class: "control-label"%></td>
             <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
         
-        <tr>
-            <td class="col-2"><%= f.label :code , class: "control-label"%></td>
-             <td><%=f.text_field :code ,:style =>"width: 250px", class: "form-control"%></td>
-        <tr>
-
-       <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
+        <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
              <td><%= f.radio_button "status", "active", checked: true %><%=f.label :Active%>
             <%= f.radio_button "status", "inactive"%><%=f.label :Inactive%></td>
         <tr>

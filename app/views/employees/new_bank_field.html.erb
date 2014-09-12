@@ -1,21 +1,17 @@
+
 <div id="content-header">
   <h1>Employee Settings</h1>
-  <h3>Add Position</h3>
+  <h3>Add Bank Details</h3>
 </div>
 
 <div id="page-yield">
 <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
 <div align="center">
 
-	<%= form_for @employee_position, url:{action:'add_position'}, remote:true do |c|%>
+	<%= form_for @bank_field, url:{action:'add_bank_field'},remote:true do |c|%>
 	
 		<div><%= c.label :Name%>
 		<%= c.text_field :name%></div>
-
-		<div><%= c.label :Employee_Category%>
-			<%= c.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true}%>
-		</div>
-		
 		<div><%= c.label :Status%> <%= c.radio_button "status", "active", checked: true %> <%=c.label :Active%> 
 		<%= c.radio_button "status", "inactive"%> <%=c.label :Inactive%>
 		</div>
@@ -28,11 +24,12 @@
 
 </div>
 
-<div id="add_position">
-<%=render 'position'%>
 
+<div id="add_bank_field">
+<%=render 'bank_field'%>
 </div>
 <div id="myModal" class="modal fade">
  </div>
  
 </div>
+

@@ -142,11 +142,26 @@ get 'employees/new_department'
 post 'employees/add_department'
 get 'employees/:department_id/edit_department', to:'employees#edit_department', as:'employees_edit_department'
 patch 'employees/:department_id/update_department', to:'employees#update_department', as:'employees_update_department'
+delete 'employees/:id/destroy_department', to:'employees#destroy_department', as:'employees_destroy_department'
 get 'employees/new_position'
 post 'employees/add_position'
 get 'employees/:position_id/edit_position', to:'employees#edit_position', as:'employees_edit_position'
 patch 'employees/:position_id/update_position', to:'employees#update_position', as:'employees_update_position'
-
+<<<<<<< HEAD
+get 'employees/new_grade'
+post 'employees/add_grade'
+get 'employees/:grade_id/edit_grade',to:'employees#edit_grade', as:'employees_edit_grade' 
+patch 'employeess/:grade_id/update_grade',to:'employees#update_grade',as:'employees_update_grade' 
+delete 'employees/:id/destroy_grade', to:'employees#destroy_grade', as:'employees_destroy_grade'
+get 'employees/new_payroll'
+=======
+delete 'employees/:id/destroy_position', to:'employees#destroy_position', as:'employees_destroy_position'
+get 'employees/new_bank_field'
+post 'employees/add_bank_field'
+get 'employees/:bank_field_id/edit_bank_field', to:'employees#edit_bank_field', as:'employees_edit_bank_field'
+patch 'employees/:bank_field_id/update_bank_field', to:'employees#update_bank_field', as:'employees_update_bank_field'
+delete 'employees/:id/destroy_bank_field', to:'employees#destroy_bank_field', as:'employees_destroy_bank_field'
+>>>>>>> 8e693d8068a3b50267f4dc5872cdf7b4b690a268
 root 'home#dashboard'
  
  resources :home
