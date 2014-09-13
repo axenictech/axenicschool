@@ -10,7 +10,7 @@
 <div id="inner-tab-menu">
   <ul>
     <li><%= link_to 'Edit News', edit_newscast_path(@newscast)%></li>
-    <li><%= link_to 'Delete News',newscast_path(@newscast),method: :delete, data: { confirm: "Are you sure delete #{@newscast.title}?" } %></li>
+    <li><%= link_to 'Delete News',newscast_path(@newscast),method: :delete, data: { confirm: "Are you sure delete New: #{@newscast.title}?" } %></li>
   </ul>
 </div>
 
@@ -21,13 +21,11 @@
 
   <% unless flash[:notice].nil? %>
   <div class="alert alert-success"> <%= flash[:notice] %> </div><% end %>
-
-  <div id="content_wrapper">
 <div class="bread_crumb">
 <%= link_to 'Home', home_dashboard_path %> &raquo;
         <%= link_to 'News', newscasts_path %> &raquo;
         <%= @newscast.title %>
-        </div></div></div>
+        </div><br/>
 
     <div id="news_title">
       <%= @newscast.title %>
@@ -41,16 +39,24 @@
   
   <ul id="comments-list">
   <h3 id="comments-heading">Comments</h3>
-      <%= render @newscast.comments %>
+      <%= render @newscast.comments.order(created_at: :desc) %>
   </ul>
 		<%= form_for([@newscast, @newscast.comments.build]) do |f| %>
-  
+      <% if @comment.errors.any?%>
+          <div class ="errorExplanation" id="error_explanation">
+            <ul>
+              <% @comment.errors.full_messages.each do |msg| %>
+              <li style="width:300px"><%= msg%></li>
+              <% end %>
+            </ul> 
+          </div>
+      <% end %>
         <%= f.label :leave_a_comment %>
-		    <div class="comment-content"><%= f.text_area :statement, class: "comment-content"%></div>
+		    <div><%= f.text_area :statement, style:'width:100%'%></div><br/>
 		    <div align="center"><%= f.submit 'Submit', class: "btn btn-success" %></div>
 
 		<% end %>
 </div>
-
+</div>
 		  
 

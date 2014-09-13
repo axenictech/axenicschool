@@ -11,7 +11,7 @@
 				<tr>
 				<td class="col-2"><%= bg.name %></td>
 				<td><%= link_to 'Edit',courses_edit_batch_group_path(bg)%></td>
-				<td><%= link_to 'Delete',''%></td>
+				<td><%= link_to 'Delete',courses_delete_batch_group_path(bg),method: :delete, data:{confirm:"Are you sure to delete Batch Group '#{bg.name}' ?"}%></td>
 				</tr>
 				<%end%>
         	</tbody>

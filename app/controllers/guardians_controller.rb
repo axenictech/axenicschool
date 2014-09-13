@@ -39,8 +39,11 @@ class GuardiansController < ApplicationController
    def update
    	  @student=Student.find(params[:student_id])
       @guard = @student.guardians.find(params[:id])
-    	@guard.update(guardian_params)
+    	if @guard.update(guardian_params)
     	redirect_to students_dispguardian_path(@guard.student)
+      else
+        render 'edit'
+      end
    end
 
 	private

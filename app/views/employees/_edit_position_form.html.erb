@@ -6,7 +6,7 @@
 
 
 <div class="modal-body">
-
+<ul class="errors"></ul>
 <%= form_for @employee_position,url:{:action=>'update_position',position_id: @employee_position.id},method: :patch,remote:true do |f|%>
  <table class="table" style="width:85%">
         <tr>
@@ -19,9 +19,9 @@
              <td><%=f.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true} ,:style =>"width: 250px", class: "form-control"%></td>
         <tr>
 
-        <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
-             <td><%= f.radio_button "status", "active", checked: true %><%=f.label :Active%>
-            <%= f.radio_button "status", "inactive"%><%=f.label :Inactive%></td>
+           <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
+             <td><%= f.radio_button "status", "true", checked: "checked" %><%=f.label :Active%>
+            <%= f.radio_button "status", "false"%><%=f.label :Inactive%></td>
         <tr>
 
 

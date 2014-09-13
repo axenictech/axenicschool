@@ -1,0 +1,24 @@
+<% if @users.nil? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+<% if @users.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+ <div class="col-md-1"></div>
+      <table align="center" class="table table-hover" style="width:1000px">
+      <tr>
+            <th>Employee Name</th>
+            <th>Employee Id</th>
+            <th>Employee Deprtment</th>
+      </tr>
+
+      <%@users.each do |emp|%>
+          <tr>
+                <td><%= emp.first_name%></td>
+                <td><%= emp.employee_number%></td>
+                <td><%= emp.employee_department.name%></td>
+         </tr>
+      <%end%>  
+      </table>
+  <% end %>
+  <%end%>

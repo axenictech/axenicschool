@@ -1,1 +1,8 @@
+$("ul.errors2").html("")
+<% if  @employee_department.errors.any? %>
+		<%  @employee_department.errors.full_messages.each do |message| %>
+		$("ul.errors2").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
 $('#add_department').html("<%= j render 'department'%>");
+<%end%>

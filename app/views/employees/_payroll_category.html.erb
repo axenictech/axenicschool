@@ -1,0 +1,44 @@
+<div align="center">
+
+	<%= form_for @payroll_category_new, url:{action:'add_payroll_category'},remote:true do |c|%>
+		<div><%= c.label :Category_name%>
+		<%= c.text_field :name%></div>
+		<div><%= c.label :Percentage%>
+		<%= c.text_field :percentage%></div>
+		<div><%= c.label :Status%> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
+		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%>
+		</div>
+
+		<div><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></div>	
+
+		<div>
+			<%= c.submit 'Create'%>
+		</div>
+	<%end%>
+
+</div>
+
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="3">Earnings</th>
+    </tr>
+	<tbody class="product-index">
+
+	<%@payroll_categories1.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%></td>
+			<td><%= link_to 'edit',''%></td>
+			<td><%= link_to 'delete' ,''%></td>	 	
+			</tr>
+		<%end%>
+		
+	 </tbody>
+</table>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="3">Deductions</th>
+    </tr>
+	<tbody class="product-index">
+		
+	 </tbody>
+</table>

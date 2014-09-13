@@ -14,14 +14,14 @@
         <% if @student.status_description.nil? %>
           <li><%= link_to "View Profile",students_profile_path(@student) %></li>
         <% else %>
-          <li><%= link_to "View Profile",students_archived_student_profile_path(@student) %></li>
+          <li><%= link_to "View Profile",students_archived_profile_path(@student.id)%></li>
         <%end%>
         <% end %>
       <% else %>
         <li><%= link_to "View Profile" %></li>
       <% end %>
         <li><%= link_to "Edit", edit_user_path(@user)%></li>
-        <li><%= link_to "Delete",@user,method: :delete,data:{confirm:"Are you sure to delete '#{@user.first_name+" "+@user.last_name}'?"} %></li></ul>
+        <li><%= link_to "Delete",@user,method: :delete,data:{confirm:"Are you sure to delete User: '#{@user.first_name+" "+@user.last_name}'?"} %></li></ul>
   </div>
 
 <div id="page-yield">

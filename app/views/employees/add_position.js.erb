@@ -1,1 +1,8 @@
+$("ul.errors3").html("")
+<% if  @employee_position.errors.any? %>
+		<%  @employee_position.errors.full_messages.each do |message| %>
+		$("ul.errors3").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
 $('#add_position').html("<%= j render 'position'%>");
+<%end%>

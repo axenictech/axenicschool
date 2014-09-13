@@ -21,6 +21,29 @@ class Student < ActiveRecord::Base
   
   validates :date_of_birth, presence: true
   validates :batch_id, presence: true
+
+  validates :category_id, presence: true
+  validates :nationality_id, presence: true
+  validates :country_id, presence: true
+  validates :middle_name,format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+            length:{:in=> 1..20},allow_blank: true
+  validates :birth_place, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+              length:{:in=> 1..20},allow_blank: true 
+  validates :language, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+               length:{:in=> 1..30},allow_blank: true  
+  validates :religion, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+               length:{:in=> 1..20},allow_blank: true
+  validates :address_line1,length:{:in=> 1..30},allow_blank: true
+  validates :address_line2, length:{:in=> 1..20},allow_blank: true
+  validates :city, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+              length:{:in=> 1..30},allow_blank: true
+  validates :state, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+                length:{:in=> 1..30},allow_blank: true
+  validates :pin_code, numericality: { only_integer: true },
+                 length:{minimum:6,maximum:6},allow_blank: true
+  validates :phone2 ,numericality: { only_integer: true },
+              length:{minimum:10,maximum:10},allow_blank: true
+  validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   after_save :create_user_account
 
   private

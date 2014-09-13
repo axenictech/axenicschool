@@ -5,33 +5,23 @@
 </div>
 
 <div id="page-yield">
-<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
-<div align="center">
+	<div id="add_category">
 
-	<%= form_for @employee_category, url:{action:'add_category'},remote:true do |c|%>
+		<%=render 'category'%>
+
+	</div>
 	
-		<div><%= c.label :Name%>
-		<%= c.text_field :name%></div>
-		<div><%= c.label :prefix%>
-		<%= c.text_field :prefix%></div>
-		<div><%= c.label :Status%> <%= c.radio_button "status", "active", checked: true %> <%=c.label :Active%> 
-		<%= c.radio_button "status", "inactive"%> <%=c.label :Inactive%>
-		</div>
-
-		<div>
-			<%= c.submit 'Create'%>
-		</div>
-	<%end%>
-
-
-</div>
-
-
-<div id="add_category">
-<%=render 'category'%>
-
-</div>
-<div id="myModal" class="modal fade">
- </div>
+	<div id="myModal" class="modal fade">
+ 	</div>
  
 </div>
+
+<script> 
+// window.onload = function() 
+// { 
+// if (!window.location.search) 
+// { 
+// setTimeout("window.location+='?refreshed';", .1000); 
+// } 
+// } 
+// </script>

@@ -1,0 +1,47 @@
+<div id="content-header">
+  <h1>Settings</h1>
+  <h3>HR Settings</h3>
+<div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+	<div id="box">
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Add Employee Category",'new_category' %></div>
+        <div class="link-descr">Add and Edit Employee Category</div>
+      </div>
+
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Add Employee Department",'new_department'  %></div>
+        <div class="link-descr">Add and Edit Employee Department</div>
+      </div>
+
+        <div class="link-box">
+        <div class="link-heading"><%= link_to "Add Employee Position",'new_position'  %></div>
+        <div class="link-descr">Add and Edit Employee Position</div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Add Employee Grade",
+        'new_grade' %></div>
+        <div class="link-descr">Add and Edit Employee Grade.</div>
+      </div>
+     
+     <div class="link-box">
+       <div class="link-heading"><%= link_to "Add Payroll Category",
+        'new_payroll_category' %></div>
+        <div class="link-descr">Add and Edit Payroll category.</div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Add Bank Detail",'new_bank_field'%></div>
+        <div class="link-descr">Add and Edit Bank Detail</div>
+      </div>
+
+   </div>
+</div>

@@ -1,0 +1,31 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Addmission</h1>
+  <h3>Edit Privilege<br />
+  
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover" style="width:1000px">
+<%= form_for :edit_privilege ,url:{action:'update_privilege',format: @employee.id} do |f| %>
+
+    <tbody>
+    
+   	<tr>
+   			 <td class="col-4"><%= "Set Privilege for "+@employee.first_name%></td>
+ 
+   	</tr>
+     <tr><td colspan="4"><%=f.submit "Update",class: "btn btn-primary" %></td></tr>
+
+<%end%>
+</tbody>
+</table>
+</div>

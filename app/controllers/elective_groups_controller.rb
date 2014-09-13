@@ -9,7 +9,7 @@ class ElectiveGroupsController < ApplicationController
   	
   	def create
   		@batch=Batch.find(params[:batch_id])
-        @subjects=@batch.subjects.all
+        @subjects=@batch.subjects.where(elective_group_id:nil)
         @elective_groups=@batch.elective_groups.all
   	    @elective_group=@batch.elective_groups.new(elective_group_params)
         @elective_group.save
@@ -20,16 +20,16 @@ class ElectiveGroupsController < ApplicationController
     end
 
     def update
-      @subjects=@batch.subjects.all
-        @elective_groups=@batch.elective_groups.all
-    @elective_group.update(elective_group_params)
+      @subjects=@batch.subjects.where(elective_group_id:nil)
+      @elective_groups=@batch.elective_groups.all
+      @elective_group.update(elective_group_params)
      flash[:notice]="Elective group updated Successfully"
     end
 
     def destroy
-      @subjects=@batch.subjects.all
-        @elective_groups=@batch.elective_groups.all
-     @elective_group.destroy
+      @subjects=@batch.subjects.where(elective_group_id:nil)
+      @elective_groups=@batch.elective_groups.all
+      @elective_group.destroy
       flash[:notice]="Elective group deleted Successfully"
     end
     

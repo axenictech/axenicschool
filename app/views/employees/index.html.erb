@@ -1,44 +1,53 @@
-<div id="content-header">
-  <h1>Settings</h1>
-  <h3>HR Settings</h3>
 
-</div>
+<div id="content-header">
+  <h1>HR Managament</h1>
+  <h3>Human Resources</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
 
 <div id="page-yield">
-	<div id="box">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="box">
 
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Category",employees_new_category_path %></div>
-        <div class="link-descr">Add and Edit Employee Category</div>
+        <div class="link-heading"><%= link_to "setting", 'employees/settings' %></div>
+        <div class="link-descr">Hr Setting.</div>
       </div>
 
     
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Department",employees_new_department_path %></div>
-        <div class="link-descr">Add and Edit Employee Department</div>
+        <div class="link-heading"><%= link_to "Employee Management",'employees/employee_management'  %></div>
+        <div class="link-descr">Manage All Employee.</div>
       </div>
-
-        <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Position",employees_new_position_path %></div>
-        <div class="link-descr">Add and Edit Employee Position</div>
+   
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Employee Leave Management","" %></div>
+        <div class="link-descr">Manage all employee atteendance and leave.</div>
+      </div>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Create payslip", "" %></div>
+        <div class="link-descr">Create employee monthly paysleep.</div>
       </div>
 
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Grade",
-        employees_new_grade_path%></div>
-        <div class="link-descr">Add and Edit Employee Grade.</div>
-      </div>
-     
-     <div class="link-box">
-       <div class="link-heading"><%= link_to "Add Payroll Category",
-        employees_new_payroll_path%></div>
-        <div class="link-descr">Add and Edit Payroll category.</div>
+        <div class="link-heading"><%= link_to "Search Employee", "" %></div>
+        <div class="link-descr">Saerch for Employee.</div>
       </div>
 
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Bank Detail",employees_new_bank_field_path %></div>
-        <div class="link-descr">Add and Edit Bank Detail</div>
+        <div class="link-heading"><%= link_to "Employee payslip", "" %></div>
+        <div class="link-descr">View Department wise slip.</div>
       </div>
 
-   </div>
-</div>
+    </div>
+
+
+  </div>

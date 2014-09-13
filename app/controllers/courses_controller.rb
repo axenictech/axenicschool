@@ -90,7 +90,7 @@ class CoursesController < ApplicationController
                 @group_batch=GroupBatch.new(batch_group_id:@batch_group.id,batch_id: batch)
                 @group_batch.save
               end
-              flash[:notice_batch_group] = 'Batch group update successfully'
+              flash[:notice_batch_group] = 'Batch group updated successfully'
               redirect_to courses_grouped_batches_path(@batch_group.course)
         else
           render template: 'courses/grouped_batches'
@@ -99,6 +99,19 @@ class CoursesController < ApplicationController
           flash[:notice_batch_group] = 'Please Select batches'
           redirect_to courses_grouped_batches_path(@batch_group.course)
       end
+  end
+
+  def delete_batch_group
+      @batch_group=BatchGroup.find(params[:format])
+      @course=@batch_group.course
+      @group_batches=GroupBatch.where(batch_group_id:@batch_group.id)
+
+         @group_batches.each do |group_batch|
+              group_batch.destroy
+          end
+      @batch_group.destroy
+      flash[:notice_batch_group] = 'Batch group deleted successfully'
+      redirect_to courses_grouped_batches_path(@course)
   end
 
   def assign_all

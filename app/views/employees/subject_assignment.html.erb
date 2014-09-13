@@ -1,0 +1,21 @@
+<div class="box"> 
+
+
+  
+	<%= form_for :Subject_Assignment do |f| %>
+
+	<div class="label-field-pair">
+		<%=f. label :'Select Course'%>
+		<div  class="text-input-bg">
+   		<%= f.select :course_id, Course.all.collect {|b| [b.course_name,b.id]},{prompt:true}%></div></div>
+
+   		<div class="label-field-pair">
+		<%=f. label :'Select Subject'%>
+		<div  class="text-input-bg">
+   		<%= f.select :subject_id, Subject.all.collect {|b| [b.name,b.id]},{prompt:true}%></div></div>
+   
+  		<%end%>
+        <div id="batch_div"></div>
+
+	
+</div>

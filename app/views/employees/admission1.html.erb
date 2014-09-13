@@ -1,0 +1,147 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Addmission</h1>
+  <h3>Step 1 - Employee details<br />
+  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover" style="width:1000px">
+<%= form_for @employee  do |f| %>
+
+    <tbody>
+    
+    
+     <tr>
+         <td class="col-2"><%=f.label :employee_number%><span class="necessary-field">*</span></td>
+          <td class="col-2"><%=f.text_field :employee_number%></td>
+     </tr>
+     <tr>     
+          <td class="col-2"><%=f.label :joining_date %><span class="necessary-field">*</span></td>
+          <td class="col-2"><%=f.date_field :joining_date,:value => Time.now.strftime('%Y-%m-%d')%></td>
+     </tr>
+
+    
+     <tr>
+     	 <td class="col-2"><%=f.label :First_name%><span class="necessary-field">*</span></td>
+          <td class="col-2"> <%=f.text_field :first_name%></td>
+     </tr>
+
+     <tr>
+     	 <td class="col-2"><%=f.label :Middle_name%></td>
+        <td class="col-2"><%=f.text_field :middle_name, :required=>false%></td>
+     </tr>
+
+     <tr>
+     	 <td class="col-2"><%=f.label :Last_name%><span class="necessary-field">*</span></td>
+         <td class="col-2">  <%=f.text_field :last_name%></td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :Email%></td>
+          <td class="col-2"> <%=f.text_field :email%></td>
+     </tr>
+
+     <tr>
+     	 <td class="col-2"><%=f.label :Gender%>
+         <td class="col-2"> Male<%= f.radio_button  "gender","Male", :checked => "checked" %>
+          &nbsp;&nbsp;&nbsp;Female <%= f.radio_button  "gender","Female"%></td>
+       </td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :Date_of_Birth%><span class="necessary-field">*</span></td>
+          <td class="col-2"><%=f.date_field :date_of_birth%></td>
+     </tr>
+
+     <tr>
+     	 <td class="col-2"><%=f.label :Department%><span class="necessary-field">*</span></td>
+         <td class="col-2"><%= f.select :employee_department_id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},prompt:true%></td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :Category%><span class="necessary-field">*</span></td>
+         <td class="col-2"><%= f.select :employee_category_id, EmployeeCategory.all.collect {|b| [b.name,b.id]},prompt:true%></td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :Position%><span class="necessary-field">*</span></td>
+         <td class="col-2"><%= f.select :employee_position_id,EmployeePosition.all.collect {|b| [b.name,b.id]},prompt:true%></td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :Grade%><span class="necessary-field">*</span></td>
+         <td class="col-2"><%= f.select :employee_grade_id, EmployeeGrade.all.collect {|b| [b.name,b.id]},prompt:true%></td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :qualification%></td>
+           <td class="col-2"><%=f.text_field :qualification%></td>
+     </tr>
+
+     <tr>
+     	 <td class="col-2"><%=f.label :experience_detail%></td>
+           <td class="col-2"><%=f.text_field :experience_detail%></td>
+     </tr>
+
+     	<tr>
+     		<td class="col-2"><%=f.label :Total_Experience%></td>
+     		 <td class="col-2"><%= select :employee, :experience_year, (0..20),{:prompt=>"year"} %>
+          <%= select :employee, :experience_month, (0..11),{:prompt=>"month"} %></td>
+      </tr>
+
+       <tr>
+     	 <td class="col-2"><%=f.label :Status%>
+         <td class="col-2"> Active<%= f.radio_button  "status","Active", :checked => "checked" %>
+          &nbsp;&nbsp;&nbsp;Inactive <%= f.radio_button  "status","Inactive"%></td>
+       </td>
+     </tr>
+
+     <tr>
+     	<td class="col-2"><%=f.label :"Marital-Status"%></td>
+     	<td class="col-2"><%= select :employee, :marital_status, [["single"], ["married"],["divorced"]], {}, {:onchange=>"hide_or_show_fields(this.value)"} %></td>
+     
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :"Father Name"%></td>
+           <td class="col-2"><%=f.text_field :father_name%></td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :"mother name"%></td>
+           <td class="col-2"><%=f.text_field :mother_name%></td>
+     </tr>
+
+    
+	<tr>
+     	 <td class="col-2"><%=f.label :Blood_Group%></td>
+          <td class="col-2"><%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %></td>
+     </tr>
+
+      <tr>
+     	 <td class="col-2"><%=f.label :Nationality%></td>
+          <td class="col-2"><%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]}%></td>
+     </tr>
+
+    <tr>
+
+     <td class="col-2"><%= f.label :Upload_photo %></td> 
+      <td class="col-2"><%= f.file_field :photo_data %></td>
+     </tr>
+   
+   
+     <tr><td colspan="4"><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
+
+<%end%>
+</tbody>
+</table>
+  </div>

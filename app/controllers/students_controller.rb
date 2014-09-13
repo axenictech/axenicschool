@@ -46,8 +46,11 @@ class StudentsController < ApplicationController
   
   def update
     @student=Student.find(params[:id])
-    @student.update(student_params)
+    if @student.update(student_params)
     redirect_to students_profile_path(@student)
+    else
+      render 'edit'
+    end
   end
 
   def update_immediate_contact
@@ -88,12 +91,12 @@ class StudentsController < ApplicationController
   def search_ajax
     unless params[:search].empty?
       if params[:student][:status].eql? "present"
-        @students=Student.where("first_name like '#{params[:search]}%' 
-                                  OR last_name like '#{params[:search]}%' OR admission_no like '#{params[:search]}%'")
+        @students=Student.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
+        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%' OR admission_no like '#{params[:search]}%'")
       end  
       if params[:student][:status].eql? "former"
-        @students=ArchivedStudent.where("first_name like '#{params[:search]}%' 
-                                      OR last_name like '#{params[:search]}%' OR admission_no like '#{params[:search]}%'")
+        @students=ArchivedStudent.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
+        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%' OR admission_no like '#{params[:search]}%'")
       end 
     end 
   end

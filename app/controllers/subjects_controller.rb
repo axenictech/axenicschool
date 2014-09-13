@@ -8,13 +8,13 @@ class SubjectsController < ApplicationController
 
     def select
       @batch=Batch.find(params[:batch][:id])
-      @subjects=@batch.subjects.all
+      @subjects=@batch.subjects.where(elective_group_id:nil)
       @elective_groups=@batch.elective_groups.all
     end
 
     def subject
       @batch=Batch.find(params[:batch_id])
-      @subjects=@batch.subjects.all
+      @subjects=@batch.subjects.where(elective_group_id:nil)
       @elective_groups=@batch.elective_groups.all
     end
 
@@ -30,7 +30,7 @@ class SubjectsController < ApplicationController
   	
   	def create
   		  @batch=Batch.find(params[:batch_id])
-        @subjects=@batch.subjects.all
+        @subjects=@batch.subjects.where(elective_group_id:nil)
         @elective_groups=@batch.elective_groups.all
         @subject=@batch.subjects.new(subject_params)
     
@@ -38,7 +38,7 @@ class SubjectsController < ApplicationController
         @subject=@elective_group.subjects.new(subject_params) if params[:elective_group_id]
         @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
         @subject.save
-
+        @subject.update(batch_id: @batch.id) if params[:elective_group_id]
         flash[:notice]="Subject Created Successfully"
         flash[:notice2]="Elective Subject Created Successfully" if params[:elective_group_id] 
   	end
@@ -48,7 +48,7 @@ class SubjectsController < ApplicationController
     end
 
     def update
-        @subjects=@batch.subjects.all
+         @subjects=@batch.subjects.where(elective_group_id:nil)
           @elective_groups=@batch.elective_groups.all
           
            @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 
@@ -58,7 +58,7 @@ class SubjectsController < ApplicationController
     end
 
     def destroy
-       @subjects=@batch.subjects.all
+         @subjects=@batch.subjects.where(elective_group_id:nil)
           @elective_groups=@batch.elective_groups.all
          
            @elective_subjects=@elective_group.subjects.all if params[:elective_group_id] 

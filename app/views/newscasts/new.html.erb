@@ -8,14 +8,11 @@
 </div>
 
 <div id="page-yield">
-<div id="box"
-  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
-
-<div id="content_wrapper">
+<div id="box">
 <div class="bread_crumb">
  <%= link_to 'Home', home_dashboard_path %> &raquo;
         <%= link_to 'News', newscasts_path %> &raquo;
-        <%= 'Add' %></div></div>
+        <%= 'Add' %></div>
 
   <%= form_for :newscast, url: newscasts_path do |f| %>
 
@@ -24,24 +21,21 @@
       <div class ="errorExplanation" id="error_explanation">
         <ul>
           <% @newscast.errors.full_messages.each do |msg| %>
-          <li><%= msg%></li>
+          <li style="width:300px"><%= msg%></li>
           <% end %>
         </ul> 
       </div>
   <% end %>
 
-  <div id="add_news_form">
-    <div class="news_label_field">
-      <%=f.label :Title %>
-      <div id="news_title_text_field_bg"><%= f.text_field :title%></div>
-    </div>
 
     <div class="news_label_field">
-     <%=f.label :Content %>
-      <div id="news_content_text_field_bg"><%= f.text_area :content, :cols => "70", :rows => "12"%>
-        </div>
-      </div>
-    </div>
+      <%=f.label :Title %></div>
+      <div><%= f.text_field :title,style: 'width:100%'%></div><br/>
+
+    <div class="news_label_field">
+     <%=f.label :Content %></div>
+      <div><%= f.text_area :content, style: 'width:100%'%>
+        </div><br/>
     <div align="center"><%= f.submit :'Publish News', class: "btn btn-success", data: { disable_with: "Please wait" }%> </div>
   <% end %>
 </div>

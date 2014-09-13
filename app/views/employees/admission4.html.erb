@@ -1,0 +1,55 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Addmission</h1>
+  <h3>Step 4 - Select Reporting Manager<br />
+
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover" style="width:1000px">
+<%= form_for :user, url:{action:'search'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
+
+    <tbody>
+
+  
+        
+        <tr>
+          <td><%= t('selected_manager : ') %><%= t('not_selected') %></td>
+         </tr> 
+
+
+
+           <tr><td colspan="4"><%=f.submit "►save_and_proceed",class: "btn btn-primary" %></td></tr>
+         
+       <tr>
+     	  <td class="col-4"><%=f.label :"Search by Name"%></td>
+          <td class="col-4"><%= text_field_tag :search,"",{oninput:"$('#user_form').submit();"}%></td>
+     </tr>
+
+ 	 <tr>
+         <td class="col-3"><%= f.select :employee_department_id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},prompt:"select department"%></td>
+  
+         <td class="col-3"><%= f.select :employee_category_id, EmployeeCategory.all.collect {|b| [b.name,b.id]},prompt:"Select Category"%></td>
+    
+         <td class="col-3"><%= f.select :employee_position_id,EmployeePosition.all.collect {|b| [b.name,b.id]},prompt:"Select Position"%></td>
+    
+         <td class="col-3"><%= f.select :employee_grade_id, EmployeeGrade.all.collect {|b| [b.name,b.id]},prompt:"Select Grade"%></td>
+     </tr>
+
+   
+  </div>
+  
+<%end%>
+</tbody>
+</table>
+  </div>
+
+  <div id="user_search"></div>

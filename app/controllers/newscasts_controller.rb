@@ -5,13 +5,15 @@ class NewscastsController < ApplicationController
   end
 
   def select
-    @newscasts=Newscast.where("title like '%#{params[:newscast][:title]}%'")
+    unless params[:newscast][:title].empty?
+      @newscasts=Newscast.where("title like '#{params[:newscast][:title]}%'")
+    end
   end
 	
 	def create
 	 @newscast =Newscast.new(newscast_params)
     if @newscast.save
-	   redirect_to newscast_path(@newscast), notice: "News added!!!"
+	   redirect_to newscast_path(@newscast), notice: "News added successfully"
       else
       render 'new'
     end
@@ -24,7 +26,7 @@ class NewscastsController < ApplicationController
   def update
   	@newscast=Newscast.find(params[:id])
   	if @newscast.update(newscast_params)
-  	redirect_to newscast_path(@newscast), notice: "Update News successfully!!!"
+  	redirect_to newscast_path(@newscast), notice: "News updated successfully!!!"
     else
       render 'edit'
     end
@@ -33,15 +35,16 @@ class NewscastsController < ApplicationController
   def destroy
    @newscast = Newscast.find(params[:id])
   	@newscast.destroy
-   	redirect_to newscasts_path(@newscast), notice: "News item deleted succefully!"
+   	redirect_to newscasts_path(@newscast), notice: "News deleted succefully!"
   end
 
   def show
   	@newscast = Newscast.find(params[:id])
+    @comment = @newscast.comments.new
   end
 
   def display
-    @newscasts = Newscast.all
+    @newscasts = Newscast.order(created_at: :desc)
   end
 
   private

@@ -1,1 +1,9 @@
-$('#add_category').html("<%= j render 'category'%>");
+
+$("ul.errors1").html("")
+<% if  @employee_category.errors.any? %>
+		<%  @employee_category.errors.full_messages.each do |message| %>
+		$("ul.errors1").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
+$('#add_category').html("<%= j render 'category'%>")
+<%end%>

@@ -5,31 +5,13 @@
 </div>
 
 <div id="page-yield">
-<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
-<div align="center">
+	<div id="add_department">
 
-	<%= form_for @employee_department, url:{action:'add_department'},remote:true do |c|%>
+		<%=render 'department'%>
 
-		<div><%= c.label :Name%>
-		<%= c.text_field :name%></div>
-		<div><%= c.label :code%>
-		<%= c.text_field :code%></div>
-		<div><%= c.label :Status%> <%= c.radio_button "status", "active", checked: true %> <%=c.label :Active%> 
-		<%= c.radio_button "status", "inactive"%> <%=c.label :Inactive%>
-		</div>
+	</div>
 
-		<div>
-			<%= c.submit 'Create'%>
-		</div>
-	<%end%>
-
-
-</div>
-<div id="add_department">
-<%=render 'department'%>
-
-</div>
-<div id="myModal" class="modal fade">
- </div>
- 
+	<div id="myModal" class="modal fade">
+ 	</div>
+ 	
 </div>

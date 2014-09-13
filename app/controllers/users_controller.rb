@@ -16,13 +16,17 @@ class UsersController < ApplicationController
 
 	def show
 		@user=User.find(params[:id])
-		@student=Student.find(@user.student_id)
+		if @user.role.eql? "Student"
+			@student=Student.find(@user.student_id) unless @student.nil?
+			@student=ArchivedStudent.find(@user.student_id)		
+		end
 	end
 
 	def search
 	  unless params[:search].empty?
-	  	@users=User.where("first_name like'#{params[:search]}%' 
-      			OR last_name like'#{params[:search]}%'")
+	  	@users=User.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
+	  		OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%' 
+	  		OR username like '#{params[:search]}%'")
 	  end
 	end
 
@@ -47,18 +51,23 @@ class UsersController < ApplicationController
 	def update_password
 		@user=User.find(params[:id])
 		if User.authenticate?(@user.username, params[:user][:old_password])
+			  if params[:user][:new_password].length>=6 and params[:user][:new_password].length<=20
 		        if params[:user][:new_password] == params[:user][:confirm_password]
 		        	@user.password=params[:user][:new_password] 
 		            if @user.update(user_params)
-			           flash[:edit] = "password update successfully"
+			           flash[:edit] = "Password updated successfully"
 		        	   redirect_to edit_user_path(@user)
 		        	else
 		        		render 'change_password'
 		        	end
 		        else
-		          flash[:notice] = "New password and confirm password not match"
+		          flash[:notice] = "New password and confirm password not matches"
 	        	  render 'change_password'	       
 	        	end
+	          else
+		          flash[:notice] = "Password length between 6 to 20 characters"
+	        	  render 'change_password'	       
+	          end
 	    else
         flash[:notice] = "Please Enter correct old password"
         render 'change_password'

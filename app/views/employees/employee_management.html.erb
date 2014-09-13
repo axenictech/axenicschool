@@ -1,0 +1,35 @@
+
+<div id="content-header">
+  <h1>HR Managament</h1>
+  <h3>Human Resources</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "/home/dashboard" %>
+  </div>
+    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="box">
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Empolyee Admission", 'admission1' %></div>
+        <div class="link-descr">Employee Admission form.</div>
+      </div>
+
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Employee Subject Association",'subject_assignment'  %></div>
+        <div class="link-descr">Assign an employee with one or more subject.</div>
+      </div>
+   
+      
+
+    </div>
+
+  </div>
