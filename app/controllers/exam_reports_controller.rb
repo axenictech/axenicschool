@@ -184,8 +184,8 @@ class ExamReportsController < ApplicationController
   end
 
   def select_rank
-   @p="course" if params[:mode1]
-   @p="batch" if params[:mode2]
+   @mode_wise="course" if params[:mode1]
+   @mode_wise="batch" if params[:mode2]
   end
 
   def generate_ranking_level_report
