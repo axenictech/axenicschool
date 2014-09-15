@@ -11,7 +11,7 @@
 <div id="page-yield">
 <div id="box">
    <% unless flash[:notice_gradute].nil? %>
-    <div align="center" class="alert alert-danger" style="width:50%"> <%= flash[:notice_gradute] %> </div>
+    <div align="center" class="alert alert-danger" style="width:100%"> <%= flash[:notice_gradute] %> </div>
   <% end %>
 
 <h4>Graduating batch: <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %></h4>

@@ -17,7 +17,7 @@
   
   <div class="box">
    <% unless flash[:notice].nil? %>
-    <div align="center" class="alert alert-success"> <%= flash[:notice] %> </div>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
   <% end %>
         <div class="bread_crumb">
         <%= link_to 'Courses', courses_path %> &raquo;

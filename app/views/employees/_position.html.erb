@@ -1,26 +1,31 @@
 <% unless flash[:notice3].nil? %> <p class="flash-msg"> <%= flash[:notice3] %> </p><% end %>
 <div align="center">
-<ul class="errors3"></ul>
+<ul class="errors3"></ul></div>
+<table class="table" style="width:500px" align="center">
+<tbody>
 <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%>
 	
-		<div><%= c.label :Name%>
-		<%= c.text_field :name%></div>
+		<tr>
+			<td><%= c.label :Name%></td>
+			<td><%= c.text_field :name%></td>
+		</tr>
 
-		<div><%= c.label :Employee_Category%>
-			<%= c.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true}%>
-		</div>
+		<tr>
+			<td><%= c.label :Employee_Category%></td>
+			<td><%= c.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 175px"%>
+		</td></tr>
 		
-		<div><%= c.label :Status%> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
-		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%>
-		</div>
-
-		<div>
-			<%= c.submit 'Create'%>
-		</div>
+		<tr>
+			<td><%= c.label :Status%> </td>
+			<td><%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
+			<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td>
+		</tr>
+		<tr>
+			<td colspan="3"><%= c.submit 'Create'%></td>
+		</tr>
 	<%end%>
-
-
-</div>
+	</tbody>
+</table>
 
 <% if @positions1.empty? and @positions2.empty?%>
 <h3 align="center">No records</h3>
@@ -33,7 +38,7 @@
 		
 		<%@positions1.each do |c| %>
 			<tr>
-			<td class="col-3"><%=c.name%> (<%= c.employee_category.name%>)	</td>
+			<td class="col-3"><%=c.name%></td>
 			<td><%= link_to 'edit',employees_edit_position_path(c),remote:true%></td>
 			<td><%= link_to 'delete' ,employees_destroy_position_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete?"}%></td>	 
 			</tr>
@@ -51,7 +56,7 @@
 	
 		<%@positions2.each do |c| %>
 			<tr>
-			<td class="col-3"><%=c.name%>(<%= c.employee_category.name%>)</td>
+			<td class="col-3"><%=c.name%></td>
 			<td><%= link_to 'edit', employees_edit_position_path(c),remote:true%></td>
 			<td><%= link_to 'delete' ,employees_destroy_position_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete?"}%></td>	
 			</tr>

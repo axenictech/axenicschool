@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912074249) do
+ActiveRecord::Schema.define(version: 20140914103219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   add_index "archived_students", ["batch_id"], name: "index_archived_students_on_batch_id", using: :btree
   add_index "archived_students", ["category_id"], name: "index_archived_students_on_category_id", using: :btree
 
+  create_table "assets", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.decimal  "amount"
+    t.boolean  "is_inactive", default: false
+    t.boolean  "is_deleted",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "attendences", force: true do |t|
     t.integer  "student_id"
     t.integer  "time_table_entry_id"
@@ -90,6 +100,16 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   create_table "bank_fields", force: true do |t|
     t.string   "name"
     t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "batch_fee_collection_discounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "batch_fee_discounts", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -412,6 +432,174 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   add_index "exams", ["grading_level_id"], name: "index_exams_on_grading_level_id", using: :btree
   add_index "exams", ["subject_id"], name: "index_exams_on_subject_id", using: :btree
 
+  create_table "fee_collection_discounts", force: true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.integer  "receiver_id"
+    t.integer  "finance_fee_collection_id"
+    t.decimal  "discount"
+    t.boolean  "is_amount",                 default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fee_collection_discounts", ["finance_fee_collection_id"], name: "index_fee_collection_discounts_on_finance_fee_collection_id", using: :btree
+  add_index "fee_collection_discounts", ["receiver_id"], name: "index_fee_collection_discounts_on_receiver_id", using: :btree
+
+  create_table "fee_collection_particulars", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "amount"
+    t.integer  "finance_fee_collection_id"
+    t.integer  "category_id"
+    t.string   "admission_no"
+    t.integer  "student_id"
+    t.boolean  "is_deleted",                default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fee_collection_particulars", ["category_id"], name: "index_fee_collection_particulars_on_category_id", using: :btree
+  add_index "fee_collection_particulars", ["finance_fee_collection_id"], name: "index_fee_collection_particulars_on_finance_fee_collection_id", using: :btree
+  add_index "fee_collection_particulars", ["student_id"], name: "index_fee_collection_particulars_on_student_id", using: :btree
+
+  create_table "fee_discounts", force: true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.integer  "receiver_id"
+    t.integer  "finance_fee_category_id"
+    t.decimal  "discount"
+    t.boolean  "is_amount",               default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fee_discounts", ["finance_fee_category_id"], name: "index_fee_discounts_on_finance_fee_category_id", using: :btree
+  add_index "fee_discounts", ["receiver_id"], name: "index_fee_discounts_on_receiver_id", using: :btree
+
+  create_table "finance_donations", force: true do |t|
+    t.string   "donor"
+    t.string   "description"
+    t.decimal  "amount"
+    t.integer  "transaction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_donations", ["transaction_id"], name: "index_finance_donations_on_transaction_id", using: :btree
+
+  create_table "finance_fee_categories", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "batch_id"
+    t.integer  "fee_collection_id"
+    t.boolean  "is_deleted",        default: false
+    t.boolean  "is_master",         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_fee_categories", ["batch_id"], name: "index_finance_fee_categories_on_batch_id", using: :btree
+  add_index "finance_fee_categories", ["fee_collection_id"], name: "index_finance_fee_categories_on_fee_collection_id", using: :btree
+
+  create_table "finance_fee_collections", force: true do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.date     "due_date"
+    t.integer  "fee_category_id"
+    t.integer  "batch_id"
+    t.boolean  "is_deleted",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_fee_collections", ["batch_id"], name: "index_finance_fee_collections_on_batch_id", using: :btree
+  add_index "finance_fee_collections", ["fee_category_id"], name: "index_finance_fee_collections_on_fee_category_id", using: :btree
+
+  create_table "finance_fee_particulars", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "amount"
+    t.integer  "finance_fee_category_id"
+    t.integer  "category_id"
+    t.string   "admission_no"
+    t.integer  "student_id"
+    t.boolean  "is_deleted",              default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_fee_particulars", ["category_id"], name: "index_finance_fee_particulars_on_category_id", using: :btree
+  add_index "finance_fee_particulars", ["finance_fee_category_id"], name: "index_finance_fee_particulars_on_finance_fee_category_id", using: :btree
+  add_index "finance_fee_particulars", ["student_id"], name: "index_finance_fee_particulars_on_student_id", using: :btree
+
+  create_table "finance_fee_structure_elements", force: true do |t|
+    t.decimal  "amount"
+    t.string   "label"
+    t.integer  "batch_id"
+    t.integer  "category_id"
+    t.integer  "student_id"
+    t.integer  "guardian_id"
+    t.integer  "fee_collection_id"
+    t.boolean  "is_deleted",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_fee_structure_elements", ["batch_id"], name: "index_finance_fee_structure_elements_on_batch_id", using: :btree
+  add_index "finance_fee_structure_elements", ["category_id"], name: "index_finance_fee_structure_elements_on_category_id", using: :btree
+  add_index "finance_fee_structure_elements", ["fee_collection_id"], name: "index_finance_fee_structure_elements_on_fee_collection_id", using: :btree
+  add_index "finance_fee_structure_elements", ["guardian_id"], name: "index_finance_fee_structure_elements_on_guardian_id", using: :btree
+  add_index "finance_fee_structure_elements", ["student_id"], name: "index_finance_fee_structure_elements_on_student_id", using: :btree
+
+  create_table "finance_fees", force: true do |t|
+    t.integer  "fee_collection_id"
+    t.string   "transaction_id"
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_fees", ["fee_collection_id"], name: "index_finance_fees_on_fee_collection_id", using: :btree
+  add_index "finance_fees", ["student_id"], name: "index_finance_fees_on_student_id", using: :btree
+
+  create_table "finance_transaction_categories", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "is_income"
+    t.boolean  "is_deleted",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "finance_transaction_triggers", force: true do |t|
+    t.integer  "finance_category_id"
+    t.decimal  "percentage"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_transaction_triggers", ["finance_category_id"], name: "index_finance_transaction_triggers_on_finance_category_id", using: :btree
+
+  create_table "finance_transactions", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.decimal  "amount"
+    t.boolean  "fine_included",   default: false
+    t.integer  "category_id"
+    t.integer  "student_id"
+    t.integer  "finance_fees_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "finance_transactions", ["category_id"], name: "index_finance_transactions_on_category_id", using: :btree
+  add_index "finance_transactions", ["finance_fees_id"], name: "index_finance_transactions_on_finance_fees_id", using: :btree
+  add_index "finance_transactions", ["student_id"], name: "index_finance_transactions_on_student_id", using: :btree
+
   create_table "general_settings", force: true do |t|
     t.string   "school_or_college_name"
     t.string   "school_or_college_address"
@@ -458,6 +646,22 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   add_index "group_batches", ["batch_group_id"], name: "index_group_batches_on_batch_group_id", using: :btree
   add_index "group_batches", ["batch_id"], name: "index_group_batches_on_batch_id", using: :btree
 
+  create_table "grouped_exam_reports", force: true do |t|
+    t.integer  "batch_id"
+    t.integer  "student_id"
+    t.integer  "exam_group_id"
+    t.decimal  "marks"
+    t.string   "score_type"
+    t.integer  "subject_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "grouped_exam_reports", ["batch_id"], name: "index_grouped_exam_reports_on_batch_id", using: :btree
+  add_index "grouped_exam_reports", ["exam_group_id"], name: "index_grouped_exam_reports_on_exam_group_id", using: :btree
+  add_index "grouped_exam_reports", ["student_id"], name: "index_grouped_exam_reports_on_student_id", using: :btree
+  add_index "grouped_exam_reports", ["subject_id"], name: "index_grouped_exam_reports_on_subject_id", using: :btree
+
   create_table "guardians", force: true do |t|
     t.integer  "student_id"
     t.string   "first_name"
@@ -495,6 +699,16 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   end
 
   add_index "individual_payslip_categories", ["employee_id"], name: "index_individual_payslip_categories_on_employee_id", using: :btree
+
+  create_table "liabilities", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "amount"
+    t.boolean  "is_solved",   default: false
+    t.boolean  "is_deleted",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "monthly_payslips", force: true do |t|
     t.date     "salary_date"
@@ -568,6 +782,26 @@ ActiveRecord::Schema.define(version: 20140912074249) do
   end
 
   add_index "ranking_levels", ["course_id"], name: "index_ranking_levels_on_course_id", using: :btree
+
+  create_table "student_category_fee_collection_discounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "student_category_fee_discounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "student_fee_collection_discounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "student_fee_discounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "student_previous_data", force: true do |t|
     t.integer  "student_id"

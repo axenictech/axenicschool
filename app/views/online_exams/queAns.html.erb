@@ -13,7 +13,7 @@
         <tr>
             <td class="col-2"><%= f.label :Marks , class: "control-label"%></td>
              <td><%=f.text_field :marks,:style =>"width: 250px", class: "form-control"%></td>
-        <tr>
+        </tr>
 
           <% options=@online_exam.option_per_question %>
              <% i=1 %>
@@ -31,7 +31,7 @@
           
          <tr>
           <td colspan="2"><%= f.submit 'Create', class: "btn btn-primary"%>
-          <td colspan="2"><%= f.submit 'Finish', class: "btn btn-primary"%>
+          <td colspan="2"><%= link_to 'Finish',online_exams_onlineView_path(@online_exam), class: "btn btn-primary"%>
      
         </tr>
       <% end %>

@@ -11,7 +11,7 @@
   
   <div class="box">
    <% unless flash[:notice_batch_group].nil? %>
-    <div align="center" class="alert alert-danger"> <%= flash[:notice_batch_group] %> </div>
+    <div align="center" class="alert alert-danger" style="width:100%"> <%= flash[:notice_batch_group] %> </div>
   <% end %>
         <div class="bread_crumb">
         <%= link_to 'Courses', courses_path %> &raquo;

@@ -1,5 +1,5 @@
 <% unless flash[:grading_level_notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:grading_level_notice] %> </div>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:grading_level_notice] %> </div>
   <% end %>
  <div class="add_sub",style="margin-top:200px">
  <%= link_to 'Add Grades',new_batch_grading_level_path(@batch),remote: true%>

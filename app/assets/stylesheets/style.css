@@ -80,7 +80,6 @@ body {
   font-weight: bold;
   padding: 15px 20px;
   color: #7a8189;
-  text-transform: uppercase;
   -webkit-transition: color 0.25s ease-out;
   -moz-transition: color 0.25s ease-out;
   -ms-transition: color 0.25s ease-out;
@@ -182,7 +181,7 @@ body {
   padding-right: 5px;
 }
 #cssmenu ul ul li a {
-  width: 130px;
+  width: 200px;
   border-bottom: 1px solid #eeeeee;
   padding: 10px 20px;
   font-size: 12px;

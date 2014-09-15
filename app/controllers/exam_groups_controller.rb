@@ -1,8 +1,5 @@
 class ExamGroupsController < ApplicationController
-  def index
-
-  end
-
+ 
   def select
     @course=Course.find(params[:course][:id])
     @batches=@course.batches.all
@@ -16,7 +13,7 @@ class ExamGroupsController < ApplicationController
 
   def create
     @batch=Batch.find(params[:format])
-    @exam_group=@batch.exam_groups.new(paramexam)
+    @exam_group=@batch.exam_groups.new(params_exam_group)
     @exam_group.save
     @subjects=@batch.subjects.all
     @exam_group.exams.build
@@ -24,7 +21,7 @@ class ExamGroupsController < ApplicationController
 
   def exam_group_create
     @exam_group=ExamGroup.find(params[:id])
-    @exam_group.update(paramsexamgp)
+    @exam_group.update(params_exam_group)
     redirect_to exam_group_path(@exam_group.batch)
   end
   
@@ -34,7 +31,7 @@ class ExamGroupsController < ApplicationController
     @exam_groups=@batch.exam_groups.all
   end
 
-  def exam_show
+  def exams
 
    @exam_group=ExamGroup.find(params[:id])
    @exams=@exam_group.exams.all
@@ -42,13 +39,9 @@ class ExamGroupsController < ApplicationController
   end
 
   private 
-
-  def paramexam
-    params.require(:exam_group).permit(:name,:exam_type)
-  end
-
-  def paramsexamgp
-    params.require(:exam_group).permit(:name,:exam_type,exams_attributes: [:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
+  def params_exam_group
+    params.require(:exam_group).permit(:name,:exam_type,
+      exams_attributes: [:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
   end
 
 end

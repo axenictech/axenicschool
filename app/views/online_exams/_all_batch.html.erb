@@ -1,5 +1,15 @@
- <% @batches.each do |batch| %> 
+  <% @batches.each do |batch| %> 
       <%= batch.name%>&nbsp;&nbsp;&nbsp;
-      <%= check_box_tag "batches[]", batch.id,false,class: 'check'%>
+    <%if @online_exam.nil? %>
+    	<%= check_box_tag "batches[]", batch.id,false,class: 'check'%><br/>
+	  <%else%>
+	  <%batch_online=BatchesOnlineExam.find_by_batch_id_and_online_exam_id(batch,@online_exam.id) %>
+	      <%if batch_online.nil?%>
+	      	<%= check_box_tag "batches[]", batch.id,false,class: 'check'%><br/>
+	      <%else%>
+	      	<%= check_box_tag "batches[]", batch.id,true,class: 'check'%><br/>
+	      <%end%>
+      <%end%>
   <%end%>
+ 
 

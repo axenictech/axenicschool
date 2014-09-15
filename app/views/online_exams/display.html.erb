@@ -6,7 +6,7 @@
 		
 <% @online_que.each do |que|%>
              
-             <% i=1 %>
+            
 	
 			<tr>
 			<td>Question:</td>
@@ -14,18 +14,17 @@
 			<tr>
 			<td></td>
 			<td><%= que.question %></td>
-             </tr>
-             <tr>
-			<td></td>
-			<td>marks:<%= que.marks %></td>
-             </tr>
-
-			<tr>
+			<td>marks:<%= que.marks%></td>
+			<td><%=link_to 'Edit', online_exams_editQue_path(que)%></td>
+            </tr>
+            <tr>
 			<td>options:</td>
 			</tr>
 			<tr>
 			<td></td>
 			<td><%= que.option_group%></td>
+			<td><%= link_to 'Edit',online_exams_editOption_path(que) %>
+			</td>
 			</tr>
 
 <%end%>

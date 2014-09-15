@@ -1,20 +1,17 @@
-
 <div id="content-header">
   <h1>Employee Settings</h1>
   <h3>Employee category</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), '/employees' %>
+  </div>
 </div>
-
 <div id="page-yield">
 	<div id="add_category">
-
 		<%=render 'category'%>
-
 	</div>
-	
 	<div id="myModal" class="modal fade">
  	</div>
- 
-</div>
+ </div>
 
 <script> 
 // window.onload = function() 

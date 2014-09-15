@@ -14,8 +14,8 @@
  	<%= link_to "Elective Group "+@subject.elective_group.name ,batches_subjects_subject_path(@subject.elective_group.batch)%> &raquo;
  	<%= link_to "Elective Subject "+@subject.name,elective_groups_elective_subject_path(@subject.elective_group)%> &raquo; Assign Students
         </div>
- <% unless flash[:notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
+ <% unless flash[:notice_ele].nil? %>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice_ele] %> </div>
   <% end %></div></div><br/>
 <div class="linker">
 <%= link_to "Assign All",students_assign_all_path(@subject),remote:true%>

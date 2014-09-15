@@ -46,7 +46,7 @@
         </tr>
       <% end %>
 <tr class="blank"></tr>
-      <% if @exam_group.exam_type == 'mark' or @exam_group.exam_type == 'MarksAndGrades' %>
+      <% if @exam_group.exam_type == 'marks' or @exam_group.exam_type == 'MarksAndGrades' %>
         <tr class="tr-head">
           <td>Total marks:</td>
           <td><%= total_marks_attained %></td><td><%= total_max_marks %></td>

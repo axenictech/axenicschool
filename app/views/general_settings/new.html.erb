@@ -10,7 +10,7 @@
 
 <div id="page-yield">
   <% unless flash[:msg].nil? %>
-    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:msg] %> </div>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:msg] %> </div>
   <% end %>
 
 <table align="center" class="table table-hover" style="width:1000px">
@@ -51,7 +51,7 @@
 
   <tr>
     <td class="col-2"><%= f.label :Student_Attendance_Type %></td> 
-    <td class="col-2"><%= f.select :student_attendance_type, ['SubjectWise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" %></td>
+    <td class="col-2"><%= f.select :student_attendance_type, ['Subjectwise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" %></td>
   </tr>
 
   <tr>
@@ -77,14 +77,14 @@
 
   <tr>
     <td class="col-2"><%= f.label :Country %></td> 
-    <td class="col-2"><%= f.select :country, ['Afghanistan','Bangladesh','Canada','India','Nepal'], :selected => 'India',  :style => "width:310px" %></td>
+    <td class="col-2"><%= f.select :country, Country.all.collect{|c| [c.name,c.id]},:style => "width:310px",prompt:true%></td>
   </tr> 
   <tr>
-    <td class="col-2"><%= f.label :Upload_Logo %></td> 
-    <td class="col-2"><%= f.file_field :image %></td>
+    <td class="col-2">Upload Logo</td> 
+    <td class="col-2"><%= f.file_field :image%></td>
   </tr>
   <tr>
-    <td class="col-2"><%= f.label :Network_State %></td> 
+    <td class="col-2">Network State</td> 
     <td class="col-2"><%= f.select :network_state, ['Online','Offline'], :selected => 'Online', :style =>"width: 310px" %></td>
   </tr>
   <tr>

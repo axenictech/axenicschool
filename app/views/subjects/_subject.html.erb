@@ -1,5 +1,5 @@
 <% unless flash[:notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
   <% end %>
  <div class="add_sub",style="margin-top:20px">
      <%= link_to 'Add Normal Subjects',new_batch_subject_path(@batch),remote:true%>

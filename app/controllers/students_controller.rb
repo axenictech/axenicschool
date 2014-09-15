@@ -194,7 +194,7 @@ class StudentsController < ApplicationController
              student_sub.destroy
             end
       end
-       flash[:notice] = "Elective subject #{@subject.name} assigned to students successfully"
+       flash[:notice_ele] = "Elective subject #{@subject.name} assigned to students successfully"
         redirect_to students_elective_path(@subject)
   end
 

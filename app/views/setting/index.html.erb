@@ -1,7 +1,7 @@
 
 <div id="content-header">
   <h1>Configuration</h1>
-  <h3>Configuration home</h3>
+  <h3>Configuration Home</h3>
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
   </div>
@@ -10,30 +10,25 @@
 
 
 <div id="page-yield">
-
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-
   <div id="box">
 
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage Courses / Batches", '/setting/course_batch' %></div>
+        <div class="link-heading"><%= link_to "Manage Course / Batch", '/setting/course_batch' %></div>
         <div class="link-descr">Add a new Course or Batch for this academic year.</div>
       </div>
 
     
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage student categories",'/categories'  %></div>
+        <div class="link-heading"><%= link_to "Manage Student Category",'/categories'  %></div>
         <div class="link-descr">Add student category.</div>
       </div>
    
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage subjects","/subjects" %></div>
+        <div class="link-heading"><%= link_to "Manage Subject","/subjects" %></div>
         <div class="link-descr">Manage subjects corresponding to different courses.</div>
       </div>
       <div class="link-box">
-        <div class="link-heading"><%= link_to "General settings", "/general_settings/new" %></div>
+        <div class="link-heading"><%= link_to "General Settings", "/general_settings/new" %></div>
         <div class="link-descr">Set some general configurations related to institution,attendance, etc.</div>
       </div>
 

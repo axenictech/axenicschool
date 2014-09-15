@@ -12,7 +12,7 @@
   
   <div class="box">
     <% unless flash[:notice].nil? %>
-    <div align="center" style="width:500px" class="alert alert-success"> <%= flash[:notice] %> </div>
+    <div align="center" style="width:500px" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
   <% end %>
    <%= form_for :category, url:  categories_path do |f| %>
         <% if @category.errors.any? %>

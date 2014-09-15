@@ -1,21 +1,28 @@
 <% unless flash[:notice4].nil? %> <p class="flash-msg"> <%= flash[:notice4] %> </p><% end %>
 <div align="center">
-<ul class="errors4"></ul>
+<ul class="errors4"></ul></div>
+<table class="table" style="width:500px" align="center">
+<tbody>
 	<%= form_for @bank_field_new, url:{action:'add_bank_field'},remote:true do |c|%>
 	
-		<div><%= c.label :Name%>
-		<%= c.text_field :name%></div>
-		<div><%= c.label :Status%> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
-		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%>
-		</div>
+		<tr>
+			<td><%= c.label :Name%></td>
+			<td><%= c.text_field :name%></td>
+		</tr>
 
-		<div>
-			<%= c.submit 'Create'%>
-		</div>
+			<tr>
+			<td><%= c.label :Status%> </td>
+			<td><%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
+			<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td>
+		</tr>
+
+		<tr>
+			<td colspan="3"><%= c.submit 'Create'%></td>
+		</tr>
 	<%end%>
+</tbody>
+</table>
 
-
-</div>
 <% if @bank_fields1.empty? and @bank_fields2.empty?%>
 <h3 align="center">No records</h3>
 <%else%>

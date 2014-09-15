@@ -1,0 +1,14 @@
+  <%= form_for @optionedit, url:{:action=>'updateOption',online_examque_id: @optionedit},method: :patch do |f|%>
+ 
+    <table class="table">
+       <tr>
+          <td class="col-2"><%= f.label :option , class: "control-label"%></td>
+
+          <td><%=f.text_area :option_group,:style =>"width: 250px",class: 'ckeditor'%> </td>
+          <td><%= f.check_box :is_answer,:checked => false %> </td>
+       </tr>
+       <tr>
+          <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%></td>
+        </tr>
+    </table>
+  <%end%>

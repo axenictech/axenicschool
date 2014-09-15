@@ -63,6 +63,7 @@ class EmployeesController < ApplicationController
     @departments1 = EmployeeDepartment.where(status: true)
     @departments2 = EmployeeDepartment.where(status: false)
   end
+
   def edit_department
        @employee_department=EmployeeDepartment.find(params[:department_id])
   end
@@ -173,17 +174,20 @@ class EmployeesController < ApplicationController
 
    def new_payroll_category
     @payroll_category_new = PayrollCategory.new
-    @payroll_categories1 = PayrollCategory.where(is_deduction: true)
-    
-   
+    @payroll_categories1 = PayrollCategory.where(is_deduction: false)
+    @payroll_categories2 = PayrollCategory.where(is_deduction: true) 
   end
 
   def add_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.new(payroll_category_params)
-    @payroll_category.save
-    @payroll_categories1 = PayrollCategory.where(is_deduction: true)
+    if @payroll_category.save
+        flash[:notice5] = "Payroll catagory created"
+    end
+    @payroll_categories1 = PayrollCategory.where(is_deduction: false)
+    @payroll_categories2 = PayrollCategory.where(is_deduction: true)
   end
+  
   def new_grade
     @employee_grade=EmployeeGrade.new
     @grade1 = EmployeeGrade.where(status: "active")

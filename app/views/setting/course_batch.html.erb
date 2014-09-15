@@ -9,18 +9,14 @@
 </div><br /><br />
 <div id="page-yield">
 
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-
   <div class="box">
 
     <div class="link-box">
-      <div class="link-heading"><%= link_to 'Manage courses' ,"/courses" %> </div>
+      <div class="link-heading"><%= link_to 'Manage Course' ,"/courses" %> </div>
       <div class="link-descr">Manage Courses and create batches</div>
     </div>
     <div class="link-box">
-      <div class="link-heading"><%= link_to 'Manage Batches' ,"/batches"%>  </div>
+      <div class="link-heading"><%= link_to 'Manage Batch' ,"/batches"%>  </div>
       <div class="link-descr">Manage active batches</div>
     </div>
 

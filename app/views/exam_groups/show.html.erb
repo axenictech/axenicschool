@@ -10,8 +10,8 @@
 
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'New', new_exam_group_path(@batch,@exam_group) %> </li>
-    <li><%= link_to 'Connect Exams', new_course_path(@course) %> </li>
+    <li><%= link_to 'New', new_exam_group_path(@batch) %> </li>
+    <li><%= link_to 'Connect Exams', ''%> </li>
   </ul>
 </div>
 
@@ -31,7 +31,7 @@
         <% @exam_groups.each do |eg|%>
   
         <tr>
-        <td class="col-2"><%= link_to eg.name ,exam_groups_exam_show_path(eg) %></td>
+        <td class="col-2"><%= link_to eg.name ,exam_groups_exams_path(eg) %></td>
         <td><%= link_to 'edit' ,''%></td>
         <td><%= link_to 'delete' ,''%></td>
         <td><%= link_to 'results published',''%>  

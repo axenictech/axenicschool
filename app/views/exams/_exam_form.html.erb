@@ -1,37 +1,70 @@
-				
 <% if @subjects.empty? %>
  <h4 align="center">No subject Found </h4>
 <% else %>
+<%=form_for @exam_group, url:{action: 'exam_group_create',id:@exam_group.id} do |f| %>  
+<table class="table table-hover" style="width:100%">
+ <tr>
+    <td colspan="2"></td>
+    <td class="col-2">Exam Name</td>
+    <td class="col-2"><%= @exam_group.name %></td>
+    <td colspan="2"></td>
+  </tr>
+        
+  <tr>
+    <td colspan="2"></td>
+    <td class="col-2">Exam Type</td>
+    <td class="col-2"><%= @exam_group.exam_type %></td>
+    <td colspan="2"></td>
+  </tr>
 
-<%=form_for @exam_group , url:{action: 'exam_group_create',id:@exam_group.id}, method: :post do |f| %>  
-<table class="table table-hover" style="width:700px">
+<% unless @exam_group.exam_type.eql? "Grades"%>
+  <tr>
+    <td colspan="2"></td>
+    <td class="col-2"><%= f.label :maximum_marks , class: "control-label"%></td>
+    <td class="col-2"><%=text_field_tag :max_marks,"",{oninput:"$('#student_form').submit();"}%></td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+    <td class="col-2"><%= f.label :minimum_marks , class: "control-label"%></td>
+    <td class="col-2"><%= text_field_tag :min_marks,"",{oninput:"$('#student_form').submit();"}%></td>
+    <td colspan="2"></td>
+  </tr>
+<%end%>
   <tr class="tr-head">
-    <td >Subjects</td>
+    <td class="col-2">Subjects</td>
+  <% unless @exam_group.exam_type.eql? "Grades"%>
     <td >Max marks</td>
     <td >Min marks</td>
+  <%else%>
+    <td></td><td></td>
+  <% end %>
     <td >start time</td>
     <td>end time</td>
-    <td >Do not create</td>
+    <td></td>
   </tr> 
 
 <% @subjects.each do |subject| %>
 <%= f.fields_for  :exams do |exam| %>
     <tr>
      
-      <td class="col-1"><%= subject.name %></td>
+      <td class="col-2"><%= subject.name %></td>
       <%= exam.hidden_field :subject_id, value: subject.id%>
-      <td class="col-1"><%= exam.text_field :maximum_marks%></td>
-      <td class="col-1"><%= exam.text_field :minimum_marks%></td>
-      <td class="col-1"><%= exam.text_field :start_time%></td>
-      <td class="col-1"><%= exam.text_field :end_time%></td>
-      
-
+    <% unless @exam_group.exam_type.eql? "Grades"%>
+      <td ><%= exam.text_field :maximum_marks,class: ''%></td>
+      <td ><%= exam.text_field :minimum_marks,class: ''%></td>
+    <%else%>
+    <td></td><td></td>
+    <% end %>
+      <td ><%= exam.date_field :start_time%></td>
+      <td ><%= exam.date_field :end_time%></td>
+      <td></td>
     </tr>
 <%end%>
-  <% end %>
+<% end %>
 
  <tr class="tr-head"><td colspan="6">
 <%= f.submit 'create', class: "btn btn-primary" %></td></tr>
 </table>
-<% end %>
+<%end%>
 <%end%>

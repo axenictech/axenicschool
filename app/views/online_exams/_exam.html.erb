@@ -7,8 +7,11 @@
         <th>start date</th>
         <th>End date</th>
         <th></th>
+        <th></th>
     </tr>
 </thead>
+
+
 		
 <% @batch.online_exams.each do |exam|%>
 	
@@ -16,9 +19,11 @@
 			<td><%=link_to exam.name,online_exams_display_path(exam)%></td>
 			<td><%=exam.start_date.strftime("%v") %></td>
             <td><%=exam.end_date.strftime("%v")%></td>
-            <td><%=link_to 'edit',  edit_online_exam_path(exam)%></td>
+            <td><%=link_to 'edit', edit_online_exam_path(exam)%></td>
+             <td><%=link_to 'delete',online_exams_destroy_path(@batch,exam),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{exam.name} "}%></td>
 			</tr>
 <%end%>
+
 </tbody>
 </ul>
 </table>

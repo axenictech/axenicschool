@@ -1,26 +1,31 @@
-<div align="center">
+<% unless flash[:notice5].nil? %> <p class="flash-msg"> <%= flash[:notice5] %> </p><% end %>
+<table class="table" style="width:500px" align="center">
+<tbody>
 
 	<%= form_for @payroll_category_new, url:{action:'add_payroll_category'},remote:true do |c|%>
-		<div><%= c.label :Category_name%>
-		<%= c.text_field :name%></div>
-		<div><%= c.label :Percentage%>
-		<%= c.text_field :percentage%></div>
-		<div><%= c.label :Status%> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
-		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%>
-		</div>
+		<tr><td><%= c.label :Category_name%></td>
+		<td><%= c.text_field :name%></td></tr>
+		<tr><td><%= c.label :Percentage%></td>
+		<td><%= c.text_field :percentage%></td></tr>
+		<tr><td><%= c.label :Status%></td><td> <%= c.radio_button "status", "active", checked: "checked" %> <%=c.label :Active%> 
+		<%= c.radio_button "status", "inactive"%> <%=c.label :Inactive%></td></tr>
 
-		<div><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></div>	
+		<tr><td colspan="3"><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></td></tr>	
 
-		<div>
-			<%= c.submit 'Create'%>
-		</div>
+		<tr>
+			<td colspan="3"><%= c.submit 'Create'%></td>
+		</tr>
 	<%end%>
 
-</div>
+</tbody>
+</table>
 
+<% if @payroll_categories1.empty? and @payroll_categories2.empty?%>
+<h3 align="center">No records</h3>
+<%else%>
 <table align="center" class="table table-hover table-bordered" style="width:800px">
 
-	<tr class="tr-head"><th colspan="3">Earnings</th>
+	<tr class="tr-head"><th colspan="4">Earnings</th>
     </tr>
 	<tbody class="product-index">
 
@@ -28,7 +33,8 @@
 			<tr>
 			<td class="col-3"><%=c.name%></td>
 			<td><%= link_to 'edit',''%></td>
-			<td><%= link_to 'delete' ,''%></td>	 	
+			<td><%= link_to 'delete' ,''%></td>	 
+			<td><%= c.status%></td>	
 			</tr>
 		<%end%>
 		
@@ -36,9 +42,17 @@
 </table>
 <table align="center" class="table table-hover table-bordered" style="width:800px">
 
-	<tr class="tr-head"><th colspan="3">Deductions</th>
+	<tr class="tr-head"><th colspan="4">Deductions</th>
     </tr>
 	<tbody class="product-index">
+	<%@payroll_categories2.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%></td>
+			<td><%= link_to 'edit',''%></td>
+			<td><%= link_to 'delete' ,''%></td>	 <td><%= c.status%></td>	
+			</tr>
+		<%end%>
 		
 	 </tbody>
 </table>
+<%end%>
