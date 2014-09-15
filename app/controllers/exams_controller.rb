@@ -20,8 +20,9 @@ class ExamsController < ApplicationController
 	def exam_score
 	  	@exam=Exam.find(params[:id])
 	    @students=@exam.exam_group.batch.students.all
-	  	@exam.exam_scores.build  	
+	   	@exam.exam_scores.build
   	end
+
 	def update
 		@exam=Exam.find(params[:id])
    	 	@exam.update(params_exam)
