@@ -128,6 +128,7 @@ get 'exam_setting/:course_id/editRank/:id',to:'exam_setting#editRank',as:'course
 patch 'exam_setting/updateRank'
 delete 'exam_setting/:id/destroyRank', to:'exam_setting#destroyRank', as:'exam_setting_destroyRank'
 get 'exam_groups/select'
+
 patch 'exam_groups/:id/exam_group_create',to: 'exam_groups#exam_group_create',as: 'exam_groups_exam_group_create'
 get 'exam_groups/:id/exams', to:'exam_groups#exams', as:'exam_groups_exams'
 get 'exams/:id/exam_score', to:'exams#exam_score', as:'exam_exam_score'
@@ -234,6 +235,10 @@ resources :time_table_entries
   resources :time_table_entries
 end  
 
+get 'exam_groups/previous_exam_data'
+get 'exam_groups/previous_exam'
+get 'exam_groups/previous_exam_group'
+get 'exam_groups/previous_exam_details'
 resources :exam_setting
 resources :exam_groups do
   resources :exams 

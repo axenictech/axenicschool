@@ -26,16 +26,28 @@ class ExamGroupsController < ApplicationController
   end
   
   def show
-
     @batch=Batch.find(params[:id])
     @exam_groups=@batch.exam_groups.all
   end
 
   def exams
-
    @exam_group=ExamGroup.find(params[:id])
    @exams=@exam_group.exams.all
-    
+  end
+
+  def previous_exam
+    @course=Course.find(params[:course][:id])
+    @batches=@course.batches.all
+  end
+
+  def previous_exam_group
+    @batch=Batch.find(params[:batch][:id])
+    @exam_groups=@batch.exam_groups.all
+  end
+
+  def previous_exam_details
+    @exam_group=ExamGroup.find(params[:exam_group][:id])
+    @exams=@exam_group.exams.all
   end
 
   private 
