@@ -17,8 +17,10 @@ class UsersController < ApplicationController
 	def show
 		@user=User.find(params[:id])
 		if @user.role.eql? "Student"
-			@student=Student.find(@user.student_id) unless @student.nil?
-			@student=ArchivedStudent.find(@user.student_id)		
+			@student=ArchivedStudent.find_by_student_id(@user.student_id)
+			if @student.nil?
+				@student=Student.find(@user.student_id)
+			end
 		end
 	end
 
@@ -55,8 +57,8 @@ class UsersController < ApplicationController
 		        if params[:user][:new_password] == params[:user][:confirm_password]
 		        	@user.password=params[:user][:new_password] 
 		            if @user.update(user_params)
-			           flash[:edit] = "Password updated successfully"
-		        	   redirect_to edit_user_path(@user)
+			           flash[:user] = "Password updated successfully"
+		        	   redirect_to user_path(@user)
 		        	else
 		        		render 'change_password'
 		        	end
