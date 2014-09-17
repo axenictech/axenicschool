@@ -1,10 +1,10 @@
 <% unless flash[:notice3].nil? %> <p class="flash-msg"> <%= flash[:notice3] %> </p><% end %>
 <div align="center">
 <ul class="errors3"></ul></div>
-<table class="table" style="width:500px" align="center">
-<tbody>
+
 <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%>
-	
+	<table class="table" style="width:500px" align="center">
+<tbody>
 		<tr>
 			<td><%= c.label :Name%></td>
 			<td><%= c.text_field :name%></td>
@@ -23,9 +23,9 @@
 		<tr>
 			<td colspan="3"><%= c.submit 'Create'%></td>
 		</tr>
-	<%end%>
+	
 	</tbody>
-</table>
+</table><%end%>
 
 <% if @positions1.empty? and @positions2.empty?%>
 <h3 align="center">No records</h3>

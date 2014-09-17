@@ -6,7 +6,7 @@
 
 
 <div class="modal-body">
-
+<ul class="errors5"></ul>
 <%= form_for @employee_grade,url:{:action=>'update_grade',grade_id: @employee_grade.id},method: :patch,remote: true do |f|%>
  <table class="table" style="width:85%">
         <tr>
@@ -31,9 +31,9 @@
 
 
 
-        <tr>
-             <td><%= f.radio_button "status", "active", checked: true %><%=f.label :Active%></td>
-             <td><%= f.radio_button "status", "inactive"%><%=f.label :Inactive%></td>
+        <tr><td><%=f.label :Status%></td>
+             <td align="left"><%= f.radio_button "status", "true", checked: true %><%=f.label :Active%>
+             <%= f.radio_button "status", "false"%><%=f.label :Inactive%></td>
         </tr>
 
 

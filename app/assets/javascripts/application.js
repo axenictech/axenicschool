@@ -13,5 +13,41 @@
 //= require jquery
 //= require jquery_ujs
 //# require turbolinks
+//= require fullcalendar
 //= require_tree .
+$(document).ready(function(){
+ $('#calendar').fullCalendar({
+          editable: true,
+          header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+          },
+          defaultView: 'agendaWeek',
+      });
+
+ 
+ var date = new Date();
+			var d = date.getDate();
+			var m = date.getMonth();
+			var y = date.getFullYear();
+
+			$('#calendar_jdsaj').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+				editable: false,
+				    events: {
+						  url: '/events',
+						  type: 'GET',
+						  error: function() {
+						      alert('there was an error while fetching events!');
+						  },
+						  backgroundColor: 'blue',
+						  textColor: 'black'
+					}
+			});
+});
 

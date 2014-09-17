@@ -16,13 +16,15 @@
 
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for :user, url:{action:'search',format:@employee.id}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
-
     <tbody>
 
-  
+         
+        <tr>
+          <td><%= 'selected_manager :' +@reporting_manager.first_name %></td><td class="col-3"><div class="col-offset-md-3" id="name_emp"></div></td>
+         </tr> 
         
         <tr>
-          <td><%= t('selected_manager : ') %></td><td class="col-3"><div class="col-offset-md-3" id="name_emp"></div></td>
+          <td><%= t('New Manager : ') %></td><td class="col-3"><div class="col-offset-md-3" id="name_emp"></div></td>
          </tr> 
 
 

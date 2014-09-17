@@ -275,14 +275,23 @@ ActiveRecord::Schema.define(version: 20140914103219) do
     t.string   "code"
     t.boolean  "status"
     t.string   "max_leave_count"
+    t.boolean  "enable_carry_forward"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "employee_leaves", force: true do |t|
+    t.integer  "employee_id"
+    t.integer  "employee_leave_type_id"
+    t.decimal  "leave_count"
+    t.decimal  "leave_taken"
+    t.date     "reset_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "employee_leaves", ["employee_id"], name: "index_employee_leaves_on_employee_id", using: :btree
+  add_index "employee_leaves", ["employee_leave_type_id"], name: "index_employee_leaves_on_employee_leave_type_id", using: :btree
 
   create_table "employee_positions", force: true do |t|
     t.string   "name"

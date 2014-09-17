@@ -1,8 +1,9 @@
-$("ul.errors7").html("")
+$("ul.errors8").html("")
 <% if  @payroll_category.errors.any? %>
 		<%  @payroll_category.errors.full_messages.each do |message| %>
-		$("ul.errors7").append($("<li align ='left' style = 'width:500px'/>").html("<%= message.html_safe %>"))
+		$("ul.errors8").append($("<li align ='left' style = 'width:500px'/>").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>
 $('#add_payroll_category').html("<%= j render 'payroll_category'%>")
+$('#myModal').modal('hide')
 <%end%>

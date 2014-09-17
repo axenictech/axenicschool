@@ -114,6 +114,7 @@ get 'exam_reports/:student_id/student_view_transcripts/',to: 'exam_reports#stude
 get 'exam_reports/ranking_level_report'
 get 'exam_reports/select_mode'
 get 'exam_reports/select_rank'
+get 'exam_reports/select_rank_mode'
 get 'exam_reports/generate_ranking_level_report'
 get 'calender/next'
 get 'calender/demo' 
@@ -165,6 +166,9 @@ patch 'employees/:bank_field_id/update_bank_field', to:'employees#update_bank_fi
 delete 'employees/:id/destroy_bank_field', to:'employees#destroy_bank_field', as:'employees_destroy_bank_field'
 get 'employees/new_payroll_category'
 post 'employees/add_payroll_category'
+get 'employees/:payroll_category_id/edit_payroll_category',to:'employees#edit_payroll_category',as:'employees_edit_payroll_category'
+patch 'employees/:payroll_category_id/update_payroll_category', to:'employees#update_payroll_category', as:'employees_update_payroll_category'
+delete 'employees/:id/destroy_payroll_category', to:'employees#destroy_payroll_category', as:'employees_destroy_payroll_category'
 get 'employees/new_grade'
 post 'employees/add_grade'
 get 'employees/:grade_id/edit_grade',to:'employees#edit_grade', as:'employees_edit_grade' 
@@ -182,6 +186,17 @@ get 'employees/edit_privilege'
 post 'employees/update_privilege'
 get 'employees/search'
 get 'employees/settings'
+get 'employees/change_reporting_manager'
+get 'employees/:id/update_reporting_manager_name/:reporting_manager_id',to:'employees#update_reporting_manager_name',as:'employees_update_reporting_manager_name'
+patch 'employees/:id/update_reporting_manager',to:'employees#update_reporting_manager',as:'employees_update_reporting_manager'
+get 'employees/profile'
+get 'employees/edit_profile'
+patch 'employees/update_profile'
+get 'employee_attendances/new_leave_type'
+post 'employee_attendances/add_leave_type'
+delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
+get 'employee_attendances/:id/edit_leave_type',to:'employee_attendances#edit_leave_type', as: 'employee_attendances_edit_leave_type'
+patch 'employee_attendances/:id/update_leave_type',to:'employee_attendances#update_leave_type', as: 'employee_attendances_update_leave_type'
 
 root 'home#dashboard'
  
@@ -250,4 +265,5 @@ resources :courses do
 end  
 resources :online_exams
 resources :employees
+resources :employee_attendances
 end

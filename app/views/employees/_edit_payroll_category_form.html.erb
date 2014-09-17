@@ -1,0 +1,42 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing" %></h3>
+</div>
+<div class="modal-body">
+<ul class="errors8"></ul>
+<%= form_for @payroll_category,url:{:action=>'update_payroll_category',payroll_category_id: @payroll_category.id},method: :patch,remote: true do |f|%>
+ <table class="table" style="width:85%">
+        <tr>
+            <td class="col-2"><%= f.label :Category_Name , class: "control-label"%></td>
+            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+        
+        <tr>
+            <td class="col-2"><%= f.label :Percentage , class: "control-label"%></td>
+             <td><%=f.text_field :percentage ,:style =>"width: 250px", class: "form-control"%></td>
+        <tr>
+
+        <tr><td class="col-2"><%= f.label :Percentage_of%></td>
+             <td class="col-2"><%= f.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 250px"%></td>
+        </tr>
+
+        <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
+             <td><%= f.radio_button "status", "true", checked: "checked" %><%=f.label :Active%>
+            <%= f.radio_button "status", "false"%><%=f.label :Inactive%></td>
+        <tr>
+
+   <td colspan="2"><%= f.check_box :is_deduction%> <%=f.label :is_deduction%></td>
+        </tr>
+
+        <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%>
+        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        </tr>
+
+    </table>
+<% end %>
+
+
+</div>
+</div>
+</div>

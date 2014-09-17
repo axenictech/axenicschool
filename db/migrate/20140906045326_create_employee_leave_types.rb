@@ -5,6 +5,7 @@ class CreateEmployeeLeaveTypes < ActiveRecord::Migration
       t.string   :code
       t.boolean  :status
       t.string   :max_leave_count
+      t.boolean	 :enable_carry_forward
       
       t.timestamps
     end

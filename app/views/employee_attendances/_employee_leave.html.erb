@@ -1,0 +1,89 @@
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+    <ul class="errors"></ul>
+</div>
+
+ <%= form_for @new_leave_type ,url:{action: 'add_leave_type'},remote:true do |c|%>
+
+
+  <table class="table" style="width:500px" align="center">
+
+<tbody>
+    <tr>
+      <td><%= c.label :Leave_name%></td>
+      <td><%= c.text_field :name%></td>
+    </tr>
+
+    <tr>
+      <td><%= c.label :Leave_code%></td>
+      <td><%= c.text_field :code%></td>
+      </tr>
+
+       <tr>
+      <td><%= c.label :Maximum_leave_count%></td>
+      <td><%= c.text_field :max_leave_count%></td>
+      </tr>
+
+        <tr>
+            
+            <td> Enable_Carry_Forward </td>
+              <td><%= c.check_box :enable_carry_forward, :checked => false %></td>
+        </tr>
+
+     <tr>
+      <td><%= c.label :Status%> </td>
+      <td><%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
+      <%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td>
+    </tr>
+    <tr>
+      <td colspan="3"><%= c.submit 'Create'%></td>
+    </tr>
+</tbody>
+</table>
+<%end%>
+
+<% if @active_leaves.empty? and  @inactive_leaves.empty?%>
+<h3 align="center">No records</h3>
+<%else%>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+  <tr class="tr-head"><th colspan="3">Active</th>
+    </tr>
+  <tbody class="product-index">
+
+  <% @active_leaves.each do |e| %>
+      <tr>
+      <td class="col-3"><%=e.name%>-<%=e.code%></td>
+      <td><%= link_to 'edit',employee_attendances_edit_leave_type_path(e),remote:true%></td>
+      <td><%= link_to 'delete',employee_attendances_destroy_leave_type_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>  
+      </tr>
+    <%end%>
+
+    
+   </tbody>
+</table>
+
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+  <tr class="tr-head"><th colspan="3">Inactive</th>
+    </tr>
+  <tbody class="product-index">
+
+  <%@inactive_leaves.each do |e| %>
+      <tr>
+      <td class="col-3"><%=e.name%>-<%=e.code%></td>
+      <td><%= link_to 'edit',employee_attendances_edit_leave_type_path(e),remote:true%></td>
+      <td><%= link_to 'delete', employee_attendances_destroy_leave_type_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>  
+      </tr>
+    <%end%>
+
+    
+   </tbody>
+</table>
+<%end%>
+
+ 
+

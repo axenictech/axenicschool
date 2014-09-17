@@ -184,11 +184,39 @@ class ExamReportsController < ApplicationController
   end
 
   def select_rank
-   @mode_wise="course" if params[:mode1]
-   @mode_wise="batch" if params[:mode2]
+    if params[:mode1]
+        @mode="course"
+        @course=Course.find(params[:mode1][:id])
+        @batch_groups=@course.batch_groups.all
+        @ranking_levels=@course.ranking_levels.all
+    end
+    if params[:mode2]
+        @mode="batch"
+        @batch=Batch.find(params[:mode2][:id])
+        @ranking_levels=@batch.course.ranking_levels.all
+    end  
+  end
+  
+  def select_rank_mode
+      @batch=Batch.find(params[:format])
+      @rank=params[:ranking_report][:rank]
+      @subjects=@batch.subjects.all
+      @ranking_level=RankingLevel.find(params[:ranking_report][:ranking_level_id])
   end
 
   def generate_ranking_level_report
-
+    if params[:mode3]
+       @mode="course"
+       @batch_group=BatchGroup.find(params[:mode3][:batch_group_id])
+       @ranking_level=RankingLevel.find(params[:mode3][:ranking_level_id])
+    end
+    if params[:mode4]
+       @mode="batch"
+       @report_type=params[:report_type]
+       @ranking_level=RankingLevel.find(params[:value])
+       @subject=Subject.find(params[:subject][:id])
+       @batch=@subject.batch
+       @scores = GroupedExamReport.where(student_id: @students.collect(&:id),:batch_id=>@batch.id,:subject_id=>@subject.id)
+    end
   end
 end

@@ -2,11 +2,12 @@
 
 <div align="center">
 <ul class="errors1"></ul></div>
-<table class="table" style="width:500px" align="center">
 
-<tbody>
 
 	<%= form_for @employee_category_new, url:{action:'add_category'},remote:true do |c|%>
+	<table class="table" style="width:500px" align="center">
+
+<tbody>
 		<tr>
 			<td><%= c.label :Name%></td>
 			<td><%= c.text_field :name%></td>
@@ -25,10 +26,11 @@
 		<tr>
 			<td colspan="3"><%= c.submit 'Create'%></td>
 		</tr>
-	<%end%>
+	
 
 	</tbody>
 </table>
+<%end%>
 
 
 <% if @categories1.empty? and @categories2.empty?%>

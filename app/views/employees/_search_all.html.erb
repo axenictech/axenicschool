@@ -1,7 +1,7 @@
-<% if @users.nil? %>
+<% if @reporting_manager.nil? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
-<% if @users.empty? %>
+<% if @reporting_manager.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
  <div class="col-md-1"></div>
@@ -12,11 +12,11 @@
             <th>Employee Deprtment</th>
       </tr>
 
-      <%@users.each do |emp|%>
+      <%@reporting_manager.each do |emp|%>
           <tr>
-                <td><%= emp.first_name%></td>
-                <td><%= emp.employee_number%></td>
-                <td><%= emp.employee_department.name%></td>
+                <td col-md-1><%= link_to emp.first_name,employees_update_reporting_manager_name_path(@employee,emp),remote:true%></td>
+                <td col-md-1><%= emp.employee_number%></td>
+                <td col-md-1><%= emp.employee_department.name%></td>
          </tr>
       <%end%>  
       </table>

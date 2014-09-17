@@ -214,6 +214,47 @@ class EmployeesController < ApplicationController
      @employee_grade=EmployeeGrade.find(params[:id])
      @employee_grade.destroy
   end   
+  
+  def new_grade
+    @employee_grade_new=EmployeeGrade.new
+    @grade1 = EmployeeGrade.where(status: true)
+    @grade2 = EmployeeGrade.where(status: false)
+  end
+
+  def add_grade
+     @employee_grade_new=EmployeeGrade.new
+     @employee_grade=EmployeeGrade.new(grade_params)
+     if @employee_grade.save 
+      flash[:notice6] = "Employee Grade created"
+    end
+     @grade1 = EmployeeGrade.where(status: true)
+     @grade2 = EmployeeGrade.where(status: false)
+   end
+  
+  def edit_grade
+    @employee_grade=EmployeeGrade.find(params[:grade_id])
+  end
+
+  def update_grade 
+     @employee_grade_new=EmployeeGrade.new
+    @employee_grade=EmployeeGrade.find(params[:grade_id])
+    if @employee_grade.update(grade_params)
+      flash[:notice6] = "Employee Grade updated"
+    end
+    @grade1 = EmployeeGrade.where(status: true)
+    @grade2 = EmployeeGrade.where(status: false) 
+  end 
+  
+  def destroy_grade
+     @employee_grade_new=EmployeeGrade.new
+     @employee_grade=EmployeeGrade.find(params[:id])
+     if @employee_grade.destroy
+      flash[:notice6] = "Employee Grade deleted"
+    end
+     @grade1 = EmployeeGrade.where(status: true)
+     @grade2 = EmployeeGrade.where(status: false)
+  end   
+
 
   def admission1
     @employee=Employee.new
@@ -270,13 +311,46 @@ class EmployeesController < ApplicationController
   end
 
   def search
+      @employee=Employee.find(params[:format])
     unless params[:search].empty?
-      @users=Employee.where("first_name like'#{params[:search]}%' 
-            OR last_name like'#{params[:search]}%'")
+      @reporting_manager=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
+        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'")
     end
   end
 
+  def update_reporting_manager_name
+    @employee=Employee.find(params[:id])
+    @reporting_manager=Employee.find(params[:reporting_manager_id])
+  end
 
+  def update_reporting_manager
+    @employee=Employee.find(params[:id])
+    @employee.update(employee_params)
+    redirect_to employees_profile_path(@employee)
+
+  end
+
+  def change_reporting_manager
+     @employee=Employee.find(params[:format])
+      @reporting_manager = Employee.find(@employee.reporting_manager_id) unless @employee.reporting_manager_id.nil?     
+  end
+
+  def profile
+     @employee=Employee.find(params[:format])
+     @reporting_manager = Employee.find(@employee.reporting_manager_id) unless @employee.reporting_manager_id.nil?
+  end
+
+  def edit_profile
+       @employee=Employee.find(params[:format])
+  end
+
+  def update_profile
+       @employee=Employee.find(params[:format])
+       @employee.update(employee_params)
+       redirect_to employees_profile_path(@employee)
+  end
+
+  
   def employee_management
     
   end

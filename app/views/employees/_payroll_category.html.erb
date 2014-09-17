@@ -1,12 +1,18 @@
 <% unless flash[:notice5].nil? %> <p class="flash-msg"> <%= flash[:notice5] %> </p><% end %>
-<table class="table" style="width:500px" align="center">
-<tbody>
+<div align="center">
+<ul class="errors7"></ul></div>
 
 	<%= form_for @payroll_category_new, url:{action:'add_payroll_category'},remote:true do |c|%>
+	<table class="table" style="width:500px" align="center">
+	<tbody>
 		<tr><td><%= c.label :Category_name%></td>
 		<td><%= c.text_field :name%></td></tr>
 		<tr><td><%= c.label :Percentage%></td>
 		<td><%= c.text_field :percentage%></td></tr>
+
+		<tr><td><%= c.label :Percentage_of%></td>
+		<td><%= c.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 175px"%></td></tr>
+
 		<tr><td><%= c.label :Status%></td><td> <%= c.radio_button "status", "active", checked: "checked" %> <%=c.label :Active%> 
 		<%= c.radio_button "status", "inactive"%> <%=c.label :Inactive%></td></tr>
 
@@ -15,10 +21,11 @@
 		<tr>
 			<td colspan="3"><%= c.submit 'Create'%></td>
 		</tr>
-	<%end%>
+	
 
 </tbody>
 </table>
+<%end%>
 
 <% if @payroll_categories1.empty? and @payroll_categories2.empty?%>
 <h3 align="center">No records</h3>
@@ -32,9 +39,9 @@
 	<%@payroll_categories1.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'edit',''%></td>
-			<td><%= link_to 'delete' ,''%></td>	 
-			<td><%= c.status%></td>	
+			<td><%= link_to 'edit',employees_edit_payroll_category_path(c),remote:true%></td>
+			<td><%= link_to 'delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 
+			<td><%=  c.status%></td>	
 			</tr>
 		<%end%>
 		
@@ -48,8 +55,8 @@
 	<%@payroll_categories2.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'edit',''%></td>
-			<td><%= link_to 'delete' ,''%></td>	 <td><%= c.status%></td>	
+			<td><%= link_to 'edit',employees_edit_payroll_category_path(c),remote:true%></td>
+			<td><%= link_to 'delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 <td><%= c.status%></td>	
 			</tr>
 		<%end%>
 		

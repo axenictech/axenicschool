@@ -1,0 +1,6 @@
+<%= form_for @employee ,url:{action:'update_reporting_manager'} do |f|%>
+
+	<%=@reporting_manager.first_name%>
+	<%= f.hidden_field :reporting_manager_id,value: @reporting_manager.id%>
+	<tr><td colspan="4"><%=f.submit "►save_and_proceed",class: "btn btn-primary" %></td></tr>	
+<% end %>
