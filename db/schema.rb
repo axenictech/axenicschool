@@ -123,6 +123,16 @@ ActiveRecord::Schema.define(version: 20140914103219) do
 
   add_index "batch_groups", ["course_id"], name: "index_batch_groups_on_course_id", using: :btree
 
+  create_table "batch_online_exams", force: true do |t|
+    t.integer  "online_exam_id"
+    t.integer  "batch_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "batch_online_exams", ["batch_id"], name: "index_batch_online_exams_on_batch_id", using: :btree
+  add_index "batch_online_exams", ["online_exam_id"], name: "index_batch_online_exams_on_online_exam_id", using: :btree
+
   create_table "batches", force: true do |t|
     t.string   "name"
     t.integer  "course_id"
@@ -610,20 +620,20 @@ ActiveRecord::Schema.define(version: 20140914103219) do
   add_index "finance_transactions", ["student_id"], name: "index_finance_transactions_on_student_id", using: :btree
 
   create_table "general_settings", force: true do |t|
-    t.string   "school_or_college_name"
-    t.string   "school_or_college_address"
-    t.string   "school_or_college_phone_no"
-    t.string   "student_attendance_type"
-    t.date     "finance_start_year_date"
-    t.date     "finance_end_year_date"
-    t.string   "language"
-    t.string   "time_zone"
-    t.string   "country"
-    t.string   "network_state"
-    t.string   "include_grading_system"
-    t.integer  "addmission_number_auto_increament"
-    t.integer  "employee_number_auto_increament"
-    t.string   "enable_news_comment_moderation"
+    t.string   "InstitutionName"
+    t.string   "InstitutionAddress"
+    t.string   "InstitutionPhoneNo"
+    t.string   "StudentAttendanceType"
+    t.date     "Finance_start_year_date"
+    t.date     "Finance_end_year_date"
+    t.string   "Language"
+    t.string   "TimeZone"
+    t.string   "Country"
+    t.string   "NetworkState"
+    t.string   "IncludeGradingSystem"
+    t.integer  "AddmissionNumberAutoIncreament"
+    t.integer  "EmployeeNumberAutoIncreament"
+    t.string   "EnableNewsCommentModeration"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -741,6 +751,20 @@ ActiveRecord::Schema.define(version: 20140914103219) do
     t.datetime "updated_at"
   end
 
+  create_table "online_exam_groups", force: true do |t|
+    t.string   "name"
+    t.integer  "batch_id"
+    t.string   "exam_type"
+    t.boolean  "is_published",     default: false
+    t.boolean  "result_published", default: false
+    t.string   "students_list"
+    t.date     "exam_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "online_exam_groups", ["batch_id"], name: "index_online_exam_groups_on_batch_id", using: :btree
+
   create_table "online_exam_questions", force: true do |t|
     t.integer  "online_exam_id"
     t.string   "question"
@@ -753,16 +777,39 @@ ActiveRecord::Schema.define(version: 20140914103219) do
 
   add_index "online_exam_questions", ["online_exam_id"], name: "index_online_exam_questions_on_online_exam_id", using: :btree
 
-  create_table "online_exams", force: true do |t|
-    t.string   "name"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.time     "maximum_time"
-    t.decimal  "percentage"
-    t.integer  "option_per_question"
+  create_table "online_exam_scores", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "online_exam_id"
+    t.decimal  "marks"
+    t.integer  "grading_level_id"
+    t.string   "remarks"
+    t.boolean  "is_failed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "online_exam_scores", ["grading_level_id"], name: "index_online_exam_scores_on_grading_level_id", using: :btree
+  add_index "online_exam_scores", ["online_exam_id"], name: "index_online_exam_scores_on_online_exam_id", using: :btree
+  add_index "online_exam_scores", ["student_id"], name: "index_online_exam_scores_on_student_id", using: :btree
+
+  create_table "online_exams", force: true do |t|
+    t.integer  "online_exam_group_id"
+    t.integer  "subject_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "maximum_marks"
+    t.integer  "minimum_marks"
+    t.integer  "grading_level_id"
+    t.integer  "weightage",            default: 0
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "online_exams", ["event_id"], name: "index_online_exams_on_event_id", using: :btree
+  add_index "online_exams", ["grading_level_id"], name: "index_online_exams_on_grading_level_id", using: :btree
+  add_index "online_exams", ["online_exam_group_id"], name: "index_online_exams_on_online_exam_group_id", using: :btree
+  add_index "online_exams", ["subject_id"], name: "index_online_exams_on_subject_id", using: :btree
 
   create_table "payroll_categories", force: true do |t|
     t.string   "name"
@@ -933,8 +980,6 @@ ActiveRecord::Schema.define(version: 20140914103219) do
     t.string   "role"
     t.string   "hashed_password"
     t.string   "reset_password_code"
-    t.string   "student_id"
-    t.string   "employee_id"
     t.datetime "reset_password_code_until"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,0 +1,31 @@
+<% unless @exams.nil?%>
+<table align="center" class="table table-hover" style="width:800px">
+<ul id="category-list" >
+<tbody>
+<thead>
+  <tr class="tr-head">
+      <thead>
+		<th>Subject Name</th>
+		<th>Maximum Marks</th>
+		<th>Minimum Marks</th>
+	  </thead>
+	
+      
+  </tr>
+</thead>
+<% @exams.each do |exam| %>
+
+  <tbody class="product-index">
+
+      	<tr>
+      	<td><%= link_to link_to exam.subject.name , exam_exam_score_path(exam) %></td>	
+		<td><%= exam.maximum_marks%><td>
+		<td><%= exam.minimum_marks%><td>
+		</tr>
+    </tbody>
+
+<%end%>
+ </table>
+<%else%>
+NO Record Found
+<%end%>

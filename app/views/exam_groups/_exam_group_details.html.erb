@@ -1,0 +1,12 @@
+
+
+  <%= form_for :exam_group, url:{action:'previous_exam_details'},method: :get,remote:true,html:{id: "exam_group_form"}  do |f| %>
+  <div class="label-field-pair">
+  <%= f.label :select_exam_group %>
+  <div class="text-input-bg">
+  <%= f.select :id, @exam_groups.collect {|b| [b.name,b.id]}, {prompt:true},{onchange:"$('#exam_group_form').submit();"}%>
+</div></div>
+<% end %>
+<div id="exams_details">
+	
+</div>
