@@ -1,0 +1,37 @@
+
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "create" %></h3>
+</div>
+<div class="modal-body">
+	<ul class="errors"></ul>
+
+<%= form_for @attendance,remote:true  do |c|%>
+
+ <%= c.hidden_field :employee_id, :value => @employee.id %>
+    <%= c.hidden_field :attendance_date, :value => @date %>
+  <table class="table" style="width:500px" align="center">
+    
+     <tr>
+       <td><%=c.label :Leave_Type %></td>
+         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.all.collect {|b| [b.name,b.id]},prompt:true%></td>
+     </tr>
+    <tr>
+      <td><%= c.label :Reason_for_absence%></td>
+      <td><%= c.text_field :reason%></td>
+    </tr>
+    <tr>        
+   <td>is_half_day</td>
+    <td><%= c.check_box :is_half_day,:checked => false %> </td>
+    </tr>
+    
+    <tr>
+    <td colspan="2"><%= c.submit 'Create', class: "btn btn-primary"%>
+        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        </tr>
+
+</table>
+<% end %>
+
+</div></div></div>

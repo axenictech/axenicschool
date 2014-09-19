@@ -1,0 +1,81 @@
+
+<div class="header">
+  <div class="prev">
+    <%= link_to "◄",employee_attendances_display_path(@deparment.id,(@today-1.month),),remote:true %>
+  </div>
+  <div class="month">
+       <%= @today.strftime("%B %Y") %> 
+  </div>
+  <div class="next">
+    <%= link_to "►",employee_attendances_display_path(@deparment.id,(@today+1.month)),remote:true %>
+  </div>
+  <div class="extender"></div>
+</div>
+
+<div class="box-1">
+<table align="center" class="table table-hover table-bordered" >
+  <tr class="tr-head">
+    <td class="head-td-name themed_text"><%= t('name') %></td>
+    <% current_day = Date.today  %>
+    <% (@start_date..@end_date).each do |date| %>
+      <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
+        <td class="head-td-date active" ><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></td>
+      <% else %>
+        <td class="head-td-date"><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></td>
+      <% end %>
+      <% end%>
+ </tr>
+    <% @employees.each do |employee| %>
+    <tr class="tr-<%= cycle('odd', 'even')  %>">
+      <td class="td-name">
+        <%= employee.first_name %>
+       </td>
+      <% (@start_date..@end_date).each do |date| %>
+        <% @absent = EmployeeAttendance.find_by_employee_id_and_attendance_date(employee.id, date) %>
+      <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
+        <td id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark active">
+          <% else %>
+        <td id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark">
+            <% end %>
+          <% unless @absent.nil? %>
+       
+            <%= link_to 'X',employee_attendances_edit_attendance_path(@absent),remote:true%>
+
+          <% else %>
+                   <%= link_to '.',employee_attendances_new_attendance_path( 
+            employee.id,date), remote:true %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

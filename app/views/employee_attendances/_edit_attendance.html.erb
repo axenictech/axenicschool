@@ -1,0 +1,35 @@
+
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing" %></h3>
+</div>
+<div class="modal-body">
+	<ul class="errors"></ul>
+
+<%= form_for  @attendance,url:{:action=>'update_att'},method: :patch ,remote:true do |c|%>
+  <table class="table" style="width:500px" align="center">
+
+    <tr>
+       <td><%=c.label :Leave_Type %></td>
+         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.all.collect {|b| [b.name,b.id]},prompt:true%></td>
+     </tr>
+    <tr>
+      <td><%= c.label :Reason_for_absence%></td>
+      <td><%= c.text_field :reason%></td>
+    </tr>
+    <tr>        
+   <td>is_half_day</td>
+    <td><%= c.check_box :is_half_day,:checked => false %> </td>
+    </tr>
+    
+    
+    <tr>
+    <td colspan="2"><%= c.submit 'Update', class: "btn btn-primary"%></td>
+       <td> 	<%= link_to 'destroy', employee_attendances_destroy_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
+        </tr>
+
+</table>
+<% end %>
+
+</div></div></div>

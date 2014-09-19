@@ -198,7 +198,13 @@ post 'employee_attendances/add_leave_type'
 delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
 get 'employee_attendances/:id/edit_leave_type',to:'employee_attendances#edit_leave_type', as: 'employee_attendances_edit_leave_type'
 patch 'employee_attendances/:id/update_leave_type',to:'employee_attendances#update_leave_type', as: 'employee_attendances_update_leave_type'
-
+get 'employee_attendances/attendance_register'
+get 'employee_attendances/select'
+get 'employee_attendances/:department_id/display/:next',to:'employee_attendances#display',as: 'employee_attendances_display'
+get 'employee_attendances/:employee_id/new_attendance/:attendance_date',to:'employee_attendances#new_attendance',as: 'employee_attendances_new_attendance'
+get 'employee_attendances/:id/edit_attendance',to:'employee_attendances#edit_attendance', as: 'employee_attendances_edit_attendance'
+patch 'employee_attendances/:id/update_att',to:'employee_attendances#update_att', as: 'employee_attendances_update_att'
+delete 'employee_attendances/:id/destroy_attendance',to:'employee_attendances#destroy_attendance', as: 'employee_attendances_destroy_attendance'
 root 'home#dashboard'
  
  resources :home
