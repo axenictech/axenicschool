@@ -11,9 +11,8 @@
 <% if @students.empty? %>
  <h4 align="center">No students Found </h4>
 <% else %>
-
-<%=form_for @exam do |f| %>  
 <table class="table table-hover" style="width:700px">
+  <%=form_for :exams,url:{action:'update',id:@exam.id},method: :patch do |f| %>  
   <tr>
     <td class="col-3" colspan="3">Exam Name: <%= @exam.exam_group.name %></td>
   </tr>
@@ -27,19 +26,22 @@
     <td >Remarks</td>
   </tr> 
 <% @students.each do |student| %>
-<%= f.fields_for :exam_scores do |es| %>
-    <tr>
-      <td class="col-2"><%= student.first_name+" "+student.last_name %></td>
-      <%= es.hidden_field :student_id, value: student.id%>
-      <td><%= es.text_field :marks%></td>
-      <td><%= es.text_field :remarks%></td>
-    </tr>
-<%end%>
-<% end %>
+<% exam_score=ExamScore.find_by_exam_id_and_student_id(@exam.id,student.id)%>
+<tr>
 
+      <td class="col-2"><%= f.label "#{student.first_name+" "+student.last_name}" %></td>
+      <% unless exam_score.nil? %>
+        <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks%></td>
+        <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks%></td>
+      <%else%>
+        <td><%= f.text_field "exam[#{student.id}][marks]"%></td>
+        <td><%= f.text_field "exam[#{student.id}][remarks]"%></td>
+      <%end%>
+<% end %>    
+</tr>
  <tr class="tr-head"><td colspan="3">
-<%= f.submit 'create', class: "btn btn-primary" %></td></tr>
+<%= f.submit 'Submit', class: "btn btn-primary"%></td></tr>
+<%end%>
 </table>
-<% end %>
 <%end%>
 </div></div>

@@ -205,18 +205,15 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_ranking_level_report
-    if params[:mode3]
-       @mode="course"
-       @batch_group=BatchGroup.find(params[:mode3][:batch_group_id])
-       @ranking_level=RankingLevel.find(params[:mode3][:ranking_level_id])
-    end
-    if params[:mode4]
-       @mode="batch"
        @report_type=params[:report_type]
-       @ranking_level=RankingLevel.find(params[:value])
+       @ranking_level=RankingLevel.find(params[:ranking_level_id])
        @subject=Subject.find(params[:subject][:id])
        @batch=@subject.batch
+       @students=@batch.students.all
        @scores = GroupedExamReport.where(student_id: @students.collect(&:id),:batch_id=>@batch.id,:subject_id=>@subject.id)
-    end
+       @batch_group=BatchGroup.find(params[:mode3][:batch_group_id]) if params[:mode3]
+       @ranking_level=RankingLevel.find(params[:mode3][:ranking_level_id]) if params[:mode3]
+       @mode="course"  if params[:mode3]
+       @mode="batch"   if params[:mode4]
   end
 end

@@ -20,18 +20,26 @@ class ExamsController < ApplicationController
 	def exam_score
 	  	@exam=Exam.find(params[:id])
 	    @students=@exam.exam_group.batch.students.all
-	   	@exam.exam_scores.build
-  	end
+	end
 
 	def update
 		@exam=Exam.find(params[:id])
-   	 	@exam.update(params_exam)
+
+		params[:exams][:exam].each_pair do |student_id, details|
+      	@exam_score=ExamScore.find_by_exam_id_and_student_id(@exam.id,student_id)
+      		if @exam_score.nil?
+		        ExamScore.create(exam_id:@exam.id,student_id:student_id,
+		        	marks:details[:marks],remarks:details[:remarks])
+      		else
+		        @exam_score.update(marks:details[:marks],remarks:details[:remarks])
+	        end
+    	end
     	redirect_to exam_groups_exams_path(@exam.exam_group)
-	end
+    end
 
 	private
 	def params_exam
     	params.require(:exam).permit(:subject_id,:start_time,:end_time,:maximum_marks,
-    		       :minimum_marks,exam_scores_attributes: [:student_id,:marks,:remarks])
+    		       :minimum_marks)
 	end
 end
