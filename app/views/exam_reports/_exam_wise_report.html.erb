@@ -8,9 +8,9 @@
     <div class="custom_header">
       <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
     </div>
-    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered">
       <tr class="tr-head">
-        <td>Subject</td>
+        <td class="col-3">Subject</td>
         <% if @exam_group.exam_type == 'Marks' %>
           <td>Marks obtained</td>
           <td>Max</td>
@@ -26,7 +26,7 @@
       </tr>
       <% exam_score.each do |es| %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
-          <td class="col-1"> <%= es.exam.subject.name %></td>
+          <td class="col-2"> <%= es.exam.subject.name %></td>
           <% if @exam_group.exam_type == 'Marks' %>
             <td class="col-1"><%= es.marks || '-' %></td>
             <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
@@ -45,13 +45,17 @@
           <% end %>
         </tr>
       <% end %>
-<tr class="blank"></tr>
-      <% if @exam_group.exam_type == 'marks' or @exam_group.exam_type == 'MarksAndGrades' %>
+      <tr class="tr-blank"></tr>
+      <% unless @exam_group.exam_type == 'Grades'%>
         <tr class="tr-head">
           <td>Total marks:</td>
           <td><%= total_marks_attained %></td><td><%= total_max_marks %></td>
-          <td>-</td>
           <td><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></td>
+        </tr>
+      <%else%>
+        <tr class="tr-head">
+          <td>Final Grade:</td>
+          <td>-</td>
         </tr>
       <% end %>
     </table>

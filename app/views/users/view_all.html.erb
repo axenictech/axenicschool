@@ -14,7 +14,7 @@
   <div class="text-input-bg">
 		<%= form_for :user, url:{action:'select'},method: :get,remote:true,html:{id: 'user_form2'} do |f| %>
 		<%= f.label :select %>
-	    <%= f.select :role,["Admin", "Employee", "Student"],{prompt:true},{onchange:"$('#user_form2').submit();"} %>
+	    <%= f.select :role,["Admin", "Employee", "Student"],{prompt:'Select a Role'},{onchange:"$('#user_form2').submit();"} %>
 		<% end %>
 	</div></div><br/><br/>
  <div id="user_view"></div> 

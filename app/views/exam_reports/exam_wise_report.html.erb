@@ -16,8 +16,8 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     Exam Wise Report
   </div>
-   <% unless flash[:notice].nil? %>
-    <div class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+   <% unless flash[:notice_exam].nil? %>
+    <div align="center" class="alert alert-danger" style="width:100%"> <%= flash[:notice_exam] %> </div>
     <%end %>
 <%= form_for :batch_select, :url=>{:action=>'select_batch'},html:{id: 'form_batch'},remote:true,method: :get do |f| %>
   
@@ -27,6 +27,6 @@
       <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_batch').submit();"}%>
       </div></div>
   <% end %>
-      <div id="exam_report"><%= render 'exam_group' %></div>
+      <div id="exam_report"></div>
   </div>
 </div>

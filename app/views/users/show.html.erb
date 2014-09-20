@@ -32,16 +32,16 @@
   <% end %>
 	<table align="center" class="table" style="width:500px">
   <tbody><tr class="tr-blank"></tr>
+       <tr class="tr-head">
+        <td class="col-2">Username</td>
+        <td class="col-2"><%= @user.username %></td></tr>
       <tr class="tr-head">
         <td class="col-2">Name</td>
         <td class="col-2"><%= @user.first_name+' '+@user.last_name  %></td></tr>
        <tr class="tr-head">
-        <td class="col-2">UserName</td>
-        <td class="col-2"><%= @user.username %></td></tr>
-       <tr class="tr-head">
         <td class="col-2">Role</td><td class="col-2"><%= @user.role %></td></tr>
         <tr class="tr-head">
-        <td class="col-2">Email ID</td><td class="col-2"><%= @user.email %></td></tr>
+        <td class="col-2">Email</td><td class="col-2"><%= @user.email %></td></tr>
             <tr class="tr-blank"></tr>
   </tbody>
   </table> 

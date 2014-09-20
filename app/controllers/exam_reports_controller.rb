@@ -24,10 +24,18 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_exam_report
-    
-     @exam_group=ExamGroup.find(params[:exam_group_select][:id])
-     @batch=@exam_group.batch
-     @student=@batch.students.last
+    if request.get?
+      if params[:exam_group_select][:id].present?
+         @exam_group=ExamGroup.find(params[:exam_group_select][:id])
+         @batch=@exam_group.batch
+         @student=@batch.students.last
+      else
+         flash[:notice_exam]="Please select exam group"
+         @batches=Batch.all
+         @exam_groups=Batch.first.exam_groups.all
+         render 'exam_wise_report'
+      end
+    end
   end
 
   def student_exam_report
@@ -216,4 +224,57 @@ class ExamReportsController < ApplicationController
        @mode="course"  if params[:mode3]
        @mode="batch"   if params[:mode4]
   end
+
+  def combined_details
+      @batch=Batch.find(params[:batch][:id])
+      @course=@batch.course
+      @class_designations=@course.class_designations.all
+      @ranking_levels=@course.ranking_levels.all
+  end
+
+  def all
+      @batch=Batch.find(params[:format])
+      @course=@batch.course
+      @class_designations=@course.class_designations.all
+  end
+
+  def none
+      @batch=Batch.find(params[:format])
+      @course=@batch.course
+      @class_designations=@course.class_designations.all
+  end
+
+  def all1
+      @batch=Batch.find(params[:format])
+      @course=@batch.course
+      @ranking_levels=@course.ranking_levels.all
+  end
+
+  def none1
+      @batch=Batch.find(params[:format])
+      @course=@batch.course
+      @ranking_levels=@course.ranking_levels.all
+  end
+
+  def generate_combined_report
+      @batch=Batch.find(params[:format])
+      @students=@batch.students.all
+      @class_designations=[]
+      @ranking_levels=[]
+      class_designations=params[:class_designations]
+      if class_designations.present?
+        class_designations.each do |d|
+          cd=ClassDesignation.find(d)
+          @class_designations<<cd
+        end
+      end
+      ranking_levels=params[:ranking_levels]
+      if ranking_levels.present?
+        ranking_levels.each do |r|
+          rl=RankingLevel.find(r)
+          @ranking_levels<<rl
+        end
+      end
+  end
+
 end

@@ -13,6 +13,7 @@
 <% if @user.errors.any? %>
     <div class="alert alert-danger">
     <h2>Errors prohibited to being saved:</h2>
+    <h3>User account not created</h3>
     <ul><% @user.errors.full_messages.each do |message| %>
     <li><%= message %></li>
     <% end %></ul>

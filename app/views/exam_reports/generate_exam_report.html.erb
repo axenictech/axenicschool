@@ -19,12 +19,12 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     <%= link_to 'Exam wise report', '/exam_reports/exam_wise_report' %> &raquo;
     Generated report
-  </div>
-  <h3 align="center"><%= @batch.name %> - <%= @exam_group.name %></h3>
+  </div></div>
+  <h3 align="center"><%= @batch.course.course_name+" "+@batch.course.section_name+" "+@batch.name %> - <%= @exam_group.name %></h3>
   <div id="student_list">
     <%= render 'exam_wise_student_list' %>
   </div>
   <div id="exam_wise_report">
     <%= render 'exam_wise_report' %>
   </div>
-</div></div>
+</div>

@@ -1,7 +1,7 @@
 class CreateMonthlyPayslips < ActiveRecord::Migration
   def change
     create_table :monthly_payslips do |t|
-	  t.date     :salary_date
+	    t.date     :salary_date
       t.references :employee,index:true
       t.references :payroll_category,index:true
       t.string     :amount
