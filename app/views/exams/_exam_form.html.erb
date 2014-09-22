@@ -58,7 +58,7 @@
     <% end %>
       <td ><%= exam.date_field :start_time%></td>
       <td ><%= exam.date_field :end_time%></td>
-      <td></td>
+      <td><%= check_box_tag "no_create[]", exam_group.id, false, class: "no_check_box" %></td>
     </tr>
 <%end%>
 <% end %>

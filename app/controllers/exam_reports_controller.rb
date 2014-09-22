@@ -59,22 +59,39 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_subject_report  
-     @subject=Subject.find(params[:subject_select][:id])
-     @batch=@subject.batch
-     @exam_groups=@batch.exam_groups.all
-     @students=@batch.students.all
+    if request.get?
+      if params[:subject_select][:id].present?
+       @subject=Subject.find(params[:subject_select][:id])
+       @batch=@subject.batch
+       @exam_groups=@batch.exam_groups.all
+       @students=@batch.students.all
+      else
+         flash[:notice_s_r]="Please select subject"
+         @batches=Batch.all
+         @subjects=Batch.first.subjects.all
+         render 'subject_wise_report'
+      end
+    end
   end
 
   def grouped_exam_report
     @batches=Batch.all
   end
 
-  def generate_grouped_report  
-      @batch=Batch.find(params[:batch_option][:id])
-      @students=@batch.students.all
-      @student=@batch.students.last
-      @exam_groups=@batch.exam_groups.all
-      @subjects=@batch.subjects.all
+  def generate_grouped_report 
+    if request.get?
+      if params[:batch_option][:id].present? 
+          @batch=Batch.find(params[:batch_option][:id])
+          @students=@batch.students.all
+          @student=@batch.students.last
+          @exam_groups=@batch.exam_groups.all
+          @subjects=@batch.subjects.all
+      else
+         flash[:notice_b]="Please select batch"
+         @batches=Batch.all
+         render 'grouped_exam_report'
+      end
+    end
   end 
 
   def student_report
@@ -95,12 +112,20 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_archived_report
-    
-    @batch=Batch.find(params[:batch_select][:id])
-    @students=@batch.archived_students.all
-    @student=@batch.archived_students.last
-    @exam_groups=@batch.exam_groups.all
-    @subjects=@batch.subjects.all
+    if request.get?
+      if params[:batch_select][:id].present? 
+        @batch=Batch.find(params[:batch_select][:id])
+        @students=@batch.archived_students.all
+        @student=@batch.archived_students.last
+        @exam_groups=@batch.exam_groups.all
+        @subjects=@batch.subjects.all
+      else
+         flash[:notice_arch]="Please select batch"
+         @courses=Course.all
+         @batches=Course.first.batches.all
+         render 'archived_student_report'
+      end
+    end
   end
 
   def archived_student

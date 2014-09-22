@@ -16,8 +16,8 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     Archived Student Report
   </div>
-   <% unless flash[:notice].nil? %>
-    <div class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+   <% unless flash[:notice_arch].nil? %>
+    <div class="alert alert-danger" align="center" style="width:100%"> <%= flash[:notice_arch] %> </div>
     <%end %>
 <%= form_for :course_select, :url=>{:action=>'select_course'},html:{id: 'form_course'},remote:true,method: :get do |f| %>
   
@@ -27,6 +27,6 @@
       <%= f.select :id, @courses.collect {|c| [c.course_name,c.id]},{prompt:true},{onchange:"$('#form_course').submit();"}%>
       </div></div>
   <% end %>
-      <div id="archived_report"><%= render 'batch_tag' %></div>
+      <div id="archived_report"></div>
   </div>
 </div>

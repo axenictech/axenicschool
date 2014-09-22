@@ -10,21 +10,27 @@
     </div>
     <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered">
       <tr class="tr-head">
-        <td class="col-3">Subject</td>
+        <td class="col-3"><font color="blue">Subject</font></td>
         <% if @exam_group.exam_type == 'Marks' %>
-          <td>Marks obtained</td>
-          <td>Max</td>
-          <td>Percentage(%)</td>
+          <td><font color="blue">Marks obtained</font></td>
+          <td><font color="blue">Max</font></td>
+          <td><font color="blue">Percentage(%)</font></td>
         <% elsif @exam_group.exam_type == 'Grades' %>
-          <td>Grades</td>
+          <td><font color="blue">Grades</font></td>
         <% else %>
-          <td>Marks obtained</td>
-          <td>Max</td>
-          <td>Grades</td>
-          <td>Percentage(%)</td>
+          <td><font color="blue">Marks obtained</font></td>
+          <td><font color="blue">Max</font></td>
+          <td><font color="blue">Grades</font></td>
+          <td><font color="blue">Percentage(%)</font></td>
         <% end %>
       </tr>
       <% exam_score.each do |es| %>
+      <% is_valid_subject=1 %>
+          <% unless es.exam.subject.elective_group_id.nil? %>
+            <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(@student.id,es.exam.subject.id) %>
+            <% is_valid_subject = 0 if is_student_elective.nil? %>
+          <% end %>
+          <% unless is_valid_subject == 0 %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
           <td class="col-2"> <%= es.exam.subject.name %></td>
           <% if @exam_group.exam_type == 'Marks' %>
@@ -45,16 +51,18 @@
           <% end %>
         </tr>
       <% end %>
+      <%end%>
       <tr class="tr-blank"></tr>
       <% unless @exam_group.exam_type == 'Grades'%>
         <tr class="tr-head">
-          <td>Total marks:</td>
-          <td><%= total_marks_attained %></td><td><%= total_max_marks %></td>
-          <td><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></td>
+          <td><font color="blue">Total marks:</font></td>
+          <td><font color="blue"><%= total_marks_attained %></font></td>
+          <td><font color="blue"><%= total_max_marks %></font></td>
+          <td><font color="blue"><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></font></td>
         </tr>
       <%else%>
         <tr class="tr-head">
-          <td>Final Grade:</td>
+          <td><font color="blue">Final Grade:</font></td>
           <td>-</td>
         </tr>
       <% end %>

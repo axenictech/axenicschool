@@ -18,7 +18,7 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     <%= link_to 'Grouped exam report', '/exam_reports/grouped_exam_report' %> &raquo;
     Generated report
-  </div>
+  </div></div>
   <h3 align="center"><%= @batch.name %> - <%= @batch.course.course_name %></h3>
   <div id="student_list" align="left">
     <%= render 'grouped_exam_student_list' %>
@@ -27,4 +27,3 @@
     <%= render 'grouped_exam_report' %>
   </div>
   </div>
-</div>

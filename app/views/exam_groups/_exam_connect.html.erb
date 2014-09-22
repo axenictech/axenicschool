@@ -1,0 +1,14 @@
+<% @exam_groups.each do |exam_group| %>
+<% weightage=exam_group.exams.first.weightage %>
+<div class="row">
+	<div class="col-md-3">
+		<%= check_box_tag "exam_groups[]",exam_group.id,false,class: "exam_check_box" %>
+	</div>
+	<div class="col-md-3">
+		<%= exam_group.name%>	
+	</div>
+    <div class="col-md-3">
+    	<%= text_field_tag "exam_group[#{exam_group.id}][weightage]",weightage%>
+    </div>
+</div>    
+<%end%>    

@@ -1,2 +1,0 @@
-class ExamScoresController < ApplicationController
-end

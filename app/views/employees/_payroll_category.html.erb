@@ -13,8 +13,8 @@
 		<tr><td><%= c.label :Percentage_of%></td>
 		<td><%= c.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 175px"%></td></tr>
 
-		<tr><td><%= c.label :Status%></td><td> <%= c.radio_button "status", "active", checked: "checked" %> <%=c.label :Active%> 
-		<%= c.radio_button "status", "inactive"%> <%=c.label :Inactive%></td></tr>
+		<tr><td><%= c.label :Status%></td><td> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
+		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td></tr>
 
 		<tr><td colspan="3"><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></td></tr>	
 
@@ -41,7 +41,11 @@
 			<td class="col-3"><%=c.name%></td>
 			<td><%= link_to 'edit',employees_edit_payroll_category_path(c),remote:true%></td>
 			<td><%= link_to 'delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 
-			<td><%=  c.status%></td>	
+			<% if c.status? %>
+			<td><%= link_to 'Active',employees_active_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to activate this Category?"} %></td>	
+			<% else %>
+			<td><%=link_to 'inactive',employees_inactive_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
+			<%end%>
 			</tr>
 		<%end%>
 		
@@ -56,10 +60,17 @@
 			<tr>
 			<td class="col-3"><%=c.name%></td>
 			<td><%= link_to 'edit',employees_edit_payroll_category_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 <td><%= c.status%></td>	
+			<td><%= link_to 'delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	
+			 <% if c.status? %>
+			<td><%= link_to 'Active',employees_active_payroll_category_path(c),remote:true %></td>	
+			<% else %>
+			<td><%=link_to 'inactive',employees_inactive_payroll_category_path(c),remote:true%></td>
+			<%end%>
 			</tr>
 		<%end%>
 		
 	 </tbody>
 </table>
 <%end%>
+
+

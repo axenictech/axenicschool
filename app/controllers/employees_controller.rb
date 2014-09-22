@@ -172,10 +172,10 @@ class EmployeesController < ApplicationController
     @bank_fields2 = BankField.where(status: false)
   end
 
-   def new_payroll_category
+    def new_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_categories1 = PayrollCategory.where(is_deduction: false)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: true) 
+    @payroll_categories2 = PayrollCategory.where(is_deduction: false) 
   end
 
   def add_payroll_category
@@ -187,34 +187,46 @@ class EmployeesController < ApplicationController
     @payroll_categories1 = PayrollCategory.where(is_deduction: false)
     @payroll_categories2 = PayrollCategory.where(is_deduction: true)
   end
-  
-  def new_grade
-    @employee_grade=EmployeeGrade.new
-    @grade1 = EmployeeGrade.where(status: "active")
-    @grade2 = EmployeeGrade.where(status: "inactive")
+
+  def edit_payroll_category
+    @payroll_category=PayrollCategory.find(params[:payroll_category_id])
+    
   end
 
-  def add_grade
-     @employee_grade=EmployeeGrade.new(grade_params)
-     @employee_grade.save 
-     @grade1 = EmployeeGrade.where(status: "active")
-     @grade2 = EmployeeGrade.where(status: "inactive")
-   end
-  
-  def edit_grade
-    @employee_grade=EmployeeGrade.find(params[:grade_id])
-  end
-
-  def update_grade 
-    @employee_grade=EmployeeGrade.find(params[:grade_id])
-    @employee_grade.update(grade_params) 
+   def update_payroll_category
+     @payroll_category_new = PayrollCategory.new
+  @payroll_category=PayrollCategory.find(params[:payroll_category_id])
+    if @payroll_category.update(payroll_category_params)
+      flash[:notice5] = "Employee payroll category updated"
+    end
+   @payroll_categories1 = PayrollCategory.where(is_deduction:false)
+    @payroll_categories2 = PayrollCategory.where(is_deduction:true)
   end 
-  
-  def destroy_grade
-     @employee_grade=EmployeeGrade.find(params[:id])
-     @employee_grade.destroy
-  end   
-  
+
+   def destroy_payroll_category
+    @payroll_category_new = PayrollCategory.new
+   @payroll_category=PayrollCategory.find(params[:id])
+    if @payroll_category.destroy
+      flash[:notice5] = "Employee payroll category deleted"
+    end
+    @payroll_categories1 = PayrollCategory.where(is_deduction:false)
+    @payroll_categories2 = PayrollCategory.where(is_deduction:true)
+  end
+    def active_payroll_category
+      @payroll_category_new= PayrollCategory.new
+      @payroll_category=PayrollCategory.find(params[:format])
+      @payroll_category.update(status:false)
+      @payroll_categories1 = PayrollCategory.where(is_deduction:false)
+      @payroll_categories2 = PayrollCategory.where(is_deduction:true)
+    end
+    
+    def inactive_payroll_category
+       @payroll_category_new= PayrollCategory.new
+       @payroll_category=PayrollCategory.find(params[:format])
+       @payroll_category.update(status:true)
+     @payroll_categories1 = PayrollCategory.where(is_deduction: false)
+    @payroll_categories2 = PayrollCategory.where(is_deduction: true)
+      end     
   def new_grade
     @employee_grade_new=EmployeeGrade.new
     @grade1 = EmployeeGrade.where(status: true)

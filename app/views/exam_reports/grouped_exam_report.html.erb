@@ -16,8 +16,8 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     Grouped Exam Report
   </div>
-   <% unless flash[:notice].nil? %>
-    <div class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+   <% unless flash[:notice_b].nil? %>
+    <div class="alert alert-danger" align="center" style="width:100%"> <%= flash[:notice_b] %> </div>
     <%end %>
 <%= form_for :batch_option, :url=>{:action=>'generate_grouped_report'},method: :get do |f| %>
   

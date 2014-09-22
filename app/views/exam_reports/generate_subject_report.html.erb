@@ -19,14 +19,15 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     <%= link_to 'Subject Wise Report','/exam_reports/subject_wise_report'%> &raquo;
     Generated Report
-  </div><br/><br/>
-    <h4><%= @batch.name %> - <%= @batch.course.course_name %> | <%= @subject.name %></h4>
+  </div></div><br/><br/>
+    <h4><%= @batch.name %> - <%= @batch.course.course_name+" "+ @batch.course.section_name%> | <%= @subject.name %></h4>
+    
     <div id="score-table">
       <table id="listing" width="100%" cellpadding="1" cellspacing="1">
         <tr class="tr-head">
-          <td>Name</td>
+          <td class="col-2"><font color="blue">Name</font></td>
           <% @exam_groups.each do |exam_group| %>
-            <td><%= exam_group.name %></td>
+            <td><font color="blue"><%= exam_group.name %></font></td>
           <% end %>
         </tr>
            <% @students.each do |student| %>
@@ -37,13 +38,13 @@
           <% end %>
           <% unless is_valid_subject == 0 %>
             <tr class="tr-<%= cycle('odd', 'even') %>">
-              <td class="col-2"><%= student.first_name+" "+student.last_name %></td>
+              <td class="col-3"><%= student.first_name+" "+student.last_name %></td>
               <% @exam_groups.each do |exam_group| %>
                 <td class="col-3">
                   <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
                   <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.id,exam.id) unless exam.nil? %>
                   <% unless exam.nil? %>
-                    <% if exam_group.exam_type == 'marks' %>
+                    <% if exam_group.exam_type == 'Marks' %>
                       <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/"+exam.maximum_marks.to_s %>
                        <% elsif exam_group.exam_type == 'Grades'%>
                       <%= exam_score.nil? ? '-' : (exam_score.grading_level || '-') %>
@@ -59,17 +60,24 @@
             </tr>
           <% end %>
         <% end %>
-        <tr class="blank"></tr>
+        <tr class="tr-blank"></tr>
         <tr class="tr-head">
-          <td>
-            class_average
+          <td class="col-2"><font color="blue">
+            class_average</font>
           </td>
+          <% total_marks=0%> <% total_max_marks=0%>
           <% @exam_groups.each do |exam_group| %>
-            <% if exam_group.exam_type == 'marks' or exam_group.exam_type == 'MarksAndGrades' %>
+            <% if exam_group.exam_type == 'Marks' or exam_group.exam_type == 'MarksAndGrades' %>
               <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
-              <td>
-                -
+              <% exam_scores = ExamScore.where(exam_id:exam.id) %>
+              <% exam_scores.each do |exam_score|%>
+                  <%= total_marks+=exam_score.marks%>
+                  <%= total_max_marks+=exam.maximum_marks%>
+                <%end%>
+              <td><font color="blue">
+                <%= "%.2f" %(total_marks*100/total_max_marks)+"%" %></font>
               </td>
+               <% total_marks=0%> <% total_max_marks=0%>
             <% else %>
               <td>-</td>
             <% end %>
@@ -79,4 +87,3 @@
     </div>
     <div class="extender"></div>
   </div>
-</div>
