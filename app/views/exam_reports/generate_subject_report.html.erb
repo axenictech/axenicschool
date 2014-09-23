@@ -23,7 +23,7 @@
     <h4><%= @batch.name %> - <%= @batch.course.course_name+" "+ @batch.course.section_name%> | <%= @subject.name %></h4>
     
     <div id="score-table">
-      <table id="listing" width="100%" cellpadding="1" cellspacing="1">
+      <table id="listing" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
         <tr class="tr-head">
           <td class="col-2"><font color="blue">Name</font></td>
           <% @exam_groups.each do |exam_group| %>
@@ -68,16 +68,23 @@
           <% total_marks=0%> <% total_max_marks=0%>
           <% @exam_groups.each do |exam_group| %>
             <% if exam_group.exam_type == 'Marks' or exam_group.exam_type == 'MarksAndGrades' %>
+            <% @students.each do |student|%>
+             <% is_valid_subject=1 %>
+          <% unless @subject.elective_group_id.nil? %>
+            <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.id,@subject.id) %>
+            <% is_valid_subject = 0 if is_student_elective.nil? %>
+          <% end %>
+          <% unless is_valid_subject == 0 %>
               <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
-              <% exam_scores = ExamScore.where(exam_id:exam.id) %>
-              <% exam_scores.each do |exam_score|%>
-                  <%= total_marks+=exam_score.marks%>
-                  <%= total_max_marks+=exam.maximum_marks%>
-                <%end%>
+              <% exam_score = ExamScore.find_by_exam_id_and_student_id(exam.id,student.id) %>
+                  <% total_marks+=exam_score.marks%>
+                  <% total_max_marks+=exam.maximum_marks%>
+            <%end%>
+            <%end%>
               <td><font color="blue">
                 <%= "%.2f" %(total_marks*100/total_max_marks)+"%" %></font>
               </td>
-               <% total_marks=0%> <% total_max_marks=0%>
+            <% total_marks=0%> <% total_max_marks=0%>
             <% else %>
               <td>-</td>
             <% end %>

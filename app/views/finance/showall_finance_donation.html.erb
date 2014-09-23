@@ -1,0 +1,57 @@
+<div id="content-header">
+  <h1>Donations</h1>
+  <h3>Donors</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), '/finance/new_finance_donation' %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
+<% unless flash[:notice3].nil? %> <p class="flash-msg"> <%= flash[:notice3] %> </p><% end %>
+<h4>List of donors</h4>
+
+<% if @finance_donations.empty?%>
+<div align="center"><h4>No records</h4></div>
+<%else%>
+<table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+	<tbody>
+		
+	
+	<tr class="tr-head">
+		<td>Name</td>
+		<td>Description</td>
+		<td>Amount</td>
+		<td>Created At</td>
+		<td>       </td>
+	</tr>
+	 <tr class="tr-blank"></tr>
+
+	 <% @finance_donations.each do |f| %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+        
+          <td class="col-3">
+            <%= link_to f.donor, finance_disp_finance_donation_path(f)  %> 
+          </td>
+         
+          <td class="col-1">
+            <%= f.description %>
+          </td>
+          <td class="col-3">
+            <%=  f.amount%> 
+          </td>
+          <td class="col-3">
+            <%= f.created_at.strftime("%d-%m-%y") %> 
+          </td>
+          <td class="col-3">
+            <%= link_to 'Edit', finance_edit_finance_donation_path(f) %> <%='|' %> <%= link_to 'Delete', finance_destroy_finance_donation_path(f),method: :delete, data: { confirm: "Are you sure to delete #{f.donor}?"}%> 
+          </td>
+        </tr>
+      
+      <% end %>
+
+	</tbody>
+</table>
+
+
+</div>
+<%end%>

@@ -21,13 +21,17 @@
   <tr>
     <td colspan="2"></td>
     <td class="col-2"><%= f.label :maximum_marks , class: "control-label"%></td>
-    <td class="col-2"><%=text_field_tag :max_marks,"",{oninput:"$('#student_form').submit();"}%></td>
+    <td class="col-2"><%=text_field_tag :max_marks,"",
+    {oninput:" var a=$('#max_marks').val();
+  $('.max_set').attr('value',a);"}%></td>
     <td colspan="2"></td>
   </tr>
   <tr>
     <td colspan="2"></td>
     <td class="col-2"><%= f.label :minimum_marks , class: "control-label"%></td>
-    <td class="col-2"><%= text_field_tag :min_marks,"",{oninput:"$('#student_form').submit();"}%></td>
+    <td class="col-2"><%= text_field_tag :min_marks,"",
+     {oninput:" var a=$('#min_marks').val();
+  $('.min_set').attr('value',a);"}%></td>
     <td colspan="2"></td>
   </tr>
 <%end%>
@@ -51,14 +55,15 @@
       <td class="col-2"><%= subject.name %></td>
       <%= exam.hidden_field :subject_id, value: subject.id%>
     <% unless @exam_group.exam_type.eql? "Grades"%>
-      <td ><%= exam.text_field :maximum_marks,class: ''%></td>
-      <td ><%= exam.text_field :minimum_marks,class: ''%></td>
+      <td ><%= exam.text_field :maximum_marks,class: 'max_set'%></td>
+      <td ><%= exam.text_field :minimum_marks,class: 'min_set'%></td>
+
     <%else%>
     <td></td><td></td>
     <% end %>
       <td ><%= exam.date_field :start_time%></td>
       <td ><%= exam.date_field :end_time%></td>
-      <td><%= check_box_tag "no_create[]", exam_group.id, false, class: "no_check_box" %></td>
+    
     </tr>
 <%end%>
 <% end %>
@@ -68,3 +73,11 @@
 </table>
 <%end%>
 <%end%>
+
+<script>
+function set_val(){
+  
+
+}
+
+</script>

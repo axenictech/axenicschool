@@ -1,0 +1,28 @@
+
+
+
+<%= form_for :payslip,url:{action:'create_payslip_category',format:@employee}  do |f| %>
+
+    <table align="center" class="table" style="width:320px">
+  
+     <tr>
+     	 <td class="col-2"><%=f.label :name%><span class="necessary-field">*</span></td>
+          <td class="col-2"> <%=f.text_field :name%></td>
+     </tr>
+
+     <tr>
+     	 <td class="col-2"><%=f.label :amount%></td>
+        <td class="col-2"><%=f.text_field :amount, :required=>false%></td>
+     </tr>
+
+      <tr>
+       <td class="col-2"><%=f.label :is_deduction%></td>
+       <td class="col-2"> <%=f.check_box :is_deduction %>  </td>
+    </tr>
+   
+     <tr><td colspan="4"><%=f.submit "create",class: "btn btn-primary" %></td></tr>
+    </table>
+<%end%>
+
+
+

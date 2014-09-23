@@ -1,0 +1,9 @@
+$("ul.errors1").html("")
+<% if  @finance_fee_category.errors.any? %>
+		<%  @finance_fee_category.errors.full_messages.each do |message| %>
+		$("ul.errors1").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
+$('#display_finance_fee_category').html("<%= j render 'finance_fee_category'%>")
+$('#myModal').modal('hide')
+<%end%>

@@ -16,8 +16,8 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     Student Ranking Per Subject
   </div>
-   <% unless flash[:notice].nil? %>
-    <div class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+   <% unless flash[:notice_rank_sub].nil? %>
+    <div class="alert alert-danger" align="center" style="width:100%"> <%= flash[:notice_rank_sub] %> </div>
     <%end %>
 <%= form_for :rank_report, :url=>{:action=>'rank_report_batch'},html:{id: 'form_rank_report_batch'},remote:true,method: :get do |f| %>
   
@@ -27,6 +27,6 @@
       <%= f.select :batch_id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_rank_report_batch').submit();"}%>
       </div></div>
   <% end %>
-      <div id="rank_report"><%= render 'rank_report_subject' %></div>
+      <div id="rank_report"></div>
   </div>
 </div> 

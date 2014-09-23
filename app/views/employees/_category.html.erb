@@ -7,7 +7,7 @@
 	<%= form_for @employee_category_new, url:{action:'add_category'},remote:true do |c|%>
 	<table class="table" style="width:500px" align="center">
 
-<tbody>
+	<tbody>
 		<tr>
 			<td><%= c.label :Name%></td>
 			<td><%= c.text_field :name%></td>
@@ -26,7 +26,7 @@
 		<tr>
 			<td colspan="3"><%= c.submit 'Create'%></td>
 		</tr>
-	
+
 
 	</tbody>
 </table>
@@ -45,8 +45,8 @@
 	<%@categories1.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.prefix%>)</td>
-			<td><%= link_to 'edit', employees_edit_category_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 
+			<td><%= link_to 'Edit', employees_edit_category_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
 
@@ -64,7 +64,7 @@
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.prefix%>)</td>
 			<td><%= link_to 'edit', employees_edit_category_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 
+			<td><%= link_to 'delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
 

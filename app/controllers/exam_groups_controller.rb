@@ -95,11 +95,22 @@ class ExamGroupsController < ApplicationController
     redirect_to exam_groups_connect_exam_path(@batch)  
   end
 
-  private 
-  def params_exam_group
-    params.require(:exam_group).permit(:name,:exam_type,
-      exams_attributes: [:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
+  def publish_exam
+    @exam_group=ExamGroup.find(params[:format])
+    @exam_group.update(is_published:true)
+    @exam_group.exams.each do |exam|
+        exam.create_exam_event
+      end
+    @batch=@exam_group.batch
+    @exam_groups=@batch.exam_groups.all
+
   end
+
+  private 
+    def params_exam_group
+      params.require(:exam_group).permit(:name,:exam_type,
+        exams_attributes: [:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
+    end
 
 end
   

@@ -1,0 +1,12 @@
+
+  <%= form_for :subject_assignment, url:{action:'assign_subject_disp',format:@subject}, method: :get,remote:true,html:{id: "user"} do |f|%>
+
+	<div class="label-field-pair">
+		<%=f. label :'Select Subjects'%>
+		<div  class="text-input-bg">
+   		 <%= f.select :subject_id, @subject.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user').submit();"}%></div></div>
+
+   		<%end%>
+	
+
+		<div id="subject_list"></div>

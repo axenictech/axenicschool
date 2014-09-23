@@ -1,8 +1,8 @@
 class EmployeeCategory < ActiveRecord::Base
 	has_many :employee_positions
 	validates :name, presence: true,
-								length: { minimum: 1, maximum: 20 }
+								length: { minimum: 1, maximum: 30 }, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" }
 
 	validates :prefix, presence: true,
-								length: { minimum: 1, maximum: 20 }
+								length: { minimum: 1, maximum: 20 }, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" }
 end

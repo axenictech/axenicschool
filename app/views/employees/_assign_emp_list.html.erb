@@ -1,0 +1,12 @@
+<h2>Assigned Employee</h2>
+
+<table class="tabel" style="width:400px">
+	<%@assigned_employees.each do |emp|%>
+	<% @employee = Employee.find(emp.employee_id) %>
+	<tr>
+		<td><%=@employee.first_name%></td>
+		<td><%= link_to "Delete",employees_remove_employee_path(@employee,@subject),method: :delete,data: { confirm: 'Are you sure?' } ,remote:true%></td>
+	</tr>
+	<%end%>
+</table>
+

@@ -24,7 +24,7 @@
     <div class="custom_header">
     <h4><%= @batch.course.course_name+" "+@batch.course.section_name %> <%= @batch.name %> | <%= @exam_group.name %></h4>
     <div class="students-table">
-      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
         <tr class="tr-head">
           <td class="col-2"><font color="blue">Name</font></td>
             <% @exam_group.exams.each do |exam| %>

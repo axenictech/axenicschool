@@ -1,0 +1,27 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>View All</h1>
+  <h3>View All<br />
+
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<%= form_for :viewall, url:{action:'allemp'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
+
+  <div class="label-field-pair">
+    <%=f. label :'Select Deaprtment'%>
+    <div  class="text-input-bg">
+       <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form').submit();"}%></div></div>
+
+      <%end%>
+
+  <div id="user_search"></div>
+  </div>

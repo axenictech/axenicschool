@@ -1,0 +1,11 @@
+
+  <table align="center" class="table table-hover" style="width:500px">
+      <tr class="tr-head">Select Employee<td colspan="2" class="col-2">select: <%= link_to "All"%>
+      <%= link_to "none"%></td></tr>
+      <% @employees.each do |employee| %> 
+      <tr>
+      <td class="col-2"><%= employee.first_name+" "+employee.last_name  %></td>
+      <% end %>
+      </tr>
+</table>
+<div align="center"><%=link_to 'Reset','', class: 'btn btn-primary'%></div>

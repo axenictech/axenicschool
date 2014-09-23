@@ -2,7 +2,7 @@
     <div class="custom_header" align="left">
       <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
      </div>
-    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
      <% max_total = 0 %>
         <% marks_total = 0 %>
       <tr class="tr-head">
@@ -12,7 +12,14 @@
         <% end %>
           <td><font color="blue">Total</font></td>
       </tr>
+
       <% @subjects.each do |subject| %>
+      <% is_valid_subject=1 %>
+          <% unless subject.elective_group_id.nil? %>
+            <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(@student.id,subject.id) %>
+            <% is_valid_subject = 0 if is_student_elective.nil? %>
+          <% end %>
+          <% unless is_valid_subject == 0 %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
           <td class="col-3" ><%= subject.name %></td>
 
@@ -40,6 +47,7 @@
           </tr>
         <% max_total = 0 %>
         <% marks_total = 0 %>
+        <%end%>
       <% end %>
       <tr class="tr-blank"></tr>
       <tr class="tr-head">
@@ -50,9 +58,16 @@
         <% @exam_groups.each do |exam_group| %>
         <% exams=exam_group.exams.all%>
         <%exams.each do |exam|%>
+        <% is_valid_subject=1 %>
+          <% unless exam.subject.elective_group_id.nil? %>
+            <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(@student.id,exam.subject.id) %>
+            <% is_valid_subject = 0 if is_student_elective.nil? %>
+          <% end %>
+          <% unless is_valid_subject == 0 %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
              <% @max_total += exam.maximum_marks %>
               <% @marks_total += exam_score.marks %>
+          <%end%>
           <%end%>
           <% if exam_group.exam_type == "MarksAndGrades" %>
             <td><font color="blue"><%= "#{@marks_total || "-"}/"+@max_total.to_s %></font></td>

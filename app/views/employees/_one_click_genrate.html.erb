@@ -1,0 +1,21 @@
+
+   		<%=form_for :one_click_payslip do |f| %>
+
+				<table>
+				  <tr>
+				    <td><%=f.label :'salary_date'%></td>
+				    <td><%=f.date_field :joining_date,:value => Time.now.strftime('%Y-%m-%d')%></td>
+				  </tr>
+
+				  <tr>
+				    <td>
+				         <%=f.submit :'►go',class:'btn btn-success'%>
+				     </td>
+				    </tr>
+				    </table>
+		<% end %>
+
+
+
+
+   		

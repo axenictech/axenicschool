@@ -3,8 +3,8 @@
 <ul class="errors3"></ul></div>
 
 <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%>
-	<table class="table" style="width:500px" align="center">
-<tbody>
+		<table class="table" style="width:500px" align="center">
+	<tbody>
 		<tr>
 			<td><%= c.label :Name%></td>
 			<td><%= c.text_field :name%></td>
@@ -23,9 +23,10 @@
 		<tr>
 			<td colspan="3"><%= c.submit 'Create'%></td>
 		</tr>
-	
+
 	</tbody>
-</table><%end%>
+</table>
+<%end%>
 
 <% if @positions1.empty? and @positions2.empty?%>
 <h3 align="center">No records</h3>
@@ -38,9 +39,9 @@
 		
 		<%@positions1.each do |c| %>
 			<tr>
-			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'edit',employees_edit_position_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,employees_destroy_position_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete?"}%></td>	 
+			<td class="col-3"><%=c.name%> (<%=c.employee_category.name%>)</td>
+			<td><%= link_to 'Edit',employees_edit_position_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,employees_destroy_position_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
 		  
@@ -56,9 +57,9 @@
 	
 		<%@positions2.each do |c| %>
 			<tr>
-			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'edit', employees_edit_position_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,employees_destroy_position_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete?"}%></td>	
+			<td class="col-3"><%=c.name%> (<%=c.employee_category.name%>)</td>
+			<td><%= link_to 'Edit', employees_edit_position_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,employees_destroy_position_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	
 			</tr>
 		<%end%>
 		

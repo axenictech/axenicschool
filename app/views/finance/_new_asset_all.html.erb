@@ -1,0 +1,14 @@
+<% unless flash[:notice4].nil? %> <p class="flash-msg"> <%= flash[:notice4] %> </p><% end %>
+<div id="box">
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Create", finance_add_asset_path,remote:true %></div>
+        <div class="link-descr">creates new asset</div>
+      </div>
+
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "View",finance_display_asset_path%></div>
+        <div class="link-descr">Asset View</div>
+      </div>
+</div>

@@ -1,0 +1,16 @@
+<%= form_for :emp,url:{action:'add'},method: :post do |f|%>
+<table>
+	<tr>
+		<td>
+			<%= f.label :amount%></td>
+		<td><%= f.text_field :amount%>	</td>
+	</tr>
+
+	<tr>
+		<td>
+			
+			<%= f.submit :'Submit'%>	
+		</td>
+	</tr>
+</table>
+<%end %>

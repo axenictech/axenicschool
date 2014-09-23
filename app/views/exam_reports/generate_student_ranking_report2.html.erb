@@ -19,17 +19,17 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
      <%= link_to 'Student Ranking Per Course', '/exam_reports/student_ranking_per_course' %> &raquo;
     Generate Report
-  </div><br/><br/>
+  </div></div><br/><br/>
    <h4>Overall Ranking : <%= @course.course_name+" "+@course.section_name %></h4>
     <div id="score-table">
-          <table id="listing" width="100%" cellpadding="1" cellspacing="1">
+          <table id="listing" width="100%" cellpadding="1" cellspacing="1" class="table-bordered">
             <tr class="tr-head">
-              <th>Sr.No.</th>
-              <th>Admission no</th>
-              <th>Student Name</th>  
-              <th>Batch</th>       
-              <th>Marks</th>
-              <th>Rank</th>
+              <th><font color="blue">Sr.No.</font></th>
+              <th><font color="blue">Admission no</font></th>
+              <th><font color="blue">Student Name</font></th>  
+              <th><font color="blue">Batch</font></th>       
+              <th><font color="blue">Marks</font></th>
+              <th><font color="blue">Rank</font></th>
             </tr>
             <% @batches.each do |batch| %>
             <% batch.students.each_with_index do |student,i| %>
@@ -44,4 +44,4 @@
         <% end %>
         <% end %>
           </table>
-    </div></div></div>
+    </div></div>

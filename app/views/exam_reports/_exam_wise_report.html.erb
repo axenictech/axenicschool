@@ -8,7 +8,7 @@
     <div class="custom_header">
       <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
     </div>
-    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered">
+    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
       <tr class="tr-head">
         <td class="col-3"><font color="blue">Subject</font></td>
         <% if @exam_group.exam_type == 'Marks' %>

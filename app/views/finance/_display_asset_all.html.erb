@@ -1,0 +1,39 @@
+<% unless flash[:notice5].nil? %> <p class="flash-msg"> <%= flash[:notice5] %> </p><% end %>
+<% if @assets.empty?%>
+<div align="center"><h4>No records</h4></div>
+<%else%>
+<table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+	<tbody>
+		
+	
+	<tr class="tr-head">
+		<td>Asset</td>
+		<td>Created At</td>
+    <td>Total Amount</td>
+		<td>       </td>
+	</tr>
+	 <tr class="tr-blank"></tr>
+
+	 <% @assets.each do |f| %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+        
+          <td class="col-3">
+            <%= link_to f.title, finance_viewcontent_asset_path(f) %> 
+          </td>
+         
+          <td class="col-3">
+            <%= f.created_at.strftime("%d-%m-%y") %>
+          </td>
+          <td class="col-3">
+            <%= 'Rs.'%><%=f.amount%>
+          </td>
+          <td class="col-3">
+            <%= link_to 'Edit', finance_edit_asset_path(f),remote:true %> <%='|' %> <%= link_to 'Delete',finance_destroy_asset_path(f), method: :delete, data: { confirm: "Are you sure to delete #{f.title}?"} %> 
+          </td>
+        </tr>
+      
+      <% end %>
+
+	</tbody>
+</table>
+<% end %>

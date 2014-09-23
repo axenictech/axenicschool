@@ -1,0 +1,23 @@
+<div id="content-header">
+  <h1>Asset Liability Management</h1>
+  <h3>Asset View</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), '/finance/new_asset' %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'PDF Report', '' %> </li>
+
+  </ul>
+</div>
+<div id="page-yield">
+<div id="display_asset">
+<%= render 'display_asset_all'%>
+</div>
+
+<div id="myModal" class="modal fade">
+ </div>
+
+</div>

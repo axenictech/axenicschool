@@ -1,0 +1,30 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing category" %></h3>
+</div>
+<ul class="errors2"></ul>
+<%= form_for @finance_fee_category,url:{:action=>'update_finance_fee_category',finance_fee_category_id: @finance_fee_category.id},method: :patch,remote: true do |f|%>
+ <table class="table" style="width:85%">
+        <tr>
+            <td class="col-2"><%= f.label :Name , class: "control-label"%></td>
+            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+        
+        <tr>
+            <td class="col-2"><%= f.label :Description , class: "control-label"%></td>
+             <td><%=f.text_field :description ,:style =>"width: 250px", class: "form-control"%></td>
+        <tr>
+
+       <tr><td class="col-2"><%= f.label :Is_this_under_income? , class: "control-label"%></td>
+             <td><%= f.check_box :is_master %>   </td>
+        <tr>
+
+
+        <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%>
+        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        </tr>
+    </table>
+<% end %>
+
+</div></div></div>

@@ -19,7 +19,7 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     <%= link_to 'Archived student report', '/exam_reports/archived_student_report' %> &raquo;
     Consolidated Report
-  </div>
+  </div></div>
 <%= form_for :exam_group_option, :url=>{:action=>'exam_group_wise_report'},html:{id: 'form_exam_group'},remote:true,method: :get do |f| %>
    <div class="label-field-pair">
   <%= f.label :select_exam_group %>
@@ -30,5 +30,4 @@
   <br/><br/>
       <div id="consolidated_report"></div>
   </div>
-</div>
 </div>

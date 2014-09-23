@@ -1,0 +1,19 @@
+
+  <%= form_for :view_payslip, url:{action:'view_payslip'},remote:true,html:{id: "user_form2"} do |f|%>
+
+	<div class="label-field-pair">
+		<%=f. label :'Select Department'%>
+		<div  class="text-input-bg">
+   		 <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:true}%></div></div>
+
+
+
+	<div class="label-field-pair">
+		<%=f. label :'Select Month'%>
+		<div  class="text-input-bg">
+   		 <%= f.select :id,  @salary_dates.all.collect {|b| [b.salary_date,b.id]},{prompt:true},{onchange:"$('#user_form2').submit();"}%></div></div>
+
+   		<%end%>
+
+   		<div id="payslip"></div>
+   		

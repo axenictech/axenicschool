@@ -1,0 +1,9 @@
+
+  <table align="center" class="table table-hover" style="width:500px">
+  <tr class="tr-head"><td colspan="2" class="col-2">Employee name</td></tr>
+  <% @employees.each do |employee| %> 
+     <tr>
+      <td class="col-2"><%= employee.first_name+" "+employee.last_name  %></td>
+    <% end %>
+    </table>
+  

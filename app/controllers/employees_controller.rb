@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
  
-  def new_category
+    def new_category
     @employee_category_new = EmployeeCategory.new
     @categories1= EmployeeCategory.where(status: true)
     @categories2 = EmployeeCategory.where(status: false)
@@ -268,7 +268,7 @@ class EmployeesController < ApplicationController
   end   
 
 
-  def admission1
+ def admission1
     @employee=Employee.new
   end
 
@@ -368,9 +368,147 @@ class EmployeesController < ApplicationController
   end
 
   def subject_assignment
+
+    
+  end
+  def assign_subject
+    @batch=Batch.find(params[:subject_assignment][:id])
+   @subject=@batch.subjects.all
+  end
+
+   def assign_subject_disp
+    @subject=Subject.find(params[:subject_assignment][:subject_id])
+   end
+   
+   def list_emp
+     @employee=Employee.all
+     @subject=Subject.find(params[:format])
+   end
+
+   def assign_employee
+    @employee=Employee.find(params[:id])
+    @subject=Subject.find(params[:format])
+    @assigned_employee=EmployeeSubject.create(employee_id:@employee.id,subject_id:@subject.id)
+    @assigned_employees = EmployeeSubject.where(subject_id:@subject.id)
+  end
+
+  def remove_employee
+    @employee=Employee.find(params[:id])
+    @subject=Subject.find(params[:format])
+    @assigned_employee=EmployeeSubject.where(employee_id:@employee.id,subject_id:@subject.id)
+    @assigned_employee.destroy_all(employee_id:@employee.id,subject_id:@subject.id)
+    @assigned_employees = EmployeeSubject.where(subject_id:@subject.id)
+    
+  end
+
+  def search_employee
+    
+  end
+  def search_emp
+    unless params[:search].empty?
+    other_conditions = ""
+    
+    @department=EmployeeDepartment.find(params[:advance_search][:employee_department_id])
+    other_conditions += " AND employee_department_id=#{@department.id}" unless params[:advance_search][:employee_department_id]
+    @employee=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
+        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'"+other_conditions)
+    
+    p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    p @employee
+
+    end
+
     
   end
  
+  def viewall_emp
+   
+  end
+
+  def allemp
+      @department =EmployeeDepartment.find(params[:viewall][:id])
+      @employees=@department.employees.all
+  end  
+
+  def advance_search
+    
+  end
+  def advance_search_emp
+    unless params[:search].empty?
+   
+    @employee=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
+        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'")
+  
+    end
+  end
+
+  def payslip
+    
+  end
+
+  def select_employee_department
+     @department=EmployeeDepartment.all
+  end
+
+  def department_employee_list
+      @department =EmployeeDepartment.find(params[:select_department][:id])
+      @employees=@department.employees.all
+  end
+
+  def monthly_payslip
+    @employee=Employee.find(params[:format])
+    @independent_categories = PayrollCategory.all
+  end
+
+  def payroll_category
+     @employee=Employee.find(params[:format])
+  end
+  def create_monthly_payslip
+    @employee=Employee.find(params[:format])
+    #@salary_date = ''
+    @salary_date =Date.parse(params[:salery_slip][:salery_date])
+     #salary_date = Date.parse(params[:salary_date])
+
+    p @salary_date
+    unless @salary_date.to_date < @employee.joining_date.to_date
+        start_date =@salary_date - ((@salary_date.day - 1).days)
+        end_date = start_date + 1.month
+        # payslip_exists = MonthlyPayslip.where(employee_id:@employee.id,
+        #   :conditions => ["salary_date >= ? and salary_date < ?", start_date, end_date])
+        # if payslip_exists == []
+            params[:salery_slip].each_pair do |k, v|
+            row_id = EmployeeSalaryStructure.where(employee_id:@employee.id,payroll_category_id:k)
+           # category_name = PayrollCategory.find(k).name
+            unless row_id.nil?
+              MonthlyPayslip.create(:salary_date=>start_date,:employee_id => params[:format],
+                :payroll_category_id => k,:amount => v['amount'])
+            else
+              MonthlyPayslip.create(:salary_date=>start_date,:employee_id => params[:format],
+                :payroll_category_id => k,:amount => v['amount'])
+            end
+          # end
+      end
+end
+    redirect_to employees_monthly_payslip_path(@employee)
+  end
+
+  def create_payslip_category
+     @employee=Employee.find(params[:format])
+     @salary_date= (params[:salary_date])
+     @created_category = IndividualPayslipCategory.new(:employee_id=>@employee.id,:name=>params[:payslip][:name],:amount=>params[:payslip][:amount],:is_deduction=> params[:payslip][:is_deduction])
+     @created_category.save
+     redirect_to employees_monthly_payslip_path(@employee)
+  end
+
+  def department_payslip
+        @salary_dates = MonthlyPayslip.all
+
+  end
+  
+  def view_payslip
+    
+  end
+
   private
   def employee_params
     params.require(:employee).permit(:employee_category_id,

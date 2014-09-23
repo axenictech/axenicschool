@@ -1,15 +1,15 @@
 <div id="score-table">
+ <h4><%= @batch.course.course_name %> <%= @batch.name %> | <%= @exam_group.name %></h4>
     <div class="custom_header">
-    <h4><%= @batch.course.course_name %> <%= @batch.name %> | <%= @exam_group.name %></h4>
     <div class="students-table">
-      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
         <tr class="tr-head">
-          <td class="col-2">Name</td>
+          <td class="col-2"><font color="blue">Name</font></td>
             <% @exam_group.exams.each do |exam| %>
-              <td class="col-2"><%= exam.subject.code+" "+exam.subject.name %><%= "(" + exam.maximum_marks.to_s + ")"  unless exam.maximum_marks.nil? %></td>
+              <td class="col-2"><font color="blue"><%= exam.subject.code+" "+exam.subject.name %><%= "(" + exam.maximum_marks.to_s + ")"  unless exam.maximum_marks.nil? %></font></td>
             <% end %>
             <% unless @exam_group.exam_type == "Grades" %>
-              <td class="col-2">Percentage(%)</td>
+              <td class="col-2"><font color="blue">Percentage(%)</font></td>
             <% end %>
         </tr>
         <% @exam_group.batch.archived_students.each do |student|%>
@@ -19,7 +19,13 @@
               <% total_marks = 0 %>
               <% total_max_marks = 0 %>
               <% @exam_group.exams.each do |exam| %>
-                <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.id,exam.id) %>
+                <% is_valid_subject=1 %>
+                <% unless exam.subject.elective_group_id.nil? %>
+                  <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.student_id,exam.subject.id) %>
+                  <% is_valid_subject = 0 if is_student_elective.nil? %>
+                <% end %>
+                <% unless is_valid_subject == 0 %>
+                <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.student_id,exam.id) %>
                 <% unless @exam_group.exam_type == "Grades" %>
                   <td class="col-2">
                     <% if @exam_group.exam_type == "MarksAndGrades" %>
@@ -30,6 +36,9 @@
                   </td>
                   <% total_marks = total_marks+(exam_score.marks || 0) unless exam_score.nil?  %>
                   <% total_max_marks = total_max_marks+exam.maximum_marks unless exam_score.nil? %>
+              <%end%>
+              <%else%>
+              <td>-</td>
               <%end%>
               <%end%>
               <td class="col-2"><% percentage = total_marks*100/total_max_marks.to_f unless total_max_marks == 0%>

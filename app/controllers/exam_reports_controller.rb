@@ -156,10 +156,19 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_ranking_report
-     @subject=Subject.find(params[:rank_report][:subject_id])
-     @batch=@subject.batch
-     @students=@batch.students.all
-     @exam_groups=@batch.exam_groups.all
+    if request.get?
+      if params[:rank_report][:subject_id].present? 
+         @subject=Subject.find(params[:rank_report][:subject_id])
+         @batch=@subject.batch
+         @students=@batch.students.all
+         @exam_groups=@batch.exam_groups.all
+      else
+         flash[:notice_rank_sub]="Please select subject"
+         @batches=Batch.all
+         @subjects=Batch.last.subjects.all
+         render 'student_ranking_per_subject'
+      end
+    end
   end
 
   def student_ranking_per_batch
@@ -167,10 +176,18 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_student_ranking_report
-    @batch=Batch.find(params[:rank_report][:batch_id])
-    @students=@batch.students.all
-    @exam_groups=@batch.exam_groups.all
-    @subjects=@batch.subjects.all
+   if request.get?
+    if params[:rank_report][:batch_id].present? 
+        @batch=Batch.find(params[:rank_report][:batch_id])
+        @students=@batch.students.all
+        @exam_groups=@batch.exam_groups.all
+        @subjects=@batch.subjects.all
+     else
+         flash[:notice_rank_batch]="Please select batch"
+         @batches=Batch.all
+         render 'student_ranking_per_batch'
+      end
+    end
   end
 
   def student_ranking_per_course
@@ -178,8 +195,16 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_student_ranking_report2
-    @course=Course.find(params[:rank_report][:course_id])
-    @batches=@course.batches.all
+    if request.get?
+    if params[:rank_report][:course_id].present? 
+        @course=Course.find(params[:rank_report][:course_id])
+        @batches=@course.batches.all
+    else
+         flash[:notice_rank_course]="Please select course"
+           @courses=Course.all
+         render 'student_ranking_per_course'
+      end
+    end
   end
 
   def student_ranking_per_school

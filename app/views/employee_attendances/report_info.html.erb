@@ -1,0 +1,55 @@
+<div id="content-header">
+  <h1>Employee Attendance</h1>
+
+  <h3>Detailed Report</h3>
+ 
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+
+</div>
+
+<div id="page-yield">
+ <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+  
+
+      <% @leave_types.each do |lt| %>
+        <% leave_count = EmployeeLeave.where(employee_leave_type_id:lt.id,employee_id:@employee.id) %>
+
+        <tr><td><%= lt.name  %>:</td><td></td></tr>
+     
+          <% @report = EmployeeAttendance.where(employee_id:@employee.id, employee_leave_type_id:lt.id) %>
+       
+        <% if @report == [] %>
+          <tr style="background-color:lightblue"><td></td>
+          <td><%= t('no_leaves_taken') %></td>
+           </tr>
+        <% else %>
+          <% @report.each do |r| %>
+            <tr style="background-color:lightgray"> <td></td>
+             <td> <%=r.attendance_date %>
+              <% if r.is_half_day==true %>
+                (<%= t('half_day') %>)</td></tr>
+              <% end %>
+            
+          <% end %>
+
+        <% end %>
+
+      <% end %>
+  
+        <%  unless @leave_types.nil? %>
+          <%total_leave = 0 %>
+          <% @leave_count.each do |e| %>
+            <% leave_type = EmployeeLeaveType.find_by_id(e.employee_leave_type_id)%>
+              <tr><td>Total<%= leave_type.name %>:</td>
+              <td><%= e.leave_taken.to_f %>/<%= e.leave_count %></td>
+            </tr>
+            <% total_leave+=e.leave_taken.to_f %>
+          <%end%>
+          <tr><td><%= t('total_leaves_taken')%>:</td>
+          <td><%= total_leave %></td></tr>
+      <% end %>
+     
+</table>
+</div>

@@ -2,20 +2,14 @@
 
 
   
-	<%= form_for :Subject_Assignment do |f| %>
+	<%= form_for :subject_assignment, url:{action:'assign_subject'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
 
 	<div class="label-field-pair">
 		<%=f. label :'Select Course'%>
 		<div  class="text-input-bg">
-   		<%= f.select :course_id, Course.all.collect {|b| [b.course_name,b.id]},{prompt:true}%></div></div>
+   		 <%= f.select :id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#user_form').submit();"}%></div></div>
 
-   		<div class="label-field-pair">
-		<%=f. label :'Select Subject'%>
-		<div  class="text-input-bg">
-   		<%= f.select :subject_id, Subject.all.collect {|b| [b.name,b.id]},{prompt:true}%></div></div>
-   
-  		<%end%>
-        <div id="batch_div"></div>
+   		<%end%>
 
-	
+	 <div id="subject_div"></div>
 </div>

@@ -1,0 +1,52 @@
+<div id="content-header">
+  <h1>Donations</h1>
+  <h3>Donation receipt	</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
+<% unless flash[:notice2].nil? %> <p class="flash-msg"> <%= flash[:notice2] %> </p><% end %>
+<%transaction_id=1%>
+<table class="table" style="width:500px" align="center">
+
+	<tbody>
+	<tr>
+		<td>
+			Donor       :
+		</td>
+		<td>
+			<%= @finance_donation.donor%>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Description  :
+		</td>
+		<td>
+			<%= @finance_donation.description%>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Amount        :
+		</td>
+		<td>
+			<%= @finance_donation.amount%>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Transaction ID :
+		</td>
+		<td>
+			<%= transaction_id %>
+		</td>
+	</tr>
+	 <% transaction_id=transaction_id+1 %>
+	</tbody>
+</table>
+</div>

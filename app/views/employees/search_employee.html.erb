@@ -1,0 +1,52 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1><%= t('employee_search') %></h1>
+  <h3><%= t('employee_details') %></h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'view_all', employees_viewall_emp_path %></li>
+    <li><%= link_to 'advanced', employees_advance_search_path%></li>
+  </ul>
+
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover" style="width:1000px">
+<%= form_for :advance_search, url:{action:'search_emp'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
+
+    <tbody>
+
+       <tr>
+     	  <td class="col-4"><%=f.label :"Search by Name"%></td>
+          <td class="col-4"><%= text_field_tag :search,"",{oninput:"$('#user_form').submit();"}%></td>
+     </tr>
+
+ 	 <tr>
+         <td class="col-3"><%= f.select :employee_department_id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:"select department"},{onchange:"$('#user_form').submit();"}%></td>
+  
+         <td class="col-3"><%= f.select :employee_category_id, EmployeeCategory.all.collect {|b| [b.name,b.id]},{prompt:"Select Category"},{onchange:"$('#user_form').submit();"}%></td>
+    
+         <td class="col-3"><%= f.select :employee_position_id,EmployeePosition.all.collect {|b| [b.name,b.id]},{prompt:"Select Position"},{onchange:"$('#user_form').submit();"}%></td>
+    
+         <td class="col-3"><%= f.select :employee_grade_id, EmployeeGrade.all.collect {|b| [b.name,b.id]},{prompt:"Select Grade"},{onchange:"$('#user_form').submit();"}%></td>
+     </tr>
+
+   
+  </div>
+  
+<%end%>
+</tbody>
+</table>
+  </div>
+
+  <div class="user_search"></div>

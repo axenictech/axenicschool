@@ -1,0 +1,56 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Monthly Payslip</h1>
+  <h3>create<br />
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Add new Category',employees_payroll_category_path(@employee),remote:true %></li>
+ 
+  </ul>
+
+</div>
+
+<table align="left" class="table table-hover" style="width:500px">
+<%= form_for :salery_slip,url:{action:'create_monthly_payslip',format:@employee} do |f| %>
+
+	<div id ="@employeeloyee_main_info">
+      <h3> <%= "#{@employee.first_name} #{@employee.last_name}" %>  </h3>
+      <%= "Employee Number:" "#{@employee.employee_number}"%>
+    </div>
+
+    <tbody>
+    
+   	<tr>     
+          <td class="col-2"><%=f.label :"Salery Date" %><span class="necessary-field">*</span></td>
+          <td class="col-2"><%=f.date_field :salery_date,:value => Time.now.strftime('%Y-%m-%d')%></td>
+     </tr>
+
+      <%@independent_categories.each do |c| %>
+      <%@val =MonthlyPayslip.where(employee_id:@employee.id,payroll_category_id:c.id)%>
+       <%=@employee.id%>
+        <%=c.id%>
+        <tr>
+          <td class="col-2"><%= f.label :""%><%=c.name%></td>
+          <td class="col-2"><%= f.text_field :amount,:index => c.id, :value => ''%></td>
+        </tr>
+      <% end %>
+   
+     <tr><td colspan="4"><%=f.submit "Create",class: "btn btn-primary" %></td></tr>
+
+<%end%>
+</tbody>
+</table>
+  </div>
+
+<div id="payslip"></div>
