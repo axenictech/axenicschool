@@ -13,6 +13,7 @@ class Employee < ActiveRecord::Base
   has_many    :employee_bank_details
   has_many    :employee_additional_details
   has_many    :apply_leaves
+  has_many    :employee_leaves
   has_many    :monthly_payslips
   has_many    :employee_salary_structures
   has_many    :finance_transactions, :as => :payee

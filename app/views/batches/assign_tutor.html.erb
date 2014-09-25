@@ -1,0 +1,29 @@
+
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1><%= t('Batch')%></h1>
+  <h3><%= t('Assign tutor') %></h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<%= form_for :assign_tutor, url:{action:'assign_tutorial',format:@batch},remote:true,html:{id: "user_form"} do |f|%>
+
+<div class="label-field-pair">
+		<%=f. label :'Select Department'%>
+		<div  class="text-input-bg">
+   		 <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form').submit();"}%></div></div>
+    
+<%end%>
+
+  </div>
+ <div id="assign_tutor"></div>

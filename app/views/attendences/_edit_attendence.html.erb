@@ -1,0 +1,25 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Edit Attendance for " %><span><%= @student.first_name%></span></h3>
+</div>
+<div class="modal-body">
+<%= form_for  @attendence,url:{:action=>'update_attendence'},method: :patch ,remote:true do |c|%>
+  <table class="table" style="width:500px" align="center">
+
+    <tr>
+      <td><%= c.label :Reason_for_absence%></td>
+      <td><%= c.text_field :reason%></td>
+    </tr>
+       
+    <tr>
+    <td colspan="2"><%= c.submit 'Update', class: "btn btn-primary"%></td>
+       <td><%= link_to 'destroy', '' ,class: "btn btn-danger"%></td>
+        </tr>
+
+</table>
+<% end %>
+
+</div>
+</div>
+</div>

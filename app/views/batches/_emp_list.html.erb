@@ -1,0 +1,15 @@
+
+<h2>Assign New</h2>
+<table class="tabel"  align="center" style="width:400px">
+
+
+	<%@employees.each do |emp|%>
+	<tr>
+		<td><%=emp.first_name%></td>
+		<td><%= link_to "Assign",batches_assign_employee_path(@batch,emp),method: :post,remote:true%></td>
+	</tr>
+	<%end%>
+
+</table>
+
+<div id="assigned_emp"></div>

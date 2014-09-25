@@ -1,0 +1,17 @@
+<%= form_for @exam_group,url: {action: 'update'} ,method: :patch,remote: true do |f|%>
+ <table class="table" >
+        <tr>
+            <td class="col-md-2"><%= f.label :name , class: "control-label"%></td>
+            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control", required: true%></td>
+        </tr>
+        
+        <tr>
+            <td class="col-md-2"><%= f.label :type , class: "control-label"%></td>
+            <td class="col-2"><%= f.select :exam_type,["Marks","Grades","Marks and Grades"]%>
+            </td>
+        </tr>
+        
+        <tr>
+        <td colspan="2"><%= f.submit 'Submit', class: "btn btn-primary"%></td></tr>
+    </table>
+<% end %>

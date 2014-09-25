@@ -1,0 +1,669 @@
+  [1m[36m (88.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (129.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateBatches (20140812182402)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (151.9ms)[0m  [1mCREATE TABLE "batches" ("id" serial primary key, "name" character varying(255), "course_id" integer, "employee_id" integer, "start_date" timestamp, "end_date" timestamp, "is_active" boolean DEFAULT 't', "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (341.2ms)[0m  CREATE  INDEX  "index_batches_on_course_id" ON "batches"  ("course_id")
+  [1m[36m (124.1ms)[0m  [1mCREATE  INDEX  "index_batches_on_employee_id" ON "batches"  ("employee_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140812182402"]]
+  [1m[36m (82.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateElectiveGroups (20140812182424)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (135.2ms)[0m  [1mCREATE TABLE "elective_groups" ("id" serial primary key, "name" character varying(255), "batch_id" integer, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (109.0ms)[0m  CREATE  INDEX  "index_elective_groups_on_batch_id" ON "elective_groups"  ("batch_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140812182424"]]
+  [1m[35m (50.3ms)[0m  COMMIT
+Migrating to CreateSubjects (20140812182439)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (305.2ms)[0m  CREATE TABLE "subjects" ("id" serial primary key, "name" character varying(255), "code" character varying(255), "batch_id" integer, "no_exams" boolean DEFAULT 'f', "max_weekly_classes" integer, "elective_group_id" integer, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (92.2ms)[0m  [1mCREATE  INDEX  "index_subjects_on_batch_id" ON "subjects"  ("batch_id")[0m
+  [1m[35m (80.4ms)[0m  CREATE  INDEX  "index_subjects_on_elective_group_id" ON "subjects"  ("elective_group_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140812182439"]]
+  [1m[35m (51.8ms)[0m  COMMIT
+Migrating to CreateCourses (20140813105120)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (519.4ms)[0m  CREATE TABLE "courses" ("id" serial primary key, "course_name" character varying(255), "code" character varying(255), "section_name" character varying(255), "grading_type" character varying(255), "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140813105120"]]
+  [1m[35m (50.8ms)[0m  COMMIT
+Migrating to CreateCategories (20140813105221)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (73.4ms)[0m  CREATE TABLE "categories" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140813105221"]]
+  [1m[35m (72.1ms)[0m  COMMIT
+Migrating to CreateGradingLevels (20140813105310)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (382.5ms)[0m  CREATE TABLE "grading_levels" ("id" serial primary key, "name" character varying(255), "batch_id" integer, "min_score" integer, "description" character varying(255), "order" integer, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (82.8ms)[0m  [1mCREATE  INDEX  "index_grading_levels_on_batch_id" ON "grading_levels"  ("batch_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140813105310"]]
+  [1m[36m (67.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateGeneralSettings (20140814052800)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (265.3ms)[0m  [1mCREATE TABLE "general_settings" ("id" serial primary key, "school_or_college_name" character varying(255), "school_or_college_address" character varying(255), "school_or_college_phone_no" character varying(255), "student_attendance_type" character varying(255), "finance_start_year_date" date, "finance_end_year_date" date, "language" character varying(255), "time_zone" character varying(255), "country" character varying(255), "network_state" character varying(255), "include_grading_system" character varying(255), "addmission_number_auto_increament" integer, "employee_number_auto_increament" integer, "enable_news_comment_moderation" character varying(255), "image_file_name" character varying(255), "image_content_type" character varying(255), "image_file_size" integer, "image_updated_at" timestamp, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "general_settings" ("created_at", "school_or_college_name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:46.796266"], ["school_or_college_name", ""], ["updated_at", "2014-09-25 14:37:46.796266"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140814052800"]]
+  [1m[35m (78.3ms)[0m  COMMIT
+Migrating to CreateStudents (20140821080040)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (405.8ms)[0m  CREATE TABLE "students" ("id" serial primary key, "admission_no" character varying(255), "class_roll_no" character varying(255), "admission_date" date, "first_name" character varying(255), "middle_name" character varying(255), "last_name" character varying(255), "batch_id" integer, "date_of_birth" date, "gender" character varying(255), "blood_group" character varying(255), "birth_place" character varying(255), "nationality_id" integer, "language" character varying(255), "religion" character varying(255), "category_id" integer, "address_line1" character varying(255), "address_line2" character varying(255), "city" character varying(255), "state" character varying(255), "pin_code" character varying(255), "country_id" integer, "phone1" character varying(255), "phone2" character varying(255), "email" character varying(255), "immediate_contact" integer, "is_sms_enabled" boolean DEFAULT 't', "photo_filename" character varying(255), "photo_content_type" character varying(255), "photo_data" bytea, "status_description" character varying(255), "is_active" boolean DEFAULT 't', "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (131.0ms)[0m  [1mCREATE  INDEX  "index_students_on_batch_id" ON "students"  ("batch_id")[0m
+  [1m[35m (109.6ms)[0m  CREATE  INDEX  "index_students_on_category_id" ON "students"  ("category_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140821080040"]]
+  [1m[35m (37.8ms)[0m  COMMIT
+Migrating to CreateGuardians (20140821080115)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (468.6ms)[0m  CREATE TABLE "guardians" ("id" serial primary key, "student_id" integer, "first_name" character varying(255), "last_name" character varying(255), "relation" character varying(255), "email" character varying(255), "office_phone1" character varying(255), "office_phone2" character varying(255), "mobile_phone" character varying(255), "office_address_line1" character varying(255), "office_address_line2" character varying(255), "city" character varying(255), "state" character varying(255), "country_id" integer, "dob" date, "occupation" character varying(255), "income" character varying(255), "education" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (149.9ms)[0m  [1mCREATE  INDEX  "index_guardians_on_student_id" ON "guardians"  ("student_id")[0m
+  [1m[35m (120.6ms)[0m  CREATE  INDEX  "index_guardians_on_country_id" ON "guardians"  ("country_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140821080115"]]
+  [1m[35m (43.4ms)[0m  COMMIT
+Migrating to CreateStudentSubjects (20140821080144)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (152.2ms)[0m  CREATE TABLE "student_subjects" ("id" serial primary key, "student_id" integer, "subject_id" integer, "batch_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (65.8ms)[0m  [1mCREATE  INDEX  "index_student_subjects_on_student_id" ON "student_subjects"  ("student_id")[0m
+  [1m[35m (339.5ms)[0m  CREATE  INDEX  "index_student_subjects_on_subject_id" ON "student_subjects"  ("subject_id")
+  [1m[36m (119.8ms)[0m  [1mCREATE  INDEX  "index_student_subjects_on_batch_id" ON "student_subjects"  ("batch_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821080144"]]
+  [1m[36m (53.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateStudentPreviousData (20140821081257)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (302.5ms)[0m  [1mCREATE TABLE "student_previous_data" ("id" serial primary key, "student_id" integer, "institution" character varying(255), "year" character varying(255), "course" character varying(255), "total_mark" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (329.3ms)[0m  CREATE  INDEX  "index_student_previous_data_on_student_id" ON "student_previous_data"  ("student_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140821081257"]]
+  [1m[35m (99.1ms)[0m  COMMIT
+Migrating to CreateStudentPreviousSubjectMarks (20140821081346)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (162.8ms)[0m  CREATE TABLE "student_previous_subject_marks" ("id" serial primary key, "student_id" integer, "subject" character varying(255), "mark" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (135.3ms)[0m  [1mCREATE  INDEX  "index_student_previous_subject_marks_on_student_id" ON "student_previous_subject_marks"  ("student_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821081346"]]
+  [1m[36m (47.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCountries (20140821082046)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (308.7ms)[0m  [1mCREATE TABLE "countries" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.628149"], ["name", "Afghanistan"], ["updated_at", "2014-09-25 14:37:50.628149"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.630695"], ["name", "Albania"], ["updated_at", "2014-09-25 14:37:50.630695"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.632289"], ["name", "Algeria"], ["updated_at", "2014-09-25 14:37:50.632289"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.633737"], ["name", "Andorra"], ["updated_at", "2014-09-25 14:37:50.633737"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.635184"], ["name", "Angola"], ["updated_at", "2014-09-25 14:37:50.635184"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.636630"], ["name", "Antigua & Deps"], ["updated_at", "2014-09-25 14:37:50.636630"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.638028"], ["name", "Argentina"], ["updated_at", "2014-09-25 14:37:50.638028"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.639536"], ["name", "Armenia"], ["updated_at", "2014-09-25 14:37:50.639536"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.641011"], ["name", "Australia"], ["updated_at", "2014-09-25 14:37:50.641011"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.642430"], ["name", "Austria"], ["updated_at", "2014-09-25 14:37:50.642430"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.643909"], ["name", "Azerbaijan"], ["updated_at", "2014-09-25 14:37:50.643909"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.645349"], ["name", "Bahamas"], ["updated_at", "2014-09-25 14:37:50.645349"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.646778"], ["name", "Bahrain"], ["updated_at", "2014-09-25 14:37:50.646778"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.648210"], ["name", "Bangladesh"], ["updated_at", "2014-09-25 14:37:50.648210"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.649558"], ["name", "Barbados"], ["updated_at", "2014-09-25 14:37:50.649558"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.651032"], ["name", "Belarus"], ["updated_at", "2014-09-25 14:37:50.651032"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.652684"], ["name", "Belgium"], ["updated_at", "2014-09-25 14:37:50.652684"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.654112"], ["name", "Belize"], ["updated_at", "2014-09-25 14:37:50.654112"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.655522"], ["name", "Benin"], ["updated_at", "2014-09-25 14:37:50.655522"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.656838"], ["name", "Bhutan"], ["updated_at", "2014-09-25 14:37:50.656838"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.658217"], ["name", "Bolivia"], ["updated_at", "2014-09-25 14:37:50.658217"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.659545"], ["name", "Bosnia Herzegovina"], ["updated_at", "2014-09-25 14:37:50.659545"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.660909"], ["name", "Botswana"], ["updated_at", "2014-09-25 14:37:50.660909"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.662243"], ["name", "Brazil"], ["updated_at", "2014-09-25 14:37:50.662243"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.663646"], ["name", "Brunei"], ["updated_at", "2014-09-25 14:37:50.663646"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.665219"], ["name", "Bulgaria"], ["updated_at", "2014-09-25 14:37:50.665219"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.666822"], ["name", "Burkina"], ["updated_at", "2014-09-25 14:37:50.666822"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.668433"], ["name", "Burundi"], ["updated_at", "2014-09-25 14:37:50.668433"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.669864"], ["name", "Cambodia"], ["updated_at", "2014-09-25 14:37:50.669864"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.671233"], ["name", "Cameroon"], ["updated_at", "2014-09-25 14:37:50.671233"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.684493"], ["name", "Canada"], ["updated_at", "2014-09-25 14:37:50.684493"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.685892"], ["name", "Cape Verde"], ["updated_at", "2014-09-25 14:37:50.685892"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.687257"], ["name", "Central African Rep"], ["updated_at", "2014-09-25 14:37:50.687257"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.688635"], ["name", "Chad"], ["updated_at", "2014-09-25 14:37:50.688635"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.689973"], ["name", "Chile"], ["updated_at", "2014-09-25 14:37:50.689973"]]
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.691335"], ["name", "China"], ["updated_at", "2014-09-25 14:37:50.691335"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.695406"], ["name", "Colombia"], ["updated_at", "2014-09-25 14:37:50.695406"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.696929"], ["name", "Comoros"], ["updated_at", "2014-09-25 14:37:50.696929"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.698303"], ["name", "Congo"], ["updated_at", "2014-09-25 14:37:50.698303"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.699674"], ["name", "Congo {Democratic Rep}"], ["updated_at", "2014-09-25 14:37:50.699674"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.701032"], ["name", "Costa Rica"], ["updated_at", "2014-09-25 14:37:50.701032"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.702368"], ["name", "Croatia"], ["updated_at", "2014-09-25 14:37:50.702368"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.703769"], ["name", "Cuba"], ["updated_at", "2014-09-25 14:37:50.703769"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.705098"], ["name", "Cyprus"], ["updated_at", "2014-09-25 14:37:50.705098"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.706444"], ["name", "Czech Republic"], ["updated_at", "2014-09-25 14:37:50.706444"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.707769"], ["name", "Denmark"], ["updated_at", "2014-09-25 14:37:50.707769"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.709095"], ["name", "Djibouti"], ["updated_at", "2014-09-25 14:37:50.709095"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.710420"], ["name", "Dominica"], ["updated_at", "2014-09-25 14:37:50.710420"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.711772"], ["name", "Dominican Republic"], ["updated_at", "2014-09-25 14:37:50.711772"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.713056"], ["name", "East Timor"], ["updated_at", "2014-09-25 14:37:50.713056"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.714377"], ["name", "Ecuador"], ["updated_at", "2014-09-25 14:37:50.714377"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.715745"], ["name", "Egypt"], ["updated_at", "2014-09-25 14:37:50.715745"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.717127"], ["name", "El Salvador"], ["updated_at", "2014-09-25 14:37:50.717127"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.718481"], ["name", "Equatorial Guinea"], ["updated_at", "2014-09-25 14:37:50.718481"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.719830"], ["name", "Eritrea"], ["updated_at", "2014-09-25 14:37:50.719830"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.721113"], ["name", "Estonia"], ["updated_at", "2014-09-25 14:37:50.721113"]]
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.722572"], ["name", "Ethiopia"], ["updated_at", "2014-09-25 14:37:50.722572"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.724093"], ["name", "Fiji"], ["updated_at", "2014-09-25 14:37:50.724093"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.725471"], ["name", "Finland"], ["updated_at", "2014-09-25 14:37:50.725471"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.726814"], ["name", "France"], ["updated_at", "2014-09-25 14:37:50.726814"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.728204"], ["name", "Gabon"], ["updated_at", "2014-09-25 14:37:50.728204"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.729536"], ["name", "Gambia"], ["updated_at", "2014-09-25 14:37:50.729536"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.730816"], ["name", "Georgia"], ["updated_at", "2014-09-25 14:37:50.730816"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.732174"], ["name", "Germany"], ["updated_at", "2014-09-25 14:37:50.732174"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.733509"], ["name", "Ghana"], ["updated_at", "2014-09-25 14:37:50.733509"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.734823"], ["name", "Greece"], ["updated_at", "2014-09-25 14:37:50.734823"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.736171"], ["name", "Grenada"], ["updated_at", "2014-09-25 14:37:50.736171"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.737682"], ["name", "Guatemala"], ["updated_at", "2014-09-25 14:37:50.737682"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.745468"], ["name", "Guinea"], ["updated_at", "2014-09-25 14:37:50.745468"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.746888"], ["name", "Guinea-Bissau"], ["updated_at", "2014-09-25 14:37:50.746888"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.748260"], ["name", "Guyana"], ["updated_at", "2014-09-25 14:37:50.748260"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.749593"], ["name", "Haiti"], ["updated_at", "2014-09-25 14:37:50.749593"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.750922"], ["name", "Honduras"], ["updated_at", "2014-09-25 14:37:50.750922"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.752258"], ["name", "Hungary"], ["updated_at", "2014-09-25 14:37:50.752258"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.753642"], ["name", "Iceland"], ["updated_at", "2014-09-25 14:37:50.753642"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.754917"], ["name", "India"], ["updated_at", "2014-09-25 14:37:50.754917"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.756260"], ["name", "Indonesia"], ["updated_at", "2014-09-25 14:37:50.756260"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.757576"], ["name", "Iran"], ["updated_at", "2014-09-25 14:37:50.757576"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.758900"], ["name", "Iraq"], ["updated_at", "2014-09-25 14:37:50.758900"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.760214"], ["name", "Ireland {Republic}"], ["updated_at", "2014-09-25 14:37:50.760214"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.761459"], ["name", "Israel"], ["updated_at", "2014-09-25 14:37:50.761459"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.762743"], ["name", "Italy"], ["updated_at", "2014-09-25 14:37:50.762743"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.764102"], ["name", "Ivory Coast"], ["updated_at", "2014-09-25 14:37:50.764102"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.765415"], ["name", "Jamaica"], ["updated_at", "2014-09-25 14:37:50.765415"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.766743"], ["name", "Japan"], ["updated_at", "2014-09-25 14:37:50.766743"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.768135"], ["name", "Jordan"], ["updated_at", "2014-09-25 14:37:50.768135"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.769473"], ["name", "Kazakhstan"], ["updated_at", "2014-09-25 14:37:50.769473"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.770730"], ["name", "Kenya"], ["updated_at", "2014-09-25 14:37:50.770730"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.772063"], ["name", "Kiribati"], ["updated_at", "2014-09-25 14:37:50.772063"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.773386"], ["name", "Korea North"], ["updated_at", "2014-09-25 14:37:50.773386"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.774716"], ["name", "Korea South"], ["updated_at", "2014-09-25 14:37:50.774716"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.776034"], ["name", "Kosovo"], ["updated_at", "2014-09-25 14:37:50.776034"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.777359"], ["name", "Kuwait"], ["updated_at", "2014-09-25 14:37:50.777359"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.778677"], ["name", "Kyrgyzstan"], ["updated_at", "2014-09-25 14:37:50.778677"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.780026"], ["name", "Laos"], ["updated_at", "2014-09-25 14:37:50.780026"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.781355"], ["name", "Latvia"], ["updated_at", "2014-09-25 14:37:50.781355"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.782681"], ["name", "Lebanon"], ["updated_at", "2014-09-25 14:37:50.782681"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.784008"], ["name", "Lesotho"], ["updated_at", "2014-09-25 14:37:50.784008"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.785400"], ["name", "Liberia"], ["updated_at", "2014-09-25 14:37:50.785400"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.786761"], ["name", "Libya"], ["updated_at", "2014-09-25 14:37:50.786761"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.788137"], ["name", "Liechtenstein"], ["updated_at", "2014-09-25 14:37:50.788137"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.789407"], ["name", "Lithuania"], ["updated_at", "2014-09-25 14:37:50.789407"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.790715"], ["name", "Luxembourg"], ["updated_at", "2014-09-25 14:37:50.790715"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.792048"], ["name", "Macedonia"], ["updated_at", "2014-09-25 14:37:50.792048"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.793353"], ["name", "Madagascar"], ["updated_at", "2014-09-25 14:37:50.793353"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.794730"], ["name", "Malawi"], ["updated_at", "2014-09-25 14:37:50.794730"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.796095"], ["name", "Malaysia"], ["updated_at", "2014-09-25 14:37:50.796095"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.797425"], ["name", "Maldives"], ["updated_at", "2014-09-25 14:37:50.797425"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.798751"], ["name", "Mali"], ["updated_at", "2014-09-25 14:37:50.798751"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.800125"], ["name", "Malta"], ["updated_at", "2014-09-25 14:37:50.800125"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.801437"], ["name", "Montenegro"], ["updated_at", "2014-09-25 14:37:50.801437"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.802727"], ["name", "Marshall Islands"], ["updated_at", "2014-09-25 14:37:50.802727"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.804063"], ["name", "Mauritania"], ["updated_at", "2014-09-25 14:37:50.804063"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.805398"], ["name", "Mauritius"], ["updated_at", "2014-09-25 14:37:50.805398"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.806708"], ["name", "Mexico"], ["updated_at", "2014-09-25 14:37:50.806708"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.807983"], ["name", "Micronesia"], ["updated_at", "2014-09-25 14:37:50.807983"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.809285"], ["name", "Moldova"], ["updated_at", "2014-09-25 14:37:50.809285"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.810595"], ["name", "Monaco"], ["updated_at", "2014-09-25 14:37:50.810595"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.811973"], ["name", "Mongolia"], ["updated_at", "2014-09-25 14:37:50.811973"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.813331"], ["name", "Morocco"], ["updated_at", "2014-09-25 14:37:50.813331"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.814604"], ["name", "Mozambique"], ["updated_at", "2014-09-25 14:37:50.814604"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.815932"], ["name", "Myanmar, {Burma}"], ["updated_at", "2014-09-25 14:37:50.815932"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.817240"], ["name", "Namibia"], ["updated_at", "2014-09-25 14:37:50.817240"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.818537"], ["name", "Nauru"], ["updated_at", "2014-09-25 14:37:50.818537"]]
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.822360"], ["name", "Nepal"], ["updated_at", "2014-09-25 14:37:50.822360"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.824009"], ["name", "Netherlands"], ["updated_at", "2014-09-25 14:37:50.824009"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.825392"], ["name", "New Zealand"], ["updated_at", "2014-09-25 14:37:50.825392"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.826672"], ["name", "Nicaragua"], ["updated_at", "2014-09-25 14:37:50.826672"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.828067"], ["name", "Niger"], ["updated_at", "2014-09-25 14:37:50.828067"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.829403"], ["name", "Nigeria"], ["updated_at", "2014-09-25 14:37:50.829403"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.830706"], ["name", "Norway"], ["updated_at", "2014-09-25 14:37:50.830706"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.832046"], ["name", "Oman"], ["updated_at", "2014-09-25 14:37:50.832046"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.833373"], ["name", "Pakistan"], ["updated_at", "2014-09-25 14:37:50.833373"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.834693"], ["name", "Palau"], ["updated_at", "2014-09-25 14:37:50.834693"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.836078"], ["name", "Panama"], ["updated_at", "2014-09-25 14:37:50.836078"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.837429"], ["name", "Papua New Guinea"], ["updated_at", "2014-09-25 14:37:50.837429"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.838764"], ["name", "Paraguay"], ["updated_at", "2014-09-25 14:37:50.838764"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.840103"], ["name", "Peru"], ["updated_at", "2014-09-25 14:37:50.840103"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.841429"], ["name", "Philippines"], ["updated_at", "2014-09-25 14:37:50.841429"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.842718"], ["name", "Poland"], ["updated_at", "2014-09-25 14:37:50.842718"]]
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.844091"], ["name", "Portugal"], ["updated_at", "2014-09-25 14:37:50.844091"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.845574"], ["name", "Qatar"], ["updated_at", "2014-09-25 14:37:50.845574"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.846937"], ["name", "Romania"], ["updated_at", "2014-09-25 14:37:50.846937"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.848364"], ["name", "Russian Federation"], ["updated_at", "2014-09-25 14:37:50.848364"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.849800"], ["name", "Rwanda"], ["updated_at", "2014-09-25 14:37:50.849800"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.856655"], ["name", "St Kitts & Nevis"], ["updated_at", "2014-09-25 14:37:50.856655"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.858023"], ["name", "St Lucia"], ["updated_at", "2014-09-25 14:37:50.858023"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.859461"], ["name", "Saint Vincent & the Grenadines"], ["updated_at", "2014-09-25 14:37:50.859461"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.860834"], ["name", "Samoa"], ["updated_at", "2014-09-25 14:37:50.860834"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.862111"], ["name", "San Marino"], ["updated_at", "2014-09-25 14:37:50.862111"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.863474"], ["name", "Sao Tome & Principe"], ["updated_at", "2014-09-25 14:37:50.863474"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.864869"], ["name", "Saudi Arabia"], ["updated_at", "2014-09-25 14:37:50.864869"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.866178"], ["name", "Senegal"], ["updated_at", "2014-09-25 14:37:50.866178"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.867547"], ["name", "Serbia"], ["updated_at", "2014-09-25 14:37:50.867547"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.868841"], ["name", "Seychelles"], ["updated_at", "2014-09-25 14:37:50.868841"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.870189"], ["name", "Sierra Leone"], ["updated_at", "2014-09-25 14:37:50.870189"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.871575"], ["name", "Singapore"], ["updated_at", "2014-09-25 14:37:50.871575"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.872972"], ["name", "Slovakia"], ["updated_at", "2014-09-25 14:37:50.872972"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.874384"], ["name", "Slovenia"], ["updated_at", "2014-09-25 14:37:50.874384"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.875747"], ["name", "Solomon Islands"], ["updated_at", "2014-09-25 14:37:50.875747"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.877043"], ["name", "Somalia"], ["updated_at", "2014-09-25 14:37:50.877043"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.878373"], ["name", "South Africa"], ["updated_at", "2014-09-25 14:37:50.878373"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.879747"], ["name", "Spain"], ["updated_at", "2014-09-25 14:37:50.879747"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.881018"], ["name", "Sri Lanka"], ["updated_at", "2014-09-25 14:37:50.881018"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.882438"], ["name", "Sudan"], ["updated_at", "2014-09-25 14:37:50.882438"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.883829"], ["name", "Suriname"], ["updated_at", "2014-09-25 14:37:50.883829"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.885203"], ["name", "Swaziland"], ["updated_at", "2014-09-25 14:37:50.885203"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.886493"], ["name", "Sweden"], ["updated_at", "2014-09-25 14:37:50.886493"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.887945"], ["name", "Switzerland"], ["updated_at", "2014-09-25 14:37:50.887945"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.889317"], ["name", "Syria"], ["updated_at", "2014-09-25 14:37:50.889317"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.890690"], ["name", "Taiwan"], ["updated_at", "2014-09-25 14:37:50.890690"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.892069"], ["name", "Tajikistan"], ["updated_at", "2014-09-25 14:37:50.892069"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.893366"], ["name", "Tanzania"], ["updated_at", "2014-09-25 14:37:50.893366"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.894727"], ["name", "Thailand"], ["updated_at", "2014-09-25 14:37:50.894727"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.896194"], ["name", "Togo"], ["updated_at", "2014-09-25 14:37:50.896194"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.897615"], ["name", "Tonga"], ["updated_at", "2014-09-25 14:37:50.897615"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.898931"], ["name", "Trinidad & Tobago"], ["updated_at", "2014-09-25 14:37:50.898931"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.900284"], ["name", "Tunisia"], ["updated_at", "2014-09-25 14:37:50.900284"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.901626"], ["name", "Turkey"], ["updated_at", "2014-09-25 14:37:50.901626"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.902962"], ["name", "Turkmenistan"], ["updated_at", "2014-09-25 14:37:50.902962"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.904291"], ["name", "Tuvalu"], ["updated_at", "2014-09-25 14:37:50.904291"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.905554"], ["name", "Uganda"], ["updated_at", "2014-09-25 14:37:50.905554"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.906902"], ["name", "Ukraine"], ["updated_at", "2014-09-25 14:37:50.906902"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.908261"], ["name", "United Arab Emirates"], ["updated_at", "2014-09-25 14:37:50.908261"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.909528"], ["name", "United Kingdom"], ["updated_at", "2014-09-25 14:37:50.909528"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.910822"], ["name", "United States"], ["updated_at", "2014-09-25 14:37:50.910822"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.912100"], ["name", "Uruguay"], ["updated_at", "2014-09-25 14:37:50.912100"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.913428"], ["name", "Uzbekistan"], ["updated_at", "2014-09-25 14:37:50.913428"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.914744"], ["name", "Vanuatu"], ["updated_at", "2014-09-25 14:37:50.914744"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.916041"], ["name", "Vatican City"], ["updated_at", "2014-09-25 14:37:50.916041"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.917369"], ["name", "Venezuea"], ["updated_at", "2014-09-25 14:37:50.917369"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.918681"], ["name", "Vietnam"], ["updated_at", "2014-09-25 14:37:50.918681"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.919991"], ["name", "Yemen"], ["updated_at", "2014-09-25 14:37:50.919991"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:50.921297"], ["name", "Zambia"], ["updated_at", "2014-09-25 14:37:50.921297"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "countries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:50.922643"], ["name", "Zimbabwe"], ["updated_at", "2014-09-25 14:37:50.922643"]]
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140821082046"]]
+  [1m[35m (25.3ms)[0m  COMMIT
+Migrating to CreateNewscasts (20140822100426)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (419.5ms)[0m  CREATE TABLE "newscasts" ("id" serial primary key, "title" character varying(255), "content" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140822100426"]]
+  [1m[35m (42.6ms)[0m  COMMIT
+Migrating to CreateComments (20140822100721)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (283.5ms)[0m  CREATE TABLE "comments" ("id" serial primary key, "statement" text, "newscast_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (131.1ms)[0m  [1mCREATE  INDEX  "index_comments_on_newscast_id" ON "comments"  ("newscast_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140822100721"]]
+  [1m[36m (91.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAttendences (20140826061418)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (286.5ms)[0m  [1mCREATE TABLE "attendences" ("id" serial primary key, "student_id" integer, "time_table_entry_id" integer, "forenoon" boolean DEFAULT 'f', "afternoon" boolean DEFAULT 'f', "reason" character varying(255), "month_date" date, "batch_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (120.0ms)[0m  CREATE  INDEX  "index_attendences_on_student_id" ON "attendences"  ("student_id")
+  [1m[36m (112.7ms)[0m  [1mCREATE  INDEX  "index_attendences_on_time_table_entry_id" ON "attendences"  ("time_table_entry_id")[0m
+  [1m[35m (129.6ms)[0m  CREATE  INDEX  "index_attendences_on_batch_id" ON "attendences"  ("batch_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140826061418"]]
+  [1m[35m (69.8ms)[0m  COMMIT
+Migrating to CreateEvents (20140826063723)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (476.1ms)[0m  CREATE TABLE "events" ("id" serial primary key, "title" character varying(255), "description" character varying(255), "start_date" timestamp, "end_date" timestamp, "is_common" boolean DEFAULT 'f', "is_holiday" boolean DEFAULT 'f', "is_exam" boolean DEFAULT 'f', "is_due" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140826063723"]]
+  [1m[35m (70.7ms)[0m  COMMIT
+Migrating to CreateTimeTables (20140826075055)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (132.8ms)[0m  CREATE TABLE "time_tables" ("id" serial primary key, "start_date" date, "end_date" date, "is_active" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140826075055"]]
+  [1m[35m (86.3ms)[0m  COMMIT
+Migrating to CreateTimeTableEntries (20140826075134)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (144.9ms)[0m  CREATE TABLE "time_table_entries" ("id" serial primary key, "batch_id" integer, "weekday_id" integer, "class_timing_id" integer, "subject_id" integer, "employee_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (363.5ms)[0m  [1mCREATE  INDEX  "index_time_table_entries_on_batch_id" ON "time_table_entries"  ("batch_id")[0m
+  [1m[35m (42.4ms)[0m  CREATE  INDEX  "index_time_table_entries_on_weekday_id" ON "time_table_entries"  ("weekday_id")
+  [1m[36m (99.9ms)[0m  [1mCREATE  INDEX  "index_time_table_entries_on_class_timing_id" ON "time_table_entries"  ("class_timing_id")[0m
+  [1m[35m (132.9ms)[0m  CREATE  INDEX  "index_time_table_entries_on_subject_id" ON "time_table_entries"  ("subject_id")
+  [1m[36m (130.1ms)[0m  [1mCREATE  INDEX  "index_time_table_entries_on_employee_id" ON "time_table_entries"  ("employee_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140826075134"]]
+  [1m[36m (64.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateClassTimings (20140826075213)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (270.8ms)[0m  [1mCREATE TABLE "class_timings" ("id" serial primary key, "batch_id" integer, "name" character varying(255), "start_time" time, "end_time" time, "is_break" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (133.0ms)[0m  CREATE  INDEX  "index_class_timings_on_batch_id" ON "class_timings"  ("batch_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140826075213"]]
+  [1m[35m (34.9ms)[0m  COMMIT
+Migrating to CreateWeekdays (20140826075242)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (101.3ms)[0m  CREATE TABLE "weekdays" ("id" serial primary key, "batch_id" integer, "weekday" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (110.0ms)[0m  [1mCREATE  INDEX  "index_weekdays_on_batch_id" ON "weekdays"  ("batch_id")[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "weekdays" ("created_at", "updated_at", "weekday") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:55.396749"], ["updated_at", "2014-09-25 14:37:55.396749"], ["weekday", "1"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "weekdays" ("created_at", "updated_at", "weekday") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:55.399573"], ["updated_at", "2014-09-25 14:37:55.399573"], ["weekday", "2"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "weekdays" ("created_at", "updated_at", "weekday") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:55.401396"], ["updated_at", "2014-09-25 14:37:55.401396"], ["weekday", "3"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "weekdays" ("created_at", "updated_at", "weekday") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:55.403073"], ["updated_at", "2014-09-25 14:37:55.403073"], ["weekday", "4"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "weekdays" ("created_at", "updated_at", "weekday") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-09-25 14:37:55.404826"], ["updated_at", "2014-09-25 14:37:55.404826"], ["weekday", "5"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140826075242"]]
+  [1m[35m (266.5ms)[0m  COMMIT
+Migrating to CreateUsers (20140827054824)
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (224.6ms)[0m  CREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "role" character varying(255), "hashed_password" character varying(255), "reset_password_code" character varying(255), "student_id" character varying(255), "employee_id" character varying(255), "reset_password_code_until" timestamp, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mUser Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."username" = 'admin' LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'admin@fedena.com' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "hashed_password", "last_name", "role", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["created_at", "2014-09-25 14:37:56.584936"], ["email", "admin@fedena.com"], ["first_name", "Fedena"], ["hashed_password", "$2a$10$k3GXPFMmOoI.1iRKWfDg4e:$2a$10$k3GXPFMmOoI.1iRKWfDg4e.IewuW4GWL0cwHYu4S4CuDqfwGf2LLG"], ["last_name", "Administrator"], ["role", "Admin"], ["updated_at", "2014-09-25 14:37:56.584936"], ["username", "admin"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140827054824"]]
+  [1m[36m (53.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateArchivedStudents (20140831062856)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (217.7ms)[0m  [1mCREATE TABLE "archived_students" ("id" serial primary key, "student_id" integer, "admission_no" character varying(255), "class_roll_no" character varying(255), "admission_date" date, "first_name" character varying(255), "middle_name" character varying(255), "last_name" character varying(255), "batch_id" integer, "date_of_birth" date, "gender" character varying(255), "blood_group" character varying(255), "birth_place" character varying(255), "nationality_id" integer, "language" character varying(255), "religion" character varying(255), "category_id" integer, "address_line1" character varying(255), "address_line2" character varying(255), "city" character varying(255), "state" character varying(255), "pin_code" character varying(255), "country_id" integer, "phone1" character varying(255), "phone2" character varying(255), "email" character varying(255), "immediate_contact" integer, "is_sms_enabled" boolean DEFAULT 't', "photo_filename" character varying(255), "photo_content_type" character varying(255), "photo_data" bytea, "status_description" character varying(255), "is_active" boolean DEFAULT 't', "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (294.8ms)[0m  CREATE  INDEX  "index_archived_students_on_batch_id" ON "archived_students"  ("batch_id")
+  [1m[36m (117.9ms)[0m  [1mCREATE  INDEX  "index_archived_students_on_category_id" ON "archived_students"  ("category_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140831062856"]]
+  [1m[36m (75.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateExamGroups (20140903070514)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (229.9ms)[0m  [1mCREATE TABLE "exam_groups" ("id" serial primary key, "name" character varying(255), "batch_id" integer, "exam_type" character varying(255), "is_published" boolean DEFAULT 'f', "result_published" boolean DEFAULT 'f', "exam_date" date, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (364.4ms)[0m  CREATE  INDEX  "index_exam_groups_on_batch_id" ON "exam_groups"  ("batch_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140903070514"]]
+  [1m[35m (82.0ms)[0m  COMMIT
+Migrating to CreateExams (20140903070518)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (115.3ms)[0m  CREATE TABLE "exams" ("id" serial primary key, "exam_group_id" integer, "subject_id" integer, "start_time" timestamp, "end_time" timestamp, "maximum_marks" integer, "minimum_marks" integer, "grading_level_id" integer, "weightage" integer DEFAULT 0, "event_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (192.5ms)[0m  [1mCREATE  INDEX  "index_exams_on_exam_group_id" ON "exams"  ("exam_group_id")[0m
+  [1m[35m (98.1ms)[0m  CREATE  INDEX  "index_exams_on_subject_id" ON "exams"  ("subject_id")
+  [1m[36m (187.4ms)[0m  [1mCREATE  INDEX  "index_exams_on_grading_level_id" ON "exams"  ("grading_level_id")[0m
+  [1m[35m (234.2ms)[0m  CREATE  INDEX  "index_exams_on_event_id" ON "exams"  ("event_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140903070518"]]
+  [1m[35m (70.6ms)[0m  COMMIT
+Migrating to CreateExamScores (20140903070521)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (178.5ms)[0m  CREATE TABLE "exam_scores" ("id" serial primary key, "student_id" integer, "exam_id" integer, "marks" decimal, "grading_level_id" integer, "remarks" character varying(255), "is_failed" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (139.8ms)[0m  [1mCREATE  INDEX  "index_exam_scores_on_student_id" ON "exam_scores"  ("student_id")[0m
+  [1m[35m (100.4ms)[0m  CREATE  INDEX  "index_exam_scores_on_exam_id" ON "exam_scores"  ("exam_id")
+  [1m[36m (338.8ms)[0m  [1mCREATE  INDEX  "index_exam_scores_on_grading_level_id" ON "exam_scores"  ("grading_level_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140903070521"]]
+  [1m[36m (82.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRankingLevels (20140903070547)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (164.2ms)[0m  [1mCREATE TABLE "ranking_levels" ("id" serial primary key, "name" character varying(255), "gpa" decimal, "marks" decimal, "subject_count" integer, "prioriy" integer, "full_course" boolean, "course_id" integer, "subject_limit_type" character varying(255), "marks_limit_type" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (141.0ms)[0m  CREATE  INDEX  "index_ranking_levels_on_course_id" ON "ranking_levels"  ("course_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140903070547"]]
+  [1m[35m (66.1ms)[0m  COMMIT
+Migrating to CreateClassDesignations (20140903070601)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (407.1ms)[0m  CREATE TABLE "class_designations" ("id" serial primary key, "name" character varying(255), "cgpa" decimal, "marks" decimal, "course_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (152.7ms)[0m  [1mCREATE  INDEX  "index_class_designations_on_course_id" ON "class_designations"  ("course_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140903070601"]]
+  [1m[36m (92.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOnlineExams (20140903071637)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (202.8ms)[0m  [1mCREATE TABLE "online_exams" ("id" serial primary key, "name" character varying(255), "start_date" timestamp, "end_date" timestamp, "maximum_time" time, "percentage" decimal, "option_per_question" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140903071637"]]
+  [1m[36m (86.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateEmployees (20140906045056)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (464.9ms)[0m  [1mCREATE TABLE "employees" ("id" serial primary key, "employee_category_id" integer, "employee_number" character varying(255), "joining_date" date, "first_name" character varying(255), "middle_name" character varying(255), "last_name" character varying(255), "gender" boolean, "job_title" character varying(255), "employee_position_id" integer, "employee_department_id" integer, "reporting_manager_id" integer, "employee_grade_id" integer, "qualification" character varying(255), "experience_detail" text, "experience_year" integer, "experience_month" integer, "status" boolean, "status_description" character varying(255), "date_of_birth" date, "marital_status" character varying(255), "children_count" integer, "father_name" character varying(255), "mother_name" character varying(255), "husband_name" character varying(255), "blood_group" character varying(255), "country_id" integer, "home_address_line1" character varying(255), "home_address_line2" character varying(255), "home_city" character varying(255), "home_state" character varying(255), "home_country_id" integer, "home_pin_code" character varying(255), "office_address_line1" character varying(255), "office_address_line2" character varying(255), "office_city" character varying(255), "office_state" character varying(255), "office_country_id" integer, "office_pin_code" character varying(255), "office_phone1" character varying(255), "office_phone2" character varying(255), "mobile_phone" character varying(255), "home_phone" character varying(255), "email" character varying(255), "fax" character varying(255), "photo_filename" character varying(255), "photo_content_type" character varying(255), "photo_data" bytea, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (131.2ms)[0m  CREATE  INDEX  "index_employees_on_employee_category_id" ON "employees"  ("employee_category_id")
+  [1m[36m (86.6ms)[0m  [1mCREATE  INDEX  "index_employees_on_employee_position_id" ON "employees"  ("employee_position_id")[0m
+  [1m[35m (154.5ms)[0m  CREATE  INDEX  "index_employees_on_employee_department_id" ON "employees"  ("employee_department_id")
+  [1m[36m (275.3ms)[0m  [1mCREATE  INDEX  "index_employees_on_employee_grade_id" ON "employees"  ("employee_grade_id")[0m
+  [1m[35m (153.3ms)[0m  CREATE  INDEX  "index_employees_on_country_id" ON "employees"  ("country_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045056"]]
+  [1m[35m (59.8ms)[0m  COMMIT
+Migrating to CreateEmployeeAttendances (20140906045122)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (172.8ms)[0m  CREATE TABLE "employee_attendances" ("id" serial primary key, "attendance_date" date, "employee_id" integer, "employee_leave_type_id" integer, "reason" character varying(255), "is_half_day" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (144.7ms)[0m  [1mCREATE  INDEX  "index_employee_attendances_on_employee_id" ON "employee_attendances"  ("employee_id")[0m
+  [1m[35m (109.9ms)[0m  CREATE  INDEX  "index_employee_attendances_on_employee_leave_type_id" ON "employee_attendances"  ("employee_leave_type_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045122"]]
+  [1m[35m (253.8ms)[0m  COMMIT
+Migrating to CreateEmployeeBankDetails (20140906045222)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (170.2ms)[0m  CREATE TABLE "employee_bank_details" ("id" serial primary key, "employee_id" integer, "bank_field_id" integer, "bank_info" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (164.2ms)[0m  [1mCREATE  INDEX  "index_employee_bank_details_on_employee_id" ON "employee_bank_details"  ("employee_id")[0m
+  [1m[35m (75.9ms)[0m  CREATE  INDEX  "index_employee_bank_details_on_bank_field_id" ON "employee_bank_details"  ("bank_field_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045222"]]
+  [1m[35m (28.3ms)[0m  COMMIT
+Migrating to CreateEmployeeCategories (20140906045236)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (362.3ms)[0m  CREATE TABLE "employee_categories" ("id" serial primary key, "name" character varying(255), "prefix" character varying(255), "status" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045236"]]
+  [1m[35m (63.8ms)[0m  COMMIT
+Migrating to CreateEmployeeDepartments (20140906045253)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (187.3ms)[0m  CREATE TABLE "employee_departments" ("id" serial primary key, "code" character varying(255), "name" character varying(255), "status" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045253"]]
+  [1m[35m (44.7ms)[0m  COMMIT
+Migrating to CreateEmployeeDepartmentEvents (20140906045301)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (352.8ms)[0m  CREATE TABLE "employee_department_events" ("id" serial primary key, "event_id" integer, "employee_department_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (133.9ms)[0m  [1mCREATE  INDEX  "index_employee_department_events_on_event_id" ON "employee_department_events"  ("event_id")[0m
+  [1m[35m (109.2ms)[0m  CREATE  INDEX  "index_employee_department_events_on_employee_department_id" ON "employee_department_events"  ("employee_department_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045301"]]
+  [1m[35m (65.4ms)[0m  COMMIT
+Migrating to CreateEmployeeGrades (20140906045311)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (139.9ms)[0m  CREATE TABLE "employee_grades" ("id" serial primary key, "name" character varying(255), "priority" integer, "status" boolean, "max_hours_day" integer, "max_hours_week" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045311"]]
+  [1m[35m (49.8ms)[0m  COMMIT
+Migrating to CreateEmployeeLeaves (20140906045319)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (324.1ms)[0m  CREATE TABLE "employee_leaves" ("id" serial primary key, "employee_id" integer, "employee_leave_type_id" integer, "leave_count" decimal, "leave_taken" decimal, "reset_date" date, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (82.0ms)[0m  [1mCREATE  INDEX  "index_employee_leaves_on_employee_id" ON "employee_leaves"  ("employee_id")[0m
+  [1m[35m (87.3ms)[0m  CREATE  INDEX  "index_employee_leaves_on_employee_leave_type_id" ON "employee_leaves"  ("employee_leave_type_id")
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045319"]]
+  [1m[35m (97.8ms)[0m  COMMIT
+Migrating to CreateEmployeeLeaveTypes (20140906045326)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (255.5ms)[0m  CREATE TABLE "employee_leave_types" ("id" serial primary key, "name" character varying(255), "code" character varying(255), "status" boolean, "max_leave_count" character varying(255), "enable_carry_forward" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045326"]]
+  [1m[35m (30.1ms)[0m  COMMIT
+Migrating to CreateEmployeePositions (20140906045338)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (371.1ms)[0m  CREATE TABLE "employee_positions" ("id" serial primary key, "name" character varying(255), "employee_category_id" integer, "status" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (109.7ms)[0m  [1mCREATE  INDEX  "index_employee_positions_on_employee_category_id" ON "employee_positions"  ("employee_category_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140906045338"]]
+  [1m[36m (63.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateEmployeeSalaryStructures (20140906045541)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (79.2ms)[0m  [1mCREATE TABLE "employee_salary_structures" ("id" serial primary key, "employee_id" integer, "payroll_category_id" integer, "amount" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (198.0ms)[0m  CREATE  INDEX  "index_employee_salary_structures_on_employee_id" ON "employee_salary_structures"  ("employee_id")
+  [1m[36m (241.1ms)[0m  [1mCREATE  INDEX  "index_employee_salary_structures_on_payroll_category_id" ON "employee_salary_structures"  ("payroll_category_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140906045541"]]
+  [1m[36m (44.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateEmployeeSubjects (20140906045554)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (109.2ms)[0m  [1mCREATE TABLE "employee_subjects" ("id" serial primary key, "employee_id" integer, "subject_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (64.8ms)[0m  CREATE  INDEX  "index_employee_subjects_on_employee_id" ON "employee_subjects"  ("employee_id")
+  [1m[36m (131.3ms)[0m  [1mCREATE  INDEX  "index_employee_subjects_on_subject_id" ON "employee_subjects"  ("subject_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140906045554"]]
+  [1m[36m (64.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateIndividualPayslipCategories (20140906045640)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (459.5ms)[0m  [1mCREATE TABLE "individual_payslip_categories" ("id" serial primary key, "employee_id" integer, "salary_date" date, "name" character varying(255), "amount" character varying(255), "is_deduction" boolean, "include_every_month" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (142.1ms)[0m  CREATE  INDEX  "index_individual_payslip_categories_on_employee_id" ON "individual_payslip_categories"  ("employee_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045640"]]
+  [1m[35m (68.7ms)[0m  COMMIT
+Migrating to CreateMonthlyPayslips (20140906045656)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (136.0ms)[0m  CREATE TABLE "monthly_payslips" ("id" serial primary key, "salary_date" date, "employee_id" integer, "payroll_category_id" integer, "amount" character varying(255), "is_approved" boolean DEFAULT 'f' NOT NULL, "approver_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (303.4ms)[0m  [1mCREATE  INDEX  "index_monthly_payslips_on_employee_id" ON "monthly_payslips"  ("employee_id")[0m
+  [1m[35m (116.6ms)[0m  CREATE  INDEX  "index_monthly_payslips_on_payroll_category_id" ON "monthly_payslips"  ("payroll_category_id")
+  [1m[36m (113.2ms)[0m  [1mCREATE  INDEX  "index_monthly_payslips_on_approver_id" ON "monthly_payslips"  ("approver_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140906045656"]]
+  [1m[36m (80.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePayrollCategories (20140906045710)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (109.5ms)[0m  [1mCREATE TABLE "payroll_categories" ("id" serial primary key, "name" character varying(255), "percentage" float, "payroll_category_id" integer, "is_deduction" boolean, "status" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (230.6ms)[0m  CREATE  INDEX  "index_payroll_categories_on_payroll_category_id" ON "payroll_categories"  ("payroll_category_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906045710"]]
+  [1m[35m (136.2ms)[0m  COMMIT
+Migrating to CreateApplyLeaves (20140906050044)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (283.4ms)[0m  CREATE TABLE "apply_leaves" ("id" serial primary key, "employee_id" integer, "employee_leave_types_id" integer, "is_half_day" boolean, "start_date" date, "end_date" date, "reason" character varying(255), "approved" boolean DEFAULT 'f', "viewed_by_manager" boolean DEFAULT 'f', "manager_remark" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (101.5ms)[0m  [1mCREATE  INDEX  "index_apply_leaves_on_employee_id" ON "apply_leaves"  ("employee_id")[0m
+  [1m[35m (116.3ms)[0m  CREATE  INDEX  "index_apply_leaves_on_employee_leave_types_id" ON "apply_leaves"  ("employee_leave_types_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906050044"]]
+  [1m[35m (55.7ms)[0m  COMMIT
+Migrating to CreateBankFields (20140906050103)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (71.9ms)[0m  CREATE TABLE "bank_fields" ("id" serial primary key, "name" character varying(255), "status" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140906050103"]]
+  [1m[35m (234.2ms)[0m  COMMIT
+Migrating to CreateBatchGroups (20140908170643)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (133.0ms)[0m  CREATE TABLE "batch_groups" ("id" serial primary key, "name" character varying(255), "course_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (133.3ms)[0m  [1mCREATE  INDEX  "index_batch_groups_on_course_id" ON "batch_groups"  ("course_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140908170643"]]
+  [1m[36m (34.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateGroupBatches (20140908194322)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (179.1ms)[0m  [1mCREATE TABLE "group_batches" ("id" serial primary key, "batch_group_id" integer, "batch_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (278.9ms)[0m  CREATE  INDEX  "index_group_batches_on_batch_group_id" ON "group_batches"  ("batch_group_id")
+  [1m[36m (104.4ms)[0m  [1mCREATE  INDEX  "index_group_batches_on_batch_id" ON "group_batches"  ("batch_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140908194322"]]
+  [1m[36m (74.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOnlineExamQuestions (20140909103214)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (233.0ms)[0m  [1mCREATE TABLE "online_exam_questions" ("id" serial primary key, "online_exam_id" integer, "question" character varying(255), "marks" integer, "is_answer" integer, "option_group" character varying(255)[], "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (130.8ms)[0m  CREATE  INDEX  "index_online_exam_questions_on_online_exam_id" ON "online_exam_questions"  ("online_exam_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140909103214"]]
+  [1m[35m (62.9ms)[0m  COMMIT
+Migrating to CreateBatchesOnlineExams (20140912074249)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (87.0ms)[0m  CREATE TABLE "batches_online_exams" ("id" serial primary key, "online_exam_id" integer, "batch_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (109.5ms)[0m  [1mCREATE  INDEX  "index_batches_online_exams_on_online_exam_id" ON "batches_online_exams"  ("online_exam_id")[0m
+  [1m[35m (109.5ms)[0m  CREATE  INDEX  "index_batches_online_exams_on_batch_id" ON "batches_online_exams"  ("batch_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140912074249"]]
+  [1m[35m (34.8ms)[0m  COMMIT
+Migrating to CreateFinanceFees (20140914092856)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (152.0ms)[0m  CREATE TABLE "finance_fees" ("id" serial primary key, "fee_collection_id" integer, "transaction_id" character varying(255), "student_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (303.5ms)[0m  [1mCREATE  INDEX  "index_finance_fees_on_fee_collection_id" ON "finance_fees"  ("fee_collection_id")[0m
+  [1m[35m (68.2ms)[0m  CREATE  INDEX  "index_finance_fees_on_student_id" ON "finance_fees"  ("student_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914092856"]]
+  [1m[35m (81.4ms)[0m  COMMIT
+Migrating to CreateFinanceFeeCategories (20140914092937)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (271.3ms)[0m  CREATE TABLE "finance_fee_categories" ("id" serial primary key, "name" character varying(255), "description" text, "batch_id" integer, "fee_collection_id" integer, "is_deleted" boolean DEFAULT 'f', "is_master" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (89.9ms)[0m  [1mCREATE  INDEX  "index_finance_fee_categories_on_batch_id" ON "finance_fee_categories"  ("batch_id")[0m
+  [1m[35m (198.7ms)[0m  CREATE  INDEX  "index_finance_fee_categories_on_fee_collection_id" ON "finance_fee_categories"  ("fee_collection_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914092937"]]
+  [1m[35m (176.1ms)[0m  COMMIT
+Migrating to CreateFinanceFeeCollections (20140914092959)
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35m (137.6ms)[0m  CREATE TABLE "finance_fee_collections" ("id" serial primary key, "name" character varying(255), "start_date" date, "end_date" date, "due_date" date, "fee_category_id" integer, "batch_id" integer, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (123.7ms)[0m  [1mCREATE  INDEX  "index_finance_fee_collections_on_fee_category_id" ON "finance_fee_collections"  ("fee_category_id")[0m
+  [1m[35m (120.7ms)[0m  CREATE  INDEX  "index_finance_fee_collections_on_batch_id" ON "finance_fee_collections"  ("batch_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914092959"]]
+  [1m[35m (20.5ms)[0m  COMMIT
+Migrating to CreateFinanceFeeParticulars (20140914093049)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (784.0ms)[0m  CREATE TABLE "finance_fee_particulars" ("id" serial primary key, "name" character varying(255), "description" text, "amount" decimal, "finance_fee_category_id" integer, "category_id" integer, "admission_no" character varying(255), "student_id" integer, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (218.7ms)[0m  [1mCREATE  INDEX  "index_finance_fee_particulars_on_finance_fee_category_id" ON "finance_fee_particulars"  ("finance_fee_category_id")[0m
+  [1m[35m (130.2ms)[0m  CREATE  INDEX  "index_finance_fee_particulars_on_category_id" ON "finance_fee_particulars"  ("category_id")
+  [1m[36m (146.5ms)[0m  [1mCREATE  INDEX  "index_finance_fee_particulars_on_student_id" ON "finance_fee_particulars"  ("student_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140914093049"]]
+  [1m[36m (45.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateFinanceFeeStructureElements (20140914093149)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (478.9ms)[0m  [1mCREATE TABLE "finance_fee_structure_elements" ("id" serial primary key, "amount" decimal, "label" character varying(255), "batch_id" integer, "category_id" integer, "student_id" integer, "guardian_id" integer, "fee_collection_id" integer, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (137.7ms)[0m  CREATE  INDEX  "index_finance_fee_structure_elements_on_batch_id" ON "finance_fee_structure_elements"  ("batch_id")
+  [1m[36m (103.1ms)[0m  [1mCREATE  INDEX  "index_finance_fee_structure_elements_on_category_id" ON "finance_fee_structure_elements"  ("category_id")[0m
+  [1m[35m (113.1ms)[0m  CREATE  INDEX  "index_finance_fee_structure_elements_on_student_id" ON "finance_fee_structure_elements"  ("student_id")
+  [1m[36m (384.6ms)[0m  [1mCREATE  INDEX  "index_finance_fee_structure_elements_on_guardian_id" ON "finance_fee_structure_elements"  ("guardian_id")[0m
+  [1m[35m (84.7ms)[0m  CREATE  INDEX  "index_finance_fee_structure_elements_on_fee_collection_id" ON "finance_fee_structure_elements"  ("fee_collection_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914093149"]]
+  [1m[35m (81.1ms)[0m  COMMIT
+Migrating to CreateFinanceTransactions (20140914093538)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (261.8ms)[0m  CREATE TABLE "finance_transactions" ("id" serial primary key, "title" character varying(255), "description" character varying(255), "amount" decimal, "fine_included" boolean DEFAULT 'f', "category_id" integer, "student_id" integer, "finance_fees_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (300.7ms)[0m  [1mCREATE  INDEX  "index_finance_transactions_on_category_id" ON "finance_transactions"  ("category_id")[0m
+  [1m[35m (138.2ms)[0m  CREATE  INDEX  "index_finance_transactions_on_student_id" ON "finance_transactions"  ("student_id")
+  [1m[36m (141.9ms)[0m  [1mCREATE  INDEX  "index_finance_transactions_on_finance_fees_id" ON "finance_transactions"  ("finance_fees_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140914093538"]]
+  [1m[36m (53.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateFinanceTransactionCategories (20140914093601)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (295.7ms)[0m  [1mCREATE TABLE "finance_transaction_categories" ("id" serial primary key, "name" character varying(255), "description" character varying(255), "is_income" boolean, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140914093601"]]
+  [1m[36m (59.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateFinanceTransactionTriggers (20140914093614)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (590.2ms)[0m  [1mCREATE TABLE "finance_transaction_triggers" ("id" serial primary key, "finance_fee_category_id" integer, "percentage" decimal, "title" character varying(255), "description" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (124.1ms)[0m  CREATE  INDEX  "index_finance_transaction_triggers_on_finance_fee_category_id" ON "finance_transaction_triggers"  ("finance_fee_category_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914093614"]]
+  [1m[35m (54.0ms)[0m  COMMIT
+Migrating to CreateLiabilities (20140914093643)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (308.8ms)[0m  CREATE TABLE "liabilities" ("id" serial primary key, "title" character varying(255), "description" text, "amount" integer, "is_solved" boolean DEFAULT 'f', "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914093643"]]
+  [1m[35m (86.6ms)[0m  COMMIT
+Migrating to CreateStudentCategoryFeeCollectionDiscounts (20140914093706)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (284.5ms)[0m  CREATE TABLE "student_category_fee_collection_discounts" ("id" serial primary key, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914093706"]]
+  [1m[35m (173.5ms)[0m  COMMIT
+Migrating to CreateStudentCategoryFeeDiscounts (20140914093757)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (161.4ms)[0m  CREATE TABLE "student_category_fee_discounts" ("id" serial primary key, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914093757"]]
+  [1m[35m (69.8ms)[0m  COMMIT
+Migrating to CreateStudentFeeCollectionDiscounts (20140914093850)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (167.3ms)[0m  CREATE TABLE "student_fee_collection_discounts" ("id" serial primary key, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914093850"]]
+  [1m[35m (197.4ms)[0m  COMMIT
+Migrating to CreateStudentFeeDiscounts (20140914093933)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (172.8ms)[0m  CREATE TABLE "student_fee_discounts" ("id" serial primary key, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914093933"]]
+  [1m[35m (63.6ms)[0m  COMMIT
+Migrating to CreateFinanceDonations (20140914094003)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (180.1ms)[0m  CREATE TABLE "finance_donations" ("id" serial primary key, "donor" character varying(255), "description" character varying(255), "amount" decimal, "transaction_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (186.9ms)[0m  [1mCREATE  INDEX  "index_finance_donations_on_transaction_id" ON "finance_donations"  ("transaction_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140914094003"]]
+  [1m[36m (216.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateFeeDiscounts (20140914094016)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (305.9ms)[0m  [1mCREATE TABLE "fee_discounts" ("id" serial primary key, "type" character varying(255), "name" character varying(255), "receiver_id" integer, "finance_fee_category_id" integer, "discount" decimal, "is_amount" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (164.4ms)[0m  CREATE  INDEX  "index_fee_discounts_on_receiver_id" ON "fee_discounts"  ("receiver_id")
+  [1m[36m (86.9ms)[0m  [1mCREATE  INDEX  "index_fee_discounts_on_finance_fee_category_id" ON "fee_discounts"  ("finance_fee_category_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140914094016"]]
+  [1m[36m (45.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateFeeCollectionParticulars (20140914094035)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (407.9ms)[0m  [1mCREATE TABLE "fee_collection_particulars" ("id" serial primary key, "name" character varying(255), "description" text, "amount" decimal, "finance_fee_collection_id" integer, "category_id" integer, "admission_no" character varying(255), "student_id" integer, "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (86.5ms)[0m  CREATE  INDEX  "index_fee_collection_particulars_on_finance_fee_collection_id" ON "fee_collection_particulars"  ("finance_fee_collection_id")
+  [1m[36m (153.7ms)[0m  [1mCREATE  INDEX  "index_fee_collection_particulars_on_category_id" ON "fee_collection_particulars"  ("category_id")[0m
+  [1m[35m (175.7ms)[0m  CREATE  INDEX  "index_fee_collection_particulars_on_student_id" ON "fee_collection_particulars"  ("student_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914094035"]]
+  [1m[35m (46.2ms)[0m  COMMIT
+Migrating to CreateFeeCollectionDiscounts (20140914094051)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (431.5ms)[0m  CREATE TABLE "fee_collection_discounts" ("id" serial primary key, "type" character varying(255), "name" character varying(255), "receiver_id" integer, "finance_fee_collection_id" integer, "discount" decimal, "is_amount" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (119.5ms)[0m  [1mCREATE  INDEX  "index_fee_collection_discounts_on_receiver_id" ON "fee_collection_discounts"  ("receiver_id")[0m
+  [1m[35m (134.6ms)[0m  CREATE  INDEX  "index_fee_collection_discounts_on_finance_fee_collection_id" ON "fee_collection_discounts"  ("finance_fee_collection_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914094051"]]
+  [1m[35m (169.2ms)[0m  COMMIT
+Migrating to CreateBatchFeeCollectionDiscounts (20140914094108)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (178.3ms)[0m  CREATE TABLE "batch_fee_collection_discounts" ("id" serial primary key, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914094108"]]
+  [1m[35m (203.9ms)[0m  COMMIT
+Migrating to CreateBatchFeeDiscounts (20140914094131)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (129.7ms)[0m  CREATE TABLE "batch_fee_discounts" ("id" serial primary key, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914094131"]]
+  [1m[35m (64.7ms)[0m  COMMIT
+Migrating to CreateAssets (20140914094148)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (329.8ms)[0m  CREATE TABLE "assets" ("id" serial primary key, "title" character varying(255), "description" text, "amount" decimal, "is_inactive" boolean DEFAULT 'f', "is_deleted" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914094148"]]
+  [1m[35m (69.5ms)[0m  COMMIT
+Migrating to CreateGroupedExamReports (20140914103219)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (448.3ms)[0m  CREATE TABLE "grouped_exam_reports" ("id" serial primary key, "batch_id" integer, "student_id" integer, "exam_group_id" integer, "marks" decimal, "score_type" character varying(255), "subject_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (164.2ms)[0m  [1mCREATE  INDEX  "index_grouped_exam_reports_on_batch_id" ON "grouped_exam_reports"  ("batch_id")[0m
+  [1m[35m (131.7ms)[0m  CREATE  INDEX  "index_grouped_exam_reports_on_student_id" ON "grouped_exam_reports"  ("student_id")
+  [1m[36m (220.3ms)[0m  [1mCREATE  INDEX  "index_grouped_exam_reports_on_exam_group_id" ON "grouped_exam_reports"  ("exam_group_id")[0m
+  [1m[35m (110.6ms)[0m  CREATE  INDEX  "index_grouped_exam_reports_on_subject_id" ON "grouped_exam_reports"  ("subject_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140914103219"]]
+  [1m[35m (87.6ms)[0m  COMMIT
+Migrating to CreateBatchEvents (20140925131254)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (230.8ms)[0m  CREATE TABLE "batch_events" ("id" serial primary key, "batch_id" integer, "event_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (197.9ms)[0m  [1mCREATE  INDEX  "index_batch_events_on_batch_id" ON "batch_events"  ("batch_id")[0m
+  [1m[35m (218.5ms)[0m  CREATE  INDEX  "index_batch_events_on_event_id" ON "batch_events"  ("event_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140925131254"]]
+  [1m[35m (84.0ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m

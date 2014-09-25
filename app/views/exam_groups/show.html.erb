@@ -20,7 +20,8 @@
       <%= link_to 'Course' ,courses_path%> &raquo;
     <%= link_to @course.course_name,course_path(@course)%>  &raquo;
     Batch&raquo;
-    <%= link_to @batch.name,batches_display_path(@batch)%>&raquo;
+    <%= link_to @batch.name,batches_display_path(@batch)%>
+    &raquo;
     Exams
   </div></div><br/>
 <% unless flash[:notice].nil? %>
@@ -38,8 +39,12 @@
 
         <tr>
         <td class="col-2"><%= link_to eg.name ,exam_groups_exams_path(eg) %></td>
+        <% unless eg.result_published? %>
         <td><%= link_to 'delete',eg,method: :delete,
         data:{confirm:"Are you sure to delete ExamGroup: #{eg.name}"}%></td>
+        <%else%>
+        <td>delete</td>
+        <%end%>
         <% if eg.result_published? %>
         <td class="col-4"><%= 'Result published'%></td>
         <%else%>

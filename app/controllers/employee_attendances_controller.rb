@@ -263,22 +263,21 @@ end
                flash[:notice] = 'Department Wise Leave Reset Successfull'
   end
 
-   def search
-         unless params[:search].empty?
-      # @department=EmployeeDepartment.find(params[:employee_leave][:employee_department_id])
-      # @name=params[:employee_leave][:search]
-     other_condition=""
-     other_condition+="AND employee_department_id=#{@department.id})" unless params[:employee_leave][:employee_department_id]
-    
-     p "nnnnnnnnnnnnnnnnnn"
-     p @name
-    
-     p "dddddddddddddddddddddd"
-     p @department
+   def search_emp
+  
+      unless params[:search].empty?
+    other_conditions = ""
+   
 
-       @employee_leave=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
-        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'"+other_condition)
-     
+    other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ""
+    other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ""
+    other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ""
+    other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ""
+  
+    @employee = Employee.where("first_name LIKE ?"+other_conditions,"#{params[:search]}%")
+
+  
+
 
     end
 
@@ -286,7 +285,7 @@ end
 
     private
     def params_leave
-         params.require(:employe e_leave_type).permit(:name,:code,:status,:max_leave_count,:enable_carry_forward,:employee_id)
+         params.require(:employee_leave_type).permit(:name,:code,:status,:max_leave_count,:enable_carry_forward,:employee_id)
     end
 
     def params_attendance

@@ -10,7 +10,13 @@ def select
 	    @subjects = @batch.subjects.all
         
 end
-def subs
-   @subject=@batch.subjects.find(params[:subject][:id])
+
+def select_subject
+	 
+	 @subject=Subject.find(params[:subject][:subject_id])
+     @teachers= EmployeeSubject.where(subject_id: @subject.id)
+    
 end
+
+
 end

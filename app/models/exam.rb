@@ -6,11 +6,11 @@ class Exam < ActiveRecord::Base
 	 
 	validates :start_time, presence:true
 	validates :end_time, presence:true
-	# validates :end_date_cannot_be_less_than_start
 	validates :maximum_marks, presence:true
 	validates :minimum_marks, presence:true
 	validates :weightage, presence:true	
-
+	
+	validate :end_date_cannot_be_less_than_start
 
 
 	def end_date_cannot_be_less_than_start

@@ -51,19 +51,24 @@
               <% unless dt > @last_day.day %>
                   <% current_date="#{@show_month.year}-#{@show_month.month}-#{dt}".to_date %>
                   <span><%=link_to dt,new_event_path(current_date) %></span>
-                  <% @event=Event.find_by_start_date(current_date)%>
-                  <% unless @event.nil? %>
-                  <% if @event.is_holiday? %>
-                  <%= form_for :calendar, url:{action:'event_view',event_id:@event.id },method: :get,remote:true,html:{id: "calender_form#{@event.id}",style: 'width:12px;height:12px;background:#00b400; -moz-border-radius:2px;  -webkit-border-radius:2px;margin:2px;'} do |f| %>
-                  <%= link_to ".",'',{onmouseover:"$('#calender_form#{@event.id}').submit();"}%>
-                  <%end%>
+                  <% @event=Event.where("start_date<=? AND end_date>=?",current_date,current_date)%>
+                  <% @event.each do |event|%>
+                  <% unless event.nil? %>
+                  <% if event.is_holiday? %>
+                    <%= form_for :calendar, url:{action:'event_view',event_id:event.id },method: :get,remote:true,html:{id: "calender_form#{event.id}",style: 'width:12px;height:12px;background:#00b400; -moz-border-radius:2px;  -webkit-border-radius:2px;margin:2px;'} do |f| %>
+                    <%= link_to ".",'',{onmouseover:"$('#calender_form#{event.id}').submit();"}%>
+                    <%end%>
+                   <% elsif event.is_exam?%>
+                    <%= form_for :calendar, url:{action:'event_view',event_id:event.id },method: :get,remote:true,html:{id: "calender_form#{event.id}",style: 'width:12px;height:12px;background:#0C6C92; -moz-border-radius:2px;  -webkit-border-radius:2px;margin:2px;'} do |f| %>
+                    <%= link_to ".",'',{onmouseover:"$('#calender_form#{event.id}').submit();"}%>
+                    <%end%>
                   <% else%>
-                  <%= form_for :calendar, url:{action:'event_view',event_id:@event.id },method: :get,remote:true,html:{id: "calender_form#{@event.id}",style: 'width:12px;height:12px;background:#000000; -moz-border-radius:2px;  -webkit-border-radius:2px;margin:2px;'} do |f| %>
-                  <%= link_to ".",'',{onmouseover:"$('#calender_form#{@event.id}').submit();"}%>
+                    <%= form_for :calendar, url:{action:'event_view',event_id:event.id },method: :get,remote:true,html:{id: "calender_form#{event.id}",style: 'width:12px;height:12px;background:#000000; -moz-border-radius:2px;  -webkit-border-radius:2px;margin:2px;'} do |f| %>
+                    <%= link_to ".",'',{onmouseover:"$('#calender_form#{event.id}').submit();"}%>
+                    <%end%>
                   <%end%>
                   <%end%>
-                  <% end %>
-
+                  <%end%>
                 <% date = "#{@show_month.year}-#{@show_month.month}-#{dt}".to_date
                 first_day = date.beginning_of_month
                 last_day = date.end_of_month

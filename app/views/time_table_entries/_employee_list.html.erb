@@ -1,0 +1,10 @@
+<% unless @teachers.empty? %>
+ <% @teachers.each do |e| %>
+      <div class="draggable" class="btn btn-primary"><%= e.employee.first_name %></div>
+      <% end %>
+<% else %>
+<h5>No teacher associated to this subject.</h5>
+<% end %>
+
+
+

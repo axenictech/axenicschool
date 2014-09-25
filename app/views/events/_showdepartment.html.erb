@@ -3,7 +3,7 @@
 <%@departments.each do |b|%>
 <tr>
 		<td><%=b.name%></td>
-		<td><%=check_box_tag "batch[]",false%></td>
+		<td><%=check_box_tag "departments[]",b.id,false%></td>
 </tr>
 <% end %>
 </table>

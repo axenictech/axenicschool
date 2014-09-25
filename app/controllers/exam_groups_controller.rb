@@ -1,6 +1,6 @@
 class ExamGroupsController < ApplicationController
  
-  def select
+   def select
     @course=Course.find(params[:course][:id])
     @batches=@course.batches.all
 
@@ -20,8 +20,18 @@ class ExamGroupsController < ApplicationController
   end
 
   def edit
-    
+    @exam_group=ExamGroup.find(params[:id])
+    @batch=@exam_group.batch
   end
+
+  def update
+    @exam_group=ExamGroup.find(params[:id])
+    @exam_group.update(params_exam_group)
+    @batch=@exam_group.batch
+    @subjects=@batch.subjects.where(no_exams:false)
+    @exam_group.exams.build
+  end
+
   def exam_group_create
     @exam_group=ExamGroup.find(params[:id])
     @exam_group.update(params_exam_group)

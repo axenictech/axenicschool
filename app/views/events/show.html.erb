@@ -8,44 +8,45 @@
 </div>
 <div id="page-yield">
 <div class="box">
-<table class="table" style="width:500px">
+<%= form_for :events,url:{action:'update'},method: :patch do |f| %>
+<table align="center" class="table" style="width:800px">
 <tbody>
-	<tr>
-			<td> Titl---></td>
-			<td><%=@event.title%></td>
+<%= hidden_field_tag :event_id,@event.id%>
+	<tr class="tr-head">
+			<td class="col-2">Title</td>
+			<td class="col-2"><%=@event.title%></td>
 	</tr>
 
-	<tr>
-			<td> Description---></td>
-			<td><%=@event.description%></td>
+	<tr class="tr-head">
+			<td class="col-2"> Description</td>
+			<td class="col-2"><%=@event.description%></td>
 	</tr>
-	<tr>
-			<td> Start Date---></td>
-			<td><%=@event.start_date%></td>
-	</tr>
-
-	<tr>
-			<td> End Date---></td>
-			<td><%=@event.end_date%></td>
+	<tr class="tr-head">
+			<td class="col-2"> Start Date</td>
+			<td class="col-2"><%=@event.start_date%></td>
 	</tr>
 
-	<tr>
-		<td><h3><%= link_to 'Select Batch',event_path,class: "btn btn-primary",remote: true%></h3></td>
-<tr><td><h3><%= link_to 'select department',event_path,class: "btn btn-primary",remote: true%></h3></td></tr>
-
+	<tr class="tr-head">
+			<td class="col-2"> End Date</td>
+			<td class="col-2"><%=@event.end_date%></td>
+	</tr>
+	<%unless @event.is_common? %>
+	<tr class="tr-head">
+		<td class="col-2"><%= link_to 'Select Batch',event_path,remote: true%></td>	
+		<td id="batch_details"></td>
 	</tr>
 	
-	<tr>
-				
- 			<td><h3><%= link_to '► Confirm',calender_index_path,class: "btn btn-primary"%></h3></td>
- 			<td><h3><%= link_to '► Cancel',new_event_path,class: "btn btn-primary"%></h3></td>
-
+	<tr class="tr-head">
+		<td class="col-2"><%= link_to 'Select Department',events_showdep_path,remote: true%></td>
+		<td id ="department_details"></td>
 	</tr>
-	 
+	 <%end%>
+	<tr class="tr-head">
+		<td colspan="2"><%=f.submit 'Confirm',class: "btn btn-primary"%>
+ 		<%= link_to 'Cancel',calender_index_path,class: "btn btn-primary"%></td>
+	</tr>
 
 </tbody>
 </table>
-
-<div id="kankya"></div>
-<div id ="kankya2"></div>
+<%end%>
 </div></div>

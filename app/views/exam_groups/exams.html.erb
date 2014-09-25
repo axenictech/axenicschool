@@ -51,9 +51,13 @@
         <td><%= exam.maximum_marks %></td>  
         <td><%= exam.minimum_marks %></td>
         <%end%>
+        <% unless @exam_group.result_published? %>
         <td><%= link_to 'Edit',edit_exam_path(exam)%>&nbsp;&nbsp;
         <%= link_to 'Delete',exam,method: :delete,
         data:{confirm:"Are you sure to delete Exam: #{exam.subject.name}"}%></td>
+        <%else%>
+        <td>Edit&nbsp;&nbsp;Delete</td>
+        <%end%>
         </tr>
          <%end%>
          

@@ -56,6 +56,36 @@ class BatchesController < ApplicationController
        redirect_to course_path(@batch.course)
     end
   end
+def assign_tutor
+    @batch=Batch.find(params[:format])
+
+  end
+
+   def assign_tutorial
+    @batch=Batch.find(params[:format])
+    @department=EmployeeDepartment.find(params[:assign_tutor][:id])
+    @employees = Employee.where(employee_department_id:@department.id)
+  
+   end
+
+   def assign_employee
+     @batch=Batch.find(params[:batch_id])
+     @employee=Employee.find(params[:format])
+    if @batch.employee_id.nil?
+     @batch.update(employee_id:@employee.id)
+    else
+      @batch.update(employee_id:[@batch.employee_id,@employee.id].join(","))
+    end
+     @assign_employees=@batch.employee_id.to_s.split(",")
+   end
+
+   def remove_employee
+      @batch=Batch.find(params[:batch_id])
+      @employee=Employee.find(params[:format])
+      @assign_employees=Batch.where(employee_id:@employee.id)
+      @assign_employees.destroy_all
+   end
+
 
 private 
 def postparam
