@@ -221,21 +221,72 @@ end
   end
   
    def employee_leave_reset_by_department
-      @deparments=EmployeeDepartment.all
-     
+      @departments=EmployeeDepartment.all
+
+      # @department=EmployeeDepartment.find(params[:department_id])
+
    end
 
    def select_department
-       @deparment=EmployeeDepartment.find(params[:department][:id])
-        @employees=@deparment.employees.all
-       
-   
+        @department=EmployeeDepartment.find(params[:department][:id])
+        @employees=@department.employees.all
    end
 
+  def assign_all
+    @department=EmployeeDepartment.find(params[:format])
+    @employees=@department.employees.all
+     
+  end
+
+  def remove_all
+       @department=EmployeeDepartment.find(params[:format])
+
+        @employees= @department.employees.all
+  end
+
+  def update_department_leave_reset
+      
+        @employee = params[:employees]
+   
+    @employee.each do |c|
+      @leave_count = EmployeeLeave.where(employee_id:c)
+       @leave_count.each do |e|
+        @leave_type = EmployeeLeaveType.find_by_id(e.employee_leave_type_id)
+          default_leave_count = @leave_type.max_leave_count
+            available_leave = default_leave_count.to_f
+            leave_taken = 0
+             e.update(:leave_taken => leave_taken,:leave_count => available_leave)
+            
+    end
+end
+     redirect_to employee_attendances_employee_leave_reset_by_department_path
+               flash[:notice] = 'Department Wise Leave Reset Successfull'
+  end
+
+   def search
+         unless params[:search].empty?
+      # @department=EmployeeDepartment.find(params[:employee_leave][:employee_department_id])
+      # @name=params[:employee_leave][:search]
+     other_condition=""
+     other_condition+="AND employee_department_id=#{@department.id})" unless params[:employee_leave][:employee_department_id]
+    
+     p "nnnnnnnnnnnnnnnnnn"
+     p @name
+    
+     p "dddddddddddddddddddddd"
+     p @department
+
+       @employee_leave=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
+        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'"+other_condition)
+     
+
+    end
+
+   end
 
     private
     def params_leave
-         params.require(:employee_leave_type).permit(:name,:code,:status,:max_leave_count,:enable_carry_forward,:employee_id)
+         params.require(:employe e_leave_type).permit(:name,:code,:status,:max_leave_count,:enable_carry_forward,:employee_id)
     end
 
     def params_attendance

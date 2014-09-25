@@ -18,7 +18,7 @@
 <div class="text-input-bg">
 <%= form_for :department,url:{action:'select_department'},method: :get,remote:true,html:{id: "dep_form"}  do |f| %>
 <%= f.label :select_department %>
-<%= f.select :id,@deparments.collect {|d| [d.name,d.id]},{prompt:true},{onchange:"$('#dep_form').submit();"} %>  
+<%= f.select :id,@departments.collect {|d| [d.name,d.id]},{prompt:true},{onchange:"$('#dep_form').submit();"} %>  
 <%end%>
 </div><br/><br/><br/>
 <div id="department_div"></div>

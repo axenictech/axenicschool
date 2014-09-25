@@ -268,8 +268,14 @@ class EmployeesController < ApplicationController
   end   
 
 
- def admission1
+  def admission1
     @employee=Employee.new
+    if Employee.first.nil?
+      @employee.employee_number=111
+    else
+      @last_employee=Employee.last
+      @employee.employee_number=@last_employee.employee_number.next
+    end   
   end
 
   def create
@@ -323,11 +329,23 @@ class EmployeesController < ApplicationController
   end
 
   def search
-      @employee=Employee.find(params[:format])
-    unless params[:search].empty?
-      @reporting_manager=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
-        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'")
+    @employee=Employee.find(params[:format])
+      unless params[:search].empty?
+    other_conditions = ""
+   
+
+    other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ""
+    other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ""
+    other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ""
+    other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ""
+  
+    @reporting_manager = Employee.where("first_name LIKE ?"+other_conditions,"#{params[:search]}%")
+
+    p @reporting_manager
+
     end
+
+   
   end
 
   def update_reporting_manager_name
@@ -402,22 +420,23 @@ class EmployeesController < ApplicationController
   end
 
   def search_employee
-    
+    @department=EmployeeDepartment.all
   end
   def search_emp
     unless params[:search].empty?
     other_conditions = ""
-    
-    @department=EmployeeDepartment.find(params[:advance_search][:employee_department_id])
-    other_conditions += " AND employee_department_id=#{@department.id}" unless params[:advance_search][:employee_department_id]
-    @employee=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
-        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'"+other_conditions)
-    
-    p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-    p @employee
+   
+
+    other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ""
+    other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ""
+    other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ""
+    other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ""
+  
+    @employee = Employee.where("first_name LIKE ?"+other_conditions,"#{params[:search]}%")
 
     end
 
+    
     
   end
  

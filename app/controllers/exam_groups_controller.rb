@@ -15,10 +15,13 @@ class ExamGroupsController < ApplicationController
     @batch=Batch.find(params[:format])
     @exam_group=@batch.exam_groups.new(params_exam_group)
     @exam_group.save
-    @subjects=@batch.subjects.all
+    @subjects=@batch.subjects.where(no_exams:false)
     @exam_group.exams.build
-   end
+  end
 
+  def edit
+    
+  end
   def exam_group_create
     @exam_group=ExamGroup.find(params[:id])
     @exam_group.update(params_exam_group)
@@ -28,11 +31,14 @@ class ExamGroupsController < ApplicationController
   def show
     @batch=Batch.find(params[:id])
     @exam_groups=@batch.exam_groups.all
+    @course=@batch.course
   end
 
   def exams
    @exam_group=ExamGroup.find(params[:id])
    @exams=@exam_group.exams.all
+   @course=@exam_group.batch.course
+   
   end
 
   def previous_exam
@@ -106,11 +112,30 @@ class ExamGroupsController < ApplicationController
 
   end
 
+  def publish_result
+    @exam_group=ExamGroup.find(params[:format])
+    if @exam_group.is_published?
+       @exam_group.update(result_published:true)
+       flash[:result]="Result published successfully"
+    else
+       flash[:result_error]="Exam scheduled not published"
+    end
+    redirect_to exam_groups_exams_path(@exam_group)
+  end
+
+  def destroy
+    @exam_group=ExamGroup.find(params[:id])
+    batch=@exam_group.batch
+    @exam_group.destroy
+    flash[:notice] = "Exam Group deleted successfully!"
+    redirect_to exam_group_path(batch)
+  end
+
+ 
   private 
     def params_exam_group
       params.require(:exam_group).permit(:name,:exam_type,
         exams_attributes: [:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
     end
-
 end
   

@@ -22,4 +22,13 @@ class Guardian < ActiveRecord::Base
    length:{:in=> 1..20},allow_blank: true
    validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   
+   def create_user_account
+    user = User.new do |u|
+      u.first_name, u.last_name, u.username, u.student_id = self.first_name, self.last_name,  "#{self.first_name+self.last_name+self.student.admission_no.to_s}", self.student.id
+      u.password = "#{self.student.admission_no.to_s}123"
+      u.role = 'Parent'
+      u.email = ( self.email == '' or User.find_by_email(email) ) ? "#{self.first_name+self.last_name+self.student.admission_no.to_s}@axenic.com" : email
+    end
+    user.save
+  end
 end

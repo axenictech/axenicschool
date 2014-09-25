@@ -5,7 +5,7 @@ class CreateExamScores < ActiveRecord::Migration
       t.references :student, index:true
       t.references :exam,index:true
       t.decimal    :marks
-      t.references :grading_level
+      t.references :grading_level,index:true
       t.string     :remarks
       t.boolean    :is_failed
    

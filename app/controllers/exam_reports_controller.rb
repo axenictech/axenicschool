@@ -218,20 +218,48 @@ class ExamReportsController < ApplicationController
   end
 
   def generate_student_ranking_report3
-    @batch=Batch.find(params[:rank_report][:batch_id])
-    @start_date=params[:rank_report][:start_date]
-    @end_date=params[:rank_report][:end_date]
+    @batches=Batch.all
+    if request.get?
+    if params[:rank_report][:batch_id].present? 
+        if params[:rank_report][:start_date].present?
+            if params[:rank_report][:end_date].present?
+              @batch=Batch.find(params[:rank_report][:batch_id])
+              @start_date=params[:rank_report][:start_date].to_date
+              @end_date=params[:rank_report][:end_date].to_date
+              @students = @batch.students.all
+            else
+              flash[:notice_rank_att]="Please select end date"
+              render 'student_ranking_per_attendance'
+            end
+        else
+          flash[:notice_rank_att]="Please select start date"
+          render 'student_ranking_per_attendance'
+        end  
+      else
+         flash[:notice_rank_att]="Please select course"
+         render 'student_ranking_per_attendance'
+      end
+    end
   end
 
   def generate_view_transcripts
-     @batch=Batch.find(params[:transcript][:batch_id])
-     @students=@batch.students.all
-     @student=@batch.students.last
+    if request.get?
+    if params[:transcript][:batch_id].present? 
+       @batch=Batch.find(params[:transcript][:batch_id])
+       @students=@batch.students.all
+       @exam_groups=@batch.exam_groups.all
+       @student=@batch.students.last
+    else
+        flash[:notice_tran]="Please select batch"
+        render 'view_transcripts'
+    end
+    end
   end
 
   def student_view_transcripts
      @student=Student.find(params[:student_id])
      @batch=@student.batch
+     @exam_groups=@batch.exam_groups.all
      @students=@batch.students.all
   end
 

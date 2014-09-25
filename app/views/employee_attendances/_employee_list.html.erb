@@ -1,9 +1,12 @@
-
+<% if @employees.empty? %>
+  <h4 align="center">No Record Found </h4>
+   <% else %>
   <table align="center" class="table table-hover" style="width:500px">
-  <tr class="tr-head"><td colspan="2" class="col-2">Employee name</td></tr>
+  <tr class="tr-head"><td colspan="2" class="col-2"></td></tr>
   <% @employees.each do |employee| %> 
      <tr>
       <td class="col-2"><%= employee.first_name+" "+employee.last_name  %></td>
+      <td class="col-3"><%= check_box_tag "employees[]", employee.id,false,class: 'check_box'%></td>
     <% end %>
     </table>
-  
+  <% end %>

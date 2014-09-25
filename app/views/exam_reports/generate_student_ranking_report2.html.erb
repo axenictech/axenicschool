@@ -31,17 +31,37 @@
               <th><font color="blue">Marks</font></th>
               <th><font color="blue">Rank</font></th>
             </tr>
+             <%ranks=[]%>  
+              <% total_mark=0%>                                                   
             <% @batches.each do |batch| %>
-            <% batch.students.each_with_index do |student,i| %>
+            <% batch.students.each do |student| %>
+           <% grouped_exams=GroupedExamReport.where(student_id:student.id,batch_id:batch.id)%>
+           <% grouped_exams.each do |ge|%>
+            <% subject=Subject.find(ge.subject_id)%>
+             <% is_valid_subject=1 %>
+            <% unless subject.elective_group_id.nil? %>
+              <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.id,subject.id) %>
+              <% is_valid_subject = 0 if is_student_elective.nil? %>
+            <% end %>
+            <% unless is_valid_subject == 0 %>
+                <% total_mark+=ge.marks%>
+            <%end%>
+           <%end%>
+           <%ranks<<[student.id,total_mark.to_f]%>
+            <% total_mark=0%>
+          <% end %>
+          <%end%>
+        <% rank_students=ranks.sort_by{|r| r[1]}.reverse%>
+         <%  rank_students.each_with_index do |rank,i| %>
+             <% student=Student.find(rank[0])%>
           <tr class="tr-<%= cycle('odd', 'even') %>">
             <td class="col-1"><%= i+1 %></td>
             <td class="col-3"><%= student.admission_no.present? ? student.admission_no : "-" %></td>
             <td class="col-4"><%= student.first_name+" "+student.last_name %></td>
-            <td><%= batch.name %></td>
-            <td>-</td>
-            <td>-</td>
+            <td><%= student.batch.name %></td>
+            <td><%= rank[1] %></td>
+            <td><%= i+1 %></td>
           </tr>
-        <% end %>
         <% end %>
           </table>
     </div></div>

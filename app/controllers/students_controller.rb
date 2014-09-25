@@ -56,6 +56,8 @@ class StudentsController < ApplicationController
   def update_immediate_contact
     @student=Student.find(params[:id])
     @student.update(student_params)
+    @guardian=Guardian.find(@student.immediate_contact)
+    @guardian.create_user_account
     redirect_to students_previous_data_path(@student)
   end
 
@@ -120,40 +122,22 @@ class StudentsController < ApplicationController
 
   def advanced_search
     @courses=Course.all
-    @batches=Batch.all
   end
   
   def advanced_student_search
-    @search = Student.where(params[:student])
-    if params[:student]
-      unless params[:student][:course_id_equals].empty?
-        if params[:student][:batch_id_equals].empty?
-          flash[:notice] ="Please select a batch."
-          redirect_to 'advanced_search'
-        end
-      end
-    end
-      if params[:student][:status_equals]=="present"
-        @search = Student.where(params[:search])
-        @students = @search.all
-      elsif params[:student][:status_equals]=="former"
-        @search = ArchivedStudent.where(params[:search])
-        @students = @search.all
-      else
-        @search1 = Student.where(params[:student])
-        @search2 = ArchivedStudent.where(params[:student])
-        @students = @search1+@search2
-      end
-    #  name=params[:student][:student_name].split(" ")
-    # if params[:student][:status].eql? "present"
-    #   @students=Student.where("(first_name like '#{name[0]}' OR last_name like '#{name[1]}'
-    #                         OR first_name like '#{name[1]}' OR last_name like '#{name[0]}')
-    #    AND (admission_no='#{params[:student][:admission_no]} Or #{params[:student][:admission_no]} is NULL')")
-    # end  
-    # if params[:student][:status].eql? "former"
-    #   @students=ArchivedStudent.where("first_name like '#{name[0]}' OR last_name like '#{name[1]}'
-    #                         OR first_name like '#{name[1]}' OR last_name like '#{name[0]}'")
-    # end  
+    conditions=""
+    conditions+="concat_ws(' ',first_name,last_name) like '#{params[:search][:name]}%'
+                  OR concat_ws(' ',last_name,first_name)like '#{params[:search][:name]}%'" unless params[:search][:name]==""
+    conditions+="batch_id = #{params[:search][:batch_id]}" unless params[:search][:batch_id]==""
+    conditions+="category_id = #{params[:search][:category_id]}" unless params[:search][:category_id]==""
+    # conditions+="gender like '#{params[:search][:gender]}'" unless params[:search][:gender]==""
+    conditions+="blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group]==""
+    conditions+="country_id = #{params[:search][:country_id]}" unless params[:search][:country_id]==""
+    conditions+="admission_date = '#{params[:search][:admission_date]}'" unless params[:search][:admission_date]==""
+    conditions+="date_of_birth = '#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth]==""
+    # conditions+="status = '#{params[:search][:status]}'" unless params[:search][:status]==""
+        
+    @students=Student.where(conditions)
   end
 
   def elective

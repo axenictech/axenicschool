@@ -17,4 +17,61 @@ class Employee < ActiveRecord::Base
   has_many    :employee_salary_structures
   has_many    :finance_transactions, :as => :payee
   has_many    :employee_attendances
+
+
+# validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
+# validates :middle_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
+# validates :last_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
+# validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
+# validates :date_of_birth, presence: true
+# validates :employee_department,presence: true
+# validates :employee_category,presence: true
+# validates :employee_position,presence: true
+# validates :employee_grade, presence: true
+# validates :qualification,presence:true,length:{minimum:1, maximum:20},format:{with: /\A[a-zA-Z_""-]+\Z/}
+# validates :experience_detail,presence:true,length:{minimum:1,maximum:20},format:{with: /\A[a-zA-Z_""-]+\Z/}
+# validates :father_name,presence:true,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z_""-]+\Z/}
+# validates :mother_name,presence:true,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z ""-]+\Z/} 
+# validates :home_address_line1,length:{:in=> 1..30},allow_blank: true
+# validates :home_address_line2,length:{:in=>1..30},allow_blank:true
+#  validates :home_city, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+#               length:{:in=> 1..30},allow_blank: true
+# validates :home_state,format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+#               length:{:in=> 1..30},allow_blank: true
+# validates :home_pin_code,numericality: { only_integer: true },
+#                  length:{minimum:6,maximum:6},allow_blank: true
+# validates :office_address_line1,length:{:in=>1..30},allow_blank:true
+# validates :office_address_line2,length:{:in=>1..30},allow_blank:true
+# validates :office_city,format:{ with: /\A[a-z A-Z]+\z/,message:"only allows letters" },
+#               length:{:in=> 1..30},allow_blank:true
+# validates :office_state,format: { with: /\A[a-z A-Z]+\z/,message:"only allows letters"},
+#                length:{:in=>1..30},allow_blank:true
+# validates :office_pin_code,numericality:{only_integer:true},
+#                   length:{minimum:6,maximum:6},allow_blank:true
+# validates :office_phone1,numericality:{ only_integer: true},
+#                    length:{minimum:11,maximum:20}  ,allow_blank:true
+# validates :office_phone2,numericality:{only_integer: true},
+#                    length:{minimum:11,maximum:20},allow_blank:true
+# validates :mobile_phone,numericality:{only_integer:true},
+#                    length:{minimum:10,maximum:10},allow_blank:true 
+# validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
+# validates :fax,numericality:{only_integer:true},
+#                     length:{minimum:10,maximum:10},allow_blank:true
+
+ after_save :create_user_account
+
+  private
+  def create_user_account
+    user = User.new do |u|
+      u.first_name, u.last_name, u.username, u.employee_id = first_name, last_name, employee_number, id
+      u.password = "#{employee_number.to_s}123"
+      u.role = 'Employee'
+      u.email = ( email == '' or User.find_by_email(email) ) ? "#{first_name+last_name+employee_number.to_s}@axenic.com" : email
+    end
+    user.save
+  end
+                    
 end
+
+
+       

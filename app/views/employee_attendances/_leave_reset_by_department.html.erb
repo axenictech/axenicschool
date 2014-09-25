@@ -1,11 +1,9 @@
-
-  <table align="center" class="table table-hover" style="width:500px">
-      <tr class="tr-head">Select Employee<td colspan="2" class="col-2">select: <%= link_to "All"%>
-      <%= link_to "none"%></td></tr>
-      <% @employees.each do |employee| %> 
-      <tr>
-      <td class="col-2"><%= employee.first_name+" "+employee.last_name  %></td>
-      <% end %>
-      </tr>
-</table>
-<div align="center"><%=link_to 'Reset','', class: 'btn btn-primary'%></div>
+  <div><b>Select Employee</b></div>
+  <%=form_for :leave, :url => {:action=>'update_department_leave_reset'},method: :get do |f| %>
+  <div>select: <%= link_to "All",  employee_attendances_assign_all_path(@department.id),remote:true%>
+      <%= link_to "none",  employee_attendances_remove_all_path(@department.id),remote:true%></div>
+         <div id="employee_list">
+              <%= render 'employee_list' %>
+        </div>
+<div align="center"><%=f.submit 'Reset', class: 'btn btn-primary'%></div>
+<%end%>

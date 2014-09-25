@@ -9,9 +9,7 @@ class CreateEvents < ActiveRecord::Migration
       t.boolean  :is_holiday, :default => false
       t.boolean  :is_exam,    :default => false
       t.boolean  :is_due, :default => false
-      t.integer  :origin_id
-      t.string   :origin_type
-
+      
       t.timestamps
     end
   end

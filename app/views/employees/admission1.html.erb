@@ -20,9 +20,9 @@
     <tbody>
     
     
-     <tr>
+      <tr>
          <td class="col-2"><%=f.label :employee_number%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.text_field :employee_number%></td>
+          <td class="col-2"><%=f.text_field :employee_number,:value=> @employee.employee_number%></td>
      </tr>
      <tr>     
           <td class="col-2"><%=f.label :joining_date %><span class="necessary-field">*</span></td>

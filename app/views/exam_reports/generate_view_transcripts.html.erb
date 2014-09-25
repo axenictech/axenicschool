@@ -19,12 +19,17 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
      <%= link_to 'View Transcripts', '/exam_reports/view_transcripts' %> &raquo;
     Generated Report
-  </div><br/><br/>
-<div id="student_list" align="left">
+  </div></div><br/><br/>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-2">
+<div id="student_list">
     <%= render 'transcripts_student_list' %>
-  </div>
-<div id="report_transcript" align="right">
-    <%= render 'view_transcripts_report' %>
-  </div>
-</div>
   </div></div>
+<div class="col-md-9">
+<div id="report_transcript">
+    <%= render 'view_transcripts_report' %>
+  </div></div>
+</div>
+  </div>
+<br/><br/><br/>

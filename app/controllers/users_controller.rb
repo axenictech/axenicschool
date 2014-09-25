@@ -22,6 +22,15 @@ class UsersController < ApplicationController
 				@student=Student.find(@user.student_id)
 			end
 		end
+		if @user.role.eql? "Employee"
+			@employee=Employee.find(@user.employee_id)
+		end
+		if @user.role.eql? "Parent"
+			@student=ArchivedStudent.find_by_student_id(@user.student_id)
+			if @student.nil?
+				@student=Student.find(@user.student_id)
+			end
+		end
 	end
 
 	def search

@@ -23,5 +23,4 @@ class Batch < ActiveRecord::Base
       errors.add(:end_date, "can't be less than start date")
     end
   end
-  
 end

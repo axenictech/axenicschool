@@ -2,7 +2,7 @@ class ExamsController < ApplicationController
 	def new
 		@exam_group=ExamGroup.find(params[:format])
 		@batch=@exam_group.batch
-		@subjects=@batch.subjects.all
+		@subjects=@batch.subjects.where(no_exams:false)
 		@exam=@exam_group.exams.build
 	end 
 
@@ -17,23 +17,71 @@ class ExamsController < ApplicationController
 		end
 	end
 
-	def exam_score
-	  	@exam=Exam.find(params[:id])
-	    @students=@exam.exam_group.batch.students.all
+	def edit
+		@exam=Exam.find(params[:id])
+		@exam_group=@exam.exam_group
+		@batch=@exam.exam_group.batch
+		@subjects=@batch.subjects.where(no_exams:false)
 	end
 
 	def update
+		@exam=Exam.find(params[:id])
+		if @exam.update(params_exam)
+			flash[:notice_exam]='updated successfully'
+			redirect_to exam_groups_exams_path(@exam.exam_group)
+		else
+			render 'edit'
+		end
+	end
+
+	def exam_score
+
+	  	@exam=Exam.find(params[:id])
+	  	@exam_group=@exam.exam_group.name
+	  	@batch=@exam_group
+	  	@students=[]
+	    students=@exam.exam_group.batch.students.all
+	    unless students.nil?
+		    students.each do |std|
+		    	unless @exam.subject.elective_group.nil?
+			    	is_elective=StudentSubject.find_by_student_id_and_subject_id(std.id,@exam.subject_id)
+			    	unless is_elective.nil?
+			    	@students<<std
+			   		end
+			   	else
+			   		@students<<std
+			   	end
+		   	end
+		end
+		@exam_grade=@exam.exam_group.batch.grading_levels.all
+	end
+
+	def update_exam_score
 		@exam=Exam.find(params[:id])
 		@exam_group=@exam.exam_group
 		@batch=@exam_group.batch
 		params[:exams][:exam].each_pair do |student_id, details|
       	@exam_score=ExamScore.find_by_exam_id_and_student_id(@exam.id,student_id)
       	@grouped_exam=GroupedExamReport.find_by_batch_id_and_student_id_and_exam_group_id_and_subject_id(@batch.id,student_id,@exam_group.id,@exam.subject_id)
+      	score_grade=""
+      	fail=false
+      	fail=true if details[:marks].to_f<@exam.minimum_marks.to_f
+			
+			unless @exam.exam_group.exam_type=="Marks"
+				percentage=(details[:marks].to_f*100)/@exam.maximum_marks.to_f
+				grades=@exam.exam_group.batch.grading_levels.all
+				grades.each do |grade|
+					if percentage>=grade.min_score
+						score_grade=grade.id
+					end
+				end
+			end
+			
       		if @exam_score.nil?
 		        ExamScore.create(exam_id:@exam.id,student_id:student_id,
-		        	marks:details[:marks],remarks:details[:remarks])
+		        	marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
       		else
-		        @exam_score.update(marks:details[:marks],remarks:details[:remarks])
+		        @exam_score.update(marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
 	        end
 
 	        if @grouped_exam.nil?
@@ -43,7 +91,13 @@ class ExamsController < ApplicationController
 	        	@grouped_exam.update(marks:details[:marks])
 	        end
     	end
-    	redirect_to exam_groups_exams_path(@exam.exam_group)
+    	redirect_to exam_exam_score_path(@exam)
+    end
+
+    def destroy
+    	@exam=Exam.find(params[:id])
+	    @exam.destroy
+	    redirect_to exam_groups_exams_path(@exam.exam_group)
     end
 
 	private

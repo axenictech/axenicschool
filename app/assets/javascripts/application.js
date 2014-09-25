@@ -13,10 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //# require turbolinks
-//= require fullcalendar
 //= require_tree .
 $(document).ready(function(){
-	$('#calendar').fullCalendar();
 	 if ($('textarea').length > 0) {
         var data = $('textarea');
         $.each(data, function(i) {

@@ -7,18 +7,6 @@
   <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
-<div id="inner-tab-menu">
-  <ul>
-     <li class='active has-sub'><a href='#'><span>Students</span></a>
-      <ul>
-       <li><a href='/students/admission1'><span>Addmission</span></a>
-       </li>
-       <li><a href='/students'><span>Student Details</span></a>
-       </li>
-      </ul>
-     </li>
-</ul></div>
-
 <div id="page-yield">
 
   <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
@@ -63,7 +51,7 @@
 </tr>
 
 <tr>
-    <td class="col-2">Reporting Manager</td><td class="col-2"> <%= link_to @reporting_manager.first_name , employees_profile_path(@reporting_manager)%> <%= link_to 'change', employees_change_reporting_manager_path(@employee)%> </td>
+    <td class="col-2">Reporting Manager</td><td class="col-2"> <%= link_to @reporting_manager.first_name , employees_profile_path(@reporting_manager) unless @reporting_manager.nil? %> <%= link_to 'change', employees_change_reporting_manager_path(@employee)%> </td>
     <td class="col-2"></td>
 </tr>
 

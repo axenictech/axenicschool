@@ -9,7 +9,7 @@
 
   <div id="inner-tab-menu">
     <ul>
-      <% if @user.role.eql? "Student" %>
+      <% if @user.role.eql? "Student" or @user.role.eql? "Parent"%>
       <% unless @student.nil? %>
         <% if @student.status_description.nil? %>
           <li><%= link_to "View Profile",students_profile_path(@student) %></li>
@@ -17,9 +17,14 @@
           <li><%= link_to "View Profile",students_archived_profile_path(@student.id)%></li>
         <%end%>
         <% end %>
-      <% else %>
+      <% elsif @user.role.eql? "Employee"%>
+        <% unless @employee.nil? %>
+          <li><%= link_to "View Profile",employees_profile_path(@employee.id)%></li>
+        <%end%>  
+      <%else%>
         <li><%= link_to "View Profile" %></li>
       <% end %>
+      
       <li style="width:150px"><%= link_to "Change Password", users_change_password_path(@user)%></li>
         <li><%= link_to "Edit", edit_user_path(@user)%></li>
         <li><%= link_to "Delete",@user,method: :delete,data:{confirm:"Are you sure to delete User: '#{@user.first_name+" "+@user.last_name}'?"} %></li></ul>

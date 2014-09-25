@@ -16,8 +16,8 @@
     Student Ranking Per Attendance
   </div><br/><br/>
 
-  <% unless flash[:notice].nil? %>
-    <div class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+  <% unless flash[:notice_rank_att].nil? %>
+    <div class="alert alert-danger" align="center" style="width:100%"> <%= flash[:notice_rank_att] %> </div>
     <%end %>
 <%= form_for :rank_report, :url=>{:action=>'generate_student_ranking_report3'},method: :get do |f|%>
   
@@ -37,8 +37,8 @@
        <%= f.label :select_end_date %>
       <div class="text-input-bg">
       <%= f.date_field :end_date,:style =>"height: 30px"%>
-      </div></div>
-<%= f.submit 'View', class: 'btn btn-default' %>
+      </div></div><br/>
+<div align="center"><%= f.submit 'View', class: 'btn btn-default' %></div>
   <% end %>
   </div>
 </div> 

@@ -6,7 +6,6 @@ class CreateTimeTableEntries < ActiveRecord::Migration
       t.references :class_timing,index:true
       t.references :subject,index:true
       t.references :employee,index:true
-      
       t.timestamps
     end
   end

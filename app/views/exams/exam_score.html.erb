@@ -12,7 +12,7 @@
  <h4 align="center">No students Found </h4>
 <% else %>
 <table class="table table-hover" style="width:700px">
-  <%=form_for :exams,url:{action:'update',id:@exam.id},method: :patch do |f| %>  
+  <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>  
   <tr>
     <td class="col-3" colspan="3">Exam Name: <%= @exam.exam_group.name %></td>
   </tr>
@@ -24,23 +24,35 @@
     <td class="col-2">Student name</td>
     <td >Marks</td>
     <td >Remarks</td>
+    <td ><%= 'Grades' unless @exam.exam_group.exam_type=="Marks"%></td>
   </tr> 
 <% @students.each do |student| %>
 <% exam_score=ExamScore.find_by_exam_id_and_student_id(@exam.id,student.id)%>
 <tr>
-
+    <% unless exam_score.nil? %>
+    <% unless exam_score.is_failed? %>
+      <td class="col-2"><font color="green"><%= f.label "#{student.first_name+" "+student.last_name}" %></font></td>
+      <%else%>
+      <td class="col-2"><font color="red"><%= f.label "#{student.first_name+" "+student.last_name}" %></font></td>
+    <%end%>
+    <%else%>
       <td class="col-2"><%= f.label "#{student.first_name+" "+student.last_name}" %></td>
-      <% unless exam_score.nil? %>
+    <%end%>
+    <% unless exam_score.nil? %>
         <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks%></td>
         <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks%></td>
-      <%else%>
-        <td><%= f.text_field "exam[#{student.id}][marks]"%></td>
-        <td><%= f.text_field "exam[#{student.id}][remarks]"%></td>
-      <%end%>
-<% end %>    
+        <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px" unless @exam.exam_group.exam_type=="Marks"%></td>
+    <%else%>
+      <td><%= f.text_field "exam[#{student.id}][marks]"%></td>
+      <td><%= f.text_field "exam[#{student.id}][remarks]"%></td>
+      <td><%= f.text_field "exam[#{student.id}][grades]",readonly:true,style:"width:50px" unless @exam.exam_group.exam_type=="Marks"%></td>
+    <%end %>   
 </tr>
- <tr class="tr-head"><td colspan="3">
-<%= f.submit 'Submit', class: "btn btn-primary"%></td></tr>
+<% end %> 
+ <tr class="tr-head"><td colspan="4">
+<%= f.submit 'Submit', class: "btn btn-primary"%>
+<%= link_to 'Finish',exam_groups_exams_path(@exam.exam_group), class: "btn btn-primary"%></td>
+</tr>
 <%end%>
 </table>
 <%end%>
