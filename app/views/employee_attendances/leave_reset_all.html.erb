@@ -11,13 +11,13 @@
 
 
  <div id="change">
-<table style="width:100%" class="table">
+<table style="width:60%"  align="center" class="table">
 <tr >
 	<td >This will reset leave count for all employees</td>
 	</tr>
 <tr>
-	<td><%=link_to 'Reset',employee_attendances_update_employee_leave_reset_all_path,remote:true,class: "btn btn-primary"%> </td>
-	<td><%=link_to 'cancle',employee_attendances_manual_reset_path,class: "btn btn-primary"%> </td>
+	<td><%=link_to 'Reset',employee_attendances_update_employee_leave_reset_all_path,remote:true,class: "btn btn-primary"%>&nbsp;&nbsp;&nbsp;
+	<%=link_to 'cancle',employee_attendances_manual_reset_path,class: "btn btn-primary"%> </td>
 </tr>
 </table>
 </div>

@@ -20,7 +20,7 @@
 <%= f.label :select_department %>
 <%= f.select :id,@deparments.collect {|d| [d.name,d.id]},{prompt:true},{onchange:"$('#department_form').submit();"} %>  
 <%end%>
-</div><br/><br/><br/>
+</div></div><br/><br/><br/>
 <div id="report_div"></div>
 
-</div></div>
+</div>

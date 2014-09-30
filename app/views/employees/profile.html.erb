@@ -1,6 +1,6 @@
 <div id="content-header">
-  <h1>Student info</h1>
-  <h3>Student profile</h3>
+  <h1>Employee Info</h1>
+  <h3>Employee profile</h3>
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
   </div>
@@ -51,7 +51,7 @@
 </tr>
 
 <tr>
-    <td class="col-2">Reporting Manager</td><td class="col-2"> <%= link_to @reporting_manager.first_name , employees_profile_path(@reporting_manager) unless @reporting_manager.nil? %> <%= link_to 'change', employees_change_reporting_manager_path(@employee)%> </td>
+    <td class="col-2">Reporting Manager</td><td class="col-2"> <%= link_to @reporting_manager.first_name , employees_profile_path(@reporting_manager) unless @reporting_manager.nil? %> <font color="red"><%= link_to 'change', employees_change_reporting_manager_path(@employee)%></font> </td>
     <td class="col-2"></td>
 </tr>
 

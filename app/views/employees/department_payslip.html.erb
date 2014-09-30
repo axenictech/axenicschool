@@ -1,4 +1,14 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Employee Payslip</h1>
+  <h3>View Payslip</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
 
+<div id="page-yield">
   <%= form_for :view_payslip, url:{action:'view_payslip'},remote:true,html:{id: "user_form2"} do |f|%>
 
 	<div class="label-field-pair">
@@ -16,4 +26,5 @@
    		<%end%>
 
    		<div id="payslip"></div>
+   	</div>
    		

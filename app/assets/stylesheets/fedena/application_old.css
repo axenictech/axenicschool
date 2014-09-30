@@ -57,6 +57,7 @@ p.flash-msg {
 
 #page-yield {
     margin : 30px 0;
+    height: 1200px;
 }
 
 /* News block */
@@ -546,13 +547,13 @@ body > #content_wrapper {
 */
 
 table#listing{
-    background: #c3d9ff;
+    background: white;
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
     padding:20px 20px 40px;
 }
 table#listing tr.tr-head{
-    background: #fff;
+    background: white;
     color:#990a10;
     font-weight:bold;
     text-align:left;

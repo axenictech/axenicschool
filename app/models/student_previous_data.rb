@@ -6,8 +6,8 @@ class StudentPreviousData < ActiveRecord::Base
     validates :year ,numericality: { only_integer: true }
     validates_length_of :year,:minimum => 4,:maximum =>4
 
-    validates :course, presence: true ,format: { with: /\A[a-z A-Z 0-9]+\z/}
-	validates_length_of :course,:minimum => 1,:maximum =>10
+    validates :course, presence: true ,format: { with: /\A[a-zA-Z0-9._" "-\/]+\z/}
+	validates_length_of :course,:minimum => 1,:maximum =>80
 
 	validates :total_mark ,numericality: { only_integer: true }
     validates_length_of :total_mark,:minimum => 2,:maximum =>4

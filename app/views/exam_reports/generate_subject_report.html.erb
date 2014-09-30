@@ -47,9 +47,9 @@
                     <% if exam_group.exam_type == 'Marks' %>
                       <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/"+exam.maximum_marks.to_s %>
                        <% elsif exam_group.exam_type == 'Grades'%>
-                      <%= exam_score.nil? ? '-' : (exam_score.grading_level || '-') %>
+                      <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-') %>
                     <% else %>
-                      <%= exam_score.nil? ? '-' : "#{(exam_score.marks || "-")}" +"/"+exam.maximum_marks.to_s+"[#{(exam_score.grading_level || "-")}]" %>
+                      <%= exam_score.nil? ? '-' : "#{(exam_score.marks || "-")}" +"/"+exam.maximum_marks.to_s+" Grade-#{(exam_score.grading_level.name || "-")}" %>
                   
                     <% end %>
                   <% else %>
@@ -67,7 +67,7 @@
           </td>
           <% total_marks=0%> <% total_max_marks=0%>
           <% @exam_groups.each do |exam_group| %>
-            <% if exam_group.exam_type == 'Marks' or exam_group.exam_type == 'MarksAndGrades' %>
+            <% unless exam_group.exam_type == 'Grades'%>
             <% @students.each do |student|%>
              <% is_valid_subject=1 %>
           <% unless @subject.elective_group_id.nil? %>

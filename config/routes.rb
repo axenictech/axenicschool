@@ -82,6 +82,7 @@ get 'time_tables/sub'
 get 'time_tables/new'
 get 'time_tables/timetable'
 get 'time_table_entries/select'
+get 'time_table_entries/select_subject'
 get 'exam_reports/report_center'
 get 'exam_reports/exam_wise_report'
 get 'exam_reports/subject_wise_report'
@@ -128,6 +129,7 @@ get 'exam_reports/none'
 get 'exam_reports/all1'
 get 'exam_reports/none1'
 get 'exam_reports/generate_combined_report'
+get 'exam_reports/genrate_reports'
 get 'calender/change' 
 get 'calender/event_view'
 get 'exam_setting/:course_id/setting',to: 'exam_setting#setting', as: 'course_class_designations'
@@ -353,7 +355,7 @@ resources :events
 resources :calender
 resources :weekdays
 resources :time_tables
-
+resources :attendences
 resources :time_table_entries
 
   resources :batches do

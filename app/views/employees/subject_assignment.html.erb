@@ -1,7 +1,14 @@
-<div class="box"> 
+<div id="content-header">
+  <h1>Employee</h1>
+  <h3>Subject Assignment</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
 
-
-  
+<div id="page-yield">
+<div class="box">   
 	<%= form_for :subject_assignment, url:{action:'assign_subject'}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
 
 	<div class="label-field-pair">
@@ -12,4 +19,4 @@
    		<%end%>
 
 	 <div id="subject_div"></div>
-</div>
+</div></div>

@@ -172,7 +172,7 @@ class EmployeesController < ApplicationController
     @bank_fields2 = BankField.where(status: false)
   end
 
-    def new_payroll_category
+  def new_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_categories1 = PayrollCategory.where(is_deduction: false)
     @payroll_categories2 = PayrollCategory.where(is_deduction: false) 
@@ -271,7 +271,7 @@ class EmployeesController < ApplicationController
   def admission1
     @employee=Employee.new
     if Employee.first.nil?
-      @employee.employee_number=111
+      @employee.employee_number=221
     else
       @last_employee=Employee.last
       @employee.employee_number=@last_employee.employee_number.next
@@ -339,13 +339,9 @@ class EmployeesController < ApplicationController
     other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ""
     other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ""
   
-    @reporting_manager = Employee.where("first_name LIKE ?"+other_conditions,"#{params[:search]}%")
-
-    p @reporting_manager
-
-    end
-
-   
+    @reporting_manager = Employee.where("first_name like ?"+other_conditions,"#{params[:search]}%")
+    
+    end   
   end
 
   def update_reporting_manager_name
@@ -399,7 +395,8 @@ class EmployeesController < ApplicationController
    end
    
    def list_emp
-     @employee=Employee.all
+    @department=EmployeeDepartment.find(params[:subject_assignment][:id])
+     @employee=@department.employees.all
      @subject=Subject.find(params[:format])
    end
 
@@ -586,7 +583,7 @@ end
   end
   
   def payroll_category_params
-    params.require(:payroll_category).permit(:name,:percentage,:status,:is_deduction)
+    params.require(:payroll_category).permit(:name,:percentage,:status,:is_deduction,:payroll_category_id)
     
   end
 end

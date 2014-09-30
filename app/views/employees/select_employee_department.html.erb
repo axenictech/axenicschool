@@ -1,4 +1,14 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Payslip</h1>
+  <h3>Select Employee</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
 
+<div id="page-yield">
   <%= form_for :select_department,url:{action:'department_employee_list'},remote:true,html:{id: "user_form2"} do |f|%>
 
 	<div class="label-field-pair">
@@ -9,4 +19,4 @@
    		<%end%>
 
    		<div id="emp_list"></div>
-   		
+   		</div>

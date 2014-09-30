@@ -1,10 +1,9 @@
 
-<div id="page-yield">
   <% unless flash[:notice].nil? %>
     <p class="flash-msg"> <%= flash[:notice] %> </p>
   <% end %>
     <ul class="errors"></ul>
-</div>
+
 
  <%= form_for @new_leave_type ,url:{action: 'add_leave_type'},remote:true do |c|%>
 
@@ -56,7 +55,7 @@
 
   <% @active_leaves.each do |e| %>
       <tr>
-      <td class="col-3"><%=e.name%>-<%=e.code%></td>
+      <td class="col-2"><%=e.name%>-<%=e.code%></td>
       <td><%= link_to 'edit',employee_attendances_edit_leave_type_path(e),remote:true%></td>
       <td><%= link_to 'delete',employee_attendances_destroy_leave_type_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>  
       </tr>
@@ -74,7 +73,7 @@
 
   <%@inactive_leaves.each do |e| %>
       <tr>
-      <td class="col-3"><%=e.name%>-<%=e.code%></td>
+      <td class="col-2"><%=e.name%>-<%=e.code%></td>
       <td><%= link_to 'edit',employee_attendances_edit_leave_type_path(e),remote:true%></td>
       <td><%= link_to 'delete', employee_attendances_destroy_leave_type_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>  
       </tr>

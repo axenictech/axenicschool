@@ -1,3 +1,14 @@
+<div id="content-header">
+  <h1>Exam Management</h1>
+  <h3>Connect Exam</h3>
+  <div id="app-back-button">
+ <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>  
+</div>
+<div id="page-yield">
+<div class="box">
+
 <% unless flash[:notice_connect].nil? %>
     <div align="center" class="alert alert-danger" style="width:100%"> <%= flash[:notice_connect] %> </div>
 <% end %>
@@ -34,4 +45,4 @@
     
 </div>
 <%end%>
-</div>
+</div></div></div>

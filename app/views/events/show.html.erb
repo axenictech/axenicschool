@@ -23,12 +23,12 @@
 	</tr>
 	<tr class="tr-head">
 			<td class="col-2"> Start Date</td>
-			<td class="col-2"><%=@event.start_date%></td>
+			<td class="col-2"><%=@event.start_date.to_date%></td>
 	</tr>
 
 	<tr class="tr-head">
 			<td class="col-2"> End Date</td>
-			<td class="col-2"><%=@event.end_date%></td>
+			<td class="col-2"><%=@event.end_date.to_date%></td>
 	</tr>
 	<%unless @event.is_common? %>
 	<tr class="tr-head">

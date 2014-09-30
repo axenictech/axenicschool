@@ -29,12 +29,12 @@
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
             <td class="col-3">
               <% unless @exam.nil? %>
-                <% if exam_group.exam_type == "MarksAndGrades" %>
-                  <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "-")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level || "-")}]" %>
+                <% if exam_group.exam_type == "Marks and Grades" %>
+                  <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "-")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level.name || "-")}]" %>
                 <% elsif exam_group.exam_type == "Marks" %>
                   <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/"+@exam.maximum_marks.to_s %>
                 <% else %>
-                  <%= exam_score.nil? ? '-' : (exam_score.grading_level || '-')  %>
+                  <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-')  %>
                 <% end %>
               <% else %>
                NA
@@ -69,7 +69,7 @@
               <% @marks_total += exam_score.marks %>
           <%end%>
           <%end%>
-          <% if exam_group.exam_type == "MarksAndGrades" %>
+          <% if exam_group.exam_type == "Marks and Grades" %>
             <td><font color="blue"><%= "#{@marks_total || "-"}/"+@max_total.to_s %></font></td>
           <% elsif exam_group.exam_type == "Marks" %>
             <td><font color="blue"><%= "#{@marks_total || "-"}/"+@max_total.to_s %></font></td>

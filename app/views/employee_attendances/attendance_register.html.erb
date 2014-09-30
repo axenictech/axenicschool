@@ -20,9 +20,9 @@
 <%= f.label :select_department %>
 <%= f.select :id,@deparments.collect {|d| [d.name,d.id]},{prompt:true},{onchange:"$('#batch_form').submit();"} %>  
 <%end%>
-</div><br/><br/><br/>
+</div></div><br/><br/><br/>
 <div id="employee_div"></div>
 <div id="myModal" class="modal fade"></div>
-</div></div>
+</div>
 
 

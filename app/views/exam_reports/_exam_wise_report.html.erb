@@ -8,7 +8,7 @@
     <div class="custom_header">
       <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
     </div>
-    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
+    <table id="listing" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
       <tr class="tr-head">
         <td class="col-3"><font color="blue">Subject</font></td>
         <% if @exam_group.exam_type == 'Marks' %>
@@ -40,13 +40,13 @@
             <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
             <td class="col-1"><%= es.calculate_percentage %></td>
           <% elsif @exam_group.exam_type == 'Grades' %>
-            <td class="col-1"><%= es.grading_level || "-" %></td>
+            <td class="col-1"><%= es.grading_level.name || "-" %></td>
           <% else %>
             <td class="col-1"><%= es.marks || "-" %></td>
             <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
             <td class="col-1"><%= es.exam.maximum_marks %></td>
             <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
-            <td class="col-1"><%= es.grading_level || "-" %></td>
+            <td class="col-1"><%= es.grading_level.name || "-" %></td>
             <td class="col-1"><%= es.calculate_percentage %></td>
           <% end %>
         </tr>
@@ -58,6 +58,7 @@
           <td><font color="blue">Total marks:</font></td>
           <td><font color="blue"><%= total_marks_attained %></font></td>
           <td><font color="blue"><%= total_max_marks %></font></td>
+          <td>-</td>
           <td><font color="blue"><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></font></td>
         </tr>
       <%else%>
