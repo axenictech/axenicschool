@@ -1,8 +1,11 @@
 
 <h2>Assigned Employee</h2>
-
+<% if @assign_employees.nil? %>
+<h4>Employee not assigned</h4>
+<%else%>
 <table class="tabel" style="width:400px">
-	<%  @assign_employees.each do |emp|%>
+  <% @assign_employees =  @batch.employee_id.split(",") unless @batch.employee_id.nil?%>
+	<% @assign_employees.each do |emp|%>
 	<% @employee = Employee.find(emp) %>
 	<tr>
 		<td><%=@employee.first_name%></td>
@@ -10,4 +13,5 @@
 	</tr>
 	<%end%>
 </table>
+<%end%>
 

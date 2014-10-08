@@ -9,7 +9,7 @@
 
 <div id="inner-tab-menu">
   <ul>
-      <li><%= link_to 'Reports', students_report_path%></li>
+      <li><%= link_to 'Reports', students_report_path(@student)%></li>
       <li><%= link_to "Guardians", students_dispguardian_path(@student)%></li>
       <li><%= link_to "Send email",students_email_path(@student) %></li>
      <li><%= link_to "Delete", students_remove_path(@student)%></li>
@@ -78,7 +78,7 @@
 </tr>
 <tr style="background-color:white">
 <td colspan="4"><%= link_to 'Edit',edit_student_path(@student),class: "btn btn-primary" %>
-<%= link_to 'PDF Report',students_profile_pdf_path(@student),class: "btn btn-success" %></td>
+<%= link_to 'PDF Report',students_student_profile_path(@student,format:"pdf"),class: "btn btn-success" %></td>
 </tr>
 </tbody></table>
 </div>

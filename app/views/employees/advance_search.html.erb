@@ -17,28 +17,19 @@
   <% end %>
 
 <table align="center" class="table table-hover" style="width:500px">
-<%= form_for :user, url:{action:'advance_search_emp'}, method: :get,remote:true,html:{id: "advance_search_emp"} do |f|%>
+<%= form_for :search, url:{action:'advance_search_emp'}, method: :get do |f|%>
 
-
-    
-    
-     <tr>
-         <td class="col-2"><%=f.label :employee_number%></td>
-          <td class="col-2"><%= text_field_tag :employee_number,"",{oninput:"$('#advance_search_emp').submit();"}%></td>
-     </tr>
 
 
      <tr>
-       <td class="col-2"><%=f.label :First_name%></td>
-          <td class="col-2"><%= text_field_tag :search,"",{oninput:"$('#advance_search_emp').submit();"}%></td>
+       <td class="col-2"><%=f.label :employee_name%></td>
+          <td class="col-2"><%=f.text_field :name%></td>
      </tr>
 
-       <tr>
-       <td class="col-2"><%=f.label :Gender%>
-         <td class="col-2"> Male<%= f.radio_button  "gender","Male", :checked => "checked" %>
-          &nbsp;&nbsp;&nbsp;Female <%= f.radio_button  "gender","Female"%></td>
-       </td>
-     </tr>
+      <tr><td class="col-2"><%= f.label :gender%></td>
+        <td class="col-2"><%=f.radio_button :gender,"All", :checked => "checked" %>All
+          <%=f.radio_button :gender,"Male"%>Male
+          <%=f.radio_button :gender,"Female"%>Female</td></tr>
 
      <tr>
        <td class="col-2"><%=f.label :Blood_Group%></td>
@@ -47,7 +38,7 @@
 
      <tr>
       <td class="col-2"><%=f.label :"Marital-Status"%></td>
-      <td class="col-2"><%= select :employee, :marital_status, [["single"], ["married"],["divorced"]], {}, {:onchange=>"hide_or_show_fields(this.value)"} %></td>
+      <td class="col-2"><%=f.select :marital_status, ["single","married","divorced"],{prompt:true} %></td>
      
      </tr>
     
@@ -65,7 +56,7 @@
 
      <tr>     
           <td class="col-2"><%=f.label :joining_date %><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.date_field :joining_date,:value => Time.now.strftime('%Y-%m-%d')%></td>
+          <td class="col-2"><%=f.date_field :joining_date %></td>
      </tr>
 
     
@@ -103,7 +94,7 @@
      
      <tr><td colspan="4"><%=f.submit "Search",class: "btn btn-success" %></td></tr>
      
-   
+        
   </div>
   
 <%end%>

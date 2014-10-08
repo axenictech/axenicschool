@@ -1,4 +1,6 @@
-
+<% if @employees.nil? %>
+<h4>Employee not assigned</h4>
+<%else%>
 <h2>Assign New</h2>
 <table class="tabel"  align="center" style="width:400px">
 
@@ -12,4 +14,5 @@
 
 </table>
 
-<div id="assigned_emp"></div>
+<div id="assigned_emp"><%=render 'assigned_emp_list'%></div>
+<%end%>

@@ -1,0 +1,9 @@
+hi:
+   first_name: "प्रथम नाम"
+   admission_no: "प्रवेश संख्या"
+   admission_date: "प्रवेश की तारीख"
+   batch_id: "बैच"
+   date_of_birth: "जन्म तिथि"
+   gender: "लिंग"
+   submit: "सबमिट"
+      

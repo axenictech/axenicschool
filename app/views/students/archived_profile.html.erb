@@ -11,6 +11,7 @@
   <ul>
       <li><%= link_to 'Reports', students_archived_report_path%></li>
       <li><%= link_to "Guardians", students_archived_student_guardian_path(@student)%></li>
+      <li><%= link_to "Send email",students_email_path(@student) %></li>
       <li><%= link_to "Generate TC",'' %></li>
   </ul>
 </div>

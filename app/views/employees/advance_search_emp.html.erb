@@ -1,0 +1,33 @@
+ 
+ <div id="content-header">
+  <h1>Employee</h1>
+  <h3>Advanced search result</h3>
+  <div id="app-back-button">
+   <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<% if @employees.nil? or @employees.empty? %>
+  <div align="center"><h4>No Employees found</h4></div>
+<% else %>
+
+ <div class="col-md-1"></div>
+      <table align="center" class="table table-hover" style="width:1000px">
+      <tr>
+            <th>Employee Name</th>
+            <th>Employee Id</th>
+            <th>Employee Deprtment</th>
+      </tr>
+
+      <%@employees.each do |emp|%>
+          <tr>
+                <td col-md-1><%= link_to emp.first_name,employees_profile_path(emp)%></td>
+                <td col-md-1><%= emp.employee_number%></td>
+               <td col-md-1><%= emp.employee_department.name%></td>
+         </tr>
+      <%end%> 
+      <%end%> 
+      </table>
+  
+
+ 

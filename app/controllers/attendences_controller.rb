@@ -54,12 +54,7 @@ class AttendencesController < ApplicationController
 
     def update_attendence
         @attendence=Attendence.find(params[:id])
-        p "@@@@@@@@@@@@@@@"
-        p @attendence
-        p "@@@@@@@@@@@@@@@@@@@@"
         @student=Student.find(@attendence.student_id)
-        p "@@@@@@@@@@@@@@@@@@@@"
-        p @student
         @reason = params[:attendence][:reason]
      attendence.update(reason:@reason,student_id:@student.id,month_date:@date)
        

@@ -13,7 +13,7 @@
     <li><%= link_to 'Delete', batches_display_path(@batch),
                     method: :delete, data: { confirm: "Are you sure to delete Batch #{@batch.course.course_name+" "+@batch.course.section_name+" - "+@batch.name }?"} %></li>
     <li style="width:150px"><%= link_to 'Manage Subject',batches_subjects_subject_path(@batch)%></li>
-    <li style="width:150px"><%= link_to 'Assign Tutor',''%></li>
+    <li style="width:150px"><%= link_to 'Assign Tutor',batches_assign_tutor_path(@batch)%></li>
   </ul>
 </div>
 

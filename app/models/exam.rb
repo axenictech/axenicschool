@@ -3,20 +3,33 @@ class Exam < ActiveRecord::Base
 	belongs_to :subject
 	belongs_to :event
 	has_many :exam_scores,dependent: :destroy
-	 
-	validates :start_time, presence:true
-	validates :end_time, presence:true
-	validates :maximum_marks, presence:true
-	validates :minimum_marks, presence:true
-	validates :weightage, presence:true	
-	
-	validate :end_date_cannot_be_less_than_start
+	validates :maximum_marks,numericality: { only_integer: true },
+              length:{minimum:1,maximum:3},allow_blank: true
 
+	validates :minimum_marks,numericality: { only_integer: true },
+              length:{minimum:1,maximum:3},allow_blank: true
+              
+	validate :end_time_cannot_be_less_than_start_time
+	validate :start_time_cannot_be_less_than_past
+	validate :end_time_cannot_be_less_than_past
 
-	def end_date_cannot_be_less_than_start
+	def end_time_cannot_be_less_than_start_time
+
 		if  end_time.present? and end_time < start_time then
-			error.add(:end_time, "cannot be less than start time");
+			errors.add(:end_time, "cannot be less than start time");
 		end	
+	end
+
+	def start_time_cannot_be_less_than_past
+		if start_time.present? and start_time.to_date < Date.today
+			errors.add(:start_time, "should not be past date");
+		end
+	end
+
+	def end_time_cannot_be_less_than_past
+		if end_time.present? and end_time.to_date < Date.today
+			errors.add(:end_time, "should not be past date");
+		end
 	end
 
 	def create_exam_event

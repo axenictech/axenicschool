@@ -13,13 +13,27 @@
     <h3>Academics</h3>
 
     <div class="exam-results-reports-col">
-      <h4>Recent exams</h4>
-      <h4>Subjectwise results</h4>
+      <h4>Recent Exams</h4>
+      <% @batch.exam_groups.all.each do |eg|%>
+      <p><%=link_to eg.name,students_recent_exam_report_path(exam_group_id:eg.id,student_id:@student.id) %></p>
+      <%end%>
+      <h4>Subject wise results</h4>
+      <% @batch.subjects.all.each do |s|%>
+      <% is_elective=StudentSubject.find_by_subject_id_and_student_id(s.id,@student.id)%>
+        <% if s.elective_group.nil?%>
+        <p><%=link_to s.name,students_subject_wise_report_path(subject_id:s.id,student_id:@student.id)%></p>
+        <%else%>
+          <% unless is_elective.nil?%>
+            <p><%=link_to s.name,students_subject_wise_report_path(subject_id:s.id,student_id:@student.id)%></p>
+          <%end%>
+        <%end%>
+      <%end%>
     </div>
     
     <div class="exam-results-reports-col">
       <h4>Detailed reports</h4>
-      <h4>Archives</h4>
+      <p><%= link_to 'Final Report(Exam Grouped)',students_final_report_path(@student.id)%></p>
+      <p><%= link_to 'Transcript Report',students_transcript_report_path(@student.id)%></p>
     </div>
 <div class="extender"> </div>
 </div>
@@ -27,8 +41,7 @@
 
     <h3>Attendance</h3>
     <h4>Detailed Reports</h4>
-    <h4>Archives</h4>
-
+    <p><%=link_to 'Current year report',students_attendance_report_path(@student.id)%></p>
   </div>
 
 </div>

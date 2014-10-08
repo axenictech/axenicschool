@@ -1,0 +1,8 @@
+ar:
+  first_name: "الاسم الأول"
+  admission_no: "قبول عدد"  
+  admission_date: "تاريخ القبول"
+  batch_id: "دفعة"
+  date_of_birth: "تاريخ الميلاد"
+  gender: "بين الجنسين"
+  submit: "يقدم"

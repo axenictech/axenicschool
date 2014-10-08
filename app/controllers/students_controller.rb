@@ -113,31 +113,169 @@ class StudentsController < ApplicationController
   end
 
   def profile
-    @student=Student.find(params[:format])
+    @student=Student.find(params[:id])
+  end
+
+  def student_profile
+    @student=Student.find(params[:id])
+    render 'student_profile',layout:false
   end
 
   def archived_profile
     @student=ArchivedStudent.find(params[:format])
   end
 
+  def report
+    @student=Student.find(params[:format])
+    @batch=@student.batch
+  end
+
+  def recent_exam_report
+    @exam_group=ExamGroup.find(params[:exam_group_id])
+    @student=Student.find(params[:student_id])
+    @batch=@exam_group.batch
+  end
+
+  def subject_wise_report
+    @subject=Subject.find(params[:subject_id])
+    @student=Student.find(params[:student_id])
+    @batch=@subject.batch
+    @exam_groups=@batch.exam_groups.all
+  end
+
+  def final_report
+    @student=Student.find(params[:format])
+    @batch=@student.batch
+    @exam_groups=@batch.exam_groups.all
+    @subjects=@batch.subjects.all
+  end
+
+  def transcript_report
+    @student=Student.find(params[:format])
+    @batch=@student.batch
+    @exam_groups=@batch.exam_groups.all
+  end
+
+  def attendance_report
+    @student=Student.find(params[:format])
+    @batch=@student.batch
+    @subjects=@batch.subjects.all
+  end
+
+  def genrate_report
+    @student=Student.find(params[:report][:student_id])
+    @subject_id=params[:report][:subject_id]
+    @start_date=params[:report][:start_date]
+    @end_date=params[:report][:end_date]
+  end
+
   def advanced_search
     @courses=Course.all
+    @batches=Course.first.batches.all
+  end
+  
+  def batch_details
+    @course=Course.find(params[:id])
+    @batches=@course.batches.all
   end
   
   def advanced_student_search
     conditions=""
-    conditions+="concat_ws(' ',first_name,last_name) like '#{params[:search][:name]}%'
-                  OR concat_ws(' ',last_name,first_name)like '#{params[:search][:name]}%'" unless params[:search][:name]==""
-    conditions+="batch_id = #{params[:search][:batch_id]}" unless params[:search][:batch_id]==""
-    conditions+="category_id = #{params[:search][:category_id]}" unless params[:search][:category_id]==""
-    # conditions+="gender like '#{params[:search][:gender]}'" unless params[:search][:gender]==""
-    conditions+="blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group]==""
-    conditions+="country_id = #{params[:search][:country_id]}" unless params[:search][:country_id]==""
-    conditions+="admission_date = '#{params[:search][:admission_date]}'" unless params[:search][:admission_date]==""
-    conditions+="date_of_birth = '#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth]==""
-    # conditions+="status = '#{params[:search][:status]}'" unless params[:search][:status]==""
-        
-    @students=Student.where(conditions)
+    conditions+="concat_ws(' ',first_name,last_name) like '#{params[:search][:name]}%'" unless params[:search][:name]==""
+    if params[:batch][:id]
+      if conditions==""
+        conditions+="batch_id = #{params[:batch][:id]}" unless params[:batch][:id]==""
+      else
+        conditions+=" AND batch_id = #{params[:batch][:id]}" unless params[:batch][:id]==""
+      end
+    end
+    if params[:search][:category_id]
+      if conditions==""
+        conditions+="category_id = #{params[:search][:category_id]}" unless params[:search][:category_id]==""
+      else
+        conditions+=" AND category_id = #{params[:search][:category_id]}" unless params[:search][:category_id]==""
+      end
+    end
+    if params[:search][:gender]
+      unless params[:search][:gender].eql? "All"
+        if conditions==""
+           conditions+="gender like '#{params[:search][:gender]}'"
+        else
+           conditions+=" AND gender like '#{params[:search][:gender]}'"
+        end
+      end
+    end
+    if params[:search][:blood_group]
+      if conditions==""
+        conditions+="blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group]==""
+      else
+        conditions+=" AND blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group]==""
+      end
+    end
+    if params[:search][:country_id]
+      if conditions==""
+        conditions+="nationality_id ='#{params[:search][:country_id]}'" unless params[:search][:country_id]==""
+      else
+        conditions+=" AND nationality_id ='#{params[:search][:country_id]}'" unless params[:search][:country_id]==""
+      end
+    end
+    if params[:search][:admission_date]
+      if conditions==""
+        conditions+="admission_date ='#{params[:search][:admission_date]}'" unless params[:search][:admission_date]==""
+      else
+        conditions+=" AND admission_date ='#{params[:search][:admission_date]}'" unless params[:search][:admission_date]==""
+      end
+    end
+    if params[:search][:date_of_birth]
+      if conditions==""
+        conditions+="date_of_birth = '#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth]==""
+      else
+        conditions+=" AND date_of_birth = '#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth]==""
+
+      end
+    end
+    if params[:search][:status]
+      if params[:search][:status]=="all"
+        @student1=Student.where(conditions)
+        @student2=ArchivedStudent.where(conditions)
+        @students=@student1+@student2  
+      elsif params[:search][:status]=="present"
+        @students=Student.where(conditions)
+      else
+        @students=ArchivedStudent.where(conditions)
+      end
+    end
+     @search = ''
+      @search += " Name: " + params[:search][:name].to_s+", " unless params[:search][:name].empty?
+        if params[:search][:course_id].present?
+          course = Course.find(params[:search][:course_id])
+          @search += " Course: " + course.course_name+", " unless course.nil?
+        end
+        if params[:batch][:id].present?
+           batch = Batch.find(params[:batch][:id])
+           @search += " Batch: " + batch.name+", " unless batch.nil?
+        end 
+        if params[:search][:category_id].present?     
+           @search += " Category: " + Category.find(params[:search][:category_id]).name+", "
+        end
+        if  params[:search][:gender] == 'All'
+          @search += " Gender: All"+", "
+        else
+          @search += " Gender: "+params[:search][:gender].to_s+", " unless params[:search][:gender].empty?
+        end
+      @search += " Blood group: " + params[:search][:blood_group].to_s+", " unless params[:search][:blood_group].empty?
+      if params[:search][:country_id].present?
+         @search += " Country: " + Country.find(params[:search][:country_id]).name+", "
+      end
+      @search += " Admission date: " +  params[:search][:admission_date].to_s+", " unless  params[:search][:admission_date].empty?
+      @search += " Date of birth: " +  params[:search][:date_of_birth].to_s+", " unless  params[:search][:date_of_birth].empty?
+      if params[:search][:status]=="present"
+        @search += " Present student"
+      elsif params[:search][:status]=="former"
+        @search += " Former student"
+      else
+        @search += " All student"
+      end
   end
 
   def elective
@@ -186,6 +324,20 @@ class StudentsController < ApplicationController
     @student=Student.find(params[:format])
   end
 
+  def send_email
+    @student=Student.find(params[:student_id])
+    subject=params[:subject]
+    recipient=params[:email][:recipient]
+    message=params[:message]
+    if recipient.eql? "Student"
+      @user=User.find_by_student_id_and_role("#{@student.id}","Student")
+    else
+      @user=User.find_by_student_id_and_role("#{@student.id}","Parent")
+    end
+    UserMailer.student_email(@user,subject,message).deliver!
+    redirect_to students_email_path(@student)
+  end
+
   def remove
     @student=Student.find(params[:format])
   end
@@ -212,14 +364,6 @@ class StudentsController < ApplicationController
     @archived_student=ArchivedStudent.create(archived_student_params)
     @student.destroy
     redirect_to students_archived_profile_path(@archived_student)
-  end
-
-  def profile_pdf
-    
-    @student = Student.find(params[:id])
-    @address = @student.address_line1 + ' ' + @student.address_line2
-    # @immediate_contact = Guardian.find(@student.immediate_contact)
-    
   end
 
   def dispguardian

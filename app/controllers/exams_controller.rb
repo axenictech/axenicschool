@@ -8,6 +8,8 @@ class ExamsController < ApplicationController
 
 	def create
 		@exam_group=ExamGroup.find(params[:exam_group_id])
+		@batch=@exam_group.batch
+		@subjects=@batch.subjects.where(no_exams:false)
 		@exam=@exam_group.exams.new(params_exam)
 		if @exam.save 
 			flash[:notice_exam]='created successfully'

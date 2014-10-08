@@ -9,6 +9,7 @@ class ExamGroupsController < ApplicationController
   def new
     @batch=Batch.find(params[:format])
     @exam_group=@batch.exam_groups.build
+    @course=@batch.course
   end
 
   def create
@@ -35,7 +36,14 @@ class ExamGroupsController < ApplicationController
   def exam_group_create
     @exam_group=ExamGroup.find(params[:id])
     @exam_group.update(params_exam_group)
-    redirect_to exam_group_path(@exam_group.batch)
+      if params[:no_create].present?
+        params[:no_create].each do |s|
+          @exam=Exam.find_by_subject_id_and_exam_group_id(s,@exam_group.id)
+          unless @exam.nil?
+            @exam.destroy
+          end
+        end      
+      end
   end
   
   def show
@@ -64,6 +72,7 @@ class ExamGroupsController < ApplicationController
   def previous_exam_details
     @exam_group=ExamGroup.find(params[:exam_group][:id])
     @exams=@exam_group.exams.all
+    
   end
   
   def connect_exam

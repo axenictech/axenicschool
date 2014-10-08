@@ -1,10 +1,17 @@
+<%= form_for :subject,url:{action:'assign_time'},method: :post,html:{id:"create_time_form"} do |f| %>
+   <%=hidden_field_tag :timing_id%> 
+   <%=hidden_field_tag :weekday_id%> 
+   <%=hidden_field_tag :subject_id%>
+   <%=hidden_field_tag :batch_id%>
 <% unless @teachers.empty? %>
  <% @teachers.each do |e| %>
-      <div class="draggable" class="btn btn-primary"><%= e.employee.first_name %></div>
+      <div class="btn btn-primary" ><%= e.employee.first_name %></div>
+         <%=radio_button_tag "teacher",e.employee.id,:checked =>"unchecked"%>
       <% end %>
 <% else %>
 <h5>No teacher associated to this subject.</h5>
 <% end %>
+<%end%>
 
 
 

@@ -46,9 +46,9 @@ class BatchesController < ApplicationController
          end
      end
 
-     def destroy
+  def destroy
      @batch = Batch.find(params[:id])
-     if @batch.destroy
+    if @batch.destroy
       flash[:notice] = 'Batch deleted successfully!'
        redirect_to course_path(@batch.course)
     else
@@ -56,12 +56,12 @@ class BatchesController < ApplicationController
        redirect_to course_path(@batch.course)
     end
   end
-def assign_tutor
-    @batch=Batch.find(params[:format])
 
+  def assign_tutor
+    @batch=Batch.find(params[:format])
   end
 
-   def assign_tutorial
+  def assign_tutorial
     @batch=Batch.find(params[:format])
     @department=EmployeeDepartment.find(params[:assign_tutor][:id])
     @employees = Employee.where(employee_department_id:@department.id)
@@ -71,21 +71,26 @@ def assign_tutor
    def assign_employee
      @batch=Batch.find(params[:batch_id])
      @employee=Employee.find(params[:format])
-    if @batch.employee_id.nil?
-     @batch.update(employee_id:@employee.id)
+    unless @batch.employee_id.blank?
+      @assigned_emps = @batch.employee_id.split(',')
     else
-      @batch.update(employee_id:[@batch.employee_id,@employee.id].join(","))
+      @assigned_emps = []
     end
-     @assign_employees=@batch.employee_id.to_s.split(",")
-   end
-
+    @assigned_emps.push(params[:format].to_s)
+    @batch.update_attributes :employee_id => @assigned_emps.join(",")
+    @assign_employees = @assigned_emps.join(",")
+  end
+  
    def remove_employee
       @batch=Batch.find(params[:batch_id])
       @employee=Employee.find(params[:format])
-      @assign_employees=Batch.where(employee_id:@employee.id)
-      @assign_employees.destroy_all
-   end
 
+    @assigned_emps = @batch.employee_id.split(',')
+    @removed_emps = @assigned_emps.delete(params[:format].to_s)
+     @assign_employees = @assigned_emps.join(",")
+    @batch.update_attributes :employee_id => @assign_employees
+   
+   end
 
 private 
 def postparam

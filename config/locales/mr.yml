@@ -1,0 +1,9 @@
+mr:
+  general_settings: "सामान्य सेटिंग्स"
+  first_name: "प्रथम नाव"
+  admission_no: "प्रवेश क्रमांक"
+  admission_date: "प्रवेश तारीख"
+  batch_id: "तुकडी"
+  date_of_birth: "जन्म तारीख "
+  gender: "लिंग "
+  submit: "सुपूर्द करा"

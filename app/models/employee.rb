@@ -65,7 +65,7 @@ class Employee < ActiveRecord::Base
   def create_user_account
     user = User.new do |u|
       u.first_name, u.last_name, u.username, u.employee_id = first_name, last_name, employee_number, id
-      u.password = "#{employee_number.to_s}123"
+      u.password = "#{employee_number.to_s}123456"
       u.role = 'Employee'
       u.email = ( email == '' or User.find_by_email(email) ) ? "#{first_name+last_name+employee_number.to_s}@axenic.com" : email
     end

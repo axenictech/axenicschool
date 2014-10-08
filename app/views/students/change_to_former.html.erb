@@ -20,7 +20,6 @@
   <div id="remove-student">
     <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
     <p>For students leaving the school, use this option to remove them from the list of active students and place them in the former students list.</p>
-    </div>
     </div><br><br><br><br><br>
 
 <%= form_for @archived_student,url:{action: 'archived_student_create',format: @student.id} do |f| %>
@@ -52,4 +51,4 @@
         <%= f.hidden_field :photo_data,:value=> @student.photo_data%>
         <%=f.submit "Remove",class: "btn btn-danger" %></div>
 
-<%end%>
+<%end%></div>

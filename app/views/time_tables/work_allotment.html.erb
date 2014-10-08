@@ -1,0 +1,26 @@
+<div id="content-header">
+  <h1>Timetable</h1>
+  <h3>Work Allotment</h3>
+  <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+  </div>
+<%=link_to 'Assign Multiple Teacher',employees_subject_assignment_path %>
+<%=form_for :employees_subjects,:html=>{:id=>'work_allotment_form'} do |f| %>
+   <table align="center" class="table table-hover" style="width:80%">
+    <% @batches.each do |batch| %>
+       <tr><td><li class="heading">
+          <%= batch.name%>
+        </li></td>
+      </tr>
+        <tr>
+         <% batch.subjects.each do |subj| %>
+              <td><%=subj.name%></td>
+        <td><%=select_tag "employee_subjects[#{subj.id}]",options_for_select([[t('select_employee'),""]]+Employee.all.collect{|c| [c.first_name,c.id]},subj.employees.first.try(:id))%>
+         </td>
+          </tr>
+         <%end%>
+      <% end %>
+ </table>
+    <%= f.submit 'update',:class=>:submit_button %>
+     <% end %>
+  

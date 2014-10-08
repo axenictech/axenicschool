@@ -21,8 +21,4 @@ $(document).ready(function(){
             CKEDITOR.replace(data[i].id);
         });
     }
-});
-
-$(function() {
-    $( ".draggable" ).draggable();
 });  

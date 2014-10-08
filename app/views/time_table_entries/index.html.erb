@@ -19,6 +19,7 @@
 <%= f.label :select_batch %>
 <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name, b.id]},{prompt:true},{onchange:"$('#batch_form').submit();"} %>  
 <%end%>
-</div><br/><br/><br/>
-
-<div id="batch_div"></div>
+</div>
+<div id="batch_div"></div><br/><br/><br/>
+</div>
+</div>

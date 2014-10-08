@@ -8,12 +8,23 @@
 </div>
 
 <div id="page-yield">
-<div id="box">
+<div id="inner-tab-menu">
+  <ul>
+    <li style="width:150px"><%= link_to "Search Again", 'advanced_search'%></li>
+    <% unless @students.empty? %>
+    <li style="width:150px"><%= link_to "View Pdf Report",''%></li>
+    <%end%>
+  </ul>
+</div>
+<br/><br/>
 <% if @students.nil? or @students.empty? %>
   <div align="center"><h4>No students found</h4></div>
 <% else %>
+<div class="searched_for themed_text">
+        You searched for <%= @search %>
+</div>
   <div class="students-table">
-    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered">
+    <table id="listing" align="center" width="80%" cellpadding="1" cellspacing="1" class="table-bordered">
       <tr class="tr-head">
         <td class="col-1">
           Sl no.
@@ -47,4 +58,4 @@
     </table>
   </div>
 <% end %>
-</div></div>
+</div>

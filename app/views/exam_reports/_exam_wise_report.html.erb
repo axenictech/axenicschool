@@ -58,7 +58,9 @@
           <td><font color="blue">Total marks:</font></td>
           <td><font color="blue"><%= total_marks_attained %></font></td>
           <td><font color="blue"><%= total_max_marks %></font></td>
+          <%if @exam_group.exam_type=="Marks and Grades"%>
           <td>-</td>
+          <%end%>
           <td><font color="blue"><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></font></td>
         </tr>
       <%else%>

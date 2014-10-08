@@ -21,3 +21,12 @@
 
 en:
   hello: "Hello world"
+  first_name: "First Name"
+  admission_no: "Admission No"
+  admission_date: "Admission Date"
+  batch_id: "Batch Id"
+  date_of_birth: "Birth Date "
+  gender: "Gender"
+  submit: "Submit"
+
+

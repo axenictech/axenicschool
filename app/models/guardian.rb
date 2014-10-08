@@ -25,7 +25,7 @@ class Guardian < ActiveRecord::Base
    def create_user_account
     user = User.new do |u|
       u.first_name, u.last_name, u.username, u.student_id = self.first_name, self.last_name,  "#{self.first_name+self.last_name+self.student.admission_no.to_s}", self.student.id
-      u.password = "#{self.student.admission_no.to_s}123"
+      u.password = "#{self.student.admission_no.to_s}123456"
       u.role = 'Parent'
       u.email = ( self.email == '' or User.find_by_email(email) ) ? "#{self.first_name+self.last_name+self.student.admission_no.to_s}@axenic.com" : email
     end

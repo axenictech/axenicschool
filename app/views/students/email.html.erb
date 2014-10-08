@@ -14,29 +14,20 @@
       <span class="name"> <%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %>  </span>
       <span class="course"> Course & Batch: <%= @student.batch.course.course_name+" "+@student.batch.course.section_name+" "+@student.batch.name %> </span>
       <span class="adm"> Adm no : <%= @student.admission_no %> </span>
-
-
-    <div class="extender"> </div>
-
+</div><br/><br/>
+  <div id="box">
+  <%= form_for :email,url:{action:'send_email'} do |f|%>
+    <%= hidden_field_tag :student_id,@student.id%>
+    <div><label for="email_subject">Subject</label>
+    <%= text_field_tag :subject %></div>
+    <br/><br/>
+    <div><label for="email_recipients">Recipients</label>
+    <%= f.select :recipient,["Student","Guardian"],prompt:true %></div>
+    <br/><br/>
+    <div><label for="email_message">Message</label>
+    <%= text_area_tag :message %></div>
+    <br/><br/>
+    <div><%= f.submit 'Send',class: "btn btn-success"%></div>
+  <%end%>
   </div>
-  <div class="label-field-pair">
-    <label for="email_subject">Subject</label>
-    <div class="text-input-bg"><%= text_field_tag 'subject' %></div>
-  </div>
-
-  <div class="label-field-pair">
-    <label for="email_recipients">Recipients</label>
-    <div class="text-input-bg"><%= %></div>
-  </div>
-
-  <div class="message-area">
-    <br/>
-    <label for="email_message">Message</label>
-    <%= text_area_tag 'message' %>
-  </div>
-
-  <div class="submit-area">
-    <%= submit_tag 'Create' %>
-  </div>
-
 </div>

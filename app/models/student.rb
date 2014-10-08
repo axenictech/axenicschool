@@ -50,7 +50,7 @@ class Student < ActiveRecord::Base
   def create_user_account
     user = User.new do |u|
       u.first_name, u.last_name, u.username, u.student_id = first_name, last_name, admission_no, id
-      u.password = "#{admission_no.to_s}123"
+      u.password = "#{admission_no.to_s}123456"
       u.role = 'Student'
       u.email = ( email == '' or User.find_by_email(email) ) ? "#{first_name+last_name+admission_no.to_s}@axenic.com" : email
     end

@@ -1,0 +1,30 @@
+<div id="content-header">
+  <h1>Timetable</h1>
+  <h3>New Timetable</h3>
+  <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+  </div>
+
+   <%=form_for @timetable do |f| %>
+     <table align="center" class="table table-hover" style="width:80%">
+        <tr>
+        <td><%=f.label :start_date%></td>
+         <td>
+          <%= f.date_select :start_date,:use_month_numbers=>true,:start_year => Date.current.year-1, :end_year => Date.current.year+1,:order=>[:day,:month,:year]%>
+         </td>
+        </tr>
+         <tr>
+         <td>
+       	  <%=f.label :end_date%>
+        </td>
+        <td>
+        
+          <%= f.date_select :end_date,:use_month_numbers=>true,:start_year => Date.current.year-1,:end_year => Date.current.year+1,:order=>[:day,:month,:year]%>
+       
+         </td>
+         </tr>
+       </table>
+
+      <%=f.submit 'create',:class => "submit_button" %>
+    <% end %>
+

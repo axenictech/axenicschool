@@ -9,8 +9,8 @@
 
 <div id="page-yield">
 <div id="box">
-<% unless flash[:notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
+<% unless flash[:s].nil? %>
+    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:s] %> </div>
   <% end %></div>
 		<%=form_for :search ,url:{action:'advanced_student_search'},method: :get do |f| %>
 <table align="center" class="table table-hover " style="width:500px">
@@ -19,17 +19,22 @@
 				<td class="col-2"><%=f.text_field :name%></td></tr>
 
 			<tr><td class="col-2"><%= f.label :course_name %></td>
-				<td class="col-2"><%=f.select :course_id, @courses.collect {|c| [c.course_name,c.id]},{prompt:true}, {onchange:" var a=$('#search_course_id').val(); $('#search_batch_id').attr('value',a);"}%></td></tr>
+				<td class="col-2"><%=f.select :course_id, @courses.collect {|c| [c.course_name,c.id]},{prompt:true}, 
+				{onchange:"var a={
+					id: $('#search_course_id').val()
+					};
+					$.get('batch_details',a,function(response){
+						});"}%></td></tr>
 			
 			<tr><td class="col-2"><%= f.label :batch_name %></td>
-				<td class="col-2"><%=f.select :batch_id, Batch.where(course_id:1).collect {|b| [b.name,b.id]},prompt:true%></td></tr>
+			<td class="col-2" id="batch_view"><%= render 'all_batch'%></td></tr>
 				
 			<tr><td class="col-2"><%= f.label :category %></td>
 				<td class="col-2"><%=f.select :category_id, Category.all.collect {|c| [c.name,c.id]},prompt:true %></td></tr>
 
 			<tr><td class="col-2"><%= f.label :gender%></td>
-				<td class="col-2"><%=f.radio_button :gender,"All", :checked => "checked" %>All
-					<%=f.radio_button :gender,"Male"%>Male
+				<td class="col-2"><%=f.radio_button :gender,"All", :checked => "checked" %>All&nbsp;&nbsp;
+					<%=f.radio_button :gender,"Male"%>Male&nbsp;&nbsp;
 					<%=f.radio_button :gender,"Female"%>Female</td></tr>
 			
 			<tr><td class="col-2"><%=f.label :Blood_Group%></td>
@@ -45,11 +50,11 @@
 				<td class="col-2"><%=f.date_field :date_of_birth%></td></tr>
 
 			<tr><td class="col-2"><%= f.label :status%></td>
-				<td class="col-2"><%= f.radio_button  :status,"all",:checked => "checked" %>All
-				<br/>
-				<%= f.radio_button :status,"present"%>
-				Present Students<br/>
-			   		<%= f.radio_button  :status,"former"%>Former Students</td></tr>
+				<td class="col-2">
+				<%= f.radio_button :status,"present",:checked => "checked"%>Present&nbsp;&nbsp;
+			    <%= f.radio_button  :status,"former"%>Former&nbsp;&nbsp;
+			    <%= f.radio_button  :status,"all"%>All
+			    </td></tr>
 
 			<tr><td colspan="2"><%= f.submit 'Search', class: "btn btn-primary"%></td></tr>
 	</table>

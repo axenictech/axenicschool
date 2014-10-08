@@ -449,14 +449,96 @@ class EmployeesController < ApplicationController
   def advance_search
     
   end
-  def advance_search_emp
-    unless params[:search].empty?
-   
-    @employee=Employee.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
-        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%'")
-  
+ def advance_search_emp
+   conditions=""
+    conditions+="concat_ws(' ',first_name,last_name) like '#{params[:search][:name]}%'" unless params[:search][:name]==""
+
+       if params[:search][:gender]
+      unless params[:search][:gender].eql? "All"
+        if conditions==""
+           conditions+="gender like '#{params[:search][:gender]}'"
+        else
+           conditions+=" AND gender like '#{params[:search][:gender]}'"
+        end
+      end
     end
+
+    if params[:search][:employee_category_id]
+      if conditions==""
+        conditions+="employee_category_id = #{params[:search][:employee_category_id]}" unless params[:search][:employee_category_id]==""
+      else
+        conditions+=" AND employee_category_id = #{params[:search][:employee_category_id]}" unless params[:search][:employee_category_id]==""
+      end
+    end
+
+    if params[:search][:blood_group]
+      if conditions==""
+        conditions+="blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group]==""
+      else
+        conditions+=" AND blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group]==""
+      end
+    end
+
+    if params[:search][:marital_status]
+      if conditions==""
+        conditions+="marital_status like '#{params[:search][:marital_status]}'" unless params[:search][:marital_status]==""
+      else
+        conditions+=" AND marital_status like '#{params[:search][:marital_status]}'" unless params[:search][:marital_status]==""
+      end
+    end
+
+     if params[:search][:country_id]
+      if conditions==""
+        conditions+="country_id='#{params[:search][:country_id]}'" unless params[:search][:country_id]==""
+      else
+        conditions+=" AND country_id ='#{params[:search][:country_id]}'" unless params[:search][:country_id]==""
+      end
+    end
+
+     if params[:search][:joining_date]
+      if conditions==""
+        conditions+="joining_date='#{params[:search][:joining_date]}'" unless params[:search][:joining_date]==""
+      else
+        conditions+=" AND joining_date ='#{params[:search][:joining_date]}'" unless params[:search][:joining_date]==""
+      end
+    end
+
+    if params[:search][:employee_department_id]
+      if conditions==""
+        conditions+="employee_department_id='#{params[:search][:employee_department_id]}'" unless params[:search][:employee_department_id]==""
+      else
+        conditions+=" AND employee_department_id='#{params[:search][:employee_department_id]}'" unless params[:search][:employee_department_id]==""
+      end
+    end
+
+   if params[:search][:employee_position_id]
+      if conditions==""
+        conditions+="employee_position_id='#{params[:search][:employee_position_id]}'" unless params[:search][:employee_position_id]==""
+      else
+        conditions+=" AND employee_position_id='#{params[:search][:employee_position_id]}'" unless params[:search][:employee_position_id]==""
+      end
+    end
+
+      if params[:search][:employee_grade_id]
+      if conditions==""
+        conditions+="employee_grade_id='#{params[:search][:employee_grade_id]}'" unless params[:search][:employee_grade_id]==""
+      else
+        conditions+=" AND employee_grade_id='#{params[:search][:employee_grade_id]}'" unless params[:search][:employee_grade_id]==""
+      end
+    end
+
+     if params[:search][:date_of_birth]
+      if conditions==""
+        conditions+="date_of_birth='#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth]==""
+      else
+        conditions+=" AND date_of_birth ='#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth]==""
+      end
+    end
+
+      
+    @employees=Employee.where(conditions)           
   end
+
 
   def payslip
     

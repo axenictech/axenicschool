@@ -7,7 +7,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string     :first_name
       t.string     :middle_name
       t.string     :last_name
-      t.boolean    :gender
+      t.string     :gender
       t.string     :job_title
       t.references :employee_position,index:true
       t.references :employee_department,index:true

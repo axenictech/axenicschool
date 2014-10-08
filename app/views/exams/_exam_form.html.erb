@@ -1,7 +1,13 @@
+
 <% if @subjects.empty? %>
  <h4 align="center">No subject Found </h4>
 <% else %>
-<%=form_for @exam_group, url:{action: 'exam_group_create',id:@exam_group.id} do |f| %>  
+
+<ul class="errors " style="width:700px"></ul>
+
+<%=form_for @exam_group, url:{action: 'exam_group_create',
+  id:@exam_group.id},remote:true do |f| %>
+
 <table class="table table-hover" style="width:100%">
  <tr>
     <td colspan="2"></td>
@@ -25,8 +31,7 @@
   <tr>
     <td colspan="2"></td>
     <td class="col-2"><%= f.label :maximum_marks , class: "control-label"%></td>
-    <td class="col-2"><%=text_field_tag :max_marks,"",
-    {oninput:" var a=$('#max_marks').val();
+    <td class="col-2"><%=text_field_tag :max_marks,"",{oninput:"var a=$('#max_marks').val();
   $('.max_set').attr('value',a);"}%></td>
     <td colspan="2"> </td>
   </tr>
@@ -35,7 +40,8 @@
     <td class="col-2"><%= f.label :minimum_marks , class: "control-label"%></td>
     <td class="col-2"><%= text_field_tag :min_marks,"",
      {oninput:" var a=$('#min_marks').val();
-  $('.min_set').attr('value',a);"} %></td>
+    
+  $('.min_set').attr('value',a);"}%></td>
     <td colspan="2"></td>
   </tr>
 <%end%>
@@ -44,12 +50,13 @@
   <% unless @exam_group.exam_type== "Grades"%>
     <td >Max marks</td>
     <td >Min marks</td>
+    
   <%else%>
     <td></td><td></td>
   <% end %>
     <td >start time</td>
     <td>end time</td>
-    <td></td>
+    <td>Do Not Create</td>
   </tr> 
 
 <% @subjects.each do |subject| %>
@@ -59,20 +66,22 @@
       <td class="col-2"><%= subject.name %></td>
       <%= exam.hidden_field :subject_id, value: subject.id%>
     <% unless @exam_group.exam_type=="Grades"%>
-      <td ><%= exam.text_field :maximum_marks,class: 'max_set'%></td>
+      <td ><%= exam.text_field :maximum_marks,class: 'max_set'%>
+</td>
       <td ><%= exam.text_field :minimum_marks,class: 'min_set'%></td>
     <%else%>
     <td></td><td></td>
-    <% end %>
-      <td ><%= exam.date_field :start_time%></td>
+    <%end%>
+      <td ><%= exam.date_field :start_time %></td>
       <td ><%= exam.date_field :end_time%></td>
-    
+      <td><%= check_box_tag "no_create[]",subject.id,false, class: "exam_no_check" %>
     </tr>
 <%end%>
 <% end %>
 
- <tr class="tr-head"><td colspan="6">
+<tr class="tr-head"><td colspan="6">
 <%= f.submit 'create', class: "btn btn-primary" %></td></tr>
 </table>
 <%end%>
 <%end%>
+

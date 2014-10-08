@@ -1,4 +1,10 @@
+
+<ul class="errors" style="width:150px"></ul>
+
 <%= form_for [@batch,@exam_group],url: {action: 'create',format: @batch.id} , remote: true do |f|%>
+
+
+
  <table class="table" >
         <tr>
             <td class="col-md-2"><%= f.label :name , class: "control-label"%></td>
@@ -12,6 +18,9 @@
         </tr>
         
         <tr>
-        <td colspan="2"><%= f.submit 'Submit', class: "btn btn-primary"%></td></tr>
+            <td colspan="2">
+            <%= f.submit 'Submit', class: "btn btn-primary"%>
+            </td>
+        </tr>
     </table>
 <% end %>
