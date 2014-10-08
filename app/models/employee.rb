@@ -13,13 +13,13 @@ class Employee < ActiveRecord::Base
   has_many    :employee_bank_details
   has_many    :employee_additional_details
   has_many    :apply_leaves
-  has_many    :employee_leaves
   has_many    :monthly_payslips
   has_many    :employee_salary_structures
   has_many    :finance_transactions, :as => :payee
   has_many    :employee_attendances
 
 
+<<<<<<< HEAD
 # validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
 # validates :middle_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
 # validates :last_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
@@ -71,8 +71,48 @@ class Employee < ActiveRecord::Base
     end
     user.save
   end
+=======
+  validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}    
+  validates :middle_name,length:{minimum:1,maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/},allow_blank: true
+  validates :last_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
+  validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
+  validates :date_of_birth, presence: true
+  validates :employee_department,presence: true
+  validates :employee_category,presence: true
+  validates :employee_position,presence: true
+  validates :employee_grade, presence: true
+  validates :qualification,length:{minimum:1,maximum:20},format:{with: /\A[a-zA-Z_""-]+\Z/},allow_blank: true
+  validates :experience_detail,length:{minimum:1,maximum:20},format:{with: /\A[a-zA-Z_""-]+\Z/},allow_blank: true
+  validates :father_name,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z_""-]+\Z/},allow_blank: true
+  validates :mother_name,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z ""-]+\Z/} ,allow_blank: true
+  validates :home_address_line1,length:{:in=> 1..30},allow_blank: true
+  validates :home_address_line2,length:{:in=>1..30},allow_blank: true
+  validates :home_city, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+              length:{:in=> 1..30},allow_blank: true
+  validates :home_state,format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+              length:{:in=> 1..30},allow_blank: true
+  validates :home_pin_code,numericality: { only_integer: true },
+                 length:{minimum:6,maximum:6},allow_blank: true
+  validates :office_address_line1,length:{:in=>1..30},allow_blank:true
+  validates :office_address_line2,length:{:in=>1..30},allow_blank:true
+  validates :office_city,format:{ with: /\A[a-z A-Z]+\z/,message:"only allows letters" },
+              length:{:in=> 1..30},allow_blank:true
+  validates :office_state,format: { with: /\A[a-z A-Z]+\z/,message:"only allows letters"},
+               length:{:in=>1..30},allow_blank:true
+  validates :office_pin_code,numericality:{only_integer:true},
+                  length:{minimum:6,maximum:6},allow_blank:true
+  validates :office_phone1,numericality:{ only_integer: true},
+                   length:{minimum:11,maximum:20}  ,allow_blank:true
+  validates :office_phone2,numericality:{only_integer: true},
+                   length:{minimum:11,maximum:20},allow_blank:true
+  validates :mobile_phone,numericality:{only_integer:true},
+                   length:{minimum:10,maximum:10},allow_blank:true 
+  validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
+  validates :fax,numericality:{only_integer:true},
+                    length:{minimum:10,maximum:10},allow_blank:true
+>>>>>>> 003cec3913463c73923c1081b3dc84ddc27c4c7a
                     
-end
+  end
 
 
        

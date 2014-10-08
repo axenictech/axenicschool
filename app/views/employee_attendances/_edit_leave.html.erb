@@ -27,7 +27,7 @@
        <tr>
             
             <td>Enable_Carry_Forward</td>
-            <td><%= c.check_box :enable_carry_forward, :checked => false %> </td>
+            <td><%= c.check_box :enable_carry_forward%> </td>
         </tr>
      <tr>
       <td><%= c.label :Status%> </td>
@@ -37,7 +37,7 @@
     
     <tr>
     <td colspan="2"><%= c.submit 'Update', class: "btn btn-primary"%>
-        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        	<%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
         </tr>
 
 </table>
