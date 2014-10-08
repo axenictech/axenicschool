@@ -16,10 +16,10 @@
         <td><%= f.text_field :priority%></td></tr>
     
     
-        <tr><td><%= f.label :'Max period per day' %></td>
+        <tr><td><%= f.label :'Max periods per day' %></td>
         <td><%= f.text_field :max_hours_day%></td></tr>
     
-        <tr><td><%=f.label :'Max period per week'%></td>
+        <tr><td><%=f.label :'Max periods per week'%></td>
         <td><%=f.text_field :max_hours_week%></td></tr>
     
          
@@ -47,8 +47,8 @@
 		<%@grade1.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.priority%>)</td>
-			 <td><%= link_to 'edit',employees_edit_grade_path(c),remote:true%></td>
-			 <td><%= link_to 'delete',employees_destroy_grade_path(c),remote:true,method: :delete ,data: {confirm:"Are you sure to delete"}%></td>
+			 <td><%= link_to 'Edit',employees_edit_grade_path(c),remote:true%></td>
+			 <td><%= link_to 'Delete',employees_destroy_grade_path(c),remote:true,method: :delete ,data: {confirm:"Are you sure to delete #{c.name}"}%></td>
 			</tr>
 		<%end%>
 	 </tbody>
@@ -62,8 +62,8 @@
 		<%@grade2.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.priority%>)</td>
-			<td><%= link_to 'edit', employees_edit_grade_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,employees_destroy_grade_path(c),remote:true,method: :delete,data:{confirm:"Are you sure to delete"}%></td>	
+			<td><%= link_to 'Edit', employees_edit_grade_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,employees_destroy_grade_path(c),remote:true,method: :delete,data:{confirm:"Are you sure to delete #{c.name}"}%></td>	
 			</tr>
 		<%end%>
 	 </tbody>

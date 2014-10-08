@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140925131254) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
     t.integer  "employee_leave_types_id"
@@ -60,13 +57,13 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.string   "phone2"
     t.string   "email"
     t.integer  "immediate_contact"
-    t.boolean  "is_sms_enabled",     default: true
+    t.boolean  "is_sms_enabled",                      default: true
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data"
+    t.binary   "photo_data",         limit: 16777215
     t.string   "status_description"
-    t.boolean  "is_active",          default: true
-    t.boolean  "is_deleted",         default: false
+    t.boolean  "is_active",                           default: true
+    t.boolean  "is_deleted",                          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -77,9 +74,9 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   create_table "assets", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.decimal  "amount"
-    t.boolean  "is_inactive", default: false
-    t.boolean  "is_deleted",  default: false
+    t.decimal  "amount",      precision: 10, scale: 0
+    t.boolean  "is_inactive",                          default: false
+    t.boolean  "is_deleted",                           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -169,8 +166,8 @@ ActiveRecord::Schema.define(version: 20140925131254) do
 
   create_table "class_designations", force: true do |t|
     t.string   "name"
-    t.decimal  "cgpa"
-    t.decimal  "marks"
+    t.decimal  "cgpa",       precision: 10, scale: 0
+    t.decimal  "marks",      precision: 10, scale: 0
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -298,8 +295,8 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   create_table "employee_leaves", force: true do |t|
     t.integer  "employee_id"
     t.integer  "employee_leave_type_id"
-    t.decimal  "leave_count"
-    t.decimal  "leave_taken"
+    t.decimal  "leave_count",            precision: 10, scale: 0
+    t.decimal  "leave_taken",            precision: 10, scale: 0
     t.date     "reset_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -386,7 +383,7 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.string   "fax"
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data"
+    t.binary   "photo_data",             limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -426,7 +423,7 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   create_table "exam_scores", force: true do |t|
     t.integer  "student_id"
     t.integer  "exam_id"
-    t.decimal  "marks"
+    t.decimal  "marks",            precision: 10, scale: 0
     t.integer  "grading_level_id"
     t.string   "remarks"
     t.boolean  "is_failed"
@@ -462,8 +459,8 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.string   "name"
     t.integer  "receiver_id"
     t.integer  "finance_fee_collection_id"
-    t.decimal  "discount"
-    t.boolean  "is_amount",                 default: false
+    t.decimal  "discount",                  precision: 10, scale: 0
+    t.boolean  "is_amount",                                          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -474,12 +471,12 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   create_table "fee_collection_particulars", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "amount"
+    t.decimal  "amount",                    precision: 10, scale: 0
     t.integer  "finance_fee_collection_id"
     t.integer  "category_id"
     t.string   "admission_no"
     t.integer  "student_id"
-    t.boolean  "is_deleted",                default: false
+    t.boolean  "is_deleted",                                         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -493,8 +490,8 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.string   "name"
     t.integer  "receiver_id"
     t.integer  "finance_fee_category_id"
-    t.decimal  "discount"
-    t.boolean  "is_amount",               default: false
+    t.decimal  "discount",                precision: 10, scale: 0
+    t.boolean  "is_amount",                                        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -505,7 +502,7 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   create_table "finance_donations", force: true do |t|
     t.string   "donor"
     t.string   "description"
-    t.decimal  "amount"
+    t.decimal  "amount",         precision: 10, scale: 0
     t.integer  "transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -545,12 +542,12 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   create_table "finance_fee_particulars", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "amount"
+    t.decimal  "amount",                  precision: 10, scale: 0
     t.integer  "finance_fee_category_id"
     t.integer  "category_id"
     t.string   "admission_no"
     t.integer  "student_id"
-    t.boolean  "is_deleted",              default: false
+    t.boolean  "is_deleted",                                       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -560,14 +557,14 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   add_index "finance_fee_particulars", ["student_id"], name: "index_finance_fee_particulars_on_student_id", using: :btree
 
   create_table "finance_fee_structure_elements", force: true do |t|
-    t.decimal  "amount"
+    t.decimal  "amount",            precision: 10, scale: 0
     t.string   "label"
     t.integer  "batch_id"
     t.integer  "category_id"
     t.integer  "student_id"
     t.integer  "guardian_id"
     t.integer  "fee_collection_id"
-    t.boolean  "is_deleted",        default: false
+    t.boolean  "is_deleted",                                 default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -600,7 +597,7 @@ ActiveRecord::Schema.define(version: 20140925131254) do
 
   create_table "finance_transaction_triggers", force: true do |t|
     t.integer  "finance_fee_category_id"
-    t.decimal  "percentage"
+    t.decimal  "percentage",              precision: 10, scale: 0
     t.string   "title"
     t.string   "description"
     t.datetime "created_at"
@@ -612,8 +609,8 @@ ActiveRecord::Schema.define(version: 20140925131254) do
   create_table "finance_transactions", force: true do |t|
     t.string   "title"
     t.string   "description"
-    t.decimal  "amount"
-    t.boolean  "fine_included",   default: false
+    t.decimal  "amount",          precision: 10, scale: 0
+    t.boolean  "fine_included",                            default: false
     t.integer  "category_id"
     t.integer  "student_id"
     t.integer  "finance_fees_id"
@@ -675,7 +672,7 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.integer  "batch_id"
     t.integer  "student_id"
     t.integer  "exam_group_id"
-    t.decimal  "marks"
+    t.decimal  "marks",         precision: 10, scale: 0
     t.string   "score_type"
     t.integer  "subject_id"
     t.datetime "created_at"
@@ -762,7 +759,7 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.string   "question"
     t.integer  "marks"
     t.integer  "is_answer"
-    t.string   "option_group",   array: true
+    t.string   "option_group"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -774,7 +771,7 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.time     "maximum_time"
-    t.decimal  "percentage"
+    t.decimal  "percentage",          precision: 10, scale: 0
     t.integer  "option_per_question"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -794,8 +791,8 @@ ActiveRecord::Schema.define(version: 20140925131254) do
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
-    t.decimal  "gpa"
-    t.decimal  "marks"
+    t.decimal  "gpa",                precision: 10, scale: 0
+    t.decimal  "marks",              precision: 10, scale: 0
     t.integer  "subject_count"
     t.integer  "prioriy"
     t.boolean  "full_course"
@@ -888,13 +885,13 @@ ActiveRecord::Schema.define(version: 20140925131254) do
     t.string   "phone2"
     t.string   "email"
     t.integer  "immediate_contact"
-    t.boolean  "is_sms_enabled",     default: true
+    t.boolean  "is_sms_enabled",                      default: true
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data"
+    t.binary   "photo_data",         limit: 16777215
     t.string   "status_description"
-    t.boolean  "is_active",          default: true
-    t.boolean  "is_deleted",         default: false
+    t.boolean  "is_active",                           default: true
+    t.boolean  "is_deleted",                          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

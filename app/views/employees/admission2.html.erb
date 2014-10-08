@@ -10,12 +10,24 @@
 </div><br/><br/>
 
 <div id="page-yield">
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% unless flash[:notice8].nil? %>
+    <p class="flash-msg"> <%= flash[:notice8] %> </p>
   <% end %>
 
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for (@employee),url:{action: 'admission2_create',format: @employee.id},method: :patch do |f| %>
+<div align="center">
+    <% if @employee.errors.any? %>
+        <div class="alert alert-danger" style="width:500px" >
+          <h3>Error prohibited to from being saved:</h3>
+          <ul>
+           <% @employee.errors.full_messages.each do |msg| %>
+              <li style="width:500px" align="left"><%= msg %></li>
+            <% end %>
+          </ul>
+          <% end %>
+      </div>
+ </div>
 
     <tbody>
 
@@ -35,7 +47,7 @@
      </tr>
 
      <tr>
-     	 <td class="col-2"><%=f.label :city%></td>
+     	 <td class="col-2"><%=f.label :city%><span class="necessary-field">*</span></td>
         <td class="col-2"><%=f.text_field :home_city, :required=>false%></td>
      </tr>
 
@@ -62,12 +74,12 @@
       </tr>
 
      <tr>
-         <td class="col-2"><%=f.label :line1%><span class="necessary-field">*</span></td>
+         <td class="col-2"><%=f.label :line1%></td>
           <td class="col-2"><%=f.text_field :office_address_line1%></td>
      </tr>
     
      <tr>
-       <td class="col-2"><%=f.label :line2%><span class="necessary-field">*</span></td>
+       <td class="col-2"><%=f.label :line2%></td>
           <td class="col-2"> <%=f.text_field :office_address_line2%></td>
      </tr>
 
@@ -77,7 +89,7 @@
      </tr>
 
      <tr>
-       <td class="col-2"><%=f.label :state%><span class="necessary-field">*</span></td>
+       <td class="col-2"><%=f.label :state%></td>
          <td class="col-2">  <%=f.text_field :office_state%></td>
      </tr>
 
@@ -99,7 +111,7 @@
 
 
       <tr>
-       <td class="col-2"><%=f.label :"office phone1"%><span class="necessary-field">*</span></td>
+       <td class="col-2"><%=f.label :"office phone1"%></td>
           <td class="col-2"> <%=f.text_field :office_phone1%></td>
      </tr>
 
@@ -109,7 +121,7 @@
      </tr>
 
      <tr>
-       <td class="col-2"><%=f.label :mobile%><span class="necessary-field">*</span></td>
+       <td class="col-2"><%=f.label :mobile%></td>
          <td class="col-2">  <%=f.text_field :mobile_phone%></td>
      </tr>
 

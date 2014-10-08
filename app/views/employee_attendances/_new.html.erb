@@ -5,7 +5,7 @@
   <h3><%= "create" %></h3>
 </div>
 <div class="modal-body">
-	<ul class="errors"></ul>
+	<ul class="errors1"></ul>
 
 <%= form_for @attendance,remote:true  do |c|%>
 
@@ -22,13 +22,13 @@
       <td><%= c.text_field :reason%></td>
     </tr>
     <tr>        
-   <td>is_half_day</td>
+   <td>is_half_day?</td>
     <td><%= c.check_box :is_half_day,:checked => false %> </td>
     </tr>
     
     <tr>
     <td colspan="2"><%= c.submit 'Create', class: "btn btn-primary"%>
-        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        	<%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
         </tr>
 
 </table>

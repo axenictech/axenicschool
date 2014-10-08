@@ -133,20 +133,15 @@ class FinanceController < ApplicationController
   end
 
   def add_liability
-
       @li=Liability.new(liability_params)
       @li.save
-
-
   end
 
   def add
     @amount=params[:emp][:amount]
     p "pppppppp"
     p @amount
-  
-  redirect_to employees_admission1_path
-
+    redirect_to employees_admission1_path
   end
 
   def create_liability

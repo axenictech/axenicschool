@@ -38,7 +38,7 @@
 <%else%>
 <table align="center" class="table table-hover table-bordered" style="width:800px">
 
-	<tr class="tr-head"><th colspan="3">Active category</th>
+	<tr class="tr-head"><th colspan="3">Active Category</th>
     </tr>
 	<tbody class="product-index">
 
@@ -56,15 +56,15 @@
 
 <table align="center" class="table table-hover table-bordered" style="width:800px">
 
-	<tr class="tr-head"><th colspan="3">Inactive category</th>
+	<tr class="tr-head"><th colspan="3">Inactive Category</th>
     </tr>
 	<tbody class="product-index">
 
 	<%@categories2.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.prefix%>)</td>
-			<td><%= link_to 'edit', employees_edit_category_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
+			<td><%= link_to 'Edit', employees_edit_category_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
 

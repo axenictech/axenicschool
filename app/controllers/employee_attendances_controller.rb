@@ -2,8 +2,8 @@ class EmployeeAttendancesController < ApplicationController
 	def new_leave_type
 		@new_leave_type=EmployeeLeaveType.new
      @employee = Employee.all
-		@active_leaves=EmployeeLeaveType.where(status: true)
-        @inactive_leaves=EmployeeLeaveType.where(status: false)
+		@active_leaves=EmployeeLeaveType.where(status: true).order(:name)
+    @inactive_leaves=EmployeeLeaveType.where(status: false).order(:name)
 	end
     
     def	add_leave_type
@@ -14,25 +14,24 @@ class EmployeeAttendancesController < ApplicationController
             @employee.each do |e|
                 EmployeeLeave.create( :employee_id => e.id, :employee_leave_type_id =>  @new_leave_type1.id, :leave_count =>  @new_leave_type1.max_leave_count)
             end
-       	  flash[:notice] = 'Employee Leavetype created successfully!'
+       	  flash[:notice] = 'Employee Leave type created successfully!'
        	 else
-       	 flash[:notice] = 'Employee Leavetype not created successfully!'
+       	 flash[:notice] = 'Employee Leave type not created successfully!'
         end
-        @active_leaves=EmployeeLeaveType.where(status: true)
-        @inactive_leaves=EmployeeLeaveType.where(status: false)
+        @active_leaves=EmployeeLeaveType.where(status: true).order(:name)
+        @inactive_leaves=EmployeeLeaveType.where(status: false).order(:name)
 
     end    
        def destroy_leave_type
          @new_leave_type=EmployeeLeaveType.new
          @leave_type= EmployeeLeaveType.find(params[:id])
          if @leave_type.destroy
-         	flash[:notice] = 'Employee Leavetype created successfully!'
+         	flash[:notice] = 'Employee Leave type deleted successfully!'
          end
-         @active_leaves=EmployeeLeaveType.where(status: true)
-         @inactive_leaves=EmployeeLeaveType.where(status: false)
-     end
+         @active_leaves=EmployeeLeaveType.where(status: true).order(:name)
+         @inactive_leaves=EmployeeLeaveType.where(status: false).order(:name)
 
-   
+   end
      
      def edit_leave_type
          @edit_leave_type=EmployeeLeaveType.find(params[:id])
@@ -42,10 +41,10 @@ class EmployeeAttendancesController < ApplicationController
      	 @new_leave_type=EmployeeLeaveType.new
          @leave_type= EmployeeLeaveType.find(params[:id])
          if @leave_type.update(params_leave)
-         	flash[:notice] = 'Employee Leavetype updated successfully!'
+         	flash[:notice] = 'Employee Leave type updated successfully!'
          end
-         @active_leaves=EmployeeLeaveType.where(status: true)
-         @inactive_leaves=EmployeeLeaveType.where(status: false)
+         @active_leaves=EmployeeLeaveType.where(status: true).order(:name)
+         @inactive_leaves=EmployeeLeaveType.where(status: false).order(:name)
      end
 
       def attendance_register
