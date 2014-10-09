@@ -255,6 +255,16 @@ get 'employees/department_payslip'
 get 'employees/payslip'
 get 'employees/select_employee_department'
 post 'employees/view_payslip'
+get 'employees/genral_profile'
+get 'employees/personal_profile'
+get 'employees/address_profile'
+get 'employees/contact_profile'
+get 'employees/bank_info'
+get 'employees/emp_payroll'
+
+
+
+
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'
 delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
@@ -282,6 +292,8 @@ get 'employee_attendances/remove_all'
 get 'employee_attendances/update_department_leave_reset'
 get 'employee_attendances/employee_leave_reset_by_employee'
 post 'employee_attendances/search'
+
+
 get 'finance/new_finance_fee_category'
 get 'finance/add_finance_fee_category'
 post 'finance/create_finance_fee_category'

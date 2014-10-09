@@ -278,12 +278,13 @@ class EmployeesController < ApplicationController
   def admission1
     @employee=Employee.new
     if Employee.first.nil?
-      @employee.employee_number=221
+      @employee.employee_number=1
+       flash[:notice7] = "Employee number of first employee is #{@employee.employee_number}" 
     else
       @last_employee=Employee.last
       @employee.employee_number=@last_employee.employee_number.next
+          flash[:notice7] = "Employee number of last employee is #{@last_employee.employee_number}" 
     end  
-    flash[:notice7] = "Employee number of last employee is #{@last_employee.employee_number}" 
   end
 
   def create
@@ -620,6 +621,39 @@ end
   
   def view_payslip
     
+  end
+
+  def genral_profile
+   @employee=Employee.find(params[:format])
+   @reporting_manager = Employee.find(@employee.reporting_manager_id) unless @employee.reporting_manager_id.nil?
+  end
+
+
+  def personal_profile
+   @employee=Employee.find(params[:format])
+  end
+
+  def address_profile
+   @employee=Employee.find(params[:format])
+   @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
+   @office_country = Country.find(@employee.office_country_id).name unless @employee.home_country_id.nil?
+
+  end
+
+  def contact_profile
+   @employee=Employee.find(params[:format])
+  end
+
+  def bank_info
+   @employee=Employee.find(params[:format])
+   @bank_details = EmployeeBankDetail.where(employee_id:@employee.id)
+   p "supriyaaaaaaaaaaaaaaaaaa"
+   p @bank_details
+  end
+
+  def emp_payroll
+   @employee=Employee.find(params[:format])
+   #@payroll_details = EmployeeSalaryStructure.where(employee_id:@employee)
   end
 
   private
