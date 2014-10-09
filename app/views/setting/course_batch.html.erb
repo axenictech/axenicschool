@@ -7,19 +7,35 @@
   </div>
   <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br /><br />
-<div id="page-yield">
 
-  <div class="box">
 
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Manage Course' ,"/courses" %> </div>
-      <div class="link-descr">Manage Courses and create batches</div>
+<div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to 'Manage Course' ,"/courses",style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+            Manage Courses and create batches
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+         <%= link_to 'Manage Batch' ,"/batches",style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Manage active batches
+          </div>
+        </div>
+
+      </div>
+       
+      <div class="col-md-2"></div>
     </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Manage Batch' ,"/batches"%>  </div>
-      <div class="link-descr">Manage active batches</div>
-    </div>
+  
 
-    <div class="extender"></div>
-  </div>
-</div>
+     

@@ -8,31 +8,63 @@
     <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br/><br/>
 
-
-<div id="page-yield">
-  <div id="box">
-
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage Course / Batch", '/setting/course_batch' %></div>
-        <div class="link-descr">Add a new Course or Batch for this academic year.</div>
+<!-- new panel code -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Manage Course / Batch", '/setting/course_batch',style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+            Add a new Course or Batch for this academic year.
+          </div>
+        </div>
+       
       </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Manage Student Category",'/categories',style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Add student category.
+          </div>
+        </div>
 
-    
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage Student Category",'/categories'  %></div>
-        <div class="link-descr">Add student category.</div>
       </div>
-   
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage Subject","/subjects" %></div>
-        <div class="link-descr">Manage subjects corresponding to different courses.</div>
-      </div>
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "General Settings", "/general_settings/new" %></div>
-        <div class="link-descr">Set some general configurations related to institution,attendance, etc.</div>
-      </div>
+       
+      <div class="col-md-2"></div>
+    </div>
+  
 
+  
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Manage Subject","/subjects",style: 'color:black' %>          </div>
+          <div class="panel-body" style="height:70px">
+            Manage subjects corresponding to different courses.
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "General Settings", "/general_settings/new",style: 'color:black'%></div>
+          <div class="panel-body" style="height:70px">
+           Set some general configurations related to institution,attendance, etc.
+          </div>
+        </div>
+
+      </div>
+       
+      <div class="col-md-2"></div>
     </div>
 
-
-  </div>
+ </div>
+  
