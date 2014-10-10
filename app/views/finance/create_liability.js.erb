@@ -1,2 +1,9 @@
-
+$("ul.errors5").html("")
+<% if  @liability.errors.any? %>
+		<%  @liability.errors.full_messages.each do |message| %>
+		$("ul.errors5").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
+$('#new_liability').html("<%= j  render 'new_liability_all'%>")
 $('#myModal').modal('hide')
+<%end%>

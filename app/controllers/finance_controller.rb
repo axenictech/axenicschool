@@ -94,7 +94,7 @@ class FinanceController < ApplicationController
   end
 
   def create_asset
-    @assets=Asset.order(created_At: :desc) 
+  
     @asset=Asset.new(asset_params)
     @asset.save   
     flash[:notice4] = "Asset created successfully"
@@ -102,7 +102,7 @@ class FinanceController < ApplicationController
   end
 
   def display_asset
-      @assets=Asset.order(created_At: :desc)   
+      @assets=Asset.order(created_at: :asc)
   end
 
   def viewcontent_asset
@@ -115,26 +115,56 @@ class FinanceController < ApplicationController
   end
 
   def update_asset
-    @assets=Asset.order(created_At: :desc) 
+    @assets=Asset.order(created_at: :asc)
     @asset=Asset.find(params[:asset_id])
     @asset.update(asset_params)
     flash[:notice5] = "Asset updated successfully"
  end
 
   def destroy_asset
+    @assets=Asset.order(created_at: :asc)
     @asset=Asset.find(params[:id])
     if @asset.destroy
     flash[:notice5] = "Asset deleted successfully"
     redirect_to finance_display_asset_path(@asset)
   end
-
+  end
   def new_liability
-    @li=Liability.new
+    @liability=Liability.new
+  end
+  
+  def create_liability
+    @liability=Liability.new(liability_params)
+    @liability.save   
+    flash[:notice6] = "Liability created successfully"
   end
 
-  def add_liability
-      @li=Liability.new(liability_params)
-      @li.save
+  def display_liability
+      @liabilities=Liability.order(created_at: :asc)
+  end
+
+  def viewcontent_liability
+    @liability=Liability.find(params[:format])
+  end
+
+  def edit_liability
+    @liability=Liability.find(params[:liability_id])
+  end
+
+  def update_liability
+      @liabilities=Liability.order(created_at: :asc)
+    @liability=Liability.find(params[:liability_id])
+    @liability.update(liability_params)
+    flash[:notice7] = "Liability updated successfully"
+  end
+
+  def destroy_liability
+      @liabilities=Liability.order(created_at: :asc)
+   @liability=Liability.find(params[:id])
+    if @liability.destroy
+    flash[:notice7] = "Liability deleted successfully"
+    redirect_to finance_display_liability_path(@asset)
+    end
   end
 
   def add
@@ -144,26 +174,34 @@ class FinanceController < ApplicationController
     redirect_to employees_admission1_path
   end
 
-  def create_liability
-    #@li=Liability.new
-        # @liability.save    
-  end
+  
   def disp
     @emp=Employee.new    
   end
-
-  def add_automatic_transaction
-    @automatic_transaction=FinanceTransactionTrigger.new    
+  def new_automatic_transaction
+    @automatic_transactions=FinanceTransactionTrigger.all   
   end
 
   def create_automatic_transaction
+    @automatic_transactions=FinanceTransactionTrigger.all
     @automatic_transaction=FinanceTransactionTrigger.new(finance_transaction_trigger_params)
     @automatic_transaction.save
     
   end
 
-    
-end
+  def display_automatic_transaction
+      @automatic_transactions=FinanceTransactionTrigger.all
+  end
+
+  def edit_automatic_transaction
+      @automatic_transaction=FinanceTransactionTrigger.find(params[:automatic_transaction_id])
+  end
+
+  def update_automatic_transaction
+    @automatic_transactions=FinanceTransactionTrigger.all
+      @automatic_transaction=FinanceTransactionTrigger.find(params[:automatic_transaction_id])
+      @automatic_transaction.update(finance_transaction_trigger_params)
+  end
 
 	private
 	def finance_fee_category_params

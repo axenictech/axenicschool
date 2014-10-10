@@ -733,7 +733,7 @@ ActiveRecord::Schema.define(version: 20140930111520) do
   create_table "liabilities", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.integer  "amount"
+    t.decimal  "amount"
     t.boolean  "is_solved",   default: false
     t.boolean  "is_deleted",  default: false
     t.datetime "created_at"

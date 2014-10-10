@@ -325,11 +325,17 @@ delete 'finance/:id/destroy_asset', to:'finance#destroy_asset', as:'finance_dest
 get 'finance/new_liability'
 get 'finance/add_liability'
 post 'finance/create_liability'
-get 'finance/disp'
+get 'finance/display_liability'
+get 'finance/viewcontent_liability'
+get 'finance/:liability_id/edit_liability',to:'finance#edit_liability', as:'finance_edit_liability'
+patch 'finance/:liability_id/update_liability',to:'finance#update_liability', as:'finance_update_liability'
+delete 'finance/:id/destroy_liability', to:'finance#destroy_liability', as:'finance_destroy_liability'
 
 get 'finance/new_automatic_transaction'
 get 'finance/add_automatic_transaction'
 post 'finance/create_automatic_transaction'
+get 'finance/:automatic_transaction_id/edit_automatic_transaction', to: 'finance#edit_automatic_transaction', as: 'finance_edit_automatic_transaction'
+patch 'finance/:automatic_transaction_id/update_automatic_transaction', to: 'finance#update_automatic_transaction', as: 'finance_update_automatic_transaction'
 
 get 'attendences/attendence_register'
 get 'attendences/select' 
