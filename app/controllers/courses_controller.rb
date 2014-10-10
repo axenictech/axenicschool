@@ -13,6 +13,7 @@ class CoursesController < ApplicationController
     @course.batches.build
     
   end
+  
   def create
     @course=Course.new(postparam)
       

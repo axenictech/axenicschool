@@ -7,12 +7,16 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 <div id="inner-tab-menu">
+  <% if @exam_group.result_published? %>
   <ul>
-      <li><%= link_to 'Pdf Report','' %></li>
+      <li><%= link_to 'Pdf Report',{action:'student_exam_report',format:"pdf",exam_group_id:@exam_group.id,student_id:@student.id} %></li>
   </ul>
+  <%end%>
 </div>
+
 <div id="page-yield" align="center">
-  <h3><%= @batch.course.course_name+" "+@batch.course.section_name+" "+@batch.name %> - <%= @exam_group.name %></h3>
+<% if @exam_group.result_published? %>
+  <h3><%= @batch.course.course_name+" "+ @batch.course.section_name%>|<%= @batch.name %>|<%= @subject.name %></h3>
 
     <% exam_score = [] %>
 <% @exam_group.exams.each do |exam| %>
@@ -87,4 +91,10 @@
       <% end %>
     </table>
 </div>
+<%else%>
+<div id="score-table" style="width:80%">
+    <div class="custom_header">
+    <span>Exam Result Not Published</span>
+</div></div>
+<%end%>
 </div>

@@ -8,46 +8,109 @@
     <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br/><br/>
 
-
-<div id="page-yield">
-
-  <% unless flash[:notice].nil? %>
+<% unless flash[:notice].nil? %>
     <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-
-  <div id="box">
-
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Setting", 'employees/settings' %></div>
-        <div class="link-descr">HR Setting.</div>
+  <% end %>  
+<!--  -->
+ <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Setting", 'employees/settings',style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+         HR Setting.
+          </div>
+        </div>
+       
       </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Employee Management",'employees/employee_management',style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Manage All Employee.
+          </div>
+        </div>
+
+      </div>
+       
+      <div class="col-md-2"></div>
+    </div>
+  
+
+  
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Employee Leave Management",'employee_attendances',style: 'color:black' %>     
+         </div>
+          <div class="panel-body" style="height:70px">
+            Manage subjects corresponding to different courses.
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Employee Leave Management",'employee_attendances',style: 'color:black'%>
+          </div>
+          <div class="panel-body" style="height:70px">
+            Manage all employee atteendance and leave.
+          </div>
+        </div>
+
+      </div>
+       
+      <div class="col-md-2"></div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Search Employee", 'employees/search_employee',style: 'color:black' %>     
+         </div>
+          <div class="panel-body" style="height:70px">
+           Saerch for Employee.
+         </div>
+        </div>
+       
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Employee payslip",'employees/department_payslip',style: 'color:black'%></div>
+          <div class="panel-body" style="height:70px">
+            View Department wise slip.
+          </div>
+        </div>
+
+      </div>
+       
+      <div class="col-md-2"></div>
+    </div>
+
+ </div>
+
+ 
+
+<!--  -->
 
     
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Employee Management",'employees/employee_management'  %></div>
-        <div class="link-descr">Manage All Employee.</div>
-      </div>
    
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Employee Leave Management",'employee_attendances' %></div>
-        <div class="link-descr">Manage all employee atteendance and leave.</div>
-      </div>
       <!-- <div class="link-box">
         <div class="link-heading"><%#= link_to "Create payslip",'employees/payslip' %></div>
         <div class="link-descr">Create employee monthly paysleep.</div>
       </div>
  -->
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Search Employee", 'employees/search_employee' %></div>
-        <div class="link-descr">Saerch for Employee.</div>
-      </div>
 
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Employee payslip",'employees/department_payslip' %></div>
-        <div class="link-descr">View Department wise slip.</div>
-      </div>
-
-    </div>
-
-
-  </div>
+     

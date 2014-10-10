@@ -7,28 +7,66 @@
     <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
-<div id="page-yield">
-  <div class="box">
 
-    <div class="link-box">
-      <div class="link-heading"><%= link_to "Add Leave Types",'employee_attendances/new_leave_type'%></div>
-      <div class="link-descr">Add and edit employee leave types</div>
+
+
+<!--  -->
+ <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Add Leave Types",'employee_attendances/new_leave_type',style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+            Add and edit employee leave types
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Attendance Register",'employee_attendances/attendance_register',style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Register attendance
+          </div>
+        </div>
+
+      </div>
+       
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Attendance Report",'employee_attendances/attendance_report',style: 'color:black' %>   
+          </div>
+          <div class="panel-body" style="height:70px">
+            Attendance report
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Reset Leave",'employee_attendances/manual_reset',style: 'color:black'%></div>
+          <div class="panel-body" style="height:70px">
+           Reset employee leaves
+          </div>
+        </div>
+
+      </div>
+       
+      <div class="col-md-2"></div>
     </div>
 
-    <div class="link-box">
-      <div class="link-heading"><%= link_to "Attendance Register",'employee_attendances/attendance_register'%></div>
-      <div class="link-descr">Register attendance</div>
-    </div>
+ </div>
+  
+<!--  -->
 
-    <div class="link-box">
-      <div class="link-heading"><%= link_to "Attendance Report",'employee_attendances/attendance_report' %></div>
-      <div class="link-descr">Attendance report</div>
-    </div>
-    
-    <div class="link-box">
-      <div class="link-heading"><%= link_to "Reset Leave",'employee_attendances/manual_reset' %></div>
-      <div class="link-descr">Reset employee leaves</div>
-    </div>
-
-  </div>
-</div>

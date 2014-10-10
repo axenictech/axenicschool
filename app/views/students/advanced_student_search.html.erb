@@ -12,7 +12,11 @@
   <ul>
     <li style="width:150px"><%= link_to "Search Again", 'advanced_search'%></li>
     <% unless @students.empty? %>
-    <li style="width:150px"><%= link_to "View Pdf Report",''%></li>
+    <%students=[]%>
+    <% @students.each do |s|%>
+        <% students<< s%>
+    <%end%>
+    <li style="width:150px"><%= link_to "View Pdf Report",{ :action =>'advanced_search_result',format:"pdf", :students=> students, :search=> @search},method: :post%></li>
     <%end%>
   </ul>
 </div>

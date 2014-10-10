@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+table#pdf-table{
+   border: 1px solid #ADACAB;
+   border-left: 0px solid #ADACAB;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1 align="center">Axenic School</h1></div>
+<div class="page-yield" class="available_sections">
+  <div class="hor_line"></div>
+  <div id="student_profile_heading" class="section">
+    <div id ="student_main_info">
+      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %> - <%= @subject.name.capitalize %></h2>
+      <span><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
+      <h4><%= t('student_academic_report') %></h4>
+    </div>
+  </div>
+
+<table id="pdf-table" width="100%" cellpadding="1" cellspacing="1" border="1">
+        <tr class="tr-head">
+          <td class="col-2"><font color="blue">Exam Name</font></td>
+          <td class="col-2"><font color="blue">Marks</font></td>
+          <td class="col-2"><font color="blue">Maximum Marks</font></td>
+          <td class="col-2"><font color="blue">Grades</font></td>
+        </tr>
+            <tr class="tr-<%= cycle('odd', 'even') %>">
+              <% @exam_groups.each do |exam_group| %>
+                <td class="col-3"><%= exam_group.name %></td>
+                  <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
+                  <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
+                <% unless exam.nil? %>
+                  <% if exam_group.exam_type == 'Marks' %>
+                    <td class="col-3">
+                      <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}"%>
+                    </td>
+                    <td class="col-3">
+                      <%= exam_score.nil? ? '-' : "#{exam.maximum_marks || "-"}"%>
+                    </td>
+                    <td>-</td>
+                  <% elsif exam_group.exam_type == 'Grades'%>
+                    <td>-</td>
+                    <td>-</td>
+                    <td class="col-3">
+                      <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-') %></td>
+                  <% else %>
+                    <td class="col-3">
+                      <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}"%>
+                    </td>
+                    <td class="col-3">
+                      <%= exam_score.nil? ? '-' : "#{exam.maximum_marks || "-"}"%>
+                    </td>
+                    <td> <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-') %></td>
+                    <% end %>
+                  <% end %>
+                <% end %>
+            </tr>
+      </table>
+</div>
+</body>
+</html>

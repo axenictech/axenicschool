@@ -340,7 +340,8 @@ get 'attendences/:student_id/new_attendence/:month_date',to:'attendences#new_att
 get 'attendences/:id/edit_attendence',to:'attendences#edit_attendence',as: 'attendences_edit_attendence'
 patch 'attendences/:id/update_attendence',to:'attendences#update_attendence', as:'attendences_update_attendence'
 get 'employee_attendances/search_emp'
-
+ delete 'time_table_entries/delete_time'
+ get 'time_tables/selectTime'
 root 'home#dashboard'
  
  resources :home

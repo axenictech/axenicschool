@@ -13,7 +13,8 @@ class Batch < ActiveRecord::Base
   has_many :elective_groups
   has_many :subjects
   has_many :weekdays
-  has_many :time_table_entries
+ 
+ 
   has_many :exam_groups
   has_and_belongs_to_many :online_exams
   # has_many :fee_category , :class_name => "FinanceFeeCategory"

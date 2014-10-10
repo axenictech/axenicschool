@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141010142214) do
+=======
+ActiveRecord::Schema.define(version: 20141010120617) do
+>>>>>>> 2d82c559217d5824723b96da4ef1ac445ae01a5a
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -989,12 +993,14 @@ ActiveRecord::Schema.define(version: 20141010142214) do
     t.integer  "employee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "time_table_id"
   end
 
   add_index "time_table_entries", ["batch_id"], name: "index_time_table_entries_on_batch_id", using: :btree
   add_index "time_table_entries", ["class_timing_id"], name: "index_time_table_entries_on_class_timing_id", using: :btree
   add_index "time_table_entries", ["employee_id"], name: "index_time_table_entries_on_employee_id", using: :btree
   add_index "time_table_entries", ["subject_id"], name: "index_time_table_entries_on_subject_id", using: :btree
+  add_index "time_table_entries", ["time_table_id"], name: "index_time_table_entries_on_time_table_id", using: :btree
   add_index "time_table_entries", ["weekday_id"], name: "index_time_table_entries_on_weekday_id", using: :btree
 
   create_table "time_tables", force: true do |t|

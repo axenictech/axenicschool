@@ -8,12 +8,12 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Pdf Report',''%></li>
+    <li><%= link_to 'Pdf Report',{action:'academic_report',format:"pdf",subject_id:@subject.id,student_id:@student.id}%></li>
   </ul>
 </div>
 
 <div id="page-yield" align="center">
-    <h4><%= @batch.name %>|<%= @batch.course.course_name+" "+ @batch.course.section_name%>|<%= @subject.name %></h4>
+    <h4><%= @batch.course.course_name+" "+ @batch.course.section_name%>|<%= @batch.name %>|<%= @subject.name %></h4>
     
     <div id="score-table" style="width:80%">
      <div class="custom_header" align="left">
@@ -29,6 +29,9 @@
             <tr class="tr-<%= cycle('odd', 'even') %>">
               <% @exam_groups.each do |exam_group| %>
                 <td class="col-3"><%= exam_group.name %></td>
+                <% unless exam_group.result_published?%>
+                  <td colspan="3">Exam Result Not Published</td>
+                  <%else%>
                   <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
                   <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
                 <% unless exam.nil? %>
@@ -55,6 +58,7 @@
                     <td> <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-') %></td>
                     <% end %>
                   <% end %>
+                  <%end%>
                 <% end %>
             </tr>
       </table>
