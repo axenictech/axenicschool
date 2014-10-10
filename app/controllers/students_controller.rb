@@ -74,7 +74,6 @@ class StudentsController < ApplicationController
       redirect_to students_profile_path(@student)
     else
       render :template => 'students/previous_data',:object =>'@student'
-      
     end
   end
 
@@ -100,7 +99,7 @@ class StudentsController < ApplicationController
         @students=ArchivedStudent.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%' 
         OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%' OR admission_no like '#{params[:search]}%'")
       end 
-    end 
+    end
   end
 
   def view_all

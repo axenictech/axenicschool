@@ -1,5 +1,6 @@
 class FinanceController < ApplicationController
-	def new_finance_fee_category
+	
+  def new_finance_fee_category
 		
 		@finance_fee_categories=FinanceFeeCategory.all
 	end
@@ -128,6 +129,7 @@ class FinanceController < ApplicationController
     flash[:notice5] = "Asset deleted successfully"
     redirect_to finance_display_asset_path(@asset)
   end
+<<<<<<< HEAD
   end
   def new_liability
     @liability=Liability.new
@@ -165,6 +167,11 @@ class FinanceController < ApplicationController
     flash[:notice7] = "Liability deleted successfully"
     redirect_to finance_display_liability_path(@asset)
     end
+=======
+
+  def add_liability
+      @liability=Liability.new
+>>>>>>> 865a34e87f74fbb26d40b2b4fb334496706c7a85
   end
 
   def add
@@ -174,7 +181,15 @@ class FinanceController < ApplicationController
     redirect_to employees_admission1_path
   end
 
+<<<<<<< HEAD
   
+=======
+  def create_liability
+     @liability=Liability.new(liability_params)
+     @liability.save
+  end
+
+>>>>>>> 865a34e87f74fbb26d40b2b4fb334496706c7a85
   def disp
     @emp=Employee.new    
   end
@@ -189,6 +204,7 @@ class FinanceController < ApplicationController
     
   end
 
+<<<<<<< HEAD
   def display_automatic_transaction
       @automatic_transactions=FinanceTransactionTrigger.all
   end
@@ -203,6 +219,8 @@ class FinanceController < ApplicationController
       @automatic_transaction.update(finance_transaction_trigger_params)
   end
 
+=======
+>>>>>>> 865a34e87f74fbb26d40b2b4fb334496706c7a85
 	private
 	def finance_fee_category_params
 		params.require(:finance_fee_category).permit(:name, :description, :is_master)
@@ -223,5 +241,6 @@ class FinanceController < ApplicationController
   def finance_transaction_trigger_params
      params.require(:finance_transaction_trigger).permit(:finance_fee_category_id, :percentage, :title, :description)
   end
+
 end
   

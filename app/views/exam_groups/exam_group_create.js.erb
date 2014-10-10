@@ -1,8 +1,9 @@
 $('ul.errors').html("")
+
 <% if @exam_group.errors.any? %>
-		<% @exam_group.errors.full_messages.each do |msg| %>
-		$("ul.errors").append($("<li/>").html("<%= msg.html_safe%>"))
-		<%end%>
-<%else%>
+		<% @exam_group.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
 $(window.location.replace("/exam_groups/<%= @exam_group.batch.id %>"));
 <%end%>
