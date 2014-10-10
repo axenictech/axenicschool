@@ -70,9 +70,17 @@ class ExamGroupsController < ApplicationController
   end
 
   def previous_exam_details
+    @exams=[]
     @exam_group=ExamGroup.find(params[:exam_group][:id])
-    @exams=@exam_group.exams.all
+    exams_data=@exam_group.exams.all
     
+    exams_data.each do |exam|
+      exam.exam_scores.each do |es|
+        if es.is_failed?
+         @exams<<exam
+        end         
+       end
+     end
   end
   
   def connect_exam
@@ -150,11 +158,55 @@ class ExamGroupsController < ApplicationController
     redirect_to exam_group_path(batch)
   end
 
- 
+  def previous_exam_scores
+    @exam=Exam.find(params[:format])
+    @exam_scores=@exam.exam_scores.where(is_failed:true)
+
+  end
+
+  def update_exam_score
+    @exam=Exam.find(params[:id])
+    @exam_group=@exam.exam_group
+    @batch=@exam_group.batch
+    params[:exams][:exam].each_pair do |student_id, details|
+        @exam_score=ExamScore.find_by_exam_id_and_student_id(@exam.id,student_id)
+        @grouped_exam=GroupedExamReport.find_by_batch_id_and_student_id_and_exam_group_id_and_subject_id(@batch.id,student_id,@exam_group.id,@exam.subject_id)
+        score_grade=""
+        fail=false
+        fail=true if details[:marks].to_f<@exam.minimum_marks.to_f
+      
+      unless @exam.exam_group.exam_type=="Marks"
+        percentage=(details[:marks].to_f*100)/@exam.maximum_marks.to_f
+        grades=@exam.exam_group.batch.grading_levels.all
+        grades.each do |grade|
+          if percentage>=grade.min_score
+            score_grade=grade.id
+          end
+        end
+      end
+      
+          if @exam_score.nil?
+            ExamScore.create(exam_id:@exam.id,student_id:student_id,
+              marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
+          else
+            @exam_score.update(marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
+          end
+
+          if @grouped_exam.nil?
+            GroupedExamReport.create(batch_id:@batch.id,student_id:student_id,
+              exam_group_id:@exam_group.id,subject_id:@exam.subject_id,marks:details[:marks])
+          else
+            @grouped_exam.update(marks:details[:marks])
+          end
+      end
+      redirect_to exam_groups_previous_exam_scores_path(@exam.id)
+  end
+
   private 
+
     def params_exam_group
       params.require(:exam_group).permit(:name,:exam_type,
-        exams_attributes: [:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
+        exams_attributes:[:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
     end
 end
   

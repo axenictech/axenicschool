@@ -19,7 +19,7 @@ class Employee < ActiveRecord::Base
   has_many    :employee_attendances
 
 
-<<<<<<< HEAD
+
 # validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
 # validates :middle_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
 # validates :last_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
@@ -71,7 +71,7 @@ class Employee < ActiveRecord::Base
     end
     user.save
   end
-=======
+
   validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}    
   validates :middle_name,length:{minimum:1,maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/},allow_blank: true
   validates :last_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
@@ -110,7 +110,6 @@ class Employee < ActiveRecord::Base
   validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   validates :fax,numericality:{only_integer:true},
                     length:{minimum:10,maximum:10},allow_blank:true
->>>>>>> 003cec3913463c73923c1081b3dc84ddc27c4c7a
                     
   end
 

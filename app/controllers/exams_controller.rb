@@ -55,6 +55,7 @@ class ExamsController < ApplicationController
 		   	end
 		end
 		@exam_grade=@exam.exam_group.batch.grading_levels.all
+		
 	end
 
 	def update_exam_score

@@ -1,19 +1,13 @@
 
-
-
 <% unless @exams.nil?%>
 <table align="center" class="table table-hover" style="width:800px">
 <ul id="category-list" >
 <tbody>
 <thead>
   <tr class="tr-head">
-      <thead>
-		<th>Subject Name</th>
-		<th>Maximum Marks</th>
-		<th>Minimum Marks</th>
-	  </thead>
-	
-      
+      <td>Subject Name</td>
+	  <td>Maximum Marks</td>
+	  <td>Minimum Marks</td>
   </tr>
 </thead>
 <% @exams.each do |exam| %>
@@ -21,7 +15,7 @@
   <tbody class="product-index">
 
       	<tr>
-      	<td><%= link_to link_to exam.subject.name , exam_exam_score_path(exam) %></td>	
+      	<td><%= link_to link_to exam.subject.name , exam_groups_previous_exam_scores_path(exam) %></td>	
 		<td><%= exam.maximum_marks%><td>
 		<td><%= exam.minimum_marks%><td>
 		</tr>
@@ -30,5 +24,5 @@
 <%end%>
  </table>
 <%else%>
-NO Record Found
+<h3>NO Record Found</h3>
 <%end%>
