@@ -39,6 +39,8 @@ class ExamsController < ApplicationController
 	def exam_score
 
 	  	@exam=Exam.find(params[:id])
+
+
 	  	@students=[]
 	    students=@exam.exam_group.batch.students.all
 	    unless students.nil?

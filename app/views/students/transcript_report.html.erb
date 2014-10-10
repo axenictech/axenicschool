@@ -8,7 +8,7 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Pdf Report',''%></li>
+    <li><%= link_to 'Pdf Report',{action:'student_transcript_report',format:"pdf",student_id:@student.id}%></li>
   </ul>
 </div>
 <div id="page-yield">
@@ -55,7 +55,7 @@
         
          <% @subjects.each do |subject| %>
                <% @exam_groups.each do |exam_group| %>
-
+               <% if exam_group.result_published? %>
                <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
                 <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
                 <% max_total += @exam.maximum_marks %>
@@ -63,10 +63,11 @@
                 <% @mark += exam_score.marks %>
                 <% @total += @exam.maximum_marks %>
               <% end %>
+              <%end%>
                   <tr class="tr-<%= cycle('odd', 'even') %>">
                     <td class="col-1"> <%= subject.code %></td>
                     <td class="col-3"> <%= subject.name %></td>
-                    <td class="col-3"><%= "%.2f" %(marks_total*100/max_total)+"%"%></td>
+                    <td class="col-3"><%="%.2f" %(marks_total*100/max_total)+"%" unless max_total==0 %></td>
                   </tr>
           <% max_total = 0 %>
           <% marks_total = 0 %>
@@ -75,7 +76,7 @@
                 <tr class="tr-blank"></tr>
                 <tr class="tr-head">
                   <td colspan="2" align="right"><font color="blue">Total</font></td>
-                  <td><%="%.2f" %(@mark*100/@total)+"%"%></td>
+                  <td><%="%.2f" %(@mark*100/@total)+"%" unless @total==0 %></td>
                 </tr>
             </table>
            <%else%>

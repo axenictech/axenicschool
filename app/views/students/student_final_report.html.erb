@@ -1,24 +1,92 @@
-<div id="content-header">
-  <h1>Students</h1>
-  <h3>Final Reports</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),:back  %>
-  </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-<div id="inner-tab-menu">
-  <ul>
-      <li><%= link_to 'Pdf Report',{action:'student_final_report',format:"pdf",student_id:@student.id}%></li>
-  </ul>
-</div>
-<div id="page-yield" align="center">
-  <h3><%= @batch.name %> - <%= @batch.course.course_name %></h3>
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
 
-    <div id="score-table" style="width:80%">
-    <div class="custom_header" align="left">
-      <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
-     </div>
-    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+table#pdf-table{
+   border: 1px solid #ADACAB;
+   border-left: 0px solid #ADACAB;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1 align="center">Axenic School</h1></div>
+<div class="page-yield" class="available_sections">
+  <div class="hor_line"></div>
+  <div id="student_profile_heading" class="section">
+    <div id ="student_main_info">
+      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %></h2>
+      <span><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
+      <h4><%= t('student_final_report') %></h4>
+    </div>
+  </div>
+
+  <table id="pdf-table" align="center" width="100%" cellpadding="1" cellspacing="1" border="1">
      <% max_total = 0 %>
         <% marks_total = 0 %>
       <tr class="tr-head">
@@ -40,9 +108,7 @@
           <td class="col-3" ><%= subject.name %></td>
 
           <% @exam_groups.each do |exam_group| %>
-          <% unless exam_group.result_published? %>
-          <td>Exam Result Not Published</td>
-          <%else%>
+
             <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
             <td class="col-3">
@@ -61,7 +127,6 @@
            <% max_total += @exam.maximum_marks %>
         <% marks_total += exam_score.marks%>
           <% end %>
-          <% end %>
           <td class="col-1"><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
           </tr>
         <% max_total = 0 %>
@@ -75,7 +140,6 @@
         <% @marks_total = 0 %>
         <% total_marks=0%><%total=0%>
         <% @exam_groups.each do |exam_group| %>
-        <% if exam_group.result_published? %>
         <% exams=exam_group.exams.all%>
         <%exams.each do |exam|%>
         <% is_valid_subject=1 %>
@@ -87,7 +151,6 @@
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
              <% @max_total += exam.maximum_marks %>
               <% @marks_total += exam_score.marks %>
-          <%end%>
           <%end%>
           <%end%>
           <% if exam_group.exam_type == "Marks and Grades" %>
@@ -106,5 +169,6 @@
       </tr>
       <tr></tr>
     </table>
-  </div>
-  </div>
+</div>
+</body>
+</html>

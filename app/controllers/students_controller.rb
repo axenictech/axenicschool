@@ -136,11 +136,26 @@ class StudentsController < ApplicationController
     @batch=@exam_group.batch
   end
 
+  def student_exam_report
+    @exam_group=ExamGroup.find(params[:exam_group_id])
+    @student=Student.find(params[:student_id])
+    @batch=@exam_group.batch
+    render 'student_exam_report',layout:false
+  end
+
   def subject_wise_report
     @subject=Subject.find(params[:subject_id])
     @student=Student.find(params[:student_id])
     @batch=@subject.batch
     @exam_groups=@batch.exam_groups.all
+  end
+
+  def academic_report
+    @subject=Subject.find(params[:subject_id])
+    @student=Student.find(params[:student_id])
+    @batch=@subject.batch
+    @exam_groups=@batch.exam_groups.all
+    render 'academic_report',layout:false
   end
 
   def final_report
@@ -150,10 +165,25 @@ class StudentsController < ApplicationController
     @subjects=@batch.subjects.all
   end
 
+  def student_final_report
+    @student=Student.find(params[:student_id])
+    @batch=@student.batch
+    @exam_groups=@batch.exam_groups.all
+    @subjects=@batch.subjects.all
+    render 'student_final_report',layout:false
+  end
+
   def transcript_report
     @student=Student.find(params[:format])
     @batch=@student.batch
     @exam_groups=@batch.exam_groups.all
+  end
+
+  def student_transcript_report
+    @student=Student.find(params[:student_id])
+    @batch=@student.batch
+    @exam_groups=@batch.exam_groups.all
+    render 'student_transcript_report',layout:false
   end
 
   def attendance_report
@@ -276,6 +306,12 @@ class StudentsController < ApplicationController
       else
         @search += " All student"
       end
+  end
+
+  def advanced_search_result
+    @students=params[:students]
+    @search=params[:search]
+    render 'advanced_search_result',layout:false
   end
 
   def elective
