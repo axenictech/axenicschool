@@ -1,5 +1,6 @@
 class FinanceController < ApplicationController
-	def new_finance_fee_category
+	
+  def new_finance_fee_category
 		
 		@finance_fee_categories=FinanceFeeCategory.all
 	end
@@ -128,13 +129,8 @@ class FinanceController < ApplicationController
     redirect_to finance_display_asset_path(@asset)
   end
 
-  def new_liability
-    @li=Liability.new
-  end
-
   def add_liability
-      @li=Liability.new(liability_params)
-      @li.save
+      @liability=Liability.new
   end
 
   def add
@@ -145,9 +141,10 @@ class FinanceController < ApplicationController
   end
 
   def create_liability
-    #@li=Liability.new
-        # @liability.save    
+     @liability=Liability.new(liability_params)
+     @liability.save
   end
+
   def disp
     @emp=Employee.new    
   end
@@ -161,9 +158,6 @@ class FinanceController < ApplicationController
     @automatic_transaction.save
     
   end
-
-    
-end
 
 	private
 	def finance_fee_category_params
@@ -185,5 +179,6 @@ end
   def finance_transaction_trigger_params
      params.require(:finance_transaction_trigger).permit(:finance_fee_category_id, :percentage, :title, :description)
   end
+
 end
   
