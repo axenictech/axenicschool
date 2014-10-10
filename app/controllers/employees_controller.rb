@@ -656,6 +656,24 @@ end
    #@payroll_details = EmployeeSalaryStructure.where(employee_id:@employee)
   end
 
+  def remove
+         @employee=Employee.find(params[:format])
+  end
+
+  def change_to_former
+         @employee=Employee.find(params[:format])
+  end
+
+   def create_archived_employee
+      @employee=Employee.find(params[:format])
+      if request.post?
+          EmployeeSubject.destroy_all(:employee_id=>@employee.id)
+          @archived_employee=@employee.archived_employee
+          p "saveddddddddddddddddddddddd........."
+          p @archived_employee
+    end
+  end
+
   private
   def employee_params
     params.require(:employee).permit(:employee_category_id,

@@ -9,8 +9,6 @@
 
 <div id="page-yield">
 <div class="box">
-
-
   <%= form_for :course, url:{action:'previous_exam'},method: :get,remote:true,html:{id: "course_form"}  do |f| %>
   <div class="label-field-pair">
   <%= f.label :select_course %>
@@ -18,7 +16,10 @@
   <%= f.select :id, Course.all.collect {|b| [b.course_name+" "+b.section_name,b.id]}, {prompt:true},{onchange:"$('#course_form').submit();"}%>
 </div></div>
 <% end %>
- <div id="batch_div"></div>
+ <div id="batch_div">
+   
+ </div>
 
- </div></div>
+ </div>
+ </div>
  

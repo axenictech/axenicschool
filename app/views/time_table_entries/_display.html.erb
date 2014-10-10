@@ -1,6 +1,4 @@
 
-<div id="box">
-
   <table align="center" class="table table-hover table-bordered" style="width:800px" >
     <tr>
     <td class="col-4"></td>
@@ -13,22 +11,30 @@
       <tr>
         <td class="td"><div class="name"><%=w.weekday%></div></td>
         <% @batch.class_timings.each do |c|%>
-     <td><%=link_to "Assign","#",{onclick:"
+         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id(c.id,w.id) %>
+        <td>
+        <%unless @present.nil? %>
+         <font color="red"><%= @present.subject.name %></font><br/>
+       <font color="blue"><%= @present.employee.first_name+" "+@present.employee.last_name%></font><br/>
+        <div id="image">
+        <%=link_to image_tag("download.jpg",width:"10%"),time_table_entries_delete_time_path(@present), method: :delete, data:{ confirm: "Are you sure to delete"},remote:true%></div>
+        <%else%>
+     <%=link_to "Assign","#",{onclick:"
        $('#timing_id').val(#{c.id});
        $('#weekday_id').val(#{w.id});
-       $('#subject_id').val( $('#subject_subject_id option:selected').val());
+         $('#time_table_id').val(#{@time});
+       $('#subject_id').val( $('#sub_subject_id option:selected').val());
         $('#create_time_form').submit();"}%></td>
-
-      <% end %>
+        <%end%>
+      <%end%>
       </tr>
     <% end %>
   </table><br/><br/><br/>
 
- <%= form_for :subject,url:{action:'select_subject'},method: :get,remote:true,html:{id:"em"} do |f| %>
+ <%= form_for :sub,url:{action:'select_subject'},method: :get,remote:true,html:{id:"em"} do |f| %>
  <%= f.label :select_subjects %>
  <%= f.select :subject_id,@subjects.collect {|b| [b.name,b.id,"#{b.id}"]},{prompt:true},{
   onchange: "$('#em').submit();"}%>
 <%end%>
-</div>
 <div id="emp_div"></div>
 

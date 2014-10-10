@@ -6,22 +6,20 @@
   </div>
  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
-<% if @exam.errors.any?%>
-    <div class="alert alert-danger">
-    <h4>Errors prohibited to being saved:</h4>
-    <ul><% @exam.errors.full_messages.each do |msg|%>
-      <li style="width:800px">
-      <%= msg %>
-      </li>
-      <%end%></ul>
-      </div>  
-<%end%>
 
 <div id="page-yield">
 <div class="box">		
 <% if @students.empty? %>
  <h4 align="center">No students Found </h4>
 <% else %>
+<% unless @errors.nil? %>
+    <div class="alert alert-danger">
+    <h4>Errors prohibited to being saved:</h4>
+    <ul><% @errors.each do |msg|%>
+      <li style="width:800px"><%= msg %></li>
+      <%end%></ul>
+    </div>  
+<%end%>
 <table class="table table-hover" style="width:700px">
   <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>  
   <tr>
