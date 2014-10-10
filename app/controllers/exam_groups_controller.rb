@@ -71,15 +71,19 @@ class ExamGroupsController < ApplicationController
 
   def previous_exam_details
     @exams=[]
+    flag=false
     @exam_group=ExamGroup.find(params[:exam_group][:id])
     exams_data=@exam_group.exams.all
     
     exams_data.each do |exam|
       exam.exam_scores.each do |es|
         if es.is_failed?
-         @exams<<exam
+        flag=true   
         end         
        end
+      if flag == true
+        @exams<< exam
+      end
      end
   end
   

@@ -39,8 +39,6 @@ class ExamsController < ApplicationController
 	def exam_score
 
 	  	@exam=Exam.find(params[:id])
-	  	@exam_group=@exam.exam_group.name
-	  	
 	  	@students=[]
 	    students=@exam.exam_group.batch.students.all
 	    unless students.nil?
@@ -81,20 +79,43 @@ class ExamsController < ApplicationController
 			end
 			
       		if @exam_score.nil?
-		        ExamScore.create(exam_id:@exam.id,student_id:student_id,
+		        exam_score=ExamScore.new(exam_id:@exam.id,student_id:student_id,
 		        	marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
+  				unless exam_score.save
+  					@errors=exam_score.errors.full_messages
+  				end
       		else
-		        @exam_score.update(marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
-	        end
-
-	        if @grouped_exam.nil?
-	        	GroupedExamReport.create(batch_id:@batch.id,student_id:student_id,
-		        	exam_group_id:@exam_group.id,subject_id:@exam.subject_id,marks:details[:marks])
-	        else
-	        	@grouped_exam.update(marks:details[:marks])
+		        unless @exam_score.update(marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
+		        	@errors=exam_score.errors.full_messages
+		        end	
 	        end
     	end
+    if @errors.nil?
+    	if @grouped_exam.nil?
+	        GroupedExamReport.create(batch_id:@batch.id,student_id:student_id,
+		        	exam_group_id:@exam_group.id,subject_id:@exam.subject_id,marks:details[:marks])
+	    else
+	       	@grouped_exam.update(marks:details[:marks])
+	    end
     	redirect_to exam_exam_score_path(@exam)
+    else
+    	@students=[]
+	    students=@exam.exam_group.batch.students.all
+	    unless students.nil?
+		    students.each do |std|
+		    	unless @exam.subject.elective_group.nil?
+			    	is_elective=StudentSubject.find_by_student_id_and_subject_id(std.id,@exam.subject_id)
+			    	unless is_elective.nil?
+			    	@students<<std
+			   		end
+			   	else
+			   		@students<<std
+			   	end
+		   	end
+		end
+		@exam_grade=@exam.exam_group.batch.grading_levels.all					
+    	render 'exam_score'
+    end
     end
 
     def destroy
