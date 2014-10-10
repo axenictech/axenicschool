@@ -55,11 +55,10 @@
 </div>
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
-      data-toggle="dropdown" style="margin-right:20px">
-      Delete
-      <span class="caret"></span>
-   </button></div>
+   <button type="button" class="btn btn-primary" 
+       style="margin-right:20px;">
+      <%= link_to "Delete",employees_remove_path(@employee),style:"color:white"%>
+</button></div>
 
 <div id="profile_picture_display">
           <%= image_tag "default_employee.png" %>

@@ -258,6 +258,10 @@ get 'employees/address_profile'
 get 'employees/contact_profile'
 get 'employees/bank_info'
 get 'employees/emp_payroll'
+get 'employees/remove'
+get 'employees/change_to_former'
+post 'employees/create_archived_employee'
+
 
 
 
