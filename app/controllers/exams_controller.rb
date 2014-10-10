@@ -40,7 +40,6 @@ class ExamsController < ApplicationController
 
 	  	@exam=Exam.find(params[:id])
 	  	@exam_group=@exam.exam_group.name
-	  	@batch=@exam_group
 	  	@students=[]
 	    students=@exam.exam_group.batch.students.all
 	    unless students.nil?
