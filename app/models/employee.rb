@@ -110,6 +110,7 @@ class Employee < ActiveRecord::Base
   validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   validates :fax,numericality:{only_integer:true},
                     length:{minimum:10,maximum:10},allow_blank:true
+
                     
   end
 

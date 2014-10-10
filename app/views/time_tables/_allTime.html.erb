@@ -1,0 +1,29 @@
+
+  <table align="center" class="table table-hover table-bordered" style="width:800px" >
+    <tr>
+    <td class="col-4"></td>
+     <% @batch.class_timings.each do |c|%>
+     <td class="td"><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></td>
+      <% end %>
+    </tr> 
+ 
+<% @batch.weekdays.each do |w|%>
+      <tr>
+        <td class="td"><div class="name"><%=w.weekday%></div></td>
+        <% @batch.class_timings.each do |c|%>
+         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id(c.id,w.id) %>
+        <td>
+        <%unless @present.nil? %>
+         <font color="red"><%= @present.subject.name %></font><br/>
+       <font color="blue"><%= @present.employee.first_name+" "+@present.employee.last_name%></font><br/>
+       
+        <%else%>
+     <%="Not Assigned"%></td>
+        <%end%>
+      <%end%>
+      </tr>
+    <% end %>
+  </table><br/><br/><br/>
+
+
+
