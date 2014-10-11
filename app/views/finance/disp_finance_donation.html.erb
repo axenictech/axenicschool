@@ -8,7 +8,7 @@
 </div>
 <div id="page-yield">
 <% unless flash[:notice2].nil? %> <p class="flash-msg"> <%= flash[:notice2] %> </p><% end %>
-<%transaction_id=1%>
+
 <table class="table" style="width:500px" align="center">
 
 	<tbody>
@@ -43,10 +43,10 @@
 			Transaction ID :
 		</td>
 		<td>
-			<%= transaction_id %>
+			<%=@finance_donation.finance_transaction_id%>
 		</td>
 	</tr>
-	 <% transaction_id=transaction_id+1 %>
+
 	</tbody>
 </table>
 </div>

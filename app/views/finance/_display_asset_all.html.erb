@@ -15,25 +15,53 @@
 	 <tr class="tr-blank"></tr>
 
 	 <% @assets.each do |f| %>
+   <% if f.is_inactive %>
+        <tr  class="inactive">
+        
+          <td class="col-3" bgcolor="#A0A0A0">
+         
+            <%= link_to f.title+" ( inactive )" , finance_viewcontent_asset_path(f) %> 
+          </td>
+         
+          <td class="col-3" bgcolor="#A0A0A0">
+            <%= link_to f.created_at.strftime("%d-%m-%y"),finance_viewcontent_asset_path(f)%>
+          </td>
+         
+          
+           <td class="col-3" bgcolor="A0A0A0">
+            <%= 'Rs.'%><%=f.amount%>
+             </td>
+          
+          <td class="col-3" bgcolor="A0A0A0">
+            <%= link_to 'Edit', finance_edit_asset_path(f),remote:true %> <%='|' %> <%= link_to 'Delete',finance_destroy_asset_path(f), method: :delete,remote:true, data: { confirm: "Are you sure to delete #{f.title}?"} %> 
+          </td>
+        </tr>
+        <%else%>
         <tr class="tr-<%= cycle('odd', 'even') %>">
         
           <td class="col-3">
+     
             <%= link_to f.title, finance_viewcontent_asset_path(f) %> 
           </td>
          
           <td class="col-3">
-            <%= f.created_at.strftime("%d-%m-%y") %>
+            <%= link_to f.created_at.strftime("%d-%m-%y"),finance_viewcontent_asset_path(f)%>
           </td>
-          <td class="col-3">
+         
+          
+           <td class="col-3">
             <%= 'Rs.'%><%=f.amount%>
-          </td>
+             </td>
+          
           <td class="col-3">
-            <%= link_to 'Edit', finance_edit_asset_path(f),remote:true %> <%='|' %> <%= link_to 'Delete',finance_destroy_asset_path(f), method: :delete, data: { confirm: "Are you sure to delete #{f.title}?"} %> 
+            <%= link_to 'Edit', finance_edit_asset_path(f),remote:true %> <%='|' %> <%= link_to 'Delete',finance_destroy_asset_path(f), method: :delete,remote:true, data: { confirm: "Are you sure to delete #{f.title}?"} %> 
           </td>
         </tr>
-      
+
+      <%end%>
       <% end %>
 
 	</tbody>
 </table>
+
 <% end %>

@@ -85,8 +85,28 @@ table#pdf-table{
     </div>
   </div>
 
-  <table id="pdf-table" width="100%" cellspacing="0" class="section">
-   
+<table id="pdf-table" width="100%" cellspacing="0" class="section">
+
+<tr class="odd"><td class="col-pdf"><%= t('admission_number') %></td><td class="col-pdf"><%= @student.admission_no unless @student.admission_no.nil? %></td></tr>
+    <tr class="even"><td class="col-pdf"><%= t('admission_date') %></td><td class="col-pdf"><%= @student.admission_date unless @student.admission_date.nil? %></td></tr>
+    <tr class="odd"><td class="col-pdf"><%= t('batch') %></td><td class="col-pdf"><%= @student.batch.name unless @student.batch.name.nil? %></td></tr>
+    <tr class="even"><td class="col-pdf"><%= t('course_text') %></td><td class="col-pdf"><%= @student.batch.course.course_name unless @student.batch.course.course_name.nil? %></td></tr>
+    <tr class="odd"><td><%= t('date_of_birth') %></td><td class="right"><%= @student.date_of_birth unless @student.date_of_birth.nil? %></td></tr>
+    <tr class="even"><td><%= t('blood_group') %></td><td class="right"><%= @student.blood_group %></td></tr>
+    <tr class="odd"><td><%= t('gender') %></td><td class="right"><%= t("#{@student.gender}") %></td></tr>
+    <tr class="even"><td><%= t('nationality') %></td><td class="right"><%= @student.nationality.name unless @student.nationality_id.nil? %></td></tr>
+    <tr class="odd"><td><%= t('language') %></td><td class="right"><%= @student.language %></td></tr>
+
+    <tr class="even"><td><%= t('category') %></td><td class="right"><%= @student.category.name unless @student.category.nil? %></td></tr>
+    <tr class="odd"><td><%= t('religion') %></td><td class="right"><%= @student.religion %></td></tr>
+    <tr class="even"><td><%= t('address') %></td><td class="right"><%= @student.address_line1%><%= ', ' unless @student.address_line1.blank? %><%=  @student.address_line2 %></td></tr>
+    <tr class="odd"><td><%= t('city') %></td><td class="right"><%= @student.city %></td></tr>
+    <tr class="even"><td><%= t('state') %></td><td class="right"><%= @student.state %></td></tr>
+    <tr class="odd"><td><%= t('zip') %></td><td class="right"><%= @student.pin_code %></td></tr>
+    <tr class="even"><td><%= t('country') %></td><td class="right"><%= @student.country.name unless @student.country_id.nil? %></td></tr>
+    <tr class="odd"><td><%= t('phone') %></td><td class="right"><%= @student.phone1 %></td></tr>
+    <tr class="even"><td><%= t('mobile') %></td><td class="right"><%= @student.phone2 %></td></tr>
+    <tr class="odd"><td><%= t('email') %></td><td class="right"><%= @student.email %></td></tr>
   </table>
 </div>
 </body>

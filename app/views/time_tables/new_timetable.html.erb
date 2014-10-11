@@ -5,7 +5,16 @@
   <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
   </div>
 
-   <%=form_for @timetable do |f| %>
+   <%=form_for @time_table do |f| %>
+     <% if  @time_table.errors.any? %>
+            <div class="alert alert-danger">
+             
+            <ul><%@time_table.errors.full_messages.each do |msg| %>
+                <li style="width:300px"><%= msg %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
      <table align="center" class="table table-hover" style="width:80%">
         <tr>
         <td><%=f.label :start_date%></td>

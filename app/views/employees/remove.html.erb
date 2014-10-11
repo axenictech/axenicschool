@@ -1,0 +1,32 @@
+ 
+
+
+  <div id="content-header">
+  <h1>Students</h1>
+  <h3>Remove student</h3>
+  <div id="app-back-button">
+     <%= link_to image_tag("buttons/back.png",:border => 0),:back  %>
+  </div>
+   <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+  <div class="box">
+    <div class="bread_crumb">
+    <h4> <%= @employee.first_name %> |  <%= t('employee_number') %>  : <%= @employee.employee_number %> | Department : <%= @employee.employee_department.name %>
+     </h4>
+  </div></div>
+
+  <div class="extender"> </div>
+  <div id="box">
+  <div class="link-box">
+    <div class="link-heading"> <%= link_to "Employee leaving Institution",employees_change_to_former_path(@employee)%></div>
+    <div class="link-descr">For employee leaving the Institution, use this option to remove them from the list of active employees and place them in the former employees list.</div>
+  </div>
+  </div>
+    <div class="link-box">
+
+    <div class="link-heading"> <%= link_to'Remove Employee Rrecord',employees_delete_employee_path(@employee),data:{:confirm=>"Are u sure"}%></div>
+    <div class="link-descr">Completely delete employees records from the Institution's databases. Use this option only if you created the employee record by accident and want to remove it completely.</div>
+  </div>
+</div>

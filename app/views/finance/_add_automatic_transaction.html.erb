@@ -5,11 +5,12 @@
 </div>
 
 <div class="modal-body">
-<%= form_for :automatic_transaction,url:{action: 'create_automatic_transaction'}, remote:true do |f|%>
+<ul class="errors13"></ul>
+<%= form_for :finance_transaction_trigger,url:{action: 'create_automatic_transaction'}, remote:true do |f|%>
  <table class="table" style="width:85%">
         <tr>
             <td class="col-2"><%= f.label :Category, class: "control-label"%></td>
-            <td><%=f.select :finance_fee_category_id ,FinanceFeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 175px"%></td>
+            <td><%=f.select :finance_fee_category_id ,FinanceFeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 250px",class: "form-control"%></td>
         </tr>
 
         <tr>

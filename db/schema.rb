@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010120617) do
+ActiveRecord::Schema.define(version: 20141010142214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,65 @@ ActiveRecord::Schema.define(version: 20141010120617) do
 
   add_index "apply_leaves", ["employee_id"], name: "index_apply_leaves_on_employee_id", using: :btree
   add_index "apply_leaves", ["employee_leave_types_id"], name: "index_apply_leaves_on_employee_leave_types_id", using: :btree
+
+  create_table "archived_employees", force: true do |t|
+    t.integer  "employee_category_id"
+    t.string   "employee_number"
+    t.date     "joining_date"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.boolean  "gender"
+    t.string   "job_title"
+    t.integer  "employee_position_id"
+    t.integer  "employee_department_id"
+    t.integer  "reporting_manager_id"
+    t.integer  "employee_grade_id"
+    t.string   "qualification"
+    t.text     "experience_detail"
+    t.integer  "experience_year"
+    t.integer  "experience_month"
+    t.boolean  "status"
+    t.string   "status_description"
+    t.date     "date_of_birth"
+    t.string   "marital_status"
+    t.integer  "children_count"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "husband_name"
+    t.string   "blood_group"
+    t.integer  "nationality_id"
+    t.string   "home_address_line1"
+    t.string   "home_address_line2"
+    t.string   "home_city"
+    t.string   "home_state"
+    t.integer  "home_country_id"
+    t.string   "home_pin_code"
+    t.string   "office_address_line1"
+    t.string   "office_address_line2"
+    t.string   "office_city"
+    t.string   "office_state"
+    t.integer  "office_country_id"
+    t.string   "office_pin_code"
+    t.string   "office_phone1"
+    t.string   "office_phone2"
+    t.string   "mobile_phone"
+    t.string   "home_phone"
+    t.string   "email"
+    t.string   "fax"
+    t.string   "photo_filename"
+    t.string   "photo_content_type"
+    t.binary   "photo_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "country_id"
+    t.integer  "former_id"
+  end
+
+  add_index "archived_employees", ["country_id"], name: "index_archived_employees_on_country_id", using: :btree
+  add_index "archived_employees", ["employee_department_id"], name: "index_archived_employees_on_employee_department_id", using: :btree
+  add_index "archived_employees", ["employee_grade_id"], name: "index_archived_employees_on_employee_grade_id", using: :btree
+  add_index "archived_employees", ["employee_position_id"], name: "index_archived_employees_on_employee_position_id", using: :btree
 
   create_table "archived_students", force: true do |t|
     t.integer  "student_id"
@@ -505,12 +564,12 @@ ActiveRecord::Schema.define(version: 20141010120617) do
     t.string   "donor"
     t.string   "description"
     t.decimal  "amount"
-    t.integer  "transaction_id"
+    t.integer  "finance_transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "finance_donations", ["transaction_id"], name: "index_finance_donations_on_transaction_id", using: :btree
+  add_index "finance_donations", ["finance_transaction_id"], name: "index_finance_donations_on_finance_transaction_id", using: :btree
 
   create_table "finance_fee_categories", force: true do |t|
     t.string   "name"
