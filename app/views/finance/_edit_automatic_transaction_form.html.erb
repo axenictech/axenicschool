@@ -1,12 +1,12 @@
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
-  <h3><%= "Create Automatic transaction" %></h3>
+  <h3><%= "Edit Automatic transaction" %></h3>
 </div>
 
 <div class="modal-body">
-<ul class="errors13"></ul>
-<%= form_for :finance_transaction_trigger,url:{action: 'create_automatic_transaction'}, remote:true do |f|%>
+<ul class="errors14"></ul>
+<%= form_for @automatic_transaction,url:{action: 'update_automatic_transaction'}, remote:true do |f|%>
  <table class="table" style="width:85%">
         <tr>
             <td class="col-2"><%= f.label :Category, class: "control-label"%></td>
@@ -31,7 +31,7 @@
 
     
 
-        <td colspan="2"><%= f.submit 'Save', class: "btn btn-primary"%></td>
+        <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%></td>
         </tr>
     </table>
 <% end %>

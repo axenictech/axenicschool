@@ -3,7 +3,7 @@ class CreateLiabilities < ActiveRecord::Migration
     create_table :liabilities do |t|
       t.string :title
       t.text :description
-      t.integer :amount
+      t.decimal :amount
       t.boolean :is_solved,:default=>false
       t.boolean :is_deleted, :default=>false
       

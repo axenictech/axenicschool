@@ -1,0 +1,58 @@
+<% unless flash[:notice7].nil? %> <p class="flash-msg"> <%= flash[:notice7] %> </p><% end %>
+<% if @liabilities.empty?%>
+<div align="center"><h4>No records</h4></div>
+<%else%>
+<table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+	<tbody>
+		
+	
+	<tr class="tr-head">
+		<td>Liability</td>
+		<td>Created At</td>
+    <td>Total Amount</td>
+		<td>       </td>
+	</tr>
+	 <tr class="tr-blank"></tr>
+
+	 <% @liabilities.each do |f| %>
+   <% if f.is_solved %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+        
+          <td class="col-3" bgcolor="#A0A0A0">
+            <%= link_to f.title+"(solved)", finance_viewcontent_liability_path(f)%> 
+          </td>
+         
+          <td class="col-3" bgcolor="#A0A0A0">
+            <%=link_to f.created_at.strftime("%d-%m-%y"),finance_viewcontent_liability_path(f)%>
+          </td>
+          <td class="col-3" bgcolor="#A0A0A0">
+            <%= 'Rs.'%><%=f.amount%>
+          </td>
+          <td class="col-3" bgcolor="#A0A0A0">
+            <%= link_to 'Edit', finance_edit_liability_path(f),remote:true %> <%='|' %> <%= link_to 'Delete',finance_destroy_liability_path(f), method: :delete,remote:true, data: { confirm: "Are you sure to delete #{f.title}?"} %> 
+          </td>
+        </tr>
+        <%else%>
+          <tr class="tr-<%= cycle('odd', 'even') %>">
+        
+          <td class="col-3">
+            <%= link_to f.title, finance_viewcontent_liability_path(f)%> 
+          </td>
+         
+          <td class="col-3">
+            <%= f.created_at.strftime("%d-%m-%y") %>
+          </td>
+          <td class="col-3">
+            <%= 'Rs.'%><%=f.amount%>
+          </td>
+          <td class="col-3">
+            <%= link_to 'Edit', finance_edit_liability_path(f),remote:true %> <%='|' %> <%= link_to 'Delete',finance_destroy_liability_path(f), method: :delete,remote:true, data: { confirm: "Are you sure to delete #{f.title}?"} %> 
+          </td>
+        </tr>
+        <%end%>
+      
+      <% end %>
+
+	</tbody>
+</table>
+<% end %>
