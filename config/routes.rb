@@ -336,6 +336,7 @@ get 'finance/add_automatic_transaction'
 post 'finance/create_automatic_transaction'
 get 'finance/:automatic_transaction_id/edit_automatic_transaction', to: 'finance#edit_automatic_transaction', as: 'finance_edit_automatic_transaction'
 patch 'finance/:automatic_transaction_id/update_automatic_transaction', to: 'finance#update_automatic_transaction', as: 'finance_update_automatic_transaction'
+delete 'finance/:id/destroy_automatic_transaction', to:'finance#destroy_automatic_transaction', as:'finance_destroy_automatic_transaction'
 
 get 'attendences/attendence_register'
 get 'attendences/select' 

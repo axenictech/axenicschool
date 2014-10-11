@@ -43,8 +43,8 @@ class FinanceController < ApplicationController
   end
 
   def new_finance_donation
-  	@finance_donation=FinanceDonation.new  		
-  end
+  	@finance_donation=FinanceDonation.new  
+    end
 
   def add_finance_donation
   	@finance_donation=FinanceDonation.new(finance_donation_params)	
@@ -58,10 +58,11 @@ class FinanceController < ApplicationController
 
   def disp_finance_donation
     @finance_donation = FinanceDonation.find(params[:format])
+    
   end
   
   def showall_finance_donation
-  	@finance_donations = FinanceDonation.order(created_At: :desc)
+  	@finance_donations = FinanceDonation.order(created_at: :desc)
   end
 
   def edit_finance_donation
@@ -119,6 +120,10 @@ class FinanceController < ApplicationController
     @assets=Asset.order(created_at: :asc)
     @asset=Asset.find(params[:asset_id])
     @asset.update(asset_params)
+    if @asset.is_inactive
+      @active="inactive"
+    end
+
     flash[:notice5] = "Asset updated successfully"
  end
 
@@ -127,9 +132,9 @@ class FinanceController < ApplicationController
     @asset=Asset.find(params[:id])
     if @asset.destroy
     flash[:notice5] = "Asset deleted successfully"
-    redirect_to finance_display_asset_path(@asset)
+    
   end
-<<<<<<< HEAD
+
   end
   def new_liability
     @liability=Liability.new
@@ -154,9 +159,12 @@ class FinanceController < ApplicationController
   end
 
   def update_liability
-      @liabilities=Liability.order(created_at: :asc)
+    @liabilities=Liability.order(created_at: :asc)
     @liability=Liability.find(params[:liability_id])
     @liability.update(liability_params)
+    if @liability.is_solved
+      @solved="issolved"
+    end
     flash[:notice7] = "Liability updated successfully"
   end
 
@@ -165,13 +173,11 @@ class FinanceController < ApplicationController
    @liability=Liability.find(params[:id])
     if @liability.destroy
     flash[:notice7] = "Liability deleted successfully"
-    redirect_to finance_display_liability_path(@asset)
     end
-=======
+end
 
   def add_liability
       @liability=Liability.new
->>>>>>> 865a34e87f74fbb26d40b2b4fb334496706c7a85
   end
 
   def add
@@ -181,32 +187,26 @@ class FinanceController < ApplicationController
     redirect_to employees_admission1_path
   end
 
-<<<<<<< HEAD
-  
-=======
-  def create_liability
-     @liability=Liability.new(liability_params)
-     @liability.save
-  end
-
->>>>>>> 865a34e87f74fbb26d40b2b4fb334496706c7a85
   def disp
     @emp=Employee.new    
   end
   def new_automatic_transaction
-    @automatic_transactions=FinanceTransactionTrigger.all   
+    @automatic_transactions=FinanceTransactionTrigger.order(title: :asc)  
   end
 
   def create_automatic_transaction
-    @automatic_transactions=FinanceTransactionTrigger.all
+    
     @automatic_transaction=FinanceTransactionTrigger.new(finance_transaction_trigger_params)
-    @automatic_transaction.save
+    if @automatic_transaction.save
+      flash[:notice8] = "Automatic transaction created successfully"
+    end
+    @automatic_transactions=FinanceTransactionTrigger.order(title: :asc)
     
   end
 
-<<<<<<< HEAD
+
   def display_automatic_transaction
-      @automatic_transactions=FinanceTransactionTrigger.all
+      @automatic_transactions=FinanceTransactionTrigger.order(title: :asc)
   end
 
   def edit_automatic_transaction
@@ -214,20 +214,32 @@ class FinanceController < ApplicationController
   end
 
   def update_automatic_transaction
-    @automatic_transactions=FinanceTransactionTrigger.all
+    
       @automatic_transaction=FinanceTransactionTrigger.find(params[:automatic_transaction_id])
-      @automatic_transaction.update(finance_transaction_trigger_params)
+      if @automatic_transaction.update(finance_transaction_trigger_params)
+        flash[:notice8] = "Automatic transaction updated successfully"
+      end
+        @automatic_transactions=FinanceTransactionTrigger.order(title: :asc)
   end
 
-=======
->>>>>>> 865a34e87f74fbb26d40b2b4fb334496706c7a85
+  def destroy_automatic_transaction
+    @automatic_transactions=FinanceTransactionTrigger.order(title: :asc)
+    @automatic_transaction=FinanceTransactionTrigger.find(params[:id])
+    if @automatic_transaction.destroy
+      flash[:notice8] = "Automatic transaction deleted successfully"
+    end
+      @automatic_transactions=FinanceTransactionTrigger.order(title: :asc)
+      
+  end
+
+
 	private
 	def finance_fee_category_params
 		params.require(:finance_fee_category).permit(:name, :description, :is_master)
 	end
 
 	def finance_donation_params
-		params.require(:finance_donation).permit(:donor, :description, :amount)
+		params.require(:finance_donation).permit(:donor, :description, :amount, :finance_transaction_id)
 	end
 
   def asset_params
@@ -236,7 +248,7 @@ class FinanceController < ApplicationController
   end
 
   def liability_params
-     params.require(:liability).permit(:title, :description, :amount)
+     params.require(:liability).permit(:title, :description, :amount, :is_solved)
   end
   def finance_transaction_trigger_params
      params.require(:finance_transaction_trigger).permit(:finance_fee_category_id, :percentage, :title, :description)

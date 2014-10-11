@@ -21,7 +21,11 @@
             <td class="col-2"><%= f.label :Amount , class: "control-label"%></td>
              <td><%=f.text_field :amount ,:style =>"width: 250px", class: "form-control"%></td>
         <tr>
-   
+
+        <tr>
+            <td class="col-2"><%= f.label :'Solve this Liability?', class: "control-label"%></td>
+             <td><%=f.check_box :is_solved%></td>
+        <tr>
 
 
         <td colspan="2"><%= f.submit 'Save', class: "btn btn-primary"%></td>

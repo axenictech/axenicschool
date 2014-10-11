@@ -13,8 +13,8 @@
 	<%@finance_fee_categories.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'edit', finance_edit_finance_fee_category_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,finance_destroy_finance_fee_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 
+			<td><%= link_to 'Edit', finance_edit_finance_fee_category_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,finance_destroy_finance_fee_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
 
