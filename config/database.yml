@@ -26,8 +26,6 @@ default: &default
 development:
   <<: *default
   database: educulture_development
-  username: axenic
-  password: axenic123
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
