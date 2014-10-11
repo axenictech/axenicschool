@@ -327,6 +327,9 @@ get 'finance/new_automatic_transaction'
 get 'finance/add_automatic_transaction'
 post 'finance/create_automatic_transaction'
 
+get 'finance/fees_index'
+
+
 get 'attendences/attendence_register'
 get 'attendences/select' 
 get 'attendences/select_subject'    

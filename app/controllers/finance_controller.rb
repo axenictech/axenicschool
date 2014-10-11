@@ -162,6 +162,10 @@ class FinanceController < ApplicationController
     
   end
 
+  def fees_index
+    
+  end
+
     
 end
 

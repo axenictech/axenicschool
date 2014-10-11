@@ -50,7 +50,7 @@
         <%unless @exam_group.exam_type=="Grades"%>
         <td><%= exam.maximum_marks %></td>  
         <td><%= exam.minimum_marks %></td>
-        <%end%>
+        <% end %>
         <% unless @exam_group.result_published? %>
         <td><%= link_to 'Edit',edit_exam_path(exam)%>&nbsp;&nbsp;
         <%= link_to 'Delete',exam,method: :delete,

@@ -133,21 +133,35 @@ class ExamGroupsController < ApplicationController
   end
 
   def publish_exam
+    @date=Date.today
     @exam_group=ExamGroup.find(params[:format])
     @exam_group.update(is_published:true)
     @exam_group.exams.each do |exam|
         exam.create_exam_event
-      end
+    end
+    
     @batch=@exam_group.batch
     @exam_groups=@batch.exam_groups.all
 
   end
 
   def publish_result
+    flag=false
     @exam_group=ExamGroup.find(params[:format])
-    if @exam_group.is_published?
+    if @exam_group.is_published? 
+      @exam_group.exams.each do |exam|
+        if exam.end_time >= Date.today
+        flag=true
+        end         
+      end
+      
+      if flag==true  
+       flash[:result_error] ="Exam results cannot be published"
+      else
        @exam_group.update(result_published:true)
        flash[:result]="Result published successfully"
+      end
+       
     else
        flash[:result_error]="Exam scheduled not published"
     end
@@ -209,7 +223,7 @@ class ExamGroupsController < ApplicationController
   private 
 
     def params_exam_group
-      params.require(:exam_group).permit(:name,:exam_type,
+      params.require(:exam_group).permit(:name,:exam_type,:exam_date,
         exams_attributes:[:subject_id,:maximum_marks,:minimum_marks,:start_time,:end_time])
     end
 end
