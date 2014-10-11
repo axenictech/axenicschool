@@ -138,11 +138,9 @@ class ExamGroupsController < ApplicationController
     @exam_group.update(is_published:true)
     @exam_group.exams.each do |exam|
         exam.create_exam_event
-    end
-    
+    end    
     @batch=@exam_group.batch
     @exam_groups=@batch.exam_groups.all
-
   end
 
   def publish_result
