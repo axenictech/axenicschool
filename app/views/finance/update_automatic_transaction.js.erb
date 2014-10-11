@@ -1,0 +1,9 @@
+$("ul.errors14").html("")
+<% if  @automatic_transaction.errors.any? %>
+		<%@automatic_transaction.errors.full_messages.each do |message| %>
+		$("ul.errors14").append($("<li align ='left' style = 'width:500px'/>").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
+$("#display_automatic_transaction").html("<%= j render 'automatic_transaction'%>");
+$("#myModal").modal("hide")
+<%end%>

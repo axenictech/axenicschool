@@ -1,7 +1,7 @@
 $("ul.errors2").html("")
 <% if  @finance_fee_category.errors.any? %>
 		<%  @finance_fee_category.errors.full_messages.each do |message| %>
-		$("ul.errors2").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
+		$("ul.errors2").append($("<li align ='left' style = 'width:500px'/>").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>
 $('#display_finance_fee_category').html("<%= j render 'finance_fee_category'%>")

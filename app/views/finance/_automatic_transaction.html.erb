@@ -1,4 +1,25 @@
- <div class="link-box">
+<% unless flash[:notice8].nil? %> <p class="flash-msg"> <%= flash[:notice8	] %> </p><% end %>
+<div class="link-box">
         <div class="link-heading"><%= link_to "Create",finance_add_automatic_transaction_path,remote:true %></div>
         <div class="link-descr">Creates an auto transaction</div>
  </div></br></br></br></br></br>
+
+ <% if @automatic_transactions.empty? %>
+<H4 align="center">No records</H4>
+<%else%>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tbody class="product-index">
+
+	<%@automatic_transactions.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.title%>-<%=c.percentage%></td>
+			<td><%= link_to 'edit', finance_edit_automatic_transaction_path(c), remote:true%></td>
+			<td><%= link_to 'delete',finance_destroy_automatic_transaction_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 
+			</tr>
+		<%end%>
+
+		
+	 </tbody>
+</table>
+<%end%>

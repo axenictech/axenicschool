@@ -1,0 +1,14 @@
+<% unless flash[:notice6].nil? %> <p class="flash-msg"> <%= flash[:notice6] %> </p><% end %>
+<div id="box">
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Create", finance_add_liability_path,remote:true %></div>
+        <div class="link-descr">Create New Liability</div>
+      </div>
+
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "View",finance_display_liability_path%></div>
+        <div class="link-descr">Create New Liability</div>
+    </div>
+</div>

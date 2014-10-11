@@ -267,11 +267,7 @@ get 'employees/emp_payroll'
 get 'employees/remove'
 get 'employees/change_to_former'
 post 'employees/create_archived_employee'
-
-
-
-
-
+get 'employees/delete_employee'
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'
 delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
@@ -331,11 +327,21 @@ delete 'finance/:id/destroy_asset', to:'finance#destroy_asset', as:'finance_dest
 get 'finance/new_liability'
 get 'finance/add_liability'
 post 'finance/create_liability'
-get 'finance/disp'
+get 'finance/display_liability'
+get 'finance/viewcontent_liability'
+get 'finance/:liability_id/edit_liability',to:'finance#edit_liability', as:'finance_edit_liability'
+patch 'finance/:liability_id/update_liability',to:'finance#update_liability', as:'finance_update_liability'
+delete 'finance/:id/destroy_liability', to:'finance#destroy_liability', as:'finance_destroy_liability'
 
 get 'finance/new_automatic_transaction'
 get 'finance/add_automatic_transaction'
 post 'finance/create_automatic_transaction'
+get 'finance/:automatic_transaction_id/edit_automatic_transaction', to: 'finance#edit_automatic_transaction', as: 'finance_edit_automatic_transaction'
+patch 'finance/:automatic_transaction_id/update_automatic_transaction', to: 'finance#update_automatic_transaction', as: 'finance_update_automatic_transaction'
+delete 'finance/:id/destroy_automatic_transaction', to:'finance#destroy_automatic_transaction', as:'finance_destroy_automatic_transaction'
+
+get 'finance/fees_index'
+
 
 get 'attendences/attendence_register'
 get 'attendences/select' 
@@ -348,6 +354,8 @@ patch 'attendences/:id/update_attendence',to:'attendences#update_attendence', as
 get 'employee_attendances/search_emp'
  delete 'time_table_entries/delete_time'
  get 'time_tables/selectTime'
+ get 'time_tables/teachers_timetable'
+ get 'time_tables/teacher_time_table_display'
 root 'home#dashboard'
  
  resources :home

@@ -564,12 +564,12 @@ ActiveRecord::Schema.define(version: 20141010142214) do
     t.string   "donor"
     t.string   "description"
     t.decimal  "amount"
-    t.integer  "transaction_id"
+    t.integer  "finance_transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "finance_donations", ["transaction_id"], name: "index_finance_donations_on_transaction_id", using: :btree
+  add_index "finance_donations", ["finance_transaction_id"], name: "index_finance_donations_on_finance_transaction_id", using: :btree
 
   create_table "finance_fee_categories", force: true do |t|
     t.string   "name"
