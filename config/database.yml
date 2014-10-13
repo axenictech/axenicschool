@@ -26,6 +26,9 @@ default: &default
 development:
   <<: *default
   database: educulture_development
+  username: 
+  password: 
+
   # username: axenic
   # password: axenic123
 

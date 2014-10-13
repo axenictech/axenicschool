@@ -65,6 +65,18 @@ class StudentsController < ApplicationController
     redirect_to students_previous_data_path(@student)
   end
 
+  def edit_immediate_contact
+    @student=Student.find(params[:format])
+  end
+
+  def update_immediatecontact
+    @student=Student.find(params[:id])
+    @student.update(student_params)
+    @guardian=Guardian.find(@student.immediate_contact)
+    @guardian.create_user_account
+    redirect_to students_profile_path(@student)
+  end
+
   def previous_data
     @student=Student.find(params[:format])
     @previous_data=StudentPreviousData.new
@@ -117,6 +129,7 @@ class StudentsController < ApplicationController
 
   def profile
     @student=Student.find(params[:id])
+    @immediate_contact=Guardian.find(@student.immediate_contact)
   end
 
   def student_profile
@@ -400,7 +413,8 @@ class StudentsController < ApplicationController
 
   def archived_student_create
     @student=Student.find(params[:format])
-    @archived_student=ArchivedStudent.create(archived_student_params)
+    @archived_student=@student.archived_student
+    @archived_student.update(status_description: params[:archived_student][:status_description])
     @student.destroy
     redirect_to students_archived_profile_path(@archived_student)
   end
@@ -434,11 +448,5 @@ class StudentsController < ApplicationController
 
   def params_subject
     params.require(:student_previous_subject_mark).permit(:student_id,:subject,:mark)
-  end
-  def archived_student_params
-      params.require(:archived_student).permit(:student_id,:admission_no,:class_roll_no,:admission_date,:first_name,
-                                    :middle_name, :last_name,:batch_id,:date_of_birth,:gender,:blood_group,:birth_place, 
-                                    :nationality_id ,:language,:category_id,:religion,:address_line1,:address_line2,:city,
-                                    :state,:pin_code,:country_id,:phone1,:phone2,:email,:immediate_contact,:status_description )
   end
 end
