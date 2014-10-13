@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+    <h3>Create Master Category For Fees</h3>
+</div>
+
+<div class="modal-body">
+    <%= form_for :master_category,url:{action:'create_master_fees'} do |f|%>
+    <div class="row">
+        <div class="col-md-3"><%= f.label :name %></div>
+        <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%>
+        </div>
+    </div>
+    <div class="row">
+        <div><%= f.label :description %></div>
+        <div><%= f.text_field :description,:style =>"width: 250px",class: "form-control"%>
+        </div>
+    </div>
+    <div class="row">
+        <div><%= f.label :name %></div>
+        <div><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
+    <%end%>
+    </div>
+    <%end%>
+    </div>    
+    <%end%>    
+    </div>
+    
+</div>

@@ -335,6 +335,8 @@ patch 'finance/:automatic_transaction_id/update_automatic_transaction', to: 'fin
 delete 'finance/:id/destroy_automatic_transaction', to:'finance#destroy_automatic_transaction', as:'finance_destroy_automatic_transaction'
 
 get 'finance/fees_index'
+get 'finance/master_fees'
+get 'finance/create_master_fees'
 
 
 get 'attendences/attendence_register'

@@ -204,13 +204,15 @@ end
     
   end
 
-<<<<<<< HEAD
+
   def fees_index
-    
   end
 
-=======
+  def create_master_fees
+    @batches=Batch.all
+  end
 
+  
   def display_automatic_transaction
       @automatic_transactions=FinanceTransactionTrigger.order(title: :asc)
   end
@@ -219,9 +221,7 @@ end
       @automatic_transaction=FinanceTransactionTrigger.find(params[:automatic_transaction_id])
   end
 
-  def update_automatic_transaction
->>>>>>> e6b6662dbbc2a3decea899e2cdca1ad43f2ee221
-    
+  def update_automatic_transaction 
       @automatic_transaction=FinanceTransactionTrigger.find(params[:automatic_transaction_id])
       if @automatic_transaction.update(finance_transaction_trigger_params)
         flash[:notice8] = "Automatic transaction updated successfully"
