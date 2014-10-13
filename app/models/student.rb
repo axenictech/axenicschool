@@ -46,6 +46,12 @@ class Student < ActiveRecord::Base
   validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   after_save :create_user_account
 
+  def archived_student
+    student_attributes = self.attributes   
+    student_attributes["student_id"]= self.id
+    archived_student = ArchivedStudent.new(student_attributes)
+  end
+
   private
   def create_user_account
     user = User.new do |u|

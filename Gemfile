@@ -18,7 +18,8 @@ gem 'imagemagick-binaries'
 gem 'aws-sdk'
 gem 'ckeditor'
 gem 'devise'
-gem "pdfkit"
+gem 'pdfkit'
+gem 'wkhtmltopdf'
 gem 'wkhtmltopdf-binary'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
