@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+devise_for :users
 mount Ckeditor::Engine => '/ckeditor'
 get 'setting/course_batch'
 get 'general_settings/all'
@@ -48,16 +48,22 @@ get 'students/admission2_1'
 get 'newscasts/select'
 get 'newscasts/display'
 get 'students/admission3'
+get 'students/edit_immediate_contact'
 patch 'students/update_immediate_contact'
+patch 'students/update_immediatecontact'
 get 'students/previous_data'
 post 'students/previous_data_create'
 get 'students/previous_subject'
 post 'students/previous_subject_create'
 get 'students/report'
 get 'students/recent_exam_report'
+get 'students/student_exam_report'
 get 'students/subject_wise_report'
+get 'students/academic_report'
 get 'students/final_report'
+get 'students/student_final_report'
 get 'students/transcript_report'
+get 'students/student_transcript_report'
 get 'students/archived_report'
 get 'students/attendance_report'
 get 'students/genrate_report'
@@ -261,11 +267,7 @@ get 'employees/emp_payroll'
 get 'employees/remove'
 get 'employees/change_to_former'
 post 'employees/create_archived_employee'
-
-
-
-
-
+get 'employees/delete_employee'
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'
 delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
@@ -278,7 +280,6 @@ get 'employee_attendances/:employee_id/new_attendance/:attendance_date',to:'empl
 get 'employee_attendances/:id/edit_attendance',to:'employee_attendances#edit_attendance', as: 'employee_attendances_edit_attendance'
 patch 'employee_attendances/:id/update_att',to:'employee_attendances#update_att', as: 'employee_attendances_update_att'
 delete 'employee_attendances/:id/destroy_attendance',to:'employee_attendances#destroy_attendance', as: 'employee_attendances_destroy_attendance'
-
 get 'employee_attendances/attendance_report'
 get 'employee_attendances/select_report'
 get 'employee_attendances/:employee_id/report_info',to:'employee_attendances#report_info', as: 'employee_attendances_report_info'
@@ -293,15 +294,12 @@ get 'employee_attendances/remove_all'
 get 'employee_attendances/update_department_leave_reset'
 get 'employee_attendances/employee_leave_reset_by_employee'
 post 'employee_attendances/search'
-
-
 get 'finance/new_finance_fee_category'
 get 'finance/add_finance_fee_category'
 post 'finance/create_finance_fee_category'
 get 'finance/:finance_fee_category_id/edit_finance_fee_category',to:'finance#edit_finance_fee_category', as:'finance_edit_finance_fee_category' 
 patch 'finance/:finance_fee_category_id/update_finance_fee_category',to:'finance#update_finance_fee_category', as:'finance_update_finance_fee_category' 
 delete 'finance/:id/destroy_finance_fee_category', to:'finance#destroy_finance_fee_category', as:'finance_destroy_finance_fee_category'
-
 get 'finance/new_finance_donation'
 post 'finance/add_finance_donation'
 get 'finance/disp_finance_donation'
@@ -309,9 +307,7 @@ get 'finance/showall_finance_donation'
 get 'finance/:finance_donation_id/edit_finance_donation',to:'finance#edit_finance_donation', as:'finance_edit_finance_donation' 
 patch 'finance/:finance_donation_id/update_finance_donation',to:'finance#update_finance_donation', as:'finance_update_finance_donation'
 delete 'finance/:id/destroy_finance_donation', to:'finance#destroy_finance_donation', as:'finance_destroy_finance_donation'
-
 get 'finance/asset_liability'
-
 post 'finance/add'
 get 'finance/new_asset'
 get 'finance/add_asset'
@@ -321,7 +317,6 @@ get 'finance/viewcontent_asset'
 get 'finance/:asset_id/edit_asset',to:'finance#edit_asset', as:'finance_edit_asset'
 patch 'finance/:asset_id/update_asset',to:'finance#update_asset', as:'finance_update_asset'
 delete 'finance/:id/destroy_asset', to:'finance#destroy_asset', as:'finance_destroy_asset'
-
 get 'finance/new_liability'
 get 'finance/add_liability'
 post 'finance/create_liability'
@@ -330,13 +325,15 @@ get 'finance/viewcontent_liability'
 get 'finance/:liability_id/edit_liability',to:'finance#edit_liability', as:'finance_edit_liability'
 patch 'finance/:liability_id/update_liability',to:'finance#update_liability', as:'finance_update_liability'
 delete 'finance/:id/destroy_liability', to:'finance#destroy_liability', as:'finance_destroy_liability'
-
 get 'finance/new_automatic_transaction'
 get 'finance/add_automatic_transaction'
 post 'finance/create_automatic_transaction'
 get 'finance/:automatic_transaction_id/edit_automatic_transaction', to: 'finance#edit_automatic_transaction', as: 'finance_edit_automatic_transaction'
 patch 'finance/:automatic_transaction_id/update_automatic_transaction', to: 'finance#update_automatic_transaction', as: 'finance_update_automatic_transaction'
-
+delete 'finance/:id/destroy_automatic_transaction', to:'finance#destroy_automatic_transaction', as:'finance_destroy_automatic_transaction'
+get 'finance/fees_index'
+get 'finance/master_fees'
+get 'finance/create_master_fees'
 get 'attendences/attendence_register'
 get 'attendences/select' 
 get 'attendences/select_subject'    

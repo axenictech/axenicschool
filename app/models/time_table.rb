@@ -1,5 +1,9 @@
 class TimeTable < ActiveRecord::Base
+
 	has_many :time_table_entries, dependent: :destroy
+
+	has_many :timetable_entries, dependent: :destroy
+
 
     # validate :end_date_cannot_be_less_than_start_date
     

@@ -108,7 +108,9 @@ table#pdf-table{
           <td class="col-3" ><%= subject.name %></td>
 
           <% @exam_groups.each do |exam_group| %>
-
+          <% unless exam_group.result_published? %>
+          <td>Exam Result Not Published</td>
+          <%else%>
             <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
             <td class="col-3">
@@ -127,6 +129,7 @@ table#pdf-table{
            <% max_total += @exam.maximum_marks %>
         <% marks_total += exam_score.marks%>
           <% end %>
+          <% end %>
           <td class="col-1"><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
           </tr>
         <% max_total = 0 %>
@@ -140,6 +143,7 @@ table#pdf-table{
         <% @marks_total = 0 %>
         <% total_marks=0%><%total=0%>
         <% @exam_groups.each do |exam_group| %>
+        <% if exam_group.result_published? %>
         <% exams=exam_group.exams.all%>
         <%exams.each do |exam|%>
         <% is_valid_subject=1 %>
@@ -151,6 +155,7 @@ table#pdf-table{
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
              <% @max_total += exam.maximum_marks %>
               <% @marks_total += exam_score.marks %>
+          <%end%>
           <%end%>
           <%end%>
           <% if exam_group.exam_type == "Marks and Grades" %>

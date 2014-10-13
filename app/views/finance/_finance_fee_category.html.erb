@@ -1,8 +1,16 @@
 <% unless flash[:notice1].nil? %> <p class="flash-msg"> <%= flash[:notice1] %> </p><% end %>
- <div class="link-box">
-        <div class="link-heading"><%= link_to "Create Finance Category", finance_add_finance_fee_category_path,remote:true %></div>
+<div class="row" >
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+        <div class="link-heading">
+        <%= link_to "Create Finance Category", finance_add_finance_fee_category_path,remote:true %>
+        </div>
         <div class="link-descr">Create Category</div>
-      </div></br></br></br></br></br>
+</div>
+<div class="col-md-4"></div>
+	
+</div>
+<div style="margin-top:20px	">
 <% if @finance_fee_categories.empty? %>
 <H4 align="center">No records</H4>
 <%else%>
@@ -10,11 +18,11 @@
 
 	<tbody class="product-index">
 
-	<%@finance_fee_categories.each do |c| %>
+	<% @finance_fee_categories.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'edit', finance_edit_finance_fee_category_path(c),remote:true%></td>
-			<td><%= link_to 'delete' ,finance_destroy_finance_fee_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete"}%></td>	 
+			<td><%= link_to 'Edit', finance_edit_finance_fee_category_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,finance_destroy_finance_fee_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
 
@@ -22,3 +30,4 @@
 	 </tbody>
 </table>
 <%end%>
+</div>

@@ -15,6 +15,7 @@
   </ul>
 </div>
 
+
 <div class="box">
   <div class="bread_crumb">
       <%= link_to 'Course' ,courses_path%> &raquo;
@@ -48,7 +49,12 @@
         <% if eg.result_published? %>
         <td class="col-4"><%= 'Result published'%></td>
         <%else%>
+        <% if eg.is_published? %>
+        <td class="col-4"><%= link_to 'Update exam schedule',exam_groups_publish_exam_path(eg), remote:true %>
+        </td>
+          <%else%>
         <td class="col-4"><%= link_to 'Publish exam schedule',exam_groups_publish_exam_path(eg), remote:true %></td>
+        <%end%>
         <%end%>
         <td id="publish_exam<%=eg.id%>"%></td>
        </tr>

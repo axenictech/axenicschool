@@ -72,7 +72,7 @@ validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ w
       u.first_name, u.last_name, u.username, u.employee_id = first_name, last_name, employee_number, id
       u.password = "#{employee_number.to_s}123456"
       u.role = 'Employee'
-      u.email = ( email == '' or User.find_by_email(email) ) ? "#{first_name+last_name+employee_number.to_s}@axenic.com" : email
+      u.email = ( email == ''or User.find_by_email(email) ) ? "#{first_name+last_name+employee_number.to_s}@axenic.com" : email
     end
     user.save
   end
