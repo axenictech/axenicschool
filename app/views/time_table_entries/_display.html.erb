@@ -19,7 +19,7 @@
         <div id="image">
         <%=link_to image_tag("download.jpg",width:"10%"),time_table_entries_delete_time_path(@present), method: :delete, data:{ confirm: "Are you sure to delete"},remote:true%></div>
         <%else%>
-     <%=link_to "Assign","#",{onclick:"
+     <%=button_tag "Assign Here",{onclick:"
        $('#timing_id').val(#{c.id});
        $('#weekday_id').val(#{w.id});
          $('#time_table_id').val(#{@time});
