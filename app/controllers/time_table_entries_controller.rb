@@ -1,7 +1,7 @@
 class TimeTableEntriesController < ApplicationController
 
  def index
-   @time=TimeTable.find(params[:format])
+   # @time=TimeTable.find(params[:format])
   
    @batches=Batch.all
    @sub=params[:sub_id]
