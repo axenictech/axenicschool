@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141010142214) do
-=======
-ActiveRecord::Schema.define(version: 20141010120617) do
->>>>>>> 2d82c559217d5824723b96da4ef1ac445ae01a5a
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -796,7 +792,7 @@ ActiveRecord::Schema.define(version: 20141010120617) do
   create_table "liabilities", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.decimal  "amount"
+    t.integer  "amount"
     t.boolean  "is_solved",   default: false
     t.boolean  "is_deleted",  default: false
     t.datetime "created_at"
