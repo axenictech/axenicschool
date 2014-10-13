@@ -15,6 +15,8 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
+      flash[:notice] = "Student Reord saved successfully please fill the parent detail"
+
       redirect_to students_admission2_path(@student)
     else
       render 'admission1'
@@ -47,6 +49,8 @@ class StudentsController < ApplicationController
   def update
     @student=Student.find(params[:id])
     if @student.update(student_params)
+     flash[:notice] = "Student Reord updated successfully "
+
     redirect_to students_profile_path(@student)
     else
       render 'edit'

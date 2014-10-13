@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div align="center">
+<font color="purple"><b><i><h3>Axenic School</h3>
+<h4>Employee Profile</h4></i></b></font>
+</div>
+
+<table class="table" align="center" style="width:900px">
+<thead>
+<tr>
+    <th colspan="4">
+    <div id ="student_main_info">
+      <h3 align="left"> <%= @employee.first_name.capitalize %> <%= @employee.middle_name.capitalize %> <%= @employee.last_name.capitalize %>  </h3>
+       <h4 align="left"> Position : <%=   @employee.employee_position.name %> </h4>
+      <h4 align="left"> Department : <%=  @employee.employee_department.name %> </h4>
+      <h4 align="left"> Employee no. : <%= @employee.employee_number %> </h4></div>
+   </th>
+  </tr>
+</thead>
+<tbody>
+<tr><td colspan="4"></td></tr>
+<tr>
+    <td class="col-2" colspan="4"><font color="brown">Employee Personal Details</font></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Joining Date</font> </td><td class="col-2" colspan="3"><%= @employee.joining_date  %></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Department</font></td><td class="col-2" colspan="3"><%=@employee.employee_department.name%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Category</font></td><td class="col-2" colspan="3"><%=@employee.employee_category.name%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">position</font></td><td class="col-2"><%=  @employee.employee_position.name %></td>
+    
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Grade</font></td><td class="col-2"> <%= @employee.employee_grade.name%> </td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Job Title</font></td><td class="col-2"> <%= @employee.job_title %> </td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Reporting Manager</font></td><td class="col-2"> <%= @reporting_manager.first_name %> </td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Gender</font></td><td class="col-2"> <%= @employee.gender %> </td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Email</font></td><td class="col-2"><%= @employee.email%> </td>
+    </tr>
+    <tr>
+    <td class="col-2"><font color="grey">Status</font></td><td class="col-2"> <%= @employee.status %> </td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">qualification</font></td><td class="col-2"> <%= @employee.qualification %></td>
+    </tr>
+    <tr>
+    <td class="col-2"><font color="grey">Experience</font></td><td class="col-2"> <%= @employee.experience_year%><%=@employee.experience_month%>   </td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Experience Information</font></td><td class="col-2"><%=@employee.experience_detail %> </td>
+   
+</tr>
+
+
+<tr>
+  <td class="col-2" colspan="4"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

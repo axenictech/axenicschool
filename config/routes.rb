@@ -262,6 +262,8 @@ get 'employees/remove'
 get 'employees/change_to_former'
 post 'employees/create_archived_employee'
 get 'employees/delete_employee'
+get 'employees/employee_profile'
+
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'
 delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
