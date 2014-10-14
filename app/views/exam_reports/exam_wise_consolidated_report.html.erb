@@ -1,30 +1,104 @@
-<div id="content-header">
-  <h1>Exam Reports</h1>
-  <h3>Exam Wise Consolidated Report</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+#score-table{
+    background: #C3D9FF;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 20px 20px;
+}
+table#listing{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.custom_header{
+    margin: 0 auto;
+    padding: 5px;
+    background: #fff;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1 align="center">Axenic School</h1></div>
+<div class="page-yield" class="available_sections">
+  <div class="hor_line"></div>
+  <div id="student_profile_heading" class="section">
+    <div id ="student_main_info">
+      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %></h2>
+      <h4><%= t('exam_wise_students_report') %></h4>
+    </div>
   </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'Pdf Report',exam_reports_exam_wise_consolidated_report_path(exam_group_id:@exam_group.id,format:"pdf") %></li>
-  </ul>
-</div>
-<div id="page-yield">
- 
-  <div class="box">
-   <div class="bread_crumb">
-    <%= link_to 'Exams',  '/exams'  %> &raquo;
-    <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
-    <%= link_to 'Exam_wise_report', '/exam_reports/exam_wise_report' %> &raquo;
-    Consolidated Report
-  </div></div><br/><br/>
-  <div id="score-table">
-    <div class="custom_header">
-    <h4><%= @batch.course.course_name+" "+@batch.course.section_name %> <%= @batch.name %> | <%= @exam_group.name %></h4>
-    <div class="students-table">
-      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
+ <table id="score-table" align="center" width="100%" cellpadding="1" cellspacing="1" border="1">
         <tr class="tr-head">
           <td class="col-2"><font color="blue">Name</font></td>
             <% @exam_group.exams.each do |exam| %>
@@ -39,7 +113,7 @@
               <td class="col-2"><font color="blue">Percentage(%)</font></td>
             <% end %>
         </tr>
-        <% @batch.students.each do |student|%>
+        <% @exam_group.batch.students.each do |student|%>
           <tr>
             <td class="col-2"><%= student.first_name+" "+ student.last_name%></td>
      
@@ -74,4 +148,6 @@
             </tr>
              <%end%>
       </table>
-  </div></div></div>
+</div>
+</body>
+</html>

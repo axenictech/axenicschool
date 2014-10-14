@@ -30,6 +30,19 @@ class ExamReportsController < ApplicationController
     end
   end
 
+  def exam_wise_students_report
+    @exam_group=ExamGroup.find(params[:exam_group_id])
+    @batch=@exam_group.batch
+    @students=@batch.students.all
+    render 'exam_wise_students_report',layout:false
+  end
+
+  def exam_wise_consolidated_report
+    @exam_group=ExamGroup.find(params[:exam_group_id])
+    @batch=@exam_group.batch
+    render 'exam_wise_consolidated_report',layout:false
+  end
+
   def student_exam_report
       @exam_group=ExamGroup.find(params[:exam_group_id])
       @student=Student.find(params[:student_id])
@@ -55,7 +68,7 @@ class ExamReportsController < ApplicationController
       if params[:subject_select][:id].present?
        @subject=Subject.find(params[:subject_select][:id])
        @batch=@subject.batch
-       @exam_groups=@batch.exam_groups.all
+       @exam_groups=@batch.exam_groups.where(result_published:true)
        @students=@batch.students.all
       else
          flash[:notice_s_r]="Please select subject"
@@ -64,6 +77,14 @@ class ExamReportsController < ApplicationController
          render 'subject_wise_report'
       end
     end
+  end
+
+  def subject_wise_students_report
+      @subject=Subject.find(params[:subject_id])
+      @batch=@subject.batch
+      @exam_groups=@batch.exam_groups.where(result_published:true)
+      @students=@batch.students.all
+      render 'subject_wise_students_report',layout:false
   end
 
   def grouped_exam_report
@@ -76,7 +97,7 @@ class ExamReportsController < ApplicationController
           @batch=Batch.find(params[:batch_option][:id])
           @students=@batch.students.all
           @student=@batch.students.last
-          @exam_groups=@batch.exam_groups.all
+          @exam_groups=@batch.exam_groups.where(result_published:true)
           @subjects=@batch.subjects.all
       else
          flash[:notice_b]="Please select batch"
@@ -86,9 +107,17 @@ class ExamReportsController < ApplicationController
     end
   end 
 
+  def grouped_exam_students_report
+      @batch=Batch.find(params[:batch_id])
+      @students=@batch.students.all
+      @exam_groups=@batch.exam_groups.where(result_published:true)
+      @subjects=@batch.subjects.all
+      render 'grouped_exam_students_report',layout:false
+  end
+
   def student_report
       @batch=Batch.find(params[:batch_id])
-       @exam_groups=@batch.exam_groups.all
+       @exam_groups=@batch.exam_groups.where(result_published:true)
       @student=Student.find(params[:student_id])
        @subjects=@batch.subjects.all
   end
