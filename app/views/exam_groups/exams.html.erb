@@ -7,14 +7,14 @@
   </div>
  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
-
+<% unless @exam_group.result_published? %>
 <div id="inner-tab-menu">
   <ul>
     <li><%= link_to 'Publish Results',exam_groups_publish_result_path(@exam_group)%> </li>
     <li><%= link_to 'New', new_exam_path(@exam_group) %> </li>
   </ul>
 </div>
-
+<% end %>
 <div class="box">
   
     <div class="bread_crumb">
@@ -50,7 +50,7 @@
         <%unless @exam_group.exam_type=="Grades"%>
         <td><%= exam.maximum_marks %></td>  
         <td><%= exam.minimum_marks %></td>
-        <%end%>
+        <% end %>
         <% unless @exam_group.result_published? %>
         <td><%= link_to 'Edit',edit_exam_path(exam)%>&nbsp;&nbsp;
         <%= link_to 'Delete',exam,method: :delete,

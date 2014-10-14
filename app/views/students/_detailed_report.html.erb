@@ -1,5 +1,16 @@
-<%= @student.first_name %>
-<%= @subject_id %>
-<%= @start_date %>
-<%= @end_date %>
-<h5>Total working hours: 0 |Total Present : 0 | Percentage: 0.00</h5>
+<% total_days=0 %><% absent_days=0 %>
+<%unless @time_table_entry.nil? %>
+<% (@start_date..@end_date).each do |date| %>
+	<% @weekdays.each do |d| %>
+		<% if I18n.l(date.to_date,:format=>"%A")==d.weekday %>
+			<% total_days+=1 %>
+        <%end%>
+    <%end%>
+    <% @attendence=Attendence.find_by_student_id_and_time_table_entry_id_and_month_date(@student.id,@time_table_entry.id,date.to_date) %>
+    <% unless @attendence.nil? %>
+    	<% absent_days+=1 %>
+    <%end%>
+<%end%>
+<%end%>
+<% present_days=total_days-absent_days %>
+<h4 align="center">Total working days: <%= total_days %> | Total present days: <%= present_days %> | Percentage: <%= "%.2f" %(total_days*100/present_days)+"%" unless present_days==0 %></h4>

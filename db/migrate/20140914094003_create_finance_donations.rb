@@ -4,7 +4,7 @@ class CreateFinanceDonations < ActiveRecord::Migration
       t.string     :donor
       t.string     :description
       t.decimal    :amount
-      t.references :transaction,index:true
+      t.references :finance_transaction,index:true
 
       t.timestamps
     end

@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
   
-  	 def index
+  	def index
      @courses=Course.all
     end
 

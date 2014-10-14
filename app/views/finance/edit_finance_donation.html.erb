@@ -20,7 +20,7 @@
       	<div>
         <ul>
           <% @finance_donation.errors.full_messages.each do |msg| %>
-          <li style="width:300px"><%= msg%></li>
+          <li style="width:600px"><%= msg%></li>
           <% end %>
         </ul> 
       	</div>
@@ -36,6 +36,10 @@
 			<td><%= c.text_field :description%></td>
 		</tr>
 
+		<tr>     
+          <td><%=c.label :'Transaction Date'%></td>
+          <td><%=c.date_field :created_at,:style=>"width:175px"%></td>
+     	</tr>	
 		
 
 		<tr>
