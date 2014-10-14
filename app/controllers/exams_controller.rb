@@ -88,17 +88,19 @@ class ExamsController < ApplicationController
   				end
       		else
 		        unless @exam_score.update(marks:details[:marks],remarks:details[:remarks],grading_level_id:score_grade,is_failed:fail)
-		        	@errors=exam_score.errors.full_messages
+		        	@errors=@exam_score.errors.full_messages
 		        end	
 	        end
-    	end
-    if @errors.nil?
-    	if @grouped_exam.nil?
+	    if @errors.nil?
+	   		if @grouped_exam.nil?
 	        GroupedExamReport.create(batch_id:@batch.id,student_id:student_id,
 		        	exam_group_id:@exam_group.id,subject_id:@exam.subject_id,marks:details[:marks])
-	    else
+	    	else
 	       	@grouped_exam.update(marks:details[:marks])
-	    end
+	    	end
+	   	end 	
+    end
+    if @errors.nil?
     	redirect_to exam_exam_score_path(@exam)
     else
     	@students=[]
@@ -118,7 +120,7 @@ class ExamsController < ApplicationController
 		@exam_grade=@exam.exam_group.batch.grading_levels.all					
     	render 'exam_score'
     end
-    end
+	end
 
     def destroy
     	@exam=Exam.find(params[:id])
