@@ -14,12 +14,14 @@
         
  <tr>
     <td class="col-2"><%= f.label :marks, class: "control-label"%></td>
-     <td><%=f.select :marks_limit_type, ["Upper", "Lower", "Exact"],:style =>"width: 250px", class: "form-control" %></td>
+     <td><%=f.text_field :marks ,:style =>"width: 250px", class: "form-control"%></td>
+     
   </tr>
 
   <tr>
      <td class="col-2"><%= f.label :marks_limit_Type , class: "control-label"%></td>
-      <td><%=f.text_field :marks_limit_type ,:style =>"width: 250px", class: "form-control"%></td>
+     <td><%=f.select :marks_limit_type, ["Upper", "Lower", "Exact"],:style =>"width: 250px", class: "form-control" %></td>
+     
   </tr>
 
   <tr>

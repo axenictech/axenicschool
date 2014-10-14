@@ -9,7 +9,7 @@ class Exam < ActiveRecord::Base
 
 	validates :minimum_marks,numericality: { only_integer: true },
               length:{minimum:1,maximum:3},allow_blank: true
-              
+
 	validate :end_time_cannot_be_less_than_start_time
 	validate :start_time_cannot_be_less_than_past
 	validate :end_time_cannot_be_less_than_past

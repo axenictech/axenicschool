@@ -19,7 +19,6 @@ class TimeTablesController < ApplicationController
   def teacher_time_table_display
     @time=TimeTableEntry.where(time_table_id:params[:time][:id])
     @weekdays=[]
-
     @class_timings=[]
     @employees=[]
     unless @time.nil?
@@ -42,7 +41,6 @@ end
   end
 
 	def select
-
 	   @batch = Batch.find(params[:batch][:id])
 	   @subjects = @batch.subjects.all
   end
