@@ -1,9 +1,21 @@
+<% unless @exam_group.result_published? %>
+<div id="score-table">
+    <div class="custom_header">
+      <span class="student">Result not published</span>
+    </div>
+<%else%>
 <% exam_score = [] %>
 <% @exam_group.exams.each do |exam| %>
   <% exam_score.push exam.exam_scores.find_by_student_id(@student.id) unless exam.exam_scores.find_by_student_id(@student.id).nil?  %>
 <% end%>
   <% total_marks_attained = 0 %>
   <% total_max_marks = 0 %>
+<% if @student.nil? %>
+<div id="score-table">
+    <div class="custom_header">
+      <span class="student">Student recorde not found</span>
+    </div>
+<%else%>
   <div id="score-table">
     <div class="custom_header">
       <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
@@ -34,19 +46,19 @@
         <tr class="tr-<%= cycle('odd', 'even') %>">
           <td class="col-2"> <%= es.exam.subject.name %></td>
           <% if @exam_group.exam_type == 'Marks' %>
-            <td class="col-1"><%= es.marks || '-' %></td>
+            <td class="col-1"><%= es.marks || 'AB' %></td>
             <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
             <td class="col-1"><%= es.exam.maximum_marks %></td>
             <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
             <td class="col-1"><%= es.calculate_percentage %></td>
           <% elsif @exam_group.exam_type == 'Grades' %>
-            <td class="col-1"><%= es.grading_level.name || "-" %></td>
+            <td class="col-1"><%= es.grading_level.name || "AB" %></td>
           <% else %>
-            <td class="col-1"><%= es.marks || "-" %></td>
+            <td class="col-1"><%= es.marks || "AB" %></td>
             <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
             <td class="col-1"><%= es.exam.maximum_marks %></td>
             <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
-            <td class="col-1"><%= es.grading_level.name || "-" %></td>
+            <td class="col-1"><%= es.grading_level.name || "AB" %></td>
             <td class="col-1"><%= es.calculate_percentage %></td>
           <% end %>
         </tr>
@@ -71,3 +83,5 @@
       <% end %>
     </table>
 </div>
+<%end%>
+<%end%>

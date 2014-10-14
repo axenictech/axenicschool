@@ -278,7 +278,7 @@ class EmployeesController < ApplicationController
   def admission1
     @employee=Employee.new
     if Employee.first.nil?
-      @employee.employee_number=1
+      @employee.employee_number=10101
        flash[:notice7] = "Employee number of first employee is #{@employee.employee_number}" 
     else
       @last_employee=Employee.last
