@@ -76,7 +76,7 @@
 </tr>
 <tr style="background-color:white">
 <td colspan="4"><%= link_to 'Edit',employees_edit_profile_path(@employee),class: "btn btn-primary" %>
-<%= link_to 'PDF Report','',class: "btn btn-success" %></td>
+<%= link_to 'PDF Report',employees_employee_profile_path(employee_id:@employee,format: "pdf"),class: "btn btn-success" %></td>
 </tr>
 </tbody></table>
 </div>

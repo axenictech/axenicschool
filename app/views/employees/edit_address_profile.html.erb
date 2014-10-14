@@ -1,0 +1,86 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Addmission</h1>
+  <h3>Employee Details Update<br />
+  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover" style="width:1000px">
+<%= form_for @employee ,url:{action:'update_profile',format:@employee.id} do |f| %>
+
+    <tbody>
+    
+    <tr>  
+         <td class="col-2"><%=f.label :line1%><span class="necessary-field">*</span></td>
+          <td class="col-2"><%=f.text_field :home_address_line1%></td>
+     </tr>
+    
+
+     <tr>
+       <td class="col-2"><%=f.label :city%><span class="necessary-field">*</span></td>
+        <td class="col-2"><%=f.text_field :home_city, :required=>false%></td>
+     </tr>
+
+     <tr>
+       <td class="col-2"><%=f.label :state%><span class="necessary-field">*</span></td>
+         <td class="col-2">  <%=f.text_field :home_state%></td>
+     </tr>
+
+      <tr>
+
+       <tr>
+       <td class="col-2"><%=f.label :Country%></td>
+          <td class="col-2"><%=f.select :home_country_id,Country.all.collect{|c| [c.name,c.id]}%></td>
+     </tr>
+
+      <tr>
+       <td class="col-2"><%=f.label :"pin code"%></td>
+           <td class="col-2"><%=f.text_field :home_pin_code%></td>
+     </tr>
+
+
+       <tr>
+         <td class="col-2"><%=f.label :line1%></td>
+          <td class="col-2"><%=f.text_field :office_address_line1%></td>
+     </tr>
+    
+   
+
+     <tr>
+       <td class="col-2"><%=f.label :city%></td>
+        <td class="col-2"><%=f.text_field :office_city, :required=>false%></td>
+     </tr>
+
+     <tr>
+       <td class="col-2"><%=f.label :state%></td>
+         <td class="col-2">  <%=f.text_field :office_state%></td>
+     </tr>
+
+
+       <tr>
+       <td class="col-2"><%=f.label :Country%></td>
+          <td class="col-2"><%=f.select :office_country_id,Country.all.collect{|c| [c.name,c.id]}%></td>
+     </tr>
+      
+
+      <tr>
+       <td class="col-2"><%=f.label :"pin code"%></td>
+           <td class="col-2"><%=f.text_field :office_pin_code%></td>
+     </tr>
+         
+   
+     <tr><td colspan="4"><%=f.submit "Update",class: "btn btn-success" %></td></tr>
+
+<%end%>
+</tbody>
+</table>
+  </div>

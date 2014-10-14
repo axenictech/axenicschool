@@ -60,6 +60,14 @@
       <%= link_to "Delete",employees_remove_path(@employee),style:"color:white"%>
 </button></div>
 
+<div class="dropdown pull-right">
+   <button type="button" class="btn btn-primary" 
+       style="margin-right:20px;">
+       
+      <%= link_to "Timetable",time_tables_employee_timetable_path(@employee),style:"color:white"%>
+     
+</button></div>
+
 <div id="profile_picture_display">
           <%= image_tag "default_employee.png" %>
               </div>
@@ -73,4 +81,4 @@
   <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
 
 
-<div id="profile"><%=render'display_profile'%></div>
+<div id="profile"><%=render'disp_genral_profile'%></div>
