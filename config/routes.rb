@@ -348,6 +348,8 @@ patch 'attendences/:id/update_attendence',to:'attendences#update_attendence', as
 get 'employee_attendances/search_emp'
  delete 'time_table_entries/delete_time'
  get 'time_tables/selectTime'
+ get 'time_tables/teachers_timetable'
+ get 'time_tables/teacher_time_table_display'
 root 'home#dashboard'
  
  resources :home

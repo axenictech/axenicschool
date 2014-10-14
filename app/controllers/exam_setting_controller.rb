@@ -28,14 +28,22 @@ class ExamSettingController < ApplicationController
       @course=Course.find(params[:course_id])
       @class_dess=@course.class_designations.all
       @class_des1=@course.class_designations.new(params_class)
-      @class_des1.save
+     if @class_des1.save
+      flash[:class_designation_notice]="Class Designation Created Successfully"
+     else 
+       flash[:class_designation_notice]="Class Designation Not Created Successfully"
     end
-
+   end
     def createrank
       @course=Course.find(params[:course_id])
       @rank_levels=@course.ranking_levels.all
       @rank_lev1=@course.ranking_levels.new(params_rank)
-      @rank_lev1.save
+      if @rank_lev1.save 
+       flash[:ranking_level_notice]="RankingLevel Created Successfully"
+       else
+          flash[:ranking_level_notice]="RankingLevel Not Created Successfully"
+         # render 'newrank'
+       end
     end
 
 
@@ -43,15 +51,24 @@ class ExamSettingController < ApplicationController
         @course=Course.find(params[:course_id])
         @class_dess=@course.class_designations.all
         @class_des1=@course.class_designations.find(params[:id])
-        @class_des1.destroy
-    end
+       if @class_des1.destroy
+        flash[:class_designation_notice]="Class Designation Deleted Successfully"
+      else 
+        flash[:class_designation_notice]="Class Designation Not Deleted Successfully"
+      end
+   end
 
     def destroyRank
       
        @rank_lev1=RankingLevel.find(params[:id])
        @course=@rank_lev1.course
        @rank_levels=@course.ranking_levels.all
-       @rank_lev1.destroy
+       if @rank_lev1.destroy
+         flash[:ranking_level_notice]="RankingLevel Deleted Successfully"
+       else
+         flash[:ranking_level_notice]="RankingLevel not Deleted Successfully"
+         render 'newrank'
+      end
     end
 
     def edit
@@ -63,9 +80,12 @@ class ExamSettingController < ApplicationController
         @course=Course.find(params[:course_id])
         @class_dess=@course.class_designations.all
          @class_des1=@course.class_designations.find(params[:id])
-        @class_des1.update(params_class)
+        if @class_des1.update(params_class)
+          flash[:class_designation_notice]="Class Designation Updated Successfully"
+        else 
+         flash[:class_designation_notice]="Class Designation Not Updated Successfully"
+        end
     end
-
     def editRank
         @course=Course.find(params[:course_id])
         @rank_lev1=@course.ranking_levels.find(params[:id])
@@ -75,7 +95,11 @@ class ExamSettingController < ApplicationController
       @course=Course.find(params[:course_id])
       @rank_levels=@course.ranking_levels.all
       @rank_lev1=@course.ranking_levels.find(params[:id])
-      @rank_lev1.update(params_rank)
+     if @rank_lev1.update(params_rank)
+       flash[:ranking_level_notice]="Ranking Level Updated Successfully"
+        else 
+         flash[:ranking_level_notice]="Ranking Level Designation Not Updated Successfully"
+        end
     end
 
     def select
@@ -86,7 +110,7 @@ class ExamSettingController < ApplicationController
     def selectrank
         @course=Course.find(params[:course][:id])
        @rank_levels=@course.ranking_levels.all
-         # @course=Course.find(params[:course_id]
+         
     end
     
     private
