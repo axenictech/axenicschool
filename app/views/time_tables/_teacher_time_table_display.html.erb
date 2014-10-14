@@ -1,3 +1,41 @@
-<%@weekdays.each do |w|%>
- <%=w.weekday%>
-<%end%>
+
+<% unless @time.empty? %>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+	
+        <tr>
+         <td></td>
+         <% @weekdays.each do |weekday| -%>
+            <th colspan="<%=@class_timings.count %>"><%= weekday.weekday%></th>
+          <%end%>
+        </tr>
+        <tr> 
+        	<td></td>
+        	<% @weekdays.each do |weekday| %>
+            <% @class_timings.each do |c| %>
+              <td>
+                <%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%>
+              </td>
+            <%end%>
+          <%end%>
+        </tr>
+       <%@employees.each do |employee|%>
+       <tr>
+       	 <td><%=employee.first_name%></td>
+       	    <% @weekdays.each do |weekday| %>
+            <% @class_timings.each do |c| %>
+              <td>
+            <%t=TimeTableEntry.find_by_employee_id_and_class_timing_id_and_weekday_id(employee.id,c.id,weekday.id)%>
+              <% unless t.nil?%>
+              	<%= t.subject.name %><br/>
+              	<%= t.batch.name %>
+              <%end%>
+              </td>
+            <%end%>
+          <%end%>
+       </tr>
+    <%end%>
+  </table>
+ <%else%>
+  <%='No timetable entries found'%>
+  <%end%>
+

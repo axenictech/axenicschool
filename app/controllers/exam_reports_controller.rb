@@ -4,15 +4,7 @@ class ExamReportsController < ApplicationController
   	@batches=Batch.all
  	  @exam_groups=Batch.first.exam_groups.all
   end
-
-  def genrate_reports
- 			
-  end
-
-  def genrate_previous_reports
-  	
-  end
-
+  
   def select
   	@course=Course.find(params[:exam][:course_id])
   	@batches=@course.batches.all

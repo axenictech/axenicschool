@@ -35,7 +35,12 @@ class ExamSettingController < ApplicationController
       @course=Course.find(params[:course_id])
       @rank_levels=@course.ranking_levels.all
       @rank_lev1=@course.ranking_levels.new(params_rank)
-      @rank_lev1.save
+      if @rank_lev1.save 
+         flash[:ranking_level_notice]="RankingLevel Created Successfully"
+      else
+         flash[:ranking_level_notice]="RankingLevel not Created Successfully"
+         render 'newrank'
+      end
     end
 
 
@@ -44,6 +49,12 @@ class ExamSettingController < ApplicationController
         @class_dess=@course.class_designations.all
         @class_des1=@course.class_designations.find(params[:id])
         @class_des1.destroy
+      #    flash[:ranking_level_notice]="RankingLevel Deleted Successfully"
+      #   else
+      #    flash[:ranking_level_notice]="RankingLevel not Deleted Successfully"
+      #   render 'newrank'
+      # end
+
     end
 
     def destroyRank
@@ -51,7 +62,12 @@ class ExamSettingController < ApplicationController
        @rank_lev1=RankingLevel.find(params[:id])
        @course=@rank_lev1.course
        @rank_levels=@course.ranking_levels.all
-       @rank_lev1.destroy
+       if @rank_lev1.destroy
+         flash[:ranking_level_notice]="RankingLevel Deleted Successfully"
+       else
+         flash[:ranking_level_notice]="RankingLevel not Deleted Successfully"
+         render 'newrank'
+      end
     end
 
     def edit

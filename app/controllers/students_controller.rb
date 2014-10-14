@@ -15,6 +15,8 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
+      flash[:notice] = "Student Reord saved successfully please fill the parent detail"
+
       redirect_to students_admission2_path(@student)
     else
       render 'admission1'
@@ -47,6 +49,8 @@ class StudentsController < ApplicationController
   def update
     @student=Student.find(params[:id])
     if @student.update(student_params)
+     flash[:notice] = "Student Reord updated successfully "
+
     redirect_to students_profile_path(@student)
     else
       render 'edit'
@@ -130,16 +134,36 @@ class StudentsController < ApplicationController
 
   def student_profile
     @student=Student.find(params[:id])
+    @immediate_contact=Guardian.find(@student.immediate_contact)
+    @student_previous_data=StudentPreviousData.find_by_student_id(@student.id)
+    @student_previous_subject_marks=StudentPreviousSubjectMark.where(student_id:@student.id)
     render 'student_profile',layout:false
   end
 
   def archived_profile
     @student=ArchivedStudent.find(params[:format])
+    @immediate_contact=Guardian.find(@student.immediate_contact)
+    @student_previous_data=StudentPreviousData.find_by_student_id(@student.student_id)
+    @student_previous_subject_marks=StudentPreviousSubjectMark.where(student_id:@student.student_id)
+  end
+
+  def archived_student_profile
+    @student=ArchivedStudent.find(params[:id])
+    @immediate_contact=Guardian.find(@student.immediate_contact)
+    @student_previous_data=StudentPreviousData.find_by_student_id(@student.student_id)
+    @student_previous_subject_marks=StudentPreviousSubjectMark.where(student_id:@student.student_id)
+    render 'student_profile',layout:false
   end
 
   def report
     @student=Student.find(params[:format])
     @batch=@student.batch
+  end
+
+  def archived_report
+    @student=ArchivedStudent.find(params[:format])
+    @batch=@student.batch
+    @exam_groups=@batch.exam_groups.all
   end
 
   def recent_exam_report
@@ -198,6 +222,13 @@ class StudentsController < ApplicationController
     render 'student_transcript_report',layout:false
   end
 
+  def archived_student_transcript_report
+    @student=ArchivedStudent.find(params[:student_id])
+    @batch=@student.batch
+    @exam_groups=@batch.exam_groups.all
+    render 'archived_student_transcript_report',layout:false
+  end
+
   def attendance_report
     @student=Student.find(params[:format])
     @batch=@student.batch
@@ -206,9 +237,10 @@ class StudentsController < ApplicationController
 
   def genrate_report
     @student=Student.find(params[:report][:student_id])
-    @subject_id=params[:report][:subject_id]
     @start_date=params[:report][:start_date]
     @end_date=params[:report][:end_date]
+    @time_table_entry=TimeTableEntry.find_by_subject_id_and_batch_id(params[:report][:subject_id],@student.batch.id)
+    @weekdays=@student.batch.weekdays.all
   end
 
   def advanced_search
@@ -382,8 +414,34 @@ class StudentsController < ApplicationController
     else
       @user=User.find_by_student_id_and_role("#{@student.id}","Parent")
     end
-    UserMailer.student_email(@user,subject,message).deliver!
+    UserMailer.student_email(@user,subject,message).deliver
     redirect_to students_email_path(@student)
+  end
+
+   def report_email
+    @student=ArchivedStudent.find(params[:format])
+  end
+
+  def send_report_email
+    @student=ArchivedStudent.find(params[:student_id])
+    subject=params[:subject]
+    recipient=params[:email][:recipient]
+    message=params[:message]
+    if recipient.eql? "Student"
+      @user=User.find_by_student_id_and_role("#{@student.student_id}","Student")
+    else
+      @user=User.find_by_student_id_and_role("#{@student.student_id}","Parent")
+    end
+    UserMailer.student_email(@user,subject,message).deliver
+    redirect_to students_report_email_path(@student)
+  end
+
+  def generate_tc
+    @student=ArchivedStudent.find(params[:id])
+    @immediate_contact=Guardian.find(@student.immediate_contact)
+    @father = Guardian.find_by_student_id_and_relation(@student.id,'father')
+    @mother = Guardian.find_by_student_id_and_relation(@student.id,'mother')
+    render 'generate_tc',layout:false
   end
 
   def remove

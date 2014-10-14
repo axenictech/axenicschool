@@ -68,41 +68,41 @@
 <tr>
     <td class="col-2" colspan="4"><font color="brown">Student Previous Institution Details</font></td>
 </tr>
-<% unless @student.student_previous_data.nil? %>
+<% unless @student_previous_data.nil? %>
 <tr>
   <td class="col-2"><font color="grey">Institution Name</font></td>
   <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.institution %>
+  <%= @student_previous_data.institution %>
   </td>
 </tr>
 <tr>
   <td class="col-2"><font color="grey">Year</font></td>
   <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.year %>
+  <%= @student_previous_data.year %>
   </td>
 </tr>
 <tr>
   <td class="col-2"><font color="grey">Course</font></td>
   <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.course %>
+  <%= @student_previous_data.course %>
   </td>
 </tr>
 <tr>
   <td class="col-2"><font color="grey">Total Marks</font></td>
   <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.total_mark %>
+  <%= @student_previous_data.total_mark %>
   </td>
 </tr>
 <tr><td colspan="4"></td></tr>
 <tr>
     <td class="col-2" colspan="4"><font color="brown">Student Previous Subject Marks</font></td>
 </tr>
-<% unless @student.student_previous_subject_marks.nil? %>
+<% unless @student_previous_subject_marks.nil? %>
 <tr>
   <td class="col-2"><font color="green">Subject Name</font></td>
   <td class="col-2" colspan="3"><font color="green">Marks</font></td>
 </tr>
-<% @student.student_previous_subject_marks.each do |psm| %>
+<% @student_previous_subject_marks.each do |psm| %>
 <tr>
   <td class="col-2"><%= psm.subject %></td>
   <td class="col-2" colspan="3"><%= psm.mark %></td>
@@ -110,6 +110,9 @@
 <%end%>
 <%end%>
 <%end%>
+<tr>
+  <td class="col-2" colspan="4"></td>
+</tr>
 </tbody>
 </table>
 </div>
