@@ -1,0 +1,40 @@
+<div id="content-header">
+  <h1>Master category</h1>
+  <h3>Finance Managment</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0),
+    :back  %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+    
+    <div class="row">
+    <div class="col-md-2"></div>
+      <div class="col-md-3">
+        <div class="link-heading"><%= link_to 'Create Master Category','create_master_fees',remote:true %></div>
+        <div class="link-descr">Create Master Fees and Additional Fees</div>
+      </div>
+  
+      <div class="col-md-3">
+        <div class="link-heading"><%= link_to 'Fees Collection' %>  </div>
+        <div class="link-descr">Create new Fees collection Date</div>
+      </div>
+   
+      <div class="col-md-4">
+        <div class="link-heading"><%= link_to 'Fees' %></div>
+        <div class="link-descr">Fees Submission</div>
+      </div>
+    
+    </div>
+
+<div class="row" style="margin-top:20px">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div>Select Batch</div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<div id="modal_create_master_fees" class="modal fade"></div>
+</div>

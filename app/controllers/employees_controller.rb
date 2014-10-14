@@ -283,7 +283,7 @@ class EmployeesController < ApplicationController
     else
       @last_employee=Employee.last
       @employee.employee_number=@last_employee.employee_number.next
-          flash[:notice7] = "Employee number of last employee is #{@last_employee.employee_number}" 
+      flash[:notice7] = "Employee number of last employee is #{@last_employee.employee_number}" 
     end  
   end
 
@@ -687,6 +687,15 @@ end
         redirect_to @employee
         p "Successfully Deleted............."
   end
+
+  def employee_profile
+    @employee=Employee.find(params[:employee_id])
+    @reporting_manager = Employee.find(@employee.reporting_manager_id) unless @employee.reporting_manager_id.nil?
+
+    render 'employee_profile',layout:false
+  end
+
+
 
   private
   def employee_params
