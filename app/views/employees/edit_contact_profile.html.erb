@@ -1,0 +1,53 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Addmission</h1>
+  <h3>Employee Details Update<br />
+  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover" style="width:1000px">
+<%= form_for @employee ,url:{action:'update_profile',format:@employee.id} do |f| %>
+
+    <tbody>
+         
+
+     <tr>
+       <td class="col-2"><%=f.label :"office phone1"%></td>
+          <td class="col-2"> <%=f.text_field :office_phone1%></td>
+     </tr>
+
+     <tr>
+       <td class="col-2"><%=f.label :"office_phone2"%></td>
+        <td class="col-2"><%=f.text_field :office_phone2, :required=>false%></td>
+     </tr>
+
+     <tr>
+       <td class="col-2"><%=f.label :mobile%></td>
+         <td class="col-2">  <%=f.text_field :mobile_phone%></td>
+     </tr>
+
+      <tr>
+       <td class="col-2"><%=f.label :"Home phone"%></td>
+          <td class="col-2"> <%=f.text_field :home_phone%></td>
+     </tr>
+
+     <tr>
+       <td class="col-2"><%=f.label :Fax%></td>
+          <td class="col-2"> <%=f.text_field :fax%></td>
+     </tr>
+    
+     <tr><td colspan="4"><%=f.submit "Update",class: "btn btn-success" %></td></tr>
+
+<%end%>
+</tbody>
+</table>
+  </div>

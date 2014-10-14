@@ -269,6 +269,17 @@ get 'employees/change_to_former'
 post 'employees/create_archived_employee'
 get 'employees/delete_employee'
 get 'employees/employee_profile'
+get 'employees/edit_personal_profile'
+get 'employees/edit_address_profile'
+get 'employees/edit_contact_profile'
+get 'employees/edit_bank_info'
+patch 'employees/update_bank_details'
+get 'employees/personal_profile_pdf'
+get 'employees/address_profile_pdf'
+get 'employees/contact_profile_pdf'
+get 'employees/bank_info_pdf'
+
+
 
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'
@@ -349,6 +360,8 @@ get 'employee_attendances/search_emp'
  get 'time_tables/selectTime'
  get 'time_tables/teachers_timetable'
  get 'time_tables/teacher_time_table_display'
+ get 'time_tables/employee_timetable'
+
 root 'home#dashboard'
  
  resources :home

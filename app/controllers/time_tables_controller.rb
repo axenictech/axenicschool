@@ -1,6 +1,11 @@
 class TimeTablesController < ApplicationController
 
-	
+	def employee_timetable
+          @employee=Employee.find(params[:format])
+          @is_timetable=TimeTableEntry.where(employee_id:@employee.id)
+         
+          p @is_timetable
+      end
 	def new
  		@timetables=TimeTable.all
 
@@ -105,6 +110,10 @@ end
      end
   end
       
+
+
+
+
    private 
    def time_table
 	       params.require(:time_table).permit(:start_date,:end_date,:is_active)
