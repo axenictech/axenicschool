@@ -368,6 +368,7 @@ get 'employee_attendances/search_emp'
  get 'time_tables/teacher_time_table_display'
  get 'time_tables/employee_timetable'
  get 'time_tables/time_table_pdf'
+ get 'time_tables/selectTimeEmployee'
 
 root 'home#dashboard'
  

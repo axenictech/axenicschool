@@ -1,14 +1,16 @@
 class TimeTablesController < ApplicationController
 
 	def employee_timetable
+          @timetables=[]
           @employee=Employee.find(params[:format])
-          @is_timetable=TimeTableEntry.where(employee_id:@employee.id)
-         
-          p @is_timetable
-      end
-	def new
- 		@timetables=TimeTable.all
-
+          @time_table_entries=TimeTableEntry.where(employee_id:@employee)
+          @time_table_entries.each do |tbe|
+              @timetables<<tbe.time_table
+          end
+  end
+        
+  def new
+ 	     	@timetables=TimeTable.all
   end
 
   def selectTime
@@ -21,7 +23,27 @@ class TimeTablesController < ApplicationController
   end
   end
 
+  def selectTimeEmployee
+    @employee=Employee.find(params[:format])
+    p "eeeeeeeeeeeeeeeeeeeeeeee"
+    p @employee
+    @time=TimeTableEntry.where(employee_id:@employee.id)
+    p "ttttttttttttttttttttttt"
+    p @time
+    @weekdays=[]
+    @class_timings=[]
+    @employees=[]
+    unless @time.nil?
+     @time.each do |t|
+     @weekdays.push t.weekday
+     @class_timings.push t.class_timing
+     @employees.push t.employee
+   end
+  end
+end
+
   def time_table_pdf
+    @batch = Batch.find(params[:batch_id])
      render 'time_table_pdf',layout:false
 
   end
