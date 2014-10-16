@@ -6,11 +6,14 @@
   </div>
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
+
 <div id="inner-tab-menu">
+<% if @exam_group.result_published? %>
   <ul>
       <li style="width:150px"><%= link_to 'Consolidated Report',exam_reports_consolidated_report_path(@exam_group) %></li>
-      <li><%= link_to 'Pdf Report','' %></li>
+      <li><%= link_to 'Pdf Report',exam_reports_exam_wise_students_report_path(exam_group_id:@exam_group.id,format:"pdf") %></li>
   </ul>
+<%end%>
 </div>
 <div id="page-yield">
 <div class="box">
