@@ -21,6 +21,11 @@ class TimeTablesController < ApplicationController
   end
   end
 
+  def time_table_pdf
+     render 'time_table_pdf',layout:false
+
+  end
+
   def teacher_time_table_display
     @time=TimeTableEntry.where(time_table_id:params[:time][:id])
     @weekdays=[]
