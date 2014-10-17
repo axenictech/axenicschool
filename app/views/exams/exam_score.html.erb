@@ -48,9 +48,15 @@
       <td class="col-2"><%= f.label "#{student.first_name+" "+student.last_name}" %></td>
     <%end%>
     <% unless exam_score.nil? %>
+      <% unless @exam.exam_group.result_published? %>
         <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks%></td>
         <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks%></td>
         <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px" unless @exam.exam_group.exam_type=="Marks"%></td>
+        <%else%>
+          <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks,readonly:true%></td>
+        <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks,readonly:true%></td>
+        <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px" unless @exam.exam_group.exam_type=="Marks"%></td>
+        <%end%>
     <%else%>
       <td><%= f.text_field "exam[#{student.id}][marks]"%></td>
       <td><%= f.text_field "exam[#{student.id}][remarks]"%></td>

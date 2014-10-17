@@ -13,4 +13,4 @@
 <%end%>
 <%end%>
 <% present_days=total_days-absent_days %>
-<h4 align="center">Total working days: <%= total_days %> | Total present days: <%= present_days %> | Percentage: <%= "%.2f" %(total_days*100/present_days)+"%" unless present_days==0 %></h4>
+<h4 align="center">Total working days: <%= total_days %> | Total present days: <%= present_days %> | Percentage: <%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %></h4>

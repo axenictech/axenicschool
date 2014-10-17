@@ -9,7 +9,7 @@
 <div id="inner-tab-menu">
 <ul>
       <li style="width:150px"><%= link_to 'Consolidated Report',exam_reports_consolidated_archived_report_path(@batch.id)%></li>
-      <li><%= link_to 'Pdf Report','' %></li>
+      <li><%= link_to 'Pdf Report',exam_reports_archived_students_exam_report_path(batch_id:@batch.id,format:"pdf") %></li>
   </ul>
 </div>
 <div id="page-yield">
@@ -22,7 +22,7 @@
     </div></div>
 
   <h4 align="center"><%= @batch.name %> - <%= @batch.course.course_name %></h4>
-  <div id="student_list" align="left">
+  <div id="student_list" style="margin-left:50px">
     <%= render 'archived_student_list' %>
   </div>
   <div id="archived_student_report" align="right">

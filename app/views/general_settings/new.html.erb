@@ -50,16 +50,16 @@
     <td class="col-2"><%= f.select :student_attendance_type, ['Subjectwise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" %></td>
   </tr>
 
- <!--  <tr>
-    <td class="col-2"><%#= t('Finance_start_year_date') %></td> 
-    <td class="col-2"><%#= f.date_select :finance_start_year_date, :start_year=>1999 %></td>
+ <tr>
+    <td class="col-2"><%= t('Finance_start_year_date') %></td> 
+    <td class="col-2"><%= f.date_select :finance_start_year_date, :start_year=>1999 %></td>
   </tr>
       
   <tr>
-    <td class="col-2"><%#= t('Finance_end_year_date') %></td> 
-    <td class="col-2"><%#= f.date_select :finance_end_year_date, :end_year=>2019%></td>
+    <td class="col-2"><%= t('Finance_end_year_date') %></td> 
+    <td class="col-2"><%= f.date_select :finance_end_year_date, :end_year=>2019%></td>
   </tr>
- -->
+ 
   <tr>
     <td class="col-2"><%= t('Language') %></td> 
     <td class="col-2"><%= f.select :language,Language.all.collect{|l| [l.name,l.id]}, prompt:true,  :style => "width:310px" %></td>
@@ -80,14 +80,11 @@
     <td class="col-2"><%= f.file_field :image%></td>
   </tr>
   <tr>
-    <td class="col-2"><%= t('Network State')%></td> 
-    <td class="col-2"><%= f.select :network_state, ['Online','Offline'], :selected => 'Online', :style =>"width: 310px" %></td>
-  </tr>
-  <tr>
     <td class="col-2"><%= t('Include Grading Systems') %></td> 
     <td class="col-2">
-    Select: <%= link_to "#{t('All')}",general_settings_all_path,remote:true%>
-        <%= link_to  "#{t('None')}",general_settings_none_path,remote:true%>
+    Select: &nbsp;&nbsp;
+    <%= link_to "All",general_settings_all_path,remote:true%>&nbsp;&nbsp;
+        <%= link_to  "None",general_settings_none_path,remote:true%>
         <p id="grading_system"><%= render 'grading_type'%></p>
       </td>
   </tr>
@@ -106,7 +103,7 @@
         </td> 
     </tr>
     <tr><td colspan="2">
-    <%= f.submit "#{t('Update')}",  class: "btn btn-success"%> 
+    <%= f.submit 'Update',  class: "btn btn-success"%> 
     
     </td>
     </tr>

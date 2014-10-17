@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+#score-table{
+    background: #C3D9FF;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 20px 20px;
+}
+table#listing{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.custom_header{
+    margin: 0 auto;
+    padding: 5px;
+    background: #fff;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
+<div class="page-yield" class="available_sections">
+  <div class="hor_line"></div>
+  <div id="student_profile_heading" class="section">
+    <div id ="student_main_info">
+      <h4><%= t('students_transcripts_report') %></h4>
+    </div>
+  </div>
+<% unless @students.empty? %>
+<% @students.each do |student|%>
+ <div style="width:100%">
+    <div class="info">
+      <div class="info-left">
+        <div class="info1">
+          <h4><label  class="field-label label label-default" style="margin-right:100px" >Name</label>: <label class="infolbl themed_text "> <%=student.first_name.capitalize+" "+student.last_name.capitalize %></label></h4>
+        </div>
+        <div class="info1">
+          <h4><label class="field-label label label-default" style="margin-right:90px">Course</label>: <label class="infolbl themed_text"> <%= student.batch.course.course_name %></label></h4>
+        </div>
+      </div>
+      <div class="info-right">
+        <div class="info1">
+          <h4><label class="field-label label label-default" style="margin-right:35px">Addmission No</label>: <label class="infolbl themed_text" > <%= student.admission_no  %></label></h4>
+        </div>
+      </div>
+    </div>
+          <% general_subjects = @batch.subjects.where(elective_group_id:nil) %>
+          <% student_electives = StudentSubject.where(student_id: student.id,batch_id: @batch.id) %>
+          <% elective_subjects = [] %>
+          <% student_electives.each do |elect| %>
+            <% elective_subjects.push Subject.find(elect.subject_id) %>
+          <% end %>
+          <% @subjects = general_subjects + elective_subjects %>
+          <% unless @subjects.empty? %>
+            <div class="batch-name" style="color:blue"><h4><%= "(Code -"+@batch.course.code+") "+@batch.name.capitalize %></h4></div>
+            <% total_credits=0 %>
+          <div id="score-table" >
+            <table id="listing" class="table-bordered" width="100%" cellpadding="1" cellspacing="1" border="1">
+              <tr class="tr-head">
+                <td class="col-2"><font color="blue">Subject Code</font></td>
+                <td class="col-2"><font color="blue">Subject Title</font></td>
+                <td class="col-2"><font color="blue">Percentage(%)</font></td>
+              </tr>
+        <% max_total = 0 %>
+        <% marks_total = 0 %>
+        <% @mark = 0 %>
+        <% @total = 0 %>
+        
+         <% @subjects.each do |subject| %>
+               <% @exam_groups.each do |exam_group| %>
+
+               <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
+              <%unless @exam.nil?%>
+                <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.id,@exam.id) unless @exam.nil? %>
+                <% max_total += @exam.maximum_marks.to_f %>
+                <% marks_total += exam_score.marks.to_f %>
+                <% @mark += exam_score.marks.to_f %>
+                <% @total += @exam.maximum_marks.to_f %>
+              <%end%>
+              <% end %>
+                  <tr class="tr-<%= cycle('odd', 'even') %>">
+                    <td class="col-1"> <%= subject.code %></td>
+                    <td class="col-3"> <%= subject.name %></td>
+                    <td class="col-3"><%=marks_total==0 ? "AB" : "%.2f" %(marks_total*100/max_total)+"%"%></td>
+                  </tr>
+          <% max_total = 0 %>
+          <% marks_total = 0 %>
+        
+                <% end %>
+                <tr class="tr-blank"></tr>
+                <tr class="tr-head">
+                  <td colspan="2" align="right"><font color="blue">Total</font></td>
+                  <td><%="%.2f" %(@mark*100/@total)+"%"%></td>
+                </tr>
+            </table>
+           <%else%>
+           <h4>Subject Not Found</h4>
+           <%end%>
+           </div>
+</div>
+<br/><br/>
+<%end%>
+<%end%>
+</div>
+</body>
+</html>

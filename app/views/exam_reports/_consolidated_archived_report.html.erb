@@ -1,3 +1,9 @@
+<% unless @exam_group.result_published? %>
+<div id="score-table" style="width:80%">
+    <div class="custom_header" align="left">
+      <span class="student">Result not published</span>
+     </div>
+<%else%>
 <div id="score-table">
  <h4><%= @batch.course.course_name %> <%= @batch.name %> | <%= @exam_group.name %></h4>
     <div class="custom_header">
@@ -47,3 +53,4 @@
              <%end%>
       </table>
   </div></div></div>
+<%end%>

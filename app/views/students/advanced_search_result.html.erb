@@ -78,7 +78,9 @@ table#pdf-table{
   <div class="page">
     <div class="hor_line"></div>
     <div id="title">
-    <h1 align="center">Axenic School</h1>
+    <h1 align="center"><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4>
     <h2><%= 'Student' %>-<%= 'Advanced Search' %></h2>
     </div>
     <div class="hor_line"></div>

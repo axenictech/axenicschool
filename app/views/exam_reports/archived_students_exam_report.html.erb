@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+#score-table{
+    background: #C3D9FF;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 20px 20px;
+}
+table#listing{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.custom_header{
+    margin: 0 auto;
+    padding: 5px;
+    background: #fff;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
+<div class="page-yield" class="available_sections">
+  <div class="hor_line"></div>
+  <div id="student_profile_heading" class="section">
+    <div id ="student_main_info">
+      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %></h2>
+      <h4><%= t('archived_students_exam_report') %></h4>
+    </div>
+  </div>
+<% @students.each do |student|%>
+  <div id="score-table">
+    <div class="custom_header">
+      <span class="student"><%= "#{student.first_name+" "+student.last_name}"" - #{student.admission_no}" %></span>
+    </div>
+  <table id="score-table" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
+     <% max_total = 0 %>
+        <% marks_total = 0 %>
+      <tr class="tr-head">
+        <td class="col-2"><font color="blue">Subject</font></td>
+        <% @exam_groups.each do |exam_group| %>
+          <td><font color="blue"><%= exam_group.name %></font></td>
+        <% end %>
+          <td><font color="blue">Total</font></td>
+      </tr>
+
+      <% @subjects.each do |subject| %>
+      <% is_valid_subject=1 %>
+          <% unless subject.elective_group_id.nil? %>
+            <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.student_id,subject.id) %>
+            <% is_valid_subject = 0 if is_student_elective.nil? %>
+          <% end %>
+          <% unless is_valid_subject == 0 %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+          <td class="col-3" ><%= subject.name %></td>
+
+          <% @exam_groups.each do |exam_group| %>
+
+            <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
+            <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.student_id,@exam.id) unless @exam.nil? %>
+            <td class="col-3">
+              <% unless @exam.nil? %>
+                <% if exam_group.exam_type == "Marks and Grades" %>
+                  <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "AB")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level.name || "-")}]" %>
+                <% elsif exam_group.exam_type == "Marks" %>
+                  <%= exam_score.nil? ? '-' : "#{exam_score.marks || "AB"}/"+@exam.maximum_marks.to_s %>
+                <% else %>
+                  <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || 'AB')  %>
+                <% end %>
+              <% else %>
+               NA
+            <% end %>
+          </td>
+          <% unless @exam.nil? %>
+            <% max_total += @exam.maximum_marks.to_f %>
+            <% marks_total += exam_score.marks.to_f unless exam_score.nil? %>
+          <%end%>
+          <% end %>
+          <td class="col-1"><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
+          </tr>
+        <% max_total = 0 %>
+        <% marks_total = 0 %>
+        <%end%>
+      <% end %>
+      <tr class="tr-blank"></tr>
+      <tr class="tr-head">
+        <td class="col-2"><font color="blue">Total</font></td>
+        <% @max_total = 0 %>
+        <% @marks_total = 0 %>
+        <% total_marks=0%><%total=0%>
+        <% @exam_groups.each do |exam_group| %>
+        <% exams=exam_group.exams.all%>
+        <%exams.each do |exam|%>
+        <% is_valid_subject=1 %>
+          <% unless exam.subject.elective_group_id.nil? %>
+            <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.student_id,exam.subject.id) %>
+            <% is_valid_subject = 0 if is_student_elective.nil? %>
+          <% end %>
+          <% unless is_valid_subject == 0 %>
+            <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.student_id,exam.id) unless exam.nil? %>
+            <% unless exam.nil? %>
+              <% @max_total += exam.maximum_marks.to_f %>
+              <% @marks_total += exam_score.marks.to_f unless exam_score.nil? %>
+            <%end%>
+          <%end%>
+          <%end%>
+          <% if exam_group.exam_type == "Marks and Grades" %>
+            <td><font color="blue"><%= "#{@marks_total || "-"}/"+@max_total.to_s %></font></td>
+          <% elsif exam_group.exam_type == "Marks" %>
+            <td><font color="blue"><%= "#{@marks_total || "-"}/"+@max_total.to_s %></font></td>
+          <% else %>
+            <td></td>
+          <% end %>
+        <% total_marks+= @marks_total %>
+        <%total+= @max_total %>
+        <% @max_total = 0 %>
+        <% @marks_total = 0 %>
+        <% end %>
+        <td><font color="blue"><%= "#{total_marks || "-"}/"+total.to_s %></font></td>
+      </tr>
+      <tr></tr>
+    </table>
+      <div class="custom_header" align="left"><font color="green">
+        <% percentage = "%.2f" %(total_marks*100/total)+"%" %>
+        Total Marks = <%= total_marks %> | Aggregate % = <%= percentage  unless percentage.nil? %></font>
+      </div>
+  </div><br/><br/>
+<%end%>
+</div>
+</body>
+</html>
