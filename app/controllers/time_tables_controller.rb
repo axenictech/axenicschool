@@ -23,13 +23,38 @@ class TimeTablesController < ApplicationController
   end
   end
 
+  # def timetable
+  #   # @config = Configuration.available_modules
+  #   @batches = Batch.all
+  #   unless params[:next].nil?
+  #     @today = params[:next].to_date
+  #     render (:update) do |page|
+  #       page.replace_html "timetable", :partial => 'table'
+  #     end
+  #   else
+  #      @today = Date.today
+  #      # @today = @local_tzone_time.to_date
+  #     p "ttttttttttttttttttt"
+  #     p @today
+  #   end
+  # end
+
+  def timetable
+    @today=Date.today
+    @batches=Batch.all
+  end
+
+  def display_institutional_time_table
+       @today = params[:next].to_date
+       @batches=Batch.all
+      
+  end
+
   def selectTimeEmployee
     @employee=Employee.find(params[:format])
-    p "eeeeeeeeeeeeeeeeeeeeeeee"
-    p @employee
+  
     @time=TimeTableEntry.where(employee_id:@employee.id)
-    p "ttttttttttttttttttttttt"
-    p @time
+   
     @weekdays=[]
     @class_timings=[]
     @employees=[]
@@ -84,9 +109,7 @@ end
   def teachers_timetable
      @timetables=TimeTable.all
   end
-  def timetable
-		@batches=Batch.all
-	end
+ 
   def work_allotment
     @employees = Employee.all
     @emp_subs = []

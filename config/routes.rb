@@ -101,7 +101,7 @@ post'weekdays/create'
 get 'time_tables/select'
 get 'time_tables/sub'
 get 'time_tables/new'
-get 'time_tables/timetable'
+
 get 'time_table_entries/select'
 get 'time_table_entries/select_subject'
 get 'time_tables/work_allotment'
@@ -369,7 +369,8 @@ get 'employee_attendances/search_emp'
  get 'time_tables/employee_timetable'
  get 'time_tables/time_table_pdf'
  get 'time_tables/selectTimeEmployee'
-
+ get 'time_tables/timetable'
+ get 'time_tables/display_institutional_time_table/:next',to:'time_tables#display_institutional_time_table',as:'time_tables_display_institutional_time_table'
 root 'home#dashboard'
  
  resources :home

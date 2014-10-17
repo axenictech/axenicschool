@@ -24,4 +24,8 @@ class Batch < ActiveRecord::Base
       errors.add(:end_date, "can't be less than start date")
     end
   end
+
+   def has_own_weekday
+     Weekday.where(batch_id:self.id).present?
+   end
 end
