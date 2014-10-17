@@ -16,8 +16,9 @@ class Batch < ActiveRecord::Base
  
  
   has_many :exam_groups
+  has_many :fee_category 
+  has_many :finance_fee_categories
   has_and_belongs_to_many :online_exams
-  # has_many :fee_category , :class_name => "FinanceFeeCategory"
 
   def end_date_cannot_be_less_than_start_date
     if end_date.present? and end_date < start_date
