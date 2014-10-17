@@ -8,7 +8,7 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Pdf Report',''%></li>
+    <li><%= link_to 'Pdf Report',exam_reports_subject_wise_students_report_path(subject_id:@subject.id,format:"pdf")%></li>
   </ul>
 </div>
 
@@ -38,18 +38,18 @@
           <% end %>
           <% unless is_valid_subject == 0 %>
             <tr class="tr-<%= cycle('odd', 'even') %>">
-              <td class="col-3"><%= student.first_name+" "+student.last_name %></td>
+              <td class="col-2"><%= student.first_name+" "+student.last_name %></td>
               <% @exam_groups.each do |exam_group| %>
                 <td class="col-3">
                   <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
                   <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.id,exam.id) unless exam.nil? %>
                   <% unless exam.nil? %>
                     <% if exam_group.exam_type == 'Marks' %>
-                      <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/"+exam.maximum_marks.to_s %>
+                      <%= exam_score.nil? ? '-' : "#{exam_score.marks || "AB"} | "+exam.maximum_marks.to_s %>
                        <% elsif exam_group.exam_type == 'Grades'%>
-                      <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-') %>
+                      <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || 'AB') %>
                     <% else %>
-                      <%= exam_score.nil? ? '-' : "#{(exam_score.marks || "-")}" +"/"+exam.maximum_marks.to_s+" Grade-#{(exam_score.grading_level.name || "-")}" %>
+                      <%= exam_score.nil? ? '-' : "#{(exam_score.marks || "AB")}" +" | "+exam.maximum_marks.to_s+" | Grade-#{(exam_score.grading_level.name || "AB")}" %>
                   
                     <% end %>
                   <% else %>
@@ -76,13 +76,15 @@
           <% end %>
           <% unless is_valid_subject == 0 %>
               <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
-              <% exam_score = ExamScore.find_by_exam_id_and_student_id(exam.id,student.id) %>
-                  <% total_marks+=exam_score.marks%>
-                  <% total_max_marks+=exam.maximum_marks%>
+              <% exam_score = ExamScore.find_by_exam_id_and_student_id(exam.id,student.id) unless exam.nil? %>
+                  <% unless exam_score.nil? %>
+                      <% total_marks+=exam_score.marks unless exam_score.marks.nil? %>
+                      <% total_max_marks+=exam.maximum_marks unless exam.maximum_marks.nil? %>
+                  <%end%>
             <%end%>
             <%end%>
               <td><font color="blue">
-                <%= "%.2f" %(total_marks*100/total_max_marks)+"%" %></font>
+                <%= "%.2f" %(total_marks*100/total_max_marks)+"%" unless total_max_marks==0 %></font>
               </td>
             <% total_marks=0%> <% total_max_marks=0%>
             <% else %>

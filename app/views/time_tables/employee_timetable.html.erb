@@ -1,0 +1,19 @@
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<div class="box">
+<%unless @timetables.empty? %>
+<div class="text-input-bg">
+<%= form_for :time,url:{action:'selectTimeEmployee',format:@employee.id},method: :get,remote:true,html:{id: "time_form"} do |f| %>
+<%= f.label :select_a_time %>
+<%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:true},{onchange:"$('#time_form').submit();"}%> 
+<%end%>
+</div> 
+<%else%>
+<h4>Time table not assigned to this employee</h4>
+<%end%>
+<br/><br/><br/>
+<div id="time_div"></div>
+</div></div>

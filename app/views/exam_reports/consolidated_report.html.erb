@@ -8,7 +8,7 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Pdf Report','' %></li>
+    <li><%= link_to 'Pdf Report',exam_reports_exam_wise_consolidated_report_path(exam_group_id:@exam_group.id,format:"pdf") %></li>
   </ul>
 </div>
 <div id="page-yield">
@@ -39,7 +39,7 @@
               <td class="col-2"><font color="blue">Percentage(%)</font></td>
             <% end %>
         </tr>
-        <% @exam_group.batch.students.each do |student|%>
+        <% @batch.students.each do |student|%>
           <tr>
             <td class="col-2"><%= student.first_name+" "+ student.last_name%></td>
      
@@ -55,7 +55,7 @@
           <% unless is_valid_subject == 0 %>
                 <% unless @exam_group.exam_type == "Grades" %>
                   <td class="col-2">
-                      <%= exam_score.nil? ? '-' : exam_score.marks || "-" %>
+                      <%= exam_score.nil? ? '-' : exam_score.marks || "AB" %>
                   </td>
                 <%else%>
                    <td class="col-2">-</td>

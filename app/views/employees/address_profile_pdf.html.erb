@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div align="center">
+<font color="purple"><b><i><h3>Axenic School</h3>
+<h4>Employee Personal Profile</h4></i></b></font>
+</div>
+
+<table class="table" align="center" style="width:900px">
+<thead>
+<tr>
+    <th colspan="4">
+    <div id ="student_main_info">
+      <h3 align="left"> <%= @employee.first_name.capitalize %> <%= @employee.middle_name.capitalize %> <%= @employee.last_name.capitalize %>  </h3>
+       <h4 align="left"> Position : <%=   @employee.employee_position.name %> </h4>
+      <h4 align="left"> Department : <%=  @employee.employee_department.name %> </h4>
+      <h4 align="left"> Employee no. : <%= @employee.employee_number %> </h4></div>
+   </th>
+  </tr>
+</thead>
+<tbody>
+<tr><td colspan="4"></td></tr>
+<tr>
+    <td class="col-2" colspan="4"><font color="brown">Employee address Details</font></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Home Address</font> </td><td class="col-2" colspan="3"><%= @employee.home_address_line1%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">City</font></td><td class="col-2" colspan="3"><%= @employee.home_city%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">State</font></td><td class="col-2" colspan="3"><%=@employee.home_state%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Country</font></td><td class="col-2"><%=@home_country %></td>
+</tr>
+
+<tr>
+    <td class="col-2"><font color="grey">Pin-code</font></td><td class="col-2"><%=@employee.home_pin_code %></td>
+</tr>
+
+<tr>
+    <td class="col-2"><font color="grey">Office Address</font> </td><td class="col-2" colspan="3"><%= @employee.office_address_line1%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">City</font></td><td class="col-2" colspan="3"><%= @employee.office_city%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">State</font></td><td class="col-2" colspan="3"><%=@employee.office_state%></td>
+</tr>
+<tr>
+    <td class="col-2"><font color="grey">Country</font></td><td class="col-2"><%=@office_country %></td>
+</tr>
+
+<tr>
+    <td class="col-2"><font color="grey">Pin-code</font></td><td class="col-2"><%=@employee.office_pin_code %></td>
+</tr>
+
+
+<tr>
+  <td class="col-2" colspan="4"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

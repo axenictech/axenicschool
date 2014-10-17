@@ -631,6 +631,8 @@ end
 
   def personal_profile
    @employee=Employee.find(params[:format])
+   @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
+
   end
 
   def address_profile
@@ -647,8 +649,7 @@ end
   def bank_info
    @employee=Employee.find(params[:format])
    @bank_details = EmployeeBankDetail.where(employee_id:@employee.id)
-   p "supriyaaaaaaaaaaaaaaaaaa"
-   p @bank_details
+  
   end
 
   def emp_payroll
@@ -666,8 +667,7 @@ end
 
    def create_archived_employee
       @employee=Employee.find(params[:format])
-      p "employeeeeeeeeeeeeee"
-      p @employee
+     
       if request.post?
           EmployeeSubject.destroy_all(:employee_id=>@employee.id)
           @archived_employee=@employee.archived_employee
@@ -685,7 +685,7 @@ end
         @employee.destroy
         flash[:notice] = "All Records of #{@employee.first_name} is Deleted Successfully" 
         redirect_to @employee
-        p "Successfully Deleted............."
+       
   end
 
   def employee_profile
@@ -695,7 +695,57 @@ end
     render 'employee_profile',layout:false
   end
 
+  def personal_profile_pdf
+      @employee=Employee.find(params[:employee_id])
+      @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
 
+      render 'personal_profile_pdf',layout:false
+  end
+
+  def address_profile_pdf
+       @employee=Employee.find(params[:employee_id])
+       @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
+       @office_country = Country.find(@employee.office_country_id).name unless @employee.home_country_id.nil?
+       render 'address_profile_pdf',layout:false
+  end
+
+  def contact_profile_pdf
+       @employee=Employee.find(params[:employee_id])
+       render 'contact_profile_pdf',layout:false
+  end
+
+   def bank_info_pdf
+       @employee=Employee.find(params[:employee_id])
+       @bank_details = EmployeeBankDetail.where(employee_id:@employee.id)
+       render 'bank_info_pdf',layout:false
+  end
+
+  def edit_personal_profile
+        @employee=Employee.find(params[:format])
+  end
+
+  def edit_address_profile
+        @employee=Employee.find(params[:format])
+  end
+
+
+  def edit_contact_profile
+        @employee=Employee.find(params[:format])
+  end
+
+  def edit_bank_info
+      @employee=Employee.find(params[:format])
+      @bank_info=@employee.employee_bank_details.all
+  end
+
+  def update_bank_details
+    @employee=Employee.find(params[:format])
+     params[:banks].each_pair do |k,v|
+        @bank_info=EmployeeBankDetail.find_by_id_and_employee_id(k,@employee.id) 
+        @bank_info.update(bank_info:v[:bank_info]) 
+    end
+    redirect_to employees_profile_path(@employee)
+  end
 
   private
   def employee_params

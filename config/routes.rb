@@ -101,7 +101,7 @@ post'weekdays/create'
 get 'time_tables/select'
 get 'time_tables/sub'
 get 'time_tables/new'
-get 'time_tables/timetable'
+
 get 'time_table_entries/select'
 get 'time_table_entries/select_subject'
 get 'time_tables/work_allotment'
@@ -155,6 +155,10 @@ get 'exam_reports/none'
 get 'exam_reports/all1'
 get 'exam_reports/none1'
 get 'exam_reports/generate_combined_report'
+get 'exam_reports/exam_wise_students_report'
+get 'exam_reports/exam_wise_consolidated_report'
+get 'exam_reports/subject_wise_students_report'
+get 'exam_reports/grouped_exam_students_report'
 get 'calender/change' 
 get 'calender/event_view'
 get 'exam_setting/:course_id/setting',to: 'exam_setting#setting', as: 'course_class_designations'
@@ -274,7 +278,15 @@ get 'employees/change_to_former'
 post 'employees/create_archived_employee'
 get 'employees/delete_employee'
 get 'employees/employee_profile'
-
+get 'employees/edit_personal_profile'
+get 'employees/edit_address_profile'
+get 'employees/edit_contact_profile'
+get 'employees/edit_bank_info'
+patch 'employees/update_bank_details'
+get 'employees/personal_profile_pdf'
+get 'employees/address_profile_pdf'
+get 'employees/contact_profile_pdf'
+get 'employees/bank_info_pdf'
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'
 delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
@@ -317,7 +329,6 @@ get 'employee_attendances/search_emp'
  get 'time_tables/teachers_timetable'
  get 'time_tables/teacher_time_table_display'
 
-
 #finance
 
 get 'finance/fees'
@@ -327,6 +338,12 @@ post 'finance/create_transaction_category'
 
 
 
+
+ get 'time_tables/employee_timetable'
+ get 'time_tables/time_table_pdf'
+ get 'time_tables/selectTimeEmployee'
+ get 'time_tables/timetable'
+ get 'time_tables/display_institutional_time_table/:next',to:'time_tables#display_institutional_time_table',as:'time_tables_display_institutional_time_table'
 
 root 'home#dashboard'
  

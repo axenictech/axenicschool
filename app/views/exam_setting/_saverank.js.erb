@@ -1,3 +1,9 @@
-
+$("ul.errors").html("")
+<% if   @rank_lev1.errors.any? %>
+		<%   @rank_lev1.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
 $('#rank_div').html("<%= j render 'rank'%>");
   $("#myModalrank").modal("hide")
+ <%end%>
