@@ -1,14 +1,16 @@
 class TimeTablesController < ApplicationController
 
 	def employee_timetable
+          @timetables=[]
           @employee=Employee.find(params[:format])
-          @is_timetable=TimeTableEntry.where(employee_id:@employee.id)
-         
-          p @is_timetable
-      end
-	def new
- 		@timetables=TimeTable.all
-
+          @time_table_entries=TimeTableEntry.where(employee_id:@employee)
+          @time_table_entries.each do |tbe|
+              @timetables<<tbe.time_table
+          end
+  end
+        
+  def new
+ 	     	@timetables=TimeTable.all
   end
 
   def selectTime
@@ -19,6 +21,56 @@ class TimeTablesController < ApplicationController
      @batches.push t.batch
     end
   end
+  end
+
+  # def timetable
+  #   # @config = Configuration.available_modules
+  #   @batches = Batch.all
+  #   unless params[:next].nil?
+  #     @today = params[:next].to_date
+  #     render (:update) do |page|
+  #       page.replace_html "timetable", :partial => 'table'
+  #     end
+  #   else
+  #      @today = Date.today
+  #      # @today = @local_tzone_time.to_date
+  #     p "ttttttttttttttttttt"
+  #     p @today
+  #   end
+  # end
+
+  def timetable
+    @today=Date.today
+    @batches=Batch.all
+  end
+
+  def display_institutional_time_table
+       @today = params[:next].to_date
+       @batches=Batch.all
+      
+  end
+
+  def selectTimeEmployee
+    @employee=Employee.find(params[:format])
+  
+    @time=TimeTableEntry.where(employee_id:@employee.id)
+   
+    @weekdays=[]
+    @class_timings=[]
+    @employees=[]
+    unless @time.nil?
+     @time.each do |t|
+     @weekdays.push t.weekday
+     @class_timings.push t.class_timing
+     @employees.push t.employee
+   end
+  end
+end
+
+  def time_table_pdf
+    @batch = Batch.find(params[:batch_id])
+     render 'time_table_pdf',layout:false
+
   end
 
   def teacher_time_table_display
@@ -57,9 +109,7 @@ end
   def teachers_timetable
      @timetables=TimeTable.all
   end
-  def timetable
-		@batches=Batch.all
-	end
+ 
   def work_allotment
     @employees = Employee.all
     @emp_subs = []
