@@ -94,12 +94,12 @@
      </tr>
 
       <tr>
-     	 <td class="col-2"><%=f.label :qualification%></td>
+     	 <td class="col-2"><%=f.label :Qualification%></td>
            <td class="col-2"><%=f.text_field :qualification%></td>
      </tr>
 
      <tr>
-     	 <td class="col-2"><%=f.label :experience_detail%></td>
+     	 <td class="col-2"><%=f.label :Experience_detail%></td>
            <td class="col-2"><%=f.text_field :experience_detail%></td>
      </tr>
 
@@ -118,7 +118,7 @@
 
      <tr>
      	<td class="col-2"><%=f.label :"Marital-Status"%></td>
-     	<td class="col-2"><%= select :employee, :marital_status, [["single"], ["married"],["divorced"]], {}, {:onchange=>"hide_or_show_fields(this.value)"} %></td>
+     	<td class="col-2"><%= select :employee, :marital_status, [["Single"], ["Married"],["Divorced"]],{prompt:true}, {:onchange=>"hide_or_show_fields(this.value)"} %></td>
      
      </tr>
 
@@ -135,12 +135,12 @@
     
 	<tr>
      	 <td class="col-2"><%=f.label :Blood_Group%></td>
-          <td class="col-2"><%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %></td>
+          <td class="col-2"><%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{prompt:true} %></td>
      </tr>
 
       <tr>
      	 <td class="col-2"><%=f.label :Nationality%></td>
-          <td class="col-2"><%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]}%></td>
+          <td class="col-2"><%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true}%></td>
      </tr>
 
     <tr>
