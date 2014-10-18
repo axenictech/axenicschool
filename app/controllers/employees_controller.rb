@@ -334,6 +334,8 @@ class EmployeesController < ApplicationController
   def edit_privilege
     @user = User.find(params[:format])
     @employee=Employee.find(params[:format])
+    @privilege_tags=PrivilegeTag.all
+
   end
 
   def update_privilege
