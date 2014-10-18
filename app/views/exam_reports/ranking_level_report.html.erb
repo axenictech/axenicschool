@@ -13,9 +13,7 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     Ranking Level Report
   </div>
-   <% unless flash[:notice].nil? %>
-    <div class="alert alert-success" style="width:50%"> <%= flash[:notice] %> </div>
-    <%end %>
+
 	<%= form_for :mode, :url=>{:action=>'select_mode'},html:{id: 'form_mode'},remote:true,method: :get do |f| %>
 	  
 	<div class="label-field-pair">

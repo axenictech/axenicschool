@@ -9,9 +9,7 @@
 </div><br/><br/>
 
 <div id="page-yield">
-  <% unless flash[:notice8].nil? %>
-    <p class="flash-msg"> <%= flash[:notice8] %> </p>
-  <% end %>
+  
 
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for (@employee),url:{action: 'admission2_create',format: @employee.id},method: :patch do |f| %>

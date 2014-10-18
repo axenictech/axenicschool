@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141018065654) do
-=======
-ActiveRecord::Schema.define(version: 20141017204427) do
->>>>>>> a8e9cb18574c669d26dc6cd57a1df61877368ab2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -572,10 +568,8 @@ ActiveRecord::Schema.define(version: 20141017204427) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "transaction_date"
-    t.integer  "finance_transaction_id"
   end
 
-  add_index "finance_donations", ["finance_transaction_id"], name: "index_finance_donations_on_finance_transaction_id", using: :btree
   add_index "finance_donations", ["transaction_id"], name: "index_finance_donations_on_transaction_id", using: :btree
 
   create_table "finance_fee_categories", force: true do |t|
