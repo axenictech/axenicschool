@@ -7,33 +7,77 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
-<div id="page-yield">
+<div class="container">
+  <div class="row" style="margin-top:30px">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+         <%= link_to 'Create fees','',style: "color:black" %>
+          </div>
 
-    <div class="box">
-      <div class="link-box">
-        <div class="link-heading"><%= link_to 'Create fees','' %>
+          <div class="panel-body" style="height:70px">
+           Create Master Fees and Additional Fees
+          </div>
         </div>
-        <div class="link-descr">Create Master Fees and Additional Fees</div>
+    </div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Fees Collection','',style: "color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px"   >
+          Create new Fees collection Date
+          </div>
       </div>
+    </div>
   
-      <div class="link-box">
-        <div class="link-heading"><%= link_to 'Fees Collection' %>  </div>
-        <div class="link-descr">Create new Fees collection Date</div>
+    <div class="col-md-2 col-xs-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Fees','',style: "color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Fees Submission
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to 'Fees Structure','',style: "color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px"   >
+          Display Fees Structure for Student
+          </div>
       </div>
-   
-      <div class="link-box">
-        <div class="link-heading"><%= link_to 'Fees' %></div>
-        <div class="link-descr">Fees Submission</div>
-      </div>
+    </div>
   
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Fees Structure' %></div>
-      <div class="link-descr">Display Fees Structure for Student</div>
+    <div class="col-md-2 col-xs-2"></div>
+  </div>
+ <div class="row" style="margin-bottom:30px">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+              <%= link_to 'Fees Defaulters','',style: "color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Student with fees Dues
+          </div>
+        </div>
     </div>
 
-    <div class="link-box">
-          <div class="link-heading"><%= link_to 'Fees Defaulters' %></div>
-          <div class="link-descr">Student with fees Dues</div>
-    </div> 
+  
+    <div class="col-md-2 col-xs-2"></div>
   </div>
-</div>
+
+  
