@@ -1,9 +1,9 @@
 $("ul.errors").html("")
-<% if @@transaction_category.errors.any? %>
-		<% @@transaction_category.errors.full_messages.each do |message| %>
+<% if @transaction_category.errors.any? %>
+		<% @transaction_category.errors.full_messages.each do |message| %>
 		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>
-  $("#").modal("hide")
-  $('#transaction_category_modal').html("<%= j render 'transaction_category'%>");    
+  $('#transaction_category_modal').modal('hide')
+  $('#display_categories').html("<%= j render 'categories'%>");    
 <% end %>
