@@ -16,7 +16,7 @@
     <% @employees.each do |e|%>
         <% employees<< e %>
     <%end%>
-    <li style="width:150px"><%= link_to "View Pdf Report",{ :action =>'advanced_search_result_pdf',format:"pdf", :employees=> employees, :search=> @search},method: :post%></li>
+     <li style="width:150px"><%= link_to "View Pdf Report",{:action =>'advance_search_result_pdf',format:"pdf", :employees=> employees, :search=> @search},method: :post%></li>
     <%end%>
   </ul>
 </div>
@@ -42,7 +42,7 @@
         <td class="col-3">
         </td></tr>
          <tr class="tr-blank"></tr>
-      <% @employee.each_with_index do |emp,i| %>
+      <% @employees.each_with_index do |emp,i| %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
           <td class="col-1">
             <%= emp.employee_number %>
