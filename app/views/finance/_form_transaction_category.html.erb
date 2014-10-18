@@ -4,10 +4,9 @@
 <div class="modal-header">
 <h3>Create New Category</h3>
 </div>
-<ul class="errors"></ul>
 <div class="modal-body">
         <ul class="errors"></ul>
-<%= form_for @transaction_category,url:{action:'create_transaction_category'} , remote:true do |f|%>
+<%= form_for @transaction_category,url:{action:'create_transaction_category'},remote:true do |f|%>
  <table class="table" style="width:85%">
         <tr>
             <td class="col-2"><%= f.label :name , class: "control-label"%></td>

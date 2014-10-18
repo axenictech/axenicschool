@@ -1,0 +1,79 @@
+<h1>Genral Profile</h1>
+
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+<table class="table table-hover" align="center" style="width:900px">
+<thead style="background-color:white">
+<tr>
+    <th colspan="4">
+   <div id ="student_main_info">
+      
+   </th>
+  </tr>
+</thead>
+<tbody>
+<tr><td colspan="4" style="background-color:white"></td></tr>
+<tr>
+    <td class="col-2">Joining Date </td><td class="col-2"><%= @employee.joining_date %></td>
+    <td colspan="2"></td>
+</tr>
+<tr>
+    <td class="col-2">Department</td><td class="col-2"><%= @employee.employee_department.name%></td>
+    <td colspan="2"></td>
+</tr>
+<tr>
+    <td class="col-2">Category</td><td class="col-2"><%= @employee.employee_category.name%></td>
+    <td colspan="2"></td>
+</tr>
+<tr>
+    <td class="col-2">Position</td><td class="col-2"><%= @employee.employee_position.name %></td>
+    <td class="col-2"></td>
+</tr>
+<tr>
+    <td class="col-2">Grade</td><td class="col-2"> <%= @employee.employee_grade.name %> </td>
+    <td class="col-2"></td>
+</tr>
+<tr>
+    <td class="col-2">Job Title</td><td class="col-2"> <%= @employee.job_title %> </td>
+    <td class="col-2"></td>
+</tr>
+
+
+
+<tr>
+    <td class="col-2">Gender</td><td class="col-2"> <%= @employee.gender %> </td>
+    <td class="col-2"></td>
+</tr>
+<tr>
+    <td class="col-2">Email</td><td class="col-2"> <%= @employee.email %> </td>
+     <td class="col-2"></td>
+</tr>
+
+<tr>
+    <td class="col-2">Status</td><td class="col-2"> <%= @employee.status %> </td>
+     <td class="col-2"></td>
+</tr>
+
+<tr>
+    <td class="col-2">Qualification</td><td class="col-2"> <%= @employee.experience_year.to_s+" Year"%> <%=@employee.experience_month.to_s+" Month"%> </td>
+     <td class="col-2"></td>
+</tr>
+
+<tr>
+    <td class="col-2">Total Experience</td><td class="col-2"> <%= @employee.qualification %> </td>
+     <td class="col-2"></td>
+</tr>
+
+<tr>
+    <td class="col-2">Experience Information</td><td class="col-2"> <%= @employee.experience_detail %> </td>
+     <td class="col-2"></td>
+</tr>
+<tr style="background-color:white">
+<td colspan="4"><%= link_to 'Edit',employees_edit_profile_path(@employee),class: "btn btn-primary" %>
+<%= link_to 'PDF Report',employees_employee_profile_path(employee_id:@employee,format: "pdf"),class: "btn btn-success" %></td>
+</tr>
+</tbody></table>
+</div>

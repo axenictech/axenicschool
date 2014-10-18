@@ -6,7 +6,6 @@
   </div>
     <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
-
 <div class="container">
   <div class="row">
   <div class="col-md-4"></div>
@@ -16,20 +15,9 @@
         <%= link_to "Create Finance Category",finance_new_transaction_category_path, remote:true%>
         </div>
         <div class="link-descr">Creates Transaction Category</div>
-      </div>
-
+    </div>
   </div>
   </div>
-  <div class="row" style="height:40px">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-  <div id="display_categories">
-    <%= render 'categories'%></div>
-  </div>
-  <div class="col-md-4"></div>
-
-  </div>
-
-
 </div>
-<div id="transaction_category_modal" class="modal fade"></div>
+<div id="categories"><%= render'transaction_categories'%></div>
+<div id="mymodal" class="modal fade"></div>

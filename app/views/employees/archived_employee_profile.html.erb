@@ -1,0 +1,52 @@
+<div id="content-header">
+  <h1>Employee Info</h1>
+  <h3>Archived Employee profile</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div class="dropdown pull-right">
+   <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
+      data-toggle="dropdown">
+      Profile
+      <span class="caret"></span>
+   </button>
+   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+      <li role="presentation">
+         
+         <%=link_to "Genral",employees_genral_profile_archived_path(@employee),remote:true%>
+      </li>
+      <li role="presentation">
+         
+         <%=link_to "Personal",employees_personal_profile_archived_path(@employee),remote:true%>
+      </li>
+      <li role="presentation">
+        <%=link_to "Address",employees_address_profile_archived_path(@employee),remote:true%>
+      </li>
+       <li role="presentation">
+        <%=link_to "Contact",employees_contact_profile_archived_path(@employee),remote:true%>
+      </li>
+       <li role="presentation">
+        <%=link_to "Bank_Info",employees_bank_info_archived_path(@employee),remote:true%>
+      </li>
+      
+   </ul>
+</div>
+
+
+<div id="profile_picture_display">
+          <%= image_tag "default_employee.png" %>
+              </div>
+
+              <div id ="student_main_info">
+      <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
+      <h4 align="left"> Employee Number : <%=@employee.id%> </h4></div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+
+<div id="profile"><%=render'disp_genral_profile_archived'%></div>

@@ -1,0 +1,18 @@
+<% unless @transaction_categories.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+				<tr class="tr-head"><th colspan="3">Category Name</th>
+        </tr>
+				
+			<tbody>
+				<% @transaction_categories.each do |tc|%>
+	
+				<tr>
+				<td class="col-2"><%= tc.name%></td>
+				<td><%= link_to 'Edit',finance_edit_transaction_category_path(tc),remote:true%></td>
+				<td><%= link_to 'Delete' ,finance_delete_transaction_category_path(tc),method: :delete, data:{confirm:"Are You sure to delete Category '#{tc.name}'?"},remote:true%></td>	
+				
+				</tr>
+				<%end%>
+        	</tbody>
+        	</table>
+<%end%>

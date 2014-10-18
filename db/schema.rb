@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010142214) do
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20141018065654) do
+=======
+ActiveRecord::Schema.define(version: 20141017204427) do
+>>>>>>> a8e9cb18574c669d26dc6cd57a1df61877368ab2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -567,8 +571,11 @@ ActiveRecord::Schema.define(version: 20141010142214) do
     t.integer  "transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "transaction_date"
+    t.integer  "finance_transaction_id"
   end
 
+  add_index "finance_donations", ["finance_transaction_id"], name: "index_finance_donations_on_finance_transaction_id", using: :btree
   add_index "finance_donations", ["transaction_id"], name: "index_finance_donations_on_transaction_id", using: :btree
 
   create_table "finance_fee_categories", force: true do |t|
@@ -855,6 +862,37 @@ ActiveRecord::Schema.define(version: 20141010142214) do
   end
 
   add_index "payroll_categories", ["payroll_category_id"], name: "index_payroll_categories_on_payroll_category_id", using: :btree
+
+  create_table "privilege_tags", force: true do |t|
+    t.string   "name_tag"
+    t.integer  "priority"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "privileges", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "school_id"
+    t.integer  "privilege_tag_id"
+    t.integer  "priority"
+  end
+
+  add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
+  add_index "privileges", ["school_id"], name: "index_privileges_on_school_id", using: :btree
+
+  create_table "privileges_users", force: true do |t|
+    t.integer  "school_id"
+    t.integer  "user_id"
+    t.integer  "privilege_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "privileges_users", ["privilege_id"], name: "index_privileges_users_on_privilege_id", using: :btree
+  add_index "privileges_users", ["school_id"], name: "index_privileges_users_on_school_id", using: :btree
+  add_index "privileges_users", ["user_id"], name: "index_privileges_users_on_user_id", using: :btree
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"

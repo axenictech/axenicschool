@@ -10,8 +10,8 @@
 	
 				<tr>
 				<td class="col-2"><%= link_to c.course_name+"  "+c.section_name,course_path(c)%></td>
-				<td><%= link_to 'edit' ,edit_course_path(c),remote:true%></td>
-				<td><%= link_to 'delete' ,course_path(c),method: :delete, data:{confirm:"Are You sure to delete Course '#{c.course_name}' ?"}%></td>	
+				<td><%= link_to 'Edit' ,edit_course_path(c),remote:true%></td>
+				<td><%= link_to 'Delete' ,course_path(c),method: :delete, data:{confirm:"Are You sure to delete Course '#{c.course_name}' ?"}%></td>	
 				
 				</tr>
 				<%end%>
