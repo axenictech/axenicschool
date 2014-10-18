@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h3>Create Master Category</h3>
+</div>
+
+<div class="modal-body">
+<ul class="errors"></ul>
+    <%= form_for @master_category,url:{action:'create_master_category'},remote: true do |f|%>
+    <%= f.hidden_field :is_master,value:true%>
+		<div class="row">
+			<div class="col-md-1"></div>
+	        <div class="col-md-3"><%= f.label :name %></div>
+	        <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
+	    </div><br/>
+	    <div class="row">
+	    <div class="col-md-1"></div>
+	        <div class="col-md-3"><%= f.label :description %></div>
+	        <div class="col-md-3"><%= f.text_field :description,:style =>"width: 250px",class: "form-control"%></div>
+	    </div><br/>
+	    <div class="row">
+	    <div class="col-md-1"></div>
+            <div class="col-md-3"><%= f.label :select_a_batch%></div>
+            <div class="col-md-3">
+            Select:&nbsp;&nbsp;
+            <%=link_to 'All',finance_assign_batch_path,remote:true%>&nbsp;&nbsp;
+            <%=link_to 'None',finance_remove_batch_path,remote:true%>&nbsp;&nbsp;
+            </div>
+        </div>
+
+        <div id="batch_list"><%= render 'batch_list'%></div><br/>
+
+        <div class="row">
+        <div class="col-md-2"></div>
+	        <div class="col-md-3"><%= f.submit 'Submit', class: "btn btn-primary"%></div>
+	        <div class="col-md-3"><%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></div>
+        </div>
+    <%end%>
+</div>    
+</div>
+</div>

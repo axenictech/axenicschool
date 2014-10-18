@@ -1,0 +1,8 @@
+$("ul.errors").html("")
+<% if @master_category.errors.any? %>
+		<% @master_category.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
+$("#myModal").modal("hide");
+<% end %>

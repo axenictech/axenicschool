@@ -2,12 +2,6 @@ class ExamScore < ActiveRecord::Base
   belongs_to :student
   belongs_to :exam
   belongs_to :grading_level
-
-  validates :marks,numericality: { only_integer: true },
-              length:{minimum:1,maximum:3}
-  validates :remarks, length:{minimum:1,maximum:30},format:{ with: /\A[a-zA-Z0-9._" "-\/]+\Z/}
-  validates :marks_cant_greater_than_maximum_marks
-
   validates :marks,numericality:true,allow_blank: true
   validates :remarks, length:{minimum:1,maximum:30},format:{ with: /\A[a-zA-Z0-9._" "-\/]+\Z/},allow_blank: true
   validate :marks_cant_be_greater_than_maximum_marks
