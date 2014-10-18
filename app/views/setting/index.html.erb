@@ -1,34 +1,33 @@
 
-<div id="content-header">
-  <h1>Configuration</h1>
-  <h3>Configuration Home</h3>
+<div class="system-header">
+  <h3>Configuration</h3>
+  <h5>Configuration Home</h5>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+    <%= link_to 'Back',:back,class: "btn btn-back" %>
   </div>
-    <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
+    <div class="line"></div>
+</div>
 
-<!-- new panel code -->
   <div class="container">
-    <div class="row">
+    <div class="row space-top">
       <div class="col-md-2"></div>
       <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Manage Course / Batch", '/setting/course_batch',style: 'color:black' %>
+        <div class="system-panel system-panel-warning " >
+          <div class="system-panel-heading">
+            <%= link_to "Manage Course / Batch", '/setting/course_batch'%>
           </div>
-          <div class="panel-body" style="height:70px">
+          <div class="system-panel-body">
             Add a new Course or Batch for this academic year.
           </div>
         </div>
        
       </div>
       <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Manage Student Category",'/categories',style: 'color:black' %>
+        <div class="system-panel system-panel-warning ">
+          <div class="system-panel-heading">
+          <%= link_to "Manage Student Category",'/categories' %>
           </div>
-          <div class="panel-body" style="height:70px">
+          <div class="system-panel-body" >
            Add student category.
           </div>
         </div>
@@ -38,25 +37,23 @@
       <div class="col-md-2"></div>
     </div>
   
-
-  
-    <div class="row">
+    <div class="row space-bottom">
       <div class="col-md-2"></div>
       <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Manage Subject","/subjects",style: 'color:black' %>          </div>
-          <div class="panel-body" style="height:70px">
+        <div class="system-panel system-panel-warning " >
+          <div class="system-panel-heading">
+            <%= link_to "Manage Subject","/subjects" %>          </div>
+          <div class="system-panel-body">
             Manage subjects corresponding to different courses.
           </div>
         </div>
        
       </div>
       <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "General Settings", "/general_settings/new",style: 'color:black'%></div>
-          <div class="panel-body" style="height:70px">
+        <div class="system-panel system-panel-warning ">
+          <div class="system-panel-heading">
+          <%= link_to "General Settings", "/general_settings/new"%></div>
+          <div class="system-panel-body">
            Set some general configurations related to institution,attendance, etc.
           </div>
         </div>
