@@ -11,13 +11,13 @@
   <div class="col-md-4"></div>
   <div class="col-md-4">
     <div class="link-box">
-        <div class="link-heading"><%= link_to "Create Finance Category",finance_new_transaction_category_path, remote:true%>
+        <div class="link-heading">
+        <%= link_to "Create Finance Category",finance_new_transaction_category_path, remote:true%>
         </div>
         <div class="link-descr">Creates Transaction Category</div>
     </div>
   </div>
-  <div class="col-md-4"></div>
-</div>
+  </div>
 </div>
 <div id="categories"><%= render'transaction_categories'%></div>
 <div id="mymodal" class="modal fade"></div>

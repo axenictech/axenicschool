@@ -7,27 +7,54 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
-<div id="page-yield">
+<div class="container" style="margin-top:30px">
+  <div class="row">
+   <div class="col-md-2 col-xs-2"></div> 
+   <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to 'Settings' ,'/exam_setting',style:"color:black" %>          </div>
+          <div class="panel-body" style="height:70px">
+            Manage Grading Levels, Ranking Levels and Class Designations
+          </div>
+        </div>
+   </div>
+   <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Exam Management','/exam_groups',style:"color:black" %>  
+          </div>
+          <div class="panel-body" style="height:70px">
+            Create new exams, enter results.
+          </div>
+        </div>
+   </div>
 
-    <div class="box">
-      <div class="link-box">
-        <div class="link-heading"><%= link_to 'Settings' ,'/exam_setting' %></div>
-        <div class="link-descr">Manage Grading Levels, Ranking Levels and Class Designations</div>
-      </div>
+   <div class="col-md-2 col-xs-2" style="margin-top:30px"></div>
+
+   <div class="row">
+     <div class="col-md-4 col-xs-4"></div>
+     <div class="col-md-4 col-xs-4">
+       <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Report Center', '/exam_reports/report_center',style:"color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            View Student Reports
+          </div>
+        </div>
+     </div>
+     <div class="col-md-4 col-xs-4"></div>
+   </div>
+  </div>
   
-      <div class="link-box">
-        <div class="link-heading"><%= link_to 'Exam Management','/exam_groups' %>  </div>
-        <div class="link-descr">Create new exams, enter results.</div>
-      </div>
+</div>
 
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Report Center', '/exam_reports/report_center' %></div>
-      <div class="link-descr">View Student Reports</div>
-    </div>
+
 
      <!--  <div class="link-box">
           <div class="link-heading"><%#= link_to 'Online Exam','/online_exams' %></div>
           <div class="link-descr">Manage Online Exam System</div>
     </div> -->
-  </div>
-</div>
+ 

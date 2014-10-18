@@ -7,55 +7,173 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
-<div id="page-yield">
-  <div class="box">
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Exam Wise Report','exam_wise_report' %></div>
-      <div class="link-descr">Generate exam wise report</div>
+<div class="container">
+  <div class="row" style="margin-top:30px">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Exam Wise Report','exam_wise_report', style:"color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generate exam wise report
+          </div>
+        </div>
     </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Subject Wise Report' ,'subject_wise_report' %> </div>
-      <div class="link-descr">Generate subject wise report</div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Subject Wise Report' ,'subject_wise_report',style:"color:black"%>
+          
+          </div>
+
+          <div class="panel-body" style="height:70px">
+             Generate subject wise report
+          </div>
+        </div>
+
     </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Grouped Exam Reports','grouped_exam_report' %></div>
-      <div class="link-descr">Group up exams for specific reports</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Archived Student Reports' , 'archived_student_report' %></div>
-      <div class="link-descr">Generates Grouped Exam reports for Archived Students</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Student Ranking per Subject' ,'student_ranking_per_subject' %></div>
-      <div class="link-descr">Generates reports for Subject wise Student Rank</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Student Ranking per Batch' ,'student_ranking_per_batch'%></div>
-      <div class="link-descr">Generates reports for Batch wise Overall Student Rank</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Student Ranking per Course' ,'student_ranking_per_course'%></div>
-      <div class="link-descr">Generates reports for Course wise Overall Student Rank</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Student Ranking per School', 'student_ranking_per_school' %></div>
-      <div class="link-descr">Generates reports for Overall Student Rank for this School</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Student Ranking per Attendance','student_ranking_per_attendance' %></div>
-      <div class="link-descr">Generates reports for Batch wise Student Rank per Attendance</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Ranking Level Report' ,'ranking_level_report'%></div>
-      <div class="link-descr">Generates reports based on different Ranking Levels</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'View Transcripts' , 'view_transcripts'%></div>
-      <div class="link-descr">Generates Student Transcripts</div>
-    </div>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to 'Combined Reports' ,'combined_report' %></div>
-      <div class="link-descr">Generates Combined Student Reports</div>
-    </div>
+    <div class="col-md-2"></div>
   </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Grouped Exam Reports','grouped_exam_report' ,style:"color:black"%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+           Group up exams for specific reports
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Archived Student Reports' , 'archived_student_report',style:"color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates Grouped Exam reports for Archived Students
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Student Ranking per Subject' ,'student_ranking_per_subject' ,style:"color:black"%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates reports for Subject wise Student Rank
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Student Ranking per Batch' ,'student_ranking_per_batch',style:"color:black"%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates reports for Batch wise Overall Student Rank
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Student Ranking per Course' ,'student_ranking_per_course',style:"color:black"%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates reports for Course wise Overall Student Rank
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Student Ranking per School', 'student_ranking_per_school',style:"color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates reports for Overall Student Rank for this School
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Student Ranking per Attendance','student_ranking_per_attendance',style:"color:black"%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates reports for Batch wise Student Rank per Attendance
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Ranking Level Report' ,'ranking_level_report',style:"color:black"%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates reports based on different Ranking Levels
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row" style="margin-bottom:30px">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'View Transcripts' , 'view_transcripts',style:"color:black"%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates Student Transcripts
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Combined Reports' ,'combined_report',style:"color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Generates Combined Student Reports
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  
 </div>
