@@ -1,3 +1,9 @@
+<% if @student.nil? %>
+<div id="score-table" style="width:80%">
+    <div class="custom_header" align="left">
+      <span class="student">Students not found</span>
+     </div></div>
+<%else%>
   <div id="score-table" style="width:80%">
     <div class="custom_header" align="left">
       <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
@@ -30,18 +36,20 @@
             <td class="col-3">
               <% unless @exam.nil? %>
                 <% if exam_group.exam_type == "Marks and Grades" %>
-                  <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "-")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level.name || "-")}]" %>
+                  <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "AB")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level.name || "-")}]" %>
                 <% elsif exam_group.exam_type == "Marks" %>
-                  <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/"+@exam.maximum_marks.to_s %>
+                  <%= exam_score.nil? ? '-' : "#{exam_score.marks || "AB"}/"+@exam.maximum_marks.to_s %>
                 <% else %>
-                  <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-')  %>
+                  <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || 'AB')  %>
                 <% end %>
               <% else %>
                NA
             <% end %>
           </td>
-           <% max_total += @exam.maximum_marks %>
-        <% marks_total += exam_score.marks%>
+          <% unless @exam.nil? %>
+            <% max_total += @exam.maximum_marks.to_f %>
+            <% marks_total += exam_score.marks.to_f unless exam_score.nil? %>
+          <%end%>
           <% end %>
           <td class="col-1"><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
           </tr>
@@ -65,8 +73,10 @@
           <% end %>
           <% unless is_valid_subject == 0 %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.student_id,exam.id) unless exam.nil? %>
-             <% @max_total += exam.maximum_marks %>
-              <% @marks_total += exam_score.marks %>
+            <% unless exam.nil? %>
+              <% @max_total += exam.maximum_marks.to_f %>
+              <% @marks_total += exam_score.marks.to_f unless exam_score.nil? %>
+            <%end%>
           <%end%>
           <%end%>
           <% if exam_group.exam_type == "Marks and Grades" %>
@@ -90,3 +100,4 @@
         Total Marks = <%= total_marks %> | Aggregate % = <%= percentage  unless percentage.nil? %></font>
       </div>
   </div>
+<%end%>

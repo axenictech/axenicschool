@@ -7,40 +7,96 @@
     <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br/><br/>
 
-<div id="page-yield">
-	<div id="box">
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 "></div>
+    <div class="col-md-4 ">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Employee Category",'new_category' %>
+          </div>
 
+          <div class="panel-body" style="height:70px">
+            Add and Edit Employee Category
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Employee Department",'new_department'  %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+              Add and Edit Employee Department
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2 "></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 "></div>
+    <div class="col-md-4 ">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Employee Position",'new_position'  %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Add and Edit Employee Position
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Employee Grade",
+        'new_grade' %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Add and Edit Employee Grade.
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2 "></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 "></div>
+    <div class="col-md-4 ">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Payroll Category",
+        'new_payroll_category' %>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Add and Edit Payroll category.
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Bank Detail",'new_bank_field'%>
+          </div>
+
+          <div class="panel-body" style="height:70px">
+            Add and Edit Bank Detail
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-2 "></div>
+  </div>
+</div>
+
+      
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Category",'new_category' %></div>
-        <div class="link-descr">Add and Edit Employee Category</div>
-      </div>
-
-    
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Department",'new_department'  %></div>
-        <div class="link-descr">Add and Edit Employee Department</div>
-      </div>
-
-        <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Position",'new_position'  %></div>
-        <div class="link-descr">Add and Edit Employee Position</div>
-      </div>
-
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Employee Grade",
-        'new_grade' %></div>
-        <div class="link-descr">Add and Edit Employee Grade.</div>
-      </div>
-     
-     <div class="link-box">
-       <div class="link-heading"><%= link_to "Add Payroll Category",
-        'new_payroll_category' %></div>
-        <div class="link-descr">Add and Edit Payroll category.</div>
-      </div>
-
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Add Bank Detail",'new_bank_field'%></div>
-        <div class="link-descr">Add and Edit Bank Detail</div>
+        <div class="link-heading"></div>
+        <div class="link-descr"></div>
       </div>
 
    </div>

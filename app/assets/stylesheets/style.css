@@ -12,6 +12,16 @@ body {
 	padding:10px;
 	background:#2b2f3a;
 }
+
+#icon
+{
+float:left;
+}
+
+#title
+{
+float:right;
+}
 #content {
 	padding:10px;
 	padding-bottom:60px;   /* Height of the footer element */

@@ -10,7 +10,6 @@ class CreateGeneralSettings < ActiveRecord::Migration
       t.string :language
       t.string :time_zone
       t.string :country
-      t.string :network_state
       t.string :include_grading_system
       t.integer :addmission_number_auto_increament
       t.integer :employee_number_auto_increament
@@ -22,7 +21,7 @@ class CreateGeneralSettings < ActiveRecord::Migration
     create_default
   end
   def create_default
-   GeneralSetting.create :school_or_college_name=>""
+   GeneralSetting.create :school_or_college_name=>"Axenic School"
   end
 
 end

@@ -66,7 +66,7 @@ class ExamGroupsController < ApplicationController
 
   def previous_exam_group
     @batch=Batch.find(params[:batch][:id])
-    @exam_groups=@batch.exam_groups.all
+    @exam_groups=@batch.exam_groups.where(result_published:true)
   end
 
   def previous_exam_details

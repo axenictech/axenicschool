@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+#score-table{
+    background: #C3D9FF;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 20px 20px;
+}
+table#listing{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.custom_header{
+    margin: 0 auto;
+    padding: 5px;
+    background: #fff;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
+<div class="page-yield" class="available_sections">
+  <div class="hor_line"></div>
+  <div id="student_profile_heading" class="section">
+    <div id ="student_main_info">
+      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize+" | "+ @start_date.to_s+" - "+@end_date.to_s%></h2>
+      <h4><%= t('attendance_wise_ranking_report') %></h4>
+    </div>
+  </div>
+<div id="score-table">
+ <table id="listing" width="100%" cellpadding="1" cellspacing="1" border="1">
+            <tr class="tr-head">
+              <th><font color="blue">Sr.No.</font></th>
+              <th><font color="blue">Admission no</font></th>
+              <th><font color="blue">Student Name</font></th>  
+              <th><font color="blue">Working Days</font></th>       
+              <th><font color="blue">Attended</font></th>
+              <th><font color="blue">Percentage</font></th>
+              <th><font color="blue">Rank</font></th>
+            </tr>
+            <%attendence=[]%>
+            <% @students.each_with_index do |student,i| %>
+                <% total_days=0 %><% absent_days=0 %>
+                <% (@start_date..@end_date).each do |date| %>
+                  <% @weekdays.each do |d| %>
+                    <% if I18n.l(date.to_date,:format=>"%A")==d.weekday %>
+                      <% total_days+=1 %>
+                    <%end%>
+                    <%end%>
+                <% @attendence=Attendence.find_by_student_id_and_month_date(student.id,date.to_date) %>
+                    <% unless @attendence.nil? %>
+                      <% absent_days+=1 %>
+                    <%end%>
+                <%end%>
+                <% present_days=total_days-absent_days %>
+                <% attendence<<[student,total_days,present_days]%>
+            <%end%>
+          <%attendence.sort_by{|r| r[2]}.reverse.each_with_index do |student,i|%>
+              <tr class="tr-<%= cycle('odd', 'even') %>">
+                <td class="col-1"><%= i+1 %></td>
+                <td class="col-1"><%= student[0].admission_no%></td>
+                <td class="col-3"><%= student[0].first_name+" "+student[0].last_name %></td>
+                <td class="col-1"><%= student[1] %></td>
+                <td class="col-1"><%= student[2] %></td>
+                <td class="col-1"><%= "%.2f" %(student[2]*100/student[1])+"%" unless student[1]==0 %></td>
+                <td class="col-1"><%= i+1 %></td>
+              </tr>
+            <% end %>
+          </table>
+</div>
+</div>
+</body>
+</html>

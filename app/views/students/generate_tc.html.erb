@@ -75,7 +75,9 @@ table#pdf-table{
 <body>
 <div class="hor_line"></div>
 <div id="title">
-<h1 align="center">Axenic School</h1></div>
+<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
   <h2 align="center"><%= t('transfer_certificate') %></h2>
   <div class="hor_line"></div>
   <div class="extender"> </div>

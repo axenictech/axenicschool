@@ -21,8 +21,6 @@
         <% unless @employee.nil? %>
           <li><%= link_to "View Profile",employees_profile_path(@employee.id)%></li>
         <%end%>  
-      <%else%>
-        <li><%= link_to "View Profile" %></li>
       <% end %>
       
       <li style="width:150px"><%= link_to "Change Password", users_change_password_path(@user)%></li>

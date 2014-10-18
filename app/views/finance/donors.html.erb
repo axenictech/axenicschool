@@ -1,0 +1,35 @@
+<div id="content-header">
+  <h1>Donations</h1>
+  <h3>Donors</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), '/finance' %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<h5>List of Donors</h5>
+<% unless @donors.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+	<th>Name</th>
+	<th>Description</th>
+	<th>Amount</th>
+	<th>Created At</th>
+	<th></th>
+	</tr>
+		<% @donors.each do |d|%>
+
+		<tr>
+		<td class="col-3"><%= link_to d.donor,finance_donation_receipt_path(d)%></td>
+		<td class="col-3"><%= d.description%></td>
+		<td class="col-3"><%= d.amount%></td>
+		<td class="col-3"><%= d.created_at.to_date%></td>
+		<td class="col-3"><%= link_to 'Edit',finance_edit_donation_path(d)%>&nbsp;&nbsp;
+			<%= link_to 'Delete' ,finance_delete_donation_path(d),method: :delete, data:{confirm:"Are You sure to delete donor '#{d.donor}'?"}%></td>	
+		
+		</tr>
+		<%end%>
+</table>
+<%end%>
+</div>

@@ -7,30 +7,16 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
+<div id="page-yield">
+  <div>
+  	 <div id="time">
+       <%= render 'institutional_time_table' %>
+     </div>
+</div>
+</div> 
 
-<div id="box">
- <table align="center" class="table table-hover table-bordered" style="width:800px">
 
-			
-<% @batches.each do |b| %>
-		<tr>
-					<td class="col-2" >Time </td>
-			
-         <% b.class_timings.each do |c|%>
-
-     	<td><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></td>
-            
-            <%end%>
-            </tr>
-
-		<tr  class="tr-head">
-		<td class="col-2"> <%= b.course.code + ' - ' + b.name %> </td>
-		</tr>
-          <%end%>
-      
-     
-</table>
-</div>    
+ 
     
 
 

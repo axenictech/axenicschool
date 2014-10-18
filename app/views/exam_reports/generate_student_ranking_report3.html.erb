@@ -8,7 +8,7 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Pdf report', '' %></li>
+    <li><%= link_to 'Pdf report',exam_reports_attendance_wise_ranking_report_path(batch_id:@batch.id,start_date:@start_date,end_date:@end_date,format:"pdf") %></li>
   </ul>
 </div>
 <div id="page-yield">
@@ -32,15 +32,41 @@
               <th><font color="blue">Percentage</font></th>
               <th><font color="blue">Rank</font></th>
             </tr>
+            <%attendence=[]%>
             <% @students.each_with_index do |student,i| %>
+                <% total_days=0 %><% absent_days=0 %>
+                <% (@start_date..@end_date).each do |date| %>
+                <%is_holiday=false%>
+                <% @batch_events.each do |be|%>
+                  <% if be.event.start_date<=date and be.event.end_date>=date and be.event.is_holiday=true %>
+                    <% is_holiday=true%>
+                  <%end%>
+                <%end%>
+                  <% @weekdays.each do |d| %>
+                    <% if I18n.l(date.to_date,:format=>"%A")==d.weekday %>
+                      <% total_days+=1 %>
+                    <%end%>
+                    <%end%>
+                <% @attendence=Attendence.find_by_student_id_and_month_date(student.id,date.to_date) %>
+                    <% unless @attendence.nil? %>
+                      <% absent_days+=1 %>
+                    <%end%>
+                    <% if is_holiday==true%>
+                        <% total_days-=1 %>
+                    <%end%>
+                <%end%>
+                <% present_days=total_days-absent_days unless total_days==0%>
+                <% attendence<<[student,total_days,present_days]%>
+            <%end%>
+          <%attendence.sort_by{|r| r[2]}.reverse.each_with_index do |student,i|%>
               <tr class="tr-<%= cycle('odd', 'even') %>">
                 <td class="col-1"><%= i+1 %></td>
-                <td class="col-1"><%= student.admission_no%></td>
-                <td class="col-3"><%= student.first_name+" "+student.last_name %></td>
-                <td class="col-1"><%= student. %></td>
-                <td class="col-1"><%= student %></td>
-                <td class="col-1"><%= student%></td>
-                <td class="col-1"><%= student %></td>
+                <td class="col-1"><%= student[0].admission_no%></td>
+                <td class="col-3"><%= student[0].first_name+" "+student[0].last_name %></td>
+                <td class="col-1"><%= student[1] %></td>
+                <td class="col-1"><%= student[2] %></td>
+                <td class="col-1"><%= "%.2f" %(student[2]*100/student[1])+"%" unless student[1]==0 %></td>
+                <td class="col-1"><%= i+1 %></td>
               </tr>
             <% end %>
           </table>

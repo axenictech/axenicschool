@@ -34,12 +34,14 @@ class ExamReportsController < ApplicationController
     @exam_group=ExamGroup.find(params[:exam_group_id])
     @batch=@exam_group.batch
     @students=@batch.students.all
+    @general_setting=GeneralSetting.first
     render 'exam_wise_students_report',layout:false
   end
 
   def exam_wise_consolidated_report
     @exam_group=ExamGroup.find(params[:exam_group_id])
     @batch=@exam_group.batch
+    @general_setting=GeneralSetting.first
     render 'exam_wise_consolidated_report',layout:false
   end
 
@@ -84,6 +86,7 @@ class ExamReportsController < ApplicationController
       @batch=@subject.batch
       @exam_groups=@batch.exam_groups.where(result_published:true)
       @students=@batch.students.all
+      @general_setting=GeneralSetting.first
       render 'subject_wise_students_report',layout:false
   end
 
@@ -112,6 +115,7 @@ class ExamReportsController < ApplicationController
       @students=@batch.students.all
       @exam_groups=@batch.exam_groups.where(result_published:true)
       @subjects=@batch.subjects.all
+      @general_setting=GeneralSetting.first
       render 'grouped_exam_students_report',layout:false
   end
 
@@ -138,7 +142,7 @@ class ExamReportsController < ApplicationController
         @batch=Batch.find(params[:batch_select][:id])
         @students=@batch.archived_students.all
         @student=@batch.archived_students.last
-        @exam_groups=@batch.exam_groups.all
+        @exam_groups=@batch.exam_groups.where(result_published:true)
         @subjects=@batch.subjects.all
       else
          flash[:notice_arch]="Please select batch"
@@ -149,10 +153,19 @@ class ExamReportsController < ApplicationController
     end
   end
 
+  def archived_students_exam_report
+      @batch=Batch.find(params[:batch_id])
+      @students=@batch.archived_students.all
+      @exam_groups=@batch.exam_groups.where(result_published:true)
+      @subjects=@batch.subjects.all
+      @general_setting=GeneralSetting.first
+      render 'archived_students_exam_report',layout:false
+  end
+
   def archived_student
       @student=ArchivedStudent.find(params[:student_id])
       @batch=@student.batch
-      @exam_groups=@batch.exam_groups.all
+      @exam_groups=@batch.exam_groups.where(result_published:true)
       @subjects=@batch.subjects.all
   end
 
@@ -164,6 +177,13 @@ class ExamReportsController < ApplicationController
   def exam_group_wise_report
      @exam_group=ExamGroup.find(params[:exam_group_option][:id])
      @batch=@exam_group.batch
+  end
+
+  def archived_students_consolidated_report
+      @batch=Batch.find(params[:batch_id])
+      @exam_groups=@batch.exam_groups.where(result_published:true)
+      @general_setting=GeneralSetting.first
+      render 'archived_students_consolidated_report',layout:false
   end
 
   def student_ranking_per_subject
@@ -182,7 +202,7 @@ class ExamReportsController < ApplicationController
          @subject=Subject.find(params[:rank_report][:subject_id])
          @batch=@subject.batch
          @students=@batch.students.all
-         @exam_groups=@batch.exam_groups.all
+         @exam_groups=@batch.exam_groups.where(result_published:true)
       else
          flash[:notice_rank_sub]="Please select subject"
          @batches=Batch.all
@@ -190,6 +210,15 @@ class ExamReportsController < ApplicationController
          render 'student_ranking_per_subject'
       end
     end
+  end
+
+  def subject_wise_ranking_report
+    @subject=Subject.find(params[:subject_id])
+    @batch=@subject.batch
+    @students=@batch.students.all
+    @exam_groups=@batch.exam_groups.where(result_published:true)
+    @general_setting=GeneralSetting.first
+    render 'subject_wise_ranking_report',layout:false
   end
 
   def student_ranking_per_batch
@@ -201,7 +230,7 @@ class ExamReportsController < ApplicationController
     if params[:rank_report][:batch_id].present? 
         @batch=Batch.find(params[:rank_report][:batch_id])
         @students=@batch.students.all
-        @exam_groups=@batch.exam_groups.all
+        @exam_groups=@batch.exam_groups.where(result_published:true)
         @subjects=@batch.subjects.all
      else
          flash[:notice_rank_batch]="Please select batch"
@@ -209,6 +238,15 @@ class ExamReportsController < ApplicationController
          render 'student_ranking_per_batch'
       end
     end
+  end
+
+  def batch_wise_ranking_report
+      @batch=Batch.find(params[:batch_id])
+      @students=@batch.students.all
+      @exam_groups=@batch.exam_groups.where(result_published:true)
+      @subjects=@batch.subjects.all
+      @general_setting=GeneralSetting.first
+      render 'batch_wise_ranking_report',layout:false
   end
 
   def student_ranking_per_course
@@ -228,12 +266,27 @@ class ExamReportsController < ApplicationController
     end
   end
 
+  def course_wise_ranking_report
+    @course=Course.find(params[:course_id])
+    @batches=@course.batches.all
+    @general_setting=GeneralSetting.first
+    render 'course_wise_ranking_report',layout:false
+  end
+
   def student_ranking_per_school
     @courses=Course.all
     @students=Student.all
-    @exam_groups=ExamGroup.all
+    @exam_groups=ExamGroup.where(result_published:true)
   end
 
+  def school_wise_ranking_report
+    @courses=Course.all
+    @students=Student.all
+    @exam_groups=ExamGroup.where(result_published:true)
+    @general_setting=GeneralSetting.first
+    render 'school_wise_ranking_report',layout:false
+  end
+  
   def student_ranking_per_attendance
     @batches=Batch.all
   end
@@ -244,10 +297,27 @@ class ExamReportsController < ApplicationController
     if params[:rank_report][:batch_id].present? 
         if params[:rank_report][:start_date].present?
             if params[:rank_report][:end_date].present?
-              @batch=Batch.find(params[:rank_report][:batch_id])
-              @start_date=params[:rank_report][:start_date].to_date
-              @end_date=params[:rank_report][:end_date].to_date
-              @students = @batch.students.all
+              if params[:rank_report][:start_date].to_date<Date.today  
+                if params[:rank_report][:end_date].to_date<Date.today
+                   if params[:rank_report][:start_date].to_date<params[:rank_report][:end_date].to_date               
+                      @batch=Batch.find(params[:rank_report][:batch_id])
+                      @start_date=params[:rank_report][:start_date].to_date
+                      @end_date=params[:rank_report][:end_date].to_date
+                      @students = @batch.students.all
+                      @weekdays=@batch.weekdays.all
+                      @batch_events=@batch.batch_events.all
+                   else
+                      flash[:notice_rank_att]="End date cannot be less than start date"
+                      render 'student_ranking_per_attendance'
+                   end
+                else
+                  flash[:notice_rank_att]="End date cannot be in future"
+                  render 'student_ranking_per_attendance'
+                end
+              else
+                flash[:notice_rank_att]="Start date cannot be in future"
+                render 'student_ranking_per_attendance'
+              end
             else
               flash[:notice_rank_att]="Please select end date"
               render 'student_ranking_per_attendance'
@@ -263,12 +333,22 @@ class ExamReportsController < ApplicationController
     end
   end
 
+  def attendance_wise_ranking_report
+      @batch=Batch.find(params[:batch_id])
+      @start_date=params[:start_date].to_date
+      @end_date=params[:end_date].to_date
+      @students = @batch.students.all
+      @weekdays=@batch.weekdays.all
+      @general_setting=GeneralSetting.first
+      render 'attendance_wise_ranking_report',layout:false
+  end
+
   def generate_view_transcripts
     if request.get?
     if params[:transcript][:batch_id].present? 
        @batch=Batch.find(params[:transcript][:batch_id])
        @students=@batch.students.all
-       @exam_groups=@batch.exam_groups.all
+       @exam_groups=@batch.exam_groups.where(result_published:true)
        @student=@batch.students.last
     else
         flash[:notice_tran]="Please select batch"
@@ -280,8 +360,16 @@ class ExamReportsController < ApplicationController
   def student_view_transcripts
      @student=Student.find(params[:student_id])
      @batch=@student.batch
-     @exam_groups=@batch.exam_groups.all
+     @exam_groups=@batch.exam_groups.where(result_published:true)
      @students=@batch.students.all
+  end
+
+  def students_transcripts_report
+    @batch=Batch.find(params[:batch_id])
+    @students=@batch.students.all
+    @exam_groups=@batch.exam_groups.where(result_published:true)
+    @general_setting=GeneralSetting.first
+    render 'students_transcripts_report',layout:false
   end
 
   def select_mode

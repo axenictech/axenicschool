@@ -51,7 +51,7 @@ class Student < ActiveRecord::Base
   def archived_student
     student_attributes = self.attributes   
     student_attributes["student_id"]= self.id
-    archived_student = ArchivedStudent.new(student_attributes)
+    archived_student = ArchivedStudent.create(student_attributes)
   end
 
   private

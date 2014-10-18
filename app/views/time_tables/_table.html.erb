@@ -1,0 +1,81 @@
+<div id="register">
+  <div class="header">
+    <div class="next">
+      <%= link_to "►", :url=>{:controller=>"time_tables", :action=>"display_institutional_time_table",:next=>(@today+1.day)},remote:true %>
+    </div>
+    <div class="month">
+      <%= I18n.l(@today,:format=>" %d %B %Y") %>
+    </div>
+    <div class="next">
+      <%= link_to "►", :url=>{:controller=>"time_tables", :action=>"display_institutional_time_table",:next=>(@today+1.day)},remote:true %>
+    </div>
+    <div class="extender"></div>
+  </div>
+</div>
+
+<% @batches.each do |b| %>
+        <%weekday=Weekday.where(batch_id:b.id,weekday:@today.wday) if b.has_own_weekday%>
+            <% weekday = Weekday.find_by_batch_id_and_weekday(nil, @today.wday) unless b.has_own_weekday %>
+    <%@timetable = nil %>
+    <%@timetable=TimeTable.tte_for_the_day(b,@today)%>
+    
+                                                                  
+
+   <% unless @timetable.blank? %>
+      <table border="0" align="center" width="100%" id="timing"  cellspacing="0">
+        <tr>
+          <td class="head">
+            <div class="top">
+              <%= t('time_text') %>
+            </div>
+            <div class="bottom">
+              <div class="course themed_text">
+                <%= b.course.code + ' - ' + b.name %>
+              </div>
+            </div>
+          </td>
+          <td class="td-blank"> </td>
+          <% @timetable.each do |t| %>
+            <% @timing = ClassTiming.find(t.class_timing_id) %>
+            <td>
+              <div class="top">
+                <%= @timing.start_time.strftime("%I:%M%p") unless @timing.start_time.nil? %>-<%= @timing.end_time.strftime("%I:%M%p") unless @timing.end_time.nil? %>
+              </div>
+              <div class="bottom">
+                <div class="subject">
+                  <% unless t.subject_id.nil? %>
+                    <% unless t.subject.elective_group_id.nil?   %>
+                      <%= shorten_string(t.subject.elective_group.name.to_s,10) %>
+                    <% else %>
+                      <%= t.subject.code  %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <% if @config.include?('HR') %>
+                  <% unless t.employee.nil? %>
+                  <div class="employee">
+                    <% unless t.nil? %>
+                      <% unless t.subject.nil? %>
+                        <% unless t.subject.elective_group_id.nil?   %>
+                          <%= t('elective') %>
+                        <% else %>
+                          <%= t.employee.first_name unless t.employee.nil? %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                        <% end %>
+                      <% end %>
+                  </div>
+            </td>
+          <% end %>
+
+        </tr>
+      </table>
+    <% else %>
+      <div class="no-tt-entry"><%= t('no_timetable_entry_for_batch') %>: <%= b.id %> </div>
+    <% end %>
+  <% end %>
+
+</div>
+                                                            

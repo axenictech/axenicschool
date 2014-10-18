@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+#score-table{
+    background: #C3D9FF;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 20px 20px;
+}
+table#listing{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.custom_header{
+    margin: 0 auto;
+    padding: 5px;
+    background: #fff;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
+<div class="page-yield" class="available_sections">
+  <div class="hor_line"></div>
+  <div id="student_profile_heading" class="section">
+    <div id ="student_main_info">
+      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize+" | "+@subject.name%></h2>
+      <h4><%= t('subject_wise_ranking_report') %></h4>
+    </div>
+  </div>
+<div id="score-table">
+ <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" border="1">
+      <tr class="tr-head">
+          <th><font color="blue">Sr.No.</font></th>
+          <th><font color="blue">Admission No</font></th>
+          <th><font color="blue">Student Name</font></th>
+
+          <% ranks = [] %>
+          <% rank_students=[] %>
+          <% group_ranks=[] %>
+          <% @exam_groups.each do |exam_group| %>
+            <% grouped_exams=GroupedExamReport.where(subject_id:@subject.id,exam_group_id:exam_group.id,batch_id:@batch.id)%>
+                <% grouped_exams.each do |ge|%>
+                    <% ranks<<[ge.student_id,ge.marks.to_f]%>
+                  <%end%>
+                  <% ranks.sort_by{|r| r[1]}.reverse.each do |rank|%>
+                      <% rank_students<<rank[0]%>
+                  <%end%>
+                  <% group_ranks<<[exam_group.id,rank_students] %>
+                  <% ranks = [] %>
+                  <% rank_students=[] %>
+                  <th><font color="blue"><%= exam_group.name %></font></th>
+          <%end%>
+        </tr>
+        <% @students.reverse.each_with_index do |student,i| %>
+            <% is_valid_subject=1 %>
+            <% unless @subject.elective_group_id.nil? %>
+                <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.id,@subject.id) %>
+                <% is_valid_subject = 0 if is_student_elective.nil? %>
+            <% end %>
+            <% unless is_valid_subject == 0 %>
+            <tr class="tr-<%= cycle('odd', 'even') %>">
+            <td><%= i+1 %></td>
+            <td><%= student.admission_no.present? ? student.admission_no : "-" %></td>
+            <td ><%= student.first_name+" "+student.last_name %></td>
+            <td class="col-3">
+              <% @exam_groups.each do |exam_group| %>
+                <%index=0%>
+                <% group_ranks.each do |group_rank|%>
+                    <% if exam_group.id==group_rank[index]%>
+                        <% group_rank[index+1].each_with_index do |rank,i|%>
+                            <% if student.id==rank%>
+                                <%=i%>
+                            <%end%>
+                        <%end%>
+                    <%end%>
+                    <%index+=2%>
+                <%end%>        
+              <%end%>
+            </td>
+            </tr>
+            <%end%>
+        <% end %>
+      </table>
+</div>
+</div>
+</body>
+</html>

@@ -137,6 +137,7 @@ class StudentsController < ApplicationController
     @immediate_contact=Guardian.find(@student.immediate_contact)
     @student_previous_data=StudentPreviousData.find_by_student_id(@student.id)
     @student_previous_subject_marks=StudentPreviousSubjectMark.where(student_id:@student.id)
+    @general_setting=GeneralSetting.first
     render 'student_profile',layout:false
   end
 
@@ -152,6 +153,7 @@ class StudentsController < ApplicationController
     @immediate_contact=Guardian.find(@student.immediate_contact)
     @student_previous_data=StudentPreviousData.find_by_student_id(@student.student_id)
     @student_previous_subject_marks=StudentPreviousSubjectMark.where(student_id:@student.student_id)
+    @general_setting=GeneralSetting.first
     render 'student_profile',layout:false
   end
 
@@ -176,6 +178,7 @@ class StudentsController < ApplicationController
     @exam_group=ExamGroup.find(params[:exam_group_id])
     @student=Student.find(params[:student_id])
     @batch=@exam_group.batch
+    @general_setting=GeneralSetting.first
     render 'student_exam_report',layout:false
   end
 
@@ -191,6 +194,7 @@ class StudentsController < ApplicationController
     @student=Student.find(params[:student_id])
     @batch=@subject.batch
     @exam_groups=@batch.exam_groups.all
+    @general_setting=GeneralSetting.first
     render 'academic_report',layout:false
   end
 
@@ -206,6 +210,7 @@ class StudentsController < ApplicationController
     @batch=@student.batch
     @exam_groups=@batch.exam_groups.all
     @subjects=@batch.subjects.all
+    @general_setting=GeneralSetting.first
     render 'student_final_report',layout:false
   end
 
@@ -219,6 +224,7 @@ class StudentsController < ApplicationController
     @student=Student.find(params[:student_id])
     @batch=@student.batch
     @exam_groups=@batch.exam_groups.all
+    @general_setting=GeneralSetting.first
     render 'student_transcript_report',layout:false
   end
 
@@ -226,6 +232,7 @@ class StudentsController < ApplicationController
     @student=ArchivedStudent.find(params[:student_id])
     @batch=@student.batch
     @exam_groups=@batch.exam_groups.all
+    @general_setting=GeneralSetting.first
     render 'archived_student_transcript_report',layout:false
   end
 
@@ -355,6 +362,7 @@ class StudentsController < ApplicationController
   def advanced_search_result
     @students=params[:students]
     @search=params[:search]
+    @general_setting=GeneralSetting.first
     render 'advanced_search_result',layout:false
   end
 
@@ -441,6 +449,7 @@ class StudentsController < ApplicationController
     @immediate_contact=Guardian.find(@student.immediate_contact)
     @father = Guardian.find_by_student_id_and_relation(@student.id,'father')
     @mother = Guardian.find_by_student_id_and_relation(@student.id,'mother')
+    @general_setting=GeneralSetting.first
     render 'generate_tc',layout:false
   end
 

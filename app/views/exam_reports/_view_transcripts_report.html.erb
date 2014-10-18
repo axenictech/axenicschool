@@ -41,16 +41,18 @@
                <% @exam_groups.each do |exam_group| %>
 
                <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
+              <%unless @exam.nil?%>
                 <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
-                <% max_total += @exam.maximum_marks %>
-                <% marks_total += exam_score.marks%>
-                <% @mark += exam_score.marks %>
-                <% @total += @exam.maximum_marks %>
+                <% max_total += @exam.maximum_marks.to_f %>
+                <% marks_total += exam_score.marks.to_f %>
+                <% @mark += exam_score.marks.to_f %>
+                <% @total += @exam.maximum_marks.to_f %>
+              <%end%>
               <% end %>
                   <tr class="tr-<%= cycle('odd', 'even') %>">
                     <td class="col-1"> <%= subject.code %></td>
                     <td class="col-3"> <%= subject.name %></td>
-                    <td class="col-3"><%= "%.2f" %(marks_total*100/max_total)+"%"%></td>
+                    <td class="col-3"><%=marks_total==0 ? "AB" : "%.2f" %(marks_total*100/max_total)+"%"%></td>
                   </tr>
           <% max_total = 0 %>
           <% marks_total = 0 %>
