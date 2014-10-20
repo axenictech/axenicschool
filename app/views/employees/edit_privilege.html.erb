@@ -1,7 +1,7 @@
 <div id="content-header">
    <hr class="fancy-line"></hr>
-  <h1>Addmission</h1>
-  <h3>Edit Privilege<br />
+  <h1>Admission</h1>
+  <h3>Edit Privileges<br />
   
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
@@ -14,8 +14,8 @@
     <p class="flash-msg"> <%= flash[:notice] %> </p>
   <% end %>
 
-<table align="center" class="table table-hover" style="width:1000px">
 <%= form_for :edit_privilege ,url:{action:'update_privilege',format: @employee.id} do |f| %>
+<table align="center" class="table table-hover" style="width:100%">
 
     <tbody>
     
@@ -24,8 +24,20 @@
  
    	</tr>
      <tr><td colspan="4"><%=f.submit "Update",class: "btn btn-primary" %></td></tr>
-
-<%end%>
 </tbody>
 </table>
+
+
+<table align="center" class="table table-hover" style="width:100%">
+    <tbody>
+     <%@privilege_tags.each do |privilege|%>
+     <tr>
+          <td><%=f.check_box :privilege,checked:false%></td>
+          <td><%=privilege.name_tag%></td>
+     </tr>
+     <%end%>
+     </tbody>
+</table>
+<%end%>
+
 </div>

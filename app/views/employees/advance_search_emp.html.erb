@@ -1,5 +1,4 @@
- 
- <div id="content-header">
+<div id="content-header">
   <h1>Employee</h1>
   <h3>Advanced search result</h3>
   <div id="app-back-button">
@@ -7,27 +6,60 @@
   </div>
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
+
+<div id="page-yield">
+<div id="inner-tab-menu">
+  <ul>
+    <li style="width:150px"><%= link_to "Search Again", 'advance_search'%></li>
+    <% unless @employees.empty? %>
+    <%employees=[]%>
+    <% @employees.each do |e|%>
+        <% employees<< e %>
+    <%end%>
+     <li style="width:150px"><%= link_to "View Pdf Report",{:action =>'advance_search_result_pdf',format:"pdf", :employees=> employees, :search=> @search},method: :post%></li>
+    <%end%>
+  </ul>
+</div>
+<br/><br/>
 <% if @employees.nil? or @employees.empty? %>
   <div align="center"><h4>No Employees found</h4></div>
 <% else %>
+<div class="searched_for themed_text">
+        You searched for <%= @search %>
+</div>
+  <div class="students-table">
+    <table id="listing" align="center" width="80%" cellpadding="1" cellspacing="1" class="table-bordered">
+      <tr class="tr-head">
+        <td class="col-1">
+         Employee Id
+        </td>
+        <td class="col-3">
+          Employee Name
+        </td>
+        <td class="col-3">
+         Employee Department
+        </td>
+        <td class="col-3">
+        </td></tr>
+         <tr class="tr-blank"></tr>
+      <% @employees.each_with_index do |emp,i| %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+          <td class="col-1">
+            <%= emp.employee_number %>
+          </td>
+          <td class="col-3">
+            <%= link_to emp.first_name + " " + emp.last_name,employees_profile_path(emp)%>
+          </td>
+          <td class="col-3">
+          <%=  emp.employee_department.name%>
+          </td>
+          <td class="col-3">
+            <%= link_to 'View Profile' ,employees_profile_path(emp)%>
+          </td>
 
- <div class="col-md-1"></div>
-      <table align="center" class="table table-hover" style="width:1000px">
-      <tr>
-            <th>Employee Name</th>
-            <th>Employee Id</th>
-            <th>Employee Deprtment</th>
-      </tr>
-
-      <%@employees.each do |emp|%>
-          <tr>
-                <td col-md-1><%= link_to emp.first_name,employees_profile_path(emp)%></td>
-                <td col-md-1><%= emp.employee_number%></td>
-               <td col-md-1><%= emp.employee_department.name%></td>
-         </tr>
-      <%end%> 
-      <%end%> 
-      </table>
-  
-
- 
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+</div>

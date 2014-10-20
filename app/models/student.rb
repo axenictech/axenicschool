@@ -45,7 +45,9 @@ class Student < ActiveRecord::Base
   validates :pin_code, numericality: { only_integer: true },
                  length:{minimum:6,maximum:6},allow_blank: true
   validates :phone2 ,numericality: { only_integer: true },
-              length:{minimum:10,maximum:10},allow_blank: true
+              length:{minimum:6,maximum:11},allow_blank: true
+  validates :phone1 ,numericality: { only_integer: true},
+              length:{minimum:6,maximum:11},allow_blank: true
   validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   after_save :create_user_account
 
