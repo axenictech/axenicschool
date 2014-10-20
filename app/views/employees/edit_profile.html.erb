@@ -17,6 +17,18 @@
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for @employee ,url:{action:'update_profile',format:@employee.id} do |f| %>
 
+  <div align="center">
+    <% if @employee.errors.any? %>
+        <div class="alert alert-danger" style="width:500px" >
+          <h3>Error prohibited to from being saved:</h3>
+          <ul>
+           <% @employee.errors.full_messages.each do |msg| %>
+              <li style="width:500px" align="left"><%= msg %></li>
+            <% end %>
+          </ul>
+          <% end %>
+      </div>
+ </div>
     <tbody>
     
      <tr>     
