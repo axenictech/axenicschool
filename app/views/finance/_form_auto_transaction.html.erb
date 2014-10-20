@@ -1,0 +1,37 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Create Automatic Transaction" %></h3>
+</div>
+
+<div class="modal-body">
+<ul class="errors"></ul>
+<%= form_for @automatic_transaction,url:{action: 'create_automatic_transaction'},remote: true do |f|%>
+ <table class="table" style="width:85%">
+    <tr>
+        <td class="col-2"><%= f.label :category, class: "control-label"%></td>
+        <td><%= f.select :category_id, @categories.collect {|b| [b.name,b.id]},{prompt:true},:style =>"width: 250px", class: "form-control"%></td>
+    </tr>
+    <tr>
+        <td class="col-2"><%= f.label :percentage , class: "control-label"%></td>
+         <td><%=f.text_field :percentage ,:style =>"width: 250px", class: "form-control"%></td>
+    </tr>
+
+    <tr>
+        <td class="col-2"><%= f.label :title, class: "control-label"%></td>
+        <td><%=f.text_field :title ,:style =>"width: 250px", class: "form-control"%></td>
+    </tr>
+    
+    <tr>
+        <td class="col-2"><%= f.label :description, class: "control-label"%></td>
+         <td><%=f.text_field :description ,:style =>"width: 250px", class: "form-control"%></td>
+    <tr>
+
+    <td colspan="2"><%= f.submit 'Save', class: "btn btn-primary"%></td>
+    </tr>
+    </table>
+<% end %>
+
+</div>
+</div>
+</div>

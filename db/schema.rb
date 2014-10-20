@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141017204427) do
+ActiveRecord::Schema.define(version: 20141020082250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,14 +120,15 @@ ActiveRecord::Schema.define(version: 20141017204427) do
     t.string   "email"
     t.integer  "immediate_contact"
     t.boolean  "is_sms_enabled",     default: true
-    t.string   "photo_filename"
-    t.string   "photo_content_type"
-    t.binary   "photo_data"
     t.string   "status_description"
     t.boolean  "is_active",          default: true
     t.boolean  "is_deleted",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "archived_students", ["batch_id"], name: "index_archived_students_on_batch_id", using: :btree
@@ -666,9 +667,13 @@ ActiveRecord::Schema.define(version: 20141017204427) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "trigger_id"
+    t.integer  "category_id"
   end
 
+  add_index "finance_transaction_triggers", ["category_id"], name: "index_finance_transaction_triggers_on_category_id", using: :btree
   add_index "finance_transaction_triggers", ["finance_fee_category_id"], name: "index_finance_transaction_triggers_on_finance_fee_category_id", using: :btree
+  add_index "finance_transaction_triggers", ["trigger_id"], name: "index_finance_transaction_triggers_on_trigger_id", using: :btree
 
   create_table "finance_transactions", force: true do |t|
     t.string   "title"
@@ -956,14 +961,15 @@ ActiveRecord::Schema.define(version: 20141017204427) do
     t.string   "email"
     t.integer  "immediate_contact"
     t.boolean  "is_sms_enabled",     default: true
-    t.string   "photo_filename"
-    t.string   "photo_content_type"
-    t.binary   "photo_data"
     t.string   "status_description"
     t.boolean  "is_active",          default: true
     t.boolean  "is_deleted",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "students", ["batch_id"], name: "index_students_on_batch_id", using: :btree

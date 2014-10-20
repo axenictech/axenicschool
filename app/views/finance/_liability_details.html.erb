@@ -1,0 +1,27 @@
+<% unless @liabilities.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+	<th>Liability</th>
+	<th>Description</th>
+	<th>Amount</th>
+	<th>Created At</th>
+	<th></th>
+	</tr>
+		<% @liabilities.each do |l|%>
+		<% if l.is_solved?%>
+			<tr style="background-color:lightgrey">
+			<td class="col-3"><%= link_to l.title+" (solved)",finance_each_liability_view_path(l)%></td>
+		<%else%>
+			<tr>
+			<td class="col-3"><%= link_to l.title,finance_each_liability_view_path(l)%></td>
+		<%end%>
+			<td class="col-3"><%= l.description%></td>
+			<td class="col-3"><%= l.amount%></td>
+			<td class="col-3"><%= l.created_at.to_date%></td>
+			<td class="col-3"><%= link_to 'Edit',finance_edit_liability_path(l),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete' ,finance_delete_liability_path(l),method: :delete, data:{confirm:"Are You sure to delete Liability #{l.title}?"},remote:true%></td>	
+			
+			</tr>
+		<%end%>
+</table>
+<%end%>

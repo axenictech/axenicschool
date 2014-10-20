@@ -4,18 +4,20 @@
   <h3><%= "Attendance for " %><span><%= @student.first_name%></span></h3>
 </div>
 <div class="modal-body">
-<%= form_for @attendence,url:{action:'create',student_id:@student.id,month_date:@date},remote:true  do |c|%>
-
- 
+<ul class="errors"></ul>
+<%= form_for @attendence,url:{action:'create',subject_id:@subject_id},remote:true  do |f|%>
   <table class="table" style="width:500px" align="center">
-    
+    <%=f.hidden_field :student_id,value:@student.id %>
+    <%=f.hidden_field :month_date,value:@date %>
+    <%=f.hidden_field :batch_id,value:@student.batch.id %>
+    <%=f.hidden_field :time_table_entry_id,value:@time_table_entry_id %>
     <tr>
-      <td><%= c.label :Reason_for_absence%></td>
-      <td><%= c.text_field :reason%></td>
+      <td><%= f.label :reason_for_absence%></td>
+      <td><%= f.text_field :reason%></td>
     </tr>
         
     <tr>
-      <td colspan="2"><%= c.submit 'Add', class: "btn btn-primary"%>
+      <td colspan="2"><%= f.submit 'Add', class: "btn btn-primary"%>
       </td>
     </tr>
 

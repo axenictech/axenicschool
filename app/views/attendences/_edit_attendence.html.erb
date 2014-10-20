@@ -4,17 +4,18 @@
   <h3><%= "Edit Attendance for " %><span><%= @student.first_name%></span></h3>
 </div>
 <div class="modal-body">
-<%= form_for  @attendence,url:{:action=>'update_attendence'},method: :patch ,remote:true do |c|%>
+<ul class="errors"></ul>
+<%= form_for  @attendence,url:{:action=>'update_attendence',id:@attendence.id,subject_id:@subject_id,date:@today},method: :patch ,remote:true do |f|%>
   <table class="table" style="width:500px" align="center">
 
     <tr>
-      <td><%= c.label :Reason_for_absence%></td>
-      <td><%= c.text_field :reason%></td>
+      <td><%= f.label :reason_for_absence%></td>
+      <td><%= f.text_field :reason%></td>
     </tr>
        
     <tr>
-    <td colspan="2"><%= c.submit 'Update', class: "btn btn-primary"%></td>
-       <td><%= link_to 'destroy', '' ,class: "btn btn-danger"%></td>
+    <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%></td>
+       <td><%= link_to 'Delete',attendences_delete_attendence_path(@attendence,subject_id:@subject_id,date:@today,batch:@attendence.batch.id),method: :delete, data:{confirm:"Are you sure to delete?"},remote:true,class: "btn btn-danger"%></td>
         </tr>
 
 </table>

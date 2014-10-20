@@ -1,11 +1,10 @@
 
 <div class="text-input-bg">
-
-<%= form_for :demo, url:{action:'select',format:@batch},method: :get,remote:true ,html:{id: "form"} do |f| %>
+<%= form_for :subject, url:{action:'select'},method: :get,remote:true ,html:{id: "form"} do |f| %>
 
 <%= f.label :select_subject %>
-<%= f.select :subject_id, @subject.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#form').submit();"}%>
-<%end%></div>
-<br/><br/><br/>
-<div id="atten_div"></div>
+<%= f.select :id, @subjects.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#form').submit();"}%>
+<%end%>
+</div><br/><br/><br/>
+<div id="attendence"></div>
 
