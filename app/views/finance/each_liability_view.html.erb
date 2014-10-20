@@ -1,0 +1,18 @@
+<div id="content-header">
+  <h1>Liability View</h1>
+  <h3><%= @liability.title%></h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+  <div id="asset-body">
+    <div id="asset-title"><%= t('liability_name') %> : <%= @liability.title%></div>
+    <div id="asset-description"><%= @liability.description %></div>
+    <br/>
+    <div id="asset-amt"><%= t('amount') %> : <%= @liability.amount%></div>
+    <div id="asset-date"><%= t('created_at') %> : <%= I18n.l(@liability.created_at,:format=>"%A, %d %B, %Y") %></div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Edit Asset" %></h3>
+</div>
+
+<div class="modal-body">
+<ul class="errors"></ul>
+<%= form_for @asset,url:{action: 'update_asset',id:@asset.id},method: :patch,remote: true do |f|%>
+ <table class="table" style="width:85%">
+        <tr>
+            <td class="col-2"><%= f.label :title, class: "control-label"%></td>
+            <td><%=f.text_field :title ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+        
+        <tr>
+            <td class="col-2"><%= f.label :description , class: "control-label"%></td>
+             <td><%=f.text_field :description ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+
+
+        <tr>
+            <td class="col-2"><%= f.label :amount , class: "control-label"%></td>
+             <td><%=f.text_field :amount ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+
+        <tr>
+            <td class="col-2"><%= f.label :make_asset_inactive?, class: "control-label"%></td>
+            <td class="col-2"><%=f.check_box :is_inactive%></td>
+        </tr>
+
+        <tr>
+        <td colspan="2"><%= f.submit 'Save', class: "btn btn-primary"%></td>
+        </tr>
+    </table>
+<% end %>
+
+</div>
+</div>
+</div>

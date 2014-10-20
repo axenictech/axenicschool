@@ -1,0 +1,21 @@
+<%= form_for :report, :url=>{:action=>'generate_report'},method: :get,remote: :true do |f|%>
+ <div class="label-field-pair">
+ 	  <%= f.label :select_subject %>
+      <div class="text-input-bg">
+      <%= f.select :subject_id, @subjects.collect {|s| [s.name,s.id]},{prompt:true}%>
+      </div></div>
+
+ <div class="label-field-pair">
+      <%= f.label :select_start_date %>
+      <div class="text-input-bg">
+      <%= f.date_field :start_date,:style =>"height: 30px" %>
+      </div></div>
+
+ <div class="label-field-pair">
+      <%= f.label :select_end_date %>
+      <div class="text-input-bg">
+      <%= f.date_field :end_date,:style =>"height: 30px"%>
+      </div></div><br/>
+ <div align="center"><%= f.submit 'View', class: 'btn btn-default' %></div>
+<% end %><br/><br/>
+<div id="report"></div>

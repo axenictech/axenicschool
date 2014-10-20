@@ -1,0 +1,21 @@
+<div id="content-header">
+  <h1>Finance</h1>
+  <h3>Automatic Transactions</h3>
+  <div id="app-back-button">
+      <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
+<div id="box">
+<div class="link-box">
+    <div class="link-heading"><%= link_to "Create",finance_new_automatic_transaction_path,remote:true %></div>
+    <div class="link-descr">Creates an auto transaction</div>
+ </div></div>
+<div id="auto_transaction">
+	<%=render 'automatic_transaction_details'%>
+</div>
+<div id="myModal" class="modal fade"></div>
+</div>
+
+

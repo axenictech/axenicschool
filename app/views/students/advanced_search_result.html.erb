@@ -92,8 +92,8 @@ table#pdf-table{
         <% c= 'odd' %>
         <tr class="table-header"><td class="col-pdf">Sr.No.</td><td class="col-pdf">Name</td><td class="col-pdf">Batch</td><td class="col-pdf">Adm No</td><td class="col-pdf">Date of birth</td></tr>
         <% students.each.each_with_index do |s,i| %>
-          
-          <% student=Student.find(s)%>
+          <% student=ArchivedStudent.find_by_student_id(s)%>
+          <% student=Student.find(s) if student.nil? %>
           <tr class="<%= cycle((["odd","even"]-[c]).first,c) %>">
             <td class="col-pdf"><%= index+=1 %></td>
             <td class="col-pdf"><%= student.first_name+" "+student.last_name %></td>

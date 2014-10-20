@@ -1,0 +1,72 @@
+<div class="header">
+  <div class="prev">
+    <%= link_to "◄",attendences_display_path(@subject.id,(@today - 1.month)),remote:true %>
+  </div>
+  <div class="month">
+       <%= @today.strftime("%B %Y") %> 
+  </div>
+  <div class="next">
+    <%= link_to "►",attendences_display_path(@subject.id,(@today + 1.month)),remote:true %>
+  </div>
+  <div class="extender"></div>
+</div>
+<table align="center" class="table table-hover table-bordered" >
+  <tr class="tr-head">
+    <td class="head-td-name themed_text"><%= t('name') %></td>
+    <% current_day = Date.today  %>
+    <% (@start_date..@end_date).each do |date| %>
+      <%@time_table_entries.each do |d|%>
+      <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
+
+          <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
+        <td style="background-color:lightgreen" class="head-td-date active" ><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></td>
+        <%end%>
+      <% else %>
+       <% if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
+        <td class="head-td-date"><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></td>
+      <%end%>
+      <% end %>
+      <% end%>
+      <%end%>
+ </tr>
+    <% @students.each do |student| %>
+    <% is_valid_subject=1 %>
+      <%unless @subject.elective_group.nil?%>
+        <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.id,@subject.id) %>
+          <% is_valid_subject = 0 if is_student_elective.nil? %>
+      <%end%>
+    <% unless is_valid_subject == 0 %>
+      <tr class="tr-<%= cycle('odd', 'even')  %>">
+        <td class="td-name">
+            <%= student.first_name %>
+        </td>
+
+        <% (@start_date..@end_date).each do |date| %>
+           <%@time_table_entries.each do |d|%>
+         <% @absent = Attendence.find_by_student_id_and_month_date(student.id,date) %>
+
+      <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
+      <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
+        <td class="tag" style="background-color:lightgreen" id="attendance-employee-<%= student.id %>-day-<%= date %>" class="td-mark active">
+          <% else %>
+        <td class="tag" id="attendance-employee-<%= student.id %>-day-<%= date %>" class="td-mark">
+            <% end %>
+          
+          <% unless @absent.nil? %>
+       
+            <%= link_to 'X',attendences_edit_attendence_path( 
+            @absent,date:date,subject_id:@subject.id),remote:true %>
+
+          <% else %>
+                   <%= link_to '.',attendences_new_attendence_path( 
+            student.id,date,time_table_entry_id:d.id,subject_id:@subject.id),remote:true%>
+          <% end %>
+            <%end%>
+        </td>
+        <%end%>
+      <% end %>
+     
+    </tr>
+  <%end%>
+  <%end%>
+</table>

@@ -63,6 +63,7 @@ class ExamsController < ApplicationController
 		@exam=Exam.find(params[:id])
 		@exam_group=@exam.exam_group
 		@batch=@exam_group.batch
+		grades=@exam.exam_group.batch.grading_levels.order(min_score: :asc)
 		params[:exams][:exam].each_pair do |student_id, details|
       	@exam_score=ExamScore.find_by_exam_id_and_student_id(@exam.id,student_id)
       	@grouped_exam=GroupedExamReport.find_by_batch_id_and_student_id_and_exam_group_id_and_subject_id(@batch.id,student_id,@exam_group.id,@exam.subject_id)
@@ -71,11 +72,18 @@ class ExamsController < ApplicationController
       	fail=true if details[:marks].to_f<@exam.minimum_marks.to_f
 			
 			unless @exam.exam_group.exam_type=="Marks"
-				percentage=(details[:marks].to_f*100)/@exam.maximum_marks.to_f
-				grades=@exam.exam_group.batch.grading_levels.all
-				grades.each do |grade|
-					if percentage>=grade.min_score
-						score_grade=grade.id
+				unless @exam.exam_group.exam_type=="Grades"
+					percentage=(details[:marks].to_f*100)/@exam.maximum_marks.to_f
+					grades.each do |grade|
+						if percentage>=grade.min_score
+							score_grade=grade.id
+						end
+					end
+				else
+					grades.each do |grade|
+						if details[:marks].to_f>=grade.min_score
+							score_grade=grade.id
+						end
 					end
 				end
 			end

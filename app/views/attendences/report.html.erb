@@ -1,0 +1,20 @@
+<div id="content-header">
+  <h1>Attendance Report</h1>
+  <h3>Report</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield"> 
+  <div class="box">
+<%= form_for :batch, :url=>{:action=>'select_batch'},html:{id: 'form_batch'},remote:true,method: :get do |f| %>
+ <div class="label-field-pair">
+  <%= f.label :select_batch %>
+      <div class="text-input-bg">
+      <%= f.select :id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_batch').submit();"}%>
+      </div></div>
+  <% end %>
+  <div id="subject_list"></div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+
+<div id="content-header">
+  <h1>Asset Liability Management</h1>
+  <h3>Assets</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div id="box">
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "Create",finance_new_asset_path,remote:true%></div>
+        <div class="link-descr">Creates new asset</div>
+      </div>
+
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "View",finance_view_asset_path%></div>
+        <div class="link-descr">Asset View</div>
+      </div>
+</div>
+<div id="myModal" class="modal fade"></div>
+</div>
