@@ -1,0 +1,37 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>TimeTable</h1>
+  <h3>Edit</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice7] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover " style="width:35%">
+ <tbody>
+    
+    <% if @timetables.blank? %>
+       No editable timetables
+    <% else %>
+    <tr class="tr-head">
+        <td class="col-1">Sl No.</td>
+        <td class="col-3">Period</td>
+    </tr>
+      <% @timetables.each_with_index do |tt,i| %>
+      <tr>
+          <td class="col-1"><b> <%= i+1 %></b></td>
+          <td class="col-3"> <b><%=link_to "#{I18n.l(tt.start_date,:format=>"%d %b %Y")}  -  #{I18n.l(tt.end_date,:format=>"%d %b %Y")}",time_tables_update_timetable_path(tt.id)%></b></td>
+      </tr>   
+      <%end%>  
+     <%end%>  
+
+  
+</tbody>
+</table>
+  </div>

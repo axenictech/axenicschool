@@ -25,12 +25,15 @@
 </tbody>
 </table>
 
-
+<div class="sel-list">
+            <%= t('select') %>: <%= link_to 'all','#',{onclick:"$('.check_box').attr('checked', true);"}%>,
+            <%= link_to 'none','#',{onclick:"$('.check_box').attr('checked', false);"}%>
+          </div>
 <table align="center" class="table table-hover" style="width:100%">
     <tbody>
      <%@privilege_tags.each do |privilege|%>
      <tr>
-          <td><%=f.check_box :privilege,checked:false%></td>
+          <td><%=f.check_box :privilege,checked:false,class: "check_box"%></td>
           <td><%=privilege.name_tag%></td>
      </tr>
      <%end%>

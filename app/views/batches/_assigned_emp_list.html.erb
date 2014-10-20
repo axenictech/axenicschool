@@ -9,7 +9,7 @@
 	<% @employee = Employee.find(emp) %>
 	<tr>
 		<td><%=@employee.first_name%></td>
-		<td><%= link_to "Delete",batches_remove_employee_path(@batch,@employee),method: :delete,data: { confirm: 'Are you sure?' } ,remote:true%></td>
+		<td><%= link_to "Remove",batches_remove_employee_path(@batch,@employee),method: :delete,remote:true%></td>
 	</tr>
 	<%end%>
 </table>

@@ -1,2 +1,9 @@
-$('#atten_div').html("<%= j render 'attendence_form'%>");
+$("ul.errors").html("")
+<% if @attendence.errors.any? %>
+		<% @attendence.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+		<% end %>
+<% else %>
+$('#attendence').html("<%= j render 'attendence'%>");
 $("#myModal").modal("hide")
+<% end %>

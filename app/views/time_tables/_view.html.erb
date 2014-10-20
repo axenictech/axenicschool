@@ -1,7 +1,7 @@
  <div class="box">
 <div class="text-input-bg">
 
-<%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
+<%= form_for :batch, url:{action:'select',format:@time},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
 <%= f.label :select_batch %>
 <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name, b.id]},{prompt:true},{onchange:"$('#batch_form').submit();"} %>  
 <%end%>

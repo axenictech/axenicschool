@@ -1,0 +1,20 @@
+<% unless  @automatic_transactions.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+	<th>Title</th>
+	<th>Description</th>
+	<th>Created At</th>
+	<th></th>
+	</tr>
+		<%  @automatic_transactions.each do |a|%>
+			<tr>
+			<td class="col-3"><%= a.title%></td>
+			<td class="col-3"><%= a.description%></td>
+			<td class="col-3"><%= a.created_at.to_date%></td>
+			<td class="col-3"><%= link_to 'Edit',finance_edit_automatic_transaction_path(a),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete' ,finance_delete_automatic_transaction_path(a),method: :delete, data:{confirm:"Are You sure to delete Asset '#{a.title}'?"},remote:true%></td>	
+			
+			</tr>
+		<%end%>
+</table>
+<%end%>

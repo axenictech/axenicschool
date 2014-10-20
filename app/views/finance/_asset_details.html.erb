@@ -1,0 +1,27 @@
+<% unless @assets.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+	<th>Asset</th>
+	<th>Description</th>
+	<th>Amount</th>
+	<th>Created At</th>
+	<th></th>
+	</tr>
+		<% @assets.each do |a|%>
+		<% if a.is_inactive?%>
+			<tr style="background-color:lightgrey">
+			<td class="col-3"><%= link_to a.title+" (inactive)",finance_each_asset_view_path(a)%></td>
+		<%else%>
+			<tr>
+			<td class="col-3"><%= link_to a.title,finance_each_asset_view_path(a)%></td>
+		<%end%>
+			<td class="col-3"><%= a.description%></td>
+			<td class="col-3"><%= a.amount%></td>
+			<td class="col-3"><%= a.created_at.to_date%></td>
+			<td class="col-3"><%= link_to 'Edit',finance_edit_asset_path(a),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete' ,finance_delete_asset_path(a),method: :delete, data:{confirm:"Are You sure to delete Asset '#{a.title}'?"},remote:true%></td>	
+			
+			</tr>
+		<%end%>
+</table>
+<%end%>

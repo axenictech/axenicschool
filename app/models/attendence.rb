@@ -1,4 +1,5 @@
 class Attendence < ActiveRecord::Base
 		belongs_to :subject
-		has_and_belongs_to_many :students, dependent: :destroy
+		belongs_to :batch
+	validates :reason, presence: true,length:{minimum:1, maximum:30}, format:{ with: /\A[a-zA-Z0-9._" "-]+\Z/}
 end

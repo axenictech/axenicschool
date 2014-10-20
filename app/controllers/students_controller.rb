@@ -244,11 +244,12 @@ class StudentsController < ApplicationController
 
   def genrate_report
     @student=Student.find(params[:report][:student_id])
+    @subject_id=params[:report][:subject_id]
     @start_date=params[:report][:start_date]
     @end_date=params[:report][:end_date]
-    @time_table_entry=TimeTableEntry.find_by_subject_id_and_batch_id(params[:report][:subject_id],@student.batch.id)
-    @weekdays=@student.batch.weekdays.all
-  end
+    @batch_events=@student.batch.batch_events.all
+    @time_table_entries=TimeTableEntry.where(subject_id:@subject_id,batch_id:@student.batch.id)
+   end
 
   def advanced_search
     @courses=Course.all
@@ -499,17 +500,14 @@ class StudentsController < ApplicationController
 
   private
   def student_params
-      params.require(:student).permit(:admission_no,:class_roll_no,:admission_date,:first_name,
-                                    :middle_name, :last_name,:batch_id,:date_of_birth,:gender,:blood_group,:birth_place, 
-                                    :nationality_id ,:language,:category_id,:religion,:address_line1,:address_line2,:city,
-                                    :state,:pin_code,:country_id,:phone1,:phone2,:email,:immediate_contact,:status_description )
+      params.require(:student).permit!
   end
 
   def previous_data_params
-    params.require(:student_previous_data).permit(:student_id,:institution,:year,:course,:total_mark)
+    params.require(:student_previous_data).permit!
   end
 
   def params_subject
-    params.require(:student_previous_subject_mark).permit(:student_id,:subject,:mark)
+    params.require(:student_previous_subject_mark).permit!
   end
 end

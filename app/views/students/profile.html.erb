@@ -23,8 +23,8 @@
 <thead>
 <tr>
     <th colspan="4"><div id="profile_picture_display">
-    <% unless @student.photo_data.blank? %>
-      <%= image_tag @student.image.url(:medium) %>
+    <% unless @student.image.blank? %>
+     <%= image_tag @student.image%>
       <% else %>
           <%= image_tag "master_student/profile/default_student.png" %>
       <% end %>

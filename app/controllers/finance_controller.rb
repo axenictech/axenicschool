@@ -101,6 +101,120 @@ class FinanceController < ApplicationController
     end
   end
 
+  def new_asset
+    @asset=Asset.new
+  end
+
+  def create_asset
+    @assets=Asset.all
+    @asset=Asset.new(asset_params)
+    if @asset.save
+      flash[:notice]="Asset created successfully"
+    end
+  end
+
+  def view_asset
+    @assets=Asset.all
+  end
+
+  def edit_asset
+    @asset=Asset.find(params[:id])
+  end
+
+  def update_asset
+    @assets=Asset.all
+    @asset=Asset.find(params[:id])
+    @asset.update(asset_params)
+  end
+
+  def delete_asset
+    @assets=Asset.all
+    @asset=Asset.find(params[:id])
+    @asset.destroy
+  end
+
+  def asset_list
+    @assets=Asset.all
+    @general_setting=GeneralSetting.first
+    render 'asset_list',layout:false
+  end
+
+  def each_asset_view
+    @asset=Asset.find(params[:id])
+  end
+
+  def new_liability
+    @liability=Liability.new
+  end
+
+  def create_liability
+    @liability=Liability.new(liability_params)
+    @liability.save
+    flash[:notice]="Liability created successfully"
+  end
+
+  def view_liability
+    @liabilities=Liability.all
+  end
+
+  def edit_liability
+    @liability=Liability.find(params[:id])
+  end
+
+  def update_liability
+    @liabilities=Liability.all
+    @liability=Liability.find(params[:id])
+    @liability.update(liability_params)
+  end
+
+  def delete_liability
+    @liabilities=Liability.all
+    @liability=Liability.find(params[:id])
+    @liability.destroy
+  end
+
+  def each_liability_view
+    @liability=Liability.find(params[:id])
+  end
+
+  def liability_list
+    @liabilities=Liability.all
+    @general_setting=GeneralSetting.first
+    render 'liability_list',layout:false
+  end
+
+  def automatic_transaction
+    @automatic_transactions=FinanceTransactionTrigger.all
+  end
+
+  def new_automatic_transaction
+    @automatic_transaction=FinanceTransactionTrigger.new
+    @categories=FinanceTransactionCategory.all
+  end
+
+  def create_automatic_transaction
+    @automatic_transaction=FinanceTransactionTrigger.new(auto_transaction_params)
+    @automatic_transaction.save
+    @automatic_transactions=FinanceTransactionTrigger.all
+  end
+  
+  def edit_automatic_transaction
+    @automatic_transaction=FinanceTransactionTrigger.find(params[:id])
+    @categories=FinanceTransactionCategory.all
+  end
+
+  def update_automatic_transaction
+    @automatic_transaction=FinanceTransactionTrigger.find(params[:id])
+    @automatic_transaction.update(auto_transaction_params)
+    @automatic_transactions=FinanceTransactionTrigger.all
+  end
+
+  def delete_automatic_transaction
+    @automatic_transaction=FinanceTransactionTrigger.find(params[:id])
+    @automatic_transaction.destroy
+    @automatic_transactions=FinanceTransactionTrigger.all
+  end
+
 private 
   def transaction_category_params
     params.require(:finance_transaction_category).permit!
@@ -114,4 +228,15 @@ private
     params.require(:finance_fee_category).permit!  
   end
 
+  def asset_params
+    params.require(:asset).permit!
+  end
+
+  def liability_params
+    params.require(:liability).permit!
+  end
+
+  def auto_transaction_params
+    params.require(:finance_transaction_trigger).permit!
+  end
 end

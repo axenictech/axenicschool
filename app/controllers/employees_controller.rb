@@ -420,6 +420,7 @@ class EmployeesController < ApplicationController
     @department=EmployeeDepartment.find(params[:subject_assignment][:id])
      @employee=@department.employees.all
      @subject=Subject.find(params[:format])
+     @assigned_employees = EmployeeSubject.where(subject_id:@subject.id)
    end
 
    def assign_employee

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+table#pdf-table{
+   border: 1px solid #ADACAB;
+   border-left: 0px solid #ADACAB;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
+  <h2 align="center"><%= t('liability_list') %></h2>
+  <div class="hor_line"></div>
+  <div class="extender"> </div>
+  <div class="report">
+    
+    <div id="pdf-info">
+      <table id="pdf-table" width="100%" cellspacing="0">
+        <tr class="table-header"><td class="col-pdf"><%= t('sl_no') %></td><td class="col-pdf"> <%= t('liability') %></td><td class="col-pdf"> <%= t('created_at') %> </td><td class="col-pdf"><%= t('total_amount') %></td></tr>
+        <% i = 0  %>
+        <% c= 'even' %>
+        <%total_amount=0%>
+        <% @liabilities.each do |l| %>
+          <% if l.is_solved? %>
+            <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+              <td class="col-pdf"><%= i+=1 %></td>
+              <td class="col-pdf"><%= l.title+" ( solved)" %></td>
+              <td class="col-pdf"><%= l.created_at.strftime("%d-%m-%Y") %></td>
+              <td class="col-pdf"><%= l.amount%></td>
+            </tr>
+          <% else %>
+            <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+              <td class="col-pdf"><%= i+=1 %></td>
+              <td class="col-pdf"><%= l.title %></td>
+              <td class="col-pdf"><%= l.created_at.strftime("%d-%m-%Y") %></td>
+              <td class="col-pdf"><%= l.amount%></td>
+            </tr>
+          <% end %>
+          <% total_amount+= l.amount%>
+        <% end %>
+        <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+          <td class="col-pdf" colspan="3"><%= t('grand_total') %></td>
+          <td class="col-pdf" colspan="1"><%= total_amount%></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
