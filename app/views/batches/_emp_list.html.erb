@@ -7,7 +7,7 @@
 
 	<%@employees.each do |emp|%>
 	<tr>
-		<td><%=emp.first_name%></td>
+		<td><%=Employee.find(emp).first_name%></td>
 		<td><%= link_to "Assign",batches_assign_employee_path(@batch,emp),method: :post,remote:true%></td>
 	</tr>
 	<%end%>

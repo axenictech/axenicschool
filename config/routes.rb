@@ -101,6 +101,11 @@ post'weekdays/create'
 get 'time_tables/select'
 get 'time_tables/sub'
 get 'time_tables/new'
+get 'time_tables/edit_timetable'
+get 'time_tables/update_timetable'
+patch 'time_tables/update_timetable_values'
+
+
 
 get 'time_table_entries/select'
 get 'time_table_entries/select_subject'

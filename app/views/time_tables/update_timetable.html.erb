@@ -1,0 +1,60 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>TimeTable</h1>
+  <h3>Edit Timetable</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Edit entries',time_table_entries_path(@time_table) %></li>
+  
+  </ul>
+
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice7] %> </p>
+  <% end %>
+
+<table align="center" class="table table-hover " style="width:35%">
+ <tbody>
+    
+     <%=form_for @time_table,url:{action:'update_timetable_values',format:@time_table} do |f| %>
+
+      <% if  @time_table.errors.any? %>
+            <div class="alert alert-danger">
+             
+            <ul><%@time_table.errors.full_messages.each do |msg| %>
+                <li style="width:300px"><%= msg %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
+  
+      <div class="label-field-pair" >
+        <label for="start_date"><%= t('start_date') %></label>
+        
+          <%= f.date_select :start_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
+        
+      </div>
+
+      <div class="label-field-pair">
+        <label for="end_date"><%= t('end_date') %></label>
+        
+          <%= f.date_select :end_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
+        
+      </div>
+
+
+      <%=f.submit :"►Update",class:"btn btn-success" %>
+    <% end %>
+
+  
+</tbody>
+</table>
+  </div>
