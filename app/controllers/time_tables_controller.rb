@@ -26,43 +26,21 @@ class TimeTablesController < ApplicationController
   end
   end
 
-  # def timetable
-  #   # @config = Configuration.available_modules
-  #   @batches = Batch.all
-  #   unless params[:next].nil?
-  #     @today = params[:next].to_date
-  #     render (:update) do |page|
-  #       page.replace_html "timetable", :partial => 'table'
-  #     end
-  #   else
-  #      @today = Date.today
-  #      # @today = @local_tzone_time.to_date
-  #     p "ttttttttttttttttttt"
-  #     p @today
-  #   end
-  # end
-
-  def timetable
+    def timetable
     @today=Date.today
-    @batches=Batch.all
+    @time_end=TimeTable.all
+     @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
+     @batches=Batch.all
+   end
+
+  def display_institutional_time_table
+        @time_end=TimeTable.all
+       @today = params[:next].to_date
+       @batches=Batch.all
+       @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
   end
 
-  # def display_institutional_time_table
-  #      @today = params[:next].to_date
-  #      @batches=Batch.all
-       
-
-  #      @time=TimeTableEntry.joins(:time_table,:class_timing,:weekday).where("time_tables.start_date<='2014-10-19' AND time_tables.end_date>='2014-10-19' AND time_table_entries.batch_id =3")
-      
-  #      @batches=[]
-  #      unless @time.nil?
-  #            @time.each do |t|
-  #            @batches.push t.batch
-  #        end
-  #        p "batchesssssssssssssssssssssss"
-  #        p @batches
-  #    end 
-  # end
+  
 
   def selectTimeEmployee
     @employee=Employee.find(params[:format])
