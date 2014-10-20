@@ -9,13 +9,7 @@
  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br/><br/>
 
-
-
 <div id="page-yield">
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-
 <%= form_for :assign_tutor, url:{action:'assign_tutorial',format:@batch},remote:true,html:{id: "user_form"} do |f|%>
 
 <div class="label-field-pair">

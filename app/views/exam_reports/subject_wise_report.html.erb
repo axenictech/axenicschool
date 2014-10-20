@@ -16,9 +16,7 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     Subject Wise Report
   </div>
-   <% unless flash[:notice_s_r].nil? %>
-    <div class="alert alert-danger" align="center" style="width:100%"> <%= flash[:notice_s_r] %> </div>
-    <%end %>
+ 
 <%= form_for :batch_choose, :url=>{:action=>'choose_batch'},html:{id: 'form_batch'},remote:true,method: :get do |f| %>
   
  <div class="label-field-pair">

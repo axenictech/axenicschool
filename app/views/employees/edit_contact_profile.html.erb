@@ -10,10 +10,7 @@
 </div><br/><br/>
 
 <div id="page-yield">
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-
+  
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for @employee ,url:{action:'update_profile',format:@employee.id} do |f| %>
 

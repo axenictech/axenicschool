@@ -10,9 +10,7 @@
 </div><br/><br/>
 
 <div id="page-yield">
-  <% unless flash[:notice9].nil? %>
-    <p class="flash-msg"> <%= flash[:notice9] %> </p>
-  <% end %>
+  
 
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for :bank_details,url:{action: 'admission3_create',format: @employee.id},method: :post do |f| %>

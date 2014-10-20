@@ -10,10 +10,6 @@
 
 <div id="page-yield">
 
-    <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-
  <div class="box">
 <div class="text-input-bg">
 <%= form_for :department,url:{action:'select'},method: :get,remote:true,html:{id: "batch_form"}  do |f| %>
