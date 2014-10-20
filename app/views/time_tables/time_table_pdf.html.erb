@@ -2,27 +2,45 @@
 <html>
 <head>
 </head>
+<style type="text/css">
+
+table#pdf-table{
+   border: 1px solid #ADACAB;
+   border-left: 0px solid #ADACAB;
+}
+
+</style>
 <body>
 <div align="center">
 <font color="purple"><b><i><h3>Axenic School</h3>
 <h4>Time Table</h4></i></b></font>
 </div>
 
-<table class="table" align="center" style="width:900px">
-<thead>
+  <table id="pdf-table" width="100%">    <tr>
+    <td class="col-4"></td>
+     <% @batch.class_timings.each do |c|%>
+     <td class="td"><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></td>
+      <% end %>
+    </tr> 
+ 
+<% @batch.weekdays.each do |w|%>
+      <tr>
+        <td class="td"><div class="name"><%=w.weekday%></div></td>
+        <% @batch.class_timings.each do |c|%>
+         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id(c.id,w.id) %>
+        <td>
+        <%unless @present.nil? %>
+         <font color="red"><%= @present.subject.name %></font><br/>
+       <font color="blue"><%= @present.employee.first_name+" "+@present.employee.last_name%></font><br/>
+       
+        <%else%>
+     <%="Not Assigned"%></td>
+        <%end%>
+     <%end%>
+      </tr>
+    <% end %>
+</table><br/><br/><br/>
 
-</thead>
-<tbody>
-<tr><td colspan="4"></td></tr>
-<tr>
-    <td class="col-2" colspan="4"><font color="brown">Time Table</font></td>
-</tr>
-
-<tr>
-  <td class="col-2" colspan="4"></td>
-</tr>
-</tbody>
-</table>
 </div>
 </body>
 </html>

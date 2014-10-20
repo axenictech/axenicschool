@@ -62,10 +62,13 @@ class BatchesController < ApplicationController
   end
 
   def assign_tutorial
+    @emp=[]
     @batch=Batch.find(params[:format])
     @department=EmployeeDepartment.find(params[:assign_tutor][:id])
-    @employees = Employee.where(employee_department_id:@department.id)
-  
+    @emp1 =@department.employees.pluck(:id)
+    @emp1.each{|e| @emp<<e.to_s}
+    @assign_employees=@batch.employee_id.split(',')
+    @employees=@emp-@assign_employees
    end
 
    def assign_employee
@@ -79,6 +82,13 @@ class BatchesController < ApplicationController
     @assigned_emps.push(params[:format].to_s)
     @batch.update_attributes :employee_id => @assigned_emps.join(",")
     @assign_employees = @assigned_emps.join(",")
+
+    @emp=[]
+    @department=@employee.employee_department
+    @emp1 =@department.employees.pluck(:id)
+    @emp1.each{|e| @emp<<e.to_s}
+    @assign_emp=@batch.employee_id.split(',')
+    @employees=@emp-@assign_emp
   end
   
    def remove_employee
@@ -89,7 +99,12 @@ class BatchesController < ApplicationController
     @removed_emps = @assigned_emps.delete(params[:format].to_s)
      @assign_employees = @assigned_emps.join(",")
     @batch.update_attributes :employee_id => @assign_employees
-   
+   @emp=[]
+    @department=@employee.employee_department
+    @emp1 =@department.employees.pluck(:id)
+    @emp1.each{|e| @emp<<e.to_s}
+    @assign_emp=@batch.employee_id.split(',')
+    @employees=@emp-@assign_emp
    end
 
 private 
