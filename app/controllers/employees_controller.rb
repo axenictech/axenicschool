@@ -332,7 +332,10 @@ class EmployeesController < ApplicationController
   end
 
   def edit_privilege
+    @user = User.find(params[:format])
     @employee=Employee.find(params[:format])
+    @privilege_tags=PrivilegeTag.all
+
   end
 
   def update_privilege
@@ -615,6 +618,13 @@ class EmployeesController < ApplicationController
       end
   end
 
+  def advance_search_result_pdf
+    @employees=params[:employees]
+    @search=params[:search]
+    @general_setting=GeneralSetting.first
+    render 'advance_search_result_pdf',layout:false
+    
+  end
 
   def payslip
     
