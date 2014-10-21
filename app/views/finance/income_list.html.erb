@@ -1,0 +1,44 @@
+<div id="content-header">
+  <h1>Incomes</h1>
+  <h3>Incomes List</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Pdf Report',finance_finance_income_report_path(start_date:@start_date,end_date:@end_date,format:"pdf")%></li>
+  </ul>
+</div>
+<div id="page-yield">
+<h5>List of Incomes</h5>
+<% unless @incomes.nil? %>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+		<th>Name</th>
+		<th>Description</th>
+		<th>Voucher No</th>
+		<th>Amount</th>
+		<th>Transaction Date</th>
+		<th></th>
+	</tr>
+	<% @incomes.each do |income|%>
+	<%if income.finance_transaction_category.is_income? %>
+	<tr>
+		<td><%= income.title%></td>
+		<td><%= income.description%></td>
+		<td></td>
+		<td><%= income.amount%></td>
+		<td><%= income.transaction_date%></td>
+		<td><%= link_to 'Edit',finance_edit_income_path(income)%>&nbsp;&nbsp;
+		<%= link_to 'Delete',finance_delete_income_path(income),method: :delete, data:{confirm:"Are you sure to delete Income '#{income.title}'?"}%>
+		</td>
+	</tr>
+	<%end%>
+	<%end%>
+</table>
+<%else%>
+<h4>No Transactions for the given period</h4>
+<%end%>
+</div>
