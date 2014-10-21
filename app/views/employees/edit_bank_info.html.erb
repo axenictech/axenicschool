@@ -14,6 +14,17 @@
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for :bank_details ,url:{action:'update_bank_details',format:@employee.id},method: :patch do |f| %>
 
+     <% if @employee.errors.any? %>
+        <div class="alert alert-danger" style="width:500px" >
+          <h3>Error prohibited to from being saved:</h3>
+          <ul>
+           <% @employee.errors.full_messages.each do |msg| %>
+              <li style="width:500px" align="left"><%= msg %></li>
+            <% end %>
+          </ul>
+          <% end %>
+      </div>
+ </div>
     <tbody>
          
   <% @bank_info.each do |b| %>

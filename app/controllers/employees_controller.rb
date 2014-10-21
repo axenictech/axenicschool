@@ -386,27 +386,56 @@ class EmployeesController < ApplicationController
   end
 
   def edit_profile
-       if @employee=Employee.find(params[:format])
-          else
-          @employee=ArchivedEmployee.find[:format]
-      end
+        @employee=Employee.find(params[:format])
+      
   end
 
   def update_profile
        @employee=Employee.find(params[:format])
-       @employee.update(employee_params)
-       redirect_to employees_profile_path(@employee)
+       if @employee.update(employee_params)
+          redirect_to employees_profile_path(@employee)
+       else
+          render 'edit_profile'
+       end   
   end
 
+  def update_edit_profile
+       @employee=Employee.find(params[:format])
+       if @employee.update(employee_params)
+          redirect_to employees_profile_path(@employee)
+       else
+          render 'edit_personal_profile'
+       end   
+  end
+
+
+  def  update_edit_address_profile
+       @employee=Employee.find(params[:format])
+       if @employee.update(employee_params)
+          redirect_to employees_profile_path(@employee)
+       else
+          render 'edit_address_profile'
+       end   
+  end
   
+  
+  def  update_edit_contact_profile
+       @employee=Employee.find(params[:format])
+       if @employee.update(employee_params)
+          redirect_to employees_profile_path(@employee)
+       else
+          render 'edit_contact_profile'
+       end   
+  end
+
   def employee_management
     
   end
 
   def subject_assignment
 
-    
   end
+  
   def assign_subject
     @batch=Batch.find(params[:subject_assignment][:id])
    @subject=@batch.subjects.all
@@ -858,39 +887,9 @@ end
 
   private
   def employee_params
-    params.require(:employee).permit(:employee_category_id,
-                      :reporting_manager_id,
-                          :employee_number,
-                          :joining_date,
-                          :first_name,
-                        :middle_name,
-                        :last_name,
-                        :gender,
-                        :job_title,
-                        :employee_position_id,
-                        :employee_department_id,
-                          :employee_grade_id,
-                        :qualification,
-                        :experience_detail,
-                        :experience_year,
-                        :experience_month,
-                          :status,
-                        :date_of_birth,
-                          :marital_status,
-                        :father_name,
-                        :mother_name,
-                          :blood_group,
-                        :country_id,
-                          :email,
-                          :photo_data,:home_address_line1,
-                          :home_address_line2,:home_city,:home_state,
-                          :home_country_id,
-                      :home_pin_code,
-                      :office_address_line1,:office_address_line2,
-                      :office_city,:office_state,:office_country_id,
-                      :office_pin_code,
-                      :office_phone1,:office_phone2,:mobile_phone,
-                      :home_phone,:fax)
+    params.require(:employee).permit!
+                    
+                     
   end
    
   def category_params

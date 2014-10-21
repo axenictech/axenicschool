@@ -42,11 +42,7 @@ class TimeTablesController < ApplicationController
   #   end
   # end
 
-  def timetable
-    @today=Date.today
-    @batches=Batch.all
-  end
-
+  
   # def display_institutional_time_table
   #      @today = params[:next].to_date
   #      @batches=Batch.all
