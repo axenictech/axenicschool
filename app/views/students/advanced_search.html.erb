@@ -9,9 +9,7 @@
 
 <div id="page-yield">
 <div id="box">
-<% unless flash[:s].nil? %>
-    <div align="center" class="alert alert-success" style="width:50%"> <%= flash[:s] %> </div>
-  <% end %></div>
+</div>
 		<%=form_for :search ,url:{action:'advanced_student_search'},method: :get do |f| %>
 <table align="center" class="table table-hover " style="width:500px">
 

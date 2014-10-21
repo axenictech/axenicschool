@@ -10,9 +10,6 @@
 
 <div id="page-yield">
 <div id="box">
-   <% unless flash[:notice_transfer].nil? %>
-    <div align="center" class="alert alert-danger" style="width:100%"> <%= flash[:notice_transfer] %> </div>
-  <% end %>
 
 <p>Transferring batch: <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %></p>
 

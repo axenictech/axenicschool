@@ -69,8 +69,12 @@
 </button></div>
 
 <div id="profile_picture_display">
-          <%= image_tag "default_employee.png" %>
-              </div>
+          <% unless @employee.image.blank? %>
+            <%= image_tag @employee.image%>
+          <% else %>
+            <%= image_tag "default_employee.png" %>
+          <% end %>
+      </div>
 
               <div id ="student_main_info">
       <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>

@@ -1,4 +1,4 @@
-<table  align="center" class="table table-hover table-bordered" style="width:800px">
+  <table  align="center" class="table table-hover table-bordered" style="width:800px">
      <tr>
      <td> <%= link_to "◄",time_tables_display_institutional_time_table_path(:next=>(@today-1.day)),remote:true %></td>
   <td>
@@ -9,8 +9,32 @@
     </td>
 </tr>
 </table>
-<%@batches.each do |b| %>
-      
-  
+<%unless @today.nil?%>
+<table  align="center" class="table table-hover table-bordered" style="width:800px">
+<%@time_table.each do |t| %>
+ <%@time_table_entries=TimeTableEntry.where(time_table_id:t.id)%>
+ <%@time_table_entries.each do |time|%>
+   <% @timing = ClassTiming.find(time.class_timing_id) %>
+     <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id(time.class_timing_id,time.weekday_id) %>  
+      <%if time.weekday.weekday==I18n.l(@today,:format=>"%A")%>
+     <tr>
+        <td>
+          <%='time'%><br/>
+          <%=time.batch.name%>
+         </td>
+        <td><%=@timing.start_time.strftime("%I:%M %p")+"-"+
+       @timing.end_time.strftime("%I:%M %p")%><br/>
+      <%=@present.subject.name%><br/>
+      <%=@present.employee.first_name%>
+    </td>
+   </tr>
 <%end%>
-                                                            
+<%end%>
+<%end%>
+</table>
+<%='No Time Assign For These Day' if @time_table_entries.blank?%>
+<%end%>
+
+
+
+                                                  

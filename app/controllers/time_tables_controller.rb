@@ -42,25 +42,27 @@ class TimeTablesController < ApplicationController
   #   end
   # end
 
-  def timetable
+  
+  # def display_institutional_time_table
+  #      @today = params[:next].to_date
+  #      @batches=Batch.all
+       
+    def timetable
     @today=Date.today
-    @batches=Batch.all
-  end
+    @time_end=TimeTable.all
+     @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
+     @batches=Batch.all
+   end
 
   def display_institutional_time_table
+        @time_end=TimeTable.all
        @today = params[:next].to_date
-
-       @time=TimeTableEntry.where(start_time:params[:next])
-      
-       @batches=[]
-       unless @time.nil?
-             @time.each do |t|
-             @batches.push t.batch
-         end
-         p "batchesssssssssssssssssssssss"
-         p @batches
-     end 
+       @batches=Batch.all
+       @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
   end
+
+
+  
 
   def selectTimeEmployee
     @employee=Employee.find(params[:format])

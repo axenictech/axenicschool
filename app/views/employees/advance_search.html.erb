@@ -12,9 +12,7 @@
 
 
 <div id="page-yield">
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
+ 
 
 <table align="center" class="table table-hover" style="width:500px">
 <%= form_for :search, url:{action:'advance_search_emp'}, method: :get do |f|%>

@@ -16,9 +16,7 @@
     <%= link_to 'Report Center', '/exam_reports/report_center' %> &raquo;
     Student Ranking Per Subject
   </div>
-   <% unless flash[:notice_rank_sub].nil? %>
-    <div class="alert alert-danger" align="center" style="width:100%"> <%= flash[:notice_rank_sub] %> </div>
-    <%end %>
+ 
 <%= form_for :rank_report, :url=>{:action=>'rank_report_batch'},html:{id: 'form_rank_report_batch'},remote:true,method: :get do |f| %>
   
  <div class="label-field-pair">

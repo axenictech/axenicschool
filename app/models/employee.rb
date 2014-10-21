@@ -6,7 +6,9 @@ class Employee < ActiveRecord::Base
   belongs_to  :nationality, :class_name => 'Country'
   belongs_to  :user
   belongs_to  :reporting_manager,:class_name => "Employee"
-  
+  has_attached_file :image
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   has_many    :employees_subjects
   has_many    :subjects ,:through => :employees_subjects
   has_many    :timetable_entries
