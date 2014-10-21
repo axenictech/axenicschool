@@ -48,15 +48,13 @@ class EmployeeAttendancesController < ApplicationController
      end
 
       def attendance_register
-        # @employees=Employee
-        @deparments=EmployeeDepartment.all
+       @deparments=EmployeeDepartment.all
       end
       def select
         
          @deparment=EmployeeDepartment.find(params[:department][:id])
           @employees=@deparment.employees.all
-          # @employee=EmployeeDepartment.find(params[:format])
-           @today = Date.today
+          @today = Date.today
           @start_date = @today.beginning_of_month
           @end_date = @today.end_of_month
        end
@@ -239,8 +237,7 @@ end
 
   def remove_all
        @department=EmployeeDepartment.find(params[:format])
-
-        @employees= @department.employees.all
+       @employees= @department.employees.all
   end
 
   def update_department_leave_reset

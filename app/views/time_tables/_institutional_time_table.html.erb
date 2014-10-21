@@ -9,7 +9,6 @@
     </td>
 </tr>
 </table>
-<%unless @today.nil?%>
 <table  align="center" class="table table-hover table-bordered" style="width:800px">
 <%@time_table.each do |t| %>
  <%@time_table_entries=TimeTableEntry.where(time_table_id:t.id)%>
@@ -31,9 +30,9 @@
 <%end%>
 <%end%>
 <%end%>
-</table>
 <%='No Time Assign For These Day' if @time_table_entries.blank?%>
-<%end%>
+</table>
+
 
 
 
