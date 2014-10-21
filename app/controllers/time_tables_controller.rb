@@ -25,10 +25,9 @@ class TimeTablesController < ApplicationController
       end
      end
   end
-
-  def timetable
-     @today=Date.today
-     @time_end=TimeTable.all
+ def timetable
+    @today=Date.today
+    @time_end=TimeTable.all
      @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
      @batches=Batch.all
   end
@@ -39,8 +38,8 @@ class TimeTablesController < ApplicationController
      @batches=Batch.all
      @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
   end
-  
-  def selectTimeEmployee
+
+ def selectTimeEmployee
     @employee=Employee.find(params[:format])
     @time=TimeTableEntry.where(employee_id:@employee.id)
     @weekdays=[]
