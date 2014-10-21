@@ -1,0 +1,41 @@
+
+<div id="content-header">
+  <h1>Reset employee leaves.
+</h1>
+  <h3>Reset Employee Leave</h3>
+  <div id="app-back-button">
+      <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+  <div id="list">
+    <table id="listing" width="100%">
+      <tr class="tr-head">
+        <td><%= t('leave_types') %></td>
+        <td><%= t('available_leave') %></td>
+        <td><%= t('leave_taken') %></td>
+        <td><%= t('last_reset_date') %></td>
+      </tr>
+      <% @leave_count.each do |e| %>
+        <%  leave_type =EmployeeLeaveType.find_by_id(e.employee_leave_type_id)%>
+        <%  if leave_type.status %>
+          <tr class="tr-<%= cycle('odd','even') %>">
+            <td class="col-3"><%=leave_type.name %></td>
+            <td class="col-3"><%=e.leave_count %></td>
+            <td class="col-3"><%=e.leave_taken %></td>
+            <%unless e.reset_date.nil? %>
+              <td class="col-3"><%= I18n.l(e.reset_date, :format=>"%d / %m / %Y") %></td>
+            <%else%>
+              <td class="col-3">-</td>
+            <%end%>
+          </tr>
+        <%end%>
+      <% end %>
+    </table>
+    <div>
+ 
+    </div>
+  </div>
+</div>

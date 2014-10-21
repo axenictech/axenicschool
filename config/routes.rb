@@ -433,7 +433,7 @@ get 'finance/new_master_category'
 get 'finance/assign_batch'
 get 'finance/remove_batch'
 post 'finance/create_master_category'
-
+get 'employee_attendances/employee_leave_detail'
 root 'home#dashboard'
  
  resources :home

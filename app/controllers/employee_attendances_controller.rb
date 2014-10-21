@@ -78,21 +78,18 @@ class EmployeeAttendancesController < ApplicationController
     def create
         @attendance = EmployeeAttendance.new(params_attendance)
         @employee = Employee.find(params[:employee_attendance][:employee_id])
-            
-          @date = params[:employee_attendance][:attendance_date]
-          
+        @date = params[:employee_attendance][:attendance_date]
          if @attendance.save
               @emp_leave = EmployeeLeave.find_by_employee_id(@attendance.employee_id)
-              
+              unless @emp_leave.nil?
               if @attendance.is_half_day
               leave_taken=@emp_leave.leave_taken.to_f+(0.5)
               @emp_leave.update(leave_taken: leave_taken)
-             
               else
               leave_taken=@emp_leave.leave_taken.to_f+(1)
               @emp_leave.update(leave_taken: leave_taken)
-             
-         end
+          end
+          end
              @deparment=@employee.employee_department
              @employees=@deparment.employees.all    
              @today = @date.to_date
@@ -111,18 +108,19 @@ class EmployeeAttendancesController < ApplicationController
        @employee = Employee.find(@attendance.employee_id)
        @date = @attendance.attendance_date
        @reset_count = EmployeeLeave.find_by_employee_id(@attendance.employee_id)
-           
-           leaves_taken = @reset_count.leave_taken
-           day_status = @attendance.is_half_day
-           leave_type = EmployeeLeaveType.find_by_id(@attendance.employee_leave_type_id)
-      
+            unless @reset_count.nil?
+            leaves_taken = @reset_count.leave_taken
+            day_status = @attendance.is_half_day
+            leave_type = EmployeeLeaveType.find_by_id(@attendance.employee_leave_type_id)
+              end
        if @attendance.is_half_day
            half_day = true
        else
           half_day = false
        end
-        
-       if @attendance.update(params_attendance)
+      
+         if @attendance.update(params_attendance)
+            unless leave_type.nil?
         if @attendance.employee_leave_type_id == leave_type.id
           unless day_status == @attendance.is_half_day
             if half_day
@@ -132,7 +130,7 @@ class EmployeeAttendancesController < ApplicationController
             end
             @reset_count.update_attributes(:leave_taken => leave)
            end
-        else
+         else
            if half_day
             leave = leaves_taken.to_f-(0.5)
            else
@@ -141,6 +139,7 @@ class EmployeeAttendancesController < ApplicationController
           @reset_count.update(:leave_taken => leave)
           @new_reset_count = EmployeeLeave.find_by_employee_id(@attendance.employee_id)
           leaves_taken = @new_reset_count.leave_taken
+        end
           if @attendance.is_half_day
             leave = leaves_taken.to_f+(0.5)
             @new_reset_count.update(:leave_taken => leave)
@@ -149,25 +148,29 @@ class EmployeeAttendancesController < ApplicationController
             @new_reset_count.update(:leave_taken => leave)
           end
         end
+         end
+      
          @deparment=@employee.employee_department
          @employees=@deparment.employees.all    
          @today = @date.to_date
          @start_date = @today.beginning_of_month
          @end_date = @today.end_of_month
-    end
-  end
+   
+end
      
      def destroy_attendance
           @attendance= EmployeeAttendance.find(params[:id])
           @employee = Employee.find(@attendance.employee_id)
-        
+          
           @reset_count = EmployeeLeave.find_by_employee_id(@attendance.employee_id)
+           unless @reset_count.nil?
           leaves_taken = @reset_count.leave_taken
              if @attendance.is_half_day
                  leave = leaves_taken.to_d-(0.5)
              else
                  leave = leaves_taken.to_d-(1)
              end
+           end
           @attendance.destroy
           @date = @attendance.attendance_date
           @deparment=@employee.employee_department
@@ -272,11 +275,13 @@ end
   
     @employee = Employee.where("first_name LIKE ?"+other_conditions,"#{params[:search]}%")
 
-  
+  end
 
+   end
 
-    end
-
+   def employee_leave_detail
+     @employee = Employee.find_by_id(params[:format])
+    @leave_count = EmployeeLeave.where(employee_id:@employee.id)
    end
 
     private
