@@ -19,6 +19,10 @@ gem 'aws-sdk'
 gem 'ckeditor'
 gem 'devise'
 gem 'pdfkit'
+<<<<<<< HEAD
+# gem 'wkhtmltopdf'
+=======
+>>>>>>> a55b4edb65b366310ea780284f9b7adbbd287870
 gem 'wkhtmltopdf-binary'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

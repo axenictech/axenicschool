@@ -4,71 +4,44 @@ class TimeTablesController < ApplicationController
     @timetable=TimeTable.new
   end
 	def employee_timetable
-          @timetables=[]
-          @employee=Employee.find(params[:format])
-          @time_table_entries=TimeTableEntry.where(employee_id:@employee)
-          @time_table_entries.each do |tbe|
-              @timetables<<tbe.time_table
-          end
+      @timetables=[]
+      @employee=Employee.find(params[:format])
+      @time_table_entries=TimeTableEntry.where(employee_id:@employee)
+      @time_table_entries.each do |tbe|
+      @timetables<<tbe.time_table
+      end
   end
         
   def new
- 	     	@timetables=TimeTable.all
+ 	    @timetables=TimeTable.all
   end
 
   def selectTime
-    @time=TimeTableEntry.where(time_table_id:params[:time][:id])
-    @batches=[]
-    unless @time.nil?
-    @time.each do |t|
-     @batches.push t.batch
-    end
+      @time=TimeTableEntry.where(time_table_id:params[:time][:id])
+      @batches=[]
+      unless @time.nil?
+      @time.each do |t|
+      @batches.push t.batch
+      end
+     end
   end
-  end
-
-  # def timetable
-  #   # @config = Configuration.available_modules
-  #   @batches = Batch.all
-  #   unless params[:next].nil?
-  #     @today = params[:next].to_date
-  #     render (:update) do |page|
-  #       page.replace_html "timetable", :partial => 'table'
-  #     end
-  #   else
-  #      @today = Date.today
-  #      # @today = @local_tzone_time.to_date
-  #     p "ttttttttttttttttttt"
-  #     p @today
-  #   end
-  # end
-
-  
-  # def display_institutional_time_table
-  #      @today = params[:next].to_date
-  #      @batches=Batch.all
-       
-    def timetable
+ def timetable
     @today=Date.today
     @time_end=TimeTable.all
      @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
      @batches=Batch.all
-   end
-
-  def display_institutional_time_table
-        @time_end=TimeTable.all
-       @today = params[:next].to_date
-       @batches=Batch.all
-       @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
   end
 
+  def display_institutional_time_table
+     @time_end=TimeTable.all
+     @today = params[:next].to_date
+     @batches=Batch.all
+     @time_table=TimeTable.where("time_tables.start_date <= ? AND time_tables.end_date >= ?",@today,@today)
+  end
 
-  
-
-  def selectTimeEmployee
+ def selectTimeEmployee
     @employee=Employee.find(params[:format])
-  
     @time=TimeTableEntry.where(employee_id:@employee.id)
-   
     @weekdays=[]
     @class_timings=[]
     @employees=[]
@@ -79,18 +52,16 @@ class TimeTablesController < ApplicationController
      @employees.push t.employee
    end
   end
-end
+ end
 
   def time_table_pdf
     @time=TimeTableEntry.where(params[:time_id])
     @batch = Batch.find(params[:batch_id])
     @subjects = @batch.subjects.all
-   
     render 'time_table_pdf',layout:false
-
-  end
-
-  def teacher_time_table_display
+ end
+ 
+ def teacher_time_table_display
     @time=TimeTableEntry.where(time_table_id:params[:time][:id])
     @weekdays=[]
     @class_timings=[]
