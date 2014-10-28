@@ -215,6 +215,135 @@ class FinanceController < ApplicationController
     @automatic_transactions=FinanceTransactionTrigger.all
   end
 
+  def new_expense
+    @transaction=FinanceTransaction.new
+    @categories=FinanceTransactionCategory.where(is_income:false)
+  end
+
+  def create_expense
+    @transaction=FinanceTransaction.new(transaction_params)
+    if @transaction.save
+      flash[:notice]="Expense has been added to the accounts"
+      redirect_to finance_new_expense_path
+    else
+      @categories=FinanceTransactionCategory.where(is_income:false)
+      render 'new_expense'
+    end
+  end
+
+  def expense_list
+    @start_date=params[:expense][:start_date].to_date
+    @end_date=params[:expense][:end_date].to_date
+    @expenses=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+  end
+
+  def edit_expense
+    @transaction=FinanceTransaction.find(params[:id])
+    @categories=FinanceTransactionCategory.where(is_income:false)
+  end
+
+  def update_expense
+    @transaction=FinanceTransaction.find(params[:id])
+    if @transaction.update(transaction_params)
+      flash[:notice]="Expense has been updated to the accounts"
+      redirect_to finance_view_expense_path
+    else
+      @categories=FinanceTransactionCategory.where(is_income:false)
+      render 'edit_expense'
+    end
+  end
+
+  def delete_expense
+    @transaction=FinanceTransaction.find(params[:id])
+    @transaction.destroy
+    flash[:notice]="Expense has been deleted from accounts"
+    redirect_to finance_view_expense_path
+  end
+
+  def finance_expense_report
+    @general_setting=GeneralSetting.first
+    @start_date=params[:start_date].to_date
+    @end_date=params[:end_date].to_date
+    @expenses=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+    render 'finance_expense_report',layout:false
+  end
+
+  def new_income
+    @transaction=FinanceTransaction.new
+    @categories=FinanceTransactionCategory.where(is_income:true)
+  end
+
+  def create_income
+    @transaction=FinanceTransaction.new(transaction_params)
+    if @transaction.save
+      flash[:notice]="Income has been added to the accounts"
+      redirect_to finance_new_income_path
+    else
+      @categories=FinanceTransactionCategory.where(is_income:true)
+      render 'new_income'
+    end
+  end
+
+  def income_list
+    @start_date=params[:income][:start_date].to_date
+    @end_date=params[:income][:end_date].to_date
+    @incomes=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+  end
+
+  def edit_income
+    @transaction=FinanceTransaction.find(params[:id])
+    @categories=FinanceTransactionCategory.where(is_income:true)
+  end
+
+  def update_income
+    @transaction=FinanceTransaction.find(params[:id])
+    if @transaction.update(transaction_params)
+      flash[:notice]="Income has been updated to the accounts"
+      redirect_to finance_view_income_path
+    else
+      @categories=FinanceTransactionCategory.where(is_income:true)
+      render 'edit_income'
+    end
+  end
+
+  def delete_income
+    @transaction=FinanceTransaction.find(params[:id])
+    @transaction.destroy
+    flash[:notice]="Income has been deleted from accounts"
+    redirect_to finance_view_income_path
+  end
+
+  def finance_income_report
+    @general_setting=GeneralSetting.first
+    @start_date=params[:start_date].to_date
+    @end_date=params[:end_date].to_date
+    @incomes=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+    render 'finance_income_report',layout:false
+  end
+
+  def transactions_list
+    @start_date=params[:transaction][:start_date].to_date
+    @end_date=params[:transaction][:end_date].to_date
+    @transactions=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+  end
+
+  def finance_transaction_report
+    @general_setting=GeneralSetting.first
+    @start_date=params[:start_date].to_date
+    @end_date=params[:end_date].to_date
+    @transactions=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+    render 'finance_transaction_report',layout:false
+  end
+
+  def transactions_comparison
+    @start_date1=params[:transaction][:start_date1].to_date
+    @end_date1=params[:transaction][:end_date1].to_date
+    @transactions1=FinanceTransaction.where(transaction_date:@start_date1..@end_date1)
+    @start_date2=params[:transaction][:start_date2].to_date
+    @end_date2=params[:transaction][:end_date2].to_date
+    @transactions2=FinanceTransaction.where(transaction_date:@start_date2..@end_date2)
+  end
+
 private 
   def transaction_category_params
     params.require(:finance_transaction_category).permit!
@@ -238,5 +367,9 @@ private
 
   def auto_transaction_params
     params.require(:finance_transaction_trigger).permit!
+  end
+
+  def transaction_params
+    params.require(:finance_transaction).permit!
   end
 end

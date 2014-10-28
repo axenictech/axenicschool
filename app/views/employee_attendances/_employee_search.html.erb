@@ -14,7 +14,7 @@
 
       <%@employee.each do |emp|%>
           <tr>
-                <td col-md-1><%= emp.first_name %></td>
+                <td col-md-1><%=link_to emp.first_name,employee_attendances_employee_leave_detail_path(emp.id)%></td>
                 <td col-md-1><%= emp.employee_number%></td>
                 <td col-md-1><%= emp.employee_department.name%></td>
          </tr>

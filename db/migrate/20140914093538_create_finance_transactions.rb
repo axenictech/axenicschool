@@ -5,7 +5,6 @@ class CreateFinanceTransactions < ActiveRecord::Migration
       t.string     :description
       t.decimal    :amount
       t.boolean    :fine_included, :default => false
-      t.references :category,index:true
       t.references :student,index:true
       t.references :finance_fees,index:true
 

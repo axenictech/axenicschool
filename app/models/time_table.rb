@@ -41,4 +41,17 @@ class TimeTable < ActiveRecord::Base
   #    		end
   #    	end
   #   end
+  
+  
+  def self.tte_for_the_day(batch,date)
+    #entries = TimetableEntry.find(:all,:joins=>[:timetable, :class_timing, :weekday],:conditions=>["(timetables.start_date <= ? AND timetables.end_date >= ?)  AND timetable_entries.batch_id = ? AND class_timings.is_deleted = false AND weekdays.is_deleted = false",date,date,batch.id], :order=>"class_timings.start_time")
+    entries= TimeTableEntry.joins(:time_table,:class_timing,:weekday).where("time_tables.start_date<= ? AND time_tables.end_date >=? AND time_table_entries.batch_id = ?",date,date,batch.id)
+    if entries.empty?
+      today=[]
+    else
+      today=entries.select{|a| a.weekday.day_of_week==date.wday}
+    end
+    today
+  end
+
 end

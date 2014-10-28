@@ -1,0 +1,75 @@
+<div id="content-header">
+  <h1>Transactions</h1>
+  <h3>Transactions Comparison</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
+<br/><br/>
+<h5>Report for the period from <%=@start_date1%> to <%=@end_date1%></h5>
+<% unless @transactions1.nil? %>
+<%total_expense=0%><%total_income=0%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+		<th>Sl no.</th>
+		<th>Particulars</th>
+		<th>Expenses (Rs.)</th>
+		<th>Incomes (Rs.)</th>
+	</tr>
+	<% @transactions1.each_with_index do |t,i|%>
+	<% category=t.finance_transaction_category%>
+	<tr>
+		<td><%= i+1 %></td>
+		<td><%= t.title%></td>
+		<td><%= t.amount unless category.is_income? %></td>
+		<td><%= t.amount if category.is_income? %></td>
+	</tr>
+		<% total_expense+=t.amount unless category.is_income? %>
+		<% total_income+=t.amount if category.is_income? %>
+	<%end%>
+	<tr><td colspan="4"></td></tr>
+	<tr>
+		<td></td>
+		<td><b>Grand Total</b></td>
+		<td><b><%= total_expense %></b></td>
+		<td><b><%= total_income %></b></td>
+	</tr>
+</table>
+<%else%>
+<h4>No Transactions for the given period</h4>
+<%end%><br/><br/>
+<h5>Report for the period from <%=@start_date2%> to <%=@end_date2%></h5>
+<% unless @transactions2.nil? %>
+<%total_expense=0%><%total_income=0%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+		<th>Sl no.</th>
+		<th>Particulars</th>
+		<th>Expenses (Rs.)</th>
+		<th>Incomes (Rs.)</th>
+	</tr>
+	<% @transactions2.each_with_index do |t,i|%>
+	<% category=t.finance_transaction_category%>
+	<tr>
+		<td><%= i+1 %></td>
+		<td><%= t.title%></td>
+		<td><%= t.amount unless category.is_income? %></td>
+		<td><%= t.amount if category.is_income? %></td>
+	</tr>
+		<% total_expense+=t.amount unless category.is_income? %>
+		<% total_income+=t.amount if category.is_income? %>
+	<%end%>
+	<tr><td colspan="4"></td></tr>
+	<tr>
+		<td></td>
+		<td><b>Grand Total</b></td>
+		<td><b><%= total_expense %></b></td>
+		<td><b><%= total_income %></b></td>
+	</tr>
+</table>
+<%else%>
+<h4>No Transactions for the given period</h4>
+<%end%>
+</div>
