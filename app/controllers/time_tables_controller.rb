@@ -87,6 +87,7 @@ end
 
 	def select
 	   @batch = Batch.find(params[:batch][:id])
+     @class_timing=@batch.class_timings.where(:is_break=>false)
 	   @subjects = @batch.subjects.all
   end
 
@@ -104,6 +105,7 @@ end
     if request.post?
       params[:employee_subjects]
       @error_obj = EmployeeSubject.allot_work(params[:employee_subjects])
+       flash[:notice]="Updated work allotment."
     end
       @batches = Batch.all
       @subjects = @batches.collect(&:subjects).flatten
@@ -138,12 +140,13 @@ end
      unless @error
         if @time_table.save
        	   redirect_to time_table_entries_path(@time_table)
+
         else
           render 'new_timetable'
         end
-     else
+       else
           render 'new_timetable'
-     end
+      end
   end
       
   def edit_timetable

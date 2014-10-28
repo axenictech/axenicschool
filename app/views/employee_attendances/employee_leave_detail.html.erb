@@ -10,26 +10,24 @@
 </div>
 
 <div id="page-yield">
-  <div id="list">
-    <table id="listing" width="100%">
-      <tr class="tr-head">
-        <td><%= t('leave_types') %></td>
-        <td><%= t('available_leave') %></td>
-        <td><%= t('leave_taken') %></td>
-        <td><%= t('last_reset_date') %></td>
+  
+    <table align="center" class="table table-hover table-bordered" style="width:800px">
+      <tr>
+        <td><%= 'leave_types'%></td>
+        <td><%= 'available_leave'%></td>
+        <td><%= 'leave_taken'%></td>
+        <td><%= 'last_reset_date'%></td>
       </tr>
       <% @leave_count.each do |e| %>
         <%  leave_type =EmployeeLeaveType.find_by_id(e.employee_leave_type_id)%>
-        <%  if leave_type.status %>
-          <tr class="tr-<%= cycle('odd','even') %>">
+        
+          <tr>
             <td class="col-3"><%=leave_type.name %></td>
             <td class="col-3"><%=e.leave_count %></td>
             <td class="col-3"><%=e.leave_taken %></td>
             <%unless e.reset_date.nil? %>
               <td class="col-3"><%= I18n.l(e.reset_date, :format=>"%d / %m / %Y") %></td>
-            <%else%>
-              <td class="col-3">-</td>
-            <%end%>
+      
           </tr>
         <%end%>
       <% end %>
@@ -38,4 +36,3 @@
  
     </div>
   </div>
-</div>
