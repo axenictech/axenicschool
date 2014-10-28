@@ -1,0 +1,268 @@
+
+<div id="wrapper">
+
+<!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top color-nav" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#menu-toggle" class="fa fa-list-ul fa-lg navbar-brand" id="menu-toggle"></a>
+                <a class="navbar-brand" href="index.html">Axenic School</a>
+            </div>
+                 
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>user name</strong>
+                                        </h5>
+                                       
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> 
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                        </li>
+                        
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> user name <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+      </nav>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div id="hide-left">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="index.html"><i class="fa fa-th"></i> <%= t('dashboard')%></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-institution"></i> 
+                        <%= t('admission')%></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-user"></i><%= t('student details')%></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-group"></i><%=t('manage user')%>  </a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-newspaper-o"></i><%=t('manage news')%></a>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-bar-chart"></i> <%=t('examination')%><i class="fa fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#"><%=t('setting')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('exam managment')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('generate reports')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('report center')%></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-clock-o"></i> <%=t('timetable')%><i class="fa fa-caret-down"></i></a>
+                        <ul id="demo1" class="collapse">
+                            <li>
+                                <a href="#"><%=t('create weekdays')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('set class timings')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('create timetable')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('view timetable')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('institutional   timetable')%></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-list-alt"></i><%=t('attendance')%></a>
+                            </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-cogs"></i> <%=t('settings')%><i class="fa fa-caret-down"></i></a>
+                        <ul id="demo2" class="collapse">
+                            <li>
+                                <a href="#"><%=t('manage course/batch')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('student category')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('manage subject')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('general settings')%></a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-chain"></i> <%=t('Resources ')%><i class="fa fa-caret-down"></i></a>
+                        <ul id="demo3" class="collapse">
+                            <li>
+                                <a href="#"><%=t('setting')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('employee managment')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('employee leave managment')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('create payslip')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('employee search')%></a>
+                            </li>  
+                             <li>
+                                <a href="#"><%=t('employee payslip')%></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-rupee"></i> <%=t('finance')%><i class="fa fa-caret-down"></i></a>
+                        <ul id="demo4" class="collapse">
+                            <li>
+                                <a href="#"><%=t('fees')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('category')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('transaction')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('donation')%></a>
+                            </li>
+                             <li>
+                                <a href="#"><%=t('automatic transaction')%></a>
+                            </li>  
+                             <li>
+                                <a href="#"><%=t('payslip')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('finance report')%></a>
+                            </li>
+                            <li>
+                                <a href="#"><%=t('assets liability')%></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-calender"></i><%=t('calender')%></a>
+                    </li>
+                </ul>
+            </div></div>
+  <div id="page-wrapper">
+    <div class="container-fluid">
+     <div class="row">
+        <div class="col-lg-12">
+          <% if notice %>
+            <div class="alert alert-success ">
+            <%= link_to '','',class: "fa fa-check fa-2x"%>
+            <i><%= notice %></i></div>
+          <% end %>
+          <% if alert %>
+            <div class="alert alert-danger ">
+            <%= link_to '','',class: "fa fa-remove fa-2x"%>
+            <i><%= alert %></i></div>
+          <% end %>
+        </div>
+    </div><br/>
+       
+      <%= yield %>
+    </div>
+  </div></div>
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+</nav>
+
+
+ <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
