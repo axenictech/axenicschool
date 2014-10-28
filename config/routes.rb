@@ -341,6 +341,7 @@ get 'employee_attendances/update_department_leave_reset'
 get 'employee_attendances/employee_leave_reset_by_employee'
 post 'employee_attendances/search'
 get 'employee_attendances/search_emp'
+get 'employee_attendances/employee_leave_detail'
 
 get 'attendences/attendence_register'
 get 'attendences/select' 

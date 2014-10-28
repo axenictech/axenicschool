@@ -1,9 +1,19 @@
+
+
+<% unless flash[:notice].nil? %>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
+  <% end %>
+
+
 <div id="content-header">
   <h1>Timetable</h1>
   <h3>Work Allotment</h3>
   <div id="app-back-button">
-  <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+    <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
   </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
 <%=link_to 'Assign Multiple Teacher',employees_subject_assignment_path %>
 <%=form_for :employees_subjects,:html=>{:id=>'work_allotment_form'} do |f| %>
    <table align="center" class="table table-hover" style="width:80%">
