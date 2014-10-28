@@ -1,0 +1,21 @@
+<div id="content-header">
+  <h1>Fees Defaulters</h1>
+  <h3>Students with fee dues</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div id="box">
+ <div class="label-field-pair">
+  <%= label_tag :select_course %>
+      <div class="text-input-bg">
+      <%= select :course,:id, @courses.collect {|c| [c.course_name,c.id]},{prompt:true},{onchange:"var a={id: $('#course_id').val()};$.get('batch_choice',a,function(response){});"}%>
+      </div></div><br/>
+<div id="batch"><%= render 'batch_choice'%></div><br/>
+<div id="collection"><%= render 'collection_choice'%></div>
+</div><br/><br/>
+<div id="students_list"></div>
+</div>

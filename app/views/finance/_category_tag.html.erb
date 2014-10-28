@@ -1,0 +1,4 @@
+ <div class="row">
+          <div class="col-md-3"><%= label_tag :category %></div>
+          <div class="col-md-3"><%= select :category,:id,Category.all.collect {|c| [c.name,c.id]},{prompt:true},{:style =>"width: 250px",class: "form-control"}%></div>
+      </div>

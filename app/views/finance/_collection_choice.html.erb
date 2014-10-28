@@ -1,0 +1,5 @@
+ <div class="label-field-pair">
+  <%= label_tag :select_fee_collection_date %>
+      <div class="text-input-bg">
+      <%= select :collection,:id, @collections.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={id: $('#collection_id').val()};$.get('defaulter_students',a,function(response){});"}%>
+      </div></div>

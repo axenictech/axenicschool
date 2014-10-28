@@ -1,0 +1,62 @@
+<div id="content-header">
+  <h1>Fees Collection</h1>
+  <h3>Create Particular for Master fees category</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to 'Master Fees','master_fees'%> </li>
+  </ul>
+</div>
+
+<div id="page-yield">
+
+<%= form_for @fee, url:{action: 'create_fees_particular'} do |f| %>
+	<% if @fee.errors.any?%>
+      <div class="alert alert-danger">
+        <ul>
+          <h3>Errors Prohibited: </h3>
+          <% @fee.errors.full_messages.each do |msg| %>
+          	<li style="width:500px"><%= msg%></li>
+          <% end %>
+        </ul> 
+      </div>
+  	<% end %>
+      <div class="row">
+        <div class="col-md-3"><%= f.label :name %></div>
+        <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
+      </div><br/>
+      <div class="row">
+          <div class="col-md-3"><%= f.label :description %></div>
+          <div class="col-md-3"><%= f.text_field :description,:style =>"width: 250px",class: "form-control"%></div>
+      </div><br/>
+      <div class="row">
+          <div class="col-md-3"><%= f.label :create_using %></div>
+          <div class="col-md-3">
+          <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('admission_no',function(response){
+            });"}%><%='Admission no'%><br/>
+          <%=radio_button_tag :mode,"category",'',{onclick:"$.get('category',function(response){
+            });"}%><%= 'Student Category'%><br/>
+          <%=radio_button_tag :mode,"all",'',{onclick:"$('#hidden').html('')"}%><%='All'%></div>
+      </div><br/>
+      <div id="hidden"></div><br/>
+      <div class="row">
+          <div class="col-md-3"><%= f.label :amount %></div>
+          <div class="col-md-3"><%= f.text_field :amount,:style =>"width: 250px",class: "form-control"%></div>
+      </div><br/>
+      <div class="row">
+        <div class="col-md-3"><%= f.label :finance_fee_category %></div>
+        <div class="col-md-3"> Select:&nbsp;&nbsp;<%= link_to "All",finance_select_all_path,remote:true%>&nbsp;&nbsp;<%= link_to "None",finance_select_none_path,remote:true%>
+        <div id="fee_category"><%= render 'fee_category_list'%></div>
+        </div>
+        </div>
+      <div class="row">
+      <div class="col-md-2"></div>
+        <div class="col-md-3"><%= f.submit 'Submit', class: "btn btn-primary"%></div>
+      </div>
+<%end%>
+</div>

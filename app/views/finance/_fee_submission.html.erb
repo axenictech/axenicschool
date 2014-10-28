@@ -1,0 +1,16 @@
+<% unless @particulars.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+  <tr class="tr-head">
+  <th>Sl no.</th>
+  <th>Particulars</th>
+  <th>Amount(Rs.)</th>
+  </tr>
+  <% @particulars.each_with_index do |m,i|%>
+    <tr>
+      <td class="col-3"><%= i+1 %></td>
+      <td class="col-3"><%= m.name %></td>
+      <td class="col-3"><%= m.amount %></td>
+    </tr>
+  <%end%>
+</table>
+<%end%>

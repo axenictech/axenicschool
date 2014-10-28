@@ -1,0 +1,37 @@
+<div id="content-header">
+  <h1>Fees Submission</h1>
+  <h3>Student fees submission</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div class="container">
+  <div class="row" style="margin-top:30px">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+        <div class="panel-heading">
+        <%= link_to 'Fees submission by batch','fees_submission_batch',style:"color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Fees submission by selecting each batch
+          </div>
+        </div>
+      </div>
+     <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'Fees submission for each student','fees_submission_student',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px"   >
+          Submitting fees by searching each students
+          </div>
+        </div>
+      </div>
+    <div class="col-md-2 col-xs-2"></div>
+  </div>
+</div>
+</div>
