@@ -1,23 +1,16 @@
-/*!
- * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Global Styles */
-
 body {
     margin-top: 100px;
     background-color: #222;
 }
-
-@media(min-width:768px) {
-    body {
-        margin-top: 50px;
-    }
+.content{
+    height: 100%;
+    overflow-y: hidden;
 }
-
+.content-header{
+    margin-top: 20px;
+}
 #wrapper {
+    overflow: 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -25,7 +18,13 @@ body {
 }
 
 #wrapper.toggled {
-    padding-left: 250px;
+    padding-left: 150px;
+}
+
+#page-wrapper{
+    margin: 31px;
+    height: 100%;
+    overflow-y: hidden !important;
 }
 
 #hide-left {
@@ -35,7 +34,7 @@ body {
     width: 0;
     height:100%;
     margin-left: -265px;
-    overflow-y: auto;
+    overflow-y: hidden;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -50,7 +49,7 @@ body {
 
 .side-nav {
         position: absolute;
-        top: 50px;
+        top: 20px;
         width: 250px;
         margin: 0;
         padding: 0;
@@ -124,37 +123,7 @@ body {
 }
 
 #wrapper.toggled #page-wrapper {
-    position: absolute;
-}
-
-
-.huge {
-    font-size: 50px;
-    line-height: normal;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        position: fixed;
-    }
-     #wrapper.toggled {
-        padding-left: 250px;
-    }
-
-    #hide-left {
-        width: 0px;
-    }
-
-    #wrapper.toggled #hide-left {
-        width: 250px;
-    }
-
-    #page-wrapper {
-    }
-
-    #wrapper.toggled #page-wrapper {
-        position: relative;
- }
+    position: none;
 }
 
 /*customised boot*/
@@ -233,81 +202,6 @@ li.message-footer {
 ul.alert-dropdown {
     width: 200px;
 }
-
-/* Side Navigation */
-
-@media(min-width:768px) {
-
-.flot-chart {
-    display: block;
-    height: 400px;
-}
-
-.flot-chart-content {
-    width: 100%;
-    height: 100%;
-}
-
-/* Custom Colored Panels */
-
-.huge {
-    font-size: 40px;
-}
-
-.panel-green {
-    border-color: #5cb85c;
-}
-
-.panel-green .panel-heading {
-    border-color: #5cb85c;
-    color: #fff;
-    background-color: #5cb85c;
-}
-
-.panel-green a {
-    color: #5cb85c;
-}
-
-.panel-green a:hover {
-    color: #3d8b3d;
-}
-
-.panel-red {
-    border-color: #d9534f;
-}
-
-.panel-red .panel-heading {
-    border-color: #d9534f;
-    color: #fff;
-    background-color: #d9534f;
-}
-
-.panel-red a {
-    color: #d9534f;
-}
-
-.panel-red a:hover {
-    color: #b52b27;
-}
-
-.panel-yellow {
-    border-color: #f0ad4e;
-}
-
-.panel-yellow .panel-heading {
-    border-color: #f0ad4e;
-    color: #fff;
-    background-color: #f0ad4e;
-}
-
-.panel-yellow a {
-    color: #f0ad4e;
-}
-
-.panel-yellow a:hover {
-    color: #df8a13;
-}
-
 /*space*/
 .space{
     height:40px;
@@ -323,3 +217,4 @@ background: -ms-linear-gradient(left, rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /
 background: linear-gradient(to right, rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); /* text-indent: 6-9 */
 }
+
