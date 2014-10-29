@@ -1,0 +1,26 @@
+<% unless @particular_fees.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+	<th>Sl no.</th>
+	<th>Category</th>
+	<th>Student Category</th>
+	<th>Admission No</th>
+	<th>Amount(Rs.)</th>
+	<th>Created Date</th>
+	<th></th>
+	</tr>
+	<% @particular_fees.each_with_index do |m,i|%>
+		<tr>
+			<td class="col-3"><%= i+1 %></td>
+			<td class="col-3"><%= m.name %></td>
+			<td class="col-3"><%= m.category_id %></td>
+			<td class="col-3"><%= m.admission_no%></td>
+			<td class="col-3"><%= m.amount %></td>
+			<td class="col-3"><%= m.created_at.to_date%></td>
+			<td class="col-3"><%= link_to 'Edit',finance_edit_particular_fee_path(@master_category,m),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete',finance_delete_particular_fee_path(@master_category,m),method: :delete, data:{confirm:"Are You sure to delete '#{m.name}'?"},remote:true%></td>	
+			
+		</tr>
+	<%end%>
+</table>
+<%end%>

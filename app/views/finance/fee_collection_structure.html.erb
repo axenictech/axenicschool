@@ -1,0 +1,19 @@
+<div id="content-header">
+  <h1>Finance</h1>
+  <h3><%= @student.first_name+" "+@student.last_name%></h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div id="box">
+ <div class="label-field-pair">
+  <%= label_tag :select_fee_collection_date %>
+      <div class="text-input-bg">
+      <%= select :collection,:id, @collections.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_structure',a,function(response){});"}%>
+      </div></div>
+</div><br/><br/>
+<div id="fees_structure"></div>
+</div>

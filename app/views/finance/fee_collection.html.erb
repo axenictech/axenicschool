@@ -1,0 +1,36 @@
+<div id="content-header">
+  <h1>Finance</h1>
+  <h3>Fees Collection Date</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0),:back  %>
+  </div>
+<div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div class="container">
+  <div class="row" style="margin-top:30px">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+        <div class="panel-heading">
+        <%= link_to 'Create Fee Collection','new_fee_collection',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Creates new fee collecting dates
+          </div>
+        </div>
+      </div>
+     <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to 'View','fee_collection_view',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px"   >
+          Displays fee collection dates
+          </div>
+        </div>
+      </div>
+    <div class="col-md-2 col-xs-2"></div>
+  </div>
+</div></div>

@@ -341,6 +341,7 @@ get 'employee_attendances/update_department_leave_reset'
 get 'employee_attendances/employee_leave_reset_by_employee'
 post 'employee_attendances/search'
 get 'employee_attendances/search_emp'
+get 'employee_attendances/employee_leave_detail'
 
 get 'attendences/attendence_register'
 get 'attendences/select' 
@@ -427,27 +428,78 @@ post 'finance/transactions_list'
 get 'finance/finance_transaction_report'
 get 'finance/compare_report'
 post 'finance/transactions_comparison'
-
 get 'finance/master_fees'
 get 'finance/new_master_category'
 get 'finance/assign_batch'
 get 'finance/remove_batch'
 post 'finance/create_master_category'
-get 'employee_attendances/employee_leave_detail'
+get 'finance/fees_list'
+get 'finance/:batch_id/edit_master_category/:id',to:'finance#edit_master_category',as:'finance_edit_master_category'
+patch 'finance/:batch_id/update_master_category/:id',to:'finance#update_master_category',as:'finance_update_master_category'
+delete 'finance/:batch_id/delete_master_category/:id',to:'finance#delete_master_category',as:'finance_delete_master_category'
+get 'finance/new_fees_particular'
+post 'finance/create_fees_particular'
+get 'finance/admission_no'
+get 'finance/category'
+get 'finance/select_all'
+get 'finance/select_none'
+get 'finance/:id/master_category_particular',to:'finance#master_category_particular',as:'finance_master_category_particular'
+get 'finance/:id/new_particular_fee',to:'finance#new_particular_fee',as:'finance_new_particular_fee'
+post 'finance/:id/create_particular_fee',to:'finance#create_particular_fee',as:'finance_create_particular_fee'
+get 'finance/:id/student_admission_no',to:'finance#student_admission_no',as:'finance_student_admission_no'
+get 'finance/:id/student_category',to:'finance#student_category',as:'finance_student_category'
+get 'finance/:master_id/edit_particular_fee/:id',to:'finance#edit_particular_fee',as:'finance_edit_particular_fee'
+patch 'finance/:master_id/update_particular_fee/:id',to:'finance#update_particular_fee',as:'finance_update_particular_fee'
+delete 'finance/:master_id/delete_particular_fee/:id',to:'finance#delete_particular_fee',as:'finance_delete_particular_fee'
+get 'finance/fee_discounts'
+get 'finance/new_fee_discount'
+post 'finance/create_fee_discount'
+get 'finance/discount_type'
+get 'finance/fee_category'
+get 'finance/discount_view'
+get 'finance/:master_id/edit_fee_discount/:id',to:'finance#edit_fee_discount',as:'finance_edit_fee_discount'
+patch 'finance/:master_id/update_fee_discount/:id',to:'finance#update_fee_discount',as:'finance_update_fee_discount'
+delete 'finance/:master_id/delete_fee_discount/:id',to:'finance#delete_fee_discount',as:'finance_delete_fee_discount'
+get 'finance/fee_collection'
+get 'finance/new_fee_collection'
+post 'finance/create_fee_collection'
+get 'finance/fee_collection_view'
+get 'finance/view_fee_collection'
+get 'finance/:batch_id/edit_fee_collection/:id',to:'finance#edit_fee_collection',as:'finance_edit_fee_collection'
+patch 'finance/:batch_id/update_fee_collection/:id',to:'finance#update_fee_collection',as:'finance_update_fee_collection'
+delete 'finance/:batch_id/delete_fee_collection/:id',to:'finance#delete_fee_collection',as:'finance_delete_fee_collection'
+get 'finance/:id/collection_details_view',to:"finance#collection_details_view",as:"finance_collection_details_view"
+get 'finance/fees_submission'
+get 'finance/fees_submission_batch'
+get 'finance/fee_collection_date'
+get 'finance/student_fees'
+get 'finance/fees_submission_student'
+get 'finance/search_student'
+get 'finance/fees_collection_student',to:'finance#fees_collection_student',as:'finance_fees_collection_student'
+get 'finance/student_fees_submission'
+get 'finance/fees_structure'
+get 'finance/student_search'
+get 'finance/fee_collection_structure'
+get 'finance/student_fees_structure'
+get 'finance/fees_defaulters'
+get 'finance/batch_choice'
+get 'finance/collection_choice'
+get 'finance/defaulter_students'
+
 root 'home#dashboard'
  
- resources :home
- resources :setting
- resources :categories
- resources :general_settings
+resources :home
+resources :setting
+resources :categories
+resources :general_settings
   
- resources :courses do
-    resources :batches
-  end
+resources :courses do
+	resources :batches
+end
 
-  resources :grading_levels
-  resources :batches do
-  resources :grading_levels
+resources :grading_levels
+resources :batches do
+	resources :grading_levels
 end  
 
 resources :batch_transfers

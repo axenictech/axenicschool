@@ -1,0 +1,22 @@
+<% unless @master_categories.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+	<th>Sl no.</th>
+	<th>Fees Name</th>
+	<th>Batch Name</th>
+	<th>Created At</th>
+	<th></th>
+	</tr>
+	<% @master_categories.each_with_index do |m,i|%>
+		<tr>
+			<td class="col-3"><%= i+1 %></td>
+			<td class="col-3"><%= link_to m.name,finance_master_category_particular_path(m)%></td>
+			<td class="col-3"><%= @batch.name %></td>
+			<td class="col-3"><%= m.created_at.to_date%></td>
+			<td class="col-3"><%= link_to 'Edit',finance_edit_master_category_path(@batch,m),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete',finance_delete_master_category_path(@batch,m),method: :delete, data:{confirm:"Are You sure to delete Asset '#{m.name}'?"},remote:true%></td>	
+			
+		</tr>
+	<%end%>
+</table>
+<%end%>
