@@ -238,24 +238,11 @@
             </div></div>
   <div id="page-wrapper">
     <div class="container-fluid">
-     <div class="row">
-        <div class="col-lg-12">
-          <% if notice %>
-            <div class="alert alert-success ">
-            <%= link_to '','',class: "fa fa-check fa-2x"%>
-            <i><%= notice %></i></div>
-          <% end %>
-          <% if alert %>
-            <div class="alert alert-danger ">
-            <%= link_to '','',class: "fa fa-remove fa-2x"%>
-            <i><%= alert %></i></div>
-          <% end %>
-        </div>
-    </div><br/>
-       
+    <div id="flash"><%= render 'layouts/flash_messages'%></div>
       <%= yield %>
     </div>
-  </div></div>
+  </div>
+  </div>
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
 </nav>
 

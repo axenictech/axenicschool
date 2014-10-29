@@ -5,5 +5,5 @@ $("ul.errors").html("")
 		<% end %>
 <% else %>
   $("#myModal").modal("hide")
-  $(window.location.replace("asset"));  
+  $('#flash').html("<%= j render 'layouts/flash_messages'%>")
 <% end %>

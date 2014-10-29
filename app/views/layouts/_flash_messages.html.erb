@@ -1,0 +1,14 @@
+<div class="row">
+        <div class="col-lg-12" align="center">
+          <% if notice %>
+            <div class="alert alert-success ">
+            <%= link_to '','',class: "fa fa-check fa-2x"%>
+            <i><%= notice %></i></div>
+          <% end %>
+          <% if alert %>
+            <div class="alert alert-danger ">
+            <%= link_to '','',class: "fa fa-remove fa-2x"%>
+            <i><%= alert %></i></div>
+          <% end %>
+        </div>
+    </div>
