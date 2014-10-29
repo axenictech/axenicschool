@@ -10,7 +10,9 @@ class FinanceController < ApplicationController
 
   def create_transaction_category
     @transaction_category=FinanceTransactionCategory.new(transaction_category_params)       
-    @transaction_category.save
+    if @transaction_category.save
+       flash[:notice] = "Transaction category successfully created..."
+    end
     @transaction_categories=FinanceTransactionCategory.all
   end
 
@@ -20,13 +22,17 @@ class FinanceController < ApplicationController
   
   def update_transaction_category
     @transaction_category=FinanceTransactionCategory.find(params[:id])
-    @transaction_category.update(transaction_category_params)
+    if @transaction_category.update(transaction_category_params)
+      flash[:notice] = "Transaction category successfully updated..."
+    end
     @transaction_categories=FinanceTransactionCategory.all
   end
 
   def delete_transaction_category
     @transaction_category=FinanceTransactionCategory.find(params[:id])
-    @transaction_category.destroy
+    if @transaction_category.destroy
+      flash[:notice] = "Transaction category successfully deleted..."
+    end
     @transaction_categories=FinanceTransactionCategory.all
   end
 
@@ -37,6 +43,7 @@ class FinanceController < ApplicationController
   def create_donation
     @donation=FinanceDonation.new(donation_params)
     if @donation.save
+      @donation.create_transaction
       flash[:notice]="Donation accepted"
       redirect_to finance_donation_receipt_path(@donation)
     else
@@ -65,6 +72,7 @@ class FinanceController < ApplicationController
   def update_donation
     @donation=FinanceDonation.find(params[:id])
     if @donation.update(donation_params)
+      @donation.update_transaction
       flash[:notice]="Donation updated"
       redirect_to finance_donors_path
     else
@@ -102,13 +110,17 @@ class FinanceController < ApplicationController
   def update_asset
     @assets=Asset.all
     @asset=Asset.find(params[:id])
-    @asset.update(asset_params)
+    if @asset.update(asset_params)
+      flash[:notice]="Asset updated successfully"
+    end
   end
 
   def delete_asset
     @assets=Asset.all
     @asset=Asset.find(params[:id])
-    @asset.destroy
+    if @asset.destroy
+      flash[:notice]="Asset deleted successfully"
+    end
   end
 
   def asset_list
@@ -127,8 +139,9 @@ class FinanceController < ApplicationController
 
   def create_liability
     @liability=Liability.new(liability_params)
-    @liability.save
-    flash[:notice]="Liability created successfully"
+    if @liability.save
+      flash[:notice]="Liability created successfully"
+    end
   end
 
   def view_liability
@@ -142,13 +155,17 @@ class FinanceController < ApplicationController
   def update_liability
     @liabilities=Liability.all
     @liability=Liability.find(params[:id])
-    @liability.update(liability_params)
+    if @liability.update(liability_params)
+      flash[:notice]="Liability updated successfully"
+    end
   end
 
   def delete_liability
     @liabilities=Liability.all
     @liability=Liability.find(params[:id])
-    @liability.destroy
+    if @liability.destroy
+      flash[:notice]="Liability deleted successfully"
+    end
   end
 
   def each_liability_view
@@ -172,7 +189,9 @@ class FinanceController < ApplicationController
 
   def create_automatic_transaction
     @automatic_transaction=FinanceTransactionTrigger.new(auto_transaction_params)
-    @automatic_transaction.save
+    if @automatic_transaction.save
+      flash[:notice]="Automatic transaction created successfully"
+    end 
     @automatic_transactions=FinanceTransactionTrigger.all
   end
   
@@ -183,13 +202,17 @@ class FinanceController < ApplicationController
 
   def update_automatic_transaction
     @automatic_transaction=FinanceTransactionTrigger.find(params[:id])
-    @automatic_transaction.update(auto_transaction_params)
+    if @automatic_transaction.update(auto_transaction_params)
+      flash[:notice]="Automatic transaction updated successfully"
+    end 
     @automatic_transactions=FinanceTransactionTrigger.all
   end
 
   def delete_automatic_transaction
     @automatic_transaction=FinanceTransactionTrigger.find(params[:id])
-    @automatic_transaction.destroy
+    if @automatic_transaction.destroy
+      flash[:notice]="Automatic transaction deleted successfully"
+    end 
     @automatic_transactions=FinanceTransactionTrigger.all
   end
 
