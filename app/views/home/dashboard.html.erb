@@ -1,6 +1,6 @@
-
-		<div class="row">
-			<div class="col-lg-12">
+<div class="content-header"> 
+	<div class="row">
+		<div class="col-lg-12">
 			<h1 class="page-header">
 				Dashboard <small>Dashboard Setting</small>
 				<i class=" fa fa-arrow-left pull-right"></i>
@@ -10,66 +10,70 @@
 				<i class="fa fa-dashboard"></i> Dashboard
 			</li>
 			</ol>
+		</div>
+	</div>
+</div>
+<div class="content-body">
+	<div class="row">
+		<div class="col-md-2 col-xs-2">
+			<div><%= link_to '','/students/admission1',title: "Admission" ,class: "fa fa-institution fa-5x " %>
 			</div>
+			<div class="label label-default">Admission</div>
+		</div>  
+
+		<div class="col-md-2 col-xs-2">     
+	  		<div><%= link_to '', '/students',title: "Student Details" ,class: "fa fa-user fa-5x" %>
+	  		</div>
+			<div class="label label-default">Student Details</div>
 		</div>
 
-		<div class="row">
-			
-			<div class="col-md-2 col-xs-2">
-		<div><%= link_to '','/students/admission1',title: "Admission" ,class: "fa fa-institution fa-5x " %>
-		</div>
-		<div class="label label-default">Admission</div>
-			</div>        
-			<div class="col-md-2 col-xs-2">     
-	  			<div><%= link_to '', '/students',title: "Student Details" ,class: "fa fa-user fa-5x" %>
-	  			</div>
+		<div class="col-md-2 col-xs-2">     
+			<div><%= link_to '','/users',title: "Manage Users",class: "fa fa-users fa-5x" %>
+			</div>
+			<div class="label label-default">Manage Users</div>
+		</div>   
 
-				<div class="label label-default">Student Details</div><br />
-			</div>     
-			<div class="col-md-2 col-xs-2">     
-		<div><%= link_to '','/users',title: "Manage Users",class: "fa fa-users fa-5x" %></div>
+		<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to '','/newscasts',title: "Manage News" ,class: "fa fa-bullhorn fa-5x" %>
+			</div>
+			<div class="label label-default">Manage News</div>
+		</div> 
 
-		<div class="label label-default">Manage Users</div><br />
-			</div>   
-			<div class="col-md-2 col-xs-2">     
-		<div > <%= link_to '','/newscasts',title: "Manage News" ,class: "fa fa-newspaper-o fa-5x" %></div>
-		<div class="label label-default">Manage News</div>
-		<br/>
-			</div> 
-
-			<div class="col-md-2 col-xs-2">     
-		 		<div><%= link_to '', '/exams',title: "Examinations",class: "fa fa-bar-chart fa-5x"%></div>
+		<div class="col-md-2 col-xs-2">     
+		 	<div><%= link_to '', '/exams',title: "Examinations",class: "fa fa-bar-chart-o fa-5x"%>
+		 	</div>
 			<div class="label label-default">Examinations</div>
 			</div>
 		</div>
-
-
-<div class="space">
-
-</div>
-
+		
 <div class="row">
 
-<div class="col-md-2 col-xs-2"> 
-		<div><%= link_to '','/time_tables',title: "Timetable" ,class: "fa fa-clock-o fa-5x"%></div>
-		<div class="label label-default">Timetable</div><br/>
-</div>   
-<div class="col-md-2 col-xs-2">     
-		<div ><%= link_to '','/attendences',title: "Attendance" , class: "fa fa-list-alt fa-5x"%></div>
-		<div class="label label-default">Attendance</div>
-</div>
-<div class="col-md-2 col-xs-2">     
-		<div ><%= link_to'', '/setting',title: "Setting",class: "fa fa-cogs fa-5x"%></div>
-		<div class="label label-default">Settings</div><br />
-</div>                
+	<div class="col-md-2 col-xs-2"> 
+			<div><%= link_to '','/time_tables',title: "Timetable" ,class: "fa fa-clock-o fa-5x"%>
+			</div>
+			<div class="label label-default">Timetable</div>
+	</div>   
+	<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to '','/attendences',title: "Attendance" , class: "fa fa-list-alt fa-5x"%>
+			</div>
+			<div class="label label-default">Attendance</div>
+	</div>
+	<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to'', '/setting',title: "Setting",class: "fa fa-cogs fa-5x"%>
+			</div>
+			<div class="label label-default">Settings</div>
+	</div>                
 
-<div class="col-md-2 col-xs-2">     
-		<div><%= link_to '', '/employees',title: "Human Resources", class: "fa fa-link fa-5x"%></div>
-		<div class="label label-default">Human Resources</div><br/>
-</div>
-<div class="col-md-2 col-xs-2">     
-		<div ><%= link_to '', '/finance',title: "Finance", class: "fa fa-rupee fa-5x"%></div>
-		<div class="label label-default">Finance</div><br/>
-</div>
+	<div class="col-md-2 col-xs-2">     
+			<div><%= link_to '', '/employees',title: "Human Resources", class: "fa fa-link fa-5x"%>
+			</div>
+			<div class="label label-default">Human Resources</div>
+	</div>
+	<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to '', '/finance',title: "Finance", class: "fa fa-rupee fa-5x"%></div>
+			<div class="label label-default">Finance</div><br/>
+	</div>
 </div>        
+</div>
+<!-- content-body -->
 
