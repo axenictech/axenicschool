@@ -26,8 +26,8 @@ def select_subject
     @time=params[:time_table_id]
     @subject=Subject.find(params[:subject_id])
     @batch=@subject.batch
-    @assign_time=TimeTableEntry.create(batch_id:@batch.id,class_timing_id:@class_timing_id,weekday_id:@weekday,employee_id:@teacher,subject_id:@subject.id,time_table_id:@time)
-    @time=params[:time_table_id]
+     @assign_time=TimeTableEntry.create(batch_id:@batch.id,class_timing_id:@class_timing_id,weekday_id:@weekday,employee_id:@teacher,subject_id:@subject.id,time_table_id:@time)
+     @time=params[:time_table_id]
     @subjects = @batch.subjects.all
     @class_timing=@batch.class_timings.where(:is_break=>false)
     @teachers= EmployeeSubject.where(subject_id: @subject.id)
