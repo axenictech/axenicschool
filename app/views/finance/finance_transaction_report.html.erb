@@ -88,24 +88,23 @@ table#pdf-table{
           <th class="col-pdf" >Incomes (Rs.)</th>
         </tr>
         <% c= 'even' %>
-        <%total_expense=0%><%total_income=0%>
-        <% @transactions.each_with_index do |t,i|%>
-        <% category=t.finance_transaction_category%>
-        <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
-          <td class="col-pdf"><%= i+1 %></td>
-          <td class="col-pdf"><%= t.title%></td>
-          <td class="col-pdf"><%= t.amount unless category.is_income? %></td>
-          <td class="col-pdf"><%= t.amount if category.is_income? %></td>
-        </tr>
-          <% total_expense+=t.amount unless category.is_income? %>
-          <% total_income+=t.amount if category.is_income? %>
+        <%total=0%>
+        <% @categories.each_with_index do |c,i|%>
+          <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+            <td class="col-pdf"><%= i+1 %></td>
+            <td class="col-pdf"><%= c.name%></td>
+            <td class="col-pdf"><%= expense=c.category_amount(@start_date,@end_date) unless c.is_income?%></td>
+            <td class="col-pdf"><%= income=c.category_amount(@start_date,@end_date) if c.is_income?%></td>
+          </tr>
+            <% total-=expense unless c.is_income? %>
+            <% total+=income if c.is_income? %>
         <%end%>
         <tr><td colspan="4"></td></tr>
         <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
           <td class="col-pdf"></td>
           <td class="col-pdf"><b>Grand Total</b></td>
-          <td class="col-pdf"><b><%= total_expense %></b></td>
-          <td class="col-pdf"><b><%= total_income %></b></td>
+          <td class="col-pdf"></td>
+          <td class="col-pdf"><b><%= total %></b></td>
         </tr>
       </table>
     </div>

@@ -13,8 +13,8 @@
 </div>
 <div id="page-yield">
 <h5>List of Transactions</h5>
-<% unless @transactions.nil? %>
-<%total_expense=0%><%total_income=0%>
+<% unless @categories.nil? %>
+<%total=0%>
 <table align="center" class="table table-hover table-bordered" style="width:90%">
 	<tr class="tr-head">
 		<th>Sl no.</th>
@@ -22,23 +22,26 @@
 		<th>Expenses (Rs.)</th>
 		<th>Incomes (Rs.)</th>
 	</tr>
-	<% @transactions.each_with_index do |t,i|%>
-	<% category=t.finance_transaction_category%>
+	<% @categories.each_with_index do |c,i|%>
 	<tr>
 		<td><%= i+1 %></td>
-		<td><%= t.title%></td>
-		<td><%= t.amount unless category.is_income? %></td>
-		<td><%= t.amount if category.is_income? %></td>
+	<% unless c.is_income?%>
+		<td><%=link_to c.name,finance_expense_details_path(start_date:@start_date,end_date:@end_date,category:c.id)%></td>
+	<%else%>
+		<td><%=link_to c.name,finance_income_details_path(start_date:@start_date,end_date:@end_date,category:c.id)%></td>
+	<%end%>
+		<td><%= expense=c.category_amount(@start_date,@end_date) unless c.is_income? %></td>
+		<td><%= income=c.category_amount(@start_date,@end_date) if c.is_income? %></td>
 	</tr>
-		<% total_expense+=t.amount unless category.is_income? %>
-		<% total_income+=t.amount if category.is_income? %>
+		<% total-=expense unless c.is_income? %>
+		<% total+=income if c.is_income? %>
 	<%end%>
 	<tr><td colspan="4"></td></tr>
 	<tr>
 		<td></td>
 		<td><b>Grand Total</b></td>
-		<td><b><%= total_expense %></b></td>
-		<td><b><%= total_income %></b></td>
+		<td></td>
+		<td><b><%= total%></b></td>
 	</tr>
 </table>
 <%else%>

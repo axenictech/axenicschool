@@ -485,6 +485,8 @@ get 'finance/fees_defaulters'
 get 'finance/batch_choice'
 get 'finance/collection_choice'
 get 'finance/defaulter_students'
+get 'finance/income_details'
+get 'finance/expense_details'
 
 root 'home#dashboard'
  
