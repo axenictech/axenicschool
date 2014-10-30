@@ -1,3 +1,4 @@
+
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -9,9 +10,7 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 20141030080907) do
+# It's strongly recommended that you check this file into your version control system
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,6 +209,16 @@ ActiveRecord::Schema.define(version: 20141030080907) do
   end
 
   add_index "batches", ["course_id"], name: "index_batches_on_course_id", using: :btree
+
+  create_table "batches_finance_fee_categories", force: true do |t|
+    t.integer  "finance_fee_category_id"
+    t.integer  "batch_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "batches_finance_fee_categories", ["batch_id"], name: "index_batches_finance_fee_categories_on_batch_id", using: :btree
+  add_index "batches_finance_fee_categories", ["finance_fee_category_id"], name: "index_batches_finance_fee_categories_on_finance_fee_category_id", using: :btree
 
   create_table "batches_online_exams", force: true do |t|
     t.integer  "online_exam_id"
@@ -596,13 +605,15 @@ ActiveRecord::Schema.define(version: 20141030080907) do
     t.date     "due_date"
     t.integer  "fee_category_id"
     t.integer  "batch_id"
-    t.boolean  "is_deleted",      default: false
+    t.boolean  "is_deleted",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "finance_fee_category_id"
   end
 
   add_index "finance_fee_collections", ["batch_id"], name: "index_finance_fee_collections_on_batch_id", using: :btree
   add_index "finance_fee_collections", ["fee_category_id"], name: "index_finance_fee_collections_on_fee_category_id", using: :btree
+  add_index "finance_fee_collections", ["finance_fee_category_id"], name: "index_finance_fee_collections_on_finance_fee_category_id", using: :btree
 
   create_table "finance_fee_particulars", force: true do |t|
     t.string   "name"
@@ -677,16 +688,19 @@ ActiveRecord::Schema.define(version: 20141030080907) do
     t.string   "title"
     t.string   "description"
     t.decimal  "amount"
-    t.boolean  "fine_included",   default: false
+    t.boolean  "fine_included",                   default: false
     t.integer  "category_id"
     t.integer  "student_id"
     t.integer  "finance_fees_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "transaction_date"
+    t.integer  "finance_transaction_category_id"
   end
 
   add_index "finance_transactions", ["category_id"], name: "index_finance_transactions_on_category_id", using: :btree
   add_index "finance_transactions", ["finance_fees_id"], name: "index_finance_transactions_on_finance_fees_id", using: :btree
+  add_index "finance_transactions", ["finance_transaction_category_id"], name: "index_finance_transactions_on_finance_transaction_category_id", using: :btree
   add_index "finance_transactions", ["student_id"], name: "index_finance_transactions_on_student_id", using: :btree
 
   create_table "general_settings", force: true do |t|

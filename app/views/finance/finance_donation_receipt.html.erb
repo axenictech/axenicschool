@@ -100,7 +100,7 @@ table#pdf-table{
           </tr>
           <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
             <td class="col-pdf"><%= t('transaction_id') %></td>
-            <td class="col-pdf"><%=  %></td>
+            <td class="col-pdf"><%=  @donation.finance_transaction.id %></td>
           </tr>
       </table>
     </div>

@@ -1,0 +1,39 @@
+<div id="content-header">
+  <h1>Transactions</h1>
+  <h3>Monthly Transactions</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+
+<%= form_for :transaction, url:{action: 'transactions_comparison'} do |f| %>
+<table class="table" style="width:500px" align="center">
+<tbody>
+		<tr>
+			<td class="col-2"><%= f.label :select_start_date%></td>
+			<td class="col-2"><%= f.date_field :start_date1,:style =>"width: 200px", class: "form-control"%></td>
+		</tr>
+		<tr>
+			<td class="col-2"><%= f.label :select_end_date%></td>
+			<td class="col-2"><%= f.date_field :end_date1,:style =>"width: 200px", class: "form-control"%></td>
+		</tr>
+		<tr><br/><td colspan="2"><h4><b>Compare with</b></h4></td><br/></tr>
+		<tr>
+			<td class="col-2"><%= f.label :select_start_date%></td>
+			<td class="col-2"><%= f.date_field :start_date2,:style =>"width: 200px", class: "form-control"%></td>
+		</tr>
+		<tr>
+			<td class="col-2"><%= f.label :select_end_date%></td>
+			<td class="col-2"><%= f.date_field :end_date2,:style =>"width: 200px", class: "form-control"%></td>
+		</tr>
+		<tr>
+			<td colspan="2"><%= f.submit 'Get Report',class: "btn btn-default"%></td>
+		</tr>
+
+</tbody>
+</table>
+<%end%>
+</div>

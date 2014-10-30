@@ -1,3 +1,8 @@
+
+<% unless flash[:class_time_notice].nil? %>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:class_time_notice] %> </div>
+  <% end %>
+
 <div class="add_sub",style="margin-top:200px">
  <%= link_to 'Add', new_batch_class_timing_path(@batch),remote: true%>
 </div> 

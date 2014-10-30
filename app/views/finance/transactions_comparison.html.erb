@@ -1,0 +1,76 @@
+<div id="content-header">
+  <h1>Transactions</h1>
+  <h3>Transactions Comparison</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+<div id="page-yield">
+<br/><br/>
+<h5>Report for the period from <%=@start_date1%> to <%=@end_date1%></h5>
+<% unless @categories.nil? %>
+<%total1=0%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+		<th>Sl no.</th>
+		<th>Particulars</th>
+		<th>Expenses (Rs.)</th>
+		<th>Incomes (Rs.)</th>
+	</tr>
+	<% @categories.each_with_index do |c,i|%>
+	<tr>
+		<td><%= i+1 %></td>
+	<% unless c.is_income?%>
+		<td><%=link_to c.name,finance_expense_details_path(start_date:@start_date1,end_date:@end_date1,category:c.id)%></td>
+	<%else%>
+		<td><%=link_to c.name,finance_income_details_path(start_date:@start_date1,end_date:@end_date1,category:c.id)%></td>
+	<%end%>
+		<td><%= expense=c.category_amount(@start_date1,@end_date1) unless c.is_income? %></td>
+		<td><%= income=c.category_amount(@start_date1,@end_date1) if c.is_income? %></td>
+	</tr>
+		<% total1-=expense unless c.is_income? %>
+		<% total1+=income if c.is_income? %>
+	<%end%>
+	<tr><td colspan="4"></td></tr>
+	<tr>
+		<td></td>
+		<td><b>Grand Total</b></td>
+		<td></td>
+		<td><b><%= total1 %></b></td>
+	</tr>
+</table>
+<br/><br/>
+<h5>Report for the period from <%=@start_date2%> to <%=@end_date2%></h5>
+<%total2=0%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+		<th>Sl no.</th>
+		<th>Particulars</th>
+		<th>Expenses (Rs.)</th>
+		<th>Incomes (Rs.)</th>
+	</tr>
+	<% @categories.each_with_index do |c,i|%>
+	<tr>
+		<td><%= i+1 %></td>
+	<% unless c.is_income?%>
+		<td><%=link_to c.name,finance_expense_details_path(start_date:@start_date2,end_date:@end_date2,category:c.id)%></td>
+	<%else%>
+		<td><%=link_to c.name,finance_income_details_path(start_date:@start_date2,end_date:@end_date2,category:c.id)%></td>
+	<%end%>
+		<td><%= expense=c.category_amount(@start_date2,@end_date2) unless c.is_income? %></td>
+		<td><%= income=c.category_amount(@start_date2,@end_date2) if c.is_income? %></td>
+	</tr>
+		<% total2-=expense unless c.is_income? %>
+		<% total2+=income if c.is_income? %>
+	<%end%>
+	<tr><td colspan="4"></td></tr>
+	<tr>
+		<td></td>
+		<td><b>Grand Total</b></td>
+		<td></td>
+		<td><b><%= total2 %></b></td>
+	</tr>
+</table>
+<%end%>
+</div>

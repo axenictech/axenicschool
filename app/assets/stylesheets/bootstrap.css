@@ -12,6 +12,8 @@ html {
 }
 body {
   margin: 0;
+  max-height: 100%;
+  
 }
 article,
 aside,
@@ -263,8 +265,8 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../assets/glyphicons-halflings-regular.woff') format('woff'), url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -899,7 +901,8 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  max-height: 100%;
+  background-color:#F2DCA5;
 }
 input,
 button,
@@ -910,13 +913,13 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #428bca;
+  color: grey;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #2a6496;
-  text-decoration: underline;
+  color: grey;
+  text-decoration: none;
 }
 a:focus {
   outline: thin dotted;
@@ -1417,6 +1420,8 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  max-height: 100%;
+  height: 100%;
 }
 .row {
   margin-right: -15px;
@@ -3159,7 +3164,7 @@ tbody.collapse.in {
   background-color: #e5e5e5;
 }
 .dropdown-menu > li > a {
-  display: block;
+  display: inline;
   padding: 3px 20px;
   clear: both;
   font-weight: normal;
@@ -3592,7 +3597,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eee;
 }
 .nav > li.disabled > a {
   color: #777;
@@ -3607,7 +3611,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #eee;
   border-color: #428bca;
 }
 .nav .nav-divider {
@@ -4191,6 +4194,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse {
   background-color: #222;
   border-color: #080808;
+  
 }
 .navbar-inverse .navbar-brand {
   color: #777;

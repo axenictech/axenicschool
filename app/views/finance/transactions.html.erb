@@ -1,0 +1,58 @@
+<div id="content-header">
+  <h1>Finance Transactions</h1>
+  <h3>Expences and Income</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Expense", 'new_expense',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Create New Expense
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Add Income",'new_income',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px"   >
+          Create New Income
+          </div>
+      </div>
+    </div>
+  <div class="col-md-2 col-xs-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Report",'transaction_report',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px">
+            Show Transactions
+          </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Compare Transactions",'compare_report',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px"   >
+          Compare Transactions
+          </div>
+      </div>
+    </div>
+<div class="col-md-2 col-xs-2"></div>
+</div>

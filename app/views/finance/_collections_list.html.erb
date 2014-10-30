@@ -1,0 +1,24 @@
+<% unless @collections.nil?%>
+<table align="center" class="table table-hover table-bordered" style="width:80%">
+	<tr class="tr-head">
+	<th>Name</th>
+	<th>Start Date</th>
+	<th>End Date</th>
+	<th>Due Date</th>
+	<th></th>
+	</tr>
+		<% @collections.each do |c|%>
+			<tr>
+			<td class="col-3"><%= link_to c.name,finance_collection_details_view_path(c)%></td>
+			<td class="col-3"><%= c.start_date%></td>
+			<td class="col-3"><%= c.end_date%></td>
+			<td class="col-3"><%= c.due_date%></td>
+			<td class="col-3"><%= link_to 'Edit',finance_edit_fee_collection_path(@batch,c),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete' ,finance_delete_fee_collection_path(@batch,c),method: :delete, data:{confirm:"Are you sure to delete '#{c.name}'?"},remote:true%></td>	
+			
+			</tr>
+		<%end%>
+</table>
+<%else%>
+<h5>No finance fee collection found</h5>
+<%end%>

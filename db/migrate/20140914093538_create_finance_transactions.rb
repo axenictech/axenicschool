@@ -4,11 +4,12 @@ class CreateFinanceTransactions < ActiveRecord::Migration
       t.string     :title
       t.string     :description
       t.decimal    :amount
+      t.date       :transaction_date
       t.boolean    :fine_included, :default => false
-      t.references :category,index:true
       t.references :student,index:true
       t.references :finance_fees,index:true
-
+      t.references :finance_transaction_category,index:true
+      
       t.timestamps
     end
   end

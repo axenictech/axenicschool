@@ -2,7 +2,8 @@
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
-  <h3><%= "Editing" %></h3>
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3><%= "Edit attendance for Employee" %></h3>
 </div>
 <div class="modal-body">
 	<ul class="errors2"></ul>
@@ -19,7 +20,7 @@
       <td><%= c.text_field :reason%></td>
     </tr>
     <tr>        
-   <td>is_half_day?</td>
+    <td><%=c.label :Half_Day%></td>
     <td><%= c.check_box :is_half_day%> </td>
     </tr>
     

@@ -9,7 +9,7 @@
 
 <div id="page-yield">
 
-    <div class="box">
+  <div class="box">
     <div class="row">
     <div class="col-md-3">
       <div class="link-box">
@@ -18,15 +18,23 @@
       </div></div>
     <div class="col-md-3">  
       <div class="link-box">
-        <div class="link-heading"><%= link_to 'Create Particular' %></div>
+        <div class="link-heading"><%= link_to 'Create Particular',finance_new_fees_particular_path %></div>
         <div class="link-descr">Create Particular Category</div>
       </div></div>
     <div class="col-md-3">
       <div class="link-box">
-        <div class="link-heading"><%= link_to 'Create Discount' %></div>
+        <div class="link-heading"><%= link_to 'Create Discount','fee_discounts'%></div>
         <div class="link-descr">Create Fees Discount</div>
       </div></div>
     </div>
-  </div>
+  <%= form_for :batch, :url=>{:action=>'fees_list'},html:{id: 'form_batch'},remote:true,method: :get do |f| %>
+     <div class="label-field-pair">
+      <%= f.label :select_batch %>
+          <div class="text-input-bg">
+          <%= f.select :id,Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_batch').submit();"}%>
+          </div></div>
+      <% end %>
+  </div><br/><br/>
+<div id="list"></div>
 <div id="myModal" class="modal fade"></div>
 </div>

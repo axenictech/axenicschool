@@ -1,54 +1,79 @@
-<div id="content-header">
-  </div>
-<div id="page-yield">
-<div class="container" style="margin-top:50px">
-<div class="row">
-<div class="col-md-2 col-xs-2"></div>
-<div class="col-md-2 col-xs-2">
-        <div class="link-heading"><%= link_to image_tag("admission_page_logo.jpg"),'/students/admission1',title: "Addmission" %></div>
-        <div class="link-descr">Addmission</div><br />
-</div>        
-<div class="col-md-2 col-xs-2">     
-       <div class="link-heading"><%= link_to image_tag("student_details_logo.jpg"), '/students',title: "Student Details"%></div>
-        <div class="link-descr">Student Details</div><br />
-</div>     
-<div class="col-md-2 col-xs-2">     
-        <div class="link-heading"><%= link_to image_tag("manage_user.jpg"),'/users',title: "Manage Users" %></div>
-        <div class="link-descr">Manage Users</div><br />
-</div>   
-<div class="col-md-2 col-xs-2">     
-        <div class="link-heading"><%= link_to image_tag("manage_news_logo.png"), '/newscasts',title: "Manage News"%></div>
-        <div class="link-descr">Manage News</div><br/>
-</div>        
-<div class="col-md-2 col-xs-2">     
-         <div class="link-heading"><%= link_to image_tag("show_exam.png"), '/exams',title: "Examinations"%></div>
-        <div class="link-descr">Examinations</div>
+<div class="content-header"> 
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+				Dashboard <small>Dashboard Setting</small>
+				<i class=" fa fa-arrow-left pull-right"></i>
+			</h1>
+			<ol class="breadcrumb">
+			<li class="active">
+				<i class="fa fa-dashboard"></i> Dashboard
+			</li>
+			</ol>
+		</div>
+	</div>
 </div>
-</div>
-</div>
-<div class="container" style="margin-top:50px">
-<div class="row">
-<div class="col-md-2 col-xs-2"></div>
-<div class="col-md-2 col-xs-2"> 
-        <div class="link-heading"><%= link_to image_tag("show_timetable.png"),'/time_tables',title: "Timetable" %></div>
-        <div class="link-descr">Timetable</div><br/>
-</div>   
-<div class="col-md-2 col-xs-2">     
-        <div class="link-heading"><%= link_to image_tag("show_attendence.png"),'/attendences',title: "Attendence" %></div>
-        <div class="link-descr">Attendence</div>
-</div>
-<div class="col-md-2 col-xs-2">     
-        <div class="link-heading"><%= link_to image_tag("show_settings.png"), '/setting',title: "Setting"%></div>
-        <div class="link-descr">Settings</div><br />
-</div>                
+<div class="content-body">
+	<div class="row">
+		<div class="col-md-2 col-xs-2">
+			<div><%= link_to '','/students/admission1',title: "Admission" ,class: "fa fa-institution fa-5x " %>
+			</div>
+			<div class="label label-default">Admission</div>
+		</div>  
 
-<div class="col-md-2 col-xs-2">     
-        <div class="link-heading"><%= link_to image_tag("show_hr.png"), '/employees',title: "Human Resources"%></div>
-        <div class="link-descr">Human Resources</div><br/>
-</div>
-<div class="col-md-2 col-xs-2">     
-        <div class="link-heading"><%= link_to image_tag("show_finance.png"), '/finance',title: "Finance"%></div>
-        <div class="link-descr">Finance</div><br/>
-</div>
+		<div class="col-md-2 col-xs-2">     
+	  		<div><%= link_to '', '/students',title: "Student Details" ,class: "fa fa-user fa-5x" %>
+	  		</div>
+			<div class="label label-default">Student Details</div>
+		</div>
+
+		<div class="col-md-2 col-xs-2">     
+			<div><%= link_to '','/users',title: "Manage Users",class: "fa fa-users fa-5x" %>
+			</div>
+			<div class="label label-default">Manage Users</div>
+		</div>   
+
+		<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to '','/newscasts',title: "Manage News" ,class: "fa fa-bullhorn fa-5x" %>
+			</div>
+			<div class="label label-default">Manage News</div>
+		</div> 
+
+		<div class="col-md-2 col-xs-2">     
+		 	<div><%= link_to '', '/exams',title: "Examinations",class: "fa fa-bar-chart-o fa-5x"%>
+		 	</div>
+			<div class="label label-default">Examinations</div>
+			</div>
+		</div>
+	<div class="row">
+
+	<div class="col-md-2 col-xs-2"> 
+			<div><%= link_to '','/time_tables',title: "Timetable" ,class: "fa fa-clock-o fa-5x"%>
+			</div>
+			<div class="label label-default">Timetable</div>
+	</div>   
+	<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to '','/attendences',title: "Attendance" , class: "fa fa-list-alt fa-5x"%>
+			</div>
+			<div class="label label-default">Attendance</div>
+	</div>
+	<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to'', '/setting',title: "Setting",class: "fa fa-cogs fa-5x"%>
+			</div>
+			<div class="label label-default">Settings</div>
+	</div>                
+
+	<div class="col-md-2 col-xs-2">     
+			<div><%= link_to '', '/employees',title: "Human Resources", class: "fa fa-link fa-5x"%>
+			</div>
+			<div class="label label-default">Human Resources</div>
+	</div>
+	<div class="col-md-2 col-xs-2">     
+			<div ><%= link_to '', '/finance',title: "Finance", class: "fa fa-rupee fa-5x"%></div>
+			<div class="label label-default">Finance</div><br/>
+	</div>
+	
 </div>        
-</div></div>
+</div>
+<!-- content-body -->
+

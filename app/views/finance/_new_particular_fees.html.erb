@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h3>Create Master Category Particular</h3>
+</div>
+
+<div class="modal-body">
+<ul class="errors"></ul>
+    <%= form_for @fee,url:{action:'create_particular_fee',id:@master_category},remote: true do |f|%>
+    <div class="row">
+        <div class="col-md-3"><%= f.label :name %></div>
+        <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
+      </div><br/>
+      <div class="row">
+          <div class="col-md-3"><%= f.label :description %></div>
+          <div class="col-md-3"><%= f.text_field :description,:style =>"width: 250px",class: "form-control"%></div>
+      </div><br/>
+      <div class="row">
+          <div class="col-md-3"><%= f.label :create_using %></div>
+          <div class="col-md-3">
+          <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('student_admission_no',#{@master_category.id},function(response){
+            });"}%><%='Admission no'%><br/>
+          <%=radio_button_tag :mode,"category",'',{onclick:"$.get('student_category',#{@master_category.id},function(response){
+            });"}%><%= 'Student Category'%><br/>
+          <%=radio_button_tag :mode,"all",'',{onclick:"$('#hidden').html('')"}%><%='All'%></div>
+      </div><br/>
+      <div id="hidden"></div><br/>
+      <div class="row">
+          <div class="col-md-3"><%= f.label :amount %></div>
+          <div class="col-md-3"><%= f.text_field :amount,:style =>"width: 250px",class: "form-control"%></div>
+      </div><br/>
+      <div class="row">
+      <div class="col-md-2"></div>
+        <div class="col-md-3"><%= f.submit 'Submit', class: "btn btn-primary"%></div>
+      </div>
+    <%end%>
+</div>    
+</div>
+</div>

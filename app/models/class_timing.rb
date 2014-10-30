@@ -6,11 +6,23 @@ class ClassTiming < ActiveRecord::Base
     validates :start_time, presence: true
     validates :end_time, presence: true
     validate  :end_time_cannot_be_less_than_start_time
-   
+    # validate  :validate_class_timing
     def end_time_cannot_be_less_than_start_time
       if end_time.present? and end_time < start_time
       errors.add(:end_time, "can't be less than start time")
       end
-  end
-  
+    end
+    
+  # def validate_class_timing
+  #   unless self.start_time.nil? or self.end_time.nil?
+  #   self_check= self.new_record? ? "" : "id != #{self.id} and "
+  #   start_overlap = !ClassTiming.where(:first, :conditions=>[self_check+"start_time < ? and end_time > ?", self.start_time,self.start_time]).nil?
+  #   # end_overlap = !ClassTiming.where(:first, :conditions=>[self_check+"start_time < ? and end_time > ? and is_deleted = ? and batch_id #{self.batch_id.nil? ? 'is null' : '='+ self.batch_id.to_s}", self.end_time,self.end_time,false]).nil?
+  #    # between_overlap = !ClassTiming.where(:first, :conditions=>[self_check+"start_time < ? and end_time > ? and is_deleted = ? and batch_id #{self.batch_id.nil? ? 'is null' : '='+ self.batch_id.to_s}",self.end_time, self.start_time,false]).nil?
+  #   errors.add(:start_time, "overlap_existing_class_timing") if start_overlap
+  #   # errors.add(:end_time, "overlap_existing_class_timing") if end_overlap
+  #   #  errors.add(:class_time,"overlaps_with_existing") if between_overlap
+  #     end
+  #   end
+
 end
