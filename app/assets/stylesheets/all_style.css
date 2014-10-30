@@ -1,16 +1,33 @@
+html {
+    height:100%; 
+    max-height:100%;
+    padding:0;
+    margin:0; 
+    border:0; 
+    overflow:hidden; 
+    color: green;
+}
+
 body {
     margin-top: 100px;
     background-color: #222;
+    max-height: 100px;
 }
+
+#container-outer{
+    width: 100%;    
+}
+
 .content{
     height: 100%;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 .content-header{
     margin-top: 20px;
 }
 #wrapper {
-    overflow: 
+
+    overflow:hidden; 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -21,10 +38,17 @@ body {
     padding-left: 150px;
 }
 
-#page-wrapper{
-    margin: 31px;
+#page-wrapper {
+    padding-top: 30px;
+    background-color: #fff;
     height: 100%;
-    overflow-y: hidden !important;
+    max-height: 100%;
+    overflow: hidden !important;
+    
+}
+
+#wrapper.toggled #page-wrapper {
+    position: static;
 }
 
 #hide-left {
@@ -34,7 +58,7 @@ body {
     width: 0;
     height:100%;
     margin-left: -265px;
-    overflow-y: hidden;
+    overflow: hidden;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -50,14 +74,14 @@ body {
 .side-nav {
         position: absolute;
         top: 20px;
-        width: 250px;
+        width: 100%;
         margin: 0;
-        padding: 0;
+        padding-top: 30px;
         list-style: none;
-        height:600px;
+        height:100%;
         border: none;
         border-radius: 0;
-        overflow-y: auto;
+        overflow:hidden;
         background-color: #222;
     }
 
@@ -116,15 +140,7 @@ body {
     color: #fff;
 }
 
-#page-wrapper {
-    width: 100%;
-    background-color: #fff;
-    margin-top:50px;
-}
 
-#wrapper.toggled #page-wrapper {
-    position: none;
-}
 
 /*customised boot*/
 .navbar-inverse{
@@ -208,6 +224,7 @@ ul.alert-dropdown {
 }
 
 .login  {
+
 background: rgb(69,72,77); /* Old browsers */
 background: -moz-linear-gradient(left, rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(69,72,77,1)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */

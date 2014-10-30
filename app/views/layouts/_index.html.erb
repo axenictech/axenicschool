@@ -1,4 +1,4 @@
-
+<% if user_signed_in? %>
 <!-- container-outer -->
 <div id="container-outer">
     <div class="container-header">
@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="#menu-toggle" class="fa fa-list-ul fa-lg navbar-brand" id="menu-toggle"></a>
-                <a class="navbar-brand" href="index.html">Axenic School</a>
+                <a class="navbar-brand" href="#">Axenic School</a>
             </div>
                  
             <!-- Top Menu Items -->
@@ -27,37 +27,9 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>user name</strong>
+                                        <h5 class="media-heading"><strong><%= current_user.username %></strong>
                                         </h5>
                                        
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> 
                                     </div>
                                 </div>
                             </a>
@@ -80,21 +52,15 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> user name <b class="caret"></b></a>
+                <li class="dropdown">      
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><%= current_user.username %><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                         <%= link_to 'Profile', edit_user_registration_path, :class => "fa fa-fw fa-user" %> 
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        <%= link_to "Log out", destroy_user_session_path, method: :delete, :class => "fa fa-fw fa-power-off"  %>
                         </li>
                     </ul>
                 </li>
@@ -103,6 +69,7 @@
     </div>
 </div>
 <!-- container-outer ends -->
+<% end %>
 
 <!-- container -->
 <div class="container">
@@ -113,24 +80,24 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
                         <li class="active">
-                            <a href=""><i class="fa fa-th"></i> <%= t('dashboard')%></a>
+                            <a href="/home/dashboard"><i class="fa fa-th"></i> <%= t('dashboard')%></a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-institution"></i> 
-                            <%= t('admission')%></a>
+                            <a href="/students/admission1"><i class="fa fa-institution"></i><%= t('admission')%></a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-user"></i><%= t('student details')%></a>
+                            <a href="/students"><i class="fa fa-user"></i><%= t('student details')%></a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-group"></i><%=t('manage user')%>  </a>
+                            <a href="/users"><i class="fa fa-group"></i><%=t('manage user')%>  </a>
                         </li>
-                        <li>
-                            <a href=""><i class="fa fa-bullhorn"></i><%=t('manage news')%></a>
-                        </li>
+                        <!-- <li>
+                            <a href="/newscasts"><i class="fa fa-bullhorn"></i><%=t('manage news')%></a>
+                        </li> -->
                         
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-bar-chart-o"></i> <%=t('examination')%><i class="fa fa-caret-down"></i></a>
+                            <a href="/exams"><i class="fa fa-bar-chart-o"></i> <%=t('examination')%></a>
+                            <!-- <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-bar-chart-o"></i> <%#=t('examination')%><i class="fa fa-caret-down"></i></a>
                             <ul id="demo" class="collapse">
                                 <li>
                                     <a href="#"><%=t('setting')%></a>
@@ -144,9 +111,9 @@
                                  <li>
                                     <a href="#"><%=t('report center')%></a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-clock-o"></i> <%=t('timetable')%><i class="fa fa-caret-down"></i></a>
                             <ul id="demo1" class="collapse">
                                 <li>
@@ -168,9 +135,10 @@
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-list-alt"></i><%=t('attendance')%></a>
-                                </li>
+                        </li> -->
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-cogs"></i> <%=t('settings')%><i class="fa fa-caret-down"></i></a>
+                            <a href="/setting"><i class="fa fa-cogs"></i> <%=t('settings')%></a>
+                            <!-- <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-cogs"></i> <%=t('settings')%><i class="fa fa-caret-down"></i></a>
                             <ul id="demo2" class="collapse">
                                 <li>
                                     <a href="#"><%=t('manage course/batch')%></a>
@@ -185,10 +153,11 @@
                                     <a href="#"><%=t('general settings')%></a>
                                 </li>
 
-                            </ul>
+                            </ul> -->
                         </li>
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-chain"></i> <%=t('Resources ')%><i class="fa fa-caret-down"></i></a>
+                            <a href="/employees"><i class="fa fa-chain"></i> <%=t('Human Resources')%></a>
+                            <!-- <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-chain"></i> <%=t('Resources ')%><i class="fa fa-caret-down"></i></a>
                             <ul id="demo3" class="collapse">
                                 <li>
                                     <a href="#"><%=t('setting')%></a>
@@ -208,10 +177,11 @@
                                  <li>
                                     <a href="#"><%=t('employee payslip')%></a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-rupee"></i> <%=t('finance')%><i class="fa fa-caret-down"></i></a>
+                            <a href="/finance"><i class="fa fa-rupee"></i> <%=t('finance')%></a>
+                           <!--  <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-rupee"></i> <%=t('finance')%><i class="fa fa-caret-down"></i></a>
                             <ul id="demo4" class="collapse">
                                 <li>
                                     <a href="#"><%=t('fees')%></a>
@@ -237,10 +207,26 @@
                                 <li>
                                     <a href="#"><%=t('assets liability')%></a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
+
+
                         <li>
-                            <a href="#"><i class="fa fa-calendar"></i><%=t('calender')%></a>
+                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-rupee"></i> <%=t('more')%><i class="fa fa-caret-down"></i></a>
+                            <ul id="demo1" class="collapse">
+                                <li>
+                                    <a href="/time_tables"><i class="fa fa-clock-o"></i><%=t('timetable')%></a>
+                                </li>
+                                <li>
+                                    <a href="/attendences"><i class="fa fa-list-alt"></i><%=t('attendance')%></a>
+                                </li>
+                                <li>
+                                     <a href="/calender"><i class="fa fa-calendar"></i><%=t('calender')%></a>
+                                </li>
+                                <li>
+                                    <a href="/newscasts"><i class="fa fa-bullhorn"></i><%=t('manage news')%></a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

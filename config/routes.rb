@@ -314,6 +314,7 @@ get 'employees/contact_profile_archived'
 get 'employees/bank_info_archived'
 post 'employees/emp_search_result_pdf'
 
+
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'
 delete 'employee_attendances/:id/destroy_leave_type',to:'employee_attendances#destroy_leave_type', as:'employee_attendances_destroy_leave_type'
@@ -485,6 +486,8 @@ get 'finance/fees_defaulters'
 get 'finance/batch_choice'
 get 'finance/collection_choice'
 get 'finance/defaulter_students'
+get 'finance/income_details'
+get 'finance/expense_details'
 
 root 'home#dashboard'
  
