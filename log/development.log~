@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 Started GET "/" for 127.0.0.1 at 2014-10-29 17:59:58 +0530
@@ -6901,3 +6902,5 @@ Started GET "/assets/modernizr.custom.js?body=1" for 127.0.0.1 at 2014-10-30 13:
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-10-30 13:44:56 +0530
+=======
+>>>>>>> eae4d1f92056eab5ba361259a133a91efbfa3792
