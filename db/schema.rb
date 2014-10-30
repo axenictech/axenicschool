@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -1101,3 +1103,4 @@ ActiveRecord::Schema.define(version: 20141029080351) do
   add_index "weekdays", ["batch_id"], name: "index_weekdays_on_batch_id", using: :btree
 
 end
+>>>>>>> eae4d1f92056eab5ba361259a133a91efbfa3792
