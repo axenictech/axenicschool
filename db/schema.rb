@@ -580,10 +580,8 @@ ActiveRecord::Schema.define(version: 20141025172321) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "transaction_date"
-    t.integer  "finance_transaction_id"
   end
 
-  add_index "finance_donations", ["finance_transaction_id"], name: "index_finance_donations_on_finance_transaction_id", using: :btree
   add_index "finance_donations", ["transaction_id"], name: "index_finance_donations_on_transaction_id", using: :btree
 
   create_table "finance_fee_categories", force: true do |t|
@@ -599,16 +597,6 @@ ActiveRecord::Schema.define(version: 20141025172321) do
 
   add_index "finance_fee_categories", ["batch_id"], name: "index_finance_fee_categories_on_batch_id", using: :btree
   add_index "finance_fee_categories", ["fee_collection_id"], name: "index_finance_fee_categories_on_fee_collection_id", using: :btree
-
-  create_table "finance_fee_categories_batches", force: true do |t|
-    t.integer  "finance_fee_category_id"
-    t.integer  "batch_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "finance_fee_categories_batches", ["batch_id"], name: "index_finance_fee_categories_batches_on_batch_id", using: :btree
-  add_index "finance_fee_categories_batches", ["finance_fee_category_id"], name: "index_finance_fee_categories_batches_on_finance_fee_category_id", using: :btree
 
   create_table "finance_fee_collections", force: true do |t|
     t.string   "name"
@@ -690,13 +678,11 @@ ActiveRecord::Schema.define(version: 20141025172321) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "trigger_id"
     t.integer  "category_id"
   end
 
   add_index "finance_transaction_triggers", ["category_id"], name: "index_finance_transaction_triggers_on_category_id", using: :btree
   add_index "finance_transaction_triggers", ["finance_fee_category_id"], name: "index_finance_transaction_triggers_on_finance_fee_category_id", using: :btree
-  add_index "finance_transaction_triggers", ["trigger_id"], name: "index_finance_transaction_triggers_on_trigger_id", using: :btree
 
   create_table "finance_transactions", force: true do |t|
     t.string   "title"
@@ -899,21 +885,27 @@ ActiveRecord::Schema.define(version: 20141025172321) do
 
   create_table "privileges", force: true do |t|
     t.string   "name"
-    t.integer  "school_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "school_id"
+    t.integer  "privilege_tag_id"
+    t.integer  "priority"
   end
+
+  add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
+  add_index "privileges", ["school_id"], name: "index_privileges_on_school_id", using: :btree
 
   create_table "privileges_users", force: true do |t|
     t.integer  "school_id"
     t.integer  "user_id"
-    t.integer  "privilege_id_id"
-    t.integer  "course_id"
+    t.integer  "privilege_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "privileges_users", ["course_id"], name: "index_privileges_users_on_course_id", using: :btree
+  add_index "privileges_users", ["privilege_id"], name: "index_privileges_users_on_privilege_id", using: :btree
+  add_index "privileges_users", ["school_id"], name: "index_privileges_users_on_school_id", using: :btree
+  add_index "privileges_users", ["user_id"], name: "index_privileges_users_on_user_id", using: :btree
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"

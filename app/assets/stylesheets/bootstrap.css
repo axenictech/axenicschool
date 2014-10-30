@@ -12,6 +12,8 @@ html {
 }
 body {
   margin: 0;
+  max-height: 100%;
+  
 }
 article,
 aside,
@@ -899,7 +901,8 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  max-height: 100%;
+  background-color:#F2DCA5;
 }
 input,
 button,
@@ -1417,6 +1420,8 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  max-height: 100%;
+  height: 100%;
 }
 .row {
   margin-right: -15px;
