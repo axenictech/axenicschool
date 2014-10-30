@@ -9,12 +9,12 @@
       <tr>
             <th>Employee Name</th>
             <th>Employee Id</th>
-            <th>Employee Deprtment</th>
+            <th>Employee Department</th>
       </tr>
 
       <%@employee.each do |emp|%>
           <tr>
-                <td col-md-2><%= link_to emp.first_name,employees_profile_path(emp)%></td>
+                <td col-md-2><%= link_to emp.full_name,employees_profile_path(emp)%></td>
                 <td col-md-2><%= emp.employee_number%></td>
                 <td col-md-2><%= emp.employee_department.name%></td>
          </tr>

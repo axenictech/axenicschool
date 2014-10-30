@@ -20,6 +20,9 @@ class EmployeesController < ApplicationController
     @categories2 = EmployeeCategory.where(status: false).order(:name)
      
   end
+  def none_privielege
+    
+  end
 
   def edit_category
 
@@ -256,7 +259,7 @@ class EmployeesController < ApplicationController
 
   def update_grade 
      @employee_grade_new=EmployeeGrade.new
-    @employee_grade=EmployeeGrade.find(params[:grade_id])
+     @employee_grade=EmployeeGrade.find(params[:grade_id])
     if @employee_grade.update(grade_params)
       flash[:notice6] = "Employee Grade updated Successfully"
     end
@@ -278,19 +281,19 @@ class EmployeesController < ApplicationController
   def admission1
     @employee=Employee.new
     if Employee.first.nil?
-      @employee.employee_number=10101
-       flash[:notice7] = "Employee number of first employee is #{@employee.employee_number}" 
+      @employee.employee_number=1
+       flash[:notice] = "Employee number of first employee is #{@employee.employee_number}" 
     else
       @last_employee=Employee.last
       @employee.employee_number=@last_employee.employee_number.next
-      flash[:notice7] = "Employee number of last employee is #{@last_employee.employee_number}" 
+      flash[:notice] = "Employee number of last employee is #{@last_employee.employee_number}" 
     end  
   end
 
   def create
     @employee=Employee.new(employee_params)
     if @employee.save
-    flash[:notice8] = "Employee details added for #{@employee.first_name}"
+    flash[:notice] = "Employee details added for #{@employee.first_name}"
     redirect_to employees_admission2_path(@employee)
     else
       render 'admission1'
@@ -304,7 +307,7 @@ class EmployeesController < ApplicationController
   def admission2_create
     @employee=Employee.find(params[:format])
     if @employee.update(employee_params)
-      flash[:notice9] = "Additional details added for #{@employee.first_name}"
+      flash[:notice] = "Additional details added for #{@employee.first_name}"
     redirect_to employees_admission3_path(@employee)
     else
       render 'admission2'
@@ -335,6 +338,15 @@ class EmployeesController < ApplicationController
     @user = User.find(params[:format])
     @employee=Employee.find(params[:format])
     @privilege_tags=PrivilegeTag.all
+
+    privilege=[]
+    privilege=params[:privilege]
+   
+     privilege.each  do |p|
+         
+            @pri= PrivilegeUser.new(user_id:@user.id,)
+            @pri.save
+      end
 
   end
 
@@ -403,6 +415,7 @@ class EmployeesController < ApplicationController
        @employee=Employee.find(params[:format])
        if @employee.update(employee_params)
           redirect_to employees_profile_path(@employee)
+          flash[:notice] = "Personal details updated successfully for #{@employee.first_name}"
        else
           render 'edit_personal_profile'
        end   
@@ -413,6 +426,8 @@ class EmployeesController < ApplicationController
        @employee=Employee.find(params[:format])
        if @employee.update(employee_params)
           redirect_to employees_profile_path(@employee)
+          flash[:notice] = "Address details updated successfully for #{@employee.first_name}"
+
        else
           render 'edit_address_profile'
        end   
@@ -423,6 +438,8 @@ class EmployeesController < ApplicationController
        @employee=Employee.find(params[:format])
        if @employee.update(employee_params)
           redirect_to employees_profile_path(@employee)
+          flash[:notice] = "Contact details updated successfully for #{@employee.first_name}"
+
        else
           render 'edit_contact_profile'
        end   
@@ -883,6 +900,8 @@ end
         @bank_info.update(bank_info:v[:bank_info]) 
     end
     redirect_to employees_profile_path(@employee)
+    flash[:notice] = "Bank details updated successfully for #{@employee.first_name}"
+
   end
 
   private

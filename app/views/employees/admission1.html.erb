@@ -10,6 +10,7 @@
 </div><br/><br/>
 
 <div id="page-yield">
+<% unless flash[:notice].nil? %> <%end%>
   
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for @employee  do |f| %>
@@ -30,7 +31,7 @@
     
       <tr>
          <td class="col-2"><%=f.label :employee_number%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.text_field :employee_number,:value=> @employee.employee_number%></td>
+          <td class="col-2"><%=f.text_field :employee_number,readonly: true,:value=> @employee.employee_number%></td>
      </tr>
      <tr>     
           <td class="col-2"><%=f.label :joining_date %><span class="necessary-field">*</span></td>

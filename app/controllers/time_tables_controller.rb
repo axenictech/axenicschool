@@ -18,6 +18,7 @@ class TimeTablesController < ApplicationController
 
   def selectTime
       @time=TimeTableEntry.where(time_table_id:params[:time][:id])
+      @time1=TimeTable.find(params[:time][:id])
       @batches=[]
       unless @time.nil?
       @time.each do |t|
@@ -25,15 +26,14 @@ class TimeTablesController < ApplicationController
       end
      end
   end
-  
-  def select
-   
+
+
+    def select
+     @time1=TimeTable.find(params[:t])
      @batch = Batch.find(params[:batch][:id])
      @class_timing=@batch.class_timings.where(:is_break=>false)
      @subjects = @batch.subjects.all
   end
-
-
 
  def timetable
     @today=Date.today
@@ -73,31 +73,22 @@ class TimeTablesController < ApplicationController
  
  def teacher_time_table_display
     @time=TimeTableEntry.where(time_table_id:params[:time][:id])
-    @weekdays=[]
-    @class_timings=[]
-    @employees=[]
-    unless @time.nil?
-     @time.each do |t|
-     @weekdays.push t.weekday
-     @class_timings.push t.class_timing
-     @employees.push t.employee
-   end
-
+    @time_table=TimeTable.find(params[:time][:id])
+    @timetable_entries = @time_table.time_table_entries
+    @weekdays = @timetable_entries.collect(&:weekday).uniq.sort!{|a,b| a.weekday <=> b.weekday}
+    @class_timings =@timetable_entries.collect(&:class_timing).uniq.sort!{|a,b| a.start_time <=> b.start_time}
+    @employees =@timetable_entries.collect(&:employee).uniq
  end
-end
   
- def select
-    unless @time.nil?
-    @time.each do |t|
-     @weekdays.push t.weekday
-   end
- end
+ # def select
+ #    unless @time.nil?
+ #    @time.each do |t|
+ #     @weekdays.push t.weekday
+ #   end
+ # end
 
-  end
-
-
-
-	def sub
+  # end
+  def sub
   		 @subject=@batch.subjects.find(params[:subject][:id])
 	end
 

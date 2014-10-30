@@ -18,7 +18,6 @@
 	<tr class="tr-head">
 		<th>Name</th>
 		<th>Description</th>
-		<th>Voucher No</th>
 		<th>Amount</th>
 		<th>Transaction Date</th>
 		<th></th>
@@ -28,7 +27,6 @@
 	<tr>
 		<td><%= expense.title%></td>
 		<td><%= expense.description%></td>
-		<td></td>
 		<td><%= expense.amount%></td>
 		<td><%= expense.transaction_date%></td>
 		<td><%= link_to 'Edit',finance_edit_expense_path(expense)%>&nbsp;&nbsp;

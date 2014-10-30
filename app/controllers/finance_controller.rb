@@ -234,8 +234,18 @@ class FinanceController < ApplicationController
 
   def expense_list
     @start_date=params[:expense][:start_date].to_date
-    @end_date=params[:expense][:end_date].to_date
-    @expenses=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+    unless @start_date.nil?
+      @end_date=params[:expense][:end_date].to_date
+      unless @end_date.nil?
+        @expenses=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+      else
+        flash[:alert]="Please select end date"
+        render 'view_expense'
+      end
+    else
+      flash[:alert]="Please select start date"
+      render 'view_expense'
+    end
   end
 
   def edit_expense
@@ -287,8 +297,18 @@ class FinanceController < ApplicationController
 
   def income_list
     @start_date=params[:income][:start_date].to_date
-    @end_date=params[:income][:end_date].to_date
-    @incomes=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+    unless @start_date.nil?
+      @end_date=params[:income][:end_date].to_date
+      unless @end_date.nil?
+        @incomes=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+      else
+        flash[:alert]="Please select end date"
+        render 'view_income'
+      end
+    else
+      flash[:alert]="Please select start date"
+      render 'view_income'
+    end
   end
 
   def edit_income
@@ -324,25 +344,60 @@ class FinanceController < ApplicationController
 
   def transactions_list
     @start_date=params[:transaction][:start_date].to_date
-    @end_date=params[:transaction][:end_date].to_date
-    @transactions=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+    unless @start_date.nil?
+      @end_date=params[:transaction][:end_date].to_date
+      unless @end_date.nil?
+        @categories=FinanceTransactionCategory.all
+      else
+        flash[:alert]="Please select end date"
+        render 'transaction_report'
+      end
+    else
+      flash[:alert]="Please select start date"
+      render 'transaction_report'
+    end
+  end
+
+  def expense_details
+    @start_date=params[:start_date].to_date
+    @end_date=params[:end_date].to_date
+    @category=FinanceTransactionCategory.find(params[:category])
+    @expenses=@category.finance_transactions.where(transaction_date:@start_date..@end_date)
+    render 'expense_list'
+  end
+
+  def income_details
+    @start_date=params[:start_date].to_date
+    @end_date=params[:end_date].to_date
+    @category=FinanceTransactionCategory.find(params[:category])
+    @incomes=@category.finance_transactions.where(transaction_date:@start_date..@end_date)
+    render 'income_list'
   end
 
   def finance_transaction_report
     @general_setting=GeneralSetting.first
     @start_date=params[:start_date].to_date
     @end_date=params[:end_date].to_date
-    @transactions=FinanceTransaction.where(transaction_date:@start_date..@end_date)
+    @categories=FinanceTransactionCategory.all
     render 'finance_transaction_report',layout:false
   end
 
   def transactions_comparison
     @start_date1=params[:transaction][:start_date1].to_date
     @end_date1=params[:transaction][:end_date1].to_date
-    @transactions1=FinanceTransaction.where(transaction_date:@start_date1..@end_date1)
     @start_date2=params[:transaction][:start_date2].to_date
     @end_date2=params[:transaction][:end_date2].to_date
-    @transactions2=FinanceTransaction.where(transaction_date:@start_date2..@end_date2)
+    unless @start_date1.nil? or @start_date2.nil?
+      unless @end_date1.nil? or @end_date2.nil?
+        @categories=FinanceTransactionCategory.all
+      else
+        flash[:alert]="Please select end date"
+        render 'compare_report'
+      end
+    else
+      flash[:alert]="Please select start date"
+      render 'compare_report'
+    end
   end
 
   def new_master_category
