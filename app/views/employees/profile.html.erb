@@ -16,7 +16,7 @@
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
-         <%=link_to "Genral",employees_genral_profile_path(@employee),remote:true%>
+         <%=link_to "General",employees_genral_profile_path(@employee),remote:true%>
       </li>
       <li role="presentation">
          
@@ -82,7 +82,7 @@
 
 <div id="page-yield">
 
-  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+  <% unless flash[:notice].nil? %> <% end %>
 
 
 <div id="profile"><%=render'disp_genral_profile'%></div>

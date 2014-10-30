@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20141020133340) do
-=======
-ActiveRecord::Schema.define(version: 20141020111551) do
->>>>>>> e912437de6bc9a99c6a9583777664565b0b6d7a4
+ActiveRecord::Schema.define(version: 20141030080907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,13 +78,14 @@ ActiveRecord::Schema.define(version: 20141020111551) do
     t.string   "home_phone"
     t.string   "email"
     t.string   "fax"
-    t.string   "photo_filename"
-    t.string   "photo_content_type"
-    t.binary   "photo_data"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "country_id"
     t.integer  "former_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "archived_employees", ["country_id"], name: "index_archived_employees_on_country_id", using: :btree
@@ -249,7 +246,6 @@ ActiveRecord::Schema.define(version: 20141020111551) do
     t.boolean  "is_break"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_deleted"
   end
 
   add_index "class_timings", ["batch_id"], name: "index_class_timings_on_batch_id", using: :btree
@@ -881,15 +877,9 @@ ActiveRecord::Schema.define(version: 20141020111551) do
   end
 
   create_table "privileges_users", force: true do |t|
-    t.integer  "school_id"
-    t.integer  "user_id"
-    t.integer  "privilege_id_id"
-    t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "privileges_users", ["course_id"], name: "index_privileges_users_on_course_id", using: :btree
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
@@ -1083,7 +1073,6 @@ ActiveRecord::Schema.define(version: 20141020111551) do
     t.string   "weekday"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_deleted"
     t.integer  "day_of_week"
   end
 
