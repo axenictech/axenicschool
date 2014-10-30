@@ -10,6 +10,7 @@ class TimeTableEntriesController < ApplicationController
  end
 
  def select
+  
     @time=params[:format]
     @batch=Batch.find(params[:batch][:id])
     @class_timing=@batch.class_timings.where(:is_break=>false)
@@ -27,17 +28,17 @@ def select_subject
     @subject=Subject.find(params[:subject_id])
     @batch=@subject.batch
     @assign_time=TimeTableEntry.create(batch_id:@batch.id,class_timing_id:@class_timing_id,weekday_id:@weekday,employee_id:@teacher,subject_id:@subject.id,time_table_id:@time)
+  
     @subjects = @batch.subjects.all
     @class_timing=@batch.class_timings.where(:is_break=>false)
-    @teachers= EmployeeSubject.where(subject_id: @subject.id)
-    
+   
  end
 
   def delete_time
     @delete_time=TimeTableEntry.find(params[:format])
     @delete_time.destroy
     @batch=@delete_time.batch
-       @class_timing=@batch.class_timings.where(:is_break=>false)
+    @class_timing=@batch.class_timings.where(:is_break=>false)
     @subjects=@batch.subjects.all
   end
 

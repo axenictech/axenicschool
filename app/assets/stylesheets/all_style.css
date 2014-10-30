@@ -133,6 +133,12 @@ body {
     color: #fff;
 }
 
+#page-wrapper {
+    width: 100%;
+    background-color: #fff;
+    margin-top:50px;
+}
+
 #wrapper.toggled #page-wrapper {
     position: none;
 }
