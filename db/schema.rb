@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 20141030080907) do
     t.boolean  "is_break"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_deleted"
   end
 
   add_index "class_timings", ["batch_id"], name: "index_class_timings_on_batch_id", using: :btree
@@ -899,14 +900,23 @@ ActiveRecord::Schema.define(version: 20141030080907) do
   create_table "privileges_users", force: true do |t|
     t.integer  "school_id"
     t.integer  "user_id"
+<<<<<<< HEAD
     t.integer  "privilege_id"
+=======
+    t.integer  "privilege_id_id"
+    t.integer  "course_id"
+>>>>>>> a20a8a06758b7ea31e262e35ed27fc0ee25d035c
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   add_index "privileges_users", ["privilege_id"], name: "index_privileges_users_on_privilege_id", using: :btree
   add_index "privileges_users", ["school_id"], name: "index_privileges_users_on_school_id", using: :btree
   add_index "privileges_users", ["user_id"], name: "index_privileges_users_on_user_id", using: :btree
+=======
+  add_index "privileges_users", ["course_id"], name: "index_privileges_users_on_course_id", using: :btree
+>>>>>>> a20a8a06758b7ea31e262e35ed27fc0ee25d035c
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
@@ -1100,6 +1110,7 @@ ActiveRecord::Schema.define(version: 20141030080907) do
     t.string   "weekday"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_deleted"
     t.integer  "day_of_week"
   end
 

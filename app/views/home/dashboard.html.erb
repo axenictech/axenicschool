@@ -1,226 +1,117 @@
-<!-- <div class="content-header"> 
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-				Dashboard <small>Dashboard Setting</small>
-				<i class=" fa fa-arrow-left pull-right"></i>
-			</h1>
-			<ol class="breadcrumb">
-			<li class="active">
-				<i class="fa fa-dashboard"></i> Dashboard
-			</li>
-			</ol>
-		</div>
+
+<div class="page-header page-header-with-buttons">
+	<h1 class="pull-left">
+	  <i class="icon-dashboard"></i>
+	  <span>Dashboard</span>
+	</h1>
+<div class="pull-right">
+  <div class="btn-group">
+    <a class="btn btn-white hidden-xs" href="/back">
+    	<i class="icon-arrow-left fa-2x"></i>
+    </a>
+  </div>
+</div>
+
+</div>
+<div class="row box box-transparent">
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link blue-background">
+	    <a href="/students/admission1">
+	      <div class="header">
+	        <div class="icon-edit"></div>
+	      </div>
+	      <div class="content">Admission</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link green-background">
+	    <a href="/students">
+	      <div class="header">
+	        <div class="icon-star"></div>
+	      </div>
+	      <div class="content">Student Details</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link orange-background">
+	    <a href="/users">
+	      <div class="header">
+	        <div class="icon-user"></div>
+	      </div>
+	      <div class="content">Manage Users</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link purple-background">
+	    <a href="/newscasts">
+	      <div class="header">
+	        <div class="icon-bullhorn"></div>
+	      </div>
+	      <div class="content">Manage News</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link red-background">
+	    <a href="/exams">
+	      <div class="header">
+	        <div class="icon-bar-chart"></div>
+	      </div>
+	      <div class="content">Examinations</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link muted-background">
+	    <a href="/time_tables">
+	      <div class="header">
+	        <div class="icon-time"></div>
+	      </div>
+	      <div class="content">Timetable</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link grass-green-background">
+	    <a href="/attendances">
+	      <div class="header">
+	        <div class="icon-list"></div>
+	      </div>
+	      <div class="content">Attendance</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link brown-background">
+	    <a href="/setting">
+	      <div class="header">
+	        <div class="icon-cogs"></div>
+	      </div>
+	      <div class="content">Settings</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link banana-background">
+	    <a href="/employees">
+	      <div class="header">
+	        <div class="icon-link"></div>
+	      </div>
+	      <div class="content">Human Resources</div>
+	    </a>
+	  </div>
+	</div>
+	<div class="col-xs-4 col-sm-2">
+	  <div class="box-quick-link sea-blue-background">
+	    <a href="/finance">
+	      <div class="header">
+	        <div class="icon-rupee"></div>
+	      </div>
+	      <div class="content">Finance</div>
+	    </a>
+	  </div>
 	</div>
 </div>
-<div class="content-body">
-	<div class="row">
-		<div class="col-md-2 col-xs-2">
-			<div><%= link_to '','/students/admission1',title: "Admission" ,class: "fa fa-institution fa-5x " %>
-			</div>
-			<div class="label label-default">Admission</div>
-		</div>  
-
-		<div class="col-md-2 col-xs-2">     
-	  		<div><%= link_to '', '/students',title: "Student Details" ,class: "fa fa-user fa-5x" %>
-	  		</div>
-			<div class="label label-default">Student Details</div>
-		</div>
-
-		<div class="col-md-2 col-xs-2">     
-			<div><%= link_to '','/users',title: "Manage Users",class: "fa fa-users fa-5x" %>
-			</div>
-			<div class="label label-default">Manage Users</div>
-		</div>   
-
-		<div class="col-md-2 col-xs-2">     
-			<div ><%= link_to '','/newscasts',title: "Manage News" ,class: "fa fa-bullhorn fa-5x" %>
-			</div>
-			<div class="label label-default">Manage News</div>
-		</div> 
-
-		<div class="col-md-2 col-xs-2">     
-		 	<div><%= link_to '', '/exams',title: "Examinations",class: "fa fa-bar-chart-o fa-5x"%>
-		 	</div>
-			<div class="label label-default">Examinations</div>
-			</div>
-		</div>
-	<div class="row">
-
-	<div class="col-md-2 col-xs-2"> 
-			<div><%= link_to '','/time_tables',title: "Timetable" ,class: "fa fa-clock-o fa-5x"%>
-			</div>
-			<div class="label label-default">Timetable</div>
-	</div>   
-	<div class="col-md-2 col-xs-2">     
-			<div ><%= link_to '','/attendences',title: "Attendance" , class: "fa fa-list-alt fa-5x"%>
-			</div>
-			<div class="label label-default">Attendance</div>
-	</div>
-	<div class="col-md-2 col-xs-2">     
-			<div ><%= link_to'', '/setting',title: "Setting",class: "fa fa-cogs fa-5x"%>
-			</div>
-			<div class="label label-default">Settings</div>
-	</div>                
-
-	<div class="col-md-2 col-xs-2">     
-			<div><%= link_to '', '/employees',title: "Human Resources", class: "fa fa-link fa-5x"%>
-			</div>
-			<div class="label label-default">Human Resources</div>
-	</div>
-	<div class="col-md-2 col-xs-2">     
-			<div ><%= link_to '', '/finance',title: "Finance", class: "fa fa-rupee fa-5x"%></div>
-			<div class="label label-default">Finance</div><br/>
-	</div>
-	
-</div>        
-</div>
-<!-- content-body -->
-
- <div class="col-xs-12">
-    <div class="page-header page-header-with-buttons">
-        <h1 class="pull-left">
-            <i class="icon-dashboard"></i>
-             	<span><%= t('dashboard')%></span>
-        </h1>
-    </div>
-
-    <div class="row box box-transparent">
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link blue-background">
-                    <a href="setting">
-                      <div class="header">
-                        <div class="icon-shield"></div>
-                      </div>
-                      <div class="content"><%= t('acadmecis')%></div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link green-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="icon-gears"></div>
-                      </div>
-                      <div class="content"><%= t('settings')%></div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link orange-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="icon-pencil"></div>
-                      </div>
-                      <div class="content"><%= t('Examinations')%></div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link purple-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="icon-group"></div>
-                      </div>
-                      <div class="content"><%= t('human resources')%></div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link red-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="icon-time"></div>
-                      </div>
-                      <div class="content"><%= t('timetable')%></div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link muted-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="icon-calendar"></div>
-                      </div>
-                      <div class="content"><%= t('calendar')%></div>
-                    </a>
-                  </div>
-                </div>
-	</div>
-
-	<div class="row box box-transparent">
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link blue-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="icon-briefcase fa-2x"></div>
-                      </div>
-                      <div class="content">Academics</div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link green-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="fa fa-institution fa-2x"></div>
-                      </div>
-                      <div class="content">Academics</div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link orange-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="fa fa-institution fa-2x"></div>
-                      </div>
-                      <div class="content">Academics</div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link purple-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="fa fa-institution fa-2x"></div>
-                      </div>
-                      <div class="content">Academics</div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link red-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="fa fa-institution fa-2x"></div>
-                      </div>
-                      <div class="content">Academics</div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-2">
-                  <div class="box-quick-link muted-background">
-                    <a href="#">
-                      <div class="header">
-                        <div class="fa fa-institution fa-2x"></div>
-                      </div>
-                      <div class="content">Academics</div>
-                    </a>
-                  </div>
-                </div>
-	</div>
-
-
-
-
