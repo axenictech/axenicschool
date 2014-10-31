@@ -2,6 +2,7 @@
    <hr class="fancy-line"></hr>
   <h1>Admission</h1>
   <h3>Step 2 - Employee Details<br />
+   <small><font color="red">Fields Marked with * must be filled</font></small></h3>
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
   </div>
@@ -12,7 +13,7 @@
   
 
 <table align="center" class="table table-hover" style="width:1000px">
-<%= form_for (@employee),url:{action: 'admission2_create',format: @employee.id},method: :patch do |f| %>
+<%= form_for @employee,url:{action: 'admission2_create',format: @employee.id},method: :patch do |f| %>
 <div align="center">
     <% if @employee.errors.any? %>
         <div class="alert alert-danger" style="width:500px" >
@@ -34,7 +35,7 @@
       </tr>
 
     <tr>  
-         <td class="col-2"><%=f.label :Line1%></td>
+         <td class="col-2"><%=f.label :Line1%><span class="necessary-field">*</span></td>
           <td class="col-2"><%=f.text_field :home_address_line1%></td>
      </tr>
     
@@ -44,24 +45,24 @@
      </tr>
 
      <tr>
-     	 <td class="col-2"><%=f.label :City%></td>
+     	 <td class="col-2"><%=f.label :City%><span class="necessary-field">*</span></td>
         <td class="col-2"><%=f.text_field :home_city, :required=>false%></td>
      </tr>
 
      <tr>
-     	 <td class="col-2"><%=f.label :State%></td>
+     	 <td class="col-2"><%=f.label :State%><span class="necessary-field">*</span></td>
          <td class="col-2">  <%=f.text_field :home_state%></td>
      </tr>
 
       <tr>
 
        <tr>
-       <td class="col-2"><%=f.label :Country%></td>
+       <td class="col-2"><%=f.label :Country%><span class="necessary-field">*</span></td>
           <td class="col-2"><%=f.select :home_country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true}%></td>
      </tr>
 
       <tr>
-     	 <td class="col-2"><%=f.label :"PIN code"%></td>
+     	 <td class="col-2"><%=f.label :"PIN code"%><span class="necessary-field">*</span></td>
            <td class="col-2"><%=f.text_field :home_pin_code%></td>
      </tr>
 

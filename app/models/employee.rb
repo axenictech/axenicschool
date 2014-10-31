@@ -22,27 +22,28 @@ class Employee < ActiveRecord::Base
 
  after_save :create_user_account
 
-validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}    
-  validates :middle_name,length:{minimum:1,maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/},allow_blank: true
-  validates :last_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/}
+validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/,message:"allows only letters"}    
+  validates :middle_name,length:{minimum:1,maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/,message:"allows only letters"},allow_blank: true
+  validates :last_name,presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/,message:"allows only letters"}
   validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   validates :date_of_birth, presence: true
   validates :employee_department,presence: true
   validates :employee_category,presence: true
   validates :employee_position,presence: true
   validates :employee_grade, presence: true
-  validates :qualification,length:{minimum:1,maximum:20},format:{with: /\A[a-z A-Z_""-.]+\Z/},allow_blank: true
-  validates :experience_detail,length:{minimum:1,maximum:20},format:{with: /\A[a-zA-Z 0-9_""-]+\Z/},allow_blank: true
-  validates :father_name,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z_""-]+\Z/},allow_blank: true
+  validates :qualification,length:{minimum:1,maximum:30},allow_blank: true
+  validates :experience_detail,length:{minimum:1,maximum:30},allow_blank: true
+  validates :father_name,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z_""-]+\Z/,message:"allows only letters"},allow_blank: true
   validates :mother_name,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z ""-]+\Z/,message:"allows only letters"} ,allow_blank: true
-  validates :home_address_line1,length:{:in=> 1..30},allow_blank: true
+  
+  validates :home_address_line1,presence: true,length:{:in=> 1..30},on: :update
   validates :home_address_line2,length:{:in=>1..30},allow_blank: true
-  validates :home_city, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-              length:{:in=> 1..30},allow_blank: true
-  validates :home_state,format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-              length:{:in=> 1..30},allow_blank: true
-  validates :home_pin_code,numericality: { only_integer: true },
-                 length:{minimum:6,maximum:6},allow_blank: true
+  validates :home_city,presence: true, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+              length:{:in=> 1..30},on: :update
+  validates :home_state,presence: true,format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
+              length:{:in=> 1..30},on: :update
+  validates :home_pin_code,presence: true,numericality: { only_integer: true },
+                 length:{minimum:6,maximum:6},on: :update
   validates :office_address_line1,length:{:in=>1..30},allow_blank:true
   validates :office_address_line2,length:{:in=>1..30},allow_blank:true
   validates :office_city,format:{ with: /\A[a-z A-Z]+\z/,message:"only allows letters" },
@@ -63,12 +64,17 @@ validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ w
  validates :home_phone,numericality:{only_integer:true},
                     length:{minimum:6,maximum:11},allow_blank:true
 
-                    
+ validates :home_country_id,presence: true,on: :update
+
   def archived_employee
     employee_attributes = self.attributes  
     self.update_attributes(status_description:status) 
     employee_attributes["former_id"]= self.id
     archived_employee = ArchivedEmployee.create(employee_attributes)
+  end
+
+   def full_name
+    "#{first_name} #{last_name}"
   end
 
   private

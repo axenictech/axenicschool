@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -13,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029080351) do
+ActiveRecord::Schema.define(version: 20141030080907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,13 +78,14 @@ ActiveRecord::Schema.define(version: 20141029080351) do
     t.string   "home_phone"
     t.string   "email"
     t.string   "fax"
-    t.string   "photo_filename"
-    t.string   "photo_content_type"
-    t.binary   "photo_data"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "country_id"
     t.integer  "former_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "archived_employees", ["country_id"], name: "index_archived_employees_on_country_id", using: :btree
@@ -1103,4 +1102,3 @@ ActiveRecord::Schema.define(version: 20141029080351) do
   add_index "weekdays", ["batch_id"], name: "index_weekdays_on_batch_id", using: :btree
 
 end
->>>>>>> eae4d1f92056eab5ba361259a133a91efbfa3792
