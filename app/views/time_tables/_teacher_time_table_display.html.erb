@@ -4,7 +4,7 @@
 	
         <tr>
          <td></td>
-         <% @weekdays.each do |weekday| -%>
+         <% @weekdays.each do |weekday| %>
             <th colspan="<%=@class_timings.count %>"><%= weekday.weekday%></th>
           <%end%>
         </tr>
@@ -24,7 +24,7 @@
        	    <% @weekdays.each do |weekday| %>
             <% @class_timings.each do |c| %>
               <td>
-            <%t=TimeTableEntry.find_by_employee_id_and_class_timing_id_and_weekday_id(employee.id,c.id,weekday.id)%>
+            <%t=TimeTableEntry.find_by_employee_id_and_class_timing_id_and_weekday_id_and_time_table_id(employee.id,c.id,weekday.id,@time_table)%>
               <% unless t.nil?%>
               	<%= t.subject.name %><br/>
               	<%= t.batch.name %>

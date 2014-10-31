@@ -14,7 +14,7 @@
  <%@time_table_entries=TimeTableEntry.where(time_table_id:t.id)%>
  <%@time_table_entries.each do |time|%>
    <% @timing = ClassTiming.find(time.class_timing_id) %>
-     <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id(time.class_timing_id,time.weekday_id) %>  
+     <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_time_table_id(time.class_timing_id,time.weekday_id,time.time_table) %>  
       <%if time.weekday.weekday==I18n.l(@today,:format=>"%A")%>
      <tr>
         <td>

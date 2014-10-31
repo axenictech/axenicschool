@@ -7,11 +7,11 @@
       <% end %>
     </tr> 
  
-<% @batch.weekdays.each do |w|%>
+<% @batch.weekdays.reverse_each do |w|%>
       <tr>
         <td class="td"><div class="name"><%=w.weekday%></div></td>
         <% @class_timing.each do |c|%>
-         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id(c.id,w.id) %>
+         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_time_table_id(c.id,w.id,@time) %>
         <td>
         <%unless @present.nil? %>
          <font color="red"><%= @present.subject.name %></font><br/>
