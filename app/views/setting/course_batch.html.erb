@@ -1,43 +1,77 @@
 
-<div id="content-header">
-  <h1>Courses</h1>
-  <h3>Home</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),:back  %>
-  </div>
- 
-</div><br /><br />
-
-
-<div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to 'Manage Course' ,"/courses",style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-            Manage Courses and create batches
-          </div>
-        </div>
-       
+<div class="col-xs-12">
+  <div class="page-header page-header-with-buttons">
+    <h1 class="pull-left">
+      <i class="icon-gears"></i>
+              <span><%= t('manage course/batches')%></span>
+              <small><%= t('home')%></small>
+    </h1>
+      <div class="pull-right">
+        <ul class="breadcrumb">
+        <!-- <li>
+          <a href="">
+            <i class="icon-backward"></i>
+          </a>
+        </li> -->
+          <li>
+            <a href="setting/course_batch">
+              <i class="icon-gears"></i>
+              <%= t('settings')%></li>
+            </a>
+          
+          <li class="separator">
+            <i class="icon-angle-right"></i>
+          </li>
+          <li class="active"><i class="icon-books"></i>
+          <%= t('courses or batches')%></li>
+        </ul>
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-         <%= link_to 'Manage Batch' ,"/batches",style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-           Manage active batches
-          </div>
-        </div>
-
-      </div>
-       
-      <div class="col-md-2"></div>
 </div>
 
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-4">
+    <div class="box box-transparent box-nomargin">
+      <div class="box-header">
+        <div class="title">
+          <i class="icon-book"></i>
+          <%= link_to 'Manage Course' ,"/courses",style: 'color:black' %>
+        </div>
+        <div class="actions">
+          <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+          </a>
+          
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-content box-padding">
+        Manage Courses and create batches
+      </div>
+    </div>
+  </div>
 
-  
+  <div class="col-sm-4">
+    <div class="box box-transparent box-nomargin">
+      <div class="box-header">
+        <div class="title">
+          <i class="icon-book"></i>
+          <%= link_to 'Manage Batch' ,"/batches",style: 'color:black' %>
+                 </div>
+        <div class="actions">
+          <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+          </a>
+          
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-content box-padding">
+        Manage active batches
+      </div>
+    </div>
+  </div>
 
-     
+</div>
+
+ 

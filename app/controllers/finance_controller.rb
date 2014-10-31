@@ -415,11 +415,13 @@ class FinanceController < ApplicationController
 
   def create_master_category
     @master_category=FinanceFeeCategory.new(fee_category_params)
-    @master_category.save
-    if params[:batches].present?
-        params[:batches].each do |batch|
-          BatchesFinanceFeeCategory.create(batch_id:batch,finance_fee_category_id:@master_category.id)
-        end
+    if @master_category.save
+      if params[:batches].present?
+          params[:batches].each do |batch|
+            BatchesFinanceFeeCategory.create(batch_id:batch,finance_fee_category_id:@master_category.id)
+          end
+      end
+      flash[:notice]="Finance fee category created successfully"
     end
   end
 
@@ -436,14 +438,18 @@ class FinanceController < ApplicationController
   def update_master_category
     @batch=Batch.find(params[:batch_id])
     @master_category=@batch.finance_fee_categories.find(params[:id])
-    @master_category.update(fee_category_params)
+     if @master_category.update(fee_category_params)
+        flash[:notice]="Finance fee category updated successfully"
+     end
     @master_categories=@batch.finance_fee_categories.all
   end
   
   def delete_master_category
     @batch=Batch.find(params[:batch_id])
     @master_category=@batch.finance_fee_categories.find(params[:id])
-    @master_category.destroy
+    if @master_category.destroy
+      flash[:notice]="Finance fee category deleted successfully"
+    end
     @master_categories=@batch.finance_fee_categories.all
   end
 

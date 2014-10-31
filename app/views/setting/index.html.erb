@@ -1,104 +1,123 @@
-<!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            <%= t('configuration')%> <small><%= t('configuration home')%></small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-th"></i> <%= t('dashboard')%>
-                            </li>
-                            <li>
-                              <i class="fa fa-cogs"></i><%= t('settings')%>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
 
-                <!-- /.row -->
+<div class="col-xs-12">
+  <div class="page-header page-header-with-buttons">
+    <h1 class="pull-left">
+      <i class="icon-gears"></i>
+              <span><%= t('settings')%></span>
+              <small><%= t('settings home')%></small>
+    </h1>
+      <div class="pull-right">
+        <ul class="breadcrumb">
+        <!-- <li>
+          <a href="">
+            <i class="icon-backward"></i>
+          </a>
+        </li> -->
+          <li>
+            <a href="home/dashboard">
+              <i class="icon-dashboard"></i>
+              <%= t('dashboard')%></li>
+            </a>
+          
+          <li class="separator">
+            <i class="icon-angle-right"></i>
+          </li>
+          <li class="active"><i class="icon-gears"></i>
+          <%= t('setting')%></li>
+        </ul>
+      </div>
+</div>
 
-<div class="content-body">
-  <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-pencil fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge"></div>
-                                        <div><%= t('manage courses')%></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                
- </div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-4">
+    <div class="box box-transparent box-nomargin">
+      <div class="box-header">
+        <div class="title">
+          <i class="icon-book"></i>
+          <%= link_to "Manage Course / Batch", '/setting/course_batch'%>
+        </div>
+        <div class="actions">
+          <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+          </a>
+          
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-content box-padding">
+        Add a new Course or Batch for this academic year.
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="box box-transparent box-nomargin">
+      <div class="box-header">
+        <div class="title">
+          <i class="icon-book"></i>
+          <%= link_to "Manage Student Category",'/categories' %>        </div>
+        <div class="actions">
+          <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+          </a>
+          
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-content box-padding">
+        Add student category.
+      </div>
+    </div>
+  </div>
 
 </div>
 
-  <div class="container">
-    <div class="row space-top">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="system-panel system-panel-warning " >
-          <div class="system-panel-heading">
-            <%= link_to "Manage Course / Batch", '/setting/course_batch'%>
-          </div>
-          <div class="system-panel-body">
-            Add a new Course or Batch for this academic year.
-          </div>
-        </div>
-       
-      </div>
-      <div class="col-md-4">
-        <div class="system-panel system-panel-warning ">
-          <div class="system-panel-heading">
-          <%= link_to "Manage Student Category",'/categories' %>
-          </div>
-          <div class="system-panel-body" >
-           Add student category.
-          </div>
-        </div>
+ <hr class="hr-double">
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-4">
+    <div class="box box-transparent box-nomargin">
+      <div class="box-header">
+        <div class="title">
+          <i class="icon-book"></i>
+          <%= link_to "Manage Subject","/subjects" %>  
 
+        </div>
+        <div class="actions">
+          <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+          </a>
+          
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
       </div>
-       
-      <div class="col-md-2"></div>
+      <div class="box-content box-padding">
+        Manage subjects corresponding to different courses.
+      </div>
     </div>
-  
-    <div class="row space-bottom">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="system-panel system-panel-warning " >
-          <div class="system-panel-heading">
-            <%= link_to "Manage Subject","/subjects" %>          </div>
-          <div class="system-panel-body">
-            Manage subjects corresponding to different courses.
-          </div>
-        </div>
-       
-      </div>
-      <div class="col-md-4">
-        <div class="system-panel system-panel-warning ">
-          <div class="system-panel-heading">
-          <%= link_to "General Settings", "/general_settings/new"%></div>
-          <div class="system-panel-body">
-           Set some general configurations related to institution,attendance, etc.
-          </div>
-        </div>
+  </div>
 
+  <div class="col-sm-4">
+    <div class="box box-transparent box-nomargin">
+      <div class="box-header">
+        <div class="title">
+          <i class="icon-book"></i>
+          <%= link_to "General Settings", "/general_settings/new"%>
+        </div>
+        <div class="actions">
+          <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+          </a>
+          
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
       </div>
-       
-      <div class="col-md-2"></div>
+      <div class="box-content box-padding">
+        Set some general configurations related to institution,attendance, etc.
+      </div>
     </div>
+  </div>
 
-    
+</div>
+
