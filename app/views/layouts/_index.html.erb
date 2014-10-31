@@ -6,22 +6,63 @@
         <a class="toggle-nav btn pull-left">
           <i class="icon-reorder"></i>
         </a>
+    <% if user_signed_in? %>
         <ul class="nav">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" >
+              <i class="fa fa-cogs"></i>
+            </a>
+        </li>
+        <li class="dropdown medium only-icon widget">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+              <i class="icon-rss"></i>
+              <div class="label">5</div>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="">
+                  <div class="widget-body">
+                    <div class="pull-left icon">
+                      <i class="icon-user text-success"></i>
+                    </div>
+                    <div class="pull-left text">
+                      John Doe signed up
+                      <small class="text-muted">just now</small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="">
+                  <div class="widget-body">
+                    <div class="pull-left icon">
+                      <i class="icon-inbox text-error"></i>
+                    </div>
+                    <div class="pull-left text">
+                      New Order #002
+                      <small class="text-muted">3 minutes ago</small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="dropdown dark user-menu">
             <a class="dropdown-toggle" data-toggle="dropdown">
-              <span class="user-name">Mila Kunis</span>
+              <span class="user-name"><%= current_user.username %></span>
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="./Educulture_files/Educulture.html">
+                <a href="/users/edit">
                   <i class="icon-user"></i>
                   Profile
                 </a>
               </li>
                <li class="divider"></li>
               <li>
-                <a href="./Educulture_files/Educulture.html">
+                <a href="/users/sign_out" data-method="delete">
                   <i class="icon-signout"></i>
                   Sign out
                 </a>
@@ -29,6 +70,7 @@
             </ul>
           </li>
         </ul>
+  <%end%>
       </nav>
 </header>
 
@@ -97,7 +139,6 @@
                     <i class="icon-caret-right"></i>
                     <span>Timetable</span>
                   </a>
-
                 </li>
                 <li>
                   <a href="http://localhost:3000/attendances">
@@ -117,16 +158,16 @@
                     <span>Manage News</span>
                   </a>
                 </li>
-
-            </ul>
-    </div>
-</nav>
-             
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <section id="content">
         <div class="container">
           <div class="row" id="content-wrapper">
           <div class="col-xs-12">
-          <div id="flash"></div>
+          <div id="flash"><%= render 'layouts/flash_messages'%></div>
                 <%= yield %>
           </div>   
           </div>
@@ -135,20 +176,10 @@
               <div class="row">
                 <div class="col-sm-6 text">
                   Copyright © 2014 Axenic School
-
                 </div>
               </div>
             </div>
-
-<div id="page-wrapper">
-    <div id="flash"><%= render 'layouts/flash_messages'%></div>
-        <%= yield %>
-</div>
-</div>
-</div>
-
           </footer>
         </div>
-      </section>
-    </div>
-
+    </section>
+</div>
