@@ -1,5 +1,7 @@
-
-  <table align="center" class="table table-hover table-bordered" style="width:800px" >
+<% unless flash[:notice].nil? %>
+    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
+  <% end %>
+ <table align="center" class="table table-hover table-bordered" style="width:800px" >
     <tr>
     <td class="col-4"></td>
      <%  @class_timing.each do |c|%>
