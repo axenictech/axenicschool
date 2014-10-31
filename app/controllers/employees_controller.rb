@@ -498,9 +498,14 @@ class EmployeesController < ApplicationController
     other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ""
     other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ""
   
-    @employee = Employee.where("first_name LIKE ?"+other_conditions,"#{params[:search]}%")
-
-    end
+    #@employee = Employee.where("first_name LIKE ?"+other_conditions,"#{params[:search]}%")
+    #@employee = Employee.where("concat_ws(' ',first_name,last_name) like '#{params[:search]}%' OR concat_ws(' ',last_name,first_name) like '#{params[:search]}%'"+other_conditions)
+    
+     names=params[:search].split(" ")
+     p "-------------------------------------------------------------"
+     p other_conditions,names.first+"%" +params[:search].last+"%"
+     @employee = Employee.where("first_name LIKE ? OR last_name LIKE ? "+other_conditions,names.first+"%",names.last+"%")
+end
 
     
     
