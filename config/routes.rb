@@ -489,6 +489,8 @@ get 'finance/defaulter_students'
 get 'finance/income_details'
 get 'finance/expense_details'
 
+
+
 root 'home#dashboard'
  
 resources :home
