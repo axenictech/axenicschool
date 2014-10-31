@@ -464,20 +464,24 @@ class EmployeesController < ApplicationController
    
    def list_emp
     @department=EmployeeDepartment.find(params[:subject_assignment][:id])
-     @employee=@department.employees.all
+     @employees=@department.employees.all
      @subject=Subject.find(params[:format])
      @assigned_employees = EmployeeSubject.where(subject_id:@subject.id)
    end
 
    def assign_employee
+     @department=EmployeeDepartment.find(params[:department_id])
     @employee=Employee.find(params[:id])
+    @employees=@department.employees.all
     @subject=Subject.find(params[:format])
     @assigned_employee=EmployeeSubject.create(employee_id:@employee.id,subject_id:@subject.id)
     @assigned_employees = EmployeeSubject.where(subject_id:@subject.id)
   end
 
   def remove_employee
+     @department=EmployeeDepartment.find(params[:department_id])
     @employee=Employee.find(params[:id])
+    @employees=@department.employees.all
     @subject=Subject.find(params[:format])
     @assigned_employee=EmployeeSubject.where(employee_id:@employee.id,subject_id:@subject.id)
     @assigned_employee.destroy_all(employee_id:@employee.id,subject_id:@subject.id)
@@ -502,8 +506,6 @@ class EmployeesController < ApplicationController
     #@employee = Employee.where("concat_ws(' ',first_name,last_name) like '#{params[:search]}%' OR concat_ws(' ',last_name,first_name) like '#{params[:search]}%'"+other_conditions)
     
      names=params[:search].split(" ")
-     p "-------------------------------------------------------------"
-     p other_conditions,names.first+"%" +params[:search].last+"%"
      @employee = Employee.where("first_name LIKE ? OR last_name LIKE ? "+other_conditions,names.first+"%",names.last+"%")
 end
 
@@ -525,7 +527,7 @@ end
   end
  def advance_search_emp
    conditions=""
-    conditions+="concat_ws(' ',first_name,last_name) like '#{params[:search][:name]}%'" unless params[:search][:name]==""
+   conditions+="concat_ws(' ',first_name,last_name) like '#{params[:search][:name]}%'" unless params[:search][:name]==""
 
        if params[:search][:gender]
       unless params[:search][:gender].eql? "All"
