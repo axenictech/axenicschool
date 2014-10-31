@@ -1,22 +1,20 @@
+
 <% if user_signed_in? %>
-<!-- container-outer -->
-<div id="container-outer">
-    <div class="container-header">
-    <nav class="navbar navbar-inverse navbar-fixed-top color-nav" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+<nav class="navbar navbar-inverse navbar-fixed-top color-nav" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
                 <a href="#menu-toggle" class="fa fa-list-ul fa-lg navbar-brand" id="menu-toggle"></a>
                 <a class="navbar-brand" href="#">Axenic School</a>
             </div>
                  
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
+            <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
@@ -65,19 +63,14 @@
                     </ul>
                 </li>
             </ul>
-    </nav>
     </div>
-</div>
-<!-- container-outer ends -->
+</nav>
 <% end %>
-
-<!-- container -->
-<div class="container">
-<div class="content">
+<div class="container-fluid">    
 <div id="wrapper">
             <!-- Sidebar Menu  -->
             <div id="hide-left">
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <div class="collapse navbar-collapse navbar-collapse">
                     <ul class="nav navbar-nav side-nav">
                         <li class="active">
                             <a href="/home/dashboard"><i class="fa fa-th"></i> <%= t('dashboard')%></a>
@@ -91,126 +84,18 @@
                         <li>
                             <a href="/users"><i class="fa fa-group"></i><%=t('manage user')%>  </a>
                         </li>
-                        <!-- <li>
-                            <a href="/newscasts"><i class="fa fa-bullhorn"></i><%=t('manage news')%></a>
-                        </li> -->
-                        
                         <li>
                             <a href="/exams"><i class="fa fa-bar-chart-o"></i> <%=t('examination')%></a>
-                            <!-- <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-bar-chart-o"></i> <%#=t('examination')%><i class="fa fa-caret-down"></i></a>
-                            <ul id="demo" class="collapse">
-                                <li>
-                                    <a href="#"><%=t('setting')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('exam managment')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('generate reports')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('report center')%></a>
-                                </li>
-                            </ul> -->
                         </li>
-                        <!-- <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-clock-o"></i> <%=t('timetable')%><i class="fa fa-caret-down"></i></a>
-                            <ul id="demo1" class="collapse">
-                                <li>
-                                    <a href="#"><%=t('create weekdays')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('set class timings')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('create timetable')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('view timetable')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('institutional   timetable')%></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-list-alt"></i><%=t('attendance')%></a>
-                        </li> -->
                         <li>
                             <a href="/setting"><i class="fa fa-cogs"></i> <%=t('settings')%></a>
-                            <!-- <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-cogs"></i> <%=t('settings')%><i class="fa fa-caret-down"></i></a>
-                            <ul id="demo2" class="collapse">
-                                <li>
-                                    <a href="#"><%=t('manage course/batch')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('student category')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('manage subject')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('general settings')%></a>
-                                </li>
-
-                            </ul> -->
                         </li>
                         <li>
                             <a href="/employees"><i class="fa fa-chain"></i> <%=t('Human Resources')%></a>
-                            <!-- <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-chain"></i> <%=t('Resources ')%><i class="fa fa-caret-down"></i></a>
-                            <ul id="demo3" class="collapse">
-                                <li>
-                                    <a href="#"><%=t('setting')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('employee managment')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('employee leave managment')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('create payslip')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('employee search')%></a>
-                                </li>  
-                                 <li>
-                                    <a href="#"><%=t('employee payslip')%></a>
-                                </li>
-                            </ul> -->
                         </li>
                         <li>
                             <a href="/finance"><i class="fa fa-rupee"></i> <%=t('finance')%></a>
-                           <!--  <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-rupee"></i> <%=t('finance')%><i class="fa fa-caret-down"></i></a>
-                            <ul id="demo4" class="collapse">
-                                <li>
-                                    <a href="#"><%=t('fees')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('category')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('transaction')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('donation')%></a>
-                                </li>
-                                 <li>
-                                    <a href="#"><%=t('automatic transaction')%></a>
-                                </li>  
-                                 <li>
-                                    <a href="#"><%=t('payslip')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('finance report')%></a>
-                                </li>
-                                <li>
-                                    <a href="#"><%=t('assets liability')%></a>
-                                </li>
-                            </ul> -->
                         </li>
-
-
                         <li>
                          <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-rupee"></i> <%=t('more')%><i class="fa fa-caret-down"></i></a>
                             <ul id="demo1" class="collapse">
@@ -232,21 +117,13 @@
                 </div>
             </div>
 <div id="page-wrapper">
-    <div class="container-fluid">
     <div id="flash"><%= render 'layouts/flash_messages'%></div>
-      
-      <%= yield %>
-
-    </div>
-    <!-- container fluid ends -->
+        <%= yield %>
 </div>
-<!-- page-wrapper ends -->
 </div>
-  <!-- wrapper ends -->
 </div>
-<!-- content ends -->
+<div id="container-footer"></div>
 </div>
-<!-- container ends -->
  <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();

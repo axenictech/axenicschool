@@ -1,4 +1,4 @@
-html {
+/*html {
     height:100%; 
     max-height:100%;
     padding:0;
@@ -14,17 +14,6 @@ body {
     max-height: 100px;
 }
 
-#container-outer{
-    width: 100%;    
-}
-
-.content{
-    height: 100%;
-    overflow: hidden;
-}
-.content-header{
-    margin-top: 20px;
-}
 #wrapper {
 
     overflow:hidden; 
@@ -234,4 +223,4 @@ background: -ms-linear-gradient(left, rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /
 background: linear-gradient(to right, rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); /* text-indent: 6-9 */
 }
-
+*/

@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -10,7 +9,9 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 20141030080907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -885,15 +886,27 @@
 
   create_table "privileges", force: true do |t|
     t.string   "name"
-    t.integer  "school_id_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "school_id"
+    t.integer  "privilege_tag_id"
+    t.integer  "priority"
+  end
+
+  add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
+  add_index "privileges", ["school_id"], name: "index_privileges_on_school_id", using: :btree
+
+  create_table "privileges_users", force: true do |t|
+    t.integer  "school_id"
+    t.integer  "user_id"
+    t.integer  "privilege_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "privileges_users", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "privileges_users", ["privilege_id"], name: "index_privileges_users_on_privilege_id", using: :btree
+  add_index "privileges_users", ["school_id"], name: "index_privileges_users_on_school_id", using: :btree
+  add_index "privileges_users", ["user_id"], name: "index_privileges_users_on_user_id", using: :btree
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
