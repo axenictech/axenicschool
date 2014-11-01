@@ -34,10 +34,7 @@
     <td class="col-2">Grade</td><td class="col-2"> <%= @employee.employee_grade.name %> </td>
     <td class="col-2"></td>
 </tr>
-<tr>
-    <td class="col-2">Job Title</td><td class="col-2"> <%= @employee.job_title %> </td>
-    <td class="col-2"></td>
-</tr>
+
 
 <tr>
     <td class="col-2">Reporting Manager</td><td class="col-2"> <%= link_to @reporting_manager.to_s, employees_profile_path(@reporting_manager)%> <%= link_to 'change', employees_change_reporting_manager_path(@employee)%> </td>
