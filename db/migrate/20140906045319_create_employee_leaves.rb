@@ -6,7 +6,6 @@ class CreateEmployeeLeaves < ActiveRecord::Migration
       t.decimal    :leave_count
       t.decimal    :leave_taken
       t.date       :reset_date
-
       t.timestamps
     end
   end

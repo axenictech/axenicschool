@@ -6,7 +6,6 @@ class CreateEmployeeAttendances < ActiveRecord::Migration
       t.references :employee_leave_type,index:true
       t.string     :reason
       t.boolean    :is_half_day
-
       t.timestamps
     end
   end
