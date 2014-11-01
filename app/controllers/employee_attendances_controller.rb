@@ -285,8 +285,7 @@ end
    def employee_leave_detail
      @employee = Employee.find_by_id(params[:format])
      @leave_count = EmployeeLeave.where(employee_id:@employee.id)
-     p "eeeeeeeeeeeeee lllllllllllllllll ccccccccccccc"
-     p @leave_count
+    
    end
 
     private
