@@ -338,20 +338,26 @@ class EmployeesController < ApplicationController
    # @user = User.find(params[:format])
     @employee=Employee.find(params[:format])
     @privilege_tags=PrivilegeTag.all
-
-    privilege=[]
-    privilege=params[:privilege]
-   
-     # privilege.each  do |p|
-         
-     #        @pri= PrivilegeUser.new(user_id:@user.id,)
-     #        @pri.save
-     #  end
-
   end
 
   def update_privilege
     @employee=Employee.find(params[:format])
+    @user = User.find_by_employee_id("#{@employee.id}")
+
+    privilege_tag=params[:privilege]
+
+    if privilege_tag.present?
+      privilege_tag.each  do |p_t|
+      
+        privileges=PrivilegeTag.find(p_t).privileges.all
+    
+        unless privileges.nil?
+          privileges.each do |p|
+          PrivilegesUser.create(user_id:@user.id,privilege_id:p.id)
+        end
+        end
+      end
+    end
     redirect_to employees_admission4_path(@employee)
   end
 
