@@ -344,7 +344,7 @@ get 'employee_attendances/update_department_leave_reset'
 get 'employee_attendances/employee_leave_reset_by_employee'
 post 'employee_attendances/search'
 get 'employee_attendances/search_emp'
-get 'employee_attendances/employee_leave_detail'
+get 'employee_attendances/employee_leave_detail/:id',to:'employee_attendances#employee_leave_detail',as:'employee_attendances_employee_leave_detail'
 
 get 'attendences/attendence_register'
 get 'attendences/select' 
@@ -490,8 +490,7 @@ get 'finance/collection_choice'
 get 'finance/defaulter_students'
 get 'finance/income_details'
 get 'finance/expense_details'
-
-
+get 'employee_attendances/employee_wise_leave_reset/:id',to:'employee_attendances#employee_wise_leave_reset',as:'employee_attendances_employee_wise_leave_reset'
 
 root 'home#dashboard'
  

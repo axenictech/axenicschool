@@ -81,20 +81,21 @@ class EmployeeAttendancesController < ApplicationController
         @date = params[:employee_attendance][:attendance_date]
          if @attendance.save
               @emp_leave = EmployeeLeave.find_by_employee_id(@attendance.employee_id)
-              unless @emp_leave.nil?
+           unless @emp_leave.nil?
               if @attendance.is_half_day
               leave_taken=@emp_leave.leave_taken.to_f+(0.5)
               @emp_leave.update(leave_taken: leave_taken)
               else
               leave_taken=@emp_leave.leave_taken.to_f+(1)
               @emp_leave.update(leave_taken: leave_taken)
-          end
-          end
+           end
+           end 
              @deparment=@employee.employee_department
              @employees=@deparment.employees.all    
              @today = @date.to_date
              @start_date = @today.beginning_of_month
              @end_date = @today.end_of_month    
+         
         end  
     end
 
@@ -262,7 +263,7 @@ end
     end
 end
      redirect_to employee_attendances_employee_leave_reset_by_department_path
-               flash[:notice] = 'Department Wise Leave Reset Successfull'
+          flash[:notice] = 'Department Wise Leave Reset Successfull'
   end
 
    def search_emp
@@ -283,10 +284,25 @@ end
    end
 
    def employee_leave_detail
-     @employee = Employee.find_by_id(params[:format])
+     @employee = Employee.find_by_id(params[:id])
+ 
      @leave_count = EmployeeLeave.where(employee_id:@employee.id)
-    
+  
    end
+
+   def employee_wise_leave_reset
+
+    @employee = Employee.find_by_id(params[:id])
+    @leave_count = EmployeeLeave.where(employee_id:@employee.id)
+    @leave_count.each do |e|
+      @leave_type = EmployeeLeaveType.find_by_id(e.employee_leave_type_id)
+      default_leave_count = @leave_type.max_leave_count
+        available_leave = default_leave_count.to_f
+         leave_taken = 0
+           e.update(:leave_taken => leave_taken,:leave_count => available_leave)
+      end
+    redirect_to employee_attendances_employee_leave_detail_path
+  end
 
     private
     def params_leave
