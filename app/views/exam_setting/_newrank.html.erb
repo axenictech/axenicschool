@@ -1,12 +1,24 @@
+<%@index=0.to_i%>
 <%@rank_levels.each do |r| %>
         <tr>
+           <% @priority={"index"=>@index}%>
             <td class="col-2"><%= r.name %></td>
+                 <% unless r==@rank_levels.last%>
+                 <td><%=link_to '▼',exam_setting_decrease_priority_path(r.course,r,@priority),remote:true%></td>
+                 <%else%>
+                 <td></td>
+                 <%end%>
+                 <% unless r==@rank_levels.first%>
+                 <td><%=link_to '▲',exam_setting_increase_priority_path(r.course,r,@priority),remote:true%></td>
+                 <%else%>
+                 <td></td>
+                 <%end%>
                  <td><%=link_to 'Edit', course_ranking_level_path(r.course,r),remote: true%></td>
             <td><%= link_to 'Delete', exam_setting_destroyRank_path(r),remote:true,
                     method: :delete, data: { confirm: "Are you sure to delete"} %></td>
                 
           </tr>   
-            
+          <%@index+=1%>  
       <% end %>
 
      
