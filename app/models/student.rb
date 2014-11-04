@@ -7,11 +7,10 @@ class Student < ActiveRecord::Base
   has_one    :student_previous_data
   has_many   :student_previous_subject_marks
   has_many   :guardians
+  has_and_belongs_to_many :fee_collection_particulars
+  has_and_belongs_to_many :fee_collection_discounts
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-
-  # has_many   :finance_transactions, dependent: :destroy
-  # has_many   :fee_category ,:class_name => "FinanceFeeCategory", dependent: :destroy
 
  validates :admission_no, presence: true
   validates :admission_date, presence: true

@@ -1,6 +1,0 @@
-<% @categories=FinanceFeeCategory.all%>
-<%unless @categories.nil?%>
-    <% @categories.each do |c|%>
-    <div><%= check_box_tag "fee_category[]", c.id,false,class: 'check_box'%>&nbsp;&nbsp;<%= c.name%></div>
-    <%end%>
-<%end%>

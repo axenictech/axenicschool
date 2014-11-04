@@ -7,7 +7,7 @@ class CreateFinanceFeeParticulars < ActiveRecord::Migration
       t.references  :finance_fee_category,index:true
       t.references  :category,index:true
       t.string      :admission_no
-      t.references  :student,index:true
+      t.references  :batch,index:true
       t.boolean     :is_deleted, :default => false
       
       t.timestamps

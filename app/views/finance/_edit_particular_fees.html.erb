@@ -6,7 +6,7 @@
 
 <div class="modal-body">
 <ul class="errors"></ul>
-    <%= form_for @fee,url:{action:'update_particular_fee',master_id:@master_category,id:@fee.id},method: :patch,remote: true do |f|%>
+    <%= form_for @fee,url:{action:'update_particular_fee',batch_id:@batch.id,master_id:@master_category,id:@fee.id},method: :patch,remote: true do |f|%>
     <div class="row">
         <div class="col-md-3"><%= f.label :name %></div>
         <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
