@@ -1,38 +1,25 @@
-<% if @courses.empty? %>
- <h4 align="center">No Record Found </h4>
-   <% else %>
- <table align="center" class="table table-hover table-bordered" style="width:800px">
-				<tr class="tr-head"><th colspan="3">Course Name</th>
-        </tr>
-				
-			<tbody>
-				<% @courses.each do |c|%>
-	
-				<tr>
-				<td class="col-2"><%= link_to c.course_name+"  "+c.section_name,course_path(c)%></td>
-				<td><%= link_to 'Edit' ,edit_course_path(c),remote:true%></td>
-				<td><%= link_to 'Delete' ,course_path(c),method: :delete, data:{confirm:"Are You sure to delete Course '#{c.course_name}' ?"}%></td>	
-				
-				</tr>
-				<%end%>
-        	</tbody>
-        	</table>
-  <%end%>
+<div class="row">
+  <div class="col-sm-4 pull-right">
+      <button class="button btn-primary "><%= link_to 'New', new_course_path %>
+      </button>
+  </div>
+</div>
+
 
 
   <div class="row">
-                <div class="col-sm-12 ">
-                  <div class="box bordered-box green-border" style="margin-bottom:0;">
-                    <div class="box-header green-background">
-                      <div class="title"><%= t('courses details')%></div>
-                      <div class="actions">
-                        <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
-                        </a>
-                        
-                        <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
-                        </a>
-                      </div>
-                    </div>
+    <div class="col-sm-12 ">
+      <div class="box bordered-box green-border" style="margin-bottom:0;">
+        <div class="box-header green-background">
+          <div class="title"><%= t('courses details')%></div>
+          <div class="actions">
+            <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+            </a>
+            
+            <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+            </a>
+          </div>
+        </div>
 <div class="box-content box-no-padding">
   <div class="responsive-table">
     <div class="scrollable-area">
@@ -40,106 +27,47 @@
       <div class="row datatables-top">
       <div class="col-sm-4">
 	      <div id="DataTables_Table_0_length" class="dataTables_length">
-	      <label>
-	      <select size="1" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0">
-	      <option value="10" selected="selected">10</option>
-	      <option value="25">25</option>
-	      <option value="50">50</option>
-	      <option value="100">100</option>
-	      </select> records per page</label>
+	      
 	      </div>
       </div>
       
-
-      <div class="col-sm-4 ">
-	      <div class="dataTables_filter" id="DataTables_Table_0_filter">
-	      <label>Search: <input type="text" aria-controls="DataTables_Table_0" class="form-control input-sm" placeholder="Search... " style="width: 200px;">
-	      </label>
-	      </div>
-	   </div>
-
-	   <div class="col-sm-4 pull-right">
-      <button class="button btn-primary "><%= link_to 'New', new_course_path(@course) %>
-      </button>
-      </div>
+	   
 
       </div>
       <table class="data-table table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+        <% if @courses.empty? %>
+         <h4 align="center">No Record Found </h4>
+           <% else %>
         <thead>
           <tr role="row">
           <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
               Name
             : activate to sort column descending" style="width: 297px;">
-              Name
+              Course Name
             </th>
-            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="
-              E-mail
-            : activate to sort column ascending" style="width: 353px;">
-              E-mail
-            </th>
-            <!-- <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="
-              Status
-            : activate to sort column ascending" style="width: 157px;">
-              Status
-            </th>
- -->            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 125px;">Actions</th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 125px;">Actions</th>
 
             </tr>
         </thead>
         
       <tbody role="alert" aria-live="polite" aria-relevant="all">
-      <tr class="odd">
-            <td class=" sorting_1">Aylin Sauer</td>
-            <td class=" ">sylvia@gmail.com</td>
-            <td class=" ">
-              <div class="text-right">
-                <a class="btn btn-warning btn-xs" href="#">
-                  <i class="icon-pencil"></i><%= t('edit')%>
-                </a>
-                <a class="btn btn-danger btn-xs" href="#">
-                  <i class="icon-remove"></i></i><%= t('delete')%>
-                </a>
-                
-              </div>
-              
-            </td>
-          </tr><tr class="even">
-            <td class=" sorting_1">Bradford Senger</td>
-            <td class=" ">efrain@yahoo.com</td>
-           <td class=" ">
-              <div class="text-right">
-                <a class="btn btn-warning btn-xs" href="#">
-                  <i class="icon-pencil"></i><%= t('edit')%>
-                </a>
-                <a class="btn btn-danger btn-xs" href="#">
-                  <i class="icon-remove"></i></i><%= t('delete')%>
-                </a>
-                
-              </div>
-              
-            </td>
-
-          </tr>
-          <tr class="odd">
-            <td class=" sorting_1">Hosea Hackett</td>
-            <td class=" ">keara@hotmail.com</td>
-            <td class=" ">
-              <div class="text-right">
-                <a class="btn btn-warning btn-xs" href="#">
-                  <i class="icon-pencil"></i><%= t('edit')%>
-                </a>
-                <a class="btn btn-danger btn-xs" href="#">
-                  <i class="icon-remove"></i></i><%= t('delete')%>
-                </a>
-                
-              </div>
-              
-            </td>
-
-          </tr>
+    <% @courses.each do |c|%>
+      <tr class="<%= cycle('odd', 'even')%>">
+        <td class=" sorting_1"><%= link_to c.course_name+"  "+c.section_name,course_path(c)%></td>
+        <td class=" ">
+          <div class="text-right">
+          <i class="icon-pencil"></i>
+            <%= link_to 'Edit' ,edit_course_path(c),remote:true,class: "btn btn-warning btn-xs"%>
+            <i class="icon-remove"></i>
+            <%= link_to 'Delete' ,course_path(c),method: :delete, data:{confirm:"Are You sure to delete Course '#{c.course_name}' ?"},class: "btn btn-danger btn-xs"%>
+          </div>              
+        </td>
+      </tr>
+    <%end%>
           </tbody>
+        <%end%>
           </table>
-          <div class="row datatables-bottom"><div class="col-sm-6"><div class="dataTables_info" id="DataTables_Table_0_info">Showing 1 to 10 of 20 entries</div></div><div class="col-sm-6 text-right"><div class="dataTables_paginate paging_bootstrap"><ul class="pagination pagination-sm"><li class="prev disabled"><a href="#">← Previous</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li class="next"><a href="#">Next → </a></li></ul></div></div></div></div>
+          <div class="row datatables-bottom"><div class="col-sm-6"></div><div class="col-sm-6 text-right"><div class="dataTables_paginate paging_bootstrap"><ul class="pagination pagination-sm"><li class="prev disabled"><a href="#">← Previous</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li class="next"><a href="#">Next → </a></li></ul></div></div></div></div>
     </div>
   </div>
 </div>

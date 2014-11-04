@@ -5603,7 +5603,8 @@ button.close {
   left: 0;
   z-index: 1060;
   display: none;
-  max-width: 276px;
+  width: 200px;
+  max-width: 200px;
   padding: 1px;
   text-align: left;
   white-space: normal;
@@ -5631,15 +5632,17 @@ button.close {
 .popover-title {
   padding: 8px 14px;
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: normal;
   line-height: 18px;
-  background-color: #f7f7f7;
+  background-color: #EB6C69;
   border-bottom: 1px solid #ebebeb;
   border-radius: 5px 5px 0 0;
 }
 .popover-content {
   padding: 9px 14px;
+  font-style: italic;
+  font-size: 13px;
 }
 .popover > .arrow,
 .popover > .arrow:after {
