@@ -2717,7 +2717,7 @@ body {
   .responsive-table .scrollable-area {
     width: 100%;
     overflow: scroll;
-    overflow-y: hidden; }
+    overflow: hidden; }
   .responsive-table table td {
     position: relative;
     white-space: nowrap;
@@ -4731,7 +4731,8 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
   color: #9564e2 !important; }
 
 .text-muted {
-  color: #999999 !important; }
+  color: #999999 !important;
+  font-style: italic; }
 
 .text-contrast {
   color: #f34541 !important; }
@@ -5164,3 +5165,5 @@ pre {
 
 .select2-results .select2-highlighted {
   background-color: #f34541; }
+
+
