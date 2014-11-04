@@ -48,30 +48,7 @@ def select_subject
       flash[:alert]="Warning : Max hours per day exceeded"
   end
 
-#   # p "----------------------------------------------------------------"
-# # overlap=TimeTableEntry.where("time_table_id= AND weekday_id = #{@weekday} AND class_timing_id = #{@class_timing_id} AND employee_id = #{ @teacher} AND  batch_id=#{@batch.id} 
-#            # ")
-      
-#       # overlap=TimeTableEntry.where("time_table_id=246 AND weekday_id=48 AND class_timing_id=37 AND employee_id=40").first
 
-#     # overlap = TimeTableEntry.where(
-#     #     :conditions => "time_table_id=#{@time} AND weekday_id = #{@weekday} AND class_timing_id = #{@class_timing_id} AND time_table_entries.employee_id = #{@teacher}", \
-#     #       :joins=>"INNER JOIN subjects ON time_table_entries.subject_id =  @subject.id INNER JOIN batches ON subjects.batch_id = @batch.id")
-  
-#    # p overlap=TimeTableEntry.where("time_table_id=#{@time} AND weekday_id=#{@weekday} AND class_timing_id=#{@class_timing_id} AND employee_id=#{@teacher}").first
-
-#         p "time_table_id=246 AND weekday_id=48 AND class_timing_id=37 AND employee_id=40"
-#         p "time_table_id=#{@time} AND weekday_id=#{@weekday} AND class_timing_id=#{@class_timing_id} AND employee_id=#{@teacher}"
-#         # overlap=TimeTableEntry.where("time_table_id=246 AND weekday_id=48 AND class_timing_id=37 AND employee_id=40").first
-#       p "jjjjjjjjjjjjjjjjjjjjjjjjjjjjk"
-#       p overlap=TimeTableEntry.where("time_table_id=#{@time} AND weekday_id=#{@weekday}  AND class_timing_id=#{@class_timing_id} AND employee_id=#{@teacher}").first
-
-
-#         if overlap.nil?
-#          @assign_time=TimeTableEntry.create(batch_id:@batch.id,class_timing_id:@class_timing_id,weekday_id:@weekday,employee_id:@teacher,subject_id:@subject.id,time_table_id:@time)       
-#         else
-#           flash[:alert]="over"   
-#         end
     @time=params[:time_table_id]
     @subjects = @batch.subjects.all
     @class_timing=@batch.class_timings.where(:is_break=>false)

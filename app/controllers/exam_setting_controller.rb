@@ -77,9 +77,8 @@ class ExamSettingController < ApplicationController
     def decrease_priority
         @course=Course.find(params[:course_id])
         @rank_levels=@course.ranking_levels.order('prioriy ASC')
-          @rank_lev1=@course.ranking_levels.find(params[:id]) 
-        p "cccccccccccccccccccccccccc"
-        p selected=params[:index].to_i+1.to_i
+        @rank_lev1=@course.ranking_levels.find(params[:id]) 
+        selected=params[:index].to_i+1.to_i
          next_pri=0.to_i
          temp=nil
          @rank_levels.each do |p|
