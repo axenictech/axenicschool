@@ -26,15 +26,19 @@
 </table>
 
 <div class="sel-list">
-            <%= t('select') %>: <%= link_to 'all','#',{onclick:"$('.check_box').prop('checked', true);"}%>,
-            <%= link_to 'none','#',{onclick:"$('.check_box').prop('checked', false);"}%>
+            <%= t('select') %>: <%= link_to 'all','#',{onclick:"
+              event.preventDefault();
+              $('.check_box').prop('checked', true);"}%>,
+            <%= link_to 'none','#',{onclick:"
+              event.preventDefault();
+              $('.check_box').prop('checked', false);"}%>
           </div>
 <table align="center" class="table table-hover" style="width:100%">
     <tbody>
-     <%@privilege_tags.each do |privilege|%>
+     <%@privilege_tags.each do |p_t|%>
      <tr>
-          <td><%= check_box_tag "privilege[]",false,class: "check_box"%></td>
-          <td><%=privilege.name_tag%></td>
+          <td><%= check_box_tag "privilege[]",p_t.id,false,class: "check_box"%></td>
+          <td><%=p_t.name_tag%></td>
      </tr>
      <%end%>
      </tbody>

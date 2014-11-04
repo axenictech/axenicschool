@@ -15,7 +15,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-            <%= link_to "Setting", 'employees/settings',style: 'color:black' %>
+            <%= link_to "Setting",employees_settings_path,style: 'color:black' %>
           </div>
           <div class="panel-body" style="height:70px">
          HR Setting.
@@ -26,7 +26,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-          <%= link_to "Employee Management",'employees/employee_management',style: 'color:black' %>
+          <%= link_to "Employee Management",employees_employee_management_path,style: 'color:black' %>
           </div>
           <div class="panel-body" style="height:70px">
            Manage All Employee.
@@ -69,7 +69,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-            <%= link_to "Search Employee", 'employees/search_employee',style: 'color:black' %>     
+            <%= link_to "Search Employee",employees_search_employee_path,style: 'color:black' %>     
          </div>
           <div class="panel-body" style="height:70px">
            Saerch for Employee.
@@ -80,9 +80,18 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-          <%= link_to "Employee payslip",'employees/department_payslip',style: 'color:black'%></div>
+          <%= link_to "Employee payslip",employees_department_payslip_path,style: 'color:black'%></div>
           <div class="panel-body" style="height:70px">
             View Department wise slip.
+          </div>
+        </div>
+
+        <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Create payslip",employees_payslip_path ,style: 'color:black'%></div>
+          <div class="panel-body" style="height:70px">
+            Create employee monthly paysleep.
           </div>
         </div>
 
@@ -92,10 +101,6 @@
     </div>
 
  </div>  
-      <!-- <div class="link-box">
-        <div class="link-heading"><%#= link_to "Create payslip",'employees/payslip' %></div>
-        <div class="link-descr">Create employee monthly paysleep.</div>
-      </div>
- -->
+      
 
      

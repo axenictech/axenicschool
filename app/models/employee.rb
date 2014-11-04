@@ -16,7 +16,7 @@ class Employee < ActiveRecord::Base
   has_many    :employee_additional_details
   has_many    :apply_leaves
   has_many    :monthly_payslips
-  has_many    :employee_salary_structures
+  has_many    :employee_salery_structures
   has_many    :finance_transactions, :as => :payee
   has_many    :employee_attendances
 
@@ -33,8 +33,8 @@ validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ w
   validates :employee_grade, presence: true
   validates :qualification,length:{minimum:1,maximum:30},allow_blank: true
   validates :experience_detail,length:{minimum:1,maximum:30},allow_blank: true
-  validates :father_name,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z_""-]+\Z/,message:"allows only letters"},allow_blank: true
-  validates :mother_name,length:{minimum:1,maximum:20},format:{with:/\A[a-zA-Z ""-]+\Z/,message:"allows only letters"} ,allow_blank: true
+  validates :father_name,length:{minimum:1,maximum:20},format:{with:/\A[a-z A-Z_" "-]+\Z/,message:"allows only letters"},allow_blank: true
+  validates :mother_name,length:{minimum:1,maximum:20},format:{with:/\A[a-z A-Z " "-]+\Z/,message:"allows only letters"} ,allow_blank: true
   
   validates :home_address_line1,presence: true,length:{:in=> 1..30},on: :update
   validates :home_address_line2,length:{:in=>1..30},allow_blank: true
@@ -60,7 +60,7 @@ validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ w
                    length:{minimum:10,maximum:10},allow_blank:true 
   validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
   validates :fax,numericality:{only_integer:true},
-                    length:{minimum:10,maximum:10},allow_blank:true
+                    length:{minimum:6,maximum:11},allow_blank:true
  validates :home_phone,numericality:{only_integer:true},
                     length:{minimum:6,maximum:11},allow_blank:true
 

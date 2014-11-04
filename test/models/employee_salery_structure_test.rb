@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PrivilegesUsersTest < ActiveSupport::TestCase
+class EmployeeSaleryStructureTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
