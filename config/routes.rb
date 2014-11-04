@@ -491,7 +491,8 @@ get 'finance/defaulter_students'
 get 'finance/income_details'
 get 'finance/expense_details'
 get 'employee_attendances/employee_wise_leave_reset/:id',to:'employee_attendances#employee_wise_leave_reset',as:'employee_attendances_employee_wise_leave_reset'
-
+get 'exam_setting/:course_id/increase_priority/:id',to:'exam_setting#increase_priority',as:'exam_setting_increase_priority'
+get 'exam_setting/:course_id/decrease_priority/:id',to:'exam_setting#decrease_priority',as:'exam_setting_decrease_priority'
 root 'home#dashboard'
  
 resources :home
