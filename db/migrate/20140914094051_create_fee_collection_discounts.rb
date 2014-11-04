@@ -3,10 +3,12 @@ class CreateFeeCollectionDiscounts < ActiveRecord::Migration
     create_table :fee_collection_discounts do |t|
       t.string     :type
       t.string     :name
-      t.references :receiver,index:true
-      t.references :finance_fee_collection,index:true
       t.decimal    :discount
-      t.boolean    :is_amount, :default=> false
+      t.references :finance_fee_collection,index:true
+      t.references  :category,index:true
+      t.string      :admission_no
+      t.references  :batch,index:true
+      t.boolean     :is_deleted, :default => false
 
       t.timestamps
     end

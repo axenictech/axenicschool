@@ -16,7 +16,7 @@
         <td><%= 'leave_types'%></td>
         <td><%= 'available_leave'%></td>
         <td><%= 'leave_taken'%></td>
-        <td><%= 'last_reset_date'%></td>
+         <td><%= 'last_reset_date' %></td>
       </tr>
       <% @leave_count.each do |e| %>
         <%  leave_type =EmployeeLeaveType.find_by_id(e.employee_leave_type_id)%>
@@ -25,13 +25,18 @@
             <td class="col-3"><%=leave_type.name %></td>
             <td class="col-3"><%=e.leave_count %></td>
             <td class="col-3"><%=e.leave_taken %></td>
-            <%unless e.reset_date.nil? %>
+             <%unless e.reset_date.nil? %>
               <td class="col-3"><%= I18n.l(e.reset_date, :format=>"%d / %m / %Y") %></td>
-      
-          </tr>
+            <%else%>
+              <td class="col-3">-</td>
+            <%end%>
+
+         </tr>
         <%end%>
-      <% end %>
+     
     </table>
+
+     <div><%= link_to "►Reset_Leave",employee_attendances_employee_wise_leave_reset_path(id:@employee.id),class: "btn btn-primary" %></div>
     <div>
  
     </div>

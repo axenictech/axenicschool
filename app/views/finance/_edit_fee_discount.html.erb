@@ -6,7 +6,7 @@
 
 <div class="modal-body">
 <ul class="errors"></ul>
-    <%= form_for @discount,url:{action:'update_fee_discount',master_id:@master_category.id,id:@discount.id},method: :patch,remote: true do |f|%>
+    <%= form_for @discount,url:{action:'update_fee_discount',batch_id:@batch.id,master_id:@master_category.id,id:@discount.id},method: :patch,remote: true do |f|%>
 
         <div class="row">
             <div class="col-md-1"></div>

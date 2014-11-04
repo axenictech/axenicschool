@@ -6,7 +6,7 @@
 
 <div class="modal-body">
 <ul class="errors"></ul>
-    <%= form_for @fee,url:{action:'create_particular_fee',id:@master_category},remote: true do |f|%>
+    <%= form_for @fee,url:{action:'create_particular_fee',id:@master_category,batch_id:@batch.id},remote: true do |f|%>
     <div class="row">
         <div class="col-md-3"><%= f.label :name %></div>
         <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
@@ -18,10 +18,8 @@
       <div class="row">
           <div class="col-md-3"><%= f.label :create_using %></div>
           <div class="col-md-3">
-          <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('student_admission_no',#{@master_category.id},function(response){
-            });"}%><%='Admission no'%><br/>
-          <%=radio_button_tag :mode,"category",'',{onclick:"$.get('student_category',#{@master_category.id},function(response){
-            });"}%><%= 'Student Category'%><br/>
+          <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('student_admission_no',#{@master_category.id},function(response){});"}%><%='Admission no'%><br/>
+          <%=radio_button_tag :mode,"category",'',{onclick:"$.get('student_category',#{@master_category.id},function(response){});"}%><%= 'Student Category'%><br/>
           <%=radio_button_tag :mode,"all",'',{onclick:"$('#hidden').html('')"}%><%='All'%></div>
       </div><br/>
       <div id="hidden"></div><br/>

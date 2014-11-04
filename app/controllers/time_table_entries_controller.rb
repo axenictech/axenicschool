@@ -3,7 +3,7 @@ class TimeTableEntriesController < ApplicationController
  def index
 
    @time=TimeTable.find(params[:format])
-   flash[:notice]="Time table structure created from #{@time.start_date} - #{@time.end_date}"
+   flash[:notice]="Time table structure created from #{@time.start_date.strftime("%B %Y")} - #{@time.end_date}"
    @batches=Batch.all
    @sub=params[:sub_id]
    @times=params[:time_id]
@@ -21,16 +21,57 @@ def select_subject
  end
  def assign_time
     @class_timing_id=params[:timing_id]
-    @weekday=params[:weekday_id]
-    @teacher=params[:teacher]
-    @time=params[:time_table_id]
-    @subject=Subject.find(params[:subject_id])
-   
-    @batch=@subject.batch
-
-       
-            @assign_time=TimeTableEntry.create(batch_id:@batch.id,class_timing_id:@class_timing_id,weekday_id:@weekday,employee_id:@teacher,subject_id:@subject.id,time_table_id:@time)
   
+    @weekday=params[:weekday_id]
+  
+    @teacher=params[:teacher]
+   
+    @time=params[:time_table_id]
+   
+    @subject=Subject.find(params[:subject_id])
+    @em=Employee.find(params[:teacher])
+    @batch=@subject.batch
+   
+
+ unless TimeTableEntry.where(:employee_id=>@em.id,:weekday_id=>@weekday,:time_table_id=>@time).count >= @em.employee_grade.max_hours_day 
+    if TimeTableEntry.where(:employee_id=>@em.id,:time_table_id=>@time).count < @em.employee_grade.max_hours_week
+          
+     if TimeTableEntry.where(:subject_id=>@subject.id,:time_table_id=>@time).count >= @subject.max_weekly_classes
+          flash[:alert]="Warning : Weekly subject limit reached"
+      else
+        @assign_time=TimeTableEntry.create(batch_id:@batch.id,class_timing_id:@class_timing_id,weekday_id:@weekday,employee_id:@teacher,subject_id:@subject.id,time_table_id:@time)
+     end
+      else
+        flash[:alert]="Warning : Max hours per week exceeded" 
+   end
+  else
+      flash[:alert]="Warning : Max hours per day exceeded"
+  end
+
+#   # p "----------------------------------------------------------------"
+# # overlap=TimeTableEntry.where("time_table_id= AND weekday_id = #{@weekday} AND class_timing_id = #{@class_timing_id} AND employee_id = #{ @teacher} AND  batch_id=#{@batch.id} 
+#            # ")
+      
+#       # overlap=TimeTableEntry.where("time_table_id=246 AND weekday_id=48 AND class_timing_id=37 AND employee_id=40").first
+
+#     # overlap = TimeTableEntry.where(
+#     #     :conditions => "time_table_id=#{@time} AND weekday_id = #{@weekday} AND class_timing_id = #{@class_timing_id} AND time_table_entries.employee_id = #{@teacher}", \
+#     #       :joins=>"INNER JOIN subjects ON time_table_entries.subject_id =  @subject.id INNER JOIN batches ON subjects.batch_id = @batch.id")
+  
+#    # p overlap=TimeTableEntry.where("time_table_id=#{@time} AND weekday_id=#{@weekday} AND class_timing_id=#{@class_timing_id} AND employee_id=#{@teacher}").first
+
+#         p "time_table_id=246 AND weekday_id=48 AND class_timing_id=37 AND employee_id=40"
+#         p "time_table_id=#{@time} AND weekday_id=#{@weekday} AND class_timing_id=#{@class_timing_id} AND employee_id=#{@teacher}"
+#         # overlap=TimeTableEntry.where("time_table_id=246 AND weekday_id=48 AND class_timing_id=37 AND employee_id=40").first
+#       p "jjjjjjjjjjjjjjjjjjjjjjjjjjjjk"
+#       p overlap=TimeTableEntry.where("time_table_id=#{@time} AND weekday_id=#{@weekday}  AND class_timing_id=#{@class_timing_id} AND employee_id=#{@teacher}").first
+
+
+#         if overlap.nil?
+#          @assign_time=TimeTableEntry.create(batch_id:@batch.id,class_timing_id:@class_timing_id,weekday_id:@weekday,employee_id:@teacher,subject_id:@subject.id,time_table_id:@time)       
+#         else
+#           flash[:alert]="over"   
+#         end
     @time=params[:time_table_id]
     @subjects = @batch.subjects.all
     @class_timing=@batch.class_timings.where(:is_break=>false)

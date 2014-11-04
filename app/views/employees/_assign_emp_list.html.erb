@@ -1,12 +1,16 @@
 <h2>Assigned Employee</h2>
 
+<%if @assigned_employees.nil? ||@assigned_employees.empty?%>
+		<h3>No employee assigned yet </h3>
+<%else%>
 <table class="tabel" style="width:400px">
 	<%@assigned_employees.each do |emp|%>
 	<% @employee = Employee.find(emp.employee_id) %>
 	<tr>
 		<td><%=@employee.first_name%></td>
-		<td><%= link_to "Delete",employees_remove_employee_path(@employee,@subject),method: :delete,data: { confirm: 'Are you sure?' } ,remote:true%></td>
+		<td><%= link_to "Remove",employees_remove_employee_path(@employee,@subject,department_id:@department.id),method: :delete,data: { confirm: 'Are you sure?' } ,remote:true%></td>
 	</tr>
+	<%end%>
 	<%end%>
 </table>
 
