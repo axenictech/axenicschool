@@ -8,7 +8,7 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li style="width:150px"><%= link_to 'Create Particulars',finance_new_particular_fee_path(@master_category),remote:true%></li>
+    <li style="width:150px"><%= link_to 'Create Particulars',finance_new_particular_fee_path(@master_category,batch_id:@batch.id),remote:true%></li>
   </ul>
 </div>
 <div id="page-yield">

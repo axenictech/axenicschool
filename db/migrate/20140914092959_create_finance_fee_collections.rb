@@ -5,7 +5,7 @@ class CreateFinanceFeeCollections < ActiveRecord::Migration
       t.date       :start_date
       t.date       :end_date
       t.date       :due_date
-      t.references :fee_category,index:true
+      t.references :finance_fee_category,index:true
       t.references :batch,index:true
       t.boolean    :is_deleted, :default => false
       

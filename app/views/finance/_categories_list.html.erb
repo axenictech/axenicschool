@@ -1,5 +1,6 @@
 <div class="label-field-pair">
   <%= label_tag :select_fees_category %>
       <div class="text-input-bg">
-      <%= select :category,:id,  @categories.collect {|c| [c.name,c.id]},{prompt:true},{onchange:"var a={id: $('#category_id').val()};$.get('discount_view',a,function(response){});"}%>
+      <%= select :category,:id,  @categories.collect {|c| [c.name,c.id]},{prompt:true},{onchange:"var a={id: $('#category_id').val(),batch_id:#{@batch.id}};$.get('discount_view',a,function(response){});"}%>
 </div></div>
+<div id="list"></div>

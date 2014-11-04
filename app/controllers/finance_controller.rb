@@ -455,45 +455,54 @@ class FinanceController < ApplicationController
 
   def new_fees_particular
     @fee=FinanceFeeParticular.new
+    @categories=FinanceFeeCategory.all
+  end
+
+  def category_batch
+    @master_category=FinanceFeeCategory.find(params[:id])
+    @batches=@master_category.batches
   end
 
   def create_fees_particular
-    categories=params[:fee_category]
-    if categories.present?
-      categories.each do |c|
-        master_category=FinanceFeeCategory.find(c)
-        batches=master_category.batches.all
-        if batches.present?
-          batches.each do |b|
-            if params[:mode]=="admission_no"
-              students=b.students.where(admission_no:params[:admission_no])
-            elsif params[:mode]=="category"
-              students=b.students.where(category:params[:category][:id])
-            else
-              students=b.students.all
-            end
-            if students.present?
-              students.each do |s|
-                params[:finance_fee_particular][:category_id]=s.category_id
-                params[:finance_fee_particular][:admission_no]=s.admission_no
-                params[:finance_fee_particular][:student_id]=s.id
-                @fee_particular=master_category.finance_fee_particulars.new(fee_particular_params)
-                @fee_particular.save
-              end
-            end
+    batches=params[:batches]
+    @categories=FinanceFeeCategory.all
+    @fee=FinanceFeeParticular.new(fee_particular_params)
+    error=false
+      if batches.present?
+        batches.each do |b|
+          if params[:mode]=="admission_no"
+            @fee.admission_no=params[:admission_no]
+            @fee.batch_id=b
+          elsif params[:mode]=="category"
+            @fee.category_id=params[:category][:id]
+            @fee.batch_id=b
+          else
+            @fee.batch_id=b
+          end
+          unless @fee.save
+            error=true
           end
         end
+        unless error==true
+          flash[:notice]="Finance fee particular created successfully"
+          redirect_to finance_master_fees_path
+        else
+          render 'new_fees_particular'
+        end
+      else
+        flash[:alert]="Please select batch..."
+        render 'new_fees_particular'
       end
-    end
-    redirect_to finance_master_fees_path
   end
 
   def master_category_particular
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:id])
-    @particular_fees=@master_category.finance_fee_particulars.all
+    @particular_fees=@master_category.finance_fee_particulars.where(batch_id:@batch.id)
   end
 
   def new_particular_fee
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:id])
     @fee=FinanceFeeParticular.new
   end
@@ -509,48 +518,48 @@ class FinanceController < ApplicationController
   end
 
   def create_particular_fee
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:id])
-    @particular_fees=@master_category.finance_fee_particulars.all
-    batches=@master_category.batches.all
-        if batches.present?
-          batches.each do |b|
-            if params[:mode]=="admission_no"
-              students=b.students.where(admission_no:params[:admission_no])
-            elsif params[:mode]=="category"
-              students=b.students.where(category:params[:category][:id])
-            else
-              students=b.students.all
-            end
-            if students.present?
-              students.each do |s|
-                params[:finance_fee_particular][:category_id]=s.category_id
-                params[:finance_fee_particular][:admission_no]=s.admission_no
-                params[:finance_fee_particular][:student_id]=s.id
-                @fee_particular=@master_category.finance_fee_particulars.new(fee_particular_params)
-                @fee_particular.save
-              end
-            end
-          end
-        end
+    @particular_fees=@master_category.finance_fee_particulars.where(batch_id:@batch.id)
+    @fee=@master_category.finance_fee_particulars.new(fee_particular_params)
+      if params[:mode]=="admission_no"
+          @fee.admission_no=params[:admission_no]
+          @fee.batch_id=@batch.id
+      elsif params[:mode]=="category"
+            @fee.category_id=params[:category][:id]
+            @fee.batch_id=@batch.id
+      else
+            @fee.batch_id=@batch.id
+      end
+    if @fee.save
+      flash[:notice]="Finance fee particulars created successfully"
+    end
   end
 
   def edit_particular_fee
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:master_id])
     @fee=@master_category.finance_fee_particulars.find(params[:id])
   end
 
   def update_particular_fee
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:master_id])
-    @particular_fees=@master_category.finance_fee_particulars.all
+    @particular_fees=@master_category.finance_fee_particulars.where(batch_id:@batch.id)
     @fee=@master_category.finance_fee_particulars.find(params[:id])
-    @fee.update(fee_particular_params)
+    if @fee.update(fee_particular_params)
+      flash[:notice]="Finance fee particulars updated successfully"
+    end
   end
 
   def delete_particular_fee
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:master_id])
-    @particular_fees=@master_category.finance_fee_particulars.all
+    @particular_fees=@master_category.finance_fee_particulars.where(batch_id:@batch.id)
     @fee=@master_category.finance_fee_particulars.find(params[:id])
-    @fee.destroy
+    if @fee.destroy
+      flash[:notice]="Finance fee particulars deleted successfully"
+    end      
   end
 
   def new_fee_discount
@@ -563,16 +572,35 @@ class FinanceController < ApplicationController
   end
 
   def create_fee_discount
-    unless params[:fee_discount][:type]=="Batch"
-      if params[:fee_discount][:type]=="Student"
-         params[:fee_discount][:receiver]=params[:admission_no]
-      else 
-        params[:fee_discount][:receiver]=params[:category][:id]
-      end
-    end
+    batches=params[:batches]
+    @categories=FinanceFeeCategory.all
     @discount=FeeDiscount.new(fee_discount_params)
-    @discount.save
-    redirect_to finance_new_fee_discount_path
+    error=false
+      if batches.present?
+        batches.each do |b|
+          if @discount.type=="Student"
+            @discount.admission_no=params[:admission_no]
+            @discount.batch_id=b
+          elsif @discount.type=="Student Category"
+            @discount.category_id=params[:category][:id]
+            @discount.batch_id=b
+          else
+            @discount.batch_id=b
+          end
+          unless @discount.save
+            error=true
+          end
+        end
+        unless error==true
+          flash[:notice]="Finance fee discount created successfully"
+          redirect_to finance_new_fee_discount_path
+        else
+          render 'new_fee_discount'
+        end
+      else
+        flash[:alert]="Please select batch..."
+        render 'new_fee_discount'
+      end
   end
 
   def fee_category
@@ -581,27 +609,35 @@ class FinanceController < ApplicationController
   end
 
   def discount_view
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:id])
-    @discounts=@master_category.fee_discounts.all
+    @discounts=@master_category.fee_discounts.where(batch_id:@batch.id)
   end
 
   def edit_fee_discount
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:master_id])
     @discount=@master_category.fee_discounts.find(params[:id])
   end
 
   def update_fee_discount
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:master_id])
     @discount=@master_category.fee_discounts.find(params[:id])
-    @discount.update(fee_discount_params)
-    @discounts=@master_category.fee_discounts.all
+    if @discount.update(fee_discount_params)
+     flash[:notice]="Finance fee discount updated successfully"     
+    end
+    @discounts=@master_category.fee_discounts.where(batch_id:@batch.id)
   end
 
   def delete_fee_discount
+    @batch=Batch.find(params[:batch_id])
     @master_category=FinanceFeeCategory.find(params[:master_id])
     @discount=@master_category.fee_discounts.find(params[:id])
-    @discount.destroy
-    @discounts=@master_category.fee_discounts.all
+    if @discount.destroy
+      flash[:notice]="Finance fee discount deleted successfully"     
+    end
+    @discounts=@master_category.fee_discounts.where(batch_id:@batch.id)
   end
 
   def new_fee_collection
@@ -610,21 +646,37 @@ class FinanceController < ApplicationController
   end
 
   def create_fee_collection
-    @master_category=FinanceFeeCategory.find(params[:finance_fee_collection][:finance_fee_category_id])
-    batches=@master_category.batches.all
-    batches.each do |b|
-      params[:finance_fee_collection][:batch_id]=b.id
-      @collection=FinanceFeeCollection.new(collection_params)
-      @collection.save
-      @collection.create_collection_particular(b,@master_category)
+    @collection=FinanceFeeCollection.new(collection_params)
+    @master_category=@collection.finance_fee_category
+    batches=params[:batches]
+    error=false
+    if batches.present?
+      batches.each do |b|
+        @collection.batch_id=b
+        unless @collection.save
+          error=true
+        else
+          @collection.create_collection_particular(b,@master_category)
+          @collection.create_fee_collection_discount(b,@master_category)
+        end
+      end
+      unless error==true
+        flash[:notice]="Finance fee collection created successfully"
+        redirect_to finance_new_fee_collection_path
+      else
+        @categories=FinanceFeeCategory.all
+        render 'new_fee_collection'
+      end
+    else
+      @categories=FinanceFeeCategory.all
+      flash[:alert]="Please select batch..."
+      render 'new_fee_collection'
     end
-
-    redirect_to finance_new_fee_collection_path
   end
   
   def view_fee_collection
     @batch=Batch.find(params[:id])
-    @collections=@batch.finance_fee_collections.all    
+    @collections=@batch.finance_fee_collections.all   
   end
 
   def edit_fee_collection
@@ -637,19 +689,24 @@ class FinanceController < ApplicationController
     @batch=Batch.find(params[:batch_id])
     @collections=@batch.finance_fee_collections.all 
     @collection=@batch.finance_fee_collections.find(params[:id])
-    @collection.update(collection_params)    
+    if @collection.update(collection_params)    
+      flash[:notice]="Finance fee collection updated successfully"     
+    end
   end
 
   def delete_fee_collection
     @batch=Batch.find(params[:batch_id])
     @collections=@batch.finance_fee_collections.all 
     @collection=@batch.finance_fee_collections.find(params[:id])
-    @collection.destroy   
+    if @collection.destroy   
+       flash[:notice]="Finance fee collection deleted successfully"     
+    end
   end
 
   def collection_details_view
      @collection=FinanceFeeCollection.find(params[:id])
-     @particulars=@collection.fee_collection_particulars.all
+     @particulars=@collection.fee_collection_particulars
+     @discounts=@collection.fee_collection_discounts
   end
 
   def fees_submission_batch

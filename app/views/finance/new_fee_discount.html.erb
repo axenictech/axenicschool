@@ -34,8 +34,14 @@
         <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
       </div><br/>
       <div class="row">
-        <div class="col-md-3"><%= f.label :fee_category %></div>
-        <div class="col-md-3"><%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},:style =>"width: 250px",class: "form-control"%></div>
+          <div class="col-md-3"><%= f.label :finance_fee_category %></div>
+          <div class="col-md-3"><%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#fee_discount_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",:style =>"width: 250px",class: "form-control"}%></div>
+      </div><br/>
+       <div class="row">
+        <div class="col-md-3"><%= label_tag :select_batch %></div>
+        <div class="col-md-3"> Select:&nbsp;&nbsp;<%= link_to "All",finance_select_all_path,{onclick:"$('.check_box').prop('checked',true);",remote:true}%>&nbsp;&nbsp;<%= link_to "None",finance_select_none_path,{onclick:"$('.check_box').prop('checked',false);",remote:true}%>
+        <div id="fee_category"><%= render 'category_batches_list'%></div>
+        </div>
       </div><br/>
       <div id="hidden"></div><br/>
       <div class="row">

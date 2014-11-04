@@ -13,12 +13,12 @@
 		<tr>
 			<td class="col-3"><%= i+1 %></td>
 			<td class="col-3"><%= m.name %></td>
-			<td class="col-3"><%= m.category_id %></td>
-			<td class="col-3"><%= m.admission_no%></td>
+			<td class="col-3"><%= m.category.nil? ? "-": m.category.name%></td>
+			<td class="col-3"><%= m.admission_no.nil? ? "-": m.admission_no%></td>
 			<td class="col-3"><%= m.amount %></td>
 			<td class="col-3"><%= m.created_at.to_date%></td>
-			<td class="col-3"><%= link_to 'Edit',finance_edit_particular_fee_path(@master_category,m),remote:true %>&nbsp;&nbsp;
-				<%= link_to 'Delete',finance_delete_particular_fee_path(@master_category,m),method: :delete, data:{confirm:"Are You sure to delete '#{m.name}'?"},remote:true%></td>	
+			<td class="col-3"><%= link_to 'Edit',finance_edit_particular_fee_path(@master_category,m,batch_id:@batch.id),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete',finance_delete_particular_fee_path(@master_category,m,batch_id:@batch.id),method: :delete, data:{confirm:"Are You sure to delete '#{m.name}'?"},remote:true%></td>	
 			
 		</tr>
 	<%end%>
