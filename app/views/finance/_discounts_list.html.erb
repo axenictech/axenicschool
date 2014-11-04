@@ -7,17 +7,17 @@
 	<th>Discount(%)</th>
 	<th></th>
 	</tr>
-		<% @discounts.each do |d|%>
-		<tr>
-			<td class="col-3"><%= d.name%></td>
-			<td class="col-3"><%= %></td>
-			<td class="col-3"><%= %></td>
-			<td class="col-3"><%= d.discount%></td>
-			<td class="col-3"><%= link_to 'Edit',finance_edit_fee_discount_path(@master_category,d),remote:true %>&nbsp;&nbsp;
-				<%= link_to 'Delete' ,finance_delete_fee_discount_path(@master_category,d),method: :delete, data:{confirm:"Are you sure to delete '#{d.name}'?"},remote:true%></td>	
-			
-			</tr>
-		<%end%>
+	<% @discounts.each do |d|%>
+	<tr>
+		<td class="col-3"><%= d.name%></td>
+		<td class="col-3"><%= d.category.nil? ? "-": d.category.name%></td>
+		<td class="col-3"><%= d.admission_no.nil? ? "-": d.admission_no%></td>
+		<td class="col-3"><%= d.discount%></td>
+		<td class="col-3"><%= link_to 'Edit',finance_edit_fee_discount_path(@batch,@master_category,id:d.id),remote:true %>&nbsp;&nbsp;
+			<%= link_to 'Delete' ,finance_delete_fee_discount_path(@batch,@master_category,id:d.id),method: :delete, data:{confirm:"Are you sure to delete '#{d.name}'?"},remote:true%></td>	
+		
+		</tr>
+	<%end%>
 </table>
 <%else%>
 <h5>No discount found for this fee category</h5>

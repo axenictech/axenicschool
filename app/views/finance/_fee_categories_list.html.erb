@@ -10,7 +10,7 @@
 	<% @master_categories.each_with_index do |m,i|%>
 		<tr>
 			<td class="col-3"><%= i+1 %></td>
-			<td class="col-3"><%= link_to m.name,finance_master_category_particular_path(m)%></td>
+			<td class="col-3"><%= link_to m.name,finance_master_category_particular_path(m,batch_id:@batch.id)%></td>
 			<td class="col-3"><%= @batch.name %></td>
 			<td class="col-3"><%= m.created_at.to_date%></td>
 			<td class="col-3"><%= link_to 'Edit',finance_edit_master_category_path(@batch,m),remote:true %>&nbsp;&nbsp;

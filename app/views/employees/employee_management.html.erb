@@ -1,33 +1,47 @@
 
 <div id="content-header">
-  <h1>Employee Management</h1>
-  <h3>Manage All Employees</h3>
+  <h1>HR Managament</h1>
+  <h3>Human Resources</h3>
   <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "/employees" %>
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
   </div>
     <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br/><br/>
 
-
-<div id="page-yield">
-
-  
-
-  <div id="box">
-
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Empolyee Admission", 'admission1' %></div>
-        <div class="link-descr">Employee Admission form.</div>
+ 
+ <div class="container">
+    <div class="row" style="margin-top:20px">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+            <%= link_to "Employee Admission",employees_admission1_path,style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+         HR Setting.
+          </div>
+        </div>
+       
       </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "Employee Subject Association",employees_subject_assignment_path,style: 'color:black' %>
+          </div>
+          <div class="panel-body" style="height:70px">
+           Manage All Employee.
+          </div>
+        </div>
 
-    
-      <div class="link-box">
-        <div class="link-heading"><%= link_to "Employee Subject Association",'subject_assignment'  %></div>
-        <div class="link-descr">Assign an employee with one or more subject.</div>
       </div>
-   
-      
-
+      </div>
+      </div>
+      </div>
+      </div>
+       
+      <div class="col-md-2"></div>
     </div>
 
-  </div>
+ </div>  
+      
+
