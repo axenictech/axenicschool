@@ -256,6 +256,10 @@ ActiveRecord::Schema.define(version: 20141103195732) do
     t.boolean  "is_break"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
+    t.boolean  "is_deleted"
+=======
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
   end
 
   add_index "class_timings", ["batch_id"], name: "index_class_timings_on_batch_id", using: :btree
@@ -410,11 +414,14 @@ ActiveRecord::Schema.define(version: 20141103195732) do
   add_index "employee_salery_structures", ["employee_id"], name: "index_employee_salery_structures_on_employee_id", using: :btree
   add_index "employee_salery_structures", ["payroll_category_id"], name: "index_employee_salery_structures_on_payroll_category_id", using: :btree
 
+<<<<<<< HEAD
+=======
   create_table "employee_salery_strucyures", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
   create_table "employee_subjects", force: true do |t|
     t.integer  "employee_id"
     t.integer  "subject_id"
@@ -725,16 +732,29 @@ ActiveRecord::Schema.define(version: 20141103195732) do
     t.string   "title"
     t.string   "description"
     t.decimal  "amount"
+<<<<<<< HEAD
+    t.boolean  "fine_included",                   default: false
+=======
     t.boolean  "fine_included",   default: false
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
     t.integer  "category_id"
     t.integer  "student_id"
     t.integer  "finance_fees_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
+    t.date     "transaction_date"
+    t.integer  "finance_transaction_category_id"
+=======
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
   end
 
   add_index "finance_transactions", ["category_id"], name: "index_finance_transactions_on_category_id", using: :btree
   add_index "finance_transactions", ["finance_fees_id"], name: "index_finance_transactions_on_finance_fees_id", using: :btree
+<<<<<<< HEAD
+  add_index "finance_transactions", ["finance_transaction_category_id"], name: "index_finance_transactions_on_finance_transaction_category_id", using: :btree
+=======
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
   add_index "finance_transactions", ["student_id"], name: "index_finance_transactions_on_student_id", using: :btree
 
   create_table "general_settings", force: true do |t|
@@ -928,14 +948,25 @@ ActiveRecord::Schema.define(version: 20141103195732) do
   add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
 
   create_table "privileges_users", force: true do |t|
+<<<<<<< HEAD
+    t.integer  "school_id"
+    t.integer  "user_id"
+    t.integer  "privilege_id_id"
+    t.integer  "course_id"
+=======
     t.integer  "user_id"
     t.integer  "privilege_id"
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
+  add_index "privileges_users", ["course_id"], name: "index_privileges_users_on_course_id", using: :btree
+=======
   add_index "privileges_users", ["privilege_id"], name: "index_privileges_users_on_privilege_id", using: :btree
   add_index "privileges_users", ["user_id"], name: "index_privileges_users_on_user_id", using: :btree
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
@@ -1129,6 +1160,10 @@ ActiveRecord::Schema.define(version: 20141103195732) do
     t.string   "weekday"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
+    t.boolean  "is_deleted"
+=======
+>>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
     t.integer  "day_of_week"
   end
 
