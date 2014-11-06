@@ -958,7 +958,6 @@ end
   end
   
   def payroll_category_params
-    params.require(:payroll_category).permit(:name,:percentage,:status,:is_deduction,:payroll_category_id)
-    
+    params.require(:payroll_category).permit(:name,:percentage,:status,:is_deduction,:payroll_category_id)  
   end
 end
