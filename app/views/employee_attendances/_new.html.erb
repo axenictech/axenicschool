@@ -3,7 +3,7 @@
 <div class="modal-content">
 <div class="modal-header">
    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <h3><%= "Attendance for Employee " %></h3>
+  <h3><%= "Attendance for #{ @employee.first_name}" %></h3>
 </div>
 <div class="modal-body">
 	<ul class="errors1"></ul>
@@ -16,7 +16,7 @@
     
      <tr>
        <td><%=c.label :Leave_Type %></td>
-         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.all.collect {|b| [b.name,b.id]},prompt:true%></td>
+         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:'t').collect {|b| [b.name,b.id]},prompt:true%></td>
      </tr>
     <tr>
       <td><%= c.label :Reason_for_absence%></td>
