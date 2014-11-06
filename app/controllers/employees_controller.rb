@@ -1,12 +1,11 @@
 class EmployeesController < ApplicationController
 
-    def new_category
+  def new_category
     @employee_category_new = EmployeeCategory.new
     @categories1 = EmployeeCategory.where(status: true).order(:name)
     @categories2 = EmployeeCategory.where(status: false).order(:name)
    
   end
-
 
   def add_category
     @employee_category_new = EmployeeCategory.new
@@ -203,8 +202,8 @@ class EmployeesController < ApplicationController
   end
 
    def update_payroll_category
-     @payroll_category_new = PayrollCategory.new
-  @payroll_category=PayrollCategory.find(params[:payroll_category_id])
+    @payroll_category_new = PayrollCategory.new
+    @payroll_category=PayrollCategory.find(params[:payroll_category_id])
     if @payroll_category.update(payroll_category_params)
       flash[:notice5] = "Employee payroll category updated Successfully"
     end
