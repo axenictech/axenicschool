@@ -7,7 +7,7 @@ class CreateFinanceTransactions < ActiveRecord::Migration
       t.date       :transaction_date
       t.boolean    :fine_included, :default => false
       t.references :student,index:true
-      t.references :finance_fees,index:true
+      t.references :finance_fee,index:true
       t.references :finance_transaction_category,index:true
       
       t.timestamps
