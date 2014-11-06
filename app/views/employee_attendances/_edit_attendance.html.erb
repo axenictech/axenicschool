@@ -23,11 +23,13 @@
     <td><%=c.label :Half_Day%></td>
     <td><%= c.check_box :is_half_day%> </td>
     </tr>
-    
-    
     <tr>
-    <td colspan="2"><%= c.submit 'Update', class: "btn btn-primary"%></td>
+<%if @reset_count.leave_taken.to_f==0.0%>
+    <td>  <%= link_to 'Delete', employee_attendances_destroy_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
+    <%else%>
+       <td colspan="2"><%= c.submit 'Submit', class: "btn btn-primary"%></td>
        <td> 	<%= link_to 'Delete', employee_attendances_destroy_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
+      <%end%>
         </tr>
 
 </table>

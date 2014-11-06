@@ -26,7 +26,7 @@ class WeekdaysController < ApplicationController
 			weekday= Weekday.new(:batch_id => @batch.id, :weekday=>divas)
      		weekday.save
 	    end
-        flash[:notice]="Weekday created successfully...."
+        flash[:notice]="Weekday created successfully......"
 	end
 
 	def select
