@@ -4,24 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_filter :set_user_language
+  rescue_from ActiveRecord::RecordNotFound,with: :record_not_found
   
   private
   def set_user_language
-    language=GeneralSetting.first.language
-    if language=='1'
-            I18n.locale='en'
-     end
-
-     if language=='2'      
-             I18n.locale='hi' 
-     end
-
-     if language=='3'
-              I18n.locale='mr'
-     end
-     if language=='4'
-              I18n.locale='ar'
-     end
   end 
-
+  def record_not_found
+      render '/public/404.html', layout:false
+  end
 end
