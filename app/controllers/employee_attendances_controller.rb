@@ -80,6 +80,7 @@ class EmployeeAttendancesController < ApplicationController
     @date = params[:employee_attendance][:attendance_date]
       if @attendance.save
         @emp_leave = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
+        unless  @emp_leave.nil?
           if @attendance.is_half_day
             leave_taken=@emp_leave.leave_taken.to_f+(0.5)
             @emp_leave.update(leave_taken: leave_taken)
@@ -87,6 +88,7 @@ class EmployeeAttendancesController < ApplicationController
             leave_taken=@emp_leave.leave_taken.to_f+(1)
             @emp_leave.update(leave_taken: leave_taken)
           end
+         end
       end
     @deparment=@employee.employee_department
     @employees=@deparment.employees.all    
@@ -99,13 +101,15 @@ class EmployeeAttendancesController < ApplicationController
    def edit_attendance
       @attendance= EmployeeAttendance.find(params[:id])
       @employee = Employee.find(@attendance.employee_id)
-   end
+      @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
+  end
 
    def update_att
     @attendance= EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @date = @attendance.attendance_date
     @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
+
       unless @reset_count.nil?
         leaves_taken = @reset_count.leave_taken
         day_status = @attendance.is_half_day
@@ -160,7 +164,8 @@ class EmployeeAttendancesController < ApplicationController
     @attendance= EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
-      if @reset_count.leave_taken!=0
+     unless  @reset_count.nil?
+     if @reset_count.leave_taken!=0
         leaves_taken = @reset_count.leave_taken
         unless leaves_taken.nil?
           if @attendance.is_half_day
@@ -169,9 +174,13 @@ class EmployeeAttendancesController < ApplicationController
             leave = leaves_taken.to_d-(1) 
           end
         end
+
+     end
       end
     @attendance.destroy
-    @reset_count.update(:leave_taken => leave)
+    unless  @reset_count.nil?
+     @reset_count.update(:leave_taken => leave)
+    end
     @date = @attendance.attendance_date
     @deparment=@employee.employee_department
     @employees=@deparment.employees.all    

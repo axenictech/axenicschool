@@ -18,6 +18,7 @@ class TimeTableEntriesController < ApplicationController
 def select_subject
     @subject=Subject.find(params[:sub][:subject_id])
     @teachers= EmployeeSubject.where(subject_id: @subject.id)
+  
  end
  def assign_time
     @class_timing_id=params[:timing_id]
@@ -31,7 +32,6 @@ def select_subject
     @subject=Subject.find(params[:subject_id])
     @em=Employee.find(params[:teacher])
     @batch=@subject.batch
-   
 
  unless TimeTableEntry.where(:employee_id=>@em.id,:weekday_id=>@weekday,:time_table_id=>@time).count >= @em.employee_grade.max_hours_day 
     if TimeTableEntry.where(:employee_id=>@em.id,:time_table_id=>@time).count < @em.employee_grade.max_hours_week

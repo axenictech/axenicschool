@@ -75,10 +75,12 @@ class TimeTablesController < ApplicationController
     @time=TimeTableEntry.where(time_table_id:params[:time][:id])
     @time_table=TimeTable.find(params[:time][:id])
     @timetable_entries = @time_table.time_table_entries
-    @weekdays = @timetable_entries.collect(&:weekday).uniq.sort!{|a,b| a.weekday <=> b.weekday}
+    @weekdays = @timetable_entries.collect(&:weekday).uniq.sort!{|a,b| a.weekday <=> b.weekday} 
+
     @class_timings =@timetable_entries.collect(&:class_timing).uniq.sort!{|a,b| a.start_time <=> b.start_time}
     @employees =@timetable_entries.collect(&:employee).uniq
- end
+
+end
   
  # def select
  #    unless @time.nil?

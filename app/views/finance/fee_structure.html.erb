@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.page {
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:100%;
+    background: #ADACAB;
+    height: 1px;
+}
+
+#title h1{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+#student_main_info h4{
+    color: #555555;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+#student_main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+    
+}
+
+.even{
+    
+    height:auto;
+    background: #fff;
+    
+    
+}
+
+.even td{
+   
+   padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+}
+
+.odd td{
+  padding: 12px 12px 12px 15px;
+  border-left:  1px solid #ADACAB;
+  border-bottom: 1px solid #ADACAB;
+  width: 150px;
+
+}
+
+table#pdf-table{
+   border: 1px solid #ADACAB;
+   border-left: 0px solid #ADACAB;
+}
+
+</style>
+</head>
+<body>
+<div class="hor_line"></div>
+<div id="title">
+<h1><%= @general_setting.school_or_college_name%></h1>
+<h4><small><%= @general_setting.school_or_college_address%><br/>
+  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
+  <h2 align="center"><%= t('fee_structure') %></h2>
+  <div class="hor_line"></div>
+  <div class="extender"> </div>
+  <div class="report">
+  	<div><%= t('student_name') %>&nbsp;&nbsp;<span>:</span><%= @student.first_name+" "+@student.last_name %></div>
+    <div><%= t('fee_collection_name') %>&nbsp;&nbsp;<span>:</span><%= @collection.name %></div>
+    <% unless @category.nil? %>
+      <div><%= t('fee_category_name') %>&nbsp;&nbsp;<span>:</span><%= @category.name %></div>
+    <% end %>
+    <div><%= t('start_date') %>&nbsp;&nbsp;<span>:</span><%= @collection.start_date %></div>
+    <div><%= t('end_date') %>&nbsp;&nbsp;<span>:</span><%= @collection.end_date %></div>
+    <div><%= t('due_date') %>&nbsp;&nbsp;<span>:</span><%= @collection.due_date %></div>
+<br/>
+<br/>
+<table align="center" id="pdf-table" width="100%" cellspacing="5" cellpadding="5" border="1">
+<%total=0%>
+<%discount=0%>
+<%fines=0%>
+  <tr class="tr-head">
+  <th>Sl no</th>
+  <th>Particular</th>
+  <th>Amount(Rs.)</th>
+  </tr>
+<tr><td colspan="3"></td></tr>
+<% unless @particulars.nil?%>
+    <% @particulars.each_with_index do |p,i|%>
+      <tr>
+      <td class="col-3"><%= i+1%></td>
+      <td class="col-3"><%= p.name%></td>
+      <td class="col-3"><%= p.collection_amount%></td>
+      </tr>
+    <%total+=p.collection_amount%>
+    <%end%>
+<%end%>
+<tr><td colspan="3"></td></tr>
+<tr><td colspan="2" align="right">Total Fees</td><td><%= total%></td></tr>
+<tr><td colspan="3"></td></tr>
+<tr class="tr-head"><th colspan="3">Discount</th></tr>
+<% unless @discounts.nil?%>
+    <% @discounts.each_with_index do |d,i|%>
+      <tr>
+      <td class="col-3"><%= i+1%></td>
+      <td class="col-3"><%= d.name+"("+d.discount.to_s+"%)"%></td>
+      <td class="col-3"><%= d.collection_discount(total)%></td>
+      </tr>
+      <%discount+=d.collection_discount(total)%>
+    <%end%>
+<%end%>
+<tr><td colspan="3"></td></tr>
+<tr><td colspan="2" align="right">Total Discount</td><td><%= discount%></td></tr>
+<tr><td colspan="3"></td></tr>
+<tr><td colspan="2" align="right">Fee to be paid</td><td><%= total-discount %></td></tr>
+<tr><td colspan="3"></td></tr>
+</table>
+</div>
+</body>
+</html>

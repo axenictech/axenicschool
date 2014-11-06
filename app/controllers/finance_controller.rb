@@ -721,7 +721,95 @@ class FinanceController < ApplicationController
 
   def student_fees
     @collection=FinanceFeeCollection.find(params[:id])
+    @category=@collection.finance_fee_category
+    @finance_fees=@collection.finance_fees
+    @student=@finance_fees.first.student
+    @previous=@finance_fees.find_by_student_id(@student.id).id-1
+    @next=@finance_fees.find_by_student_id(@student.id).id+1
+    @fee=@finance_fees.find_by_student_id(@student.id)
     @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    @transactions=@fee.finance_transactions
+    @fines=@fee.finance_fines
+  end
+
+  def student_fees_details
+    @collection=FinanceFeeCollection.find(params[:id])
+    @category=@collection.finance_fee_category
+    @finance_fees=@collection.finance_fees
+    @finance_fee=@finance_fees.find(params[:finance_fee_id])
+    @student=@finance_fee.student
+    @previous=@finance_fees.find_by_student_id(@student.id).id-1
+    if @student.id==@finance_fees.last.student.id
+       @previous-=1
+    end
+    @next=@finance_fees.find_by_student_id(@student.id).id+1
+    @fee=@finance_fees.find_by_student_id(@student.id)
+    @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    @transactions=@fee.finance_transactions
+    @fines=@fee.finance_fines
+  end
+
+  def pay_fine
+    @student_fine=FinanceFee.find(params[:finance_fee_id])
+    @student_fine.create_fine(params[:fine])
+    @collection=FinanceFeeCollection.find(params[:id])
+    @category=@collection.finance_fee_category
+    @finance_fees=@collection.finance_fees
+    @finance_fee=@finance_fees.find(params[:finance_fee_id])
+    @student=@finance_fee.student
+    @previous=@finance_fees.find_by_student_id(@student.id).id-1
+    if @student.id==@finance_fees.last.student.id
+       @previous-=1
+    end
+    @next=@finance_fees.find_by_student_id(@student.id).id+1
+    @fee=@finance_fees.find_by_student_id(@student.id)
+    @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    @transactions=@fee.finance_transactions
+    @fines=@fee.finance_fines
+  end
+  
+  def pay_fee
+    @student_fee=FinanceFee.find(params[:finance_fee_id])
+    fine=false
+    @student_fee.create_transaction(params[:amount],fine)
+    if params[:amount]==params[:pay_amount]
+       @student_fee.update(is_paid:true)
+    end
+    @collection=FinanceFeeCollection.find(params[:id])
+    @category=@collection.finance_fee_category
+    @finance_fees=@collection.finance_fees
+
+    @finance_fee=@finance_fees.find(params[:finance_fee_id])
+    @student=@finance_fee.student
+    @previous=@finance_fees.find_by_student_id(@student.id).id-1
+    
+    if @student.id==@finance_fees.last.student.id
+       @previous-=1
+    end
+    
+    @next=@finance_fees.find_by_student_id(@student.id).id+1
+    @fee=@finance_fees.find_by_student_id(@student.id)
+    @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    @transactions=@fee.finance_transactions
+    @fines=@fee.finance_fines
+  end
+
+  def student_fee_receipt
+    @general_setting=GeneralSetting.first
+    @collection=FinanceFeeCollection.find(params[:id])
+    @category=@collection.finance_fee_category
+    @finance_fees=@collection.finance_fees
+    @finance_fee=@finance_fees.find(params[:finance_fee_id])
+    @student=@finance_fee.student
+    @fee=@finance_fees.find_by_student_id(@student.id)
+    @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    @fines=@fee.finance_fines
+    render 'student_fee_receipt',layout:false 
   end
 
   def search_student
@@ -731,13 +819,19 @@ class FinanceController < ApplicationController
 
   def fees_collection_student
     @student=Student.find(params[:id])
-    @collections=@student.batch.finance_fee_collections
+    @collections=@student.finance_fee_collections
   end
 
   def student_fees_submission
     @student=Student.find(params[:student_id])
     @collection=FinanceFeeCollection.find(params[:collection_id])
+    @category=@collection.finance_fee_category
+    @finance_fees=@collection.finance_fees
+    @fee=@finance_fees.find_by_student_id(@student.id)
     @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    @transactions=@fee.finance_transactions
+    @fines=@fee.finance_fines
   end
 
   def student_search
@@ -747,13 +841,25 @@ class FinanceController < ApplicationController
 
   def fee_collection_structure
     @student=Student.find(params[:id])
-    @collections=@student.batch.finance_fee_collections
+    @collections=@student.finance_fee_collections
   end
 
   def student_fees_structure
     @student=Student.find(params[:student_id])
     @collection=FinanceFeeCollection.find(params[:collection_id])
+    @category=@collection.finance_fee_category
     @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+  end
+
+  def fee_structure
+    @general_setting=GeneralSetting.first
+    @student=Student.find(params[:student_id])
+    @collection=FinanceFeeCollection.find(params[:collection_id])
+    @category=@collection.finance_fee_category
+    @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    render 'fee_structure',layout:false
   end
 
   def fees_defaulters
@@ -769,11 +875,31 @@ class FinanceController < ApplicationController
 
   def collection_choice
     @batch=Batch.find(params[:id])
-    @collections=@batch.collections
+    @collections=@batch.finance_fee_collections
   end
 
   def defaulter_students
     @collection=FinanceFeeCollection.find(params[:id])
+    @students=@collection.students
+  end
+
+  def fees_defaulters_list
+    @general_setting=GeneralSetting.first
+    @collection=FinanceFeeCollection.find(params[:id])
+    @students=@collection.students
+    render 'fees_defaulters_list',layout:false
+  end
+
+  def pay_fees_defaulters
+    @student=Student.find(params[:student_id])
+    @collection=FinanceFeeCollection.find(params[:collection_id])
+    @category=@collection.finance_fee_category
+    @finance_fees=@collection.finance_fees
+    @fee=@finance_fees.find_by_student_id(@student.id)
+    @particulars=@collection.fee_collection_particulars
+    @discounts=@collection.fee_collection_discounts
+    @transactions=@fee.finance_transactions
+    @fines=@fee.finance_fines
   end
 
 private 

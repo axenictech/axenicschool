@@ -25,6 +25,10 @@ class FeeCollectionDiscount < ActiveRecord::Base
 		end   
 	end
 	
+	def collection_discount(total)
+		discount=(total*self.discount)/100
+	end
+
 	def student_name
 		if self.type=="Student"
 			student=Student.find_by_admission_no(self.admission_no)
