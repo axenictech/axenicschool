@@ -184,7 +184,7 @@ class EmployeesController < ApplicationController
   def new_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: false).order(:name)
+    @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
   end
 
   def add_payroll_category
