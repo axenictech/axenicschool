@@ -33,9 +33,10 @@
      </tr>
 
       <%@independent_categories.each do |c| %>
+      <%- val = EmployeeSaleryStructure.find_by_employee_id_and_payroll_category_id(@employee, c) -%>
         <tr>
           <td class="col-2"><%= f.label :""%><%=c.name%></td>
-          <td class="col-2"><%= f.text_field :amount,:index => c.id, :value => ''%></td>
+          <td class="col-2"><%= f.text_field :amount,:index => c.id, :value => (val.nil? ? 0.00 : val.amount)%></td>
         </tr>
       <% end %>
    

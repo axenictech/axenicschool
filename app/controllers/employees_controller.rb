@@ -726,7 +726,7 @@ end
     #@salary_date = ''
     @salary_date =Date.parse(params[:salery_slip][:salery_date])
      #salary_date = Date.parse(params[:salary_date])
-
+    p "---------------------------------------------------------"
     p @salary_date
     unless @salary_date.to_date < @employee.joining_date.to_date
         start_date =@salary_date - ((@salary_date.day - 1).days)
@@ -735,7 +735,7 @@ end
         #   :conditions => ["salary_date >= ? and salary_date < ?", start_date, end_date])
         # if payslip_exists == []
             params[:salery_slip].each_pair do |k, v|
-            row_id = EmployeeSalaryStructure.where(employee_id:@employee.id,payroll_category_id:k)
+            row_id = EmployeeSaleryStructure.where(employee_id:@employee.id,payroll_category_id:k)
            # category_name = PayrollCategory.find(k).name
             unless row_id.nil?
               MonthlyPayslip.create(:salary_date=>start_date,:employee_id => params[:format],

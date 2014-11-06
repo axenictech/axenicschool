@@ -948,25 +948,22 @@ ActiveRecord::Schema.define(version: 20141103195732) do
   add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
 
   create_table "privileges_users", force: true do |t|
-<<<<<<< HEAD
+
     t.integer  "school_id"
     t.integer  "user_id"
     t.integer  "privilege_id_id"
     t.integer  "course_id"
-=======
     t.integer  "user_id"
     t.integer  "privilege_id"
->>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
+
   add_index "privileges_users", ["course_id"], name: "index_privileges_users_on_course_id", using: :btree
-=======
   add_index "privileges_users", ["privilege_id"], name: "index_privileges_users_on_privilege_id", using: :btree
   add_index "privileges_users", ["user_id"], name: "index_privileges_users_on_user_id", using: :btree
->>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
+
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
@@ -1160,10 +1157,7 @@ ActiveRecord::Schema.define(version: 20141103195732) do
     t.string   "weekday"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
     t.boolean  "is_deleted"
-=======
->>>>>>> 8e77c97393632bd6fb5684e991a25b12d2c89599
     t.integer  "day_of_week"
   end
 
