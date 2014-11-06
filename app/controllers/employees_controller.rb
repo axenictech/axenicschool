@@ -722,32 +722,40 @@ end
   
   def create_monthly_payslip
     @employee=Employee.find(params[:format])
-    #@salary_date = ''
     @salary_date =Date.parse(params[:salery_slip][:salery_date])
-     #salary_date = Date.parse(params[:salary_date])
-
-    p @salary_date
     unless @salary_date.to_date < @employee.joining_date.to_date
         start_date =@salary_date - ((@salary_date.day - 1).days)
         end_date = start_date + 1.month
-        # payslip_exists = MonthlyPayslip.where(employee_id:@employee.id,
-        #   :conditions => ["salary_date >= ? and salary_date < ?", start_date, end_date])
-        # if payslip_exists == []
-            params[:salery_slip].each_pair do |k, v|
-            row_id = EmployeeSalaryStructure.where(employee_id:@employee.id,payroll_category_id:k)
-           # category_name = PayrollCategory.find(k).name
-            unless row_id.nil?
-              MonthlyPayslip.create(:salary_date=>start_date,:employee_id => params[:format],
-                :payroll_category_id => k,:amount => v['amount'])
-            else
-              MonthlyPayslip.create(:salary_date=>start_date,:employee_id => params[:format],
-                :payroll_category_id => k,:amount => v['amount'])
-            end
-          # end
+    
+    payslip_exists = @employee.monthly_payslips.where(salary_date:start_date..end_date).take
+    total_salary=0
+    params[:amounts].each do |amount|
+      total_salary+=amount[0].to_f
+    end
+          
+      unless payslip_exists.nil?
+        payslip_exists.update(amount: total_salary)
+      else
+        MonthlyPayslip.create(:salary_date=>start_date,:employee_id => params[:format],amount: total_salary)
       end
-end
+    end
     redirect_to employees_monthly_payslip_path(@employee)
   end
+
+  def employee_structure
+    @employee=Employee.find(params[:employee_id])
+    @independent_categories = PayrollCategory.all
+    @amount=params[:amount]
+    @payroll_category=params[:id]
+    @salary=EmployeeSaleryStructure.where(employee_id: @employee.id,payroll_category_id: @payroll_category).take
+    if @salary.nil?
+      EmployeeSaleryStructure.create(employee_id: @employee.id,payroll_category_id: @payroll_category,amount:@amount)
+    else
+      @salary.update(amount:@amount)
+    end
+    @employee.update_payroll(@payroll_category,@amount)
+  end
+
 
   def create_payslip_category
      @employee=Employee.find(params[:format])
