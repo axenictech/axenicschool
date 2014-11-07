@@ -1,21 +1,55 @@
-<% if @course.batches.empty? %>
-<h4 align="center">No Record Found </h4>
-<% else %>
-<table align="center" class="table table-hover table-bordered" style="width:500px">
-<ul id="category-list">
-<tbody>
-<thead>
-	<tr class="tr-head"><th>Batch</th>
-		</tr>
-</thead>
-		
-<% @course.batches.each do |batch|%>
-	
-			<tr>
-			<td><%=link_to batch.course.code+" "+batch.course.section_name+" - "+batch.name , batches_display_path(batch) %></td>
-			</tr>
-<%end%>
-</tbody>
-</ul>
-</table>
-<% end %>
+<hr class="normal"/>
+<div class="col-sm-12 ">
+  <div class="box bordered-box green-border" style="margin-bottom:0;">
+    <div class="box-header green-background">
+      <div class="title">Batch details</div>
+        <div class="actions">
+          <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+          </a>
+            
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
+    </div>
+
+  <div class="box-content box-no-padding">
+  <div class="responsive-table">
+    <div class="scrollable-area">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
+      <div class="row datatables-top">
+      <div class="col-sm-4">
+	      <div id="DataTables_Table_0_length" class="dataTables_length">
+	      </div>
+      </div>
+      </div>
+    <table class="data-table table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+        <% if @course.batches.empty? %>
+			<h4 align="center">No Record Found </h4>
+  			<% else %>
+        <thead>
+          <tr role="row">
+          <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+              Name
+            : activate to sort column descending" style="width: 297px;">
+              Batch Name
+            </th>
+            <!-- <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 125px;">Actions</th>
+ -->
+            </tr>
+        </thead>
+        
+      <tbody role="alert" aria-live="polite" aria-relevant="all">
+    	<% @course.batches.each do |batch|%>
+      	<tr class="<%= cycle('odd', 'even')%>">
+        <td class=" sorting_1"><%=link_to batch.course.code+" "+batch.course.section_name+" - "+batch.name , batches_display_path(batch) %></td>
+     	</tr>
+    	<%end%>
+      </tbody>
+     <%end%>
+ </table>
+          <div class="row datatables-bottom"><div class="col-sm-6"></div><div class="col-sm-6 text-right"><div class="dataTables_paginate paging_bootstrap"><ul class="pagination pagination-sm"><li class="prev disabled"><a href="#">← Previous</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li class="next"><a href="#">Next → </a></li></ul></div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

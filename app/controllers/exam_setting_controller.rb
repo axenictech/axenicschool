@@ -35,9 +35,15 @@ class ExamSettingController < ApplicationController
 
     def createrank
       @course=Course.find(params[:course_id])
-      @rank_levels=@course.ranking_levels.all
+    
+      @rank_levels=@course.ranking_levels.order('prioriy ASC')
       @rank_lev1=@course.ranking_levels.new(params_rank)
-      if @rank_lev1.save 
+      @max_rank=RankingLevel.maximum('prioriy')
+      if @max_rank.nil?
+        @max_rank=0.to_i
+      end
+      @rank_lev1.prioriy=@max_rank+1.to_i
+      if @rank_lev1.save
          flash[:ranking_level_notice]="RankingLevel Created Successfully"
       else
          flash[:ranking_level_notice]="RankingLevel not Created Successfully"
@@ -45,6 +51,53 @@ class ExamSettingController < ApplicationController
       end
     end
 
+    def increase_priority
+         @course=Course.find(params[:course_id])
+         @rank_levels=@course.ranking_levels.order('prioriy ASC')
+           @rank_lev1=@course.ranking_levels.find(params[:id])
+         selected=params[:index].to_i-1.to_i
+         previous=0.to_i
+         temp=nil
+        @rank_levels.each do |p|
+              if(selected==previous)
+                 temp=p
+              end 
+             if(selected+1.to_i==previous)
+                current=p.prioriy
+                previous_pri=temp.prioriy
+                 p.update(prioriy:nil)
+                 temp.update(prioriy:current)
+                 p.update(prioriy:previous_pri)
+              end 
+        previous=previous+1.to_i
+        end  
+       @rank_levels=@course.ranking_levels.order('prioriy ASC')
+  end
+    
+    def decrease_priority
+        @course=Course.find(params[:course_id])
+        @rank_levels=@course.ranking_levels.order('prioriy ASC')
+        @rank_lev1=@course.ranking_levels.find(params[:id]) 
+        selected=params[:index].to_i+1.to_i
+         next_pri=0.to_i
+         temp=nil
+         @rank_levels.each do |p|
+             if(selected-1.to_i==next_pri)
+                temp=p
+              end
+           if(selected==next_pri)
+            current=p.prioriy
+            next_priority=temp.prioriy 
+            p.update(prioriy:nil)
+            temp.update(prioriy:current)
+            p.update(prioriy:next_priority)
+        end 
+        next_pri=next_pri+1.to_i
+        end  
+       @rank_levels=@course.ranking_levels.order('prioriy ASC')
+
+    end
+    
     def destroy
         @course=Course.find(params[:course_id])
         @class_dess=@course.class_designations.all
@@ -59,7 +112,7 @@ class ExamSettingController < ApplicationController
     def destroyRank      
        @rank_lev1=RankingLevel.find(params[:id])
        @course=@rank_lev1.course
-       @rank_levels=@course.ranking_levels.all
+       @rank_levels=@course.ranking_levels.order('prioriy ASC')
        if @rank_lev1.destroy
          flash[:ranking_level_notice]="RankingLevel Deleted Successfully"
        else
@@ -90,7 +143,7 @@ class ExamSettingController < ApplicationController
 
     def updateRank
       @course=Course.find(params[:course_id])
-      @rank_levels=@course.ranking_levels.all
+      @rank_levels=@course.ranking_levels.order('prioriy ASC')
       @rank_lev1=@course.ranking_levels.find(params[:id])
      if @rank_lev1.update(params_rank)
        flash[:ranking_level_notice]="Ranking Level Updated Successfully"
@@ -106,8 +159,7 @@ class ExamSettingController < ApplicationController
 
     def selectrank
         @course=Course.find(params[:course][:id])
-       @rank_levels=@course.ranking_levels.all
-         
+        @rank_levels=@course.ranking_levels.order('prioriy ASC')
     end
     
     private
@@ -117,7 +169,7 @@ class ExamSettingController < ApplicationController
 
     private
     def params_rank
-      params.require(:ranking_level).permit(:name,:marks,:marks_limit_type,:subject_limit_type,:subject_count,:full_course)
+      params.require(:ranking_level).permit(:name,:marks,:marks_limit_type,:subject_limit_type,:subject_count,:full_course,:prioriy)
     end
 
 end

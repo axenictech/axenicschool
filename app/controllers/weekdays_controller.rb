@@ -10,6 +10,8 @@ class WeekdaysController < ApplicationController
 
 		@day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 		@days = ["0", "1", "2", "3", "4", "5", "6"]
+
+		  @batch = params[:weekday][:batch_id]
 		
 		@batch = @batch=Batch.find(params[:weekday][:batch_id])
 		  week=[]
@@ -24,7 +26,7 @@ class WeekdaysController < ApplicationController
 			weekday= Weekday.new(:batch_id => @batch.id, :weekday=>divas)
      		weekday.save
 	    end
-        flash[:notice]="Weekday created successfully...."
+        flash[:notice]="Weekday created successfully......"
 	end
 
 	def select

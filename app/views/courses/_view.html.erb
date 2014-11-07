@@ -1,43 +1,36 @@
+
 <div class="row">
-  <div class="col-sm-4 pull-right">
-      <button class="button btn-primary "><%= link_to 'New', new_course_path %>
-      </button>
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="pull-right">
+        <%= link_to 'New Course', new_course_path, class: "btn btn-white hidden-xs", style: "margin-bottom:20px;" %>
+    </div>
   </div>
 </div>
-
-
-
-  <div class="row">
-    <div class="col-sm-12 ">
-      <div class="box bordered-box green-border" style="margin-bottom:0;">
-        <div class="box-header green-background">
-          <div class="title"><%= t('courses details')%></div>
-          <div class="actions">
-            <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
-            </a>
-            
-            <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
-            </a>
-          </div>
+  
+<div class="col-sm-12 ">
+  <div class="box bordered-box green-border" style="margin-bottom:0;">
+    <div class="box-header green-background">
+      <div class="title"><%= t('courses details')%></div>
+        <div class="actions">  
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
         </div>
-<div class="box-content box-no-padding">
+    </div>
+
+  <div class="box-content box-no-padding">
   <div class="responsive-table">
     <div class="scrollable-area">
       <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
       <div class="row datatables-top">
       <div class="col-sm-4">
 	      <div id="DataTables_Table_0_length" class="dataTables_length">
-	      
 	      </div>
       </div>
-      
-	   
-
       </div>
       <table class="data-table table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
         <% if @courses.empty? %>
          <h4 align="center">No Record Found </h4>
-           <% else %>
+          <% else %>
         <thead>
           <tr role="row">
           <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
@@ -71,6 +64,6 @@
     </div>
   </div>
 </div>
-</div>
+
 </div>
 </div>

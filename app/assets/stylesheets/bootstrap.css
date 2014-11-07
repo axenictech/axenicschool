@@ -5603,12 +5603,12 @@ button.close {
   left: 0;
   z-index: 1060;
   display: none;
-  width: 200px;
-  max-width: 200px;
+  width: 250px;
+  max-width: 250px;
   padding: 1px;
   text-align: left;
   white-space: normal;
-  background-color: #fff;
+  height: 30px;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
   border: 1px solid #ccc;
@@ -5622,6 +5622,7 @@ button.close {
 }
 .popover.right {
   margin-left: 10px;
+  
 }
 .popover.bottom {
   margin-top: 10px;
@@ -5640,7 +5641,7 @@ button.close {
   border-radius: 5px 5px 0 0;
 }
 .popover-content {
-  padding: 9px 14px;
+  padding: 4px;
   font-style: italic;
   font-size: 13px;
 }
