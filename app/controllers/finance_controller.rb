@@ -902,6 +902,68 @@ class FinanceController < ApplicationController
     @fines=@fee.finance_fines
   end
 
+  def approve_monthly_payslip
+    @salary_months=MonthlyPayslip.select(:salary_date).distinct
+  end
+
+  def approve_salary
+    @salary_months=MonthlyPayslip.where(salary_date:params[:date])
+    @salary=@salary_months.first
+    @date=params[:date]
+  end
+
+  def approve
+    @salary_months=MonthlyPayslip.where(salary_date:params[:date])
+    @salary_months.each do |s|
+      s.approve_salary
+    end
+    flash[:notice]='Payslip has been approved'
+    redirect_to finance_approve_monthly_payslip_path
+  end
+
+  def view_monthly_payslip
+    @departments=EmployeeDepartment.all
+    @salary_months=MonthlyPayslip.select(:salary_date).distinct
+  end
+
+  def view_payslip
+    @payslips=[]
+    @department=EmployeeDepartment.find(params[:payslip][:department])
+    @date=params[:payslip][:date]
+    @employees=@department.employees
+    unless @employees.nil?
+      @employees.each do |e|
+        salary=e.monthly_payslips.find_by_salary_date(@date)
+        unless salary.nil?
+          @payslips<<salary
+        end
+      end
+    end
+  end
+
+  def employee_monthly_payslip
+    @general_setting=GeneralSetting.first
+    @payslips=params[:payslips]
+    render 'employee_monthly_payslip',layout:false
+  end
+
+  def view_employee_payslip
+    @employee=Employee.find(params[:id])
+    @date=params[:date]
+    @structures=@employee.employee_salery_structures
+    @salary=@employee.monthly_payslips.find_by_salary_date(@date)
+    @individual_salary=@employee.individual_payslip_categories.find_by_salary_date(@date)
+  end
+
+  def employee_payslip
+    @general_setting=GeneralSetting.first
+    @employee=Employee.find(params[:id])
+    @date=params[:date]
+    @structures=@employee.employee_salery_structures
+    @salary=@employee.monthly_payslips.find_by_salary_date(@date)
+    @individual_salary=@employee.individual_payslip_categories.find_by_salary_date(@date)
+    render 'employee_payslip',layout:false
+  end
 private 
   def transaction_category_params
     params.require(:finance_transaction_category).permit!

@@ -1,0 +1,38 @@
+<div id="content-header">
+  <h1>Payslip</h1>
+  <h3>Employee Payslips</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yeild">
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 col-xs-2"></div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "View Payslip",'view_monthly_payslip',style: "color:black" %>
+          </div>
+          <div class="panel-body" style="height:70px">
+            View employee monthly payslip
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xs-4">
+      <div class="panel panel-warning " style="width:250px;">
+          <div class="panel-heading">
+          <%= link_to "One click approve payslip",'approve_monthly_payslip',style: "color:black" %>
+          </div>
+
+          <div class="panel-body" style="height:70px"   >
+          Approve monthly payslip
+          </div>
+      </div>
+    </div>
+    <div class="col-md-2 col-xs-2"></div>
+  </div>
+</div>
+  </div>
