@@ -1,0 +1,40 @@
+<% unless @payslips.empty?%>
+<table align="center" class="table table-hover table-bordered" style="width:90%">
+	<tr class="tr-head">
+	<th>Sl no.</th>
+	<th>Employee</th>
+	<th>Employee No</th>
+	<th>Net Salary</th>
+	<th>Payslip Status</th>
+	<th></th>
+	</tr>
+	<%employees=1%>
+	<%total_salary=0%>
+	<%approved_salary=0%>
+	<% @payslips.each_with_index do |p,i|%>
+		<tr>
+			<td class="col-3"><%= i+1 %></td>
+			<td class="col-3"><%= p.employee.first_name+" "+p.employee.last_name %></td>
+			<td class="col-3"><%= p.employee.employee_number%></td>
+			<td class="col-3"><%= p.amount%></td>
+			<td class="col-3"><%= p.is_approved? ? "Approved" : "Pending" %></td>
+			<td class="col-3"><%= link_to 'View',finance_view_employee_payslip_path(id:p.employee.id,date:@date)%></td>	
+		</tr>
+		<%employees+=i%>
+		<%total_salary+=p.amount.to_f%>
+		<% approved_salary+=p.amount.to_f if p.is_approved?%>
+	<%end%>
+	<tr class="tr-head">
+	<th>Total employees</th>
+	<th><%=employees%></th>
+	<th>Total salary</th>
+	<th><%=total_salary%></th>
+	<th>Approved salary</th>
+	<th><%= approved_salary%></th>
+	</tr>
+</table>
+<br/>
+<div align="center"><%= link_to 'Pdf Report',finance_employee_monthly_payslip_path(payslips:@payslips,format: "pdf"),class: "btn btn-success"%></div>
+<%else%>
+<h5>Payslip not found</h5>
+<%end%>

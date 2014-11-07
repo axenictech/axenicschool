@@ -16,6 +16,7 @@
     <div><%= t('due_date') %>&nbsp;&nbsp;<span>:</span><%= @collection.due_date %></div>
   </div>
 <br/><br/>
+<%total=0%>
 <% unless @particulars.nil?%>
 <table align="center" class="table table-hover table-bordered" style="width:80%">
 	<tr class="tr-head">
@@ -35,6 +36,7 @@
 			<td class="col-3"><%= p.collection_amount%></td>
 			<td class="col-3"><%= p.created_at.to_date%></td>	
 			</tr>
+		<%total+=p.collection_amount%>
 		<%end%>
 </table>
 <%else%>
@@ -53,10 +55,10 @@
 		<% @discounts.each_with_index do |d,i|%>
 			<tr>
 			<td class="col-3"><%= i+1%></td>
-			<td class="col-3"><%= d.name%></td>
+			<td class="col-3"><%= d.name+"("+d.discount.to_s+"%)"%></td>
 			<td class="col-3"><%= d.category.nil? ? "-": d.category.name%></td>
 			<td class="col-3"><%= d.admission_no.nil? ? "-": d.student_name%></td>
-			<td class="col-3"><%= d.discount%></td>
+			<td class="col-3"><%= d.collection_discount(total)%></td>
 			</tr>
 		<%end%>
 </table>

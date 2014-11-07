@@ -1,0 +1,78 @@
+<div id="content-header">
+  <h1>Finance</h1>
+  <h3>Employee payslip</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div id="box" align="center">
+<table align="center" class="table table-hover" style="width:90%">
+<tr class="tr-head">
+  <th colspan="2"><%=  @employee.first_name+" "+@employee.last_name%></th>
+</tr>
+<tr class="tr-head">
+  <th colspan="2"><%= t('payslip_generated_on') %><%= @salary.salary_date%><% %><span class="themed_text">(<%= t('status') %>: <%=@salary.is_approved? ? "Approved" : "Pending"%>)</span></th>
+</tr>
+<tr><td colspan="2"></td></tr>
+  <tr class="tr-head"><th colspan="2"><%= t('earnings') %></th></tr>
+    <% @structures.each do |mp| %>
+      <% unless mp.payroll_category.blank? %>
+        <% unless mp.payroll_category.is_deduction == true %>
+      <tr>
+        <td class="col-3"><%= mp.payroll_category.name  %></td>
+        <td><%="%.2f" %mp.amount.to_f %><%= " Rs"%></td>
+      </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% unless @individual_salary.nil? %>
+    <% @individual_salary.each do |s| %>
+      <% unless s.is_deduction == true %>
+      <tr>
+        <td class="col-3"><%= s.name  %></td>
+        <td><%="%.2f" %(s.amount.to_f) %><%= " Rs"%></td>
+      </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+<tr><td colspan="2"></td></tr>
+    <tr class="tr-head"><th colspan="2"><%= t('deductions') %></th></tr>
+    <% @structures.each do |mp| %>
+      <% unless mp.payroll_category.blank? %>
+        <% unless mp.payroll_category.is_deduction == false %>
+      <tr>
+        <td class="col-3"><%= mp.payroll_category.name  %></td>
+        <td><%="%.2f" %mp.amount.to_f %><%= " Rs"%></td>
+      </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% unless @individual_salary.nil? %>
+    <% @individual_salary.each do |s| %>
+      <% unless s.is_deduction == false %>
+      <tr>
+        <td class="col-3"><%= s.name  %></td>
+        <td><%="%.2f" %(s.amount.to_f) %><%= " Rs"%></td>
+      </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+<tr><td colspan="2"></td></tr>
+    <tr class="tr-head"><th colspan="2"><%= t('total') %></th></tr>
+    <tr>
+      <td class="col-3">Net Salary</td>
+      <td class="col-3"><%="%.2f" %(@salary.amount.to_f) %><%= " Rs"%></td>
+    </tr>
+    <tr>
+      <td class="col-3">Remark</td>
+      <td class="col-3"><%=@salary.is_approved? ? "Approved" : "Pending"%></td>
+    </tr>
+<tr><td colspan="2"></td></tr>
+  </table>
+<br/>
+<div align="center"><%= link_to 'Pdf Report',finance_employee_payslip_path(id:@employee.id,date:@date,format:"pdf"),class: "btn btn-success"%></div>
+</div>
+</div>

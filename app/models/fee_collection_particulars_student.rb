@@ -7,6 +7,7 @@ class FeeCollectionParticularsStudent < ActiveRecord::Base
 		fee=FinanceFee.new
 		fee.finance_fee_collection_id=collection
 		fee.student_id=student
+		fee.is_paid=false
 		if last_receipt_no.nil?
 		   fee.receipt_no=001
 		else

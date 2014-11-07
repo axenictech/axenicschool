@@ -19,7 +19,7 @@ class Employee < ActiveRecord::Base
   has_many    :employee_salery_structures
   has_many    :finance_transactions, :as => :payee
   has_many    :employee_attendances
-
+  has_many    :individual_payslip_categories
  after_save :create_user_account
 
 validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/,message:"allows only letters"}    
@@ -73,8 +73,24 @@ validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ w
     archived_employee = ArchivedEmployee.create(employee_attributes)
   end
 
-   def full_name
+  def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def update_payroll(payroll_id,amount)
+    @payrolls=PayrollCategory.where(payroll_category_id:payroll_id)
+      unless @payrolls.nil?
+          @payrolls.each do |payrol|
+            p_amount=(amount.to_f*payrol.percentage.to_f)/100
+            @payroll_salary=EmployeeSaleryStructure.where(employee_id: self.id,payroll_category_id: payrol.id).take
+            if @payroll_salary.nil?
+              EmployeeSaleryStructure.create(employee_id: self.id,payroll_category_id: payrol.id,amount:p_amount)
+            else
+              @payroll_salary.update(amount:p_amount)
+            end
+            update_payroll(payrol.id,p_amount)
+          end
+      end
   end
 
   private

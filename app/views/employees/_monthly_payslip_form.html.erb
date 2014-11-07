@@ -1,0 +1,34 @@
+<%= form_for :salery_slip,url:{action:'create_monthly_payslip',format:@employee} do |f| %>
+<table align="left" class="table table-hover" style="width:500px">
+	<div id ="@employeeloyee_main_info">
+      <h3> <%= "#{@employee.first_name} #{@employee.last_name}" %>  </h3>
+      <%= "Employee Number:" "#{@employee.employee_number}"%>
+    </div>
+
+    <tbody>
+    
+   	<tr>     
+          <td class="col-2"><%=f.label :"Salery Date" %><span class="necessary-field">*</span></td>
+          <td class="col-2"><%=f.date_field :salery_date,:value => Time.now.strftime('%Y-%m-%d')%></td>
+     </tr>
+
+      <%@independent_categories.each do |c| %>
+      <% val = EmployeeSaleryStructure.find_by_employee_id_and_payroll_category_id(@employee, c) -%>
+        
+          <% if c.payroll_category_id.nil? %>
+          <tr style="background-color:green">
+            <td class="col-2"><%= f.label :""%><%=c.name%></td>
+            <td class="col-2"><%= text_field_tag "amounts[#{val.nil? ? 0.00 : val.amount.to_f}]",val.nil? ? 0.00 : val.amount,onblur:"var a={amount:$(this).val(),employee_id:#{@employee.id},id:#{c.id}}; $.get('employee_structure',a,function(response){});"%></td>
+            </tr>
+          <%else%>
+          <tr>
+            <td class="col-2"><%= f.label :""%><%=c.name%></td>
+            <td class="col-2"><%= text_field_tag "amounts[#{val.nil? ? 0.00 : val.amount.to_f}]", val.nil? ? 0.00 : val.amount,readonly:true%></td>
+            </tr>
+          <%end%>
+      <% end %>
+   
+     <tr><td colspan="2"><%=f.submit "Create",class: "btn btn-primary" %></td></tr>
+</tbody>
+</table>
+<%end%>

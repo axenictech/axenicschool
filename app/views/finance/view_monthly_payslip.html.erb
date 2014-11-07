@@ -1,0 +1,26 @@
+<div id="content-header">
+  <h1>Finance</h1>
+  <h3>Department wise payslip</h3>
+    <div id="app-back-button">
+  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+  </div>
+  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div>
+
+<div id="page-yield">
+<div id="box" align="center">
+<%= form_for :payslip,url:{action:"view_payslip"},remote:true do |f|%>
+ <div class="label-field-pair">
+    <label>Select a department</label>
+    <%= f.select :department, @departments.map {|d| [d.name,d.id]},{prompt:true}%>
+  </div><br/>
+  <div class="label-field-pair">
+    <label>Select month</label>
+    <%= f.select :date, @salary_months.map {|c| [c.salary_date.strftime("%B %Y"),c.salary_date.strftime("%Y-%m-%d")]},{prompt:true}%>
+    </div><br/>
+  <%= f.submit "View",class: "btn btn-default"%>
+<%end%>
+<br/><br/>
+<div id="payslip"></div>
+</div>
+</div>

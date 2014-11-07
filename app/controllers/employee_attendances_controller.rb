@@ -25,10 +25,18 @@ class EmployeeAttendancesController < ApplicationController
     
   def destroy_leave_type
     @new_leave_type=EmployeeLeaveType.new
-    @leave_type= EmployeeLeaveType.find(params[:id])
-      if @leave_type.destroy
-        flash[:notice] = 'Employee Leave type deleted successfully!'
+    @leave_type = EmployeeLeaveType.find(params[:id])
+    @attendance = EmployeeAttendance.where(:employee_leave_type_id=>@leave_type.id)
+    @leave_count = EmployeeLeave.where(:employee_leave_type_id=>@leave_type.id)
+    if @attendance.blank?
+      @leave_type.destroy
+      @leave_count.each do |e|
+          e.destroy
       end
+          flash[:notice] = 'Leave type deleted succesfully'
+      else
+         flash[:alert] = 'Unable to delete the leave type'
+    end
     @active_leaves=EmployeeLeaveType.where(status: true).order(:name)
     @inactive_leaves=EmployeeLeaveType.where(status: false).order(:name)
   end
@@ -40,8 +48,13 @@ class EmployeeAttendancesController < ApplicationController
   def update_leave_type
     @new_leave_type=EmployeeLeaveType.new
     @leave_type= EmployeeLeaveType.find(params[:id])
+     @leave_count = EmployeeLeave.where(:employee_leave_type_id=>@leave_type.id)
       if @leave_type.update(params_leave)
-         	flash[:notice] = 'Employee Leave type updated successfully!'
+          @leave_type= EmployeeLeaveType.find(params[:id])
+           @leave_count.each do |l|
+             l.update(leave_count:@leave_type.max_leave_count)
+              end
+         flash[:notice] = 'Employee Leave type updated successfully!'
       end
     @active_leaves=EmployeeLeaveType.where(status: true).order(:name)
     @inactive_leaves=EmployeeLeaveType.where(status: false).order(:name)
@@ -49,6 +62,12 @@ class EmployeeAttendancesController < ApplicationController
 
   def attendance_register
     @deparments=EmployeeDepartment.all
+     @emp=Employee.where.not(id:EmployeeLeave.all.pluck(:employee_id))
+     @emp.each do |e|
+        EmployeeLeaveType.all.each do |l|
+        EmployeeLeave.create( :employee_id => e.id, :employee_leave_type_id => l.id, :leave_count => l.max_leave_count)
+          end
+      end
   end
       
   def select
@@ -80,6 +99,7 @@ class EmployeeAttendancesController < ApplicationController
     @date = params[:employee_attendance][:attendance_date]
       if @attendance.save
         @emp_leave = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
+        unless  @emp_leave.nil?
           if @attendance.is_half_day
             leave_taken=@emp_leave.leave_taken.to_f+(0.5)
             @emp_leave.update(leave_taken: leave_taken)
@@ -87,6 +107,7 @@ class EmployeeAttendancesController < ApplicationController
             leave_taken=@emp_leave.leave_taken.to_f+(1)
             @emp_leave.update(leave_taken: leave_taken)
           end
+         end
       end
     @deparment=@employee.employee_department
     @employees=@deparment.employees.all    
@@ -99,13 +120,16 @@ class EmployeeAttendancesController < ApplicationController
    def edit_attendance
       @attendance= EmployeeAttendance.find(params[:id])
       @employee = Employee.find(@attendance.employee_id)
-   end
+      @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
+     
+  end
 
    def update_att
     @attendance= EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @date = @attendance.attendance_date
     @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
+
       unless @reset_count.nil?
         leaves_taken = @reset_count.leave_taken
         day_status = @attendance.is_half_day
@@ -160,7 +184,8 @@ class EmployeeAttendancesController < ApplicationController
     @attendance= EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id,@attendance.employee_leave_type_id)
-      if @reset_count.leave_taken!=0
+     unless  @reset_count.nil?
+     if @reset_count.leave_taken!=0
         leaves_taken = @reset_count.leave_taken
         unless leaves_taken.nil?
           if @attendance.is_half_day
@@ -169,9 +194,13 @@ class EmployeeAttendancesController < ApplicationController
             leave = leaves_taken.to_d-(1) 
           end
         end
+
+     end
       end
     @attendance.destroy
-    @reset_count.update(:leave_taken => leave)
+    unless  @reset_count.nil?
+     @reset_count.update(:leave_taken => leave)
+    end
     @date = @attendance.attendance_date
     @deparment=@employee.employee_department
     @employees=@deparment.employees.all    
@@ -276,7 +305,7 @@ class EmployeeAttendancesController < ApplicationController
       default_leave_count = @leave_type.max_leave_count
       available_leave = default_leave_count.to_f
       leave_taken = 0
-      e.update(:leave_taken => leave_taken,:leave_count => available_leave)
+      e.update(:leave_taken => leave_taken,:leave_count => available_leave,:reset_date => Date.today)
     end
     redirect_to employee_attendances_employee_leave_detail_path
   end

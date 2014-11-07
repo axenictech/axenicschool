@@ -3,7 +3,9 @@ class FinanceFeeCollection < ActiveRecord::Base
 	belongs_to :finance_fee_category
 	has_many :fee_collection_particulars
   has_many :fee_collection_discounts
-
+  has_many :finance_fees
+  has_many :students,through: :finance_fees
+  
 	validates :name, presence:true,length: { minimum: 1, maximum: 30}, format: { with: /\A[a-z A-Z 0-9_.-\/]+\z/ }
 	validates :start_date, presence: true
 	validates :end_date, presence: true
@@ -57,6 +59,14 @@ class FinanceFeeCollection < ActiveRecord::Base
           collection_discount.student_fee_collection_discount
         end
       end
+    end
+  end
+
+  def is_due_date?
+    if self.due_date<Date.today
+      return true
+    else
+      return false
     end
   end
 end

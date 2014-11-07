@@ -4,15 +4,14 @@
    <%=hidden_field_tag :weekday_id%> 
    <%=hidden_field_tag :subject_id%>
    <%=hidden_field_tag :batch_id%>
-<% unless @teachers.empty? %>
- <% @teachers.each do |e| %>
+ <% @teachers.each do |e| unless e.employee.nil?
+ 	 %>
       <div class="btn btn-primary" ><%= e.employee.first_name %></div>
-         <%=radio_button_tag "teacher",e.employee.id,:checked=>"unchecked"%>
+         <%=radio_button_tag "teacher",e.employee.id,:checked=>"unchecked" %>
       <% end %>
-<% else %>
-<h5>No teacher associated to this subject.</h5>
-<% end %>
-<%end%>
+      <%end%>
+     <%end%>
+
 
 
 

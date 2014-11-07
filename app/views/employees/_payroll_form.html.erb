@@ -1,0 +1,24 @@
+<ul class="errors"></ul>
+
+<%= form_for @payroll_category_new, url:{action:'add_payroll_category'},remote:true do |c|%>
+	<table class="table" style="width:500px" align="center">
+	<tbody>
+		<tr><td><%= c.label :Category_name%></td>
+		<td><%= c.text_field :name%></td></tr>
+		<tr><td><%= c.label :Percentage%></td>
+		<td><%= c.text_field :percentage%></td></tr>
+
+		<tr><td><%= c.label :Percentage_of%></td>
+		<td><%= c.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 175px"%></td></tr>
+
+		<tr><td><%= c.label :Status%></td><td> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
+		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td></tr>
+
+		<tr><td colspan="3"><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></td></tr>	
+
+		<tr>
+			<td colspan="3"><%= c.submit 'Create'%></td>
+		</tr>
+</tbody>
+</table>
+<%end%>
