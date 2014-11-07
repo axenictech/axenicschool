@@ -509,10 +509,6 @@ get 'finance/employee_payslip'
 get 'employee_attendances/employee_wise_leave_reset/:id',to:'employee_attendances#employee_wise_leave_reset',as:'employee_attendances_employee_wise_leave_reset'
 get 'exam_setting/:course_id/increase_priority/:id',to:'exam_setting#increase_priority',as:'exam_setting_increase_priority'
 get 'exam_setting/:course_id/decrease_priority/:id',to:'exam_setting#decrease_priority',as:'exam_setting_decrease_priority'
-<<<<<<< HEAD
-=======
-
->>>>>>> f4e89b5c97198a7dd7bff167e6ccca361c8b4a98
 root 'home#dashboard'
  
 resources :home

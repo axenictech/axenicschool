@@ -70,8 +70,8 @@
                               onfocus:"$(this).popover('show');",
                               :style =>"width: 250px",
 									class: "form-control input-group",
-								 	placeholder: "Section name",required: true,:style=>"width:250px"
-									:"data-content"=>"Special characters not allowed"
+								 	placeholder: "Section name",required: true,:style=>"width:250px",
+									:"data-content"=>"Special characters not allowed",
 									:"data-placement"=>"right",
 									:"data-toggle"=>"popover",:"data-trigger"=>"focus" 
                   %>
@@ -84,7 +84,7 @@
                               <%= c.text_field :code ,
                               onfocus:"$(this).popover('show');",
                               :style =>"width: 250px",
-								class: "form-control input-group",placeholder: "Code",required: true
+								class: "form-control input-group",placeholder: "Code",required: true,
 									:"data-content"=>"Special characters not allowed",
 									:"data-placement"=>"right",
 									:"data-toggle"=>"popover",:"data-trigger"=>"focus"
@@ -109,8 +109,9 @@
                           <div class="form-group">
                             <label>Name</label>
                               <%= batch_form.text_field :name,
-				onfocus:"$(this).popover('show');" ,
-					class: "form-control input-group",placeholder: "batch name",required: true,:style=>"width:250px"
+				                      onfocus:"$(this).popover('show');" ,
+					       class: "form-control input-group",placeholder: "batch name",
+                required: true,:style=>"width:250px",
 						:"data-content"=>"Special characters not allowed",
 						:"data-placement"=>"right",
 						:"data-toggle"=>"popover",:"data-trigger"=>"focus"
