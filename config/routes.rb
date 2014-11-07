@@ -510,6 +510,7 @@ get 'employee_attendances/employee_wise_leave_reset/:id',to:'employee_attendance
 get 'exam_setting/:course_id/increase_priority/:id',to:'exam_setting#increase_priority',as:'exam_setting_increase_priority'
 get 'exam_setting/:course_id/decrease_priority/:id',to:'exam_setting#decrease_priority',as:'exam_setting_decrease_priority'
 
+get 'employee_attendances/attendance_report_pdf'
 root 'home#dashboard'
  
 resources :home

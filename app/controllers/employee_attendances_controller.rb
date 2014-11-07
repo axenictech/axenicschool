@@ -35,7 +35,7 @@ class EmployeeAttendancesController < ApplicationController
       end
           flash[:notice] = 'Leave type deleted succesfully'
       else
-         flash[:alert] = 'Unable to delete the leave type'
+         flash[:alert]  = 'Unable to delete the leave type'
     end
     @active_leaves=EmployeeLeaveType.where(status: true).order(:name)
     @inactive_leaves=EmployeeLeaveType.where(status: false).order(:name)
@@ -219,6 +219,14 @@ class EmployeeAttendancesController < ApplicationController
    @employees=@deparment.employees.all
   end
 
+  def attendance_report_pdf
+
+   @deparment=EmployeeDepartment.find(params[:department_id])
+   @leave_types= EmployeeLeaveType.all
+   @employees=@deparment.employees.all
+    render 'attendance_report_pdf',layout:false
+  end
+
    def report_info
      @employee = Employee.find(params[:employee_id])
      @attendance_report=EmployeeAttendance.find_by_employee_id(@employee.id)
@@ -324,5 +332,4 @@ class EmployeeAttendancesController < ApplicationController
   end
 
 end
-# end
 

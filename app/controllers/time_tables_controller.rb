@@ -65,6 +65,7 @@ class TimeTablesController < ApplicationController
  end
 
   def time_table_pdf
+    @time1=TimeTable.find(params[:t])
     @time=TimeTableEntry.where(params[:time_id])
     @batch = Batch.find(params[:batch_id])
     @subjects = @batch.subjects.all
