@@ -252,6 +252,7 @@ delete'employees/:id/remove_employee',to:'employees#remove_employee',as:'employe
 post 'employees/:id/assign_employee/department_id',to:'employees#assign_employee',as:'employees_assign_employee'
 get 'employees/admission1'
 get 'employees/admission2'
+get 'employees/view_employee_payslip'
 patch 'employees/admission2_create'
 post 'employees/admission3_create'
 get 'employees/admission3'
@@ -500,7 +501,7 @@ get 'finance/expense_details'
 get 'employee_attendances/employee_wise_leave_reset/:id',to:'employee_attendances#employee_wise_leave_reset',as:'employee_attendances_employee_wise_leave_reset'
 get 'exam_setting/:course_id/increase_priority/:id',to:'exam_setting#increase_priority',as:'exam_setting_increase_priority'
 get 'exam_setting/:course_id/decrease_priority/:id',to:'exam_setting#decrease_priority',as:'exam_setting_decrease_priority'
-
+get 'employees/employee_individual_payslip_pdf'
 root 'home#dashboard'
  
 resources :home
