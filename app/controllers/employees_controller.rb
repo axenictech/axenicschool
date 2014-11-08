@@ -729,10 +729,22 @@ end
     
     payslip_exists = @employee.monthly_payslips.where(salary_date:start_date..end_date).take
     total_salary=0
+    tot_deduction=0
+    amount=[]
+    is_deduction = PayrollCategory.where(is_deduction:'true')
+    is_deduction.each do |i|
+     amount=EmployeeSaleryStructure.where(employee_id:@employee.id,payroll_category_id:i).pluck(:amount)
+     amount.each do |i|
+      tot_deduction+=i.to_f
+    end
+  
+    end
+     
     params[:amounts].each do |amount|
       total_salary+=amount[0].to_f
     end
-          
+       total_salary-=tot_deduction.to_f
+
       unless payslip_exists.nil?
         payslip_exists.update(amount: total_salary)
       else
@@ -767,10 +779,23 @@ end
 
   def department_payslip
         @salary_dates = MonthlyPayslip.all
+
   end
   
   def view_payslip
-    
+      @salary_dates = MonthlyPayslip.all
+  end
+
+  def view_employee_payslip
+      @payslip=MonthlyPayslip.find_by_salary_date_and_employee_id(params[:salary_date],params[:employee_id])
+      @independent_categories = PayrollCategory.all  
+  end
+
+  def employee_individual_payslip_pdf
+     @payslip=MonthlyPayslip.find(params[:payslip])
+   
+      @independent_categories = PayrollCategory.all  
+     render 'employee_individual_payslip_pdf',layout:false
   end
 
   def genral_profile

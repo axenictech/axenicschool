@@ -1,0 +1,84 @@
+<div id="content-header">
+   <hr class="fancy-line"></hr>
+  <h1>Employee </h1>
+  <h3>Employee paayslip <br />
+  
+  <div id="app-back-button">
+    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
+  </div>
+ <div><%= image_tag("underline.jpg",width: "100%")%></div>
+</div><br/><br/>
+
+<div id="page-yield">
+<% unless flash[:notice].nil? %> <%end%>
+  
+<table align="center" class="table table-hover" style="width:80%">
+
+	  <%@emp=Employee.find(@payslip.employee_id)%>
+	  <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:'true').pluck(:is_approved)%>
+	  <%if approved[0]==true%>
+	  		<%status="(Approved)"%>
+	  <%else%>
+	  		<%status="(Pending)"%>
+	  <%end%>		
+      <%=@emp.first_name%><br>
+      <%="Payslip generated on "+ @payslip.salary_date.to_s+" status "+status%>
+      
+      <h2>Salary</h2>
+      
+      <tr>
+         <th>Category</th>
+         <th>Amount</th>
+      </tr>
+      <%total=0%>
+      
+        		<%is_deduction=PayrollCategory.where(is_deduction:'false')%>
+        	<%is_deduction.each do |c| %>
+      <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id: c.id).pluck(:amount) %>
+
+      <tr>
+         <td><%=c.name%></td>
+         <td><%='%.02f'%val[0]%></td>
+         <%total+=val[0].to_f%>
+      </tr>
+      <%end%>
+      <tr>
+      	<td><%="Total"%></td>
+      	<td><%='%.02f'%total%></td>
+      </tr>
+      	</table>
+      	<h2>Deduction</h2>
+      	
+      	<table align="center" class="table table-hover" style="width:80%">
+      		<%tot=0%>
+      		<%is_deduction=PayrollCategory.where(is_deduction:'true')%>
+           <%is_deduction.each do |d|%>
+            <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id:d.id).pluck(:amount)%>
+            
+      		<tr>
+      			<td><%=d.name%></td>
+      			<td><%=val[0]%></td>
+      			  <%tot+=val[0].to_f%>
+      		</tr>
+   		
+   			<%end%>
+
+      	<tr>
+		      	<td><%="Total"%></td>
+		      	<td><%='%.02f'%tot%></td>
+       </tr>   
+      	</table>
+
+      <h2>Total</h2>
+      	
+      	<table align="center" class="table table-hover" style="width:80%">
+      		
+      	    <%last_total=total.to_f-tot.to_f%>
+           	<tr>
+		      	<td><%="Total"%></td>
+		      	<td><%='%.02f'% last_total %></td>
+       </tr>   
+      	</table>
+     
+<div><%=link_to 'PDF REPORT',employees_employee_individual_payslip_pdf_path(payslip:@payslip,format:"pdf"),class: "btn btn-success"%></div>
+</div>
