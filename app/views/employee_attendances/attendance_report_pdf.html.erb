@@ -29,7 +29,7 @@
     <%@employees.each do |e| %>
   <tr>
     <td class="col-2">
-       <%=link_to e.first_name, employee_attendances_report_info_path(e) %>
+       <%= e.first_name %>
     </td>
     <% total=0 %>
     <% @leave_types.each do |lt1| %>
