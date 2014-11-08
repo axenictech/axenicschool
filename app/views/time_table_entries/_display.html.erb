@@ -1,6 +1,5 @@
-<% unless flash[:notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice] %> </div>
-  <% end %>
+
+<% if @class_timing.present? %>
  <table align="center" class="table table-hover table-bordered" style="width:800px" >
     <tr>
     <td class="col-4"></td>
@@ -34,6 +33,7 @@
 
   </table><br/><br/><br/>
 
+
  <%= form_for :sub,url:{action:'select_subject'},method: :get,remote:true,html:{id:"em"} do |f| %>
  <%= f.label :select_subjects %>
  <%= f.select :subject_id,@subjects.collect {|b| [b.name,b.id,"#{b.id}"]},{prompt:true},{
@@ -41,3 +41,6 @@
 <%end%>
 <div id="emp_div"></div>
 
+<%else%>
+<h4>Yet class timing are not assigned for this batch,Assign from Set class timings</h4>
+<%end%>

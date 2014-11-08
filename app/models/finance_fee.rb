@@ -1,6 +1,7 @@
 class FinanceFee < ActiveRecord::Base
 	belongs_to :finance_fee_collection
 	belongs_to :student
+
 	has_many :finance_transactions
   has_many :finance_fines
 
@@ -34,4 +35,5 @@ class FinanceFee < ActiveRecord::Base
   	end
   	payment
   end
+
 end

@@ -1,6 +1,5 @@
-<table align="left" class="table table-hover" style="width:500px">
 <%= form_for :salery_slip,url:{action:'create_monthly_payslip',format:@employee} do |f| %>
-
+<table align="left" class="table table-hover" style="width:500px">
 	<div id ="@employeeloyee_main_info">
       <h3> <%= "#{@employee.first_name} #{@employee.last_name}" %>  </h3>
       <%= "Employee Number:" "#{@employee.employee_number}"%>
@@ -30,7 +29,6 @@
       <% end %>
    
      <tr><td colspan="2"><%=f.submit "Create",class: "btn btn-primary" %></td></tr>
-
-<%end%>
 </tbody>
 </table>
+<%end%>

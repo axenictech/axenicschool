@@ -1,12 +1,58 @@
-  <% if @students.empty? %>
-  <h4 align="center">No Record Found </h4>
-   <% else %>
-  <table align="center" class="table table-hover" style="width:500px">
-  <tr class="tr-head"><td colspan="2" class="col-2">Student Name</td></tr>
-  <% @students.each do |student| %> 
-     <tr>
-      <td class="col-2"><%= student.first_name+" "+student.last_name  %></td>
-      <td class="col-3"><%= check_box_tag "students[]", student.id,false,class: 'check_box'%>Assign</td>
+
+      <td class="col-2"></td>
+      <td class="col-3"></td>
     <% end %>
     </table>
   <% end %>
+
+<div class="col-sm-12 ">
+  <div class="box bordered-box green-border" style="margin-bottom:0;">
+    <div class="box-header green-background">
+      <div class="title"><%= t('courses details')%></div>
+        <div class="actions">  
+          <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+          </a>
+        </div>
+    </div>
+
+  <div class="box-content box-no-padding">
+  <div class="responsive-table">
+    <div class="scrollable-area">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
+      <div class="row datatables-top">
+      <div class="col-sm-4">
+        <div id="DataTables_Table_0_length" class="dataTables_length">
+        </div>
+      </div>
+      </div>
+      <table class="data-table table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+        <% if @students.empty? %>
+         <h4 align="center">No Record Found </h4>
+          <% else %>
+        <thead>
+          <tr role="row">
+          <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+              Name
+            : activate to sort column descending" style="width: 297px;">
+              Student Name
+            </th>
+            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 125px;">Actions</th>
+
+            </tr>
+        </thead>
+        
+      <tbody role="alert" aria-live="polite" aria-relevant="all">
+    <% @students.each do |student| %> 
+      <tr class="<%= cycle('odd', 'even')%>">
+        <td class=" sorting_1"><%= student.first_name+" "+student.last_name  %></td>
+        <td class=" sorting_1"><%= check_box_tag "students[]", student.id,false,class: 'check_box'%>Assign</td>
+      
+      </tr>
+    <%end%>
+          </tbody>
+        <%end%>
+          </table>
+          <div class="row datatables-bottom"><div class="col-sm-6"></div><div class="col-sm-6 text-right"><div class="dataTables_paginate paging_bootstrap"><ul class="pagination pagination-sm"><li class="prev disabled"><a href="#">← Previous</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li class="next"><a href="#">Next → </a></li></ul></div></div></div></div>
+    </div>
+  </div>
+</div>

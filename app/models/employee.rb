@@ -19,7 +19,7 @@ class Employee < ActiveRecord::Base
   has_many    :employee_salery_structures
   has_many    :finance_transactions, :as => :payee
   has_many    :employee_attendances
-
+  has_many    :individual_payslip_categories
  after_save :create_user_account
 
 validates :first_name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z_" "-]+\Z/,message:"allows only letters"}    

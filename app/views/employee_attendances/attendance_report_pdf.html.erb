@@ -1,4 +1,18 @@
-<table align="center" class="table table-hover table-bordered" style="width:80%">
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div align="center">
+<font color="purple"><b><i><h3>Axenic School</h3>
+</i></b></font></div>
+<div align="left">
+<font><b><i><h4>Employee Department Attendance</h4>
+<h5>Department - All Departments</h5>
+<h5>Total Members-<%=@employees.count%></h5>
+</i></b></font></div>
+
+<table border="1" style="width:100%">
   <tr class="tr-head">
     <td>
       <%= t('name') %>
@@ -41,4 +55,7 @@
   </tr>
   <%end%>
 </table>
-<div><%=link_to 'PDF Report',employee_attendances_attendance_report_pdf_path(department_id:@deparment.id,format:"pdf"),class: "btn btn-primary"%></div>
+
+</div>
+</body>
+</html>
