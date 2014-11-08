@@ -13,10 +13,10 @@
   
     <table align="center" class="table table-hover table-bordered" style="width:800px">
       <tr>
-        <td><%= 'leave_types'%></td>
-        <td><%= 'available_leave'%></td>
-        <td><%= 'leave_taken'%></td>
-         <td><%= 'last_reset_date' %></td>
+        <td><%= 'Leave Types'%></td>
+        <td><%= 'Available Leave'%></td>
+        <td><%= 'Leave Taken'%></td>
+         <td><%= 'Last Reset Date' %></td>
       </tr>
       <% @leave_count.each do |e| %>
         <%  leave_type =EmployeeLeaveType.find_by_id(e.employee_leave_type_id)%>

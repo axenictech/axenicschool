@@ -77,8 +77,7 @@ class TimeTablesController < ApplicationController
     @time_table=TimeTable.find(params[:time][:id])
     @timetable_entries = @time_table.time_table_entries
     @weekdays = @timetable_entries.collect(&:weekday).uniq.sort!{|a,b| a.weekday <=> b.weekday} 
-
-    @class_timings =@timetable_entries.collect(&:class_timing).uniq.sort!{|a,b| a.start_time <=> b.start_time}
+   @class_timings=@timetable_entries.collect(&:class_timing).uniq.sort!{|a,b| a.start_time <=> b.start_time}
     @employees =@timetable_entries.collect(&:employee).uniq
 
 end
@@ -168,6 +167,14 @@ end
     end
   end
 
+  def time_table_delete
+     @time=TimeTable.find(params[:format])
+     if @time.destroy
+      redirect_to time_tables_path
+      flash[:notice]="Timetable deleted successfully"
+     end
+  end
+  
   def update_timetable_values
       @timetable=TimeTable.find(params[:format])
 
