@@ -744,15 +744,20 @@ end
       total_salary+=amount[0].to_f
     end
        total_salary-=tot_deduction.to_f
-
-      unless payslip_exists.nil?
-        payslip_exists.update(amount: total_salary)
-      else
-        MonthlyPayslip.create(:salary_date=>start_date,:employee_id => params[:format],amount: total_salary)
+  
+    b=MonthlyPayslip.where(employee_id:@employee.id,salary_date:@salary_date).pluck(:salary_date)
+     if b[0].present?  
+        if b[0].strftime("%b")==@salary_date.strftime("%b")
+         flash[:notice]="Payslip of "+@employee.first_name+" is already generated"
       end
-    end
+       else 
+         MonthlyPayslip.create(:salary_date=>@salary_date,:employee_id => params[:format],amount: total_salary)
+        end
+    
+     end
     redirect_to employees_monthly_payslip_path(@employee)
   end
+
 
   def employee_structure
     @employee=Employee.find(params[:employee_id])
@@ -778,12 +783,19 @@ end
   end
 
   def department_payslip
-        @salary_dates = MonthlyPayslip.all
+      
+  end
 
+  def select_month
+        @salary_dates = MonthlyPayslip.all
+        @department=params[:view_payslip][:id]
+        
   end
   
   def view_payslip
       @salary_dates = MonthlyPayslip.all
+      @department=EmployeeDepartment.find(params[:format])
+      @employees=@department.employees.all
   end
 
   def view_employee_payslip
