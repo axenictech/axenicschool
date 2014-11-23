@@ -1,3 +1,3 @@
 class Weekday < ActiveRecord::Base
-	belongs_to :batch
+  belongs_to :batch
 end

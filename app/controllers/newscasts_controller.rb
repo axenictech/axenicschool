@@ -1,22 +1,21 @@
 class NewscastsController < ApplicationController
-
   def new
-    @newscast=Newscast.new
+    @newscast = Newscast.new
   end
 
   def select
     unless params[:newscast][:title].empty?
-      @newscasts=Newscast.where("title like '#{params[:newscast][:title]}%'")
+      @newscasts = Newscast.where("title like '#{params[:newscast][:title]}%'")
     end
   end
-	
-	def create
-	 @newscast =Newscast.new(newscast_params)
+
+  def create
+    @newscast = Newscast.new(newscast_params)
     if @newscast.save
-	   redirect_to newscast_path(@newscast), notice: "News added successfully"
-      else
+      redirect_to newscast_path(@newscast), notice: 'News added successfully'
+    else
       render 'new'
-    end
+   end
   end
 
   def edit
@@ -24,22 +23,22 @@ class NewscastsController < ApplicationController
   end
 
   def update
-  	@newscast=Newscast.find(params[:id])
-  	if @newscast.update(newscast_params)
-  	redirect_to newscast_path(@newscast), notice: "News updated successfully!!!"
+    @newscast = Newscast.find(params[:id])
+    if @newscast.update(newscast_params)
+      redirect_to newscast_path(@newscast), notice: 'News updated successfully!!!'
     else
       render 'edit'
     end
   end
 
   def destroy
-   @newscast = Newscast.find(params[:id])
-  	@newscast.destroy
-   	redirect_to newscasts_path(@newscast), notice: "News deleted succefully!"
+    @newscast = Newscast.find(params[:id])
+    @newscast.destroy
+    redirect_to newscasts_path(@newscast), notice: 'News deleted succefully!'
   end
 
   def show
-  	@newscast = Newscast.find(params[:id])
+    @newscast = Newscast.find(params[:id])
     @comment = @newscast.comments.new
   end
 
@@ -48,6 +47,7 @@ class NewscastsController < ApplicationController
   end
 
   private
+
   def newscast_params
     params.require(:newscast).permit(:title, :content)
   end

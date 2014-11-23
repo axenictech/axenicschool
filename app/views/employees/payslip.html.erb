@@ -17,7 +17,7 @@
             <%= link_to "Select employee",employees_select_employee_department_path,style: 'color:black' %>
           </div>
           <div class="panel-body" style="height:70px">
-         Select Payslip of Employee.
+         Generate Payslip of an Employee.
           </div>
         </div>
         </div>
@@ -41,7 +41,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-            <%= link_to "One click payslip revert",employees_search_employee_path,style: 'color:black' %>     
+            <%= link_to "One click payslip revert",employees_payslip_revert_path,remote:true,style: 'color:black' %>     
          </div>
           <div class="panel-body" style="height:70px">
             One click payslip revertion.
@@ -49,7 +49,7 @@
         </div>
         </div>
 
-        <div class="col-md-4">
+         <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
           <%= link_to "Rejected Employee",employees_payslip_path,style: 'color:black' %>
@@ -63,6 +63,7 @@
         </div>
       
         <div id="one_click_payslip"></div>
+        <div id="one_click_revert"></div>
 
         </div>
 

@@ -679,7 +679,6 @@ ActiveRecord::Schema.define(version: 20141223103413) do
 
   create_table "finance_fees", force: true do |t|
     t.integer  "finance_fee_collection_id"
-    t.integer  "finance_transaction_id"
     t.integer  "student_id"
     t.string   "receipt_no"
     t.boolean  "is_paid"
@@ -688,7 +687,6 @@ ActiveRecord::Schema.define(version: 20141223103413) do
   end
 
   add_index "finance_fees", ["finance_fee_collection_id"], name: "index_finance_fees_on_finance_fee_collection_id", using: :btree
-  add_index "finance_fees", ["finance_transaction_id"], name: "index_finance_fees_on_finance_transaction_id", using: :btree
   add_index "finance_fees", ["student_id"], name: "index_finance_fees_on_student_id", using: :btree
 
   create_table "finance_fines", force: true do |t|
@@ -728,13 +726,13 @@ ActiveRecord::Schema.define(version: 20141223103413) do
     t.date     "transaction_date"
     t.boolean  "fine_included",                   default: false
     t.integer  "student_id"
-    t.integer  "finance_fees_id"
+    t.integer  "finance_fee_id"
     t.integer  "finance_transaction_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "finance_transactions", ["finance_fees_id"], name: "index_finance_transactions_on_finance_fees_id", using: :btree
+  add_index "finance_transactions", ["finance_fee_id"], name: "index_finance_transactions_on_finance_fee_id", using: :btree
   add_index "finance_transactions", ["finance_transaction_category_id"], name: "index_finance_transactions_on_finance_transaction_category_id", using: :btree
   add_index "finance_transactions", ["student_id"], name: "index_finance_transactions_on_student_id", using: :btree
 
@@ -915,20 +913,7 @@ ActiveRecord::Schema.define(version: 20141223103413) do
     t.integer  "school_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "privilege_tag_id"
   end
-
-  add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
-
-  create_table "privileges_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "privilege_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "privileges_users", ["privilege_id"], name: "index_privileges_users_on_privilege_id", using: :btree
-  add_index "privileges_users", ["user_id"], name: "index_privileges_users_on_user_id", using: :btree
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"

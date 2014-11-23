@@ -1,18 +1,18 @@
 class ClassTiming < ActiveRecord::Base
-	has_many :timetable_entries
-    belongs_to :batch
-   
-    validates :name, presence: true,length:{minimum:1, maximum:20}, format:{ with: /\A[a-zA-Z0-9" "-]+\Z/}
-    validates :start_time, presence: true
-    validates :end_time, presence: true
-    validate  :end_time_cannot_be_less_than_start_time
-    # validate  :validate_class_timing
-    def end_time_cannot_be_less_than_start_time
-      if end_time.present? and end_time < start_time
+  has_many :timetable_entries
+  belongs_to :batch
+
+  validates :name, presence: true, length: { minimum: 1, maximum: 20 }, format: { with: /\A[a-zA-Z0-9" "-]+\Z/ }
+  validates :start_time, presence: true
+  validates :end_time, presence: true
+  validate :end_time_cannot_be_less_than_start_time
+  # validate  :validate_class_timing
+  def end_time_cannot_be_less_than_start_time
+    if end_time.present? && end_time < start_time
       errors.add(:end_time, "can't be less than start time")
-      end
     end
-    
+  end
+
   # def validate_class_timing
   #   unless self.start_time.nil? or self.end_time.nil?
   #   self_check= self.new_record? ? "" : "id != #{self.id} and "
@@ -24,5 +24,4 @@ class ClassTiming < ActiveRecord::Base
   #   #  errors.add(:class_time,"overlaps_with_existing") if between_overlap
   #     end
   #   end
-
 end

@@ -1,3 +1,3 @@
 class Event < ActiveRecord::Base
- has_many :batch_events
+  has_many :batch_events
 end
