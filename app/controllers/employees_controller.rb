@@ -1,3 +1,4 @@
+# employee controller
 class EmployeesController < ApplicationController
   def new_category
     @employee_category_new = EmployeeCategory.new
@@ -133,9 +134,7 @@ class EmployeesController < ApplicationController
   def add_bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.new(bank_field_params)
-    if @bank_field.save
-      flash[:notice4] = 'Bank field created Successfully'
-    end
+    flash[:notice4] = 'Bank field created Successfully' if @bank_field.save
     @bank_fields1 = BankField.where(status: true).order(:name)
     @bank_fields2 = BankField.where(status: false).order(:name)
   end
@@ -157,9 +156,7 @@ class EmployeesController < ApplicationController
   def destroy_bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.find(params[:id])
-    if @bank_field.destroy
-      flash[:notice4] = 'Bank field deleted Successfully'
-    end
+    flash[:notice4] = 'Bank field deleted Successfully' if @bank_field.destroy
     @bank_fields1 = BankField.where(status: true).order(:name)
     @bank_fields2 = BankField.where(status: false).order(:name)
   end
@@ -305,14 +302,12 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:format])
     @bank_fields = BankField.all
 
-    if request.post?
-      params[:bank_details].each_pair do |k, v|
-        EmployeeBankDetail.create(employee_id: @employee.id, bank_field_id: k,
-                                  bank_info: v['bank_info'])
-
-      end
-      redirect_to employees_edit_privilege_path(@employee)
-        end
+   if request.post?
+    params[:bank_details].each_pair do |k, v|
+    EmployeeBankDetail.create(employee_id: @employee.id,bank_field_id: k,bank_info: v['bank_info'])
+  end
+    end
+    redirect_to employees_edit_privilege_path(@employee)
   end
 
   def edit_privilege
@@ -334,9 +329,9 @@ class EmployeesController < ApplicationController
 
         unless privileges.nil?
           privileges.each do |p|
-            PrivilegesUser.create(user_id: @user.id, privilege_id: p.id)
+            PrivilegeUsers.create(user_id: @user.id, privilege_id: p.id)
           end
-        end
+        end 
       end
     end
     redirect_to employees_admission4_path(@employee)
@@ -348,8 +343,8 @@ class EmployeesController < ApplicationController
 
   def search
     @employee = Employee.find(params[:format])
-    unless params[:search].empty?
-      other_conditions = ''
+     unless params[:search].empty?
+    other_conditions = ''
 
       other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ''
       other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ''
@@ -357,8 +352,7 @@ class EmployeesController < ApplicationController
       other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ''
 
       @reporting_manager = Employee.where('first_name like ?' + other_conditions, "#{params[:search]}%")
-
-  end
+    end
   end
 
   def update_reporting_manager_name
@@ -882,7 +876,7 @@ end
       p 'archived employee'
       p @archived_employee
       @employee.destroy
-      flash[:notice] = "Employee #{@employee.first_name} is Archived Successfully"
+      flash[:notice] = 'Employee #{@employee.first_name} is Archived Successfully'
       redirect_to employees_archived_employee_profile_path(@employee)
 
   end
