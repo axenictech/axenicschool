@@ -39,7 +39,7 @@
     <%= link_to 'Exams',exam_group_path(@batch),class: "btn btn-white hidden-xs" %> 
     <%= link_to 'Edit', edit_batch_path(@batch),class: "btn btn-white hidden-xs"%>
     <%= link_to 'Delete', batches_display_path(@batch),
-      method: :delete, data: { confirm: "Are you sure to delete Batch #{@batch.course.course_name+" "+@batch.course.section_name+" - "+@batch.name }?"} %>
+      method: :delete, data: { confirm: "Are you sure to delete Batch #{@batch.course.course_name+" "+@batch.course.section_name+" - "+@batch.name }?"}, class: "btn btn-white hidden-xs"%>
     <%= link_to 'Manage Subject',batches_subjects_subject_path(@batch),class: "btn btn-white hidden-xs"%>  
 
 

@@ -1,5 +1,4 @@
 <div id="content-header">
-   <hr class="fancy-line"></hr>
   <h1>Admission</h1>
   <h3>Step 1 - Student details<br />
   <small><font color="red">Fields Marked with * must be filled</font></small></h3>
@@ -9,8 +8,6 @@
  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br/><br/>
 <div id="page-yield">
-
- 
 
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for @student do |f| %>
@@ -174,7 +171,7 @@
      </tr>
    </div>
    
-     <tr><td colspan="4"><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
+     <tr><td colspan="4" align="center"><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
 
 <%end%>
 </tbody>

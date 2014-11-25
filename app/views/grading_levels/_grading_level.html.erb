@@ -1,16 +1,12 @@
-<% unless flash[:grading_level_notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:grading_level_notice] %> </div>
-  <% end %>
-
 <div class="box-transperent">
  <%= link_to 'Add Grades',new_batch_grading_level_path(@batch),remote: true, class: "btn btn-white hidden-xs"%>
 </div>
    
-<!-- <div class="row">
+<div class="row">
 <div class="col-lg-12 ">
   <div class="box bordered-box green-border" style="margin-bottom:0;">
     <div class="box-header green-background">
-      <div class="title"><%= Grades %></div>
+      <div class="title">Grades</div>
         <div class="actions">  
           <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
           </a>
@@ -87,4 +83,4 @@
 
 </div>
 </div>
-</div> -->
+</div>

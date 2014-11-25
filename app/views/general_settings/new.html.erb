@@ -1,7 +1,8 @@
 <div id="content-header">
   <h1><%= t('General Setting')%></h1>
   <h3><%= t('Home')%><br/>
- <small><font color="red"><%= t('Fields Marked with * must be filled</font></small')%></font></h3>
+ <small><font color="red">Fields Marked with * must be filled
+ </font></small></font></h3>
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
   </div>
@@ -102,7 +103,7 @@
         <%=  t('Enable News Comment Moderation') %>
         </td> 
     </tr>
-    <tr><td colspan="2">
+    <tr><td colspan="2" align="center">
     <%= f.submit 'Update',  class: "btn btn-success"%> 
     
     </td>
