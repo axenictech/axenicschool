@@ -45,15 +45,15 @@
 </div>
 </div>
 
-<div class="row">
-      <%= link_to "Assign All",batch_transfers_assign_all_path(@batch),remote:true%>
-      <%= link_to "Remove All",batch_transfers_remove_all_path(@batch),remote:true %>
+<div class="row" align="right" style="margin-right:20px">
+      <%= link_to "Assign All",batch_transfers_assign_all_path(@batch),remote:true, class: 'btn btn-primary'%>
+      <%= link_to "Remove All",batch_transfers_remove_all_path(@batch),remote:true, class: 'btn btn-primary' %>
 </div>
-
+<br/>
 <div id="students_list">
     <%= render 'students_list' %>
 </div>
-
+<br/>
 <div class="row">
  <div align="center"><%= f.submit "Transfer Student", class: 'btn btn-success'%>
  </div>

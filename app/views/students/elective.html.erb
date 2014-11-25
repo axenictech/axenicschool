@@ -17,9 +17,10 @@
  <% unless flash[:notice_ele].nil? %>
     <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice_ele] %> </div>
   <% end %></div><br/>
-<div class="linker">
-<%= link_to "Assign All",students_assign_all_path(@subject),remote:true%>
-  <%= link_to "Remove All",students_remove_all_path(@subject),remote:true %></div>
+<div class="linker" align="right" style="margin-right:20px">
+<%= link_to "Assign All",students_assign_all_path(@subject),remote:true, class: 'btn btn-primary'%>
+  <%= link_to "Remove All",students_remove_all_path(@subject),remote:true,class: 'btn btn-primary' %></div>
+<br/><br/>
   <div id="elective_subject">
     <%= render 'elective_subject' %>
 </div></div>

@@ -4,9 +4,10 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 
+<div id="page-yield">
 <table align="center" class="table table-hover" style="width:500px">
    	<tbody>
-<tr class="tr-head"><td><h4>Select one of the contact for Emergency Contact</h4></td></tr>
+<tr class="tr-head"><th><h4>Select one of the contact for Emergency Contact</h4></th></tr>
    	<%= form_for @student, url:{action:'update_immediatecontact'},method: :patch do |f| %>
    	<%= hidden_field_tag :id,@student.id %>	
 	<% @student.guardians.each do|g|%>
@@ -17,7 +18,7 @@
       </tr>
 	<%end%>
 	<tr class="tr-head">
-			 <td><%= f.submit 'Finish',class: "btn btn-primary"%></td>
+			 <td align="center"><%= f.submit 'Finish',class: "btn btn-primary"%></td>
 	</tr>
  <%end%>
 </tbody>

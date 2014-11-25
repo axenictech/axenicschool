@@ -5,18 +5,18 @@
 </div>
 
 <div id="page-yield">
- 
- 
-   <div align="center">
-  		
+ <div class="row">
+ <div class="col-xs-3 col-sm-3"></div>
+   <div class="col-xs-6 col-sm-6">
         <h4>Following guardians has been saved for <%= @student.first_name + ' ' + @student.last_name %> </h4>
-        <ul>
+        <ol>
         <% @student.guardians.each do |p| %>
           <li><h5><%= p.first_name+' '+p.last_name %> - <%= p.relation %></h5></li>
         <%  end %>
-        </ul>
+        </ol>
         <div>
         <%= link_to "Add Another Guardian", students_admission2_path(@student),class: "btn btn-primary"%>
         <%= link_to "Finish",students_admission3_path(@student),class: "btn btn-default"%>
         </div>
+      </div>
  </div>

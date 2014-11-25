@@ -5,7 +5,7 @@
 <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div><br/><br/>
 <div id="box">
- <div class="add_sub",style="margin-top:20px">
+ <div class="add_sub">
  <div id="display_subject_mark"></div>
      <%=link_to "Add subject", students_previous_subject_path(@student), remote: true %>
   </div></div>
@@ -47,7 +47,7 @@
           <td class="col-2"> <%=f.text_field :total_mark%></td>
      </tr>
       <tr>    
-          <td colspan="2"><%=f.submit 'submit',class: "btn btn-primary"%></td>
+          <td colspan="2" align="center"><%=f.submit 'submit',class: "btn btn-primary"%></td>
      </tr>
 </tbody>
 </table>

@@ -21,7 +21,7 @@
 
 <table class="table" align="center" style="width:900px">
 <thead>
-<tr>
+<tr class="tr-head">
     <th colspan="4"><div id="profile_picture_display">
     <% unless @student.image.blank? %>
      <%= image_tag @student.image%>
@@ -127,8 +127,8 @@
 <%end%>
 <%end%>
 <%end%>
-<tr style="background-color:white">
-<td colspan="4"><%= link_to 'Edit',edit_student_path(@student),class: "btn btn-primary" %>
+<tr class="tr-head">
+<td colspan="4" align="center"><%= link_to 'Edit',edit_student_path(@student),class: "btn btn-primary" %>
 <%= link_to 'PDF Report',students_student_profile_path(@student,format:"pdf"),class: "btn btn-success" %></td>
 </tr>
 </tbody></table>
