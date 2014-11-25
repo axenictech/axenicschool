@@ -1,3 +1,2 @@
 class SettingController < ApplicationController
-
 end

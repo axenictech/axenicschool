@@ -1,5 +1,6 @@
 
 <div id="payslip">
+        <%if @employees.present? %>
         <table border="1" style="width:80%">
           <tr class="tr-head">
             <td><%= 'Sr.no' %></td>
@@ -21,25 +22,30 @@
                  <%counter+=1%>
                <%end%>
           
-           <%@salary_dates.each do |emp|%>
+
+         
+              
+           <%@employees.each do |emp|%>
           <tr>
               
-               <%amount=MonthlyPayslip.where(employee_id:emp.employee_id).pluck(:amount)%>
+               <%amount=MonthlyPayslip.where(employee_id:emp.id).pluck(:amount)%>
                <%tot_amount+=amount[0].to_f%>
-               <%status=MonthlyPayslip.where(employee_id:emp.employee_id).pluck(:is_approved)%>
+               <%status=MonthlyPayslip.where(employee_id:emp.id).pluck(:is_approved)%>
                <%if status[0]==true%>
                     <%salary_ststus="Approved"%>
                 <%else%>
                     <%salary_ststus="Pending"%>
                 <%end%>
-               <%@employee=Employee.find(emp.employee_id)%>
+               
                <td><%=count+1%></td>
               
-               <td><%= @employee.first_name%></td>
-               <td><%= @employee.employee_number%></td>
+               <td><%= emp.first_name%></td>
+               <td><%= emp.employee_number%></td>
                <td><%= '%.02f'%amount[0].to_f%></td>
                <td><%= salary_ststus%></td>
-               <td><%= link_to'View',employees_view_employee_payslip_path(employee_id:emp.employee_id,salary_date:emp.salary_date)%></td> 
+
+               <%salary_date=MonthlyPayslip.where(employee_id:1).pluck(:salary_date)%>
+               <td><%= link_to'View',employees_view_employee_payslip_path(employee_id:emp.id,salary_date:salary_date)%></td> 
           </tr>
            <%count+=1%>
           <%end%>
@@ -55,6 +61,9 @@
           </tr>
 
         </table>
+         <%else%>
+                <h2>No employees found</h2>
+         <%end%>
       
   </div>
 </div>

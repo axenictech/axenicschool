@@ -1,72 +1,71 @@
 class Student < ActiveRecord::Base
-
   belongs_to :country
   belongs_to :batch
   belongs_to :category
-  belongs_to :nationality, :class_name => 'Country'
-  has_one    :student_previous_data
-  has_many   :student_previous_subject_marks
-  has_many   :guardians
+  belongs_to :nationality, class_name: 'Country'
+  has_one :student_previous_data
+  has_many :student_previous_subject_marks
+  has_many :guardians
   has_and_belongs_to_many :fee_collection_particulars
   has_and_belongs_to_many :fee_collection_discounts
   has_many :finance_fees
-  has_many :finance_fee_collections,through: :finance_fees
+  has_many :finance_fee_collections, through: :finance_fees
   has_attached_file :image
-  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates_attachment_content_type :image, content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 
- validates :admission_no, presence: true
+  validates :admission_no, presence: true
   validates :admission_date, presence: true
 
-  validates :first_name, presence: true, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" }
-  validates_length_of :first_name,:minimum => 1,:maximum =>20
+  validates :first_name, presence: true, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' }
+  validates_length_of :first_name, minimum: 1, maximum: 20
 
-  validates :last_name, presence: true, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" }
-  validates_length_of :last_name,:minimum => 1,:maximum =>20
-  
+  validates :last_name, presence: true, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' }
+  validates_length_of :last_name, minimum: 1, maximum: 20
+
   validates :date_of_birth, presence: true
   validates :batch_id, presence: true
 
   validates :category_id, presence: true
   validates :nationality_id, presence: true
   validates :country_id, presence: true
-  validates :middle_name,format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-            length:{:in=> 1..20},allow_blank: true
-  validates :birth_place, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-              length:{:in=> 1..20},allow_blank: true 
-  validates :language, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-               length:{:in=> 1..30},allow_blank: true  
-  validates :religion, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-               length:{:in=> 1..20},allow_blank: true
-  validates :address_line1,length:{:in=> 1..30},allow_blank: true
-  validates :address_line2, length:{:in=> 1..20},allow_blank: true
-  validates :city, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-              length:{:in=> 1..30},allow_blank: true
-  validates :state, format: { with: /\A[a-z A-Z]+\z/,message: "only allows letters" },
-                length:{:in=> 1..30},allow_blank: true
+  validates :middle_name, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
+                          length: { in: 1..20 }, allow_blank: true
+  validates :birth_place, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
+                          length: { in: 1..20 }, allow_blank: true
+  validates :language, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
+                       length: { in: 1..30 }, allow_blank: true
+  validates :religion, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
+                       length: { in: 1..20 }, allow_blank: true
+  validates :address_line1, length: { in: 1..30 }, allow_blank: true
+  validates :address_line2, length: { in: 1..20 }, allow_blank: true
+  validates :city, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
+                   length: { in: 1..30 }, allow_blank: true
+  validates :state, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
+                    length: { in: 1..30 }, allow_blank: true
   validates :pin_code, numericality: { only_integer: true },
-                 length:{minimum:6,maximum:6},allow_blank: true
-  validates :phone2 ,numericality: { only_integer: true },
-              length:{minimum:6,maximum:11},allow_blank: true
-  validates :phone1 ,numericality: { only_integer: true},
-              length:{minimum:6,maximum:11},allow_blank: true
-  validates :email,format:{with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/},allow_blank: true
+                       length: { minimum: 6, maximum: 6 }, allow_blank: true
+  validates :phone2, numericality: { only_integer: true },
+                     length: { minimum: 6, maximum: 11 }, allow_blank: true
+  validates :phone1, numericality: { only_integer: true },
+                     length: { minimum: 6, maximum: 11 }, allow_blank: true
+  validates :email, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }, allow_blank: true
   after_save :create_user_account
 
   def archived_student
-    student_attributes = self.attributes   
-    student_attributes["student_id"]= self.id
+    student_attributes = attributes
+    student_attributes['student_id'] = id
     archived_student = ArchivedStudent.create(student_attributes)
   end
 
   private
+
   def create_user_account
     user = User.new do |u|
       u.first_name, u.last_name, u.username, u.student_id = first_name, last_name, admission_no, id
-      u.password = "#{admission_no.to_s}123456"
+      u.password = "#{admission_no}123456"
       u.role = 'Student'
-      u.email = ( email == '' or User.find_by_email(email) ) ? "#{first_name+last_name+admission_no.to_s}@axenic.com" : email
+      u.email = (email == '' || User.find_by_email(email)) ? "#{first_name + last_name + admission_no.to_s}@axenic.com" : email
     end
     user.save
   end
-
 end

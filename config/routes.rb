@@ -315,7 +315,9 @@ get 'employees/address_profile_archived'
 get 'employees/contact_profile_archived'
 get 'employees/bank_info_archived'
 post 'employees/emp_search_result_pdf'
-
+get 'employees/select_month'
+get 'employees/payslip_revert'
+post 'employees/one_click_payslip_revert'
 
 get 'employee_attendances/new_leave_type'
 post 'employee_attendances/add_leave_type'

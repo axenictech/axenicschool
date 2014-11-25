@@ -14,6 +14,9 @@
   
 <table align="center" class="table table-hover" style="width:80%">
 
+    <%if @payslip.nil?%>
+        <h2>No salary slip found for this employee</h2>
+    <%else%>   
 	  <%@emp=Employee.find(@payslip.employee_id)%>
 	  <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:'true').pluck(:is_approved)%>
 	  <%if approved[0]==true%>
@@ -81,4 +84,5 @@
       	</table>
      
 <div><%=link_to 'PDF REPORT',employees_employee_individual_payslip_pdf_path(payslip:@payslip,format:"pdf"),class: "btn btn-success"%></div>
+<%end%>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223103413) do
+ActiveRecord::Schema.define(version: 20141223103416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -908,13 +908,38 @@ ActiveRecord::Schema.define(version: 20141223103413) do
 
   add_index "payroll_categories", ["payroll_category_id"], name: "index_payroll_categories_on_payroll_category_id", using: :btree
 
-  create_table "privileges", force: true do |t|
-    t.string   "name"
-    t.integer  "school_id_id"
+  create_table "privilege_tags", force: true do |t|
+    t.string   "name_tag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+<<<<<<< HEAD
+  end
+
+=======
+  end
+
+  create_table "privilege_users", force: true do |t|
+    t.integer  "privilege_tag_id"
+    t.integer  "privilege_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "privilege_users", ["privilege_id"], name: "index_privilege_users_on_privilege_id", using: :btree
+  add_index "privilege_users", ["privilege_tag_id"], name: "index_privilege_users_on_privilege_tag_id", using: :btree
+  add_index "privilege_users", ["user_id"], name: "index_privilege_users_on_user_id", using: :btree
+
+  create_table "privileges", force: true do |t|
+    t.string   "name"
+    t.integer  "privilege_tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
+
+>>>>>>> 60a237834b594ca49f1b42840b867e4fd4536d71
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
     t.decimal  "gpa"

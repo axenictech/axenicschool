@@ -1,58 +1,51 @@
 class GradingLevelsController < ApplicationController
-
-def index
-		 @batches = Batch.all
-         
-		
-	end
-  
-    def new
-
-    	@batch=Batch.find(params[:batch_id])
-	    @grading_level = GradingLevel.new
-	    @grading_level1=@batch.grading_levels.build
-	    
-	end
-    def create
-    	@batch=Batch.find(params[:batch_id])
-        @grading_levels=@batch.grading_levels.all
-    	@grading_level1=@batch.grading_levels.new(params_grade)
-        flash[:grading_level_notice]="Grade created successfully"
-    	@grading_level1.save
-    	
+  def index
+    @batches = Batch.all
     end
 
-    def edit
-    	@batch=Batch.find(params[:batch_id])
-    	@grading_level1=@batch.grading_levels.find(params[:id])
-    end
-    def update
-    	@batch=Batch.find(params[:batch_id])
-        @grading_levels=@batch.grading_levels.all
-    	@grading_level1=@batch.grading_levels.find(params[:id])
-        flash[:grading_level_notice]="Grade updated successfully"
-    	@grading_level1.update(params_grade)
-    	
+  def new
+    @batch = Batch.find(params[:batch_id])
+    @grading_level = GradingLevel.new
+    @grading_level1 = @batch.grading_levels.build
+       end
 
-    end
+  def create
+    @batch = Batch.find(params[:batch_id])
+    @grading_levels = @batch.grading_levels.all
+    @grading_level1 = @batch.grading_levels.new(params_grade)
+    flash[:grading_level_notice] = 'Grade created successfully'
+    @grading_level1.save
+  end
 
-    def destroy
-    	@batch=Batch.find(params[:batch_id])
-        @grading_levels=@batch.grading_levels.all
-    	@grading_level1=@batch.grading_levels.find(params[:id])
-        flash[:grading_level_notice]="Grade deleted successfully"
-    	@grading_level1.destroy
-    	
-    	
-    end
+  def edit
+    @batch = Batch.find(params[:batch_id])
+    @grading_level1 = @batch.grading_levels.find(params[:id])
+  end
 
-    def select
-         @batch=Batch.find(params[:batch][:id])
-        @grading_levels=@batch.grading_levels.all
-    end
+  def update
+    @batch = Batch.find(params[:batch_id])
+    @grading_levels = @batch.grading_levels.all
+    @grading_level1 = @batch.grading_levels.find(params[:id])
+    flash[:grading_level_notice] = 'Grade updated successfully'
+    @grading_level1.update(params_grade)
+  end
 
-    private
-    def params_grade
-    	params.require(:grading_level).permit(:name,:min_score,:description)
-    end
+  def destroy
+    @batch = Batch.find(params[:batch_id])
+    @grading_levels = @batch.grading_levels.all
+    @grading_level1 = @batch.grading_levels.find(params[:id])
+    flash[:grading_level_notice] = 'Grade deleted successfully'
+    @grading_level1.destroy
+  end
+
+  def select
+    @batch = Batch.find(params[:batch][:id])
+    @grading_levels = @batch.grading_levels.all
+  end
+
+  private
+
+  def params_grade
+    params.require(:grading_level).permit(:name, :min_score, :description)
+  end
 end
