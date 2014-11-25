@@ -253,7 +253,7 @@ class StudentsController < ApplicationController
 
   def advanced_search
     @courses=Course.all
-    @batches=Course.first.batches.all
+    @batches=Course.first.batches.all if Course.first
   end
   
   def batch_details

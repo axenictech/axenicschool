@@ -711,7 +711,7 @@ class FinanceController < ApplicationController
 
   def fees_submission_batch
     @batches=Batch.all
-    @collections=Batch.first.finance_fee_collections
+    @collections=Batch.first.finance_fee_collections if Batch.first
   end
 
   def fee_collection_date
@@ -864,8 +864,8 @@ class FinanceController < ApplicationController
 
   def fees_defaulters
     @courses=Course.all
-    @batches=Course.first.batches
-    @collections=Batch.first.finance_fee_collections
+    @batches=Course.first.batches if Course.first
+    @collections=Batch.first.finance_fee_collections if Batch.first 
   end
 
   def batch_choice

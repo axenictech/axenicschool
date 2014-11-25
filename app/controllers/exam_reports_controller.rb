@@ -2,7 +2,7 @@ class ExamReportsController < ApplicationController
  
   def exam_wise_report
   	@batches=Batch.all
- 	  @exam_groups=Batch.first.exam_groups.all
+ 	  @exam_groups=Batch.first.exam_groups.all if Batch.first
   end
   
   def select
@@ -57,7 +57,7 @@ class ExamReportsController < ApplicationController
 
   def subject_wise_report
     @batches=Batch.all
-    @subjects=Batch.first.subjects.all
+    @subjects=Batch.first.subjects.all if Batch.first
   end
 
    def choose_batch
@@ -128,7 +128,7 @@ class ExamReportsController < ApplicationController
 
   def archived_student_report
     @courses=Course.all
-    @batches=Course.first.batches.all
+    @batches=Course.first.batches.all if Course.first
   end
 
   def select_course
@@ -188,7 +188,7 @@ class ExamReportsController < ApplicationController
 
   def student_ranking_per_subject
     @batches=Batch.all
-    @subjects=Batch.last.subjects.all
+    @subjects=Batch.last.subjects.all if Batch.last
   end
 
   def rank_report_batch
