@@ -1,5 +1,4 @@
 <div id="content-header">
-   <hr class="fancy-line"></hr>
   <h1>Admission</h1>
   <h3>Step 2 - Employee Details<br />
    <small><font color="red">Fields Marked with * must be filled</font></small></h3>
@@ -29,8 +28,7 @@
 
     <tbody>
 
-    <tr><td colspan="2" class="col-2" style="background-color:white">Home Address</span>
-        <hr class="sub-heading"></hr>
+    <tr><td colspan="2" class="col-2" style="background-color:white"><b><u>Home Address</u></b></span>
       </td>
       </tr>
 
@@ -65,9 +63,7 @@
      	 <td class="col-2"><%=f.label :"PIN code"%><span class="necessary-field">*</span></td>
            <td class="col-2"><%=f.text_field :home_pin_code%></td>
      </tr>
-
-      <tr><td colspan="2" class="col-2" style="background-color:white">Office Address</span>
-        <hr class="sub-heading"></hr>
+      <tr><td colspan="2" class="col-2" style="background-color:white"><b><u>Office Address</u></b></span>
       </td>
       </tr>
 
@@ -100,10 +96,11 @@
 
       <tr>
        <td class="col-2"><%=f.label :"PIN Code"%></td>
-           <td class="col-2"><%=f.text_field :office_pin_code%></td>
+           <td class="col-2"><%=f.text_field :office_pin_code%>
+           </td>
+
      </tr>
-<tr><td colspan="2" class="col-2" style="background-color:white">Contact Details</span>
-        <hr class="sub-heading"></hr>
+<tr><td colspan="2" class="col-2" style="background-color:white"><b><u>Contact Details</u></b></span>
       </td>
       </tr>
 
@@ -133,7 +130,7 @@
           <td class="col-2"> <%=f.text_field :fax%></td>
      </tr>
    
-     <tr><td colspan="4"><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
+     <tr class="tr-head"><td colspan="4" align="center"><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
 
 <%end%>
 </tbody>

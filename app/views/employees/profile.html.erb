@@ -6,7 +6,7 @@
   </div>
   <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
-
+<br/>
 <div class="dropdown pull-right">
    <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
       data-toggle="dropdown">
@@ -58,7 +58,8 @@
    <button type="button" class="btn btn-primary" 
        style="margin-right:20px;">
       <%= link_to "Delete",employees_remove_path(@employee),style:"color:white"%>
-</button></div>
+</button>
+</div>
 
 <div class="dropdown pull-right">
    <button type="button" class="btn btn-primary" 
@@ -66,23 +67,27 @@
        
       <%= link_to "Timetable",time_tables_employee_timetable_path(@employee),style:"color:white"%>
      
-</button></div>
-
-<div id="profile_picture_display">
-          <% unless @employee.image.blank? %>
-            <%= image_tag @employee.image%>
-          <% else %>
-            <%= image_tag "default_employee.png" %>
-          <% end %>
-      </div>
-
-              <div id ="student_main_info">
-      <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
-      <h4 align="left"> Employee Id : <%=@employee.id%> </h4></div>
+</button>
+</div>
 
 <div id="page-yield">
-
-  <% unless flash[:notice].nil? %> <% end %>
-
-
+<table class="table" align="center" style="width:900px">
+<thead>
+<tr class="tr-head">
+    <th colspan="4"><div id="profile_picture_display">
+    <% unless @employee.image.blank? %>
+      <%= image_tag @employee.image%>
+    <% else %>
+      <%= image_tag "default_employee.png" %>
+    <% end %>
+    </div>
+   <div id ="student_main_info">
+      <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
+      <h4 align="left"> Employee Id : <%=@employee.id%> </h4>
+    </div>
+   </th>
+  </tr>
+</thead>
+</table>
 <div id="profile"><%=render'disp_genral_profile'%></div>
+</div>

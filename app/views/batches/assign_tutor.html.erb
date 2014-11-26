@@ -1,14 +1,11 @@
-
 <div id="content-header">
-   <hr class="fancy-line"></hr>
   <h1><%= t('Batch')%></h1>
   <h3><%= t('Assign tutor') %></h3>
   <div id="app-back-button">
     <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
   </div>
  <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
-
+</div>
 <div id="page-yield">
 <%= form_for :assign_tutor, url:{action:'assign_tutorial',format:@batch},remote:true,html:{id: "user_form"} do |f|%>
 

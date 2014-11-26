@@ -1,9 +1,5 @@
-
-
 <div align="center">
 <ul class="errors1"></ul></div>
-
-
 	<%= form_for @employee_category_new, url:{action:'add_category'},remote:true do |c|%>
 	<table class="table" style="width:500px" align="center">
 
@@ -24,10 +20,8 @@
 			<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td>
 		</tr>
 		<tr>
-			<td colspan="3"><%= c.submit 'Create'%></td>
+			<td colspan="3" align="center"><%= c.submit 'Create', class: "btn btn-primary"%></td>
 		</tr>
-
-
 	</tbody>
 </table>
 <%end%>

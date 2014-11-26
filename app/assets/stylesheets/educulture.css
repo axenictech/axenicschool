@@ -879,9 +879,8 @@ body > #content_wrapper {
     text-decoration:underline;
 }
 .table td.col-3{
-    width:13%;
     padding: 5px;
-    padding-left:10px;
+    padding-left:15px;
     color: #7F60A2;
 }
 .table td.col-4{
@@ -1184,3 +1183,6 @@ textarea{
     font-weight: bold;
     margin-left:10px;
 }
+
+.necessary-field{
+color:red;

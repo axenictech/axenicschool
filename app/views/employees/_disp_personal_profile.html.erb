@@ -1,20 +1,6 @@
-<h1>Personal Profile</h1>
-
-<div id="page-yield">
-
- 
-
 <table class="table table-hover" align="center" style="width:900px">
-<thead style="background-color:white">
-<tr>
-    <th colspan="4">
-   <div id ="student_main_info">
-      
-   </th>
-  </tr>
-</thead>
 <tbody>
-<tr><td colspan="4" style="background-color:white"></td></tr>
+<tr><td colspan="4" style="background-color:white"><h3>Personal Profile</h3></td></tr>
 <tr>
     <td class="col-2">Date of Birth</td><td class="col-2"><%= @employee.date_of_birth%></td>
     <td colspan="2"></td>
@@ -43,8 +29,7 @@
 
 
 <tr style="background-color:white">
-<td colspan="4"><%= link_to 'Edit',employees_edit_personal_profile_path(@employee),class: "btn btn-primary" %>
+<td colspan="4" align="center"><%= link_to 'Edit',employees_edit_personal_profile_path(@employee),class: "btn btn-primary" %>
 <%= link_to 'PDF Report',employees_personal_profile_pdf_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %></td>
 </tr>
 </tbody></table>
-</div>

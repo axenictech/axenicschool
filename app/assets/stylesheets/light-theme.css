@@ -1643,7 +1643,6 @@ hr {
   hr.hr-double {
     margin-top: 40px;
     margin-bottom: 40px; }
-
 header .navbar {
   margin: 0;
   padding: 0 15px;
@@ -1881,6 +1880,7 @@ header .navbar {
 @media print {
   header {
     display: none; } }
+
 
 #main-nav-bg {
   width: 251px;
