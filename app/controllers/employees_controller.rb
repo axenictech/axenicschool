@@ -11,7 +11,7 @@ class EmployeesController < ApplicationController
     @employee_category = EmployeeCategory.new(category_params)
 
     if @employee_category.save
-      flash[:notice1] = 'Employee category created Successfully'
+      flash[:notice] = 'Employee category created Successfully'
     end
 
     @categories1 = EmployeeCategory.where(status: true).order(:name)
@@ -29,7 +29,7 @@ class EmployeesController < ApplicationController
     @employee_category_new = EmployeeCategory.new
     @employee_category = EmployeeCategory.find(params[:category_id])
     if @employee_category.update(category_params)
-      flash[:notice1] = 'Employee category Updated Successfully'
+      flash[:notice] = 'Employee category Updated Successfully'
     end
     @categories1 = EmployeeCategory.where(status: true).order(:name)
     @categories2 = EmployeeCategory.where(status: false).order(:name)
@@ -39,7 +39,7 @@ class EmployeesController < ApplicationController
     @employee_category_new = EmployeeCategory.new
     @employee_category = EmployeeCategory.find(params[:id])
     if @employee_category.destroy
-      flash[:notice1] = 'Employee category deleted Successfully'
+      flash[:notice] = 'Employee category deleted Successfully'
     end
     @categories1 = EmployeeCategory.where(status: true).order(:name)
     @categories2 = EmployeeCategory.where(status: false).order(:name)
@@ -55,7 +55,7 @@ class EmployeesController < ApplicationController
     @employee_department_new = EmployeeDepartment.new
     @employee_department = EmployeeDepartment.new(department_params)
     if @employee_department.save
-      flash[:notice2] = 'Employee department created Successfully'
+      flash[:notice] = 'Employee department created Successfully'
     end
     @departments1 = EmployeeDepartment.where(status: true).order(:name)
     @departments2 = EmployeeDepartment.where(status: false).order(:name)
@@ -69,7 +69,7 @@ class EmployeesController < ApplicationController
     @employee_department_new = EmployeeDepartment.new
     @employee_department = EmployeeDepartment.find(params[:department_id])
     if @employee_department.update(department_params)
-      flash[:notice2] = 'Employee department updated Successfully'
+      flash[:notice] = 'Employee department updated Successfully'
     end
     @departments1 = EmployeeDepartment.where(status: true).order(:name)
     @departments2 = EmployeeDepartment.where(status: false).order(:name)
@@ -79,7 +79,7 @@ class EmployeesController < ApplicationController
     @employee_department_new = EmployeeDepartment.new
     @employee_department = EmployeeDepartment.find(params[:id])
     if @employee_department.destroy
-      flash[:notice2] = 'Employee department deleted Successfully'
+      flash[:notice] = 'Employee department deleted Successfully'
     end
     @departments1 = EmployeeDepartment.where(status: true).order(:name)
     @departments2 = EmployeeDepartment.where(status: false).order(:name)
@@ -95,7 +95,7 @@ class EmployeesController < ApplicationController
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.new(position_params)
     if @employee_position.save
-      flash[:notice3] = 'Employee position created Successfully'
+      flash[:notice] = 'Employee position created Successfully'
     end
     @positions1 = EmployeePosition.where(status: true).order(:name)
     @positions2 = EmployeePosition.where(status: false).order(:name)
@@ -109,7 +109,7 @@ class EmployeesController < ApplicationController
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.find(params[:position_id])
     if @employee_position.update(position_params)
-      flash[:notice3] = 'Employee position updated Successfully'
+      flash[:notice] = 'Employee position updated Successfully'
     end
     @positions1 = EmployeePosition.where(status: true).order(:name)
     @positions2 = EmployeePosition.where(status: false).order(:name)
@@ -119,7 +119,7 @@ class EmployeesController < ApplicationController
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.find(params[:id])
     if @employee_position.destroy
-      flash[:notice3] = 'Employee position deleted Successfully'
+      flash[:notice] = 'Employee position deleted Successfully'
     end
     @positions1 = EmployeePosition.where(status: true).order(:name)
     @positions2 = EmployeePosition.where(status: false).order(:name)
@@ -134,7 +134,7 @@ class EmployeesController < ApplicationController
   def add_bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.new(bank_field_params)
-    flash[:notice4] = 'Bank field created Successfully' if @bank_field.save
+    flash[:notice] = 'Bank field created Successfully' if @bank_field.save
     @bank_fields1 = BankField.where(status: true).order(:name)
     @bank_fields2 = BankField.where(status: false).order(:name)
   end
@@ -147,7 +147,7 @@ class EmployeesController < ApplicationController
     @bank_field_new = BankField.new
     @bank_field = BankField.find(params[:bank_field_id])
     if @bank_field.update(bank_field_params)
-      flash[:notice4] = 'Bank field updated Successfully'
+      flash[:notice] = 'Bank field updated Successfully'
     end
     @bank_fields1 = BankField.where(status: true).order(:name)
     @bank_fields2 = BankField.where(status: false).order(:name)
@@ -156,7 +156,7 @@ class EmployeesController < ApplicationController
   def destroy_bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.find(params[:id])
-    flash[:notice4] = 'Bank field deleted Successfully' if @bank_field.destroy
+    flash[:notice] = 'Bank field deleted Successfully' if @bank_field.destroy
     @bank_fields1 = BankField.where(status: true).order(:name)
     @bank_fields2 = BankField.where(status: false).order(:name)
   end
@@ -171,7 +171,7 @@ class EmployeesController < ApplicationController
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.new(payroll_category_params)
     if @payroll_category.save
-      flash[:notice5] = 'Payroll catagory created Successfully'
+      flash[:notice] = 'Payroll catagory created Successfully'
     end
     @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
     @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
@@ -185,7 +185,7 @@ class EmployeesController < ApplicationController
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:payroll_category_id])
     if @payroll_category.update(payroll_category_params)
-      flash[:notice5] = 'Employee payroll category updated Successfully'
+      flash[:notice] = 'Employee payroll category updated Successfully'
     end
     @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
     @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
@@ -195,7 +195,7 @@ class EmployeesController < ApplicationController
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
     if @payroll_category.destroy
-      flash[:notice5] = 'Employee payroll category deleted Successfully'
+      flash[:notice] = 'Employee payroll category deleted Successfully'
     end
     @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
     @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
@@ -227,7 +227,7 @@ class EmployeesController < ApplicationController
     @employee_grade_new = EmployeeGrade.new
     @employee_grade = EmployeeGrade.new(grade_params)
     if @employee_grade.save
-      flash[:notice6] = 'Employee Grade created Successfully'
+      flash[:notice] = 'Employee Grade created Successfully'
    end
     @grade1 = EmployeeGrade.where(status: true).order(:name)
     @grade2 = EmployeeGrade.where(status: false).order(:name)
@@ -241,7 +241,7 @@ class EmployeesController < ApplicationController
     @employee_grade_new = EmployeeGrade.new
     @employee_grade = EmployeeGrade.find(params[:grade_id])
     if @employee_grade.update(grade_params)
-      flash[:notice6] = 'Employee Grade updated Successfully'
+      flash[:notice] = 'Employee Grade updated Successfully'
     end
     @grade1 = EmployeeGrade.where(status: true).order(:name)
     @grade2 = EmployeeGrade.where(status: false) .order(:name)
@@ -251,7 +251,7 @@ class EmployeesController < ApplicationController
     @employee_grade_new = EmployeeGrade.new
     @employee_grade = EmployeeGrade.find(params[:id])
     if @employee_grade.destroy
-      flash[:notice6] = 'Employee Grade deleted Successfully'
+      flash[:notice] = 'Employee Grade deleted Successfully'
    end
     @grade1 = EmployeeGrade.where(status: true).order(:name)
     @grade2 = EmployeeGrade.where(status: false).order(:name)
@@ -720,7 +720,7 @@ end
       is_deduction.each do |i|
         amount = EmployeeSaleryStructure.where(employee_id: @employee.id, payroll_category_id: i).pluck(:amount)
         amount.each do |i |
-          tot_deduction += i.to_ f
+          tot_deduction += i.to_f
         end
 
       end
