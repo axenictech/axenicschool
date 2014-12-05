@@ -1,65 +1,41 @@
-
- <div class="page-header">
-  <h1 class="pull-left">
-    <i class="icon-chart"></i>
-      <span>Btach Transfer</span>
-      <small>transfer</small>
-  </h1>
-  <div class="pull-right">
-    <ul class="breadcrumb">
-      <li>
-        <a href="setting">
-        <i class="icon-gears"></i>
-        Settings
-        </a>
-      </li>       
-      <li class="separator">
-        <i class="icon-angle-right"></i>
-      </li>
-      <li class="active"><i class="icon-tags"></i>
-          Transfer
-      </li>
-    </ul>
-  </div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Course',courses_path %></li>
+    <li><%= link_to 'Batch',batches_path%></li>
+    <li><%= link_to 'Batch Transfer',batch_transfers_path%></li>
+    <li>Student Transfer</li>
+  </ul>
 </div>
-
-<div class="row">
-    <div class="col-sm-6">
-      Transferring batch: <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %>
-    </div>
-    <div class="col-sm-6">      
-      <%=form_for :transfer, :url => {:action=> 'student_transfer'},method: :get do |f| %>
-      <%= f.hidden_field :batch_id, value: @batch.id%>
-      <%= f.select :id,Batch.all.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}%>
-    </div>
- </div>   
-
-<div class="group-header">
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
-    <div class="text-center">
-      <h2>Transfer Students</h2>
-      <small class="text-muted">From the below list uncheck the students you don't want to transfer to the new batch.</small>
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="row" align="right" style="margin-right:20px">
-      <%= link_to "Assign All",batch_transfers_assign_all_path(@batch),remote:true, class: 'btn btn-primary'%>
-      <%= link_to "Remove All",batch_transfers_remove_all_path(@batch),remote:true, class: 'btn btn-primary' %>
-</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
 <br/>
+
+<%=form_for :transfer, :url => {:action=> 'student_transfer'},method: :get do |f| %>
+<div class="row">
+    <div class="col-md-6">
+      <b>Transfering student from </b> <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %> &nbsp;<b>To</b> 
+    </div>
+    <div class="col-md-6">      
+      <%= f.hidden_field :batch_id, value: @batch.id%>
+      <%= f.select :id,Batch.all.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:'Select a batch'%>
+    </div>
+</div>   
+<hr>
+<div class="row" align="right" style="margin-right:20px">
+  <%= link_to "Assign All",batch_transfers_assign_all_path(@batch),remote:true, class: 'btn btn-primary-link btn-xs'%>
+  <%= link_to "Remove All",batch_transfers_remove_all_path(@batch),remote:true, class: 'btn btn-primary-link btn-xs' %>
+</div>
 <div id="students_list">
     <%= render 'students_list' %>
 </div>
-<br/>
 <div class="row">
- <div align="center"><%= f.submit "Transfer Student", class: 'btn btn-success'%>
- </div>
-  
+  <div class="col-md-5"></div>
+  <div class="col-md-5">
+    <%= f.submit "Transfer Student", class: 'btn btn-success'%>
+  </div>
 </div>
-  
 <% end %>
 
 

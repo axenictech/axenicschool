@@ -1,55 +1,31 @@
-<div class="page-header">
-  <h1 class="pull-left">
-    <i class="icon-star"></i>
-      <span>Batches</span>
-  </h1>
-  <div class="pull-right">
-    <ul class="breadcrumb">
-      <li>
-        <a href="setting">
-        <i class="icon-gears"></i>
-        Settings
-        </a>
-      </li>
-        
-          
-      <li class="separator">
-        <i class="icon-angle-right"></i>
-      </li>
-      <li class="active"><i class="icon-book"></i>
-          batches
-      </li>
-    </ul>
-  </div>
-</div>
-
-
-<div class="box box-transparent">
-<div class="pull-right">
-    <%= link_to 'Grading System', grading_levels_path, class: "btn btn-white hidden-xs" %>
-    <%= link_to 'Batch Transfer', batch_transfers_path, class: "btn btn-white hidden-xs" %>  
-</div>
-</div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li>Batch</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
-<%= form_for :course, url:{action:'select'},method: :get,remote:true,html:{id: "course_form"} do |f| %>
-  <div class="col-sm-6">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Grading System', grading_levels_path, class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Batch Transfer', batch_transfers_path, class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
+</div>
+<br/>
 
-    <%= f.select :id, @courses.collect {|c| [c.course_name,c.id]},
-    {prompt:'Select a course'},{onchange:"$('#course_form').submit();",class: "select2 form-control select2-offscreen"}%>       
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for :course, url:{action:'select'},method: :get,remote:true,html:{id: "course_form"} do |f| %>
+     
+      <%= f.select :id, @courses.collect {|c| [c.course_name,c.id]},
+      {prompt:'Select a course'},{onchange:"$('#course_form').submit();",class: "form-control",style:"width:350px"}%>       
     <% end %>
-  
-</div>
-</div>
-
-<div class="row box box-transperent">
-  <div id="batch_div">
-    
   </div>
 </div>
 
-</div>
-
-
-
+<div id="batch_div"></div>
 

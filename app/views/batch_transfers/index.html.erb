@@ -1,48 +1,23 @@
- <div class="page-header">
-  <h1 class="pull-left">
-    <i class="icon-chart"></i>
-      <span>Settings</span>
-      <small>batch transfer</small>
-  </h1>
-  <div class="pull-right">
-    <ul class="breadcrumb">
-      <li>
-        <a href="setting">
-        <i class="icon-gears"></i>
-        Settings
-        </a>
-      </li>
-        
-          
-      <li class="separator">
-        <i class="icon-angle-right"></i>
-      </li>
-      <li class="active"><i class="icon-tags"></i>
-          Batch transfer
-      </li>
-    </ul>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Course',courses_path %></li>
+    <li><%= link_to 'Batch',batches_path%></li>
+    <li>Batch Transfer</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for :batch_transfer,url:{action:'select'},method: :get,remote:true,html:{id: "transfer"} do |f| %>
+
+    <%= f.select :id,Course.all.collect{|p| [p.course_name,p.id]},{prompt:'Select a course'},{onchange:"$('#transfer').submit();",class: "form-control",style: "width:350px"}%>
+    <% end %>
   </div>
 </div>
 
-<div class="row">
-<%= form_for :batch_transfer,url:{action:'select'},method: :get,remote:true,html:{id: "transfer"} do |f| %>
-
-	<div class="col-sm-2">
-	<%= f.label :select_course %>	
-	</div>
-	<div class="col-sm-6">
-	
-	<%= f.select :id,Course.all.collect{|p| [p.course_name,p.id]},
-         {prompt:true},{onchange:"$('#transfer').submit();",class: "select2 form-control select2-offscreen"}%>
-
-	</div>
-<% end %>
-</div>
-
-
-<div class="row">
-<div id="stage">
-	
-</div>	
-</div>
+<div id="stage"></div>
  

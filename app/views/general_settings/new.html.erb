@@ -1,15 +1,12 @@
-<div id="content-header">
-  <h1><%= t('General Setting')%></h1>
-  <h3><%= t('Home')%><br/>
- <small><font color="red">Fields Marked with * must be filled
- </font></small></font></h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-<div id="page-yield">
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'General Settings',new_general_setting_path %>
+    </li>
+    <li>Info</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+<br/>
 <table align="center" class="table table-hover" style="width:1000px">
 <%= form_for @general_setting,method: :patch do |f| %>
 

@@ -1,122 +1,88 @@
-<div class="page-header page-header-with-buttons">
-	<h1 class="pull-left">
-	  <i class="icon-dashboard"></i>
-	  <span>Dashboard</span>
-	</h1>
-<div class="pull-right">
-  <ol class="breadcrumb">
-      <li class="active">
-        <i class="fa fa-dashboard"></i> Dashboard
-      </li>
-  </ol>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li>Dashboard</li>
+  </ul>
 </div>
-</div>
-<div class="row box box-transparent">
-<div class="col-xs-2 col-sm-1"></div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link blue-background">
-	    <a href="/students/admission1">
-	      <div class="header">
-	        <div class="icon-edit"></div>
-	      </div>
-	      <div class="content">Admission</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link green-background">
-	    <a href="/students">
-	      <div class="header">
-	        <div class="icon-star"></div>
-	      </div>
-	      <div class="content">Student Details</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link orange-background">
-	    <a href="/users">
-	      <div class="header">
-	        <div class="icon-user"></div>
-	      </div>
-	      <div class="content">Manage Users</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link purple-background">
-	    <a href="/newscasts">
-	      <div class="header">
-	        <div class="icon-bullhorn"></div>
-	      </div>
-	      <div class="content">Manage News</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link red-background">
-	    <a href="/exams">
-	      <div class="header">
-	        <div class="icon-bar-chart"></div>
-	      </div>
-	      <div class="content">Examinations</div>
-	    </a>
-	  </div>
-	</div>
-</div>
+<div id="flash"><%= render 'layouts/messages'%></div>        
+<br/>
+<div class=" row">
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="6 new members." class="well top-block" href="/students/admission1">
+            <i class="glyphicon glyphicon-edit"></i>
+            <div>Admission</div>
+        </a>
+    </div>
 
-<div class="row box box-transparent">
-<div class="col-xs-2 col-sm-1"></div>
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="4 new pro members." class="well top-block" href="/students">
+            <i class="glyphicon glyphicon-star"></i>
+            <div>Student Details</div>
+        </a>
+    </div>
 
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link muted-background">
-	    <a href="/time_tables">
-	      <div class="header">
-	        <div class="icon-time"></div>
-	      </div>
-	      <div class="content">Timetable</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link grass-green-background">
-	    <a href="/attendences">
-	      <div class="header">
-	        <div class="icon-list"></div>
-	      </div>
-	      <div class="content">Attendance</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link brown-background">
-	    <a href="/setting">
-	      <div class="header">
-	        <div class="icon-cogs"></div>
-	      </div>
-	      <div class="content">Settings</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link banana-background">
-	    <a href="/employees">
-	      <div class="header">
-	        <div class="icon-link"></div>
-	      </div>
-	      <div class="content">Human Resources</div>
-	    </a>
-	  </div>
-	</div>
-	<div class="col-xs-4 col-sm-2">
-	  <div class="box-quick-link sea-blue-background">
-	    <a href="/finance">
-	      <div class="header">
-	        <div class="icon-rupee"></div>
-	      </div>
-	      <div class="content">Finance</div>
-	    </a>
-	  </div>
-	</div>
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="/users">
+            <i class="glyphicon glyphicon-user"></i>
+            <div>Manage Users</div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="12 new messages." class="well top-block" href="/exams">
+            <i class="glyphicon glyphicon-signal"></i>
+            <div>Examinations</div>
+        </a>
+    </div>
 </div>
+<div class=" row">
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="6 new members." class="well top-block" href="/setting">
+            <i class="glyphicon glyphicon-cog"></i>
+            <div>Settings</div>
+        </a>
+    </div>
 
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="4 new pro members." class="well top-block" href="/employees">
+            <i class="glyphicon glyphicon-link"></i>
+            <div>Human Resources</div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="/finance">
+            <i class="glyphicon glyphicon-briefcase"></i>
+            <div>Finance</div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="12 new messages." class="well top-block" href="/time_tables">
+            <i class="glyphicon glyphicon-time"></i>
+            <div>Timetable</div>
+        </a>
+    </div>
+</div>
+<div class=" row">
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="6 new members." class="well top-block" href="/attendences">
+            <i class="glyphicon glyphicon-tasks"></i>
+            <div>Attendance</div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="4 new pro members." class="well top-block" href="/calender">
+            <i class="glyphicon glyphicon-calendar"></i>
+            <div>Calendar</div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="/newscasts">
+            <i class="glyphicon glyphicon-comment"></i>
+            <div>Manage News</div>
+        </a>
+    </div>
+</div>

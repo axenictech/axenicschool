@@ -46,12 +46,5 @@ class CreateUsers < ActiveRecord::Migration
     add_index :users, :confirmation_token,   :unique => true
     add_index :users, :unlock_token,         :unique => true
     add_index :users, :authentication_token, :unique => true
-    create_default
   end
-
-  def create_default
-    User.create :username   => 'admin',:password   => 'axenicschool@123',:first_name => 'Axenic',
-    :last_name  => 'School',:email=> 'axenicschool@gmail.com',:role=> 'Admin'
-  end
-
 end

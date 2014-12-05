@@ -425,6 +425,7 @@ class EmployeesController < ApplicationController
   end
 
   def subject_assignment
+    @batches = Batch.includes(:course).all
   end
 
   def assign_subject

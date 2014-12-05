@@ -1,35 +1,13 @@
-<div class="page-header">
-  <h1 class="pull-left">
-    <i class="icon-gears"></i>
-      <span>settings</span>
-      <small>courses</small>
-  </h1>
-  <div class="pull-right">
-    <ul class="breadcrumb">
-      <li>
-        <a href="setting">
-        <i class="icon-gears"></i>
-        Settings
-        </a>
-      </li>
-        
-          
-      <li class="separator">
-        <i class="icon-angle-right"></i>
-      </li>
-          <li class="active"><i class="icon-book"></i>
-          courses
-          </li>
-        </ul>
-      </div>
-
-</li>
-</ul></div></div></div>
-
-<div id="view_details">
-  <%= render 'view' %>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li>Course</li>
+  </ul>
 </div>
-
-<div id="editmodal" class="modal fade">
-</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/>
+<div id="view_details"><%= render 'view' %></div>
+<div id="modal" class="modal fade"></div>
   

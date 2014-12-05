@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-devise_for :users
-mount Ckeditor::Engine => '/ckeditor'
+devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords'}
 get 'setting/course_batch'
 get 'general_settings/all'
 get 'general_settings/none'

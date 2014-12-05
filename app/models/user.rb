@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_and_belongs_to_many :privileges
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
-         :validatable, :timeoutable, :confirmable
+         :validatable, :timeoutable
 
   validates :username, presence: true, uniqueness: true, length: { in: 1..50 },
                        format: { with: /\A[a-zA-Z0-9]+\Z/ }
