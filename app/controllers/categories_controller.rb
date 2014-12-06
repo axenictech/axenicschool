@@ -12,8 +12,8 @@ class CategoriesController < ApplicationController
       redirect_to categories_path
     else
       render 'index'
+    end
   end
-   end
 
   def edit
     @category = Category.find(params[:id])
@@ -21,29 +21,24 @@ class CategoriesController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
-
-    if @category.update(category_params)
-      flash[:notice] = 'Student category updated successfully'
-      redirect_to categories_path(@category)
-    else
-      render 'edit'
-    end
-    end
+    @category.update(category_params)
+    flash[:notice] = 'Student category updated successfully'
+  end
 
   def destroy
     @category = Category.find(params[:id])
-    if @category.destro y
+    if @category.destroy
       flash[:notice] = 'Student category deleted successfully  '
-      redirect_to categories_pat h
-      els e
+      redirect_to categories_path
+    else
       flash[:notice] = 'Student category unable to delete '
-      redirect_to categories_pat h
- end
- end
+      redirect_to categories_path
+    end
+  end
 
   private
 
   def category_params
     params.require(:category).permit(:name)
- end
+  end
 end

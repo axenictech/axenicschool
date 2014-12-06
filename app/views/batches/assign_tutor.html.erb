@@ -1,19 +1,21 @@
-<div id="content-header">
-  <h1><%= t('Batch')%></h1>
-  <h3><%= t('Assign tutor') %></h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Batch',batches_path %></li>
+    <li>Assign Tutor</li>
+  </ul>
 </div>
-<div id="page-yield">
-<%= form_for :assign_tutor, url:{action:'assign_tutorial',format:@batch},remote:true,html:{id: "user_form"} do |f|%>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br>
+<div class="row">
+  <div class="col-md-3">
+	<%= form_for :assign_tutor, url:{action:'assign_tutorial',format:@batch},remote:true,html:{id: "user_form"} do |f|%>
 
-<div class="label-field-pair">
-		<%=f. label :'Select Department'%>
-		<div  class="text-input-bg">
-   		 <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form').submit();"}%></div></div>
-    
-<%end%>
- <div id="assign_tutor"></div>
+   	  <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:'Select a department'},{onchange:"$('#user_form').submit();",class: 'form-control'}%>
+   	<%end%>
+  </div>
 </div>
+<hr>
+<div id="assign_tutor"></div>

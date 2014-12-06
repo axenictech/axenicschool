@@ -73,25 +73,9 @@ class CoursesController < ApplicationController
 
   def update_batch_group
     @batch_group = BatchGroup.find(params[:batch_group][:batch_group_id])
-    batches = params[:batches]
-    group_batch_delete = GroupBatch.where(batch_group_id: @batch_group.id)
-    unless batches.nil?
-      if @batch_group.update(name: params[:batch_group][:name])
-
-        group_batch_delete.each(&:destroy)
-        batches.each  do |batch|
-          @group_batch = GroupBatch.new(batch_group_id: @batch_group.id, batch_id: batch)
-          @group_batch.save
-        end
-        flash[:notice_batch_group] = 'Batch group updated successfully'
-        redirect_to courses_grouped_batches_path(@batch_group.course)
-      else
-        render template: 'courses/grouped_batches'
-        end
-    else
-      flash[:notice_batch_group] = 'Please Select batches'
-      redirect_to courses_grouped_batches_path(@batch_group.course)
-      end
+    @batch_group.update(name: params[:batch_group][:name])
+    @course = @batch_group.course
+    flash[:notice_batch_group] = 'Batch group updated successfully'
   end
 
   def delete_batch_group

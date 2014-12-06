@@ -64,9 +64,13 @@ class BatchesController < ApplicationController
     @department = EmployeeDepartment.find(params[:assign_tutor][:id])
     @emp1 = @department.employees.pluck(:id)
     @emp1.each { |e| @emp << e.to_s }
-    @assign_employees = @batch.employee_id.split(',')
-    @employees = @emp - @assign_employees
-   end
+    if @batch.employee_id
+      @assign_employees = @batch.employee_id.split(',')
+      @employees = @emp - @assign_employees
+    else
+      @employees = @emp
+    end
+  end
 
   def assign_employee
     @batch = Batch.find(params[:batch_id])

@@ -1,112 +1,118 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
-    <li><%= link_to 'General Settings',new_general_setting_path %>
+    <li><%= link_to 'Settings',setting_index_path %>
     </li>
-    <li>Info</li>
+    <li>General Setting</li>
   </ul>
-</div><div id="flash"><%= render 'layouts/messages'%></div>
-<br/>
-<table align="center" class="table table-hover" style="width:1000px">
-<%= form_for @general_setting,method: :patch do |f| %>
-
-<div align="center">
-<% if @general_setting.errors.any?%>
-      <div class="alert alert-danger" style="width:500px" >
-      <h4><%= t('Errors prohibited to being update:')%></h4>
-        <ul>
-          <% @general_setting.errors.full_messages.each do |msg| %>
-          <li style="width:500px" align="left"><%= msg%></li>
-          <% end %>
-        </ul> 
-      </div>
-    <% end %>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
-  <tbody>
-    <tr>
-      <td class="col-2"><%= t('School/College Name')%><span class="necessary-field">*</span></td> 
-      <td><%= f.text_field :school_or_college_name,:style =>"width: 310px" , class: "form-control" %></td></tr>
-      
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>General Setting</h2>
+      </div>
 
-  <tr>
+      <div class="box-content">
+      <%= form_for @general_setting,method: :patch do |f| %>
 
-    <td class="col-2"><%= t('School/College Address')%><span class="necessary-field">*</span></td> 
-    <td><%= f.text_field :school_or_college_address,:style =>"width: 310px",class: "form-control"%></td>
-    
-  </tr>
+    <fieldset>
+      <% if @general_setting.errors.any?%>
+        <div class="alert alert-danger" style="width:500px" >
+        <h4><%= t('Errors prohibited to being update:')%></h4>
+          <ul>
+            <% @general_setting.errors.full_messages.each do |msg| %>
+            <li style="width:500px" align="left"><%= msg%></li>
+            <% end %>
+          </ul> 
+        </div>
+      <% end %>
 
-  <tr>
-   
-    <td class="col-2"><%= t('School/College Phone No.')%><span class="necessary-field">*</span></td> 
-    <td><%= f.text_field :school_or_college_phone_no,:style =>"width: 310px", class: "form-control"%></td>
-    
-  </tr>
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= t('School/College Name')%><span class="necessary-field">*</span>
+          <%= f.text_field :school_or_college_name, placeholder: "School/College Name", class: "form-control" %>
+        </div>
 
-  <tr>
-    <td class="col-2"><%= t('Student Attendance Type')%></td> 
-    <td class="col-2"><%= f.select :student_attendance_type, ['Subjectwise','Daily'], :selected => 'SubjectWise', :style =>"width: 310px" %></td>
-  </tr>
+        <div class="form-group">
+          <%= t('School/College Phone No.')%><span class="necessary-field">*</span>
+          <%= f.text_field :school_or_college_phone_no, placeholder: "School/College Phone No", class: "form-control"%>
+        </div>
+        
+        <div class="form-group">
+          <%= t('Student Attendance Type')%>
+          <%= f.select :student_attendance_type, ['Subjectwise','Daily'], {prompt:true}, {class: "form-control"} %>
+        </div>
 
- <tr>
-    <td class="col-2"><%= t('Finance_start_year_date') %></td> 
-    <td class="col-2"><%= f.date_select :finance_start_year_date, :start_year=>1999 %></td>
-  </tr>
-      
-  <tr>
-    <td class="col-2"><%= t('Finance_end_year_date') %></td> 
-    <td class="col-2"><%= f.date_select :finance_end_year_date, :end_year=>2019%></td>
-  </tr>
- 
-  <tr>
-    <td class="col-2"><%= t('Language') %></td> 
-    <td class="col-2"><%= f.select :language,Language.all.collect{|l| [l.name,l.id]}, prompt:true,  :style => "width:310px" %></td>
-  </tr>
+        <div class="form-group">
+          <%= t('Finance_start_year_date') %>
+          <%= f.date_field :finance_start_year_date, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= t('Finance_end_year_date') %>
+          <%= f.date_field :finance_end_year_date, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= t('Language') %>
+          <%= f.select :language,Language.all.collect{|l| [l.name,l.id]}, {prompt:true}, {class: "form-control"} %>
+        </div>
+      </div>
 
-  <tr>
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= t('Time_Zone') %>
+          <%= f.select :time_zone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], {:selected => 'Indian Standard Time(IST) - GMT+05:30'}, { class: "form-control"} %>
+        </div>
 
-    <td class="col-2"><%= t('Time_Zone') %></td> 
-    <td class="col-2"><%= f.select :time_zone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], :selected => 'Indian Standard Time(IST) - GMT+05:30',  :style => "width:310px", class: "dropdown-toggle" %></td>
-  </tr>
+        <div class="form-group">
+          <%= t('Country') %>
+          <%= f.select :country, Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
+        </div>
 
-  <tr>
-    <td class="col-2"><%= t('Country') %></td> 
-    <td class="col-2"><%= f.select :country, Country.all.collect{|c| [c.name,c.id]},:style => "width:310px",prompt:true%></td>
-  </tr> 
-  <tr>
-    <td class="col-2"><%= t('Upload Logo')%></td> 
-    <td class="col-2"><%= f.file_field :image%></td>
-  </tr>
-  <tr>
-    <td class="col-2"><%= t('Include Grading Systems') %></td> 
-    <td class="col-2">
-    Select: &nbsp;&nbsp;
-    <%= link_to "All",general_settings_all_path,remote:true%>&nbsp;&nbsp;
-        <%= link_to  "None",general_settings_none_path,remote:true%>
-        <p id="grading_system"><%= render 'grading_type'%></p>
-      </td>
-  </tr>
-    <tr><td></td>
-      <td class="col-2"> <%= f.check_box :addmission_number_auto_increament, {:checked=>true} %>  <%= t('Enable Auto Increment Student Admission No.')%>
-      </td>
-    </tr>
-    <tr><td></td>
-    <td class="col-2"> <%= f.check_box :employee_number_auto_increament, {:checked=>true} %> 
-        <%= t('Enable Auto Increment Employee No.')%>
-    </td>
-    </tr>
-    <tr><td></td>
-        <td class="col-2"> <%= f.check_box :enable_news_comment_moderation, {:checked=>false} %> 
-        <%=  t('Enable News Comment Moderation') %>
-        </td> 
-    </tr>
-    <tr><td colspan="2" align="center">
-    <%= f.submit 'Update',  class: "btn btn-success"%> 
-    
-    </td>
-    </tr>
-    
-</table>
+        <div class="form-group">
+          <%= t('Upload Logo')%>
+          <%= f.file_field :image, class: "form-control"%>
+        </div>
 
+        <div class="form-group">
+          <%= t('Include Grading Systems') %> &nbsp;&nbsp; &nbsp;&nbsp;
+          Select: &nbsp;&nbsp;
+          <%= link_to "All",general_settings_all_path,remote:true%>&nbsp;&nbsp;
+          <%= link_to  "None",general_settings_none_path,remote:true%>
+          <p id="grading_system"><%= render 'grading_type'%></p>
+        </div>
+
+        <div class="form-group">
+          <%= f.check_box :addmission_number_auto_increament, {:checked=>true} %>  <%= t('Enable Auto Increment Student Admission No.')%>
+        </div>
+
+        <div class="form-group">
+          <%= f.check_box :employee_number_auto_increament, {:checked=>true} %> 
+          <%= t('Enable Auto Increment Employee No.')%>
+        </div>
+
+        <div class="form-group">
+          <%= f.check_box :enable_news_comment_moderation, {:checked=>false} %> 
+          <%=  t('Enable News Comment Moderation') %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-5 col-sm-offset-5"> 
+      <div class="form-actions">               
+        <%= f.submit 'Update', class: "btn btn-success"%>
+      </div>
+    </div>
+  </fieldset>        
  <% end %>
+</div>
+</div>
+</div>
 </div>

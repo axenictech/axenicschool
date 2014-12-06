@@ -9,7 +9,14 @@
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <br/>
-
+<div class="row">
+  <div class="col-md-11">
+    <div class="pull-right">
+      <%= link_to 'Batch Group', courses_grouped_batches_path(@course), class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
+</div>
+<hr>
 <div class="row">
   <div class="box col-md-12">
   <div class="box-inner">
