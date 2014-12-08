@@ -1,114 +1,165 @@
-<div id="content-header">
-   <h1>Timetable</h1>
-  <h3>Home</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-    <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
 
- 
- <div class="container">
-    <div class="row" style="margin-top:20px">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Create weekdays",'/weekdays',style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-        Create weekdays
-          </div>
-        </div>
-       
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li>Time Table</li>
+  </ul>
+</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Create weekdays",'/weekdays'%></h2>
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-         <%= link_to "Set class timings",'/class_timings',style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-          Select a class and edit the timetable for that class
-          </div>
-        </div>
-
+      <div class="box-content">
+      Create weekdays.
       </div>
-       
-      <div class="col-md-2"></div>
-    </div>  
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to " Work Allotment",'/time_tables/work_allotment',style: 'color:black' %>     
-         </div>
-          <div class="panel-body" style="height:70px">
-          Assign subjects to teachers.
-          </div>
-        </div>
-       
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-        <%= link_to "Create Timetable",'/time_tables/new_timetable',style: 'color:black'%>
-          </div>
-          <div class="panel-body" style="height:70px">
-         Create timetable for all the classes.
-          </div>
-        </div>
-
-      </div>
-       
-      <div class="col-md-2"></div>
     </div>
-    <div class="row" style="margin-bottom:30px">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Edit Timetable",time_tables_edit_timetable_path,style: 'color:black' %>     
-         </div>
-          <div class="panel-body" style="height:70px">
-          Select a class and edit the timetable for that class.
-         </div>
-        </div>
-       
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Set class timings",'/class_timings' %>
+        </h2>
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "View Timetables", '/time_tables/new',style: 'color:black'%></div>
-          <div class="panel-body" style="height:70px">
-         View the timetable for a class.
-          </div>
-        </div>
+      <div class="box-content">
+        Create timetable for all the classes.
       </div>
-     
-   <div class="col-md-2"></div>
-    </div>  
-    <div class="row" style="margin-bottom:30px">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-           <%= link_to " Teacher Timetable", '/time_tables/teachers_timetable',style: 'color:black' %>    
-         </div>
-          <div class="panel-body" style="height:70px">
-           View timetable for teachers.
-          </div>
-        </div>
-       
+    </div>
+  </div>
+</div>
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to " Work Allotment",'/time_tables/work_allotment' %></h2> 
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Institutional Timetable",'/time_tables/timetable',style: 'color:black' %> 
-          </div>
-          <div class="panel-body" style="height:70px">
-         View the entire timetable for a day
-          </div>
-        </div>
+      <div class="box-content">
+        Assign subjects to teachers.
+      </div>
+    </div>
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Create Timetable",'/time_tables/new_timetable'%></h2>
+      </div>
+      <div class="box-content">
+       Create timetable for all the classes.
+      </div>
+    </div>
+  </div>
+</div>
 
+
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Edit Timetable",time_tables_edit_timetable_path %></h2> 
       </div>
+      <div class="box-content">
+         Select a class and edit the timetable for that class.
+      </div>
+    </div>
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "View Timetables", '/time_tables/new'%></h2>
+      </div>
+      <div class="box-content">
+      View the timetable for a class.
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Teacher Timetable", '/time_tables/teachers_timetable' %></h2> 
+      </div>
+      <div class="box-content">
+          View timetable for teachers.
+      </div>
+    </div>
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Institutional Timetable",'/time_tables/timetable'%></h2>
+      </div>
+      <div class="box-content">
+        View the entire timetable for a day
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

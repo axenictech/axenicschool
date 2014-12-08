@@ -1,61 +1,52 @@
-<div id="content-header">
-  <h1>Exams</h1>
-  <h3>Setting</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+  <div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Exam',exams_path %></li>
+    <li>Settings</li>
+  </ul>
+</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to 'Set grading levels' ,'/grading_levels'%></h2>
+      </div>
+      <div class="box-content">
+        Set Grading Levels.
+      </div>
+    </div>
   </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-        <div class="link-heading"> </div>
-        <div class="link-descr"></div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to 'Ranking Levels' ,'/exam_setting/newrank'%>
+        </h2>
       </div>
-        
-</div>
-
-<div class="container">
-  <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to 'Set grading levels' ,'/grading_levels',style: 'color:black' %>  
-          </div>
-          <div class="panel-body" style="height:70px">
-            Set Grading Levels
-          </div>
-        </div>
-       
+      <div class="box-content">
+       Manage Ranking Levels
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to 'Ranking Levels' ,'/exam_setting/newrank',style: 'color:black'%></div>
-          <div class="panel-body" style="height:70px">
-           Manage Ranking Levels</div>
-        </div>
-
-      </div>
-       
-      <div class="col-md-2"></div>
     </div>
-
-      <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to 'Class Designations' ,'/exam_setting/new',style: 'color:black' %>  
-          </div>
-          <div class="panel-body" style="height:70px">
-            Manage Class Designations
-          </div>
-        </div>
-       
-      </div>
-      
-      <div class="col-md-2"></div>
-    </div>
-
-
+  </div>
 </div>
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to 'Class Designations' ,'/exam_setting/new' %></h2> 
+      </div>
+      <div class="box-content">
+   Manage Class Designations.
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+

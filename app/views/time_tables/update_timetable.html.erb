@@ -1,35 +1,36 @@
-<div id="content-header">
-   <hr class="fancy-line"></hr>
-  <h1>TimeTable</h1>
-  <h3>Edit Timetable</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
 
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'Edit entries',time_table_entries_path(@time_table) %></li>
-   </ul>
-   <ul>
-   <li><%=link_to 'Delete',time_tables_time_table_delete_path(@time_table), method: :delete, data:{ confirm: "Are you sure to delete"}%></li>
-   </ul>
-
-</div>
-
-<div id="page-yield">
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice7] %> </p>
-  <% end %>
-
-<table align="center" class="table table-hover " style="width:35%">
- <tbody>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Time Table',time_tables_path %></li>
+     <li><%= link_to 'Edit Time Table',  time_tables_edit_timetable_path %></li>
+  
     
-     <%=form_for @time_table,url:{action:'update_timetable_values',format:@time_table} do |f| %>
+    <li>Update Time Table</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Edit entries',time_table_entries_path(@time_table), class: "btn btn-primary-link btn-xs" %>
+     <%=link_to 'Delete',time_tables_time_table_delete_path(@time_table), method: :delete, data:{ confirm: "Are you sure to delete"}, class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="box col-md-6">
+  <div class="box-inner">
+    <div class="box-header well" data-original-title="">
+      <h2>Edit Time Table</h2>
+    </div>
+   <hr/>
+    <div class="box-content">
+     <%=form_for @time_table,url:{action:'update_timetable_values',format:@time_table} do |f| %>
+       <fieldset>
       <% if  @time_table.errors.any? %>
-            <div class="alert alert-danger">
+              <div class="alert alert-danger alert-dismissable">
              
             <ul><%@time_table.errors.full_messages.each do |msg| %>
                 <li style="width:300px"><%= msg %></li>
@@ -38,25 +39,34 @@
             </div>
         <% end %>
   
-      <div class="label-field-pair" >
-        <label for="start_date"><%= t('start_date') %></label>
+   <div class="col-sm-7 col-sm-offset-1">
+                  <div class="form-group">
+        <%= t('start_date') %>
         
           <%= f.date_select :start_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
-        
-      </div>
+          </div>
+      <div class="form-group">
 
-      <div class="label-field-pair">
-        <label for="end_date"><%= t('end_date') %></label>
+     <%= t('end_date') %>
         
           <%= f.date_select :end_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
         
       </div>
 
+  <div class="col-sm-7 col-sm-offset-6"> 
+                <div class="form-actions">
+      <%=f.submit :"►Update",class:"btn btn-primary" %>
 
-      <%=f.submit :"►Save",class:"btn btn-primary" %>
-    <% end %>
 
-  
-</tbody>
-</table>
-  </div>
+            </div>
+            </div>
+                
+              </div>
+            </fieldset>
+  <% end %>
+</div>
+</div>
+</div>
+</div>
+
+

@@ -1,25 +1,31 @@
-<div id="content-header">
-  <h1>Student Details</h1>
-  <h3>View Details</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+   <li>View Details</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+     
+      <%= link_to 'Back','/students', class: "btn btn-primary-link btn-xs" %>
+    </div>
   </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
+  </div>
+<hr>
 
-<div id="page-yield">
-
-<div id="box">
- 	<div class="text-input-bg">
+<div class="row">
+  <div class="col-md-12">
 		<%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form_this"} do |f| %>
-		<%= f.label :select %>
-	    <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#batch_form_this').submit();"}%>
+		
+	    <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#batch_form_this').submit();",class: "form-control",style:"width:350px"}%>
 		<% end %>
 	</div>
 </div>
-<br/><br/><br/><br/>
+
 <div id="student_view_all">
 </div>	
-</div>
+
 			
 

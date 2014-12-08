@@ -1,24 +1,35 @@
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2></h2>
+    </div>
+
+
+    
+
+    <div class="box-content">
 <% if @students.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
- <table align="center" class="table table-hover" style="width:800px">
-        <tr class="tr-head">
-        <td class="col-1">Sr. No.</td>
-        <td class="col-2">Student Name</td>
-        <td class="col-1">Admission No.</td>
-        <td class="col-3"></td>
+ <table id="datatable" class="table table-striped table-bordered responsive">
+        <thead>
+        <th>Sr. No.</th>
+        <th>Student Name</th>
+        <th>Admission No.</th>
+        <th></th>
       </tr>
     </thead>
   <tbody>
-  <% sr_no=1 %>
-      <% @students.each do |student| %>
+ 
+      <% @students.each_with_index do |student,i| %>
         <tr>
-          <td><%= sr_no %></td>
+          <td><%= i+1 %></td>
           <td><%= student.first_name+' '+student.last_name  %></td>
           <td><%= student.admission_no %></td>
           <td><%= link_to 'View Profile',students_profile_path(student) %></td>
         </tr>
-        <% sr_no+=1 %>
+        
       <% end %>   
     </tbody>
   </table>
