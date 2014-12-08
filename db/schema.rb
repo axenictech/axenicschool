@@ -912,10 +912,6 @@ ActiveRecord::Schema.define(version: 20141223103416) do
     t.string   "name_tag"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-  end
-
-=======
   end
 
   create_table "privilege_users", force: true do |t|
@@ -939,7 +935,6 @@ ActiveRecord::Schema.define(version: 20141223103416) do
 
   add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
 
->>>>>>> 60a237834b594ca49f1b42840b867e4fd4536d71
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
     t.decimal  "gpa"

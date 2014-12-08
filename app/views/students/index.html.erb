@@ -1,31 +1,46 @@
-<div id="content-header">
-  <h1>Student Details</h1>
-  <h3>View Details</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
-  </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'View All','students/view_all'%></li>
-    <li style="width:150px"><%= link_to 'Advanced Serach','students/advanced_search'%></li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li>Student Details</li>
   </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'View All','students/view_all', class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Advanced Serach','students/advanced_search', class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
 </div>
+<hr>
 
-<div id="page-yield">
 
-	<div align="center">
+<div class="row">
+  <div class="col-md-2"></div>
+    <div class="box col-md-10">
+  
+       
+     
+       
 		<%= form_for :student, url:{action:'search_ajax'}, method: :get,remote:true,
 					html:{id: "student_form"} do |f|%>
-				<%= f.label :Search %>
-			   	<%= text_field_tag :search,"",{oninput:"$('#student_form').submit();"}%>
+        <fieldset>
+
+            <%= text_field_tag :search,"",{oninput:"$('#student_form').submit();",placeholder:'Search Student',class:"form-control",style: "width: 300px"}%>
+          <br>
 			   	<%= f.radio_button  "status","present", :checked => "checked" %>Present Students
 			   	&nbsp;&nbsp;&nbsp;
 			   	<%= f.radio_button  "status","former"%>Former Students
 			 	<% end %>
  	</div>
+
+ 	</fieldset>
+ 
+ 	
+ 	</div>
+ 	</div>
+
 <div id="box">
 <div class="col-md-4"></div> 	
 				
