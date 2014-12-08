@@ -59,7 +59,9 @@ class TimeTableEntriesController < ApplicationController
     @batch = @delete_time.batch
     @class_timing = @batch.class_timings.where(is_break: false)
     @subjects = @batch.subjects.all
+    unless @delete_time.nil?
     @time = @delete_time.time_table.id
+  end
   end
 
   def new

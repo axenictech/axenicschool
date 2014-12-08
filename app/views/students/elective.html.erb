@@ -1,26 +1,19 @@
-<div id="content-header">
-  <h1>Student</h1>
-  <h3>Electives</h3>
-<div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Subjects', subjects_path %></li>
+    <li><%= link_to 'Elective Subject', elective_groups_elective_subject_path(@subject.elective_group)%></li>
+    <li>Assign Students</li>
+  </ul>
 </div>
-<div id="page-yield">
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/>
 
- <div class="box">
-   <div class="bread_crumb">
-    <%= link_to "Batch "+@subject.elective_group.batch.name, batches_display_path(@subject.elective_group.batch)%> &raquo;
- 	<%= link_to "Elective Group "+@subject.elective_group.name ,batches_subjects_subject_path(@subject.elective_group.batch)%> &raquo;
- 	<%= link_to "Elective Subject "+@subject.name,elective_groups_elective_subject_path(@subject.elective_group)%> &raquo; Assign Students
-        </div>
- <% unless flash[:notice_ele].nil? %>
-    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice_ele] %> </div>
-  <% end %></div><br/>
 <div class="linker" align="right" style="margin-right:20px">
-<%= link_to "Assign All",students_assign_all_path(@subject),remote:true, class: 'btn btn-primary'%>
-  <%= link_to "Remove All",students_remove_all_path(@subject),remote:true,class: 'btn btn-primary' %></div>
-<br/><br/>
-  <div id="elective_subject">
-    <%= render 'elective_subject' %>
-</div></div>
+  <%= link_to "Assign All",students_assign_all_path(@subject),remote:true, class: 'btn btn-primary-link btn-xs'%>
+  <%= link_to "Remove All",students_remove_all_path(@subject),remote:true,class: 'btn btn-primary-link btn-xs' %>
+</div>
+<div id="elective_subject">
+  <%= render 'elective_subject' %>
+</div>

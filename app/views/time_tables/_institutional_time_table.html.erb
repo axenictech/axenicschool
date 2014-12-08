@@ -1,15 +1,24 @@
-  <table  align="center" class="table table-hover table-bordered" style="width:800px">
-     <tr>
-     <td> <%= link_to "◄",time_tables_display_institutional_time_table_path(:next=>(@today-1.day)),remote:true %></td>
-  <td>
+    
+<br/>
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+  <h2>Institutional Timetable</h2>
+    </div>
+     <div class="box-content">
+ <table id="datatable" class="table table-striped table-bordered responsive">
+        <thead> <tr>
+     <th> <%= link_to "◄",time_tables_display_institutional_time_table_path(:next=>(@today-1.day)),remote:true %></th>
+  <th>
       <%= I18n.l(@today,:format=>" %d %B %Y") %>
-    </td>
-    <td>
+    </th>
+    <th>
       <%= link_to "►",time_tables_display_institutional_time_table_path(:next=>(@today+1.day)),remote:true %>
-    </td>
+    </th>
 </tr>
-</table>
-<table  align="center" class="table table-hover table-bordered" style="width:800px">
+    </thead>
+    <tbody>
 <%@time_table.each do |t| %>
  <%@time_table_entries=TimeTableEntry.where(time_table_id:t.id)%>
  <%@time_table_entries.each do |time|%>
@@ -17,10 +26,10 @@
      <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_time_table_id(time.class_timing_id,time.weekday_id,time.time_table) %>  
       <%if time.weekday.weekday==I18n.l(@today,:format=>"%A")%>
      <tr>
-        <td>
+        <th>
           <%='time'%><br/>
           <%=time.batch.name%>
-         </td>
+         </th>
         <td><%=@timing.start_time.strftime("%I:%M %p")+"-"+
        @timing.end_time.strftime("%I:%M %p")%><br/>
       <%=@present.subject.name%><br/>
@@ -30,8 +39,13 @@
 <%end%>
 <%end%>
 <%end%>
-<%='No Time Assign For These Day' if @time_table_entries.blank?%>
+<tr><td><%='No Time Assign For These Day' if @time_table_entries.blank?%></td></tr>
+    </tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
 
 
 
