@@ -21,7 +21,7 @@ class Employee < ActiveRecord::Base
   has_many :employee_attendances
   has_many :individual_payslip_categories
   after_save :create_user_account
-
+  validates :email, presence: true, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
   validates :first_name, presence: true, length: { minimum: 1, maximum: 20 }, format: { with: /\A[a-zA-Z_" "-]+\Z/, message: 'allows only letters' }
   validates :middle_name, length: { minimum: 1, maximum: 20 }, format: { with: /\A[a-zA-Z_" "-]+\Z/, message: 'allows only letters' }, allow_blank: true
   validates :last_name, presence: true, length: { minimum: 1, maximum: 20 }, format: { with: /\A[a-zA-Z_" "-]+\Z/, message: 'allows only letters' }
@@ -58,7 +58,6 @@ class Employee < ActiveRecord::Base
                             length: { minimum: 6, maximum: 11 }, allow_blank: true
   validates :mobile_phone, numericality: { only_integer: true },
                            length: { minimum: 10, maximum: 10 }, allow_blank: true
-  validates :email, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }, allow_blank: true
   validates :fax, numericality: { only_integer: true },
                   length: { minimum: 6, maximum: 11 }, allow_blank: true
   validates :home_phone, numericality: { only_integer: true },
@@ -96,12 +95,16 @@ class Employee < ActiveRecord::Base
   private
 
   def create_user_account
-    user = User.new do |u|
-      u.first_name, u.last_name, u.username, u.employee_id = first_name, last_name, employee_number, id
-      u.password = "#{employee_number}123456"
+     user = User.new do |u|
+      u.first_name = first_name
+      u.last_name = last_name
+      u.username = employee_number
+      u.employee_id = id
+      u.password = employee_number
       u.role = 'Employee'
-      u.email = (email == '' || User.find_by_email(email)) ? "#{first_name + last_name + employee_number.to_s}@axenic.com" : email
+      u.email = email
+      u.general_setting_id = User.current.general_setting.id
     end
     user.save
   end
-  end
+end

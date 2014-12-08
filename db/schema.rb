@@ -740,7 +740,6 @@ ActiveRecord::Schema.define(version: 20141223103416) do
     t.string   "school_or_college_name"
     t.string   "school_or_college_address"
     t.string   "school_or_college_phone_no"
-    t.string   "student_attendance_type"
     t.date     "finance_start_year_date"
     t.date     "finance_end_year_date"
     t.string   "language"
@@ -912,10 +911,6 @@ ActiveRecord::Schema.define(version: 20141223103416) do
     t.string   "name_tag"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-  end
-
-=======
   end
 
   create_table "privilege_users", force: true do |t|
@@ -939,7 +934,6 @@ ActiveRecord::Schema.define(version: 20141223103416) do
 
   add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
 
->>>>>>> 60a237834b594ca49f1b42840b867e4fd4536d71
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
     t.decimal  "gpa"
@@ -1101,6 +1095,7 @@ ActiveRecord::Schema.define(version: 20141223103416) do
     t.string   "employee_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.integer  "general_setting_id"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -1124,6 +1119,7 @@ ActiveRecord::Schema.define(version: 20141223103416) do
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["general_setting_id"], name: "index_users_on_general_setting_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 

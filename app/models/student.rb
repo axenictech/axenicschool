@@ -15,7 +15,8 @@ class Student < ActiveRecord::Base
 
   validates :admission_no, presence: true
   validates :admission_date, presence: true
-
+  validates :email, presence: true, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
+  
   validates :first_name, presence: true, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' }
   validates_length_of :first_name, minimum: 1, maximum: 20
 
@@ -48,7 +49,6 @@ class Student < ActiveRecord::Base
                      length: { minimum: 6, maximum: 11 }, allow_blank: true
   validates :phone1, numericality: { only_integer: true },
                      length: { minimum: 6, maximum: 11 }, allow_blank: true
-  validates :email, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }, allow_blank: true
   after_save :create_user_account
 
   def archived_student
@@ -61,10 +61,14 @@ class Student < ActiveRecord::Base
 
   def create_user_account
     user = User.new do |u|
-      u.first_name, u.last_name, u.username, u.student_id = first_name, last_name, admission_no, id
-      u.password = "#{admission_no}123456"
+      u.first_name = first_name
+      u.last_name = last_name
+      u.username = admission_no
+      u.student_id = id
+      u.password = admission_no
       u.role = 'Student'
-      u.email = (email == '' || User.find_by_email(email)) ? "#{first_name + last_name + admission_no.to_s}@axenic.com" : email
+      u.email = email
+      u.general_setting_id =  User.current.general_setting.id
     end
     user.save
   end
