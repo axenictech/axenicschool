@@ -1,46 +1,61 @@
-<div id="content-header">
-  <h1>Student</h1>
-  <h3>Advanced search result</h3>
-  <div id="app-back-button">
-   <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
-  </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Advance Search','/students' %></li>
+      
+        <li>Advance Search Result</li>
+</ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
 
-<div id="page-yield">
-<div id="inner-tab-menu">
-  <ul>
-    <li style="width:150px"><%= link_to "Search Again", 'advanced_search'%></li>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+     <%= link_to "Search Again", 'advanced_search',class: "btn btn-primary-link btn-xs"%>
     <% unless @students.empty? %>
     <%students=[]%>
     <% @students.each do |s|%>
         <% students<< s%>
     <%end%>
-    <li style="width:150px"><%= link_to "View Pdf Report",{ :action =>'advanced_search_result',format:"pdf", :students=> students, :search=> @search},method: :post%></li>
     <%end%>
-  </ul>
+    <%= link_to "View Pdf Report",{:action =>'advanced_search_result',format:"pdf", :students=> students, :search=> @search},method: :post,class: "btn btn-primary-link btn-xs"%>
+
+
+    </div>
+  </div>
 </div>
-<br/><br/>
+<hr>
+
+
 <% if @students.nil? or @students.empty? %>
   <div align="center"><h4>No students found</h4></div>
 <% else %>
-<div class="searched_for themed_text">
-       <h4> You searched for <%= @search %></h4>
-</div>
-  <div class="students-table">
-    <table align="center" width="80%" cellpadding="1" cellspacing="1" class="table table-bordered">
-      <tr class="tr-head">
-        <td class="col-1">
+<div class="row">
+  <div class="col-md-2"></div>
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>You searched for <%= @search %>
+                </h2>
+            </div>
+
+            <div class="box-content">
+        <table id="datatable" class="table table-striped table-bordered responsive">
+        <thead>
+      <tr>
+        <th>
           Sl no.
-        </td>
-        <td class="col-3">
+        </th>
+        <th>
           Admission No
-        </td>
-        <td class="col-3">
+        </th>
+        <th>
          Student Name
-        </td>
-        <td class="col-3">
-        </td></tr>
+        </th>
+        <th>
+        </th></tr>
+        </thead>
+        <tbody>
          <tr class="tr-blank"></tr>
       <% @students.each_with_index do |student,i| %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
@@ -58,8 +73,13 @@
           </td>
 
         </tr>
+        </tbody>
       <% end %>
     </table>
   </div>
 <% end %>
+</div>
+</div>
+</div>
+
 </div>
