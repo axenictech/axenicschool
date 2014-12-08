@@ -1,7 +1,7 @@
 class Guardian < ActiveRecord::Base
   belongs_to :country
   belongs_to :student
-
+  validates :email, presence: true, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
   validates :first_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: 'only allows letters' }
   validates_length_of :first_name, minimum: 1, maximum: 20
 
@@ -20,14 +20,17 @@ class Guardian < ActiveRecord::Base
   validates :income, numericality: { only_integer: true }, length: { in: 1..10 }, allow_blank: true
   validates :education, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
                         length: { in: 1..20 }, allow_blank: true
-  validates :email, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }, allow_blank: true
 
   def create_user_account
     user = User.new do |u|
-      u.first_name, u.last_name, u.username, u.student_id = first_name, last_name,  "#{first_name + last_name + student.admission_no.to_s}", student.id
-      u.password = "#{student.admission_no}123456"
+      u.first_name = first_name
+      u.last_name = last_name
+      u.username = 'P' + student.admission_no
+      u.student_id = id
+      u.password = 'P' + student.admission_no
       u.role = 'Parent'
-      u.email = (email == '' || User.find_by_email(email)) ? "#{first_name + last_name + student.admission_no.to_s}@axenic.com" : email
+      u.email = email
+      u.general_setting_id =  User.current.general_setting.id
     end
     user.save
  end

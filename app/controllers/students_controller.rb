@@ -1,11 +1,12 @@
 class StudentsController < ApplicationController
   def admission1
     @student = Student.new
+    @date = Date.today.strftime('%Y%m%d')
     if Student.first.nil?
-      @student.admission_no = 111
+      @student.admission_no = 'S'+@date.to_s+'1'
     else
-      @last_student = Student.last
-      @student.admission_no = @last_student.admission_no.next
+      @id = Student.last.id.next
+      @student.admission_no = 'S'+@date.to_s+@id.to_s
     end
   end
 

@@ -259,13 +259,12 @@ class EmployeesController < ApplicationController
 
   def admission1
     @employee = Employee.new
+    @date = Date.today.strftime('%Y%m%d')
     if Employee.first.nil?
-      @employee.employee_number = 1
-      flash[:notice] = "Employee number of first employee is #{@employee.employee_number}"
+      @employee.employee_number = 'E'+@date.to_s+'1'
     else
-      @last_employee = Employee.last
-      @employee.employee_number = @last_employee.employee_number.next
-      flash[:notice] = "Employee number of last employee is #{@last_employee.employee_number}"
+      @id = Employee.last.id.next
+      @employee.employee_number = 'E'+@date.to_s+@id.to_s
     end
   end
 

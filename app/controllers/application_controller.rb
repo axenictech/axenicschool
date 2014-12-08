@@ -5,7 +5,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_filter :set_user_language
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  before_filter :set_current_user
 
+  def set_current_user
+    User.current = current_user
+  end
+  
   private
 
   def set_user_language

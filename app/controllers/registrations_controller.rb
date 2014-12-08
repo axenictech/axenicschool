@@ -1,6 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
 layout false
 
+  def create
+    super
+    @user.create_general_setting
+  end
+
   private
 
   def sign_up_params
