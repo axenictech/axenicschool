@@ -1,4 +1,23 @@
-<% @previous_subjects.each do |sub| %>
-<div class="name"><%= sub.subject %></div><div class="val"><span>:</span><%= sub.mark %></div><br/>
-<% end %>
+
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Student Subject Details</h2>
+       
+      </div>
+        <div class="box-content">
+             <table id="datatable" class="table table-striped table-bordered responsive">
+               <thead>
+               <tr><th>Subjects</th>
+                 <th>Marks</th>
+               </tr>
+               </thead>
+               <tbody>
+     <% @previous_subjects.each do |sub| %>
+<tr><td><%= sub.subject %></td><td><%= sub.mark %></div></td></tr></tbody><% end %>
+</div>
+</div>
+</div>
+</div>
 
