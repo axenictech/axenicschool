@@ -1,20 +1,27 @@
-<div id="content-header">
-  <h1>Student info</h1>
-  <h3>Student profile</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-<div id="inner-tab-menu">
-  <ul>
-      <li><%= link_to 'Reports', students_report_path(@student)%></li>
-      <li><%= link_to "Guardians", students_dispguardian_path(@student)%></li>
-      <li><%= link_to "Send email",students_email_path(@student) %></li>
-     <li><%= link_to "Delete", students_remove_path(@student)%></li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li>Student Details</li>
   </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Reports', students_report_path(@student), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to "Guardians", students_dispguardian_path(@student), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to "Send email",students_email_path(@student), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to "Delete", students_remove_path(@student), class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
 </div>
+<hr>
+
+
+
+
 
 <div id="page-yield">
 
