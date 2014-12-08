@@ -1,36 +1,44 @@
-<div id="content-header">
-  <h1>Students</h1>
-  <h3>View Transcripts</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
-  </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'Pdf Report',{action:'student_transcript_report',format:"pdf",student_id:@student.id}%></li>
-  </ul>
-</div>
-<div id="page-yield">
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Student Details','/students' %></li>
+      <li><%= link_to 'Student Profile',students_profile_path(@student.id)%></li>
+       <li><%= link_to 'Reports Center',students_report_path(@student.id)%></li>
+        <li>Transcript Report</li>
+</ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+
+
+
+
+
+
+
+
 <div class="row">
-<div class="col-md-2"></div>
-<div class="col-md-10">
- <div style="width:80%">
-    <div class="info">
-      <div class="info-left">
-        <div class="info1">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Pdf Report',{action:'student_transcript_report',format:"pdf",student_id:@student.id}, class: "btn btn-primary-link btn-xs" %>
+    
+    </div>
+  </div>
+</div>
+<div class="row">
+        <div class="box col-md-8">
+            <div class="box-inner">
+            <div class="box-content">
           <h4><label  class="field-label label label-default" style="margin-right:100px" >Name</label>: <label class="infolbl themed_text "> <%= @student.first_name.capitalize+" "+@student.last_name.capitalize %></label></h4>
-        </div>
-        <div class="info1">
+         <br>
+       
           <h4><label class="field-label label label-default" style="margin-right:90px">Course</label>: <label class="infolbl themed_text"> <%= @student.batch.course.course_name %></label></h4>
-        </div>
-      </div>
-      <div class="info-right">
-        <div class="info1">
+     <br>    
+    
           <h4><label class="field-label label label-default" style="margin-right:35px">Addmission No</label>: <label class="infolbl themed_text" > <%= @student.admission_no  %></label></h4>
         </div>
-      </div>
-    </div>
+        </div>
+        </div>
+        </div>
+
           <% general_subjects = @batch.subjects.where(elective_group_id:nil) %>
           <% student_electives = StudentSubject.where(student_id: @student.id,batch_id: @batch.id) %>
           <% elective_subjects = [] %>
@@ -39,15 +47,25 @@
           <% end %>
           <% @subjects = general_subjects + elective_subjects %>
           <% unless @subjects.empty? %>
-            <div class="batch-name" style="color:blue"><h4><%= "(Code -"+@batch.course.code+") "+@batch.name.capitalize %></h4></div>
+           
             <% total_credits=0 %>
-          <div id="score-table" >
-            <table id="listing" class="table-bordered" width="100%" cellpadding="1" cellspacing="1">
-              <tr class="tr-head">
-                <td class="col-2"><font color="blue">Subject Code</font></td>
-                <td class="col-2"><font color="blue">Subject Title</font></td>
-                <td class="col-2"><font color="blue">Percentage(%)</font></td>
+
+
+
+      <div class="row">
+        <div class="box col-md-12">
+            <div class="box-inner">
+              <div class="box-header well">
+                <div class="batch-name" style="color:blue"><h2><%= "(Code -"+@batch.course.code+") "+@batch.name.capitalize %></h2></div></div>
+            <div class="box-content">
+      <table id="datatable" class="table table-striped table-bordered responsive">
+          <thead>
+              <tr>
+                <th>Subject Code</th>
+                <th>Subject Title</th>
+                <th>Percentage(%)</th>
               </tr>
+              </thead>
         <% max_total = 0 %>
         <% marks_total = 0 %>
         <% @mark = 0 %>
@@ -64,7 +82,8 @@
                 <% @total += @exam.maximum_marks %>
               <% end %>
               <%end%>
-                  <tr class="tr-<%= cycle('odd', 'even') %>">
+              <tbody>                
+               <tr class="tr-<%= cycle('odd', 'even') %>">
                     <td class="col-1"> <%= subject.code %></td>
                     <td class="col-3"> <%= subject.name %></td>
                     <td class="col-3"><%="%.2f" %(marks_total*100/max_total)+"%" unless max_total==0 %></td>
@@ -78,10 +97,15 @@
                   <td colspan="2" align="right"><font color="blue">Total</font></td>
                   <td><%="%.2f" %(@mark*100/@total)+"%" unless @total==0 %></td>
                 </tr>
+                </tbody>
             </table>
            <%else%>
            <h4>Subject Not Found</h4>
            <%end%>
            </div>
 </div></div>
+</div>
+</div>
+</div>
+</div>
 </div>
