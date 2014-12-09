@@ -1,70 +1,103 @@
-<div id="content-header">
-  <h1>HR Managament</h1>
-  <h3>Human Resources</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li>HR Managament.</li>
+  </ul>
+</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%=link_to "Select employee",employees_select_employee_department_path%></h2>
+      </div>
+      <div class="box-content">
+       Generate Payslip of an Employee.
+      </div>
+    </div>
   </div>
-    <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
-
- 
- <div class="container">
-    <div class="row" style="margin-top:20px">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Select employee",employees_select_employee_department_path,style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-         Generate Payslip of an Employee.
-          </div>
-        </div>
-        </div>
-
-        <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "One click payslip Generator",employees_one_click_payslip_path,remote:true,style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-           One click payslip Generation.
-          </div>
-        </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "One click payslip Generator",employees_one_click_payslip_path%>
+        </h2>
       </div>
-
-
-       <div class="col-md-2"></div>
-    </div>  
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "One click payslip revert",employees_payslip_revert_path,remote:true,style: 'color:black' %>     
-         </div>
-          <div class="panel-body" style="height:70px">
-            One click payslip revertion.
-          </div>
-        </div>
-        </div>
-
-         <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Rejected Employee",employees_payslip_path,style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-          Manage Employee Rejected payslip.
-          </div>
-        </div>
+      <div class="box-content">
+          One click payslip Generation.
       </div>
-      
-        </div>
-      
-        <div id="one_click_payslip"></div>
+    </div>
+  </div>
+</div>
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "One click payslip revert",employees_payslip_revert_path %></h2> 
+      </div>
+      <div class="box-content">
+    One click payslip revertion.
+      </div>
+    </div>
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%=link_to "Rejected Employee",employees_payslip_path%></h2>
+      </div>
+      <div class="box-content">
+         Manage Employee Rejected payslip.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="one_click_payslip"></div>
         <div id="one_click_revert"></div>
 
-        </div>
 
-      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

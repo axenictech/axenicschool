@@ -1,70 +1,101 @@
-<div align="center">
-<ul class="errors1"></ul></div>
-	<%= form_for @employee_category_new, url:{action:'add_category'},remote:true do |c|%>
-	<table class="table" style="width:500px" align="center">
+<div class="row">
+<div class="col-md-4"></div>
+<div class="box col-md-4">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>Employee Category</h2>
+    </div>
+  <div class="box-content">
+  <%= form_for @employee_category_new, url:{action:'add_category'},remote:true do |c|%>
+   <fieldset>
+	 <div class="form-group">
+        <%= t('Name')%>
+         <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
+      </div>
 
-	<tbody>
-		<tr>
-			<td><%= c.label :Name%></td>
-			<td><%= c.text_field :name%></td>
-		</tr>
-
-		<tr>
-			<td><%= c.label :prefix%></td>
-			<td><%= c.text_field :prefix%></td>
-			</tr>
-
-		<tr>
-			<td><%= c.label :Status%> </td>
-			<td><%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
-			<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td>
-		</tr>
-		<tr>
-			<td colspan="3" align="center"><%= c.submit 'Create', class: "btn btn-primary"%></td>
-		</tr>
-	</tbody>
-</table>
-<%end%>
-
-
-<% if @categories1.empty? and @categories2.empty?%>
-<h3 align="center">No records</h3>
-<%else%>
-<table align="center" class="table table-hover table-bordered" style="width:800px">
-
-	<tr class="tr-head"><th colspan="3">Active Category</th>
-    </tr>
-	<tbody class="product-index">
-
-	<%@categories1.each do |c| %>
+      <div class="form-group">
+        <%= t('Prefix')%>
+         <%=c.text_field :prefix, placeholder: "Prefix", class: "form-control"%>
+      </div>
+      
+      <div class="form-group">
+         <%= t('Status')%>
+        <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
+        <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
+       </div>
+   
+      <div class="col-sm-5 col-sm-offset-5"> 
+       <div class="form-actions">               
+        <%= c.submit 'Create', class: "btn btn-success"%>
+      </div>
+      </div>
+   </fieldset>
+    </div>
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+     <div class="form-group">
+       <div class="row">
+        <div class="box col-md-12">
+         <div class="box-inner">
+          <div class="box-header well">
+            <h2>Active Category</h2>
+          </div>
+         <div class="box-content">
+          <% if @categories1.empty? and @categories2.empty?%>
+         <h3 align="center">No records</h3>
+       <%else%>
+       <table id="datatable" class="table table-striped table-bordered responsive">
+          <tbody class="product-index">
+            <%@categories1.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.prefix%>)</td>
 			<td><%= link_to 'Edit', employees_edit_category_path(c),remote:true%></td>
 			<td><%= link_to 'Delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
-		<%end%>
-
-		
-	 </tbody>
-</table>
-
-<table align="center" class="table table-hover table-bordered" style="width:800px">
-
-	<tr class="tr-head"><th colspan="3">Inactive Category</th>
-    </tr>
-	<tbody class="product-index">
-
-	<%@categories2.each do |c| %>
-			<tr>
-			<td class="col-3"><%=c.name%> (<%=c.prefix%>)</td>
+	    	<%end%>
+          </tbody>
+       </table>
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+   <div class="col-sm-6">
+     <div class="form-group">
+       <div class="row">
+         <div class="box col-md-12">
+           <div class="box-inner">
+            <div class="box-header well">
+              <h2>Inactive Category</h2>
+             </div>
+          <div class="box-content">
+             <table id="datatable" class="table table-striped table-bordered responsive">
+             <tbody>
+              <%@categories2.each do |c| %>
+		 	<tr>
+		 	<td class="col-3"><%=c.name%> (<%=c.prefix%>)</td>
 			<td><%= link_to 'Edit', employees_edit_category_path(c),remote:true%></td>
 			<td><%= link_to 'Delete' ,employees_destroy_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
+       </tbody>
+    </table>
+    <%end%>
+ <%end%>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
 
-		
-	 </tbody>
-</table>
-<%end%>
 
- 
+
+
+
+
