@@ -14,9 +14,10 @@
   </div>
   </div>
 <hr>
-
+ 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
 		<%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form_this"} do |f| %>
 		
 	    <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#batch_form_this').submit();",class: "form-control",style:"width:350px"}%>

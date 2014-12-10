@@ -31,7 +31,7 @@ Note:<font color="red">Fields Marked with * must be filled</font>
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
       <div class="form-group">
-       <%= t('Admission Number')%><span class="necessary-field">*</span>
+       <b><%= t('Admission Number')%></b><span class="necessary-field">*</span>
         <%=f.text_field :admission_no, :value=> @student.admission_no , class: "form-control"%>
       
       </div>

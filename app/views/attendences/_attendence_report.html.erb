@@ -1,10 +1,17 @@
-<table align="center" class="table table-hover table-bordered" style="width:80%">
-	<tr class="tr-head">
-		<td>Name</td>
-		<td>Total</td>
-		<td>Present</td>
-		<td>Percentage(%)</td>
-	</tr>
+<div class="row">
+<div class="col-md-6"></div>
+<div class="col-md-6">
+	<table class="table table-striped table-bordered responsive">
+		<thead>
+		<tr>
+		<th>Name</th>
+		<th>Total</th>
+		<th>Present</th>
+		<th>Percentage(%)</th>
+		</tr>
+		</thead>
+		<tbody>
+	
 	<% @students.each do |student|%>
 		<% total_days=0 %><% absent_days=0 %>
 		<%unless @time_table_entries.nil? %>
@@ -37,6 +44,9 @@
 		<td><%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %></td>
 	</tr>
 	<%end%>
+	</tbody>
 	<tr><td colspan="4"></td></tr>
 	<tr><td colspan="4"><%= link_to 'Pdf report',attendences_attendence_report_path(subject_id:@subject.id,start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-success"%></td></tr>
 </table>
+</div>
+</div>
