@@ -1,54 +1,48 @@
-<div id="content-header">
-  <h1>Manual Leave Reset</h1>
-  <h3>Reset Employee Leave Manually</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li>Manual Leave Reset</li>
+  </ul>
 </div>
-
- <div class="container">
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-           <%= link_to "Reset All",'leave_reset_all',style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-         Reset Leave Count For All Employees.
-          </div>
-        </div>
-       
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%=link_to "Reset All",'leave_reset_all'%></h2>
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Department Reset",'employee_leave_reset_by_department',style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-          Reset employee leave count by department.
-          </div>
-        </div>
-
+      <div class="box-content">
+ Reset Leave Count For All Employees.
       </div>
-       
-      <div class="col-md-2"></div>
     </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-           <%= link_to "Individual Reset",employee_attendances_employee_leave_reset_by_employee_path,style: 'color:black' %>   
-          </div>
-          <div class="panel-body" style="height:70px">
-            Attendance report
-          </div>
-        </div>
-       
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Department Reset",'employee_leave_reset_by_department'%>
+        </h2>
       </div>
-
-  
-
-
+      <div class="box-content">
+         Reset employee leave count by department.
+      </div>
+    </div>
+  </div>
+</div>
+<br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%=link_to "Individual Reset",employee_attendances_employee_leave_reset_by_employee_path %></h2>
+      </div>
+      <div class="box-content">
+   Attendance report.
+      </div>
+    </div>
+  </div>
+  </div>
