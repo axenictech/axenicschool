@@ -6,19 +6,19 @@
     <ul class="nav nav-pills nav-stacked main-menu">
         <li class="nav-header">Main</li>
         <li class="ajax-link">
-          <a href="/dashboard">
+          <a href="/home/dashboard">
             <i class="glyphicon glyphicon-home"></i>
             <span>Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/students/<%= current_user.student_id%>/profile">
             <i class="glyphicon glyphicon-edit"></i>
             <span>My Profile</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/newscasts">
           <i class="glyphicon glyphicon-comment"></i>
             <span>Campus News</span>
           </a>      

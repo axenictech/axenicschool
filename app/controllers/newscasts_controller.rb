@@ -11,6 +11,7 @@ class NewscastsController < ApplicationController
 
   def create
     @newscast = Newscast.new(newscast_params)
+    @newscast.user_id = current_user.id
     if @newscast.save
       redirect_to newscast_path(@newscast), notice: 'News added successfully'
     else
@@ -49,6 +50,6 @@ class NewscastsController < ApplicationController
   private
 
   def newscast_params
-    params.require(:newscast).permit(:title, :content)
+    params.require(:newscast).permit!
   end
 end

@@ -3,7 +3,7 @@
     <li><%= link_to 'Home',home_dashboard_path %></li>
      <li><%=link_to 'Step 1',students_admission1_path%></li>
       <li><%=link_to 'Step 2',students_admission2_path(@student.id)%></li>
-     <li>Step 2.1-Parent/guardian details</li>
+     <li>Admission(Step 2.1-Parent/guardian details)</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
@@ -24,12 +24,11 @@
   
   <div class="row">
       <div class="col-sm-1"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
       <div class="form-actions">               
        <%= link_to "Add Another Guardian", students_admission2_path(@student),class: "btn btn-primary"%>
           </div>
           </div>
-    <div class="col-sm-1"></div>
       <div class="col-sm-4">
          <div class="form-actions">
          <%= link_to "Finish",students_admission3_path(@student),class: "btn btn-default"%>
