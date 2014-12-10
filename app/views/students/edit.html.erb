@@ -1,175 +1,215 @@
-<div id="content-header">
-  <h1>Addmission</h1>
-  <h3>Edit- Student details<br />
-  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li>Edit- Student details</li>
+  </ul>
+</div>
+<font color="red">Fields Marked with * must be filled</font>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
 
-<div id="page-yield">
- <table align="center" class="table table-hover" style="width:1000px">
-<%= form_for @student do |f| %>
-<div align="center">
+
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2> Student details</h2>
+       
+      </div>
+        <div class="box-content">
+
+      <%= form_for @student do |f| %>
+            <fieldset>
     <% if @student.errors.any? %>
-        <div class="alert alert-danger" style="width:500px" >
-          <h3>Error prohibited to from being saved:</h3>
+          <div class="alert alert-danger" style="width:500px" >
+           <h4><%= t('Errors prohibited to being Save:')%></h4>
           <ul>
            <% @student.errors.full_messages.each do |msg| %>
               <li style="width:500px" align="left"><%= msg %></li>
             <% end %>
           </ul>
-          <% end %>
       </div>
- </div>
-    <tbody>
-     <tr>
-         <td class="col-2"><%=f.label :"Admission Number"%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.text_field :admission_no %></td>
-          <td class="col-2"><%=f.label :"Admission Date" %><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.date_field :admission_date%></td>
-     </tr>
+        <% end %>
 
+
+
+
+
+
+
+
+
+     <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+      <div class="form-group">
+       <%= t('Admission Number')%><span class="necessary-field">*</span>
+        <%=f.text_field :admission_no, :value=> @student.admission_no , class: "form-control"%>
+      
+      </div>
+       <div class="form-group">
+       <%= t('Admission Date')%><span class="necessary-field">*</span>
+       <%=f.date_field :admission_date ,:value => Time.now.strftime('%Y-%m-%d'),class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+       <%= t('First Name')%><span class="necessary-field">*</span>
+         <%=f.text_field :first_name,placeholder: "First Name", class: "form-control"%>
+       </div>
+
+     <div class="form-group">
+       <%= t('Middle Name')%>
+         <%=f.text_field :middle_name, :required=>false ,placeholder: "Middle Name", class: "form-control"%>
+       </div>
+
+         <div class="form-group">
+       <%= t('Last Name')%><span class="necessary-field">*</span>
+         <%=f.text_field :last_name,placeholder: "Last Name",class: "form-control"%>
+        </div>
+
+       <div class="form-group">
+       <%= t('Course and Batch')%><span class="necessary-field">*</span>
     
-     <tr>
-       <td class="col-2"><%=f.label :"First Name"%><span class="necessary-field">*</span></td>
-          <td class="col-2"> <%=f.text_field :first_name%></td>
-          <td colspan="2"></td>
-     </tr>
+      <%=f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}, {class: "form-control"}%>
+      
+      </div>
 
-     <tr>
-       <td class="col-2"><%=f.label :"Middle Name"%></td>
-        <td class="col-2"><%=f.text_field :middle_name, :required=>false%></td>
-        <td colspan="2"></td>
-     </tr>
+       <div class="form-group">
+       <%= t('Date Of Birth')%><span class="necessary-field">*</span>
+          <%=f.date_field :date_of_birth , class: "form-control"%>
+      
+      </div>
 
-     <tr>
-       <td class="col-2"><%=f.label :"Last Name"%><span class="necessary-field">*</span></td>
-         <td class="col-2">  <%=f.text_field :last_name%></td>
-         <td colspan="2"></td>
-     </tr>
+       <div class="form-group">
+       <%= t('Gender')%>
+       Male<%= f.radio_button  "gender","Male", :checked => "checked" %>
+          &nbsp;&nbsp;&nbsp;Female <%= f.radio_button  "gender","Female"%>
+       </div>
 
-     <tr>
-       <td class="col-2"><%=f.label :"Course and Batch"%><span class="necessary-field">*</span></td>
-         <td class="col-2"><%= f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true%></td>
-         <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Date Of Birth"%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.date_field :date_of_birth%></td>
-          <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Gender%></td>
-         <td class="col-2"> Male<%= f.radio_button  "gender","Male", :checked => "checked" %>
-          &nbsp;&nbsp;&nbsp;Female <%= f.radio_button  "gender","Female"%></td>
-       <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Blood Group"%></td>
-          <td class="col-2"><%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],prompt:true %></td>
-          <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Birth Place"%></td>
-           <td class="col-2"><%=f.text_field :birth_place%></td>
-           <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Nationality%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.select :nationality_id,Country.all.collect{|c| [c.name,c.id]},prompt:true%></td>
-        <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Mother Tongue"%></td>
-        <td class="col-2"><%=f.text_field :language%></td>
-        <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Category%><span class="necessary-field">*</span></td>
-          <td class="col-2"> <%=f.select :category_id, Category.all.collect{|c| [c.name,c.id]},prompt:true%></td>
-          <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Religion%></td>
-        <td class="col-2"><%=f.text_field :religion%></td>
-        <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Address Line1"%></td>
-          <td class="col-2"> <%=f.text_field :address_line1%></td>
-          <td colspan="2"></td>
-     </tr>
-
-
-     <tr>
-       <td class="col-2"><%=f.label :"Address Line2"%></td>
-        <td class="col-2"><%=f.text_field :address_line2%></td>
-        <td colspan="2"></td>
-     </tr>
-
-      <tr>
-       <td class="col-2"><%=f.label :City%></td>
-         <td class="col-2">  <%=f.text_field :city%></td>
-         <td colspan="2"></td>
-     </tr>
-
-      <tr>
-       <td class="col-2"><%=f.label :State%></td>
-        <td class="col-2"><%=f.text_field :state%></td>
-        <td colspan="2"></td>
-     </tr>
-
-      <tr>
-       <td class="col-2"><%=f.label :"Pin Code"%></td>
-        <td class="col-2"><%=f.text_field :pin_code%></td>
-        <td colspan="2"></td>
-     </tr>
-
-      <tr>
-       <td class="col-2"><%=f.label :Country%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]},prompt:true%></td>
-          <td colspan="2"></td>
-     </tr>
-
-      <tr>
-       <td class="col-2"><%=f.label :Phone%></td>
-         <td class="col-2"><%=f.text_field :phone1%></td>
-         <td colspan="2"></td>
-     </tr>
-
-      <tr>
-       <td class="col-2"><%=f.label :Mobile%></td>
-          <td class="col-2"><%=f.text_field :phone2%></td>
-          <td colspan="2"></td>
-     </tr>
-
-      <tr>
-       <td class="col-2"><%=f.label :Email%></td>
-          <td class="col-2"> <%=f.text_field :email%></td>
-          <td colspan="2"></td>
-     </tr>
-
-
-
-    <div class="field">
-    <tr>
-
-     <td class="col-2"><%= f.label :"Upload Photo" %></td> 
-      <td class="col-2"><%= f.file_field :image %></td>
-      <td colspan="2"></td>
-     </tr>
-   </div>
+       <div class="form-group">
+       <%= t('Blood Group')%>
    
-     <tr><td colspan="4" align="center"><%=f.submit "Update",class: "btn btn-success" %></td></tr>
+      <%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{prompt:true}, {class: "form-control"}%>
+      
+      </div>
 
-<%end%>
-</tbody>
-</table>
+       <div class="form-group">
+       <%= t('Birth Place')%>
+       <%=f.text_field :birth_place ,placeholder: "Birth Place",class: "form-control"%>
+       </div>
+
+       <div class="form-group">
+       <%= t('Nationality')%><span class="necessary-field">*</span>
+        <%=f.select :nationality_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
+      
+      </div>
+
+       <div class="form-group">
+       <%= t('Mother Tongue')%>
+     
+      <%=f.text_field :language,placeholder: "Mother Tongue",class: "form-control"%>
+      
+      </div>
+
+     
   </div>
+
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+            <div class="form-group">
+       <%= t('Category')%><span class="necessary-field">*</span>
+  
+      <%=f.select :category_id, Category.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
+      
+      </div>
+           <div class="form-group">
+       <%= t('Religion')%>
+     
+      <%=f.text_field :religion,placeholder: "Religion",class: "form-control"%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('Address Line1')%>
+     
+      <%=f.text_field :address_line1,placeholder: "Address Line1",class: "form-control"%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('Address Line2')%>
+     
+      <%=f.text_field :address_line2,placeholder: "Address Line2",class: "form-control"%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('City')%>
+     
+      <%=f.text_field :city,placeholder: "City",class: "form-control"%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('State')%>
+     
+      <%=f.text_field :state,placeholder: "State",class: "form-control"%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('Pin Code')%>
+     
+      <%=f.text_field :pin_code,placeholder: "Pin Code",class: "form-control"%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('Country')%><span class="necessary-field">*</span>
+     
+      <%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('Phone')%>
+     
+      <%=f.text_field :phone1,placeholder: "Phone",class: "form-control"%>
+      
+      </div>
+
+
+        <div class="form-group">
+       <%= t('Mobile')%>
+     
+      <%=f.text_field :phone2,placeholder: "Mobile",class: "form-control"%>
+      
+      </div>
+
+
+        <div class="form-group">
+       <%= t('Email')%>
+     
+      <%=f.text_field :email,placeholder: "Email",class: "form-control"%>
+      
+      </div>
+
+        <div class="form-group">
+       <%= t('Upload Photo')%>
+     
+      <%=f.file_field :image,class: "form-control"%>
+      
+      </div>
+</div>
+</div>
+  <div class="col-sm-5 col-sm-offset-5"> 
+      <div class="form-actions">               
+        <%= f.submit 'Save', class: "btn btn-success"%>
+      </div>
+    </div>
+  </fieldset>        
+ <% end %>
+</div>
+</div>
+</div>
+</div>

@@ -1,12 +1,14 @@
-<div id="content-header">
-  <h1>Employee Info</h1>
-  <h3>Employee profile</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-<br/>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+   <li><%= link_to'View Details',users_view_all_path%></li>
+  
+   <li>Employee Profile</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+
+<div class="row">
+  
 <div class="dropdown pull-right">
    <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
       data-toggle="dropdown">
@@ -34,6 +36,9 @@
       
    </ul>
 </div>
+
+
+
 
 <div class="dropdown pull-right">
    <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
@@ -69,25 +74,37 @@
      
 </button>
 </div>
+</div>
+<hr>
 
-<div id="page-yield">
-<table class="table" align="center" style="width:900px">
-<thead>
-<tr class="tr-head">
-    <th colspan="4"><div id="profile_picture_display">
+
+<div class="row">
+        <div class="box col-md-1"></div>
+        <div class="box col-md-9">
+        <div class="box-inner">
+      <div class="box-content">
+
+    <div class="row">
+    <div class="col-md-8">
+  <div id ="student_main_info">
+      <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
+      <h4 align="left"> Employee Id : <%=@employee.id%> </h4>
+    </div>
+    </div>
+<br>
+    <div class="col-md-3">
+    <div id="profile_picture_display">
     <% unless @employee.image.blank? %>
       <%= image_tag @employee.image%>
     <% else %>
       <%= image_tag "default_employee.png" %>
     <% end %>
     </div>
-   <div id ="student_main_info">
-      <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
-      <h4 align="left"> Employee Id : <%=@employee.id%> </h4>
     </div>
-   </th>
-  </tr>
-</thead>
-</table>
+    </div>
+   <hr>
 <div id="profile"><%=render'disp_genral_profile'%></div>
+</div>
+</div>
+</div>
 </div>

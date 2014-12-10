@@ -1,95 +1,139 @@
-
-<div id="content-header">
-  <h1>HR Managament</h1>
-  <h3>Human Resources</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li>Human Resources</li>
+  </ul>
+</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Setting",employees_settings_path%></h2>
+      </div>
+      <div class="box-content">
+       HR Setting.
+      </div>
+    </div>
   </div>
-    <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
-
- 
- <div class="container">
-    <div class="row" style="margin-top:20px">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Setting",employees_settings_path,style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-         HR Setting.
-          </div>
-        </div>
-       
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Employee Management",employees_employee_management_path %>
+        </h2>
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Employee Management",employees_employee_management_path,style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-           Manage All Employee.
-          </div>
-        </div>
-
+      <div class="box-content">
+                 Manage All Employee.
       </div>
-       
-      <div class="col-md-2"></div>
-    </div>  
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Employee Leave Management",'employee_attendances',style: 'color:black' %>     
-         </div>
-          <div class="panel-body" style="height:70px">
-            Manage subjects corresponding to different courses.
-          </div>
-        </div>
-       
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Create Payslip",employees_payslip_path,style: 'color:black'%>
-          </div>
-          <div class="panel-body" style="height:70px">
-            Create emlpoyee monthly payslip.
-          </div>
-        </div>
-
-      </div>
-       
-      <div class="col-md-2"></div>
     </div>
-    <div class="row" style="margin-bottom:30px">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Search Employee",employees_search_employee_path,style: 'color:black' %>     
-         </div>
-          <div class="panel-body" style="height:70px">
-           Saerch for Employee.
-         </div>
-        </div>
-       
+  </div>
+</div>
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Employee Leave Management",'employee_attendances' %></h2> 
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Employee payslip",employees_department_payslip_path,style: 'color:black'%></div>
-          <div class="panel-body" style="height:70px">
-            View Department wise slip.
-          </div>
-        </div>
+      <div class="box-content">
+     Manage subjects corresponding to different courses.
       </div>
-      <div class="col-md-2"></div>
     </div>
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Create Payslip",employees_payslip_path%></h2>
+      </div>
+      <div class="box-content">
+   Create emlpoyee monthly payslip.
+      </div>
+    </div>
+  </div>
+</div>
 
- </div>  
-      
+
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Search Employee",employees_search_employee_path %></h2> 
+      </div>
+      <div class="box-content">
+          Saerch for Employee.
+      </div>
+    </div>
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Employee payslip",employees_department_payslip_path%></h2>
+      </div>
+      <div class="box-content">
+        View Department wise slip.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
      

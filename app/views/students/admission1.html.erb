@@ -6,6 +6,7 @@
 </div>
 Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
 <div id="flash"><%= render 'layouts/messages'%></div>
+
 <div class="row">
   <div class="box col-md-12">
     <div class="box-inner">
@@ -36,7 +37,6 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
           <%=f.text_field :admission_no, :value=> @student.admission_no , class: "form-control"%>
         
         </div>
-      </div>
       <div class="col-md-5">
          <div class="form-group">
          <%= t('Admission Date')%><span class="necessary-field">*</span>
