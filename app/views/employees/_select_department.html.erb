@@ -1,13 +1,14 @@
 
+<br/>
+<div class="row">
+  <div class="col-md-12">
+
   <%= form_for :subject_assignment, url:{action:'list_emp',format:@subject}, method: :get,remote:true,html:{id: "user_form2"} do |f|%>
 
-	<div class="label-field-pair">
-		<%=f. label :'Select Department'%>
-		<div  class="text-input-bg">
-   		 <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form2').submit();"}%></div></div>
-
-   		<%end%>
-
-   		<div id="emp_list"></div>
+      <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:"Select Department"},{onchange:"$('#user_form2').submit();",class: "form-control",style:"width:350px"} %>  
+    <%end%>
+  </div>
+</div>
+		<div id="emp_list"></div>
    		<div id="assigned_emp"></div>
-   		
+

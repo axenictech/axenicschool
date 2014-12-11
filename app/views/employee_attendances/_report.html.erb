@@ -1,17 +1,28 @@
-<table align="center" class="table table-hover table-bordered" style="width:80%">
-  <tr class="tr-head">
-    <td>
+<br/>
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>Attendance report</h2>
+    </div>
+   <div class="box-content">
+ <table id="datatable" class="table table-striped table-bordered responsive">
+ <thead>
+  <tr>
+    <th>
       <%= t('name') %>
-    </td>
+    </th>
     <% @leave_types.each do |lt| %>
-    <td>
+    <th>
       <%= lt.code%>
-    </td>
+    </th>
   <% end %>
-    <td>
+    <th>
       <%= t('total') %>
-    </td>
+    </th>
   </tr>
+  </thead>
+  <tbody>
     <%@employees.each do |e| %>
   <tr>
     <td class="col-2">
@@ -40,5 +51,6 @@
 
   </tr>
   <%end%>
-</table>
-<div><%=link_to 'PDF Report',employee_attendances_attendance_report_pdf_path(department_id:@deparment.id,format:"pdf"),class: "btn btn-primary"%></div>
+  </tbody>
+ </table>
+ <div class="col-sm-offset-5"><%=link_to 'PDF Report',employee_attendances_attendance_report_pdf_path(department_id:@deparment.id,format:"pdf"),class: "btn btn-primary"%></div>
