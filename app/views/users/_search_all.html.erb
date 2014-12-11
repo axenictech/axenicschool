@@ -1,18 +1,42 @@
-<% if @users.nil? %>
- <h4 align="center">No Record Found </h4>
-   <% else %>
 <% if @users.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
- <div class="col-md-1"></div>
-  <% @users.each_with_index do |user| %>
-    <div id="ajax_result">
-      <%= link_to user.first_name+' '+user.last_name, user_path(user) %><br />
-      <small>UserName <%= user.username %></small><br />
-      <small>Email-Id <%= user.email %></small><br />
-      <small>Role <%= user.role %></small>
+
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>User Details</h2>
     </div>
-    <div class="col-md-1"></div>
+
+  <div class="box-content">
+
+      <table id="datatable" class="table table-striped table-bordered responsive">
+      
+        <thead>
+       <tr>
+        <th>Name</th>
+        <th>UserName</th>
+        <th>Email-Id</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+  <tbody>
+<% @users.each_with_index do |user| %>
+   <tr>
+     <td> <%= link_to user.first_name+' '+user.last_name, user_path(user) %></td>
+   <td> <%= user.username %></td>
+   <td> <%= user.email %></td>
+    <td> <%= user.role %></td>
+ </tr>
+
   <% end %>
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+
   <% end %>
-  <%end%>
+ 

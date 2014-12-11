@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true, length: { in: 1..25 }, format: { with: /\A[a-zA-Z" "]+\Z/ }
   validates :last_name, presence: true, length: { in: 1..25 }, format: { with: /\A[a-zA-Z" "]+\Z/ }
 
+  def full_name
+    self.first_name+" "+self.last_name
+  end
+  
   def create_general_setting
     gs=GeneralSetting.create(school_or_college_name: 'Axenic School')
     self.update(general_setting_id: gs.id, role: 'Admin')

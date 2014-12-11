@@ -1,108 +1,131 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
-     <li>Admission(Step 1 - Student details)</li>
+     <li>Admission(Step 1-Personal Details)</li>
   </ul>
 </div>
-Note:<font color="red">Fields Marked with * must be filled</font>
+Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
   <div class="box col-md-12">
     <div class="box-inner">
       <div class="box-header well">
-        <h2>Step 1 - Student details</h2>
+        <h2>Step 1 - Personal details</h2>
        
       </div>
         <div class="box-content">
         <%= form_for @student do |f| %>
-<fieldset>
-    <% if @student.errors.any? %>
-          <div class="alert alert-danger" style="width:500px" >
+    <fieldset>
+      <% if @student.errors.any? %>
+        <div class="alert alert-danger" style="width:500px" >
            <h4><%= t('Errors prohibited to being Save:')%></h4>
           <ul>
            <% @student.errors.full_messages.each do |msg| %>
               <li style="width:500px" align="left"><%= msg %></li>
             <% end %>
           </ul>
-      </div>
-        <% end %>
+        </div>
+      <% end %>
     <div class="row">
       <div class="col-sm-1"></div>
+      <div class="col-sm-11">
+      <div class="row">
       <div class="col-sm-4">
-      <div class="form-group">
-       <%= t('Admission Number')%><span class="necessary-field">*</span>
-        <%=f.text_field :admission_no, :value=> @student.admission_no , class: "form-control"%>
-      
+        <div class="form-group">
+         <%= t('Admission Number')%><span class="necessary-field">*</span>
+          <%=f.text_field :admission_no, :value=> @student.admission_no , class: "form-control"%>
+        
+        </div>
+      <div class="col-md-5">
+         <div class="form-group">
+         <%= t('Admission Date')%><span class="necessary-field">*</span>
+         <%=f.date_field :admission_date ,:value => Time.now.strftime('%Y-%m-%d'),class: "form-control"%>
+        </div>
       </div>
-       <div class="form-group">
-       <%= t('Admission Date')%><span class="necessary-field">*</span>
-       <%=f.date_field :admission_date ,:value => Time.now.strftime('%Y-%m-%d'),class: "form-control"%>
       </div>
-
+      <div class="row">
+      <div class="col-md-3">
       <div class="form-group">
        <%= t('First Name')%><span class="necessary-field">*</span>
          <%=f.text_field :first_name,placeholder: "First Name", class: "form-control"%>
        </div>
-
-     <div class="form-group">
+      </div>
+      <div class="col-md-3">
+      <div class="form-group">
        <%= t('Middle Name')%>
          <%=f.text_field :middle_name, :required=>false ,placeholder: "Middle Name", class: "form-control"%>
        </div>
-
+      </div>
+      <div class="col-md-3">
          <div class="form-group">
        <%= t('Last Name')%><span class="necessary-field">*</span>
          <%=f.text_field :last_name,placeholder: "Last Name",class: "form-control"%>
         </div>
-
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-5">
        <div class="form-group">
        <%= t('Course and Batch')%><span class="necessary-field">*</span>
     
       <%=f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}, {class: "form-control"}%>
       
       </div>
-
+      </div>
+      <div class="col-md-5">
        <div class="form-group">
        <%= t('Date Of Birth')%><span class="necessary-field">*</span>
           <%=f.date_field :date_of_birth , class: "form-control"%>
       
       </div>
+      </div>
+      </div>
 
+      <div class="row">
+      <div class="col-md-5">
        <div class="form-group">
-       <%= t('Gender')%>
-       Male<%= f.radio_button  "gender","Male", :checked => "checked" %>
-          &nbsp;&nbsp;&nbsp;Female <%= f.radio_button  "gender","Female"%>
+       <%= t('Gender')%>:&nbsp;&nbsp;&nbsp;
+       Male&nbsp;&nbsp;<%= f.radio_button  "gender","Male", :checked => "checked" %>
+          &nbsp;&nbsp;&nbsp;Female&nbsp;&nbsp;<%= f.radio_button  "gender","Female"%>
        </div>
-
+       </div>
+       <div class="col-md-5">
        <div class="form-group">
        <%= t('Blood Group')%>
    
       <%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{prompt:true}, {class: "form-control"}%>
       
       </div>
+      </div>
+      </div>
 
+      <div class="row">
+      <div class="col-md-5">
        <div class="form-group">
        <%= t('Birth Place')%>
        <%=f.text_field :birth_place ,placeholder: "Birth Place",class: "form-control"%>
        </div>
-
+       </div>
+      <div class="col-md-5">
        <div class="form-group">
        <%= t('Nationality')%><span class="necessary-field">*</span>
         <%=f.select :nationality_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
       
       </div>
+      </div>
+      </div>
 
+      <div class="row">
+      <div class="col-md-5">
        <div class="form-group">
        <%= t('Mother Tongue')%>
      
       <%=f.text_field :language,placeholder: "Mother Tongue",class: "form-control"%>
       
       </div>
+      </div>
 
-     
-  </div>
-
-      <div class="col-sm-1"></div>
       <div class="col-sm-4">
             <div class="form-group">
        <%= t('Category')%><span class="necessary-field">*</span>
@@ -110,91 +133,114 @@ Note:<font color="red">Fields Marked with * must be filled</font>
       <%=f.select :category_id, Category.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
       
       </div>
-           <div class="form-group">
+      </div>
+      </div>
+      
+      <div class="row">
+      <div class="col-md-5">
+      <div class="form-group">
        <%= t('Religion')%>
      
       <%=f.text_field :religion,placeholder: "Religion",class: "form-control"%>
-      
       </div>
-
+      </div>
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('Address Line1')%>
      
       <%=f.text_field :address_line1,placeholder: "Address Line1",class: "form-control"%>
       
       </div>
-
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('Address Line2')%>
      
       <%=f.text_field :address_line2,placeholder: "Address Line2",class: "form-control"%>
       
       </div>
-
+      </div>
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('City')%>
      
       <%=f.text_field :city,placeholder: "City",class: "form-control"%>
       
       </div>
-
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('State')%>
      
       <%=f.text_field :state,placeholder: "State",class: "form-control"%>
       
       </div>
-
+      </div>
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('Pin Code')%>
      
       <%=f.text_field :pin_code,placeholder: "Pin Code",class: "form-control"%>
       
       </div>
+      </div></div>
 
+      <div class="row">
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('Country')%><span class="necessary-field">*</span>
      
       <%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
       
       </div>
-
+      </div>
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('Phone')%>
      
       <%=f.text_field :phone1,placeholder: "Phone",class: "form-control"%>
       
       </div>
+      </div>
+      </div>
 
-
+      <div class="row">
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('Mobile')%>
      
       <%=f.text_field :phone2,placeholder: "Mobile",class: "form-control"%>
       
       </div>
-
-
+      </div>
+      <div class="col-md-5">
         <div class="form-group">
-       <%= t('Email')%>
+       <%= t('Email')%><span class="necessary-field">*</span>
      
       <%=f.text_field :email,placeholder: "Email",class: "form-control"%>
       
       </div>
-
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
         <div class="form-group">
        <%= t('Upload Photo')%>
      
       <%=f.file_field :image,class: "form-control"%>
       
       </div>
-</div>
-</div>
-  <div class="col-sm-5 col-sm-offset-5"> 
-      <div class="form-actions">               
-        <%= f.submit 'Save', class: "btn btn-success"%>
       </div>
-    </div>
+      </div>
+</div>
+</div>
+<div class="col-md-6 col-md-offset-4">           
+<%= f.submit 'Save', class: "btn btn-success btn-lg"%></div>
   </fieldset>        
  <% end %>
 </div>

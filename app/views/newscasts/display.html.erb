@@ -12,14 +12,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
-      <%= link_to 'Add', new_newscast_path, class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Add News', new_newscast_path, class: "btn btn-primary-link btn-xs" %>
      </div>
   </div>
 </div>
 <br/>
-
-
-
 
 <div class="row">
   <div class="box col-md-12">
@@ -48,7 +45,7 @@
             <td><%= i+1 %></td>
             <td><%=  link_to n.title, newscast_path(n) %></td>
             <td>
-            <%#= n.author.username %>
+            <%= n.user.full_name %>
           </td>
           <td>
             <%= n.comments.size %>

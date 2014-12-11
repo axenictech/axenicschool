@@ -1,9 +1,22 @@
-<table class="table" style="width:500px">
+<div class="row">
 
-<%@batches.each do |b|%>
-<tr>
-		<td><%=b.name%></td>
-		<td><%=check_box_tag "batches[]",b.id,false%></td>
-</tr>
+  <div class="box col-md-9">
+    <div class="box-inner">
+      
+      <div class="box-content">
+      <fieldset>
+     <%@batches.each do |b|%>
+     	<div class="form-group">
+     	 <%=check_box_tag "batches[]",b.id,false%>
+		&nbsp;&nbsp;&nbsp;
+		<b><%=b.name%></b>
+	  
+	   </div>
+
 <% end %>
-</table>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+

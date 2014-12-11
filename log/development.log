@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 Started GET "/time_tables" for 127.0.0.1 at 2014-12-09 13:06:44 +0530
@@ -61045,3 +61046,5 @@ Processing by EmployeesController#personal_profile as
   Rendered employees/_disp_personal_profile.html.erb (1.1ms)
   Rendered employees/personal_profile.js.erb (5.7ms)
 Completed 200 OK in 19ms (Views: 13.2ms | ActiveRecord: 1.1ms)
+=======
+>>>>>>> d329b0adb0eb95cddfe6675199e30e8962643ccd
