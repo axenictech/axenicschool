@@ -9,9 +9,6 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 <br/>
 
-
-
-
 <div class="row">
   <div class="col-md-2"></div>
     <div class="box col-md-6">
@@ -20,7 +17,7 @@
             <h2>Edit News</h2>
         </div>
       <div class="box-content">
-        <%= form_for :newscast, url: newscasts_path do |f| %>
+        <%= form_for @newscast,url:{action: 'update'},method: :patch do |f| %>
 
         <fieldset>
           <% if @newscast.errors.any?%>
@@ -33,21 +30,18 @@
             </div>  
           <%end%>
         <div class="col-sm-7 col-sm-offset-1">
-                  <div class="form-group">
-               <%=f.label :Title %>
+            <div class="form-group">
+              <%=f.label :Title %>
               <%=f.text_field :title, class: "form-control", style: "width: 350px", placeholder: "Batch Name"%>
-                  </div>
+            </div>
               
-              <div class="form-group">
-               <%=f.label :Content %>
-              <%=f.text_area :content, class: "form-control"%>
-                  </div>
+            <div class="form-group">
+              <%=f.label :Content %>
+              <%=f.text_area :content,style: 'width:350px;height:200px', placeholder: "News Content", class: "form-control"%>
+            </div>
 
-                  
-
-                
-              <div class="col-sm-7 col-sm-offset-6"> 
-                <div class="form-actions">               
+            <div class="col-sm-7 col-sm-offset-6"> 
+              <div class="form-actions">               
                 <%= f.submit 'Publish News', class: "btn btn-success"%>
                 </div>
             </div>

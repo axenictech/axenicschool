@@ -1,13 +1,13 @@
-<div id="content-header">
-   <hr class="fancy-line"></hr>
-  <h1>Leave types</h1>
-  <h3>Add new leave types</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+     <li><%= link_to 'Employee Attendance', employee_attendances_path %></li>
+   
+     <li>Leave types</li>
+  </ul>
 </div>
-
-<div id="box">
+<div id="flash"><%= render 'layouts/messages'%></div>
   <div id="add_leave_type">
     <%=render 'employee_leave'%>
   </div>

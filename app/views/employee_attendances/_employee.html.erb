@@ -1,35 +1,40 @@
+<br/>
+<br/>
 
-<div class="header">
-  <div class="prev">
+<div class="row">
+  <div class="box-inner" style="width: 150%;">
+    <div class="box-header well">
+<h2>
+<div align="center">
+
     <%= link_to "◄",employee_attendances_display_path(@deparment.id,(@today-1.month),),remote:true %>
-  </div>
-  <div class="month">
+ 
        <%= @today.strftime("%B %Y") %> 
-  </div>
-  <div class="next">
+  
     <%= link_to "►",employee_attendances_display_path(@deparment.id,(@today+1.month)),remote:true %>
-  </div>
-  <div class="extender"></div>
+   </div>
+</h2>
 </div>
-
-<div class="box-1">
-<table align="center" class="table table-hover table-bordered" >
-  <tr class="tr-head">
-    <td class="head-td-name themed_text"><%= t('name') %></td>
+<div class="box-content">
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th><%= t('name') %></th>
     <% current_day = Date.today  %>
     <% (@start_date..@end_date).each do |date| %>
       <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
-        <td class="head-td-date active" ><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></td>
+        <th class="head-td-date active" ><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></th>
       <% else %>
-        <td class="head-td-date"><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></td>
+        <th><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></th>
       <% end %>
       <% end%>
  </tr>
+ </thead>
     <% @employees.each do |employee| %>
     <tr class="tr-<%= cycle('odd', 'even')  %>">
-      <td class="td-name">
+      <th class="td-name">
         <%= employee.first_name %>
-       </td>
+       </th>
       <% (@start_date..@end_date).each do |date| %>
         <% @absent = EmployeeAttendance.find_by_employee_id_and_attendance_date(employee.id, date) %>
       <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
@@ -48,8 +53,10 @@
         </td>
       <% end %>
     </tr>
-  <% end %>
+<% end %>
 </table>
+</div>
+</div>
 </div>
 
  

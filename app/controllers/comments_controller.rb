@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   def create
     @newscast = Newscast.find(params[:newscast_id])
     @comment = @newscast.comments.new(comment_params)
+    @comment.user_id = current_user.id
     if @comment.save
       redirect_to newscast_path(@newscast)
     else
@@ -19,6 +20,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:statement)
+    params.require(:comment).permit!
   end
 end

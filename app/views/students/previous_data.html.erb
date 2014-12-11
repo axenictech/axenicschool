@@ -4,28 +4,24 @@
      <li><%=link_to 'Step 1',students_admission1_path%></li>
       <li><%=link_to 'Step 1',students_admission1_path%></li>
       <li><%=link_to 'Step 2',students_admission2_path(@student.id)%></li>
-       <li><%=link_to 'Step 2_1',students_admission2_1_path(@student.id)%></li>
+       <li><%=link_to 'Step 2.1',students_admission2_1_path(@student.id)%></li>
         <li><%=link_to 'Step 3',students_admission3_path(@student.id)%></li>
 
-     <li>Step 4 - previous Details</li>
+     <li>Admission(Step 4 - previous Details)</li>
   </ul>
 </div>
-  Note:<small><font color="red">Insert previous Institution Details</font></small>
+  Note:&nbsp;&nbsp;<small><font color="red">Insert previous Institution Details</font></small>
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
       <%=link_to "Add subject", students_previous_subject_path(@student), remote: true,class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>
 <div class="row">
-      <div class="col-sm-1"></div>
-        <div class="col-sm-6">
-             <div class="form-group">
-<div class="row">
-  <div class="box col-md-12">
+  <div class="box col-md-8">
     <div class="box-inner">
       <div class="box-header well">
         <h2>Step 3 - Emergency Contact</h2>
@@ -35,8 +31,9 @@
         <div class="box-content">
         <%= form_for @previous_data,url:{action:'previous_data_create'} do |f| %>
     <%=f.hidden_field :student_id,value: @student.id %>
-   
-<fieldset>
+  <fieldset>
+   <div class="col-md-1"></div>
+   <div class="col-md-7">
   <% if  @previous_data.errors.any? %>
          <div class="alert alert-danger" style="width:500px" >
           <h2>Error prohibited to being saved:</h2>
@@ -47,10 +44,6 @@
           </ul>
          
       </div><% end %>
-
-   	 <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-12">
       <div class="form-group">
         <%= t('Institution')%>
          <%=f.text_field :institution,placeholder: "Institution", class: "form-control"%>
@@ -70,32 +63,26 @@
         <%= t('Total Marks')%>
          <%=f.text_field :total_mark,placeholder: "Total Marks", class: "form-control"%>
       </div>
-
-</div>
-</div>
     <div class="col-sm-5 col-sm-offset-5"> 
       <div class="form-actions">               
         <%= f.submit 'Submit', class: "btn btn-primary"%>
       </div>
-    </div>
-  </fieldset>        
+    </div> 
+  </div>  
+    </fieldset>     
  <% end %>
 
 </div>
 </div>
 </div>
-</div>
- </div>
- </div>
- 
-     <div class="col-sm-1"></div>
-        <div class="col-sm-4">
-             <div class="form-group">
+
+
+<div class="col-sm-4">
+<div class="form-group">
 <div id="display_subject_mark"></div>
 </div>
 </div>
 </div>
 
- <div id="myModal" class="modal fade">
-          </div>
+<div id="myModal" class="modal fade"></div>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223103416) do
+ActiveRecord::Schema.define(version: 20141223103417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,11 +258,13 @@ ActiveRecord::Schema.define(version: 20141223103416) do
   create_table "comments", force: true do |t|
     t.text     "statement"
     t.integer  "newscast_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "comments", ["newscast_id"], name: "index_comments_on_newscast_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -868,9 +870,12 @@ ActiveRecord::Schema.define(version: 20141223103416) do
   create_table "newscasts", force: true do |t|
     t.string   "title"
     t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "newscasts", ["user_id"], name: "index_newscasts_on_user_id", using: :btree
 
   create_table "online_exam_questions", force: true do |t|
     t.integer  "online_exam_id"
