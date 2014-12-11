@@ -1,12 +1,12 @@
 class ExamReportsController < ApplicationController
   def exam_wise_report
-<<<<<<< HEAD
+
   	@batches=Batch.all
  	  @exam_groups=Batch.first.exam_groups.all if Batch.first
-=======
+
     @batches = Batch.all
     @exam_groups = Batch.first.exam_groups.all
->>>>>>> 60a237834b594ca49f1b42840b867e4fd4536d71
+
   end
 
   def select
@@ -60,13 +60,13 @@ class ExamReportsController < ApplicationController
   end
 
   def subject_wise_report
-<<<<<<< HEAD
+
     @batches=Batch.all
     @subjects=Batch.first.subjects.all if Batch.first
-=======
+
     @batches = Batch.all
     @subjects = Batch.first.subjects.all
->>>>>>> 60a237834b594ca49f1b42840b867e4fd4536d71
+
   end
 
   def choose_batch
@@ -136,13 +136,13 @@ class ExamReportsController < ApplicationController
   end
 
   def archived_student_report
-<<<<<<< HEAD
+
     @courses=Course.all
     @batches=Course.first.batches.all if Course.first
-=======
+
     @courses = Course.all
     @batches = Course.first.batches.all
->>>>>>> 60a237834b594ca49f1b42840b867e4fd4536d71
+
   end
 
   def select_course
@@ -201,13 +201,13 @@ class ExamReportsController < ApplicationController
   end
 
   def student_ranking_per_subject
-<<<<<<< HEAD
+
     @batches=Batch.all
     @subjects=Batch.last.subjects.all if Batch.last
-=======
+
     @batches = Batch.all
     @subjects = Batch.last.subjects.all
->>>>>>> 60a237834b594ca49f1b42840b867e4fd4536d71
+
   end
 
   def rank_report_batch

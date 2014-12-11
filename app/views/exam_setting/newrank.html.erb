@@ -10,7 +10,11 @@
 <div class="row">
   <div class="col-md-12">
    <%= form_for :course, url:{action:'selectrank'},method: :get,remote:true, html:{id:"class_form"} do  |f| %>
-      <%= f.select :id, @courses.collect {|b| [b.course_name,b.id]}, {prompt:true},{onchange:"$('#class_form').submit();",class: "form-control",style:"width:350px"} %>  
+    
+       <%= f.select :id, @courses.collect {|b| [b.course_name,b.id]}, {prompt:"Select Course"},{onchange:"$('#class_form').submit();",class: "form-control",style:"width:350px"} %>
+
+
+
     <%end%>
   </div>
 </div>
