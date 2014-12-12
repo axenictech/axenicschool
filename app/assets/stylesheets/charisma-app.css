@@ -706,3 +706,34 @@ ul.github-buttons li {
         padding: 0 20px;
     }
 }
+
+#profile_picture_display img {
+    width:125px;
+    height:125px;
+}
+
+#student_main_info {
+    float:left;
+    margin-left:50px;
+    width:500px;
+}
+#student_main_info h3 {
+    margin:0;
+    padding:0;
+    margin-top:25px;
+}
+#student_main_info h4 {
+    margin:0;
+    padding:0;
+    color:#b00;
+    margin-top:10px;
+}
+#student_main_info h6 {
+    margin:0;
+    padding:0;
+    color:#b00;
+    margin-top:5px;
+}
+#student_main_info h5 {
+    background-color:#eee;
+}

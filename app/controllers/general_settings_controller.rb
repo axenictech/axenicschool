@@ -1,6 +1,7 @@
 class GeneralSettingsController < ApplicationController
   def new
     @general_setting = current_user.general_setting
+    authorize! :read, @general_setting
   end
 
   def update

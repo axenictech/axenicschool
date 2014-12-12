@@ -12,7 +12,11 @@
           </a>
         </li>
         <li>
-          <a href="/students/<%= current_user.student_id%>/profile">
+      <% unless @student.status_description %> 
+        <a href="/students/<%= current_user.student_id%>/profile">
+      <% else %>
+        <a href="/students/archived_profile.<%= current_user.student_id%>">
+      <% end %>
             <i class="glyphicon glyphicon-edit"></i>
             <span>My Profile</span>
           </a>
