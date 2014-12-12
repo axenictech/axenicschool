@@ -827,7 +827,7 @@ end
   def address_profile
     @employee = Employee.find(params[:format])
     @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
-    @office_country = Country.find(@employee.office_country_id).name unless @employee.home_country_id.nil?
+    @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
   end
 
   def address_profile_archived

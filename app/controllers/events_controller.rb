@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @start_date = params[:format]
+    authorize! :create, @event
   end
 
   def create
@@ -13,10 +14,12 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @batches = Batch.all
+    authorize! :read, @event
   end
 
   def showdep
     @departments = EmployeeDepartment.all
+    authorize! :create, Event
   end
 
   def update
@@ -47,6 +50,6 @@ class EventsController < ApplicationController
   private
 
   def params_event
-    params.require(:event).permit(:start_date, :end_date, :title, :description, :is_holiday, :is_common)
+    params.require(:event).permit!
   end
 end

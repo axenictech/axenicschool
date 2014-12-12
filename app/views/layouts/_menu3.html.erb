@@ -12,16 +12,6 @@
           </a>
         </li>
         <li>
-      <% unless @student.status_description %> 
-        <a href="/students/<%= current_user.student_id%>/profile">
-      <% else %>
-        <a href="/students/archived_profile.<%= current_user.student_id%>">
-      <% end %>
-            <i class="glyphicon glyphicon-edit"></i>
-            <span>My Profile</span>
-          </a>
-        </li>
-        <li>
           <a href="/newscasts">
           <i class="glyphicon glyphicon-comment"></i>
             <span>Campus News</span>
@@ -50,7 +40,13 @@
           <i class="glyphicon glyphicon-book"></i>
             <span>Library</span>
           </a>
-        </li>                
+        </li>
+        <li>
+          <a href="/calender">
+            <i class="glyphicon glyphicon-calendar"></i>
+            <span>Calender</span>
+          </a>
+        </li>                 
       </ul>
     </div>
   </div>
