@@ -75,20 +75,18 @@ Note:<font color="red">Fields Marked with * must be filled</font>
 
         <div class="form-group">
        <%= t('Total_Experience')%>
-       <%= select :employee, :experience_year, (0..20),{:prompt=>"year"},{class: "form-control"} %>
-          <%= select :employee, :experience_month, (0..11),{:prompt=>"month"},{class: "form-control"} %>
-        
        </div>
+        <div class="form-group">
+      <div class="col-sm-6"><%= select :employee, :experience_year, (0..20),{:prompt=>"year"},{class: "form-control"} %></div>
+           <div class="col-sm-6"><%= select :employee, :experience_month, (0..11),{:prompt=>"month"},{class: "form-control"} %></div>
+        </div>
 
         <div class="form-group">
        <%= t('Marital-Status')%>
-         <%=select :employee, :marital_status, [["Single"], ["Married"],["Divorced"]],{prompt:true}, {:onchange=>"hide_or_show_fields(this.value)"}%>
+         <%=select :employee, :marital_status, [["Single"], ["Married"],["Divorced"]],{prompt:true},{class: "form-control"}%>
        </div>
 
-        <div class="form-group">
-       <%= t('Mother Name')%>
-         <%=f.text_field :mother_name,placeholder: "First Name", class: "form-control"%>
-       </div>
+     
         
          <div class="form-group">
        <%= t('Nationality')%>
@@ -140,7 +138,10 @@ Note:<font color="red">Fields Marked with * must be filled</font>
        <%= t('Father Name')%>
          <%=f.text_field :father_name,placeholder: "Father Name", class: "form-control"%>
        </div>
-
+           <div class="form-group">
+       <%= t('Mother Name')%>
+         <%=f.text_field :mother_name,placeholder: "First Name", class: "form-control"%>
+       </div>
         <div class="form-group">
        <%= t('Blood Group')%>
          <%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{prompt:true},{class: "form-control"}%>
@@ -151,10 +152,7 @@ Note:<font color="red">Fields Marked with * must be filled</font>
          <%=f.file_field :image,class: "form-control"%>
        </div>
 
-        <div class="form-group">
-       <%= t('First Name')%><span class="necessary-field">*</span>
-         <%=f.text_field :first_name,placeholder: "First Name", class: "form-control"%>
-       </div>
+      
 </div>
   <div class="col-sm-5 col-sm-offset-5"> 
       <div class="form-actions">               
