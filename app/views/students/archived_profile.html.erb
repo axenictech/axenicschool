@@ -2,8 +2,7 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
      <li><%= link_to 'Student Details','/students' %></li>
-     
-     <li>Archieve Student Profile</li>
+     <li>Profile</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 
@@ -21,8 +20,7 @@
 </div>
 <hr>
 <div class="row">
-        <div class="box col-md-1"></div>
-        <div class="box col-md-9">
+        <div class="box col-md-12">
         <div class="box-inner">
       <div class="box-content">
 
@@ -99,7 +97,17 @@
    </div>
    </div>
    <br>
+   <div class="form-group">
+    <div class="col-md-6"><b>
+   Status description:
+   </b></div> 
+   <div class="col-md-6"><%= @student.status_description%>
+   </div>
+   </div>
+   <br>
 </div>
+
+
 
 <div class="col-md-6">
  
@@ -144,7 +152,6 @@
     <div class="col-md-6"><b>Immediate Contact:</b></div>
     <div class="col-md-6"><%= @immediate_contact.first_name+" "+@immediate_contact.last_name %></div></div>&nbsp;&nbsp;
    &nbsp;&nbsp;
-    <%= link_to 'Change Immediate Contact',students_edit_immediate_contact_path(@student),style: 'color:green' %>
     <%end%>
 </div>
 </div>

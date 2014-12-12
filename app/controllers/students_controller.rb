@@ -1,4 +1,8 @@
 class StudentsController < ApplicationController
+  def index
+    authorize! :create, Student
+  end
+
   def admission1
     @student = Student.new
     @date = Date.today.strftime('%Y%m%d')
@@ -8,6 +12,7 @@ class StudentsController < ApplicationController
       @id = Student.last.id.next
       @student.admission_no = 'S'+@date.to_s+@id.to_s
     end
+    authorize! :create, @student
   end
 
   def create
@@ -23,23 +28,28 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
+    authorize! :read, @student
   end
 
   def admission2
     @student = Student.find(params[:format])
     @guardian = @student.guardians.build
+    authorize! :create, @student
   end
 
   def admission2_1
     @student = Student.find(params[:format])
+    authorize! :create, @student
   end
 
   def admission3
     @student = Student.find(params[:format])
+    authorize! :create, @student
   end
 
   def edit
     @student = Student.find(params[:id])
+    authorize! :update, @student
   end
 
   def update
@@ -63,6 +73,7 @@ class StudentsController < ApplicationController
 
   def edit_immediate_contact
     @student = Student.find(params[:format])
+    authorize! :update, @student
   end
 
   def update_immediatecontact
@@ -76,6 +87,7 @@ class StudentsController < ApplicationController
   def previous_data
     @student = Student.find(params[:format])
     @previous_data = StudentPreviousData.new
+    authorize! :create, @student
   end
 
   def previous_data_create
@@ -92,6 +104,7 @@ class StudentsController < ApplicationController
   def previous_subject
     @student = Student.find(params[:format])
     @previous_subject = StudentPreviousSubjectMark.new
+    authorize! :create, @student
   end
 
   def previous_subject_create
@@ -115,16 +128,19 @@ class StudentsController < ApplicationController
 
   def view_all
     @batches = Batch.all
+    authorize! :read, @batches.first
   end
 
   def select
     @batch = Batch.find(params[:batch][:id])
     @students = @batch.students.all
+    authorize! :read, @students.first
   end
 
   def profile
     @student = Student.find(params[:id])
     @immediate_contact = Guardian.find(@student.immediate_contact)
+    authorize! :read, @student
   end
 
   def student_profile
@@ -141,6 +157,7 @@ class StudentsController < ApplicationController
     @immediate_contact = Guardian.find(@student.immediate_contact)
     @student_previous_data = StudentPreviousData.find_by_student_id(@student.student_id)
     @student_previous_subject_marks = StudentPreviousSubjectMark.where(student_id: @student.student_id)
+    authorize! :read, @student
   end
 
   def archived_student_profile
@@ -155,18 +172,21 @@ class StudentsController < ApplicationController
   def report
     @student = Student.find(params[:format])
     @batch = @student.batch
+    authorize! :read, @student
   end
 
   def archived_report
     @student = ArchivedStudent.find(params[:format])
     @batch = @student.batch
     @exam_groups = @batch.exam_groups.all
+    authorize! :read, @student
   end
 
   def recent_exam_report
     @exam_group = ExamGroup.find(params[:exam_group_id])
     @student = Student.find(params[:student_id])
     @batch = @exam_group.batch
+    authorize! :read, @student
   end
 
   def student_exam_report
@@ -182,6 +202,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:student_id])
     @batch = @subject.batch
     @exam_groups = @batch.exam_groups.all
+    authorize! :read, @student
   end
 
   def academic_report
@@ -198,6 +219,7 @@ class StudentsController < ApplicationController
     @batch = @student.batch
     @exam_groups = @batch.exam_groups.all
     @subjects = @batch.subjects.all
+    authorize! :read, @student
   end
 
   def student_final_report
@@ -213,6 +235,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:format])
     @batch = @student.batch
     @exam_groups = @batch.exam_groups.all
+    authorize! :read, @student
   end
 
   def student_transcript_report
@@ -235,6 +258,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:format])
     @batch = @student.batch
     @subjects = @batch.subjects.all
+    authorize! :read, @student
   end
 
   def genrate_report
@@ -244,16 +268,19 @@ class StudentsController < ApplicationController
     @end_date = params[:report][:end_date]
     @batch_events = @student.batch.batch_events.all
     @time_table_entries = TimeTableEntry.where(subject_id: @subject_id, batch_id: @student.batch.id)
+    authorize! :read, @student
    end
 
   def advanced_search
     @courses=Course.all
     @batches=Course.first.batches.all if Course.first
+    authorize! :read, @student
   end
 
   def batch_details
     @course = Course.find(params[:id])
     @batches = @course.batches.all
+    authorize! :read, @student
   end
 
   def advanced_student_search
@@ -353,6 +380,7 @@ class StudentsController < ApplicationController
     else
       @search += ' All student'
     end
+    authorize! :read, @student
   end
 
   def advanced_search_result
@@ -365,16 +393,19 @@ class StudentsController < ApplicationController
   def elective
     @subject = Subject.find(params[:subject_id])
     @students = @subject.elective_group.batch.students.all
+    authorize! :read, @student
   end
 
   def assign_all
     @subject = Subject.find(params[:subject_id])
     @students = @subject.elective_group.batch.students.all
+    authorize! :read, @student
   end
 
   def remove_all
     @subject = Subject.find(params[:subject_id])
     @students = @subject.elective_group.batch.students.all
+    authorize! :read, @student
   end
 
   def assign_elective
@@ -397,10 +428,12 @@ class StudentsController < ApplicationController
     end
     flash[:notice_ele] = "Elective subject #{@subject.name} assigned to students successfully"
     redirect_to students_elective_path(@subject)
+    authorize! :create, @student
   end
 
   def email
     @student = Student.find(params[:format])
+    authorize! :create, @student
   end
 
   def send_email
@@ -419,7 +452,8 @@ class StudentsController < ApplicationController
 
   def report_email
     @student = ArchivedStudent.find(params[:format])
- end
+    authorize! :create, @student
+  end
 
   def send_report_email
     @student = ArchivedStudent.find(params[:student_id])
@@ -436,6 +470,7 @@ class StudentsController < ApplicationController
   end
 
   def generate_tc
+    authorize! :create, @student
     @student = ArchivedStudent.find(params[:id])
     @immediate_contact = Guardian.find(@student.immediate_contact)
     @father = Guardian.find_by_student_id_and_relation(@student.id, 'father')
@@ -446,6 +481,7 @@ class StudentsController < ApplicationController
 
   def remove
     @student = Student.find(params[:format])
+    authorize! :create, @student
   end
 
   def delete
@@ -453,6 +489,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
+    authorize! :delete, @student
     @student = Student.find(params[:id])
     @student.destroy
     redirect_to home_dashboard_path
@@ -461,6 +498,7 @@ class StudentsController < ApplicationController
   def change_to_former
     @student = Student.find(params[:format])
     @archived_student = ArchivedStudent.new
+    authorize! :create, @student
   end
 
   def archived_student_create
@@ -474,16 +512,19 @@ class StudentsController < ApplicationController
   def dispguardian
     @student = Student.find(params[:format])
     @guards = @student.guardians.all
+    authorize! :read, @student
   end
 
   def addguardian
     @student = Student.find(params[:format])
     @guard = @student.guardians.build
+    authorize! :read, @student
   end
 
   def archived_student_guardian
     @student = ArchivedStudent.find(params[:format])
     @guards = Guardian.where(student_id: @student.student_id)
+    authorize! :read, @student
   end
 
   private
