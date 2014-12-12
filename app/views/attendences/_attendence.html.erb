@@ -1,34 +1,41 @@
-<div class="header">
-  <div class="prev">
+<br/>
+
+<div class="row">
+  <div class="box-inner" style="width: 150%;">
+    <div class="box-header well">
+<h2>
+<div align="center">
+
     <%= link_to "◄",attendences_display_path(@subject.id,(@today - 1.month)),remote:true %>
-  </div>
-  <div class="month">
+ 
        <%= @today.strftime("%B %Y") %> 
-  </div>
-  <div class="next">
+ 
     <%= link_to "►",attendences_display_path(@subject.id,(@today + 1.month)),remote:true %>
   </div>
-  <div class="extender"></div>
+</h2>
 </div>
-<table align="center" class="table table-hover table-bordered" >
-  <tr class="tr-head">
-    <td class="head-td-name themed_text"><%= t('name') %></td>
+<div class="box-content">
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th><%= t('name') %></th>
     <% current_day = Date.today  %>
     <% (@start_date..@end_date).each do |date| %>
       <%@time_table_entries.each do |d|%>
       <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
 
           <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
-        <td style="background-color:lightgreen" class="head-td-date active" ><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></td>
+        <th style="background-color:lightgreen" class="head-td-date active" ><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></th>
         <%end%>
       <% else %>
        <% if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
-        <td class="head-td-date"><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></td>
+        <th class="head-td-date"><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></th>
       <%end%>
       <% end %>
       <% end%>
       <%end%>
  </tr>
+ </thead>
     <% @students.each do |student| %>
     <% is_valid_subject=1 %>
       <%unless @subject.elective_group.nil?%>
@@ -37,9 +44,9 @@
       <%end%>
     <% unless is_valid_subject == 0 %>
       <tr class="tr-<%= cycle('odd', 'even')  %>">
-        <td class="td-name">
+        <th class="td-name">
             <%= student.first_name %>
-        </td>
+        </th>
 
         <% (@start_date..@end_date).each do |date| %>
            <%@time_table_entries.each do |d|%>
@@ -48,7 +55,7 @@
       <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
       <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
         <td class="tag" style="background-color:lightgreen" id="attendance-employee-<%= student.id %>-day-<%= date %>" class="td-mark active">
-          <% else %>
+          <% else %></td>
         <td class="tag" id="attendance-employee-<%= student.id %>-day-<%= date %>" class="td-mark">
             <% end %>
           
@@ -70,3 +77,6 @@
   <%end%>
   <%end%>
 </table>
+</div>
+</div>
+</div>
