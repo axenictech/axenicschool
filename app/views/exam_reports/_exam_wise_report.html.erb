@@ -16,24 +16,25 @@
       <span class="student">Student recorde not found</span>
     </div>
 <%else%>
-  <div id="score-table">
-    <div class="custom_header">
-      <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></h2>
     </div>
-    <table id="listing" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
-      <tr class="tr-head">
-        <td class="col-3"><font color="blue">Subject</font></td>
+    <div class="box-content">
+    <table class="table table-bordered">
+      <tr> 
+        <th>Subject</th>
         <% if @exam_group.exam_type == 'Marks' %>
-          <td><font color="blue">Marks obtained</font></td>
-          <td><font color="blue">Max</font></td>
-          <td><font color="blue">Percentage(%)</font></td>
+          <th>Marks obtained</th>
+          <th>Max</th>
+          <th>Percentage(%)</th>
         <% elsif @exam_group.exam_type == 'Grades' %>
-          <td><font color="blue">Grades</font></td>
+          <td>Grades</td>
         <% else %>
-          <td><font color="blue">Marks obtained</font></td>
-          <td><font color="blue">Max</font></td>
-          <td><font color="blue">Grades</font></td>
-          <td><font color="blue">Percentage(%)</font></td>
+          <th>Marks obtained</th>
+          <th>Max</th>
+          <th>Grades</th>
+          <th>Percentage(%)</th>
         <% end %>
       </tr>
       <% exam_score.each do |es| %>
@@ -67,17 +68,17 @@
       <tr class="tr-blank"></tr>
       <% unless @exam_group.exam_type == 'Grades'%>
         <tr class="tr-head">
-          <td><font color="blue">Total marks:</font></td>
-          <td><font color="blue"><%= total_marks_attained %></font></td>
-          <td><font color="blue"><%= total_max_marks %></font></td>
+          <td>Total marks:</td>
+          <td><%= total_marks_attained %></td>
+          <td><%= total_max_marks %></td>
           <%if @exam_group.exam_type=="Marks and Grades"%>
           <td>-</td>
           <%end%>
-          <td><font color="blue"><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></font></td>
+          <td><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></td>
         </tr>
       <%else%>
         <tr class="tr-head">
-          <td><font color="blue">Final Grade:</font></td>
+          <td>Final Grade:</td>
           <td>-</td>
         </tr>
       <% end %>
@@ -85,3 +86,5 @@
 </div>
 <%end%>
 <%end%>
+</div>
+</div>
