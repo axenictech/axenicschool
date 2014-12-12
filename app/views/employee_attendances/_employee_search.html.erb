@@ -1,3 +1,12 @@
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>Employee Details</h2>
+    </div>
+   <div class="box-content">
+
+
 <% if @employee.nil? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
@@ -5,20 +14,27 @@
  <h4 align="center">No Record Found </h4>
    <% else %>
  <div class="col-md-1"></div>
-      <table align="center" class="table table-hover" style="width:1000px">
+  <table id="datatable" class="table table-striped table-bordered responsive">
+     <thead>
       <tr>
             <th>Employee Name</th>
             <th>Employee Id</th>
             <th>Employee Deprtment</th>
       </tr>
-
-      <%@employee.each do |emp|%>
+      </thead>
+      <tbody>
+       <%@employee.each do |emp|%>
           <tr>
-                <td col-md-1><%=link_to emp.first_name,employee_attendances_employee_leave_detail_path(emp.id)%></td>
-                <td col-md-1><%= emp.employee_number%></td>
-                <td col-md-1><%= emp.employee_department.name%></td>
+                <td col-md-1><%= link_to emp.first_name,employee_attendances_employee_leave_detail_path(emp.id)%></td>
+                <td col-md-1><%=emp.employee_number%></td>
+                <td col-md-1><%=emp.employee_department.name%></td>
          </tr>
-      <%end%>  
+      <%end%> 
+      </tbody> 
       </table>
   <% end %>
   <%end%>
+</div>
+</div>
+</div>
+</div>

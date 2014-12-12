@@ -1,11 +1,21 @@
-<div id="content-header">
-  <h1>Exams</h1>
-  <h3>Exams Scores</h3>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Examination','/exams'%></li>
+    <li><%= link_to 'Exam Management','/exam_groups'%> </li>
+    <li><%= link_to 'Exam Group', exam_group_path(@exam.exam_group.batch)%> </li>
+    <li><%= link_to 'Exam',exam_groups_exams_path(@exam.exam_group.id)%></li>
+    <li>Exam Score</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+<hr><br>
+<div class="row">
   
-</div>
-
-<div id="page-yield">
-<div class="box">		
+    <div class="col-md-11">	
+      <div class="box-inner">	
+      <div class="box-header well">
+        <h2>Exam Score</h2>
+      </div>
 <% if @students.empty? %>
  <h4 align="center">No students Found </h4>
 <% else %>
@@ -17,23 +27,51 @@
       <%end%></ul>
     </div>  
 <%end%>
-<table class="table table-hover" style="width:700px">
+      
   <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>  
-  <tr>
-    <td class="col-3" colspan="3">Exam Name: <%= @exam.exam_group.name %></td>
-  </tr>
-        
-  <tr>
-    <td class="col-3" colspan="3">Subject Name: <%= @exam.subject.name %></td>
-  </tr>
-  <tr class="tr-head">
-    <td class="col-2">Student name</td>
-    <td >Marks</td>
-    <td >Remarks</td>
-    <td ><%= 'Grades' unless @exam.exam_group.exam_type=="Marks"%></td>
+<br><br>
+  <div class="box-content">
+        <fieldset>
+       <div class="row">
+       <div class="col-md-2"></div>
+       <div class="form-group">
+        <div class="col-md-2">  
+           <b>Exam Name:</b>
+       </div>
+      
+       <div class="col-md-2">  
+            <%= @exam.exam_group.name %>
+        </div>
+        </div>
+        </div>
+ <br>
+         <div class="row">
+       <div class="col-md-2"></div>
+       <div class="form-group">
+        <div class="col-md-2">  
+           <b>Subject Name:</b>
+       </div>
+       <div class="col-md-3">  
+           <%= @exam.subject.name %>
+        </div>
+        </div>
+      </div>
+<br>
+ <div class="row">
+  
+<div class="col-md-12">
+ <table class="table table-striped">        
+ <thead>
+  <tr >
+    <th >Student name</th>
+    <th >Marks</th>
+    <th >Remarks</th>
+    <th ><%= 'Grades' unless @exam.exam_group.exam_type=="Marks"%></th>
   </tr> 
+  </thead>
 <% @students.each do |student| %>
 <% exam_score=ExamScore.find_by_exam_id_and_student_id(@exam.id,student.id)%>
+<tbody>
 <tr>
     <% unless exam_score.nil? %>
     <% unless exam_score.is_failed? %>
@@ -46,26 +84,40 @@
     <%end%>
     <% unless exam_score.nil? %>
       <% unless @exam.exam_group.result_published? %>
-        <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks%></td>
-        <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks%></td>
-        <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px" unless @exam.exam_group.exam_type=="Marks"%></td>
+        <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks,class: "form-control"%></td>
+        <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks,class: "form-control"%></td>
+        <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px",class: "form-control" unless @exam.exam_group.exam_type=="Marks"%></td>
         <%else%>
-          <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks,readonly:true%></td>
-        <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks,readonly:true%></td>
-        <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px" unless @exam.exam_group.exam_type=="Marks"%></td>
+          <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks,readonly:true,class: "form-control"%></td>
+        <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks,readonly:true,class: "form-control"%></td>
+        <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px",class: "form-control" unless @exam.exam_group.exam_type=="Marks"%></td>
         <%end%>
     <%else%>
-      <td><%= f.text_field "exam[#{student.id}][marks]"%></td>
-      <td><%= f.text_field "exam[#{student.id}][remarks]"%></td>
-      <td><%= f.text_field "exam[#{student.id}][grades]",readonly:true,style:"width:50px" unless @exam.exam_group.exam_type=="Marks"%></td>
+      <td><%= f.text_field "exam[#{student.id}][marks]",class: "form-control"%></td>
+      <td><%= f.text_field "exam[#{student.id}][remarks]",class: "form-control"%></td>
+      <td><%= f.text_field "exam[#{student.id}][grades]",readonly:true,style:"width:50px",class: "form-control" unless @exam.exam_group.exam_type=="Marks"%></td>
     <%end %>   
 </tr>
+</tbody>
 <% end %> 
- <tr class="tr-head"><td colspan="4">
+ <tr class="tr-head"><td></td>
+ <td>
 <%= f.submit 'Submit', class: "btn btn-primary"%>
 <%= link_to 'Finish',exam_groups_exams_path(@exam.exam_group), class: "btn btn-primary"%></td>
+<td></td><td></td>
 </tr>
 <%end%>
 </table>
+</div>
+</div>
+
+</fieldset>
+</div>
 <%end%>
-</div></div>
+</div>
+</div>
+</div>
+</div>
+
+
+
