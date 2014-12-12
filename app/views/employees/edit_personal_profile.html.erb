@@ -1,21 +1,25 @@
-<div id="content-header">
-  <h1>Addmission</h1>
-  <h3>Employee Details Update<br />
-  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
 
-<div id="page-yield">
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li>Employee Details Update</li>
+  </ul>
+</div>
+Note:<font color="red">Fields Marked with * must be filled</font>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
 
-<table align="center" class="table table-hover" style="width:1000px">
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Employee Details Update</h2>
+       
+      </div>
+        <div class="box-content">
 <%= form_for @employee ,url:{action:'update_edit_profile',format:@employee.id} do |f| %>
-    
-    <div align="center">
-    <% if @employee.errors.any? %>
+    <fieldset>
+     <% if @employee.errors.any? %>
         <div class="alert alert-danger" style="width:500px" >
           <h3>Error prohibited to from being saved:</h3>
           <ul>
@@ -23,44 +27,88 @@
               <li style="width:500px" align="left"><%= msg %></li>
             <% end %>
           </ul>
-          <% end %>
+      
       </div>
- </div>
-    <tbody>
-    
-     <tr>     
-          <td class="col-2"><%=f.label :'Date of birth' %><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.date_field :date_of_birth,:value => Time.now.strftime('%Y-%m-%d')%></td>
-     </tr>
+          <% end %>
+          <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+         <div class="form-group">
+       <%= t('Date of birth')%><span class="necessary-field">*</span>
+         <%=f.date_field :date_of_birth,:value => Time.now.strftime('%Y-%m-%d'), class: "form-control"%>
+       </div>
 
-    <tr>
-        <td class="col-2"><%=f.label :"Marital-Status"%></td>
-        <td class="col-2"><%= select :employee, :marital_status, [["single"], ["married"],["divorced"]], {}, {:onchange=>"hide_or_show_fields(this.value)"} %></td>
-    <tr>
-         <td class="col-2"><%=f.label :"Father Name"%></td>
-           <td class="col-2"><%=f.text_field :father_name%></td>
-     </tr>
+         <div class="form-group">
 
-      <tr>
-         <td class="col-2"><%=f.label :"mother name"%></td>
-           <td class="col-2"><%=f.text_field :mother_name%></td>
-     </tr>
+         <%=select :employee, :marital_status, [["single"], ["married"],["divorced"]],{prompt:"Marital-Status"},{class: "form-control"}%>
+       </div>
 
-       <tr>
-         <td class="col-2"><%=f.label :Blood_Group%></td>
-          <td class="col-2"><%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %></td>
-     </tr>
+          <div class="form-group">
+       <%= t('Father Name')%>
+         <%=f.text_field :father_name,placeholder: "Father Name",class: "form-control"%>
+       </div>
+
+    </div>
+
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+             <div class="form-group">
+       <%= t('Mother Name')%>
+         <%=f.text_field :mother_name,placeholder: "Mother Name",class: "form-control"%>
+       </div>
+
+        <div class="form-group">
      
-      <tr>
-         <td class="col-2"><%=f.label :Nationality%></td>
-          <td class="col-2"><%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]}%></td>
-     </tr>
+         <%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{prompt:"Blood Group"},{class: "form-control"}%>
+       </div>
 
-         
-   
-     <tr class="tr-head"><td colspan="4" align="center"><%=f.submit "Update",class: "btn btn-success" %></td></tr>
+        <div class="form-group">
+         <%=f.select :country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:"Nationality"},{class: "form-control"}%>
+       </div>
 
-<%end%>
-</tbody>
-</table>
+        
+       
   </div>
+  <div class="col-sm-5 col-sm-offset-5"> 
+      <div class="form-actions">               
+        <%= f.submit 'Update', class: "btn btn-primary"%>
+      </div>
+    </div>
+  </fieldset>        
+ <% end %>
+</div>
+</div>
+</div>
+</div>
+
+    
+   
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
