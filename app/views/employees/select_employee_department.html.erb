@@ -1,19 +1,31 @@
-<div id="content-header">
-   <hr class="fancy-line"></hr>
-  <h1>Payslip</h1>
-  <h3>Select Employee</h3>
-  
-</div><br/><br/>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Human Resources','/employees'%></li>
+    <li><%= link_to 'Create Payslip',employees_payslip_path%></li>
+    <li>Select Employee </li>
+  </ul>
 
-<div id="page-yield">
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+<br>
+<div class="row">
+  <div class="col-md-1"></div>
+    <div class="col-md-3">
   <%= form_for :select_department,url:{action:'department_employee_list'},remote:true,html:{id: "user_form2"} do |f|%>
 
-	<div class="label-field-pair">
-		<%=f. label :'Select Department'%>
-		<div  class="text-input-bg">
-   		 <%= f.select :id,@department.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form2').submit();"}%></div></div>
+
+		<b>Select Department:</b>
+	
+   		 <%= f.select :id,@department.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form2').submit();",class: "form-control",style:"width:250px"}%>
 
    		<%end%>
+</div>
 
-   		<div id="emp_list"></div>
+<br>
+  
+    <div class="col-md-7">
+   		<div id="emp_list">
+        
+      </div>
    		</div>
+      </div>

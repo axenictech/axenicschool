@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
      <li><%= link_to 'Human Resources',employees_path %></li>
-    <li>HR Managament.</li>
+    <li>Create Payslip</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
@@ -23,7 +23,7 @@
   <div class="box col-md-4">
     <div class="box-inner2">
       <div class="box-header well" data-original-title="">
-        <h2><%= link_to "One click payslip Generator",employees_one_click_payslip_path%>
+        <h2><%= link_to "One click payslip Generator",employees_one_click_payslip_path,remote:true%>
         </h2>
       </div>
       <div class="box-content">
@@ -38,7 +38,7 @@
   <div class="box col-md-4">
     <div class="box-inner2">
       <div class="box-header well" data-original-title="">
-        <h2><%= link_to "One click payslip revert",employees_payslip_revert_path %></h2> 
+        <h2><%= link_to "One click payslip revert",employees_payslip_revert_path ,remote:true%></h2> 
       </div>
       <div class="box-content">
     One click payslip revertion.
@@ -57,8 +57,14 @@
     </div>
   </div>
 </div>
+<br>
+<div class="row">
+  <div class="col-md-2"></div>
+    <div class="col-md-8">
+       <div id="one_click_payslip"></div>
+    </div>
+</div>
 
-<div id="one_click_payslip"></div>
         <div id="one_click_revert"></div>
 
 
