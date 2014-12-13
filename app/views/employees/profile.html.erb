@@ -1,7 +1,8 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
-   <li><%= link_to'View Details',users_view_all_path%></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li><%= link_to 'HR Management',employees_employee_management_path %></li>
   
    <li>Employee Profile</li>
   </ul>
@@ -36,9 +37,6 @@
       
    </ul>
 </div>
-
-
-
 
 <div class="dropdown pull-right">
    <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
@@ -78,15 +76,15 @@
 <hr>
 
 
+
 <div class="row">
-        <div class="box col-md-1"></div>
-        <div class="box col-md-9">
+        <div class="box col-md-12">
         <div class="box-inner">
       <div class="box-content">
 
     <div class="row">
     <div class="col-md-8">
-  <div id ="student_main_info">
+   <div id ="student_main_info">
       <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
       <h4 align="left"> Employee Id : <%=@employee.id%> </h4>
     </div>
@@ -97,7 +95,7 @@
     <% unless @employee.image.blank? %>
       <%= image_tag @employee.image%>
     <% else %>
-      <%= image_tag "default_employee.png" %>
+      <%= image_tag "default_student.png" %>
     <% end %>
     </div>
     </div>

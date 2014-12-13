@@ -1,21 +1,28 @@
-<div id="content-header">
-  <h1>Addmission</h1>
-  <h3>Employee Details Update<br />
-  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+     <li><%= link_to 'HR Management',employees_employee_management_path %></li>
+     <li><%= link_to 'Employee Profile',employees_profile_path(@employee.id)%></li>
+     <li>Employee Details Update</li>
+  </ul>
+</div>
+Note:<font color="red">Fields Marked with * must be filled</font>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
-<div id="page-yield">
-  
-<table align="center" class="table table-hover" style="width:1000px">
+
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Employee Details Update</h2>
+       
+      </div>
+        <div class="box-content">
 <%= form_for @employee ,url:{action:'update_edit_contact_profile',format:@employee.id} do |f| %>
 
-    
- <div align="center">
-    <% if @employee.errors.any? %>
+    <fieldset>
+     <% if @employee.errors.any? %>
         <div class="alert alert-danger" style="width:500px" >
           <h3>Error prohibited to from being saved:</h3>
           <ul>
@@ -23,40 +30,81 @@
               <li style="width:500px" align="left"><%= msg %></li>
             <% end %>
           </ul>
-          <% end %>
+      
       </div>
- </div>
-    <tbody>
-         
+          <% end %>
+          <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+       
+          <div class="form-group">
+       <%= t('Office Phone1')%>
+         <%=f.text_field :office_phone1,placeholder: "Office Phone1",class: "form-control"%>
+       </div>
+           <div class="form-group">
+       <%= t('Office Phone2')%>
+         <%=f.text_field :office_phone2,placeholder: "Office Phone2",:required=>false,class: "form-control"%>
+       </div>
+           <div class="form-group">
+       <%= t('Mobile')%>
+         <%=f.text_field :mobile_phone,placeholder: "Mobile",class: "form-control"%>
+       </div>
 
-     <tr>
-       <td class="col-2"><%=f.label :"office phone1"%></td>
-          <td class="col-2"> <%=f.text_field :office_phone1%></td>
-     </tr>
+    </div>
 
-     <tr>
-       <td class="col-2"><%=f.label :"office_phone2"%></td>
-        <td class="col-2"><%=f.text_field :office_phone2, :required=>false%></td>
-     </tr>
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+             <div class="form-group">
+       <%= t('Home Phone')%>
+         <%=f.text_field :home_phone,placeholder: "Home Phone",class: "form-control"%>
+       </div>
 
-     <tr>
-       <td class="col-2"><%=f.label :mobile%></td>
-         <td class="col-2">  <%=f.text_field :mobile_phone%></td>
-     </tr>
+        <div class="form-group">
+       <%= t('Fax')%>
+         <%=f.text_field :fax,placeholder: "Fax",class: "form-control"%>
+       </div>
 
-      <tr>
-       <td class="col-2"><%=f.label :"Home phone"%></td>
-          <td class="col-2"> <%=f.text_field :home_phone%></td>
-     </tr>
+    </div>
+  <div class="col-sm-5 col-sm-offset-5"> 
+      <div class="form-actions">               
+        <%= f.submit 'Update', class: "btn btn-primary"%>
+      </div>
+    </div>
+  </fieldset>        
+ <% end %>
+</div>
+</div>
+</div>
+</div>
 
-     <tr>
-       <td class="col-2"><%=f.label :Fax%></td>
-          <td class="col-2"> <%=f.text_field :fax%></td>
-     </tr>
     
-     <tr class="tr-head"><td colspan="4" align="center"><%=f.submit "Update",class: "btn btn-success" %></td></tr>
+   
+ 
 
-<%end%>
-</tbody>
-</table>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

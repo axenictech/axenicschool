@@ -4,19 +4,21 @@
       <span class="student">Students not found</span>
      </div></div>
 <%else%>
-  <div id="score-table" style="width:80%">
-    <div class="custom_header" align="left">
-      <span class="student"><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></h2>
      </div>
-    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1" class="table-bordered table-hover">
+     <div class="box-content">
+    <table class="table table-bordered">
+    
      <% max_total = 0 %>
         <% marks_total = 0 %>
-      <tr class="tr-head">
-        <td class="col-2"><font color="blue">Subject</font></td>
+       <tr> 
+        <th>Subject</th>
         <% @exam_groups.each do |exam_group| %>
-          <td><font color="blue"><%= exam_group.name %></font></td>
+          <th><%= exam_group.name %></th>
         <% end %>
-          <td><font color="blue">Total</font></td>
+          <th>Total</th>
       </tr>
 
       <% @subjects.each do |subject| %>
@@ -58,8 +60,8 @@
         <%end%>
       <% end %>
       <tr class="tr-blank"></tr>
-      <tr class="tr-head">
-        <td class="col-2"><font color="blue">Total</font></td>
+      <tr>
+      <th>Total</th>
         <% @max_total = 0 %>
         <% @marks_total = 0 %>
         <% total_marks=0%><%total=0%>
@@ -80,24 +82,27 @@
           <%end%>
           <%end%>
           <% if exam_group.exam_type == "Marks and Grades" %>
-            <td><font color="blue"><%= "#{@marks_total || "-"}/"+@max_total.to_s %></font></td>
+            <th><%= "#{@marks_total || "-"}/"+@max_total.to_s %></th>
           <% elsif exam_group.exam_type == "Marks" %>
-            <td><font color="blue"><%= "#{@marks_total || "-"}/"+@max_total.to_s %></font></td>
+            <th><%= "#{@marks_total || "-"}/"+@max_total.to_s %></th>
           <% else %>
-            <td></td>
+            <th></th>
           <% end %>
         <% total_marks+= @marks_total %>
         <%total+= @max_total %>
         <% @max_total = 0 %>
         <% @marks_total = 0 %>
         <% end %>
-        <td><font color="blue"><%= "#{total_marks || "-"}/"+total.to_s %></font></td>
+        <th><%= "#{total_marks || "-"}/"+total.to_s %></th>
       </tr>
       <tr></tr>
     </table>
-      <div class="custom_header" align="left"><font color="green">
-        <% percentage = "%.2f" %(total_marks*100/total)+"%" %>
-        Total Marks = <%= total_marks %> | Aggregate % = <%= percentage  unless percentage.nil? %></font>
+      <h4><div class="custom_header" align="left">
+        <% percentage = "%.2f" %(total_marks*100/total)+"%" unless total == 0%>
+        Total Marks = <%= total_marks %> | Aggregate % = <%= percentage  unless percentage.nil? %>
       </div>
+      </h4>
   </div>
 <%end%>
+</div>
+

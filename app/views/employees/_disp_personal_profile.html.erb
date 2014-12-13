@@ -1,35 +1,57 @@
-<table class="table table-hover" align="center" style="width:900px">
-<tbody>
-<tr><td colspan="4" style="background-color:white"><h3>Personal Profile</h3></td></tr>
-<tr>
-    <td class="col-2">Date of Birth</td><td class="col-2"><%= @employee.date_of_birth%></td>
-    <td colspan="2"></td>
-</tr>
-<tr>
-    <td class="col-2">Marital-Status</td><td class="col-2"><%= @employee.marital_status%></td>
-    <td colspan="2"></td>
-</tr>
-<tr>
-    <td class="col-2">Father Name</td><td class="col-2"><%=@employee.father_name%></td>
-    <td colspan="2"></td>
-</tr>
-<tr>
-    <td class="col-2">Mother Name</td><td class="col-2"><%=@employee.mother_name %></td>
-    <td class="col-2"></td>
-</tr>
-<tr>
-    <td class="col-2">Blood Group</td><td class="col-2"> <%=@employee.blood_group%> </td>
-    <td class="col-2"></td>
-</tr>
-<tr>
-    <td class="col-2">Nationality</td><td class="col-2"> <%=@country%> </td>
-    <td class="col-2"></td>
-</tr>
 
 
+<div class="form-group">
+    <h4><b><u><font color="brown">Employee Personal Profile:</font></u></b></h4>
+</div>
 
-<tr style="background-color:white">
-<td colspan="4" align="center"><%= link_to 'Edit',employees_edit_personal_profile_path(@employee),class: "btn btn-primary" %>
-<%= link_to 'PDF Report',employees_personal_profile_pdf_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %></td>
-</tr>
-</tbody></table>
+<div class="row">
+
+<div class="col-md-6">
+  <div class="form-group">
+    <div class="col-md-6"><b>Date of Birth:</b> </div>
+        <div class="col-md-6"><%= @employee.date_of_birth%></div>
+  </div>
+<br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Marital-Status:</b> </div>
+        <div class="col-md-6"><%= @employee.marital_status%></div>
+  </div>
+<br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Father Name:</b> </div>
+        <div class="col-md-6"><%= @employee.father_name%></div>
+  </div>
+<br>
+  </div>
+  <div class="col-md-6">
+
+  <div class="form-group">
+    <div class="col-md-6"><b>Mother Name :</b> </div>
+        <div class="col-md-6"><%=@employee.mother_name %> </div>
+  </div>
+<br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Blood Group</b> </div>
+        <div class="col-md-6"><%=@employee.blood_group%> </div>
+  </div>
+<br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Nationality:</b> </div>
+        <div class="col-md-6"><%=@country%></div>
+  </div>
+<br>
+ 
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-5"></div>
+  <div class="col-md-3">
+
+<%= link_to 'Edit',employees_edit_personal_profile_path(@employee),class: "btn btn-primary" %>&nbsp;&nbsp;
+<%= link_to 'PDF Report',employees_personal_profile_pdf_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %>
+</div>
+</div>
+
+</div>
+

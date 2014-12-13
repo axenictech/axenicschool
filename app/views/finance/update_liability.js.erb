@@ -6,5 +6,5 @@ $("ul.errors").html("")
 <% else %>
   $("#modal").modal("hide")
   $("#liability").html("<%= j render 'liability_details'%>")
-  $('#flash').html("<%= j render 'layouts/flash_messages'%>")
+  $('#flash').html("<%= j render 'layouts/messages'%>")
 <% end %>

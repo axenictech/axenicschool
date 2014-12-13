@@ -1,24 +1,48 @@
-<% unless @discounts.empty?%>
-<table align="center" class="table table-hover table-bordered" style="width:80%">
-	<tr class="tr-head">
-	<th>Name</th>
-	<th>Student Category</th>
-	<th>Student Name</th>
-	<th>Discount(%)</th>
-	<th></th>
-	</tr>
-	<% @discounts.each do |d|%>
-	<tr>
-		<td class="col-3"><%= d.name%></td>
-		<td class="col-3"><%= d.category.nil? ? "-": d.category.name%></td>
-		<td class="col-3"><%= d.admission_no.nil? ? "-": d.admission_no%></td>
-		<td class="col-3"><%= d.discount%></td>
-		<td class="col-3"><%= link_to 'Edit',finance_edit_fee_discount_path(@batch,@master_category,id:d.id),remote:true %>&nbsp;&nbsp;
-			<%= link_to 'Delete' ,finance_delete_fee_discount_path(@batch,@master_category,id:d.id),method: :delete, data:{confirm:"Are you sure to delete '#{d.name}'?"},remote:true%></td>	
-		
-		</tr>
-	<%end%>
-</table>
-<%else%>
-<h5>No discount found for this fee category</h5>
-<%end%>
+<div class="row">
+  <div class="box col-md-12">
+	  <div class="box-inner">
+	    <div class="box-header well">
+	      <h2>Discount Details</h2>
+	    </div>
+
+	    <div class="box-content">
+		    <% unless @discounts.empty?%>
+		      <table id="datatable" class="table table-striped table-bordered responsive">
+		        <thead>
+		          <tr>
+		            <th>Name</th>
+								<th>Student Category</th>
+								<th>Student Name</th>
+								<th>Discount(%)</th>
+								<th>Action</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		        <% @discounts.each do |d| %>
+		          <tr>
+		            <td>
+		              <%=link_to d.name,finance_master_category_particular_path(d,batch_id:@batch.id) %>
+		            </td>
+		            <td class="col-3"><%= d.category.nil? ? "-": d.category.name%></td>
+		            <td class="col-3"><%= d.admission_no.nil? ? "-": d.admission_no%></td>
+								<td class="col-3"><%= d.discount%></td>
+		            <td class="center">
+		              <div class="label-success label label-default">
+		              <i class="glyphicon glyphicon-edit icon-white"></i> 
+		              <%= link_to 'Edit', finance_edit_fee_discount_path(@batch,@master_category,id:d.id),remote:true%></div>
+
+		              <div class="label-danger label label-default">
+		              <i class="glyphicon glyphicon-trash icon-white"></i> 
+		              <%= link_to 'Delete' ,finance_delete_fee_discount_path(@batch,@master_category,id:d.id),method: :delete, data:{confirm:"Are you sure to delete '#{d.name}'?"},remote:true%></div>
+		            </td>
+		          </tr>
+		        <% end %>
+		        </tbody>
+		      </table>
+		    <%else%>
+					<center><h5>No discount found for this fee category</h5></center>
+				<%end%>
+	    </div>
+	  </div>
+  </div>
+</div>

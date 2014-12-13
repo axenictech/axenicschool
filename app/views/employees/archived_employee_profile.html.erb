@@ -1,11 +1,15 @@
-<div id="content-header">
-  <h1>Employee Info</h1>
-  <h3>Archived Employee profile</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Human Resources',employees_path %></li>
+      <li><%= link_to 'HR Management',employees_employee_management_path %></li>
+  
+   <li>Archived Employee profile</li>
+  </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+
+<div class="row">
 
 <div class="dropdown pull-right">
    <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
@@ -36,17 +40,32 @@
 </div>
 
 
+ <div class="row">
+        <div class="box col-md-12">
+        <div class="box-inner">
+      <div class="box-content">
+
+    <div class="row">
+    <div class="col-md-8">
+   <div id ="student_main_info">
+      <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>   </h3>
+      <h4 align="left"> Employee Id : <%=@employee.id%> </h4>
+    </div>
+    </div>
+<br>
+    <div class="col-md-3">
+    
+   
 <div id="profile_picture_display">
-          <%= image_tag "default_employee.png" %>
+          <%= image_tag "default_student.png" %>
               </div>
-
-              <div id ="student_main_info">
-      <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
-      <h4 align="left"> Employee Number : <%=@employee.id%> </h4></div>
-
-<div id="page-yield">
-
-  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
-
-
+    
+    </div>
+    </div>
+   <hr>
 <div id="profile"><%=render'disp_genral_profile_archived'%></div>
+</div>
+</div>
+</div>
+</div>
+

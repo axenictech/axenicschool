@@ -1,5 +1,14 @@
+
+<br/>
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>View Employee Time Table</h2>
+    </div>
 <%unless @class_timings.empty?%>
-  <table align="center" class="table table-hover table-bordered" style="width:800px" >
+   <div class="box-content">
+ <table id="datatable" class="table table-striped table-bordered responsive">
     <tr>
     <td class="col-4"></td>
      <% @class_timings.each do |c|%>
@@ -22,7 +31,12 @@
      <%end%>
       </tr>
     <% end %>
-</table><br/><br/><br/>
+</table>
 <%else%>
 <h1>no time table entries found</h1>
 <%end%>
+</div>
+</div>
+</div>
+</div>
+

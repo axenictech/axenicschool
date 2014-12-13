@@ -1,3 +1,7 @@
+<div class="form-group">
+    <h4><b><u><font color="brown">Employee General Details:</font></u></b></h4>
+</div>
+
 <div class="row">
 
 <div class="col-md-6">
@@ -30,7 +34,7 @@
 
   <div class="form-group">
     <div class="col-md-6"><b>Reporting Manager:</b> </div>
-        <div class="col-md-6"><%= link_to @reporting_manager.to_s, employees_profile_path(@reporting_manager)%> <%= link_to 'change', employees_change_reporting_manager_path(@employee)%> </div>
+        <div class="col-md-6"><%= link_to @reporting_manager.to_s, employees_profile_path(@reporting_manager)%> <%= link_to 'change', employees_change_reporting_manager_path(@employee),style: 'color:green'%> </div>
   </div>
 <br>
   <div class="form-group">
@@ -59,9 +63,12 @@
   </div>
 
 </div>
+</div>
+<br/>
 <div class="row">
-<div class="col-md-1"></div>
-<div class="form-group">
+<div class="col-md-5"></div>
+  <div class="col-md-3">
+
 <%= link_to 'Edit',employees_edit_profile_path(@employee),class: "btn btn-primary" %>&nbsp;&nbsp;
 <%= link_to 'PDF Report',employees_employee_profile_path(employee_id:@employee,format: "pdf"),class: "btn btn-success" %>
 </div>
