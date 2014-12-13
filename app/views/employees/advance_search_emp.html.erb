@@ -63,7 +63,7 @@
             <%= link_to emp.first_name + " " + emp.last_name,employees_profile_path(emp)%>
           </td>
           <td class="col-3">
-          <%=  emp.employee_department.name%>
+          <%=  emp.employee_department.name unless emp.employee_department.nil?%>
           </td>
           <td class="col-3">
             <%= link_to 'View Profile' ,employees_profile_path(emp)%>
