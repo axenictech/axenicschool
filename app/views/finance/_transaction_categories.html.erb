@@ -1,21 +1,46 @@
-<% unless @transaction_categories.empty?%>
-<table align="center" class="table table-hover table-bordered" style="width:800px">
-				<tr class="tr-head"><th colspan="3">Category Name</th>
-        </tr>
-				
-			<tbody>
-			<% @transaction_categories.each do |tc|%>
-	
-				<tr>
-			<% unless tc.id>3 %>
-				<td class="col-2" colspan="3"><%= tc.name%></td>
-			<%else%>
-				<td class="col-2"><%= tc.name%></td>
-				<td><%= link_to 'Edit',finance_edit_transaction_category_path(tc),remote:true%></td>
-				<td><%= link_to 'Delete' ,finance_delete_transaction_category_path(tc),method: :delete, data:{confirm:"Are You sure to delete Category '#{tc.name}'?"},remote:true%></td>	
-			<%end%>	
-				</tr>
-			<%end%>
-        	</tbody>
-        	</table>
-<%end%>
+<hr>
+<div class="row">
+  <div class="box col-md-12">
+	  <div class="box-inner">
+	    <div class="box-header well">
+	      <h2>Category Name</h2>
+	    </div>
+
+	    <div class="box-content">
+		    <% unless @transaction_categories.empty?%>
+		      <table id="datatable" class="table table-striped table-bordered responsive">
+		        
+		        <tbody>
+		        <% @transaction_categories.each do |tc|%>
+		          <tr>
+		            <% unless tc.id>3 %>
+									<td class="col-2" colspan="3"><%= tc.name%></td>
+								<%else%>
+									<td class="col-2"><%= tc.name%></td>
+									<td class="center">
+			              <div class="label-success label label-default">
+			              <i class="glyphicon glyphicon-edit icon-white"></i> 
+			              <%= link_to 'Edit',finance_edit_transaction_category_path(tc),remote:true%></div>
+
+			              <div class="label-danger label label-default">
+			              <i class="glyphicon glyphicon-trash icon-white"></i> 
+			              <%= link_to 'Delete' ,finance_delete_transaction_category_path(tc),method: :delete, data:{confirm:"Are You sure to delete Category '#{tc.name}'?"},remote:true%></div>
+		            	</td>	
+								<%end%>
+		          </tr>
+		        <% end %>
+		        </tbody>
+		      </table>
+		    <%else%>
+					<center><h5>No categories found</h5></center>
+				<%end%>
+	    </div>
+	  </div>
+  </div>
+</div>
+
+
+
+
+
+

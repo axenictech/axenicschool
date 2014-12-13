@@ -1,21 +1,17 @@
-<div id="content-header">
-  <h1>Asset Liability Management</h1>
-  <h3>Liability View</h3>
-    <div id="app-back-button">
-  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
 
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'Pdf Report',finance_liability_list_path(format: "pdf")%> 
-    </li>
+
+
+<div id="modal" class="modal fade"></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Finance',finance_index_path %></li>
+    <li><%= link_to 'Asset liability management',finance_asset_liability_path %></li>
+    <li><%= link_to 'Liability',finance_liability_path %></li>
+    <li>Liability view</li>
   </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
-<div id="page-yield">
-<h5 align="center"><b>List of Liability</b></h5>
-<div id="liability"><%= render 'liability_details'%></div>
-<div id="modal" class="modal fade"></div>
-</div>
+<div id="assets"><%= render 'liability_details'%></div>
+
