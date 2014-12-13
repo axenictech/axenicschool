@@ -1,28 +1,65 @@
 
 
-
+<div class="box-inner">
+  <div class="box-header well">
+      <h2></h2>
+  </div>
+<div class="box-content">
 <%= form_for :payslip,url:{action:'create_payslip_category',format:@employee}  do |f| %>
+        
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-1"></div>
+          <div class="col-md-3">
+              <h4><%=f.label :name%>:<span class="necessary-field">*</span></h4>
+          </div>
+        <div class="col-md-6">
+          <%=f.text_field :name,class: "form-control",style:"width:250"%>
+        </div>
+      </div>
+    </div>
 
-    <table align="center" class="table" style="width:320px">
-  
-     <tr>
-     	 <td class="col-2"><%=f.label :name%><span class="necessary-field">*</span></td>
-          <td class="col-2"> <%=f.text_field :name%></td>
-     </tr>
 
-     <tr>
-     	 <td class="col-2"><%=f.label :amount%></td>
-        <td class="col-2"><%=f.text_field :amount, :required=>false%></td>
-     </tr>
 
-      <tr>
-       <td class="col-2"><%=f.label :is_deduction%></td>
-       <td class="col-2"> <%=f.check_box :is_deduction %>  </td>
-    </tr>
-   
-     <tr><td colspan="4"><%=f.submit "create",class: "btn btn-primary" %></td></tr>
-    </table>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-1"></div>
+          <div class="col-md-3">
+              <h4><%=f.label :amount%>:</h4>
+          </div>
+        <div class="col-md-6">
+          <%=f.text_field :amount, :required=>false,class: "form-control",style:"width:250"%>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4"></div>
+         <div class="col-md-8">
+           <h4><%=f.check_box :is_deduction %> 
+            &nbsp;&nbsp;
+         <%=f.label :is_deduction%></h4>
+        </div>
+      </div>
+    </div>
+
+ <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6"></div>
+          <div class="col-md-5">
+      <%=f.submit "create",class: "btn btn-primary" %>
+          </div>
+          </div>
+          </div>
+
+
 <%end%>
+</div>
+</div>
+
+
 
 
 

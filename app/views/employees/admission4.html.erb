@@ -1,7 +1,12 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
-     <li>Step 4 - Select Reporting Manager</li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li><%= link_to 'HR Management',employees_employee_management_path %></li>
+    <li><%= link_to 'Employee admission(Step 1)',employees_admission1_path %></li>
+    <li><%= link_to 'Step 2',employees_admission2_path(@employee.id)%></li>
+      <li><%= link_to 'Step 3',employees_admission3_path(@employee.id)%></li>
+      <li>Step 4</li>
   </ul>
 </div>
 
