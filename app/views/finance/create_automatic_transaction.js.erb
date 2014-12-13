@@ -6,5 +6,5 @@ $("ul.errors").html("")
 <% else %>
   $("#myModal").modal("hide");
   $('#auto_transaction').html("<%= j render 'automatic_transaction_details'%>");
-  $('#flash').html("<%= j render 'layouts/flash_messages'%>") 
+  $('#flash').html("<%= j render 'layouts/messages'%>") 
 <% end %>

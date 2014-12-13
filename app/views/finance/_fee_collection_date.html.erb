@@ -1,7 +1,11 @@
- <% unless @collections.nil? %>
- <div class="label-field-pair">
-  <%= label_tag :select_fee_collection_date %>
-      <div class="text-input-bg">
-      <%= select :collection,:id, @collections.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={id: $('#collection_id').val()};$.get('student_fees',a,function(response){});"}%>
-      </div></div>
-      <%end%>
+<% unless @collections.nil? %>
+  <div class="row">
+  	<div class="col-sm-1"></div>
+  	<div class="col-sm-4">
+    	<div class="form-group">
+      	<%= t('Select fee collection date') %>
+      	<%= select :collection,:id, @collections.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={id: $('#collection_id').val()};$.get('student_fees',a,function(response){});",class: "form-control"}%>
+    	</div>
+  	</div>
+	</div>
+<%end%>
