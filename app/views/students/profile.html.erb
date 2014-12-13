@@ -2,11 +2,11 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
      <li><%= link_to 'Student Details','/students' %></li>
-    <li>Student Profile</li>
+    <li>Profile</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 
-
+    
 
 <div class="row">
   <div class="col-md-12">
@@ -21,123 +21,202 @@
 <hr>
 
 
+<div class="row">
+        <div class="box col-md-12">
+        <div class="box-inner">
+      <div class="box-content">
 
-
-
-<div id="page-yield">
-
-
-<table class="table" align="center" style="width:900px">
-<thead>
-<tr class="tr-head">
-    <th colspan="4"><div id="profile_picture_display">
+    <div class="row">
+    <div class="col-md-8">
+   <div id ="student_main_info">
+      <h3 align="left"> <%= @student.first_name.capitalize %> <%= @student.middle_name.capitalize %> <%= @student.last_name.capitalize %>  </h3>
+      <h4 align="left"> Course : <%= @student.batch.course.course_name %> </h4>
+      <h4 align="left"> Batch : <%= @student.batch.name %> </h4>
+      <h4 align="left"> Admission no. : <%= @student.admission_no %> </h4>
+      </div>
+      </div>
+      <br>
+   <div class="col-md-3">
+   <div id="profile_picture_display">
     <% unless @student.image.blank? %>
      <%= image_tag @student.image%>
       <% else %>
           <%= image_tag "default_student.png" %>
       <% end %>
     </div>
-   <div id ="student_main_info">
-      <h3 align="left"> <%= @student.first_name.capitalize %> <%= @student.middle_name.capitalize %> <%= @student.last_name.capitalize %>  </h3>
-      <h4 align="left"> Course : <%= @student.batch.course.course_name %> </h4>
-      <h4 align="left"> Batch : <%= @student.batch.name %> </h4>
-      <h4 align="left"> Admission no. : <%= @student.admission_no %> </h4></div>
-   </th>
-  </tr>
-</thead>
-<tbody>
-<tr><td colspan="4"></td></tr>
-<tr>
-    <td class="col-2" colspan="4"><font color="brown">Student Personal Details</font></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Admission Date</font> </td><td class="col-2" colspan="3"><%= @student.admission_date %></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Date of birth</font></td><td class="col-2" colspan="3"><%= @student.date_of_birth%></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Blood group</font></td><td class="col-2" colspan="3"><%= @student.blood_group %></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Gender</font></td><td class="col-2"><%= @student.gender %></td>
-    <td class="col-2"><font color="grey">Nationality</font></td><td class="col-2"><%= @student.nationality.name %></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Language</font></td><td class="col-2"> <%= @student.language %> </td>
-    <td class="col-2"><font color="grey">Category</font></td><td class="col-2"> <%= @student.category.name %> </td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Religion</font></td><td class="col-2"> <%= @student.religion %> </td>
-    <td class="col-2"><font color="grey">Address</font></td><td class="col-2"> <%= @student.address_line1+" "+@student.address_line2 %> </td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">City</font></td><td class="col-2"><%= @student.city %> </td>
-    <td class="col-2"><font color="grey">State</font></td><td class="col-2"> <%= @student.state %> </td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Country</font></td><td class="col-2"> <%= @student.country.name %></td>
-    <td class="col-2"><font color="grey">Phone</font></td><td class="col-2">  <%= @student.phone1 %>  </td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Mobile</font></td><td class="col-2"><%= @student.phone2 %> </td>
-    <td class="col-2"><font color="grey">Email</font></td><td class="col-2"> <%= @student.email %> </td>
-</tr>
-<% unless @immediate_contact.nil? %>
-<tr>
-    <td class="col-2" colspan="1"><font color="grey">Immediate Contact</font></td>
-    <td class="col-2" colspan="3"><font color="blue"><%= @immediate_contact.first_name+" "+@immediate_contact.last_name %></font>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Change Immediate Contact',students_edit_immediate_contact_path(@student),style: 'color:green' %></td>
-</tr>
-<%end%>
-<tr><td colspan="4"></td></tr>
-<tr>
-    <td class="col-2" colspan="4"><font color="brown">Student Previous Institution Details</font></td>
-</tr>
-<% unless @student.student_previous_data.nil? %>
-<tr>
-  <td class="col-2"><font color="grey">Institution Name</font></td>
-  <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.institution %>
-  </td>
-</tr>
-<tr>
-  <td class="col-2"><font color="grey">Year</font></td>
-  <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.year %>
-  </td>
-</tr>
-<tr>
-  <td class="col-2"><font color="grey">Course</font></td>
-  <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.course %>
-  </td>
-</tr>
-<tr>
-  <td class="col-2"><font color="grey">Total Marks</font></td>
-  <td class="col-2" colspan="3">
-  <%= @student.student_previous_data.total_mark %>
-  </td>
-</tr>
-<tr><td colspan="4"></td></tr>
-<tr>
-    <td class="col-2" colspan="4"><font color="brown">Student Previous Subject Marks</font></td>
-</tr>
+    </div>
+    </div>
+   
+
+<hr>
+
+<div class="form-group">
+    <h4><b><u><font color="brown">Student Personal Details:</font></u></b></h4>
+</div>
+<div class="row">
+<div class="col-md-6">
+  <div class="form-group">
+    <div class="col-md-6"><b>Admission Date:</b> </div>
+        <div class="col-md-6"><%= @student.admission_date %></div>
+  </div>
+  <br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Blood group:</b></div>
+    <div class="col-md-6"><%= @student.blood_group %></div>
+  </div>
+  <br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Gender:</b></div>
+    <div class="col-md-6"><%= @student.gender %></div>
+  </div>
+<br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Nationality</b></div>
+    <div class="col-md-6"><%= @student.nationality.name %></div>
+  </div>
+<br>
+  <div class="form-group">
+    <div class="col-md-6"><b>Language:</b></div>
+    <div class="col-md-6"><%= @student.language %> </div>
+  </div>
+<br>
+   <div class="form-group">
+      <div class="col-md-6"><b>Category:</b></div>
+      <div class="col-md-6"><%= @student.category.name %></div> 
+    </div>
+    <br>
+    <div class="form-group">
+    <div class="col-md-6"><b>Date of birth:</b></div>
+    <div class="col-md-6"><%= @student.date_of_birth%></div>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <div class="col-md-6"><b>
+   Religion:
+   </b></div> 
+   <div class="col-md-6"><%= @student.religion %>
+   </div>
+   </div>
+   <br>
+</div>
+
+<div class="col-md-6">
+ 
+<div class="form-group">
+    <div class="col-md-6"><b>
+    Address:</b></div>
+    <div class="col-md-6"><%= @student.address_line1+" "+@student.address_line2 %> </div></div>
+    <br>
+
+<div class="form-group">
+    <div class="col-md-6"><b>City:</b></div>
+    <div class="col-md-6"><%= @student.city %> </div>
+    </div>
+    <br>
+<div class="form-group">
+    <div class="col-md-6"><b>State:</b></div>
+    <div class="col-md-6"><%= @student.state %></div>
+    </div>
+    <br>
+
+  <div class="form-group">
+    <div class="col-md-6"><b>Country:</b></div>
+    <div class="col-md-6"><%= @student.country.name %></div>
+    </div>
+    <br>
+
+      <div class="form-group">
+    <div class="col-md-6"><b>Phone:</b></div>
+    <div class="col-md-6"><%= @student.phone1 %></div></div>
+    <br>
+     <div class="form-group">
+    <div class="col-md-6"><b>Mobile:</b></div>
+    <div class="col-md-6"><%= @student.phone2 %></div></div>
+    <br>
+     <div class="form-group">
+    <div class="col-md-6"><b>Email:</b></div>
+    <div class="col-md-6"><%= @student.email %></div></div>
+    <br>
+
+    <% unless @immediate_contact.nil? %>
+    <div class="form-group">
+    <div class="col-md-6"><b>Immediate Contact:</b></div>
+    <div class="col-md-6"><%= @immediate_contact.first_name+" "+@immediate_contact.last_name %></div></div>&nbsp;&nbsp;
+   &nbsp;&nbsp;
+    <%= link_to 'Change Immediate Contact',students_edit_immediate_contact_path(@student),style: 'color:green' %>
+    <%end%>
+</div>
+</div>
+
+
+  
+  <hr>
+  <div class="form-group">
+    <h4><b><u><font color="brown">Student Previous Institution Details:</font></u></b></h4>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <% unless @student.student_previous_data.nil? %>
+    <div class="form-group">
+    <div class="col-md-6"><b>
+    Institution Name:</b></div>
+    <div class="col-md-6"><%= @student.student_previous_data.institution %>
+    </div>
+    </div>
+    <br>
+     <div class="form-group">
+    <div class="col-md-6"><b>Year:</b></div>
+    <div class="col-md-6"> <%= @student.student_previous_data.year %></div></div>
+    <br>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+    <div class="col-md-6"><b>Course:</b></div>
+    <div class="col-md-6"> <%= @student.student_previous_data.course %></div></div>
+    <br>
+    <div class="form-group">
+    <div class="col-md-6"><b>Total Marks:</b></div>
+    <div class="col-md-6"> <%= @student.student_previous_data.total_mark %></div></div>
+
+</div>
+</div>
+
+
+ <hr>
+  <div class="form-group">
+    <h4><b><u><font color="brown">Student Previous Subject Marks:</font></u></b></h4>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+  
+    <div class="form-group">
+    <div class="col-md-6"><b>Subject Name</b></div>
+    <div class="col-md-6"><b>Marks</b></div>
+    <br><br>
 <% unless @student.student_previous_subject_marks.nil? %>
-<tr>
-  <td class="col-2"><font color="green">Subject Name</font></td>
-  <td class="col-2" colspan="3"><font color="green">Marks</font></td>
-</tr>
-<% @student.student_previous_subject_marks.each do |psm| %>
-<tr>
-  <td class="col-2"><%= psm.subject %></td>
-  <td class="col-2" colspan="3"><%= psm.mark %></td>
-</tr>
-<%end%>
-<%end%>
-<%end%>
-<tr class="tr-head">
-<td colspan="4" align="center"><%= link_to 'Edit',edit_student_path(@student),class: "btn btn-primary" %>
-<%= link_to 'PDF Report',students_student_profile_path(@student,format:"pdf"),class: "btn btn-success" %></td>
-</tr>
-</tbody></table>
+  <% @student.student_previous_subject_marks.each do |psm| %>
+
+    <div class="form-group">
+     <div class="col-md-6"><%= psm.subject %></div>
+   
+    <div class="col-md-6"><%= psm.mark %></div></div>
+    <%end%>
+    <%end%>
+    <%end%>
+    </div>
+    </div>
+  <br>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-8"></div>
+  <div class="col-md-3">
+    <%= link_to 'Edit',edit_student_path(@student),class: "btn btn-primary" %>
+<%= link_to 'PDF Report',students_student_profile_path(@student,format:"pdf"),class: "btn btn-success" %>
+</div>
+</div><br/>
 </div>

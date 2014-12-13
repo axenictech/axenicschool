@@ -1,52 +1,78 @@
-<div id="content-header">
-  <h1>Events</h1>
-  <h3>Step 2 - Confirmation</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png", :border => 0), :back %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-<div id="page-yield">
-<div class="box">
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Calendar','/calender'%></li>
+    <li>Confirmation:Step-2</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+
+<br>
+<div class="row">
+<div class="col-md-2"></div>
+  <div class="box col-md-6">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Confirmation </h2>
+       
+      </div>
+        <div class="box-content">
+        <fieldset>
+        <div class="col-md-1"></div>
+  <div class="box col-md-12">
 <%= form_for :events,url:{action:'update'},method: :patch do |f| %>
-<table align="center" class="table" style="width:800px">
-<tbody>
-<%= hidden_field_tag :event_id,@event.id%>
-	<tr class="tr-head">
-			<td class="col-2">Title</td>
-			<td class="col-2"><%=@event.title%></td>
-	</tr>
+ <%= hidden_field_tag :event_id,@event.id%>
 
-	<tr class="tr-head">
-			<td class="col-2"> Description</td>
-			<td class="col-2"><%=@event.description%></td>
-	</tr>
-	<tr class="tr-head">
-			<td class="col-2"> Start Date</td>
-			<td class="col-2"><%=@event.start_date.to_date%></td>
-	</tr>
+ <div class="row">
+	<div class="form-group">
+		<div class="col-md-6"><b>Title:</b></div>
+		<div class="col-md-6"><%=@event.title%>
+		</div>
+	</div>
+<br>
+	<div class="form-group">
+		<div class="col-md-6"><b> Description:</b></div>
+		<div class="col-md-6"><%=@event.description%></div>
+	</div>
+<br>
+	<div class="form-group">
+		<div class="col-md-6"><b>Start Date:</b></div>
+		<div class="col-md-6"><%=@event.start_date.to_date%></div>
+	</div>
+<br>
+	<div class="form-group">
+		<div class="col-md-6"><b> End Date:</b></div>
+		<div class="col-md-6"><%=@event.end_date.to_date%></div>
+	</div>
+</div>
+<br>
+<div class="row">
+   <%unless @event.is_common? %>
+	<div class="form-group">
+		<div class="col-md-6"><%= link_to 'Select Batch',event_path,remote: true%></div>
+		<div class="col-md-6"><div id="batch_details"></div></div>
 
-	<tr class="tr-head">
-			<td class="col-2"> End Date</td>
-			<td class="col-2"><%=@event.end_date.to_date%></td>
-	</tr>
-	<%unless @event.is_common? %>
-	<tr class="tr-head">
-		<td class="col-2"><%= link_to 'Select Batch',event_path,remote: true%></td>	
-		<td id="batch_details"></td>
-	</tr>
-	
-	<tr class="tr-head">
-		<td class="col-2"><%= link_to 'Select Department',events_showdep_path,remote: true%></td>
-		<td id ="department_details"></td>
-	</tr>
-	 <%end%>
-	<tr class="tr-head">
-		<td colspan="2"><%=f.submit 'Confirm',class: "btn btn-primary"%>
- 		<%= link_to 'Cancel',calender_index_path,class: "btn btn-primary"%></td>
-	</tr>
+<br>
 
-</tbody>
-</table>
+		<div class="col-md-6"><%= link_to 'Select Department',events_showdep_path,remote: true%></div>
+		<div class="col-md-6"><div id="department_details"></div></div>
+	</div>
 <%end%>
-</div></div>
+</div>
+
+<br>
+	<div class="form-group">
+	<div class="col-md-6"><%=f.submit 'Confirm',
+	  class: "btn btn-primary"%></div>
+	  <div class="col-md-6">
+ 		<%= link_to 'Cancel',calender_index_path,class: "btn btn-primary"%></div>
+  </div>
+
+
+<%end%>
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+

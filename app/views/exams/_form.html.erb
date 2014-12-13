@@ -1,5 +1,14 @@
 <ul class="errors"></ul>
+
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-6">
+<div class="box-inner">
+<div class="box-header well">
+   <h2> Exam Create</h2>
+ </div>
 <%= form_for [@exam_group,@exam] do |f| %>
+<fieldset>
 <% if @exam.errors.any?%>
     <div class="alert alert-danger">
     <h4>Errors prohibited to being saved:</h4>
@@ -9,51 +18,50 @@
     </div>  
 <%end%>
 
-<div class="table">
-<div class="row">
-<div class="col-md-3">
-<%= f.label :subject_id, class: "control-label " %>
-</div>
-<div class="col-md-9">
-<%= f.select :subject_id, @subjects.collect {|s| [s.name,s.id]},prompt:true %><br/>
-</div>
-</div>
+ <div class="box-content">
 
 <div class="row">
-<div class="col-md-3" style="margin-top:20px">
-<%= f.label :start_time , class: "control-label"%>
-</div>
-<div class="col-md-9">
-<%=f.date_field :start_time ,:style =>"width: 250px", class: "form-control",required:true %>
-</div>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+<div class="form-group">
+<b>Subject ID:</b>
+<%= f.select :subject_id, @subjects.collect {|s| [s.name,s.id]},{prompt:true},{style: "width: 250px", class: "form-control"} %>
 </div>
 
-<div class="row">
-<div class="col-md-3" style="margin-top:20px">
-<%= f.label :end_time , class: "control-label"%>
+<div class="form-group">
+<b>Start Time:</b>
+<%=f.date_field :start_time ,style: "width: 250px", class: "form-control",required:true %>
 </div>
-<div class="col-md-9">
-<%=f.date_field :end_time ,:style =>"width: 250px", class: "form-control",required:true%>
+
+<div class="form-group">
+<b>End Time:</b>
+<%=f.date_field :end_time ,style: "width: 250px", class: "form-control",required:true%>
 </div>
-</div>
+
+
+
+
 <% unless @exam_group.exam_type=="Grades"%>
-<div class="row">
-<div class="col-md-3" style="margin-top:20px">
-<%= f.label :maximum_marks , class: "control-label"%>
+<div class="form-group">
+<b>Maximum Marks:</b>
+<%=f.text_field :maximum_marks ,style: "width: 250px", class: "form-control", required:true%>
 </div>
-<div class="col-md-9">
-<%=f.text_field :maximum_marks ,:style =>"width: 250px", class: "form-control", required:true%>
-  </div>
-  </div>
-<div class="row">
-<div class="col-md-3" style="margin-top:20px">
-<%= f.label :minimum_marks , class: "control-label"%>
+
+<div class="form-group">
+<b>Minimum Marks:</b>
+<%=f.text_field :minimum_marks ,style: "width: 250px", class: "form-control", required:true%>
 </div>
-<div class="col-md-9">
-<%=f.text_field :minimum_marks ,:style =>"width: 250px", class: "form-control", required:true%>
-</div>
-</div>
+
 <%end%>
+<div class="form-group">
 <%= f.submit ' create', class: "btn btn-primary" %>
 </div>
-<% end%>
+</div>
+</div>
+</div>
+</fieldset>
+<%end%>
+</div>
+</div>
+</div>
+

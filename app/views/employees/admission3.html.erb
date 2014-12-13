@@ -1,36 +1,47 @@
-<div id="content-header">
-  <h1>Employee admission</h1>
-  <h3>Step 3 - Add Bank Detail<br />
-  <small><font color="red">Fields Marked with * must be filled</font></small></h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li>Step 3 - Add Bank Detail</li>
+  </ul>
+</div>
+Note:<font color="red">Fields Marked with * must be filled</font>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
-<div id="page-yield">
-  
-
-<table align="center" class="table table-hover" style="width:1000px">
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="box col-md-6">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Step 3 - Add Bank Detail</h2>
+       
+      </div>
+        <div class="box-content">
 <%= form_for :bank_details,url:{action: 'admission3_create',format: @employee.id},method: :post do |f| %>
 
-    <tbody>
-
+   <fieldset>
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-8">
  	 <% @bank_fields.each do |bd| %>
- 	 <tr>
-     
-        <td class="col-2"><%= bd.name %></td>
-        <td class="col-2"><%= f.text_field :bank_info,:index => bd.id %></td>
-   
-    </tr>
-    <% end %>
-  </div>
-   
-    
-   
-     <tr class="tr-head"><td colspan="4" align="center"><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
 
-<%end%>
-</tbody>
-</table>
+       <div class="form-group">
+       <%= bd.name %>
+         <%=f.text_field :bank_info,:index => bd.id,placeholder: "Name", class: "form-control"%>
+       </div>
+ <% end %>
   </div>
+   </div>
+
+   <div class="col-sm-5 col-sm-offset-5"> 
+      <div class="form-actions">               
+        <%= f.submit 'Save', class: "btn btn-primary"%>
+      </div>
+    </div>
+  </fieldset>        
+ <% end %>
+</div>
+</div>
+</div>
+</div>
+    
+

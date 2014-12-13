@@ -2,26 +2,31 @@ class BatchTransfersController < ApplicationController
   def index
     @courses = Course.all
     @course = Course.new
+    authorize! :read, @course
   end
 
   def select
     @course = Course.find(params[:batch_transfer][:id])
+    authorize! :read, @course
   end
 
   def transfer
     @batch = Batch.find(params[:batch_id])
     @batchs = Batch.all
     @students = @batch.students.all
+    authorize! :read, @batch
   end
 
   def assign_all
     @batch = Batch.find(params[:format])
     @students = @batch.students.all
+    authorize! :read, @batch
   end
 
   def remove_all
     @batch = Batch.find(params[:format])
     @students = @batch.students.all
+    authorize! :read, @batch
   end
 
   def student_transfer
@@ -38,11 +43,13 @@ class BatchTransfersController < ApplicationController
       flash[:notice_transfer] = 'Please select student'
     end
     redirect_to batch_transfers_transfer_path(@batch)
+    authorize! :create, @batch
   end
 
   def graduation
     @batch = Batch.find(params[:batch_id])
     @students = @batch.students.all
+    authorize! :read, @batch
   end
 
   def former_student
@@ -59,7 +66,7 @@ class BatchTransfersController < ApplicationController
                                                 nationality_id: @student.nationality_id, language: @student.language, category_id: @student.category_id,
                                                 religion: @student.religion, address_line1: @student.address_line1, address_line2: @student.address_line2,
                                                 city: @student.city, state: @student.state, pin_code: @student.pin_code, country_id: @student.country_id,
-                                                phone1: @student.phone1, phone2: @student.phone2, email: @student.email, photo_data: @student.photo_data)
+                                                phone1: @student.phone1, phone2: @student.phone2, email: @student.email)
         @archived_student.save
         @student.destroy
       end
@@ -68,5 +75,6 @@ class BatchTransfersController < ApplicationController
       flash[:notice_gradute] = 'Please select student'
   end
     redirect_to batch_transfers_graduation_path(@batch)
+    authorize! :create, @batch
   end
 end

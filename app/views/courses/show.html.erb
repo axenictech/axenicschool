@@ -12,6 +12,7 @@
 <div class="row">
   <div class="col-md-11">
     <div class="pull-right">
+      <%= link_to 'New Batch', new_batch_path(course_id: @course.id), class: "btn btn-primary-link btn-xs" %>
       <%= link_to 'Batch Group', courses_grouped_batches_path(@course), class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>

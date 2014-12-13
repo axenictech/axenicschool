@@ -27,7 +27,11 @@
           <td><%= i+1 %></td>
           <td><%= student.first_name+' '+student.last_name  %></td>
           <td><%= student.admission_no %></td>
+          <% if student.status_description %>
+          <td><%= link_to 'View Profile',students_archived_profile_path(student) %></td>
+          <% else %>
           <td><%= link_to 'View Profile',students_profile_path(student) %></td>
+          <% end %>
         </tr>
       
       <% end %>   

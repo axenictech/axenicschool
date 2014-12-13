@@ -1,8 +1,9 @@
 <%= form_for :rank_report,url:{action: 'generate_ranking_report'},method: :get do |f| %>
- <div class="label-field-pair">
-  <%= f.label :select_subject %>
-      <div class="text-input-bg">
-      <%= f.select :subject_id, @subjects.collect {|s| [s.name,s.id]}, {prompt:true}%>
-      </div></div>
- <%= f.submit "View", class: "btn btn-default" %>
-  <% end %>
+
+  <b>Select Subject:</b>
+
+      <%= f.select :subject_id, @subjects.collect {|s| [s.name,s.id]}, {prompt:true},class:"form-control",style: "width: 300px"%>
+      <br>
+
+     <%= f.submit "View", class: "btn btn-default" %>
+    <% end %>

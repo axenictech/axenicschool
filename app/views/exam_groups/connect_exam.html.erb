@@ -1,48 +1,63 @@
-<div id="content-header">
-  <h1>Exam Management</h1>
-  <h3>Connect Exam</h3>
-  <div id="app-back-button">
- <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>  
-</div>
-<div id="page-yield">
-<div class="box">
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Exams','/exams'%></li>
+    <li>Connect Exams </li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
 
+
+<div class="row">
+  <div class="col-md-1"></div>
+    <div class="box col-md-10">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>Connect Exams
+                </h2>
+            </div>
+
+            <div class="box-content">
+            <fieldset>
 <% unless flash[:notice_connect].nil? %>
     <div align="center" class="alert alert-danger" style="width:100%"> <%= flash[:notice_connect] %> </div>
 <% end %>
 <% unless flash[:notice_con].nil? %>
     <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice_con] %> </div>
 <% end %>
-<div style="width:700px">
+
  <%=form_for :connect_exam , url:{action:'update_connect_exam',format:@batch.id}, method: :get do |f| %>
   <div class="row">
-    <div class="col-md-3">
-        Select: <%= link_to  'All', exam_groups_assign_all_path(@batch),remote:true %>
-        <%= link_to  'None', exam_groups_remove_all_path(@batch), remote:true %>
+  <div class="col-md-9"></div>
+
+        <b>Select:</b> 
+        <%= link_to  'All', exam_groups_assign_all_path(@batch),remote:true,class: "btn btn-primary btn-xs" %>&nbsp;
+        <%= link_to  'None', exam_groups_remove_all_path(@batch), remote:true,class: "btn btn-primary btn-xs" %>
       
+
     </div>
-    <div class="col-md-3"> 
-     Exam Group
-    
-    </div>
-    <div class="col-md-3">
-      Weightage
-    </div>
-  </div >
-  <div class="row">
-    <div class="col-md-12">
-      <div id="connect_exam  "><%= render 'exam_connect'%></div>    
-    </div>
+<div class="col-md-1"></div>
+   
+
+
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-11">
+      <div id="connect_exam"><%= render 'exam_connect'%></div>  
   </div>
+  <div class="col-md-1"></div></div>
+  
+
 <div class="row">
   <div class="col-md-3"></div>
   <div class="col-md-3">
     <%= f.submit 'Submit', class: "btn btn-primary"%>
   </div>
-  <div class="col-md-3"></div>
+  
     
 </div>
 <%end%>
-</div></div></div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>

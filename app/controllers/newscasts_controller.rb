@@ -11,6 +11,7 @@ class NewscastsController < ApplicationController
 
   def create
     @newscast = Newscast.new(newscast_params)
+    @newscast.user_id = current_user.id
     if @newscast.save
       redirect_to newscast_path(@newscast), notice: 'News added successfully'
     else
@@ -32,6 +33,7 @@ class NewscastsController < ApplicationController
   end
 
   def destroy
+    authorize! :delete, @newscast
     @newscast = Newscast.find(params[:id])
     @newscast.destroy
     redirect_to newscasts_path(@newscast), notice: 'News deleted succefully!'
@@ -49,6 +51,6 @@ class NewscastsController < ApplicationController
   private
 
   def newscast_params
-    params.require(:newscast).permit(:title, :content)
+    params.require(:newscast).permit!
   end
 end

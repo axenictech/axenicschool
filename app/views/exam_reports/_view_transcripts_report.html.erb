@@ -15,6 +15,8 @@
         </div>
       </div>
     </div>
+    <hr>
+    <div class="box-inner">
           <% general_subjects = @batch.subjects.where(elective_group_id:nil) %>
           <% student_electives = StudentSubject.where(student_id: @student.id,batch_id: @batch.id) %>
           <% elective_subjects = [] %>
@@ -23,14 +25,16 @@
           <% end %>
           <% @subjects = general_subjects + elective_subjects %>
           <% unless @subjects.empty? %>
-            <div class="batch-name" style="color:blue"><h4><%= "(Code -"+@batch.course.code+") "+@batch.name.capitalize %></h4></div>
+
+            <div class="box-header well"><h2><%= "(Code -"+@batch.course.code+") "+@batch.name.capitalize %></h2></div>
+            <div class="box-content">
             <% total_credits=0 %>
-          <div id="score-table" >
-            <table id="listing" class="table-bordered" width="100%" cellpadding="1" cellspacing="1">
-              <tr class="tr-head">
-                <td class="col-2"><font color="blue">Subject Code</font></td>
-                <td class="col-2"><font color="blue">Subject Title</font></td>
-                <td class="col-2"><font color="blue">Percentage(%)</font></td>
+          
+            <table  class="table table-bordered">
+              <tr>
+                <th>Subject Code</th>
+                <th>Subject Title</th>
+                <th>Percentage(%)</th>
               </tr>
         <% max_total = 0 %>
         <% marks_total = 0 %>
@@ -58,15 +62,21 @@
           <% marks_total = 0 %>
         
                 <% end %>
-                <tr class="tr-blank"></tr>
-                <tr class="tr-head">
-                  <td colspan="2" align="right"><font color="blue">Total</font></td>
-                  <td><%="%.2f" %(@mark*100/@total)+"%"%></td>
-                </tr>
+               
             </table>
+<hr>
+                <div class="row">
+                <div class="col-md-12">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                <h4><b> Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%="%.2f" %(@mark*100/@total)+"%"%></b></h4></div>
+                </div>
+                </div>
+                
            <%else%>
            <h4>Subject Not Found</h4>
            <%end%>
            </div>
 </div>
 <% end %>
+</div>

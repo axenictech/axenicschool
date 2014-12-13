@@ -1,13 +1,14 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+     <li><%= link_to 'Setting', employees_settings_path %></li>
+   
      <li>Employee Category</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
-
-
-        <div id="add_category">
+ <div id="add_category">
     <%=render 'category'%>
      </div>
      <div id="myModal" class="modal fade">

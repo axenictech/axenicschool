@@ -1,13 +1,15 @@
 class GradingLevelsController < ApplicationController
   def index
     @batches = Batch.all
-    end
+    authorize! :read, @batches.first
+  end
 
   def new
     @batch = Batch.find(params[:batch_id])
     @grading_level = GradingLevel.new
     @grading_level1 = @batch.grading_levels.build
-       end
+    authorize! :create, @grading_level
+  end
 
   def create
     @batch = Batch.find(params[:batch_id])
@@ -20,6 +22,7 @@ class GradingLevelsController < ApplicationController
   def edit
     @batch = Batch.find(params[:batch_id])
     @grading_level1 = @batch.grading_levels.find(params[:id])
+    authorize! :update, @grading_level1
   end
 
   def update
@@ -31,6 +34,7 @@ class GradingLevelsController < ApplicationController
   end
 
   def destroy
+    authorize! :create, @grading_level
     @batch = Batch.find(params[:batch_id])
     @grading_levels = @batch.grading_levels.all
     @grading_level1 = @batch.grading_levels.find(params[:id])
@@ -41,6 +45,7 @@ class GradingLevelsController < ApplicationController
   def select
     @batch = Batch.find(params[:batch][:id])
     @grading_levels = @batch.grading_levels.all
+    authorize! :read, @batch
   end
 
   private
