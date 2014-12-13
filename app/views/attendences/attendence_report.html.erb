@@ -111,7 +111,7 @@ table#listing{
   <% @students.each do |student|%>
     <% total_days=0 %><% absent_days=0 %>
     <%unless @time_table_entries.nil? %>
-    <% (@start_date..@end_date).each do |date| %>
+    <% (@start_date.to_date..@end_date.to_date).each do |date| %>
       <%is_holiday=false%>
             <% @batch_events.each do |be|%>
               <% if be.event.start_date<=date and be.event.end_date>=date and be.event.is_holiday=true %>

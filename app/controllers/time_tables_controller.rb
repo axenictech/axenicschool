@@ -1,6 +1,7 @@
 class TimeTablesController < ApplicationController
   def index
     @timetable = TimeTable.new
+    authorize! :read, @timetable
   end
 
   def employee_timetable
@@ -10,10 +11,12 @@ class TimeTablesController < ApplicationController
     @time_table_entries.each do |tbe|
       @timetables << tbe.time_table
     end
+    authorize! :create, @timetable
   end
 
   def new
     @timetables = TimeTable.all
+    authorize! :read, @timetables.first
   end
 
   def selectTime
@@ -24,7 +27,8 @@ class TimeTablesController < ApplicationController
       @time.each do |t|
         @batches.push t.batch
       end
-   end
+    end
+    authorize! :read, @time1
   end
 
   def select
@@ -32,20 +36,23 @@ class TimeTablesController < ApplicationController
     @batch = Batch.find(params[:batch][:id])
     @class_timing = @batch.class_timings.where(is_break: false)
     @subjects = @batch.subjects.all
-end
+    authorize! :read, @time1
+  end
 
   def timetable
     @today = Date.today
     @time_end = TimeTable.all
     @time_table = TimeTable.where('time_tables.start_date <= ? AND time_tables.end_date >= ?', @today, @today)
     @batches = Batch.all
-   end
+    authorize! :read, @time_end.first
+  end
 
   def display_institutional_time_table
     @time_end = TimeTable.all
     @today = params[:next].to_date
     @batches = Batch.all
     @time_table = TimeTable.where('time_tables.start_date <= ? AND time_tables.end_date >= ?', @today, @today)
+    authorize! :read, @time_end.first
   end
 
   def selectTimeEmployee
@@ -60,7 +67,8 @@ end
         @class_timings.push t.class_timing
         @employees.push t.employee
       end
-  end
+    end
+    authorize! :create, TimeTable
   end
 
   def time_table_pdf
@@ -78,22 +86,17 @@ end
     @weekdays = @timetable_entries.collect(&:weekday).uniq.sort! { |a, b| a.weekday <=> b.weekday }
     @class_timings = @timetable_entries.collect(&:class_timing).uniq.sort! { |a, b| a.start_time <=> b.start_time }
     @employees = @timetable_entries.collect(&:employee).uniq
- end
+    authorize! :read, @time_table
+  end
 
-  # def select
-  #    unless @time.nil?
-  #    @time.each do |t|
-  #     @weekdays.push t.weekday
-  #   end
-  # end
-
-  # end
   def sub
     @subject = @batch.subjects.find(params[:subject][:id])
+    authorize! :create, TimeTable
   end
 
   def teachers_timetable
     @timetables = TimeTable.all
+    authorize! :read, @timetables.first
   end
 
   def work_allotment
@@ -106,10 +109,12 @@ end
     end
     @batches = Batch.all
     @subjects = @batches.collect(&:subjects).flatten
+    authorize! :create, TimeTable
   end
 
   def new_timetable
     @time_table = TimeTable.new
+    authorize! :create, @time_table
   end
 
   def create
@@ -149,6 +154,7 @@ end
   def edit_timetable
     @courses = Batch.all
     @timetables = TimeTable.all
+    authorize! :update, @timetables.first
   end
 
   def update_timetable
@@ -165,6 +171,7 @@ end
   end
 
   def time_table_delete
+    authorize! :delete, @time
     @time = TimeTable.find(params[:format])
     if @time.destroy
       redirect_to time_tables_path
@@ -201,17 +208,12 @@ end
       @error = true
       @timetable.errors.add(:end_date, "can't be less than start date")
     end
-
-    # unless @error
     if @timetable.update(time_table)
       flash[:notice] = 'Updated Successfully'
       redirect_to time_tables_edit_timetable_path(@timetable)
     else
       render 'update_timetable'
     end
-    # else
-    #             render 'update_timetable'
-    #        end
   end
 
   private

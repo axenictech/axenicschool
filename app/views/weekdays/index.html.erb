@@ -5,7 +5,7 @@
     <li>Weekdays</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
-<br/><br/>
+<br/>
 <div class="row">
   <div class="col-md-12">
    <%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
@@ -13,6 +13,5 @@
     <%end%>
   </div>
 </div>
-<br>
-<br>
+<br/>
 <div id="batch_div"></div>

@@ -13,12 +13,10 @@
       </div>
   </div>
 </div>
-<br/>
 <div class="row">
   <div class="box col-md-12">
   <div class="box-inner">
-   <div class="box-content">
-      <div class="box-header well">
+    <div class="box-header well">
       <h2>Work Allotment</h2>
     </div>
  
@@ -26,11 +24,8 @@
 
 <%=form_for :employees_subjects,:html=>{:id=>'work_allotment_form'} do |f| %>
   <table id="datatable" class="table table-striped table-bordered responsive">
-    <hr/>
     <% @batches.each do |batch| %>
-       <tr><td><li class="heading">
-          <%= batch.name%>
-        </li></td>
+       <tr><th colspan="2"><h4><b><%= batch.name%></b></h4></th>
       </tr>
         <tr>
          <% batch.subjects.each do |subj| %>
@@ -45,7 +40,6 @@
          <p align="center"><%= f.submit 'update',class: "btn btn-primary"%></p>
      <% end %>
   </div>
-</div>
 </div>
 </div>
 </div>

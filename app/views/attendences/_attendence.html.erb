@@ -1,82 +1,95 @@
-<br/>
-
 <div class="row">
-  <div class="box-inner" style="width: 150%;">
+  <div class="box-inner">
     <div class="box-header well">
-<h2>
-<div align="center">
-
-    <%= link_to "◄",attendences_display_path(@subject.id,(@today - 1.month)),remote:true %>
- 
-       <%= @today.strftime("%B %Y") %> 
- 
-    <%= link_to "►",attendences_display_path(@subject.id,(@today + 1.month)),remote:true %>
-  </div>
-</h2>
-</div>
+      <h2>Student Attendance</h2>
+    </div>
 <div class="box-content">
-<table class="table table-bordered">
-<thead>
-  <tr>
-    <th><%= t('name') %></th>
-    <% current_day = Date.today  %>
-    <% (@start_date..@end_date).each do |date| %>
-      <%@time_table_entries.each do |d|%>
-      <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
+ <div id="calendar" class="fc fc-ltr">
+    <table class="fc-header" style="width:100%">
+      <tbody>
+        <tr>
+          <td class="fc-header-left">
+            <%= link_to "◄ prev", attendences_display_path(@subject.id,(@today - 1.month)),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
+            <%= link_to "► next", attendences_display_path(@subject.id,(@today + 1.month)),remote:true , class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
+            <span class="fc-header-space"></span>
+          </td>
+          <td class="fc-header-center">
+            <span class="fc-header-title"><h2><%=@today.strftime("%B %Y") %></h2></span>
+          </td>
+          <td class="fc-header-right">
+            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">month view</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-          <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
-        <th style="background-color:lightgreen" class="head-td-date active" ><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></th>
-        <%end%>
-      <% else %>
-       <% if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
-        <th class="head-td-date"><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></th>
-      <%end%>
-      <% end %>
-      <% end%>
-      <%end%>
- </tr>
- </thead>
-    <% @students.each do |student| %>
-    <% is_valid_subject=1 %>
-      <%unless @subject.elective_group.nil?%>
-        <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.id,@subject.id) %>
-          <% is_valid_subject = 0 if is_student_elective.nil? %>
-      <%end%>
-    <% unless is_valid_subject == 0 %>
-      <tr class="tr-<%= cycle('odd', 'even')  %>">
-        <th class="td-name">
-            <%= student.first_name %>
-        </th>
-
-        <% (@start_date..@end_date).each do |date| %>
-           <%@time_table_entries.each do |d|%>
-         <% @absent = Attendence.find_by_student_id_and_month_date(student.id,date) %>
-
-      <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
-      <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
-        <td class="tag" style="background-color:lightgreen" id="attendance-employee-<%= student.id %>-day-<%= date %>" class="td-mark active">
-          <% else %></td>
-        <td class="tag" id="attendance-employee-<%= student.id %>-day-<%= date %>" class="td-mark">
-            <% end %>
-          
-          <% unless @absent.nil? %>
-       
-            <%= link_to 'X',attendences_edit_attendence_path( 
-            @absent,date:date,subject_id:@subject.id),remote:true %>
-
-          <% else %>
-                   <%= link_to '.',attendences_new_attendence_path( 
-            student.id,date,time_table_entry_id:d.id,subject_id:@subject.id),remote:true%>
-          <% end %>
+    <div class="fc-content" style="position: relative;">
+      <div class="fc-view fc-view-month fc-grid" style="position:relative">
+        <table class="fc-border-separate" style="width:100%" cellspacing="0">
+          <thead>
+            <tr class="fc-first fc-last">
+              <th class="fc-day-header fc-widget-header" style="padding:10px"><%= t('name') %></th>
+              <% current_day = Date.today  %>
+              <% (@start_date..@end_date).each do |date| %>
+                <%@time_table_entries.each do |d|%>
+                <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
+                    <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
+                  <th style="background-color:rgb(248, 247, 247)" class="fc-day-header fc-widget-header"><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></th>
+                  <%end%>
+                <% else %>
+                 <% if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
+                  <th class="fc-day-header fc-widget-header"><div class="day themed_text"><%= I18n.l(date,:format=>"%a") %></div> <div class="date"> <%=  I18n.l(date,:format=>"%d") %></div></th>
+                <%end%>
+                <% end %>
+                <% end%>
+                <%end%>
+            </tr>
+          </thead>
+          <% @students.each do |student| %>
+          <% is_valid_subject=1 %>
+            <%unless @subject.elective_group.nil?%>
+              <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.id,@subject.id) %>
+                <% is_valid_subject = 0 if is_student_elective.nil? %>
             <%end%>
-        </td>
+          <% unless is_valid_subject == 0 %>
+            <tr class="fc-week">
+              <th class="fc-day fc-widget-content" style="height:40px;padding:10px">
+                  <%= student.first_name %>
+              </th>
+
+              <% (@start_date..@end_date).each do |date| %>
+                 <%@time_table_entries.each do |d|%>
+               <% @absent = Attendence.find_by_student_id_and_month_date(student.id,date) %>
+
+            <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
+            <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
+              <td class="fc-day fc-widget-content" style="background-color:rgb(248, 247, 247)" id="attendance-employee-<%= student.id %>-day-<%= date %>">
+                <% else %>
+              <td class="fc-day fc-widget-content" id="attendance-employee-<%= student.id %>-day-<%= date %>">
+                  <% end %>
+              <div class="fc-day-content">
+              <div align="center">
+                <% unless @absent.nil? %>
+                  <%= link_to 'X',attendences_edit_attendence_path(
+                  @absent,date:date,subject_id:@subject.id),remote:true, style: "font-size:20px"%>
+                <% else %>
+                  <%= link_to '-',attendences_new_attendence_path(
+                  student.id,date,time_table_entry_id:d.id,subject_id:@subject.id),remote:true, style: "font-size:20px"%>
+                <% end %>
+              </div>
+              </div>
+                  <%end%>
+              </td>
+              <%end%>
+            <% end %>
+          </tr>
         <%end%>
-      <% end %>
-     
-    </tr>
-  <%end%>
-  <%end%>
-</table>
+        <%end%>
+      </table>
+      <br/>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

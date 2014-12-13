@@ -1,6 +1,7 @@
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h4><%= @event.title %></h4>
 			<%= @event.start_date.strftime('%d %b %y') %> - <%= @event.end_date.strftime('%d %b %y') %>
 		</div>

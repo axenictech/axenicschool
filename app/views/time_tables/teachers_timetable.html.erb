@@ -6,7 +6,7 @@
     <li>Teacher Time Table</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
-<br/><br/>
+<br/>
 <div class="row">
   <div class="col-md-12">
 <%= form_for :time,url:{action:'teacher_time_table_display'},method: :get,remote:true,html:{id: "time_form"} do |f| %>
@@ -15,5 +15,5 @@
     <%end%>
   </div>
 </div>
+<br/>
 <div id="time_div"></div>
-<br/><br/>
