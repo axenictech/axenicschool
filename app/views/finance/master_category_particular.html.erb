@@ -1,16 +1,22 @@
-<div id="content-header">
-  <h1>Master Category</h1>
-  <h3>Finance Management</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),:back  %>
-  </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-<div id="inner-tab-menu">
-  <ul>
-    <li style="width:150px"><%= link_to 'Create Particulars',finance_new_particular_fee_path(@master_category,batch_id:@batch.id),remote:true%></li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Finance',finance_index_path %></li>
+    <li><%= link_to 'Manage Fees',finance_fees_path %></li>
+    <li><%= link_to 'Create Fees',finance_master_fees_path %></li>
+    <li>Particular Details</li>
   </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<div class="row">
+  <div class="col-md-11">
+    <div class="pull-right">
+      <%= link_to 'Create Particular', finance_new_particular_fee_path(@master_category,batch_id:@batch.id),remote:true, class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
+</div>
+
+
 <div id="page-yield">
 <div id="list"><%= render 'particular_fees_list'%></div>
 <div id="Modal" class="modal fade"></div>

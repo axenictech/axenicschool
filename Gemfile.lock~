@@ -36,7 +36,6 @@ GEM
     bullet (4.14.0)
       activesupport (>= 3.0.0)
       uniform_notifier (>= 1.6.0)
-    cancan (1.6.10)
     ckeditor (4.1.0)
       mime-types
       orm_adapter (~> 0.5.0)
@@ -161,7 +160,6 @@ DEPENDENCIES
   aws-sdk
   bcrypt (~> 3.1.7)
   bullet
-  cancan
   ckeditor
   coffee-rails (~> 4.0.0)
   devise
