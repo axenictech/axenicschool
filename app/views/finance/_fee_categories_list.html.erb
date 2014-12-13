@@ -1,4 +1,3 @@
-<hr>
 <div class="row">
   <div class="box col-md-12">
   <div class="box-inner">
@@ -7,6 +6,7 @@
     </div>
 
     <div class="box-content">
+    <% unless @master_categories.empty?%>
       <table id="datatable" class="table table-striped table-bordered responsive">
         <thead>
           <tr>
@@ -37,6 +37,9 @@
         <% end %>
         </tbody>
       </table>
+      <%else%>
+          <center><h5>No batch details found</h5></center>
+      <%end%>
     </div>
   </div>
   </div>

@@ -9,6 +9,13 @@
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'View Discount', 'fee_discounts',class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="box col-md-12">
     <div class="box-inner">
       <div class="box-header well">
@@ -62,20 +69,6 @@
                 <div class="form-group">
                   <%= t('Discount(%)') %>
                   <%= f.text_field :discount, placeholder: "Discount",class: "form-control" %>
-                </div>
-              </div>
-
-              <div class="col-sm-1"></div>
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <div class="box-inner2">
-                    <div class="box-header well" data-original-title="">
-                      <h2><%= link_to "Discount", 'fee_discounts'%></h2>
-                    </div>
-                    <div class="box-content">
-                      View discount.
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

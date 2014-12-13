@@ -1,13 +1,11 @@
-<hr>
 <div class="row">
   <div class="box col-md-12">
 	  <div class="box-inner">
 	    <div class="box-header well">
 	      <h2>Collection Details</h2>
 	    </div>
-
 	    <div class="box-content">
-		    <% unless @collections.nil?%>
+		    <% unless @collections.empty?%>
 		      <table id="datatable" class="table table-striped table-bordered responsive">
 		        <thead>
 		          <tr>
@@ -46,9 +44,3 @@
 	  </div>
   </div>
 </div>
-
-
-
-
-
-
