@@ -1,6 +1,6 @@
 class ClassTimingsController < ApplicationController
   def index
-    @batches = Batch.all
+    @batches = Batch.includes(:course).all
     authorize! :read, ClassTiming
   end
 

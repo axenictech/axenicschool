@@ -260,7 +260,7 @@ class FinanceController < ApplicationController
     unless @start_date.nil?
       @end_date = params[:expense][:end_date].to_date
       unless @end_date.nil?
-        @expenses = FinanceTransaction.where(transaction_date: @start_date..@end_date)
+        @expenses = FinanceTransaction.includes(:finance_transaction_category).where(transaction_date: @start_date..@end_date)
       else
         flash[:alert] = 'Please select end date'
         render 'view_expense'
@@ -766,7 +766,7 @@ class FinanceController < ApplicationController
   end
 
   def fees_submission_batch
-    @batches=Batch.all
+    @batches=Batch.includes(:course).all
     @collections=Batch.first.finance_fee_collections if Batch.first
     authorize! :read, @collections.first
   end

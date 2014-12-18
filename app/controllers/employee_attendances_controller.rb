@@ -228,6 +228,7 @@ class EmployeeAttendancesController < ApplicationController
     @deparment = EmployeeDepartment.find(params[:department_id])
     @leave_types = EmployeeLeaveType.all
     @employees = @deparment.employees.all
+     @general_setting = GeneralSetting.first
     render 'attendance_report_pdf', layout: false
   end
 

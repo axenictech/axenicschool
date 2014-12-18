@@ -76,6 +76,7 @@ class TimeTablesController < ApplicationController
     @time = TimeTableEntry.where(params[:time_id])
     @batch = Batch.find(params[:batch_id])
     @subjects = @batch.subjects.all
+     @general_setting = GeneralSetting.first
     render 'time_table_pdf', layout: false
  end
 
@@ -108,7 +109,7 @@ class TimeTablesController < ApplicationController
       flash[:notice] = 'Updated work allotment.'
     end
     @batches = Batch.all
-    @subjects = @batches.collect(&:subjects).flatten
+    @subjects = @batches.includes(:subjects).flatten
     authorize! :create, TimeTable
   end
 

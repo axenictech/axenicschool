@@ -129,9 +129,12 @@
       </tr>
       <tr></tr>
     </table>
+
+
       <div class="custom_header" align="left">
         <% percentage = "%.2f" %(total_marks*100/total)+"%" %>
         Total Marks = <%= total_marks %> | Aggregate % = <%= percentage  unless percentage.nil? %>
+
       </div>
  
 <%end%>

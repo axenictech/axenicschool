@@ -2,7 +2,7 @@ class TimeTableEntriesController < ApplicationController
   def index
     @time = TimeTable.find(params[:format])
     flash[:notice] = "Time table structure created from #{@time.start_date.strftime('%B %Y')} - #{@time.end_date}"
-    @batches = Batch.all
+    @batches = Batch.includes(:course).all
     @sub = params[:sub_id]
     @times = params[:time_id]
     authorize! :read, @time

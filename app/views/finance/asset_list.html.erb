@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 <head>
 <style type="text/css">
 .page {
@@ -74,33 +75,75 @@ table#pdf-table{
     <div id="pdf-info">
       <table id="pdf-table" width="100%" cellspacing="0">
         <tr class="table-header"><td class="col-pdf"><%= t('sl_no') %></td><td class="col-pdf"> <%= t('asset') %></td><td class="col-pdf"> <%= t('created_at') %> </td><td class="col-pdf"><%= t('total_amount') %></td></tr>
+=======
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
+
+      
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
+
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+      <br/><h3><center>Asset List</center></h3><br/>
+     
+      <table cellpadding="5" cellspacing="5" width="700">
+     <tr bgcolor="99CCFF"><th align="left">Sl No</th>
+            <th align="left">Asset</th>
+            <th align="left">Created At</th>
+            <th align="left">Total Amount</th>
+        </tr>
+>>>>>>> cadaefc20c6d0045c8bbd4df9b07005f9ae2f1e7
         <% i = 0  %>
-        <% c= 'even' %>
+      
         <%total_amount=0%>
         <% @assets.each do |a| %>
           <% if a.is_inactive? %>
-            <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
-              <td class="col-pdf"><%= i+=1 %></td>
-              <td class="col-pdf"><%= a.title+" ( inactive )" %></td>
-              <td class="col-pdf"><%= a.created_at.strftime("%d-%m-%Y") %></td>
-              <td class="col-pdf"><%= a.amount%></td>
+            <tr>
+              <td><%= i+=1 %></td>
+              <td><%= a.title+" ( inactive )" %></td>
+              <td><%= a.created_at.strftime("%d-%m-%Y") %></td>
+              <td><%= a.amount%></td>
             </tr>
           <% else %>
-            <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
-              <td class="col-pdf"><%= i+=1 %></td>
-              <td class="col-pdf"><%= a.title %></td>
-              <td class="col-pdf"><%= a.created_at.strftime("%d-%m-%Y") %></td>
-              <td class="col-pdf"><%= a.amount%></td>
+            <tr>
+              <td><%= i+=1 %></td>
+              <td><%= a.title %></td>
+              <td><%= a.created_at.strftime("%d-%m-%Y") %></td>
+              <td><%= a.amount%></td>
             </tr>
           <% end %>
           <% total_amount+= a.amount%>
         <% end %>
-        <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
-          <td class="col-pdf" colspan="3"><%= t('grand_total') %></td>
-          <td class="col-pdf" colspan="1"><%= total_amount%></td>
+        <tr>
+          <th align="left" colspan="3">Grand Total</th>
+          <th  align="left" colspan="1"><%= total_amount%></th>
         </tr>
       </table>
     </div>
-  </div>
-</body>
+  </body>
 </html>

@@ -1,57 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
-<body>
-<div align="center">
-<font color="purple"><b><i><h3>Axenic School</h3>
-<h4>Employee Personal Profile</h4></i></b></font>
-</div>
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
 
-<table class="table" align="center" style="width:900px">
-<thead>
-<tr>
-    <th colspan="4">
-    <div id ="student_main_info">
-      <h3 align="left"> <%= @employee.first_name.capitalize %> <%= @employee.middle_name.capitalize %> <%= @employee.last_name.capitalize %>  </h3>
-       <h4 align="left"> Position : <%=   @employee.employee_position.name %> </h4>
-      <h4 align="left"> Department : <%=  @employee.employee_department.name %> </h4>
-      <h4 align="left"> Employee no. : <%= @employee.employee_number %> </h4></div>
-   </th>
-  </tr>
-</thead>
-<tbody>
-<tr><td colspan="4"></td></tr>
-<tr>
-    <td class="col-2" colspan="4"><font color="brown">Employee Personal Details</font></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey"> Date of birth</font> </td><td class="col-2" colspan="3"><%= @employee.date_of_birth%></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Marital Status</font></td><td class="col-2" colspan="3"><%=@employee.marital_status%></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Father name</font></td><td class="col-2" colspan="3"><%=@employee.father_name%></td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Mother Name</font></td><td class="col-2"><%=@employee.mother_name %></td>
-    
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Blood group</font></td><td class="col-2"> <%= @employee.blood_group%> </td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Nationality</font></td><td class="col-2"> <%==@country %> </td>
-</tr>
+      
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
 
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
 
-
-<tr>
-  <td class="col-2" colspan="4"></td>
-</tr>
-</tbody>
-</table>
-</div>
-</body>
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+      <br/><h3><center>Employee Profile</center></h3><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr><th colspan="2" bgcolor="99CCFF" align="left">Employee Details</th></tr>
+        <tr>
+          <td>Name : </td>
+          <td><%= @employee.first_name.capitalize %> <%= @employee.middle_name.capitalize %> <%= @employee.last_name.capitalize %>
+          </td>
+        </tr>
+        <tr>
+          <td>Position : </td>
+          <td><%= @employee.employee_position.name %></td>
+        </tr>
+        <tr>  
+          <td>Department : </td>
+          <td><%=  @employee.employee_department.name %> </td>
+        </tr>
+        <tr>
+          <td>Employee no : </td>
+          <td><%= @employee.employee_number %></td>
+        </tr>
+      </table>
+      <br/><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr><th colspan="2" bgcolor="99CCFF" align="left">Employee Personal Details</th></tr>
+        <tr>
+          <td>Date of Birth : </td>
+          <td><%= @employee.date_of_birth%></td>
+        </tr>
+        <tr>
+          <td>Marital Status : </td>
+          <td><%=@employee.marital_status%></td>
+        </tr>
+        <tr>  
+          <td>Father Name : </td>
+          <td><%=@employee.father_name%></td>
+        </tr>
+        <tr>
+          <td>Mother Name : </td>
+          <td><%=@employee.mother_name %></td>
+        </tr>
+        <tr>
+          <td>Blood Group : </td>
+          <td><%= @employee.blood_group%> </td>
+        </tr>
+        <tr>
+          <td>Nationality : </td>
+          <td> <%=@country %> </td>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>

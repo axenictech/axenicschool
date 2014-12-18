@@ -23,7 +23,7 @@
     
     <div class="form-group">
       <%= t('Select batch') %>
-      <%= select :batch,:id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('fee_category',a,function(response){});",class: "form-control"}%>
+      <%= select :batch,:id, Batch.includes(:course).all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('fee_category',a,function(response){});",class: "form-control"}%>
     </div>
   </div>
 </div>
