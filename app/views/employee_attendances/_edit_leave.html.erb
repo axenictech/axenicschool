@@ -8,21 +8,21 @@
 	<ul class="errors"></ul>
 
 <%= form_for @edit_leave_type,url:{:action=>'update_leave_type'},method: :patch ,remote:true do |c|%>
-  <table class="table" style="width:500px" align="center">
+  <table class="table">
 
     <tr>
       <td><%= c.label :Leave_name%></td>
-      <td><%= c.text_field :name%></td>
+      <td><%= c.text_field :name, class: 'form-control'%></td>
     </tr>
 
     <tr>
       <td><%= c.label :Leave_code%></td>
-      <td><%= c.text_field :code%></td>
+      <td><%= c.text_field :code, class: 'form-control'%></td>
       </tr>
 
        <tr>
       <td><%= c.label :Maximum_leave_count%></td>
-      <td><%= c.text_field :max_leave_count%></td>
+      <td><%= c.text_field :max_leave_count, class: 'form-control'%></td>
       </tr>
        <tr>
             

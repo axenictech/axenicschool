@@ -12,13 +12,8 @@
 
 <%= form_for :edit_privilege ,url:{action:'update_privilege',format: @employee.id} do |f| %>
 <table align="center" class="table table-hover" style="width:100%">
-
-    <tbody>
-    
-   	<tr>
-   			 <td class="col-4"><%= "Set Privilege for "+@employee.first_name%></td>
- 
-   	</tr>
+<tbody>    
+   	<tr><td class="col-4"><%= "Set Privilege for "+@employee.first_name%></td></tr>
      <tr class="tr-head"><td colspan="4"><%=f.submit "Update",class: "btn btn-primary" %></td></tr>
 </tbody>
 </table>

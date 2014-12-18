@@ -33,7 +33,7 @@
    <div class="form-group">
    <div class="col-md-2"><b>Maximum Marks:</b></div>
    <div class="col-md-3"><%=text_field_tag :max_marks,"",{oninput:"var a=$('#max_marks').val();
-  $('.max_set').attr('value',a);", class: "form-control"}%></div>
+  $('.max_set').attr('value',a);", class: "form-control",placeholder: 'Maximum Marks For All'}%></div>
   </div>
   </div><br>
 <div class="row">
@@ -43,9 +43,7 @@
 
    <div class="col-md-3">
    <%= text_field_tag :min_marks,"",
-     {oninput:" var a=$('#min_marks').val();
-    
-  $('.min_set').attr('value',a);",class: "form-control"}%></div>
+     {oninput:" var a=$('#min_marks').val();$('.min_set').attr('value',a);",class: "form-control", placeholder: 'Minimum Marks For All'}%></div>
   </div>
   </div>
 <%end%>
@@ -78,9 +76,9 @@
       <td><%= subject.name %></td>
       <%= exam.hidden_field :subject_id, value: subject.id%>
     <% unless @exam_group.exam_type=="Grades"%>
-      <td ><%= exam.text_field :maximum_marks,class: 'max_set form-control'%>
+      <td ><%= exam.text_field :maximum_marks,class: 'max_set form-control',placeholder: 'Maximum Marks'%>
 </td>
-      <td ><%= exam.text_field :minimum_marks,class: 'min_set form-control'%></td>
+    <td ><%= exam.text_field :minimum_marks,class: 'min_set form-control', placeholder: 'Minimum Marks'%></td>
     <%else%>
     <td></td><td></td>
     <%end%>

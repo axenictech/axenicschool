@@ -65,21 +65,21 @@
         </tr>
       <% end %>
       <%end%>
-      <tr class="tr-blank"></tr>
+      <tr><td colspan="5"><hr></td></tr>
       <% unless @exam_group.exam_type == 'Grades'%>
         <tr class="tr-head">
-          <td>Total marks:</td>
-          <td><%= total_marks_attained %></td>
-          <td><%= total_max_marks %></td>
+          <th>Total marks:</th>
+          <th><%= total_marks_attained %></th>
+          <th><%= total_max_marks %></th>
           <%if @exam_group.exam_type=="Marks and Grades"%>
-          <td>-</td>
+          <th>-</th>
           <%end%>
-          <td><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></td>
+          <th><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></th>
         </tr>
       <%else%>
         <tr class="tr-head">
-          <td>Final Grade:</td>
-          <td>-</td>
+          <th>Final Grade:</th>
+          <th>-</th>
         </tr>
       <% end %>
     </table>

@@ -8,10 +8,9 @@
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
-<br/><br/>
 <div class="row">
   <div class="box col-md-1"></div>
-  <div class="box col-md-4">
+  <div class="box col-md-3">
     <div class="box-inner2">
       <div class="box-header well" data-original-title="">
         <h2><%= link_to 'Create Category',finance_new_master_category_path,remote:true%></h2>
@@ -21,8 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="box col-md-1"></div>
-  <div class="box col-md-4">
+  <div class="box col-md-3">
     <div class="box-inner2">
       <div class="box-header well" data-original-title="">
         <h2><%= link_to 'Create Particular',finance_new_fees_particular_path %>
@@ -33,11 +31,7 @@
       </div>
     </div>
   </div>
-</div>
-<br/><br/>
-<div class="row">
-  <div class="box col-md-1"></div>
-  <div class="box col-md-4">
+  <div class="box col-md-3">
     <div class="box-inner2">
       <div class="box-header well" data-original-title="">
         <h2><%= link_to 'Create Discount','new_fee_discount' %></h2>
@@ -48,17 +42,15 @@
     </div>
   </div>
 </div>
-</br></br>
+</br>
 <div class="row">
   <div class="box col-md-1"></div>
   <div class="box col-md-4">
-    <div class="col-md-12">
       <%= form_for :batch, url:{action:'fees_list'},method: :get,remote:true,html:{id: 'form_batch'} do |f| %>
        <%= f.select :id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},
         {prompt:'Select a batch'},{onchange:"$('#form_batch').submit();",class: "form-control",style:"width:350px"}%>       
       <%end%>
     </div>
-  </div>
 </div>
 <div id="list"></div>
 

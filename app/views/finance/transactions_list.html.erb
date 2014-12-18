@@ -10,6 +10,14 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
+	<div class="col-md-12">
+		<div class="pull-right">
+    	<%= link_to 'Pdf Report',finance_finance_transaction_report_path(start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-primary-link btn-xs"%>
+    	</div>
+	</div>
+</div>
+<hr>
+<div class="row">
   <div class="box col-md-12">
 	  <div class="box-inner">
 	    <div class="box-header well">
@@ -50,12 +58,9 @@
 						</tr>
 		        </tbody>
 		      </table>
-		      <div align="center">
-    				<%= link_to 'Pdf Report',finance_finance_transaction_report_path(start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-success"%>
-    			</div>
 		    <%else%>
-					<center><h5>No transaction found</h5></center>
-				<%end%>
+				<center><h5>No transaction found</h5></center>
+			<%end%>
 	    </div>
 	  </div>
   </div>

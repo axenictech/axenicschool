@@ -12,11 +12,7 @@
 <div class="row">
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
-      data-toggle="dropdown">
-      Profile
-      <span class="caret"></span>
-   </button>
+  <%= link_to 'Profile','#',class: "btn dropdown-toggle btn-primary-link btn-xs", id: "dropdownMenu1", :"data-toggle"=>"dropdown"%>
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
@@ -57,7 +53,7 @@
     
    
 <div id="profile_picture_display">
-          <%= image_tag "default_student.png" %>
+          <%= image_tag "employee.png" %>
               </div>
     
     </div>

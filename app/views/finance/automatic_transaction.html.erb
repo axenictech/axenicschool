@@ -3,15 +3,17 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
     <li><%= link_to 'Finance',finance_index_path %></li>
-    <li>Atomatic Transaction</li>
+    <li>Automatic Transaction</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
-      <%= link_to 'Create atomatic transaction', finance_new_automatic_transaction_path,remote:true , class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Create automatic transaction', finance_new_automatic_transaction_path,remote:true , class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>
-<%=render 'automatic_transaction_details'%>
+<div id="auto_transaction">
+  <%=render 'automatic_transaction_details'%>
+</div>

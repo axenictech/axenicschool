@@ -13,6 +13,7 @@
 		            <th>Sl no</th>
 								<th>Admission no</th>
 								<th>Student Name</th>
+								<th>Action</th>
 							</tr>
 		        </thead>
 		        <tbody>
@@ -22,9 +23,14 @@
 				        <% unless @fee.is_paid? %>
 				          <tr>
 				            <td class="col-3"><%= i+1 %></td>
-										<td class="col-3"><%= s.admission_no%>q</td>
-										<td class="col-3"><%= s.first_name+" "+s.last_name %>q</td>
-										<td class="col-3"><%= link_to 'Pay Fees',finance_pay_fees_defaulters_path(student_id:s.id,collection_id:@collection.id)%>q</td>
+							<td class="col-3"><%= s.admission_no%></td>
+							<td class="col-3"><%= s.first_name+" "+s.last_name %></td>
+							<td class="col-3">
+							<div class="label-primary label label-default">
+              				<i class="glyphicon glyphicon-usd icon-white"></i>
+							<%= link_to 'Pay Fees',finance_pay_fees_defaulters_path(student_id:s.id,collection_id:@collection.id),class: "a-action"%>
+							</div>
+							</td>
 				          </tr>
 				        <%end%>  
 			        <%end%>

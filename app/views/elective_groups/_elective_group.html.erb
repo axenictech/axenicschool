@@ -15,7 +15,7 @@
     <% @elective_groups.each do |elective_group| %>
       <tr>
         <td>
-          <%= elective_group.name %>
+          <%= link_to elective_group.name, elective_groups_elective_subject_path(elective_group) %>
         </td>
         <td class="center">
           <div class="label-success label label-default">

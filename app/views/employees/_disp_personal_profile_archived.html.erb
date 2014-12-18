@@ -45,8 +45,6 @@
 <div class="row">
 <div class="col-md-5"></div>
   <div class="col-md-3">
-
-<%=link_to 'Edit',employees_edit_personal_profile_path(@employee),class: "btn btn-primary"%>&nbsp;&nbsp;
 <%= link_to 'PDF Report',employees_personal_profile_pdf_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %>
 </div>
 </div>
