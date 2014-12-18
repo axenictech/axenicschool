@@ -643,38 +643,6 @@ resources :exams do
     resources :exam_scores
 end
 
-<<<<<<< HEAD
-
-resources :online_exam_groups
-
-resources :exam_reports do
-	collection do
-		get :student_ranking_per_subject
-		get :generate_ranking_report
-		get :rank_report_batch
-		get :student_ranking_per_batch
-		get :generate_student_ranking_report
-		get :batch_wise_ranking_report
-		get :student_ranking_per_course
-		get :generate_student_ranking_report2
-		get :course_wise_ranking_report
-		get :student_ranking_per_school
-		get :school_wise_ranking_report
-		get :student_ranking_per_attendance
-		get :attendance_wise_ranking_report
-		get :view_transcripts
-		get :generate_view_transcripts
-		get :students_transcripts_report
-	end	
-	member do
-		get :subject_wise_ranking_report
-
-	end
-end
-
-
-
-=======
 resources :online_exam_groups
 
 resources :exam_reports do
@@ -701,7 +669,7 @@ resources :exam_reports do
     get :consolidated_archived_report
   end
 end
->>>>>>> cadaefc20c6d0045c8bbd4df9b07005f9ae2f1e7
+
 
 resources :courses do
   resources :exam_setting
