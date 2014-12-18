@@ -180,22 +180,22 @@ post 'exam_setting/createrank'
 get 'exam_setting/:course_id/editRank/:id',to:'exam_setting#editRank',as:'course_ranking_level'
 patch 'exam_setting/updateRank'
 delete 'exam_setting/:id/destroyRank', to:'exam_setting#destroyRank', as:'exam_setting_destroyRank'
-get 'exam_groups/select'
+# get 'exam_groups/select'
 patch 'exam_groups/:id/exam_group_create',to: 'exam_groups#exam_group_create',as: 'exam_groups_exam_group_create'
-get 'exam_groups/:id/exams', to:'exam_groups#exams', as:'exam_groups_exams'
-get 'exam_groups/connect_exam'
+# get 'exam_groups/:id/exams', to:'exam_groups#exams', as:'exam_groups_exams'
+# get 'exam_groups/connect_exam'
 get 'exam_groups/assign_all'
 get 'exam_groups/remove_all'
 get 'exam_groups/update_connect_exam'
-get 'exam_groups/publish_exam'
-get 'exam_groups/publish_result'
-get 'exam_groups/previous_exam_data'
+# get 'exam_groups/publish_exam'
+# get 'exam_groups/publish_result'
+# get 'exam_groups/previous_exam_data'
 get 'exam_groups/previous_exam'
 get 'exam_groups/previous_exam_group'
 get 'exam_groups/previous_exam_details'
 get 'exam_groups/previous_exam_scores'
 patch 'exam_groups/update_exam_score'
-get 'exams/:id/exam_score', to:'exams#exam_score', as:'exam_exam_score'
+# get 'exams/:id/exam_score', to:'exams#exam_score', as:'exam_exam_score'
 patch 'exams/update_exam_score'
 get 'online_exams/assign_all'
 get 'online_exams/remove_all'
@@ -567,13 +567,27 @@ end
 
 resources :exam_setting
 resources :exam_groups do
+	collection do 
+		get :select
+		get :previous_exam_data
+		get :publish_exam
+		get :connect_exam
+		get :publish_result
+	end
+	member do
+		get :exams
+
+	end
   resources :exams 
 end
 resources :exams do
+	member do 
+		get :exam_score
+	end
     resources :exam_scores
 end
 
-resources :online_exam_groups
+resources :online_exam_groups 
 resources :exam_reports
 
 resources :courses do

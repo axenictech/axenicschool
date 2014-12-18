@@ -4,7 +4,7 @@
     <li><%= link_to 'Examination','/exams'%></li>
     <li><%= link_to 'Exam Management','/exam_groups'%> </li>
     <li><%= link_to 'Exam Group', exam_group_path(@exam.exam_group.batch)%> </li>
-    <li><%= link_to 'Exam',exam_groups_exams_path(@exam.exam_group.id)%></li>
+    <li><%= link_to 'Exam',exams_exam_group_path(@exam.exam_group.id)%></li>
     <li>Exam Score</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
@@ -103,7 +103,7 @@
  <tr class="tr-head"><td></td>
  <td>
 <%= f.submit 'Submit', class: "btn btn-primary"%>
-<%= link_to 'Finish',exam_groups_exams_path(@exam.exam_group), class: "btn btn-primary"%></td>
+<%= link_to 'Finish',exams_exam_group_path(@exam.exam_group), class: "btn btn-primary"%></td>
 <td></td><td></td>
 </tr>
 <%end%>

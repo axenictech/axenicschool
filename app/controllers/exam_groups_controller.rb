@@ -125,7 +125,7 @@ class ExamGroupsController < ApplicationController
     else
       flash[:notice_connect] = 'Please select exam group'
     end
-    redirect_to exam_groups_connect_exam_path(@batch)
+    redirect_to connect_exam_exam_groups_path(@batch)
   end
 
   def publish_exam

@@ -4,6 +4,7 @@ class WeekdaysController < ApplicationController
     @day = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
     @days = %w(0 1 2 3 4 5 6)
     authorize! :create, @weekday
+    
   end
 
   def create
