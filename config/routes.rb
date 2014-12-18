@@ -127,26 +127,7 @@ get 'exam_reports/:batch_id/student_report/:student_id',
                     to: 'exam_reports#student_report',as: 'exam_reports_student_report'
 get 'exam_reports/:exam_group_id/consolidated_report',to: 'exam_reports#consolidated_report',as: 'exam_reports_consolidated_report'
 <<<<<<< HEAD
-get 'exam_reports/:batch_id/consolidated_archived_report',
-                    to: 'exam_reports#consolidated_archived_report',as: 'exam_reports_consolidated_archived_report'
-get 'exam_reports/archived_student_report'
-get 'exam_reports/select_course'
-get 'exam_reports/generate_archived_report'
-get 'exam_reports/exam_group_wise_report'
-#get 'exam_reports/student_ranking_per_subject'
-#get 'exam_reports/rank_report_batch'
-#get 'exam_reports/generate_ranking_report'
-#get 'exam_reports/student_ranking_per_batch'
-#get 'exam_reports/generate_student_ranking_report'
-#get 'exam_reports/student_ranking_per_course'
-#get 'exam_reports/generate_student_ranking_report2'
-#get 'exam_reports/student_ranking_per_school'
-#get 'exam_reports/student_ranking_per_attendance'
-get 'exam_reports/generate_student_ranking_report3'
-#get 'exam_reports/view_transcripts'
-#get 'exam_reports/generate_view_transcripts'
-get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
-=======
+
 # get 'exam_reports/:batch_id/consolidated_archived_report',
                     # to: 'exam_reports#consolidated_archived_report',as: 'exam_reports_consolidated_archived_report'
 # get 'exam_reports/archived_student_report'
@@ -166,7 +147,7 @@ get 'exam_reports/generate_student_ranking_report3'
 get 'exam_reports/view_transcripts'
 get 'exam_reports/generate_view_transcripts'
 # get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
->>>>>>> cadaefc20c6d0045c8bbd4df9b07005f9ae2f1e7
+
 get 'exam_reports/:student_id/student_view_transcripts/',to: 'exam_reports#student_view_transcripts',as: 'exam_reports_student_view_transcripts'
 get 'exam_reports/ranking_level_report'
 get 'exam_reports/select_mode'
@@ -184,16 +165,6 @@ get 'exam_reports/exam_wise_students_report'
 get 'exam_reports/exam_wise_consolidated_report'
 # get 'exam_reports/subject_wise_students_report'
 get 'exam_reports/grouped_exam_students_report'
-<<<<<<< HEAD
-get 'exam_reports/archived_students_exam_report'
-get 'exam_reports/archived_students_consolidated_report'
-#get 'exam_reports/subject_wise_ranking_report'
-#get 'exam_reports/batch_wise_ranking_report'
-#get 'exam_reports/course_wise_ranking_report'
-#get 'exam_reports/school_wise_ranking_report'
-#get 'exam_reports/attendance_wise_ranking_report'
-#get 'exam_reports/students_transcripts_report'
-=======
 # get 'exam_reports/archived_students_exam_report'
 # get 'exam_reports/archived_students_consolidated_report'
 get 'exam_reports/subject_wise_ranking_report'
@@ -202,7 +173,6 @@ get 'exam_reports/course_wise_ranking_report'
 get 'exam_reports/school_wise_ranking_report'
 get 'exam_reports/attendance_wise_ranking_report'
 get 'exam_reports/students_transcripts_report'
->>>>>>> cadaefc20c6d0045c8bbd4df9b07005f9ae2f1e7
 get 'calender/change' 
 get 'calender/event_view'
 
