@@ -40,11 +40,11 @@
 		            <td class="center">
 		              <div class="label-success label label-default">
 		              <i class="glyphicon glyphicon-edit icon-white"></i> 
-		              <%= link_to 'Edit',finance_edit_donation_path(d)%></div>
+		              <%= link_to 'Edit',finance_edit_donation_path(d), class: 'a-action'%></div>
 
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
-		              <%= link_to 'Delete' ,finance_delete_donation_path(d),method: :delete, data:{confirm:"Are You sure to delete donor '#{d.donor}'?"}%></td>	</div>
+		              <%= link_to 'Delete' ,finance_delete_donation_path(d),method: :delete, data:{confirm:"Are You sure to delete donor '#{d.donor}'?"}, class: 'a-action'%></td>	</div>
 		            </td>
 		          </tr>
 		        <% end %>

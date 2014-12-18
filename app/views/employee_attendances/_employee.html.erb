@@ -1,22 +1,31 @@
 
 <br/>
-
 <div class="row">
   <div class="box-inner" style="width: 150%;">
     <div class="box-header well">
-<h2>
-<div align="center">
-
-    <%= link_to "◄",employee_attendances_display_path(@deparment.id,(@today-1.month),),remote:true %>
- 
-       <%= @today.strftime("%B %Y") %> 
-  
-    <%= link_to "►",employee_attendances_display_path(@deparment.id,(@today+1.month)),remote:true %>
-   </div>
-</h2>
-</div>
+      <h2>Employee Attendance</h2>
+    </div>
 <div class="box-content">
-<table class="table table-bordered">
+<table class="fc-header" style="width:100%">
+      <tbody>
+        <tr>
+          <td class="fc-header-left">
+            <%= link_to "◄ prev", employee_attendances_display_path(@deparment.id,(@today-1.month)),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
+            <%= link_to "► next", employee_attendances_display_path(@deparment.id,(@today+1.month)),remote:true , class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
+            <span class="fc-header-space"></span>
+          </td>
+          <td class="fc-header-center">
+            <span class="fc-header-title"><h2><%=@today.strftime("%B %Y") %></h2></span>
+          </td>
+          <td class="fc-header-right">
+            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">month view</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+ <div class="fc-content" style="position: relative;">
+      <div class="fc-view fc-view-month fc-grid" style="position:relative">
+<table class="table table-bordered" class="fc-border-separate" cellspacing="0">
 <thead>
   <tr>
     <th><%= t('name') %></th>
@@ -38,23 +47,25 @@
       <% (@start_date..@end_date).each do |date| %>
         <% @absent = EmployeeAttendance.find_by_employee_id_and_attendance_date(employee.id, date) %>
       <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
-        <td style="background-color:lightgrey" id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark active"></td>
+        <td style="background-color:rgb(248, 247, 247)" id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark active">
           <% else %>
         <td id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark">
             <% end %>
+        <div align="center">       
           <% unless @absent.nil? %>
-       
             <%= link_to 'X',employee_attendances_edit_attendance_path(@absent),remote:true%>
-
           <% else %>
-                   <%= link_to '.',employee_attendances_new_attendance_path( 
+            <%= link_to '-',employee_attendances_new_attendance_path( 
             employee.id,date), remote:true %>
           <% end %>
+        </div>
         </td>
       <% end %>
     </tr>
 <% end %>
 </table>
+</div>
+</div>
 </div>
 </div>
 </div>

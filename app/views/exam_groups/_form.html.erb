@@ -5,8 +5,8 @@
 <%= form_for [@batch,@exam_group],url: {action: 'create',format: @batch.id} , remote: true do |f|%>
 
   <div class="form-group">
-           <b>Name:</b>
-           <%=f.text_field :name ,style: "width: 250px", class: "form-control", required: true%>
+           <b>Exam Group Name:</b>
+           <%=f.text_field :name ,style: "width: 250px", class: "form-control",placeholder: 'Exam Group Name',required: true%>
         </div>
 
          <div class="form-group">

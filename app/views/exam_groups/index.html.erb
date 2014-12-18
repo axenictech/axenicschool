@@ -4,18 +4,17 @@
     <li><%= link_to 'Examination','/exams'%></li>
     <li>Exam Management </li>
   </ul>
-</div><div id="flash"><%= render 'layouts/messages'%></div>
-
+</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
-      <%= link_to 'Previous Batch Exams', exam_groups_previous_exam_data_path, class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Previous Batch Exams', previous_exam_data_exam_groups_path, class: "btn btn-primary-link btn-xs" %>
       
     </div>
   </div>
 </div>
 <hr>
-
 
 <div class="row">
   <div class="col-md-1"></div>
@@ -26,12 +25,10 @@
 
   <%= f.select :id, Course.all.collect {|b| [b.course_name+" "+b.section_name,b.id]}, {prompt:true},{onchange:"$('#exam_form').submit();",class: "form-control",style: "width:300px"}%>
 
-<% end %>
+  <% end %>
+  </div>
 </div>
-</div>
-
-
-<br /><br/>
+<br/><br/>
  
 <div class="row">
   <div class="col-md-1"></div>

@@ -1,25 +1,29 @@
 class ExamReportsController < ApplicationController
   def exam_wise_report
 
-  	@batches=Batch.all
+
+  	@batches=Batch.includes(:course).all
  	  @exam_groups=Batch.first.exam_groups.all if Batch.first
 
-    @batches = Batch.all
-    @exam_groups = Batch.first.exam_groups.all
+    @batches=Batch.includes(:course).all
 
+    @exam_groups = Batch.first.exam_groups.all
+    authorize! :read, @exam_groups.first
   end
 
   def select
     @course = Course.find(params[:exam][:course_id])
     @batches = @course.batches.all
+    authorize! :read, ExamGroup
   end
 
   def select_batch
     @batch = Batch.find(params[:batch_select][:id])
     @exam_groups = @batch.exam_groups.all
+    authorize! :read, @exam_groups.first
   end
 
-  def generate_exam_report
+  def generate_exam_report 
     if request.get?
       if params[:exam_group_select][:id].present?
         @exam_group = ExamGroup.find(params[:exam_group_select][:id])
@@ -27,11 +31,12 @@ class ExamReportsController < ApplicationController
         @student = @batch.students.last
       else
         flash[:notice_exam] = 'Please select exam group'
-        @batches = Batch.all
+        @batches=Batch.includes(:course).all
         @exam_groups = Batch.first.exam_groups.all
         render 'exam_wise_report'
       end
     end
+    authorize! :read, @exam_group
   end
 
   def exam_wise_students_report
@@ -52,27 +57,36 @@ class ExamReportsController < ApplicationController
   def student_exam_report
     @exam_group = ExamGroup.find(params[:exam_group_id])
     @student = Student.find(params[:student_id])
+    authorize! :read, @exam_group
   end
 
   def consolidated_report
     @exam_group = ExamGroup.find(params[:exam_group_id])
     @batch = @exam_group.batch
+    authorize! :read, @exam_group
   end
 
   def subject_wise_report
+<<<<<<< HEAD
 
-    @batches=Batch.all
+   @batches=Batch.includes(:course).all
     @subjects=Batch.first.subjects.all if Batch.first
 
+    @batches=Batch.includes(:course).all
+=======
+    @batches=Batch.all
+    @subjects=Batch.first.subjects.all if Batch.first
     @batches = Batch.all
+>>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
     @subjects = Batch.first.subjects.all
-
+    authorize! :read, ExamGroup
   end
 
   def choose_batch
     @batch = Batch.find(params[:batch_choose][:id])
     @subjects = @batch.subjects.all
- end
+    authorize! :read, ExamGroup
+  end
 
   def generate_subject_report
     if request.get?
@@ -83,11 +97,12 @@ class ExamReportsController < ApplicationController
         @students = @batch.students.all
       else
         flash[:notice_s_r] = 'Please select subject'
-        @batches = Batch.all
+        @batches=Batch.includes(:course).all
         @subjects = Batch.first.subjects.all
         render 'subject_wise_report'
       end
     end
+    authorize! :read, @exam_groups.first
   end
 
   def subject_wise_students_report
@@ -100,7 +115,12 @@ class ExamReportsController < ApplicationController
   end
 
   def grouped_exam_report
+<<<<<<< HEAD
+    @batches=Batch.includes(:course).all
+=======
     @batches = Batch.all
+    authorize! :read, ExamGroup
+>>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
   end
 
   def generate_grouped_report
@@ -113,10 +133,11 @@ class ExamReportsController < ApplicationController
         @subjects = @batch.subjects.all
       else
         flash[:notice_b] = 'Please select batch'
-        @batches = Batch.all
+        @batches=Batch.includes(:course).all
         render 'grouped_exam_report'
       end
     end
+    authorize! :read, ExamGroup
   end
 
   def grouped_exam_students_report
@@ -133,21 +154,21 @@ class ExamReportsController < ApplicationController
     @exam_groups = @batch.exam_groups.where(result_published: true)
     @student = Student.find(params[:student_id])
     @subjects = @batch.subjects.all
+    authorize! :read, @exam_groups.first
   end
 
   def archived_student_report
-
     @courses=Course.all
     @batches=Course.first.batches.all if Course.first
-
     @courses = Course.all
     @batches = Course.first.batches.all
-
+    authorize! :read, ExamGroup
   end
 
   def select_course
     @course = Course.find(params[:course_select][:id])
     @batches = @course.batches.all
+    authorize! :read, ExamGroup
   end
 
   def generate_archived_report
@@ -165,6 +186,7 @@ class ExamReportsController < ApplicationController
         render 'archived_student_report'
       end
     end
+    authorize! :read, ExamGroup
   end
 
   def archived_students_exam_report
@@ -181,16 +203,19 @@ class ExamReportsController < ApplicationController
     @batch = @student.batch
     @exam_groups = @batch.exam_groups.where(result_published: true)
     @subjects = @batch.subjects.all
+    authorize! :read, @exam_groups.first
   end
 
   def consolidated_archived_report
     @batch = Batch.find(params[:batch_id])
     @exam_groups = @batch.exam_groups.all
+    authorize! :read, @exam_groups.first
   end
 
   def exam_group_wise_report
     @exam_group = ExamGroup.find(params[:exam_group_option][:id])
     @batch = @exam_group.batch
+    authorize! :read, @exam_group
   end
 
   def archived_students_consolidated_report
@@ -201,18 +226,25 @@ class ExamReportsController < ApplicationController
   end
 
   def student_ranking_per_subject
+<<<<<<< HEAD
 
-    @batches=Batch.all
+   @batches=Batch.includes(:course).all
     @subjects=Batch.last.subjects.all if Batch.last
 
+    @batches=Batch.includes(:course).all
+=======
+    @batches=Batch.all
+    @subjects=Batch.last.subjects.all if Batch.last
     @batches = Batch.all
+>>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
     @subjects = Batch.last.subjects.all
-
+    authorize! :read, ExamGroup
   end
 
   def rank_report_batch
     @batch = Batch.find(params[:rank_report][:batch_id])
     @subjects = @batch.subjects.all
+    authorize! :read, ExamGroup
   end
 
   def generate_ranking_report
@@ -224,11 +256,12 @@ class ExamReportsController < ApplicationController
         @exam_groups = @batch.exam_groups.where(result_published: true)
       else
         flash[:notice_rank_sub] = 'Please select subject'
-        @batches = Batch.all
+        @batches=Batch.includes(:course).all
         @subjects = Batch.last.subjects.all
         render 'student_ranking_per_subject'
       end
     end
+    authorize! :read, ExamGroup
   end
 
   def subject_wise_ranking_report
@@ -241,7 +274,12 @@ class ExamReportsController < ApplicationController
   end
 
   def student_ranking_per_batch
+<<<<<<< HEAD
+    @batches=Batch.includes(:course).all
+=======
     @batches = Batch.all
+    authorize! :read, ExamGroup
+>>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
   end
 
   def generate_student_ranking_report
@@ -253,10 +291,11 @@ class ExamReportsController < ApplicationController
         @subjects = @batch.subjects.all
       else
         flash[:notice_rank_batch] = 'Please select batch'
-        @batches = Batch.all
+        @batches=Batch.includes(:course).all
         render 'student_ranking_per_batch'
         end
      end
+     authorize! :read, ExamGroup
   end
 
   def batch_wise_ranking_report
@@ -270,6 +309,7 @@ class ExamReportsController < ApplicationController
 
   def student_ranking_per_course
     @courses = Course.all
+    authorize! :read, ExamGroup
   end
 
   def generate_student_ranking_report2
@@ -283,6 +323,7 @@ class ExamReportsController < ApplicationController
         render 'student_ranking_per_course'
         end
     end
+    authorize! :read, ExamGroup
   end
 
   def course_wise_ranking_report
@@ -296,6 +337,7 @@ class ExamReportsController < ApplicationController
     @courses = Course.all
     @students = Student.all
     @exam_groups = ExamGroup.where(result_published: true)
+    authorize! :read, @exam_groups.first
   end
 
   def school_wise_ranking_report
@@ -307,11 +349,16 @@ class ExamReportsController < ApplicationController
   end
 
   def student_ranking_per_attendance
+<<<<<<< HEAD
+    @batches=Batch.includes(:course).all
+=======
     @batches = Batch.all
+    authorize! :read, ExamGroup
+>>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
   end
 
   def generate_student_ranking_report3
-    @batches = Batch.all
+    @batches=Batch.includes(:course).all
     if request.get?
       if params[:rank_report][:batch_id].present?
         if params[:rank_report][:start_date].present?
@@ -324,7 +371,7 @@ class ExamReportsController < ApplicationController
                   @end_date = params[:rank_report][:end_date].to_date
                   @students = @batch.students.all
                   @weekdays = @batch.weekdays.all
-                  @batch_events = @batch.batch_events.all
+                  @batch_events = @batch.batch_events.includes(:event).all
                 else
                   flash[:notice_rank_att] = 'End date cannot be less than start date'
                   render 'student_ranking_per_attendance'
@@ -350,6 +397,7 @@ class ExamReportsController < ApplicationController
         render 'student_ranking_per_attendance'
         end
     end
+    authorize! :read, ExamGroup
   end
 
   def attendance_wise_ranking_report
@@ -374,6 +422,7 @@ class ExamReportsController < ApplicationController
         render 'view_transcripts'
       end
     end
+    authorize! :read, @exam_groups.first
   end
 
   def student_view_transcripts
@@ -381,6 +430,7 @@ class ExamReportsController < ApplicationController
     @batch = @student.batch
     @exam_groups = @batch.exam_groups.where(result_published: true)
     @students = @batch.students.all
+    authorize! :read, @exam_groups.first
   end
 
   def students_transcripts_report
@@ -394,7 +444,12 @@ class ExamReportsController < ApplicationController
   def select_mode
     @mode = params[:mode][:wise]
     @courses = Course.all
+<<<<<<< HEAD
+    @batches=Batch.includes(:course).all
+=======
     @batches = Batch.all
+    authorize! :read, ExamGroup
+>>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
   end
 
   def select_rank
@@ -409,6 +464,7 @@ class ExamReportsController < ApplicationController
       @batch = Batch.find(params[:mode2][:id])
       @ranking_levels = @batch.course.ranking_levels.all
     end
+    authorize! :read, ExamGroup
   end
 
   def select_rank_mode
@@ -416,6 +472,7 @@ class ExamReportsController < ApplicationController
     @rank = params[:ranking_report][:rank]
     @subjects = @batch.subjects.all
     @ranking_level = RankingLevel.find(params[:ranking_report][:ranking_level_id])
+    authorize! :read, ExamGroup
   end
 
   def generate_ranking_level_report
@@ -429,6 +486,7 @@ class ExamReportsController < ApplicationController
     @ranking_level = RankingLevel.find(params[:mode3][:ranking_level_id]) if params[:mode3]
     @mode = 'course'  if params[:mode3]
     @mode = 'batch'   if params[:mode4]
+    authorize! :read, ExamGroup
   end
 
   def combined_details
@@ -436,30 +494,35 @@ class ExamReportsController < ApplicationController
     @course = @batch.course
     @class_designations = @course.class_designations.all
     @ranking_levels = @course.ranking_levels.all
+    authorize! :read, ExamGroup
   end
 
   def all
     @batch = Batch.find(params[:format])
     @course = @batch.course
     @class_designations = @course.class_designations.all
+    authorize! :read, ExamGroup
   end
 
   def none
     @batch = Batch.find(params[:format])
     @course = @batch.course
     @class_designations = @course.class_designations.all
+    authorize! :read, ExamGroup
   end
 
   def all1
     @batch = Batch.find(params[:format])
     @course = @batch.course
     @ranking_levels = @course.ranking_levels.all
+    authorize! :read, ExamGroup
   end
 
   def none1
     @batch = Batch.find(params[:format])
     @course = @batch.course
     @ranking_levels = @course.ranking_levels.all
+    authorize! :read, ExamGroup
   end
 
   def generate_combined_report
@@ -481,5 +544,6 @@ class ExamReportsController < ApplicationController
         @ranking_levels << rl
       end
     end
+    authorize! :read, ExamGroup
   end
 end

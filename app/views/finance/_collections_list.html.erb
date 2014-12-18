@@ -27,11 +27,11 @@
 								<td class="center">
 		              <div class="label-success label label-default">
 		              <i class="glyphicon glyphicon-edit icon-white"></i> 
-		              <%= link_to 'Edit',finance_edit_fee_collection_path(@batch,c),remote:true %></div>
+		              <%= link_to 'Edit',finance_edit_fee_collection_path(@batch,c),remote:true, class: 'a-action'%></div>
 
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
-		              <%= link_to 'Delete' ,finance_delete_fee_collection_path(@batch,c),method: :delete, data:{confirm:"Are you sure to delete '#{c.name}'?"},remote:true%></div>
+		              <%= link_to 'Delete' ,finance_delete_fee_collection_path(@batch,c),method: :delete, data:{confirm:"Are you sure to delete '#{c.name}'?"},remote:true, class: 'a-action'%></div>
 		            </td>
 		          </tr>
 		        <% end %>

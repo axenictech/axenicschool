@@ -21,8 +21,8 @@
             <td><%=f.text_field :amount ,:style =>"width: 250px", class: "form-control"%></td>
           </tr>
           <tr>
-            <td class="col-2"><%= f.label :is_solved?, class: "control-label"%></td>
-            <td class="col-2"><%=f.check_box :is_solved%></td>
+            <td></td>
+            <td class="col-2"><%=f.check_box :is_solved%>&nbsp;&nbsp;<%= f.label :is_solved?, class: "control-label"%></td>
           </tr>
           <tr>
             <td colspan="2"><%= f.submit 'Save', class: "btn btn-primary"%></td>

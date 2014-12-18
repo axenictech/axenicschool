@@ -10,17 +10,17 @@
 		    <div class="row">
 					<div class="col-md-1"></div>
 			    <div class="col-md-3"><%= f.label :name %></div>
-			    <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
+			    <div class="col-md-7"><%= f.text_field :name,class: "form-control"%></div>
 			  </div><br/>
 			  <div class="row">
 			    <div class="col-md-1"></div>
 			    <div class="col-md-3"><%= f.label :description %></div>
-			    <div class="col-md-3"><%= f.text_field :description,:style =>"width: 250px",class: "form-control"%></div>
+			    <div class="col-md-7"><%= f.text_field :description,class: "form-control"%></div>
 			  </div><br/>
 			  <div class="row">
 			    <div class="col-md-1"></div>
 			    <div class="col-md-3"><%= f.label :batch %></div>
-			    <div class="col-md-3"><%= text_field_tag :batch,@batch.course.course_name+" "+@batch.name,readonly:true,:style =>"width: 250px",class: "form-control"%></div>
+			    <div class="col-md-7"><%= text_field_tag :batch,@batch.course.course_name+" "+@batch.name,readonly:true,class: "form-control"%></div>
 			  </div><br/>
 		    <div class="row">
 		      <div class="col-md-2"></div>

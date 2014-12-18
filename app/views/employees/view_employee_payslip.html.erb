@@ -9,8 +9,6 @@
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
-<br/>
-
 <div class="row">
   <div class="col-md-12">
   <div class="pull-right">
@@ -23,24 +21,22 @@
 
 <% unless flash[:notice].nil? %> <%end%>
   <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-7">
+  <div class="col-md-12">
 <div class="box-inner">
-
+    <div class="box-header">
     <%if @payslip.nil?%>
         <h3>No salary slip found for this employee</h3>
     <%else%>   
-	  <%@emp=Employee.find(@payslip.employee_id)%>
-	  <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:'true').pluck(:is_approved)%>
-	  <%if approved[0]==true%>
-	  		<%status="(Approved)"%>
-	  <%else%>
-	  		<%status="(Pending)"%>
-	  <%end%>		
-    <div class="box-header">
-      <h2><%=@emp.first_name%>-
+    <%@emp=Employee.find(@payslip.employee_id)%>
+    <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:'true').pluck(:is_approved)%>
+    <%if approved[0]==true%>
+        <%status="(Approved)"%>
+    <%else%>
+        <%status="(Pending)"%>
+    <%end%>   
+      <h2>&nbsp;&nbsp;&nbsp;&nbsp;<%=@emp.first_name+" "+@emp.last_name%> -
       <%="Payslip generated on "+ @payslip.salary_date.to_s+" status "+status%></h2>
-      </div>
+    </div>
       <div class="box-content">
       <fieldset>
       <h4>
@@ -87,18 +83,16 @@
             <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id:d.id).pluck(:amount)%>
             
       		<tr>
-      			<th><%=d.name%></th>
-            <th></th>
-      			<th><%=val[0]%></th>
+      			<td><%=d.name%></td>
+      			<td><%=val[0]%></td>
       			  <%tot+=val[0].to_f%>
       		</tr>
    		
    			<%end%>
 
       	<tr>
-		      	<th><%="Total"%></th>
-            <th></th>
-		      	<th><%='%.02f'%tot%></th>
+		      	<td><%="Total"%></td>
+		      	<td><%='%.02f'%tot%></td>
        </tr>   
       	</table>
         </div>

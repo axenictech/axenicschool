@@ -3,11 +3,18 @@
     <li><%= link_to 'Home',home_dashboard_path %></li>
     <li><%= link_to 'Finance',finance_index_path %></li>
     <li><%= link_to 'Employee Payslip',finance_payslip_path %></li>
-    <li><%= link_to 'Select payslip details',finance_view_monthly_payslip_path %></li>
+    <li><%= link_to 'Payslip details',finance_view_monthly_payslip_path %></li>
     <li>Employee payslip</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right"><%= link_to 'Pdf Report',finance_employee_payslip_path(id:@employee.id,date:@date,format:"pdf"),class: "btn btn-primary-link btn-xs"%>
+    </div>
+  </div>
+</div>
+<hr>
 <div class="row">
   <div class="box col-md-12">
     <div class="box-inner">
@@ -18,20 +25,11 @@
       <div class="box-content">
         <div id="page-yield">
   <div id="box" align="center">
-    <table align="center" class="table table-hover" style="width:90%">
-       <!--  --> 
-      <tr class="tr-head">
-        <th colspan="2"><%=  @employee.first_name+" "+@employee.last_name%></th>
-      </tr>
+    <table align="center" class="table table-striped" style="width:90%">
 
       <tr class="tr-head">
-        <th colspan="2"><%= t('payslip_generated_on') %><%= @salary.salary_date%><% %><span class="themed_text">(<%= t('status') %>: <%=@salary.is_approved? ? "Approved" : "Pending"%>)</span></th>
-      </tr>
-      <!--  --> 
-
-
-
-      <!--  --> 
+        <th colspan="2"><%= t('payslip_generated_on') %> <%= @salary.salary_date%><span class="themed_text"> (<%= t('status') %>: <%=@salary.is_approved? ? "Approved" : "Pending"%>)</span></th>
+      </tr> 
       <tr><td colspan="2"></td></tr>
       <tr class="tr-head"><th colspan="2"><%= t('earnings') %></th></tr>
         <% @structures.each do |mp| %>
@@ -54,11 +52,6 @@
             <% end %>
           <% end %>
         <% end %>
-        <!--  --> 
-
-
-
-        <!--  --> 
       <tr><td colspan="2"></td></tr>
       <tr class="tr-head"><th colspan="2"><%= t('deductions') %></th></tr>
         <% @structures.each do |mp| %>
@@ -81,14 +74,6 @@
             <% end %>
           <% end %>
         <% end %>
-        <!--  --> 
-
-
-
-
-
-
-        <!--  --> 
       <tr><td colspan="2"></td></tr>
       <tr class="tr-head"><th colspan="2"><%= t('total') %></th></tr>
       <tr>
@@ -99,19 +84,10 @@
         <td class="col-3">Remark</td>
         <td class="col-3"><%=@salary.is_approved? ? "Approved" : "Pending"%></td>
       </tr>
-      <!--  --> 
-
-
-
-
-      <!--  --> 
       <tr><td colspan="2"></td></tr>
     </table>
-  <br/>
-  <div align="center"><%= link_to 'Pdf Report',finance_employee_payslip_path(id:@employee.id,date:@date,format:"pdf"),class: "btn btn-success"%></div>
-  </div>
 </div>
       </div>
     </div>
   </div>
-</div>
+</div></div>

@@ -34,7 +34,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="col-sm-4">
         <div class="form-group">
          <%= t('Admission Number')%><span class="necessary-field">*</span>
-          <%=f.text_field :admission_no, :value=> @student.admission_no , class: "form-control"%>
+          <%=f.text_field :admission_no, :value=> @student.admission_no , readonly: true, class: "form-control"%>
         
         </div>
         </div>
@@ -70,7 +70,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
        <div class="form-group">
        <%= t('Course and Batch')%><span class="necessary-field">*</span>
     
-      <%=f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}, {class: "form-control"}%>
+      <%=f.select :batch_id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}, {class: "form-control"}%>
       
       </div>
       </div>

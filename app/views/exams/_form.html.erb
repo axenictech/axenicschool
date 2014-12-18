@@ -5,7 +5,7 @@
 <div class="col-md-6">
 <div class="box-inner">
 <div class="box-header well">
-   <h2> Exam Create</h2>
+   <h2> Exam</h2>
  </div>
 <%= form_for [@exam_group,@exam] do |f| %>
 <fieldset>
@@ -44,17 +44,17 @@
 <% unless @exam_group.exam_type=="Grades"%>
 <div class="form-group">
 <b>Maximum Marks:</b>
-<%=f.text_field :maximum_marks ,style: "width: 250px", class: "form-control", required:true%>
+<%=f.text_field :maximum_marks ,style: "width: 250px", class: "form-control", required:true, placeholder: 'Maximum Marks'%>
 </div>
 
 <div class="form-group">
 <b>Minimum Marks:</b>
-<%=f.text_field :minimum_marks ,style: "width: 250px", class: "form-control", required:true%>
+<%=f.text_field :minimum_marks ,style: "width: 250px", class: "form-control", required:true, placeholder: 'Minimum Marks'%>
 </div>
 
 <%end%>
 <div class="form-group">
-<%= f.submit ' create', class: "btn btn-primary" %>
+<%= f.submit ' Submit', class: "btn btn-primary" %>
 </div>
 </div>
 </div>

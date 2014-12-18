@@ -30,7 +30,7 @@
                 <h4><%= t('Errors prohibited to being update:')%></h4>
                 <ul>
                   <% @discount.errors.full_messages.each do |msg| %>
-                    <li style="width:500px" align="left"><%= msg%></li>
+                    <li><%= msg%></li>
                   <% end %>
                 </ul> 
               </div>
@@ -41,18 +41,18 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <%= t('Discount Type')%><span class="necessary-field">*</span>
-                  <%= f.select :type,['Batch','Student Category','Student'],{prompt:true},{onchange:"var a={type:$('#fee_discount_type').val()};$.get('discount_type',a,function(response){});",:style =>"width: 250px",class: "form-control"}%>
+                  <%= f.select :type,['Batch','Student Category','Student'],{prompt:true},{onchange:"var a={type:$('#fee_discount_type').val()};$.get('discount_type',a,function(response){});",class: "form-control"}%>
                 </div>
 
                 <div class="form-group">
                   <%= t('Name')%>
                   <span class="necessary-field">*</span>
-                  <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+                  <%= f.text_field :name, placeholder: "Name", class: "form-control"%>
                 </div>
 
                 <div class="form-group">
                   <%= t('Finance Fee Category') %> 
-                  <%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#fee_discount_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",:style =>"width: 250px",class: "form-control"}%>
+                  <%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#fee_discount_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",class: "form-control"}%>
                 </div>
 
                 <div class="form-group">

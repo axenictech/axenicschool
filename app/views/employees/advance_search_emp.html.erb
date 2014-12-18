@@ -40,17 +40,16 @@
         <table id="datatable" class="table table-striped table-bordered responsive">
         <thead>
       <tr class="tr-head">
-        <td class="col-1">
+        <th class="col-1">
          Employee Id
-        </td>
-        <td class="col-3">
+        </th>
+        <th class="col-3">
           Employee Name
-        </td>
-        <td class="col-3">
+        </th>
+        <th class="col-3">
          Employee Department
-        </td>
-        <td class="col-3">
-        </td></tr>
+        </th>
+        <th>Action</th></tr>
         </thead>
         <tbody>
          <tr class="tr-blank"></tr>
@@ -60,7 +59,7 @@
             <%= emp.employee_number %>
           </td>
           <td class="col-3">
-            <%= link_to emp.first_name + " " + emp.last_name,employees_profile_path(emp)%>
+            <%= emp.first_name + " " + emp.last_name%>
           </td>
           <td class="col-3">
           <%=  emp.employee_department.name unless emp.employee_department.nil?%>
