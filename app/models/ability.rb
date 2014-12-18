@@ -5,9 +5,11 @@ class Ability
     if user.role == 'Admin'
       can [:read, :create, :update], :all
     elsif user.role == 'Employee'
+        can :read, TimeTable
     else
         can [:read, :update], Student
         can [:read, :update], ArchivedStudent
+        can :read, TimeTable
     end
     # Define abilities for the passed in user here. For example:
     #

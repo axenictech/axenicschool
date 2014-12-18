@@ -3,6 +3,7 @@ class WeekdaysController < ApplicationController
     @weekday = Weekday.new
     @day = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
     @days = %w(0 1 2 3 4 5 6)
+    authorize! :create, @weekday
   end
 
   def create
@@ -31,5 +32,6 @@ class WeekdaysController < ApplicationController
     @day = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
     @days = %w(0 1 2 3 4 5 6)
     @batch = Batch.find(params[:batch][:id])
+    authorize! :read, Weekday
   end
 end

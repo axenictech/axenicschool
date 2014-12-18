@@ -131,18 +131,18 @@ get 'exam_reports/archived_student_report'
 get 'exam_reports/select_course'
 get 'exam_reports/generate_archived_report'
 get 'exam_reports/exam_group_wise_report'
-get 'exam_reports/student_ranking_per_subject'
-get 'exam_reports/rank_report_batch'
-get 'exam_reports/generate_ranking_report'
-get 'exam_reports/student_ranking_per_batch'
-get 'exam_reports/generate_student_ranking_report'
-get 'exam_reports/student_ranking_per_course'
-get 'exam_reports/generate_student_ranking_report2'
-get 'exam_reports/student_ranking_per_school'
-get 'exam_reports/student_ranking_per_attendance'
+#get 'exam_reports/student_ranking_per_subject'
+#get 'exam_reports/rank_report_batch'
+#get 'exam_reports/generate_ranking_report'
+#get 'exam_reports/student_ranking_per_batch'
+#get 'exam_reports/generate_student_ranking_report'
+#get 'exam_reports/student_ranking_per_course'
+#get 'exam_reports/generate_student_ranking_report2'
+#get 'exam_reports/student_ranking_per_school'
+#get 'exam_reports/student_ranking_per_attendance'
 get 'exam_reports/generate_student_ranking_report3'
-get 'exam_reports/view_transcripts'
-get 'exam_reports/generate_view_transcripts'
+#get 'exam_reports/view_transcripts'
+#get 'exam_reports/generate_view_transcripts'
 get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
 get 'exam_reports/:student_id/student_view_transcripts/',to: 'exam_reports#student_view_transcripts',as: 'exam_reports_student_view_transcripts'
 get 'exam_reports/ranking_level_report'
@@ -163,12 +163,12 @@ get 'exam_reports/subject_wise_students_report'
 get 'exam_reports/grouped_exam_students_report'
 get 'exam_reports/archived_students_exam_report'
 get 'exam_reports/archived_students_consolidated_report'
-get 'exam_reports/subject_wise_ranking_report'
-get 'exam_reports/batch_wise_ranking_report'
-get 'exam_reports/course_wise_ranking_report'
-get 'exam_reports/school_wise_ranking_report'
-get 'exam_reports/attendance_wise_ranking_report'
-get 'exam_reports/students_transcripts_report'
+#get 'exam_reports/subject_wise_ranking_report'
+#get 'exam_reports/batch_wise_ranking_report'
+#get 'exam_reports/course_wise_ranking_report'
+#get 'exam_reports/school_wise_ranking_report'
+#get 'exam_reports/attendance_wise_ranking_report'
+#get 'exam_reports/students_transcripts_report'
 get 'calender/change' 
 get 'calender/event_view'
 get 'exam_setting/:course_id/setting',to: 'exam_setting#setting', as: 'course_class_designations'
@@ -574,7 +574,31 @@ resources :exams do
 end
 
 resources :online_exam_groups
-resources :exam_reports
+
+resources :exam_reports do
+	collection do
+		get :student_ranking_per_subject
+		get :generate_ranking_report
+		get :rank_report_batch
+		get :student_ranking_per_batch
+		get :generate_student_ranking_report
+		get :batch_wise_ranking_report
+		get :student_ranking_per_course
+		get :generate_student_ranking_report2
+		get :course_wise_ranking_report
+		get :student_ranking_per_school
+		get :school_wise_ranking_report
+		get :student_ranking_per_attendance
+		get :attendance_wise_ranking_report
+		get :view_transcripts
+		get :generate_view_transcripts
+		get :students_transcripts_report
+	end	
+	member do
+		get :subject_wise_ranking_report
+
+	end
+end
 
 resources :courses do
   resources :exam_setting
