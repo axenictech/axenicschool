@@ -5,7 +5,8 @@
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
-<br/><br/>
+<br/>
+<% if can? :create, Employee%>
 <div class="row">
   <div class="box col-md-1"></div>
   <div class="box col-md-4">
@@ -31,7 +32,7 @@
     </div>
   </div>
 </div>
-<br/><br/><br/>
+<br/><br/>
 <div class="row">
   <div class="box col-md-1"></div>
   <div class="box col-md-4">
@@ -56,9 +57,8 @@
     </div>
   </div>
 </div>
-
-
-<br/><br/><br/>
+<br/><br/>
+<%end%>
 <div class="row">
   <div class="box col-md-1"></div>
   <div class="box col-md-4">
@@ -83,57 +83,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     

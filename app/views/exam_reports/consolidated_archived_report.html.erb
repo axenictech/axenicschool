@@ -25,8 +25,10 @@
 
 
 <div class="row">
-  <div class="col-md-1"></div>
-    <div class="col-md-10">
+
+  
+    <div class="col-md-11">
+
 
 <%= form_for :exam_group_option, :url=>{:action=>'exam_group_wise_report'},html:{id: 'form_exam_group'},remote:true,method: :get do |f| %>
    
@@ -37,10 +39,12 @@
   <% end %>
   </div>
   </div>
-  <br>
+
+  <br><br>
   <div class="row">
-  <div class="col-md-1"></div>
-    <div class="col-md-10">
+  
+    <div class="col-md-12">
+
       <div id="consolidated_report"></div>
   </div>
   </div>

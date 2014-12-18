@@ -9,14 +9,17 @@
 	    <div class="box-content">
 		    <% unless @payslips.empty?%>
 		      <table id="datatable" class="table table-striped table-bordered responsive">
+		       <div class="pull-right"><%= link_to 'Pdf Report',finance_employee_monthly_payslip_path(payslips:@payslips,format: "pdf"),class: "btn btn-success btn-xs"%>
+		      </div><br/><br/>
 		        <thead>
-		          <tr>
+		        <tr>
 		            <th>Sl no.</th>
-								<th>Employee</th>
-								<th>Employee No</th>
-								<th>Net Salary</th>
-								<th>Payslip Status</th>
-		          </tr>
+					<th>Employee</th>
+					<th>Employee No</th>
+					<th>Net Salary</th>
+					<th>Payslip Status</th>
+					<th></th>
+      			</tr>
 		        </thead>
 		        <tbody>
 		        <%employees=1%>
@@ -47,8 +50,6 @@
 						</tr>
 		        </tbody>
 		      </table>
-		      <div align="center"><%= link_to 'Pdf Report',finance_employee_monthly_payslip_path(payslips:@payslips,format: "pdf"),class: "btn btn-success"%>
-		      </div>
 		    <%else%>
 					<center><h5>No payslip details found</h5></center>
 				<%end%>

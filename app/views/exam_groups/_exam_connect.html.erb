@@ -1,4 +1,3 @@
-<h4>
 <table class="table table-striped">
    <thead>
       <th>Exam Group</th>
@@ -16,11 +15,10 @@
 	
 	<td>	<%= exam_group.name%>	</td>
 	
-    <td>	<%= text_field_tag "exam_group[#{exam_group.id}][weightage]",weightage,class: "form-control"%></td>
+    <td>	<%= text_field_tag "exam_group[#{exam_group.id}][weightage]",weightage,class: "form-control",placeholder:"Weightage"%></td>
     <td></td>
     <td><%= check_box_tag "exam_groups[]",exam_group.id,false,class: "exam_check_box" %></td>
     </tr>
     <%end%>
    </tbody>
-    </table>
-    </h4>
+</table>

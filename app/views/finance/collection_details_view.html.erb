@@ -10,15 +10,30 @@
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
-</br></br>
+</br>
 <div id="box">
-    <div><%= t('fee_collection_name') %>&nbsp;&nbsp;<span>:</span><%= @collection.name %></div>
-    <div><%= t('fee_category_name') %>&nbsp;&nbsp;<span>:</span><%= @collection.finance_fee_category.name %></div>
-    <div><%= t('start_date') %>&nbsp;&nbsp;<span>:</span><%= @collection.start_date %></div>
-    <div><%= t('end_date') %>&nbsp;&nbsp;<span>:</span><%= @collection.end_date %></div>
-    <div><%= t('due_date') %>&nbsp;&nbsp;<span>:</span><%= @collection.due_date %></div>
-  </div>
-  </br></br>
+    <div>
+    	<h4><label  class="field-label label label-default" style="margin-right:100px"><%= t('fee_collection_name') %></label>: 
+     	<label class="infolbl themed_text "> <%= @collection.name %></label></h4>
+    </div>
+    <div>
+    	<h4><label  class="field-label label label-default" style="margin-right:110px"><%= t('fee_category_name') %></label>: 
+     	<label class="infolbl themed_text"><%= @collection.finance_fee_category.name %></label></h4>
+    </div>
+    <div>
+    	<h4><label  class="field-label label label-default" style="margin-right:180px"><%= t('start_date') %></label>: 
+     	<label class="infolbl themed_text"><%= @collection.start_date %></label></h4>
+    </div>
+    <div>
+    	<h4><label  class="field-label label label-default" style="margin-right:185px"><%= t('end_date') %></label>: 
+     	<label class="infolbl themed_text"><%= @collection.end_date %></label></h4>
+    </div>
+    <div>
+    	<h4><label  class="field-label label label-default" style="margin-right:185px"><%= t('due_date') %></label>: 
+     	<label class="infolbl themed_text"><%= @collection.due_date %></label></h4>
+    </div>
+ </div>
+  </br>
 <div class="row">
   <div class="box col-md-12">
 	  <div class="box-inner">

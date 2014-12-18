@@ -5,8 +5,8 @@
     <li><%= link_to 'Exam Management','/exam_groups'%></li>
     <li> Exam Group</li>
   </ul>
-</div><div id="flash"><%= render 'layouts/messages'%></div>
-
+</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
@@ -18,61 +18,59 @@
 </div>
 <hr>
 
-
-
-  <div class="bread_crumb">
-    <h4>   <%= link_to 'Course' ,courses_path%> &raquo;
-    <%= link_to @course.course_name,course_path(@course)%>  &raquo;
-    Batch&raquo;
-    <%= link_to @batch.name,batches_display_path(@batch)%>
-    &raquo;
-    Exams
-    </h4>
-  </div>
-  <br/>
 <div class="row">
 <div class="col-md-1"></div>
 <% if @exam_groups.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
-   <div class="col-md-10">
+   <div class="col-md-12">
    <div class="box-inner">
    <div class="box-header well">
    <h2>Exams</h2>
    </div>
    <div class="box-content">
-   <h4>
-<table class="table table-striped">
-        <thead><th>Name</th>
+    <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>Action</th><th></th>
         </thead>
         
       <tbody>
         <% @exam_groups.each do |eg|%>
 
         <tr>
-        <td><%= link_to eg.name ,exams_exam_group_path(eg) %></td>
-        <% unless eg.result_published? %>
-        <td><%= link_to 'Delete',eg,method: :delete,
-        data:{confirm:"Are you sure to delete ExamGroup: #{eg.name}"}%></td>
-        <%else%>
-        <td>delete</td>
-        <%end%>
-        <% if eg.result_published? %>
-        <td class="col-4"><%= 'Result published'%></td>
-        <%else%>
-        <% if eg.is_published? %>
-        <td class="col-4"><%= link_to 'Update exam schedule',publish_exam_exam_groups_path(eg), remote:true %>
-        </td>
-          <%else%>
-        <td class="col-4"><%= link_to 'Publish exam schedule',publish_exam_exam_groups_path(eg), remote:true %></td>
-        <%end%>
-        <%end%>
+
+          <td><%= link_to eg.name ,exam_groups_exams_path(eg) %></td>
+          <td>
+            <% unless eg.result_published? %>
+              <div class="label-danger label label-default">
+              <i class="glyphicon glyphicon-trash icon-white"></i>
+                <%= link_to 'Delete',eg,method: :delete,
+                data:{confirm:"Are you sure to delete ExamGroup: #{eg.name}"},class: "a-action"%>
+              </div>
+            <%end%>&nbsp;&nbsp;&nbsp;
+            <% if eg.result_published? %>
+              <div class="label-success label label-default">
+              <i class="glyphicon glyphicon-saved icon-white"></i>
+                <%= link_to 'Result published','#',class: "a-action"%>
+              </div>
+            <%else%>
+              <div class="label-primary label label-default">
+              <i class="glyphicon glyphicon-check icon-white"></i>
+                <% if eg.is_published? %>
+                <%= link_to 'Update exam schedule',exam_groups_publish_exam_path(eg), remote:true, class: "a-action" %>
+                <%else%>
+                <%= link_to 'Publish exam schedule',exam_groups_publish_exam_path(eg), remote:true, class: "a-action" %>
+                <%end%>
+              </div>
+            <%end%>
+          </td>
+
         <td id="publish_exam<%=eg.id%>"%></td>
        </tr>
         <%end%>
       </tbody>
 </table>
-</h4>
 </div>
 </div>
 </div>

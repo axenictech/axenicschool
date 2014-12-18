@@ -10,11 +10,13 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'Create Finance Category', finance_new_transaction_category_path, remote:true, class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>
 
-<div id="categories"><%= render'transaction_categories'%></div>
+<div id="categories">
+  <%= render'transaction_categories'%>
+</div>

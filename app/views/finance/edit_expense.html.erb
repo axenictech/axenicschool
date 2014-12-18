@@ -1,6 +1,3 @@
-
-
-
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
@@ -8,7 +5,6 @@
     <li><%= link_to 'Transction',finance_transactions_path %></li>
     <li><%= link_to 'Add Expense',finance_new_expense_path %></li>
     <li><%= link_to 'View Expense','/finance/view_expense' %></li>
-    <li><%= link_to 'Expense List','/finance/expense_list' %></li>
     <li>Update expense</li>
   </ul>
 </div>
@@ -76,7 +72,7 @@
 
       <div class="col-sm-5 col-sm-offset-5"> 
         <div class="form-actions">               
-          <%= f.submit 'Update', class: "btn btn-primary"%>
+          <%= f.submit 'Update', class: "btn btn-success"%>
         </div>
       </div>
     </fieldset>        
