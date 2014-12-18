@@ -6,10 +6,7 @@
         width:100%;
         margin: 0 auto;
       }
-<<<<<<< HEAD
-=======
 
->>>>>>> cadaefc20c6d0045c8bbd4df9b07005f9ae2f1e7
       
       #head {
         height: 100px;
@@ -85,47 +82,3 @@
     </div>
   </body>
 </html>
-=======
-      <br/><h3><center>Department wise payslip</center></h3><br/><br/>
-        <% unless @payslips.empty?%>
-      <table cellpadding="5" cellspacing="5" width="700">
-    
-       <tr bgcolor="99CCFF">
-  <th align="left">Sl no.</th>
-  <th align="left">Employee</th>
-  <th align="left">Employee No</th>
-  <th align="left">Net Salary</th>
-  <th align="left">Payslip Status</th>
-  <th></th>
-  </tr>
-  <%employees=1%>
-  <%total_salary=0%>
-  <%approved_salary=0%>
-  <% @payslips.each_with_index do |pid,i|%>
-  <%p=MonthlyPayslip.find(pid)%>
-    <tr>
-      <td><%= i+1 %></td>
-      <td><%= p.employee.first_name+" "+p.employee.last_name %></td>
-      <td><%= p.employee.employee_number%></td>
-      <td><%= p.amount%></td>
-      <td><%= p.is_approved? ? "Approved" : "Pending" %></td>
-      <td></td>  
-    </tr>
-    <%employees+=i%>
-    <%total_salary+=p.amount.to_f%>
-    <% approved_salary+=p.amount.to_f if p.is_approved?%>
-  <%end%>
-  <tr>
-  <th align="left">Total employees</th>
-  <th align="left"><%=employees%></th>
-  <th align="left">Total salary</th>
-  <th align="left"><%=total_salary%></th>
-  <th align="left">Approved salary</th>
-  <th align="left"><%= approved_salary%></th>
-  </tr>
-      <% end %>
-     </table>
-    </div>
-   </body>
- </html>
->>>>>>> cadaefc20c6d0045c8bbd4df9b07005f9ae2f1e7
