@@ -8,21 +8,21 @@ class ExamSettingController < ApplicationController
   end
 
   def setting
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])
     @class_des = ClassDesignation.new
     @class_dess = @course.class_designations.all
     @class_des1 = @course.class_designations.build
   end
 
   def settingrank
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])
     @rank_lev = RankingLevel.new
     @rank_levels = @course.ranking_levels.all
     @rank_lev1 = @course.ranking_levels.build
   end
 
   def create
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])
     @class_dess = @course.class_designations.all
     @class_des1 = @course.class_designations.new(params_class)
     if @class_des1.save
@@ -136,8 +136,8 @@ end
   end
 
   def editRank
-    @course = Course.find(params[:course_id])
-    @rank_lev1 = @course.ranking_levels.find(params[:id])
+    @course = Course.find(params[:id])
+    @rank_lev1 = @course.ranking_levels.find(params[:course_id])
   end
 
   def updateRank

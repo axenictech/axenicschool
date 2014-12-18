@@ -38,7 +38,7 @@
       <% (@start_date..@end_date).each do |date| %>
         <% @absent = EmployeeAttendance.find_by_employee_id_and_attendance_date(employee.id, date) %>
       <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
-        <td style="background-color:lightgrey" id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark active"></td>
+        <td style="background-color:lightgrey" id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark active">
           <% else %>
         <td id="attendance-employee-<%= employee.id %>-day-<%= date %>" class="td-mark">
             <% end %>

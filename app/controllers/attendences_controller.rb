@@ -4,7 +4,7 @@ class AttendencesController < ApplicationController
   end
 
   def attendence_register
-    @batches = Batch.all
+    @batches = Batch.includes(:course).all
     authorize! :read, Attendence
   end
 

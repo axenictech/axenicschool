@@ -896,32 +896,35 @@ end
   def employee_profile
     @employee = Employee.find(params[:employee_id])
     @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
-
+     @general_setting = GeneralSetting.first
     render 'employee_profile', layout: false
   end
 
   def personal_profile_pdf
     @employee = Employee.find(params[:employee_id])
     @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
-
+     @general_setting = GeneralSetting.first
     render 'personal_profile_pdf', layout: false
   end
 
   def address_profile_pdf
     @employee = Employee.find(params[:employee_id])
     @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
-    @office_country = Country.find(@employee.office_country_id).name unless @employee.home_country_id.nil?
+    @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
+     @general_setting = GeneralSetting.first
     render 'address_profile_pdf', layout: false
   end
 
   def contact_profile_pdf
     @employee = Employee.find(params[:employee_id])
+     @general_setting = GeneralSetting.first
     render 'contact_profile_pdf', layout: false
   end
 
   def bank_info_pdf
     @employee = Employee.find(params[:employee_id])
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
+     @general_setting = GeneralSetting.first
     render 'bank_info_pdf', layout: false
  end
 

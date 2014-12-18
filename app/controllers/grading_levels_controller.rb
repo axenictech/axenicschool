@@ -1,6 +1,6 @@
 class GradingLevelsController < ApplicationController
   def index
-    @batches = Batch.all
+    @batches = Batch.includes(:course).all
     authorize! :read, @batches.first
   end
 

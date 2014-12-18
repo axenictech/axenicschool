@@ -91,7 +91,7 @@ class ExamReportsController < ApplicationController
   end
 
   def subject_wise_students_report
-    @subject = Subject.find(params[:subject_id])
+    @subject = Subject.find(params[:id])
     @batch = @subject.batch
     @exam_groups = @batch.exam_groups.where(result_published: true)
     @students = @batch.students.all
@@ -168,7 +168,7 @@ class ExamReportsController < ApplicationController
   end
 
   def archived_students_exam_report
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @students = @batch.archived_students.all
     @exam_groups = @batch.exam_groups.where(result_published: true)
     @subjects = @batch.subjects.all
@@ -177,14 +177,14 @@ class ExamReportsController < ApplicationController
   end
 
   def archived_student
-    @student = ArchivedStudent.find(params[:student_id])
+    @student = ArchivedStudent.find(params[:id])
     @batch = @student.batch
     @exam_groups = @batch.exam_groups.where(result_published: true)
     @subjects = @batch.subjects.all
   end
 
   def consolidated_archived_report
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.all
   end
 
@@ -194,7 +194,7 @@ class ExamReportsController < ApplicationController
   end
 
   def archived_students_consolidated_report
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.where(result_published: true)
     @general_setting = GeneralSetting.first
     render 'archived_students_consolidated_report', layout: false

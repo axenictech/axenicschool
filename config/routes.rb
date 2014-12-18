@@ -71,6 +71,7 @@ get 'students/archived_report'
 get 'students/attendance_report'
 get 'students/genrate_report'
 get 'students/email'
+
 post 'students/send_email'
 get 'students/report_email'
 post 'students/send_report_email'
@@ -111,26 +112,26 @@ post'time_tables/work_allotment'
 get 'time_tables/new_timetable'
 post'time_table_entries/create_time'
 post'time_table_entries/assign_time'
-get 'exam_reports/report_center'
-get 'exam_reports/exam_wise_report'
-get 'exam_reports/subject_wise_report'
-get 'exam_reports/generate_exam_report'
-get 'exam_reports/select_batch'
-get 'exam_reports/choose_batch'
-get 'exam_reports/generate_subject_report'
-get 'exam_reports/grouped_exam_report'
-get 'exam_reports/generate_grouped_report'
+# get 'exam_reports/report_center'
+# get 'exam_reports/exam_wise_report'
+# get 'exam_reports/subject_wise_report'
+# get 'exam_reports/generate_exam_report'
+# get 'exam_reports/select_batch'
+# get 'exam_reports/choose_batch'
+# get 'exam_reports/generate_subject_report'
+# get 'exam_reports/grouped_exam_report'
+# get 'exam_reports/generate_grouped_report'
 get 'exam_reports/:exam_group_id/student_exam_report/:student_id',
                     to: 'exam_reports#student_exam_report',as: 'exam_reports_student_exam_report'
 get 'exam_reports/:batch_id/student_report/:student_id',
                     to: 'exam_reports#student_report',as: 'exam_reports_student_report'
 get 'exam_reports/:exam_group_id/consolidated_report',to: 'exam_reports#consolidated_report',as: 'exam_reports_consolidated_report'
-get 'exam_reports/:batch_id/consolidated_archived_report',
-                    to: 'exam_reports#consolidated_archived_report',as: 'exam_reports_consolidated_archived_report'
-get 'exam_reports/archived_student_report'
-get 'exam_reports/select_course'
-get 'exam_reports/generate_archived_report'
-get 'exam_reports/exam_group_wise_report'
+# get 'exam_reports/:batch_id/consolidated_archived_report',
+                    # to: 'exam_reports#consolidated_archived_report',as: 'exam_reports_consolidated_archived_report'
+# get 'exam_reports/archived_student_report'
+# get 'exam_reports/select_course'
+# get 'exam_reports/generate_archived_report'
+# get 'exam_reports/exam_group_wise_report'
 get 'exam_reports/student_ranking_per_subject'
 get 'exam_reports/rank_report_batch'
 get 'exam_reports/generate_ranking_report'
@@ -143,7 +144,7 @@ get 'exam_reports/student_ranking_per_attendance'
 get 'exam_reports/generate_student_ranking_report3'
 get 'exam_reports/view_transcripts'
 get 'exam_reports/generate_view_transcripts'
-get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
+# get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
 get 'exam_reports/:student_id/student_view_transcripts/',to: 'exam_reports#student_view_transcripts',as: 'exam_reports_student_view_transcripts'
 get 'exam_reports/ranking_level_report'
 get 'exam_reports/select_mode'
@@ -159,10 +160,10 @@ get 'exam_reports/none1'
 get 'exam_reports/generate_combined_report'
 get 'exam_reports/exam_wise_students_report'
 get 'exam_reports/exam_wise_consolidated_report'
-get 'exam_reports/subject_wise_students_report'
+# get 'exam_reports/subject_wise_students_report'
 get 'exam_reports/grouped_exam_students_report'
-get 'exam_reports/archived_students_exam_report'
-get 'exam_reports/archived_students_consolidated_report'
+# get 'exam_reports/archived_students_exam_report'
+# get 'exam_reports/archived_students_consolidated_report'
 get 'exam_reports/subject_wise_ranking_report'
 get 'exam_reports/batch_wise_ranking_report'
 get 'exam_reports/course_wise_ranking_report'
@@ -171,15 +172,17 @@ get 'exam_reports/attendance_wise_ranking_report'
 get 'exam_reports/students_transcripts_report'
 get 'calender/change' 
 get 'calender/event_view'
-get 'exam_setting/:course_id/setting',to: 'exam_setting#setting', as: 'course_class_designations'
-get 'exam_setting/select'
-get 'exam_setting/selectrank'
-get 'exam_setting/:course_id/settingrank',to: 'exam_setting#settingrank',as: 'course_ranking_levels'
-get 'exam_setting/newrank'
-post 'exam_setting/createrank'
-get 'exam_setting/:course_id/editRank/:id',to:'exam_setting#editRank',as:'course_ranking_level'
-patch 'exam_setting/updateRank'
-delete 'exam_setting/:id/destroyRank', to:'exam_setting#destroyRank', as:'exam_setting_destroyRank'
+  # get 'exam_setting/:course_id/setting',to: 'exam_setting#setting', as: 'course_class_designations'
+  # get 'exam_setting/select'
+  # get 'exam_setting/selectrank'
+  # get 'exam_setting/:course_id/settingrank',to: 'exam_setting#settingrank',as: 'course_ranking_levels'
+ # get 'exam_setting/newrank'
+
+  # post 'exam_setting/createrank'
+  # get 'exam_setting/:course_id/editRank/:id',to:'exam_setting#editRank',as:'course_ranking_level'
+  # patch 'exam_setting/updateRank'
+  # delete 'exam_setting/:id/destroyRank', to:'exam_setting#destroyRank', as:'exam_setting_destroyRank'
+# 
 get 'exam_groups/select'
 patch 'exam_groups/:id/exam_group_create',to: 'exam_groups#exam_group_create',as: 'exam_groups_exam_group_create'
 get 'exam_groups/:id/exams', to:'exam_groups#exams', as:'exam_groups_exams'
@@ -510,7 +513,7 @@ get 'finance/view_employee_payslip'
 get 'finance/employee_payslip'
 get 'employee_attendances/employee_wise_leave_reset/:id',to:'employee_attendances#employee_wise_leave_reset',as:'employee_attendances_employee_wise_leave_reset'
 get 'exam_setting/:course_id/increase_priority/:id',to:'exam_setting#increase_priority',as:'exam_setting_increase_priority'
-get 'exam_setting/:course_id/decrease_priority/:id',to:'exam_setting#decrease_priority',as:'exam_setting_decrease_priority'
+ get 'exam_setting/:course_id/decrease_priority/:id',to:'exam_setting#decrease_priority',as:'exam_setting_decrease_priority'
 get 'employees/employee_individual_payslip_pdf'
 get 'employee_attendances/attendance_report_pdf'
 delete 'time_tables/time_table_delete'
@@ -565,16 +568,61 @@ resources :time_table_entries
   resources :time_table_entries
 end  
 
-resources :exam_setting
+resources :exam_setting do
+   collection do
+     get :newrank
+     get :selectrank
+     post :createrank
+     patch :updateRank
+     get :select
+   end
+   member do
+     delete :destroyRank
+     get :setting
+     get :settingrank
+     get :editRank
+  end
+end
+
 resources :exam_groups do
+  collection do 
+    get :select
+
+  end
+
   resources :exams 
 end
+
 resources :exams do
     resources :exam_scores
 end
 
 resources :online_exam_groups
-resources :exam_reports
+
+resources :exam_reports do
+  collection do
+    get :report_center
+    get :exam_wise_report
+    get :select_batch
+    get :generate_exam_report
+    get :subject_wise_report
+    get :choose_batch
+    get :generate_subject_report
+    get :subject_wise_students_report
+    get :grouped_exam_report
+    get :generate_grouped_report
+    get :archived_student_report
+    get :select_course
+    get :generate_archived_report
+    get :archived_students_consolidated_report
+    get :exam_group_wise_report
+    get :archived_students_exam_report
+  end
+  member do
+    get :archived_student
+    get :consolidated_archived_report
+  end
+end
 
 resources :courses do
   resources :exam_setting

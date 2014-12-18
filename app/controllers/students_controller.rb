@@ -5,6 +5,7 @@ class StudentsController < ApplicationController
 
   def admission1
     @student = Student.new
+    # @batches = Batch.includes(:course).all
     @date = Date.today.strftime('%Y%m%d')
     if Student.first.nil?
       @student.admission_no = 'S'+@date.to_s+'1'
@@ -172,6 +173,7 @@ class StudentsController < ApplicationController
   def report
     @student = Student.find(params[:format])
     @batch = @student.batch
+    
     authorize! :read, @student
   end
 

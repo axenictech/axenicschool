@@ -189,8 +189,12 @@ table#listing{
       <tr></tr>
     </table>
       <div class="custom_header" align="left"><font color="green">
+           <% unless total==0%>
         <% percentage = "%.2f" %(total_marks*100/total)+"%" %>
-        Total Marks = <%= total_marks %> | Aggregate % = <%= percentage  unless percentage.nil? %></font>
+        Total Marks = <%= total_marks %> | Aggregate % =  <%= percentage  unless percentage.nil? %>
+        <%end%>
+ 
+        </font>
       </div>
   </div><br/><br/>
 <%end%>

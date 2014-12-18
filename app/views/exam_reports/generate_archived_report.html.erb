@@ -14,8 +14,8 @@
   <div class="col-md-12">
     <div class="pull-right">
    
-      <%= link_to 'Consolidated Report',exam_reports_consolidated_archived_report_path(@batch.id), class: "btn btn-primary-link btn-sm" %>
-      <%= link_to 'Pdf Report',exam_reports_archived_students_exam_report_path(batch_id:@batch.id,format:"pdf"), class: "btn btn-primary-link btn-sm" %>
+      <%= link_to 'Consolidated Report',consolidated_archived_report_exam_report_path(@batch.id), class: "btn btn-primary-link btn-sm" %>
+      <%= link_to 'Pdf Report',archived_students_exam_report_exam_reports_path(id:@batch.id,format:"pdf"), class: "btn btn-primary-link btn-sm" %>
       
     </div>
   </div>
