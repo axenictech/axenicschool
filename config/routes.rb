@@ -126,7 +126,6 @@ get 'exam_reports/:exam_group_id/student_exam_report/:student_id',
 get 'exam_reports/:batch_id/student_report/:student_id',
                     to: 'exam_reports#student_report',as: 'exam_reports_student_report'
 get 'exam_reports/:exam_group_id/consolidated_report',to: 'exam_reports#consolidated_report',as: 'exam_reports_consolidated_report'
-<<<<<<< HEAD
 
 # get 'exam_reports/:batch_id/consolidated_archived_report',
                     # to: 'exam_reports#consolidated_archived_report',as: 'exam_reports_consolidated_archived_report'
