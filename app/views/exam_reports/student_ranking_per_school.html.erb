@@ -47,7 +47,7 @@
             <%ranks=[]%>  
             <% total_mark=0%>
             <% @courses.each do |course|%>
-            <% course.batches.each do |batch| %>
+            <% course.batches.includes(:students).each do |batch| %>
             <% batch.students.each do |student| %>
            <% grouped_exams=GroupedExamReport.where(student_id:student.id,batch_id:batch.id)%>
            <% grouped_exams.each do |ge|%>

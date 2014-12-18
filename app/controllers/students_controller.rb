@@ -14,6 +14,7 @@ class StudentsController < ApplicationController
       @student.admission_no = 'S'+@date.to_s+@id.to_s
     end
     authorize! :create, @student
+    @batches = Batch.includes(:course).all
   end
 
   def create
@@ -36,6 +37,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:format])
     @guardian = @student.guardians.build
     authorize! :create, @student
+
   end
 
   def admission2_1
@@ -51,6 +53,7 @@ class StudentsController < ApplicationController
   def edit
     @student = Student.find(params[:id])
     authorize! :update, @student
+    @batches = Batch.includes(:course).all
   end
 
   def update
@@ -128,9 +131,10 @@ class StudentsController < ApplicationController
   end
 
   def view_all
-    @batches = Batch.all
+    @batches = Batch.includes(:course).all
     authorize! :read, @batches.first
-  end
+
+  end 
 
   def select
     @batch = Batch.find(params[:batch][:id])
@@ -175,6 +179,7 @@ class StudentsController < ApplicationController
     @batch = @student.batch
     
     authorize! :read, @student
+
   end
 
   def archived_report

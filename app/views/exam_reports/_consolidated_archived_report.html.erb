@@ -13,12 +13,14 @@
       <table  class="table table-bordered ">
         <thead>
         <tr>
+
           <th ><font>Name</font></th>
             <% @exam_group.exams.each do |exam| %>
               <th><font><%= exam.subject.code+" "+exam.subject.name %><%= "(" + exam.maximum_marks.to_s + ")"  unless exam.maximum_marks.nil? %></font></th>
             <% end %>
             <% unless @exam_group.exam_type == "Grades" %>
               <th><font>Percentage(%)</font></th>
+
             <% end %>
         </tr>
         </thead>

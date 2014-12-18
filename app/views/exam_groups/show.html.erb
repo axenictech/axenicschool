@@ -11,7 +11,7 @@
   <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'New', new_exam_group_path(@batch), class: "btn btn-primary-link btn-xs" %>
-      <%= link_to 'Connect Exams', exam_groups_connect_exam_path(@batch), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Connect Exams', connect_exam_exam_groups_path(@batch), class: "btn btn-primary-link btn-xs" %>
       
     </div>
   </div>
@@ -39,6 +39,7 @@
         <% @exam_groups.each do |eg|%>
 
         <tr>
+
           <td><%= link_to eg.name ,exam_groups_exams_path(eg) %></td>
           <td>
             <% unless eg.result_published? %>
@@ -64,6 +65,7 @@
               </div>
             <%end%>
           </td>
+
         <td id="publish_exam<%=eg.id%>"%></td>
        </tr>
         <%end%>

@@ -1,112 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style type="text/css">
-.page {
-    width:100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
 
+      
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
 
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
 
-.hor_line{
-    width:100%;
-    background: #ADACAB;
-    height: 1px;
-}
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+    <br/><h3><center>Attendance Report</center></h3>
+    <br>
+    <h4><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize+" | "+ @start_date.to_s+" - "+@end_date.to_s%></h4>
 
-#title h1{
-    margin-bottom: 2px;
-    font-weight: normal;
-
-}
-
-#student_main_info h4{
-    color: #555555;
-    margin-top: 2px;
-    font-weight: normal;
-}
-
-#student_main_info h2{
-    margin-bottom: 2px;
-    font-weight: normal;
-
-}
-
-
-.odd{
-    height:auto;
-    background: #EEEEEE;
-    
-}
-
-.even{
-    
-    height:auto;
-    background: #fff;
-    
-    
-}
-
-.even td{
-   
-   padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-}
-
-.odd td{
-  padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-
-}
-
-#score-table{
-    background: #C3D9FF;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    padding: 20px 20px;
-}
-table#listing{
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
-    padding: 0;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.custom_header{
-    margin: 0 auto;
-    padding: 5px;
-    background: #fff;
-}
-
-</style>
-</head>
-<body>
-<div class="hor_line"></div>
-<div id="title">
-<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
-<h4><small><%= @general_setting.school_or_college_address%><br/>
-  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
-<div class="page-yield" class="available_sections">
-  <div class="hor_line"></div>
-  <div id="student_profile_heading" class="section">
-    <div id ="student_main_info">
-      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize+" | "+ @start_date.to_s+" - "+@end_date.to_s%></h2>
-      <h4><%= t('attendance_report') %></h4>
-    </div>
-  </div>
-<div id="score-table">
- <table id="listing" width="100%" cellpadding="1" cellspacing="1" border="1">
-           <tr class="tr-head">
-    <td>Name</td>
-    <td>Total</td>
-    <td>Present</td>
-    <td>Percentage(%)</td>
+      <table cellpadding="5" cellspacing="5" width="650">
+        <tr>
+        <th bgcolor="99CCFF">Name</th>
+        
+        <th bgcolor="99CCFF">Total</th>
+        <th bgcolor="99CCFF">Present</th>
+        <th bgcolor="99CCFF">Percentage(%)</th>
   </tr>
   <% @students.each do |student|%>
     <% total_days=0 %><% absent_days=0 %>
@@ -134,14 +71,14 @@ table#listing{
     <%end%>
     <% present_days=total_days-absent_days unless total_days==0 %>
   <tr>
-    <td><%= student.first_name+" "+student.last_name%></td>
-    <td><%= total_days%></td>
-    <td><%= present_days%></td>
-    <td><%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %></td>
+    <td align="center"><%= student.first_name+" "+student.last_name%></td>
+    <td align="center"><%= total_days%></td>
+    <td align="center"><%= present_days%></td>
+    <td align="center"><%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %></td>
   </tr>
   <%end%>
           </table>
 </div>
-</div>
+
 </body>
 </html>

@@ -30,7 +30,7 @@
       </div>
       <div class="col-md-4">
       <h4>Subject wise results</h4>
-      <% @batch.subjects.all.each do |s|%>
+      <% @batch.subjects.includes(:elective_group).all.each do |s|%>
       <% is_elective=StudentSubject.find_by_subject_id_and_student_id(s.id,@student.id)%>
         <% if s.elective_group.nil?%>
         <p><%=link_to s.name,students_subject_wise_report_path(subject_id:s.id,student_id:@student.id)%></p>
