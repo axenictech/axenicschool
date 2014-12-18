@@ -59,6 +59,8 @@
         <div class="form-group">
           <%=radio_button_tag :mode,"all",'',{onclick:"$('#hidden').html('')"}%><%=  t('All') %>
         </div>
+        
+        <div id="hidden"></div> 
 
         <div class="form-group">
           <%= t('Amount') %>
@@ -76,20 +78,10 @@
           Select: &nbsp;&nbsp;
           <%= link_to "All",finance_select_all_path,{onclick:"$('.check_box').prop('checked',true);",remote:true}%>&nbsp;&nbsp;
           <%= link_to  "None",finance_select_none_path,{onclick:"$('.check_box').prop('checked',false);",remote:true}%>
-          <div id="fee_category"><%= render 'category_batches_list'%>
-                  </div>
-        </div>
-        <div id="hidden"></div><br/>  
-        
-      </div>
-
-      <div class="col-sm-1"></div>
-      <div class="col-sm-4">
-        <div class="form-group">
-          
+        <div id="fee_category">
+          <%= render 'category_batches_list'%></div>
         </div>
       </div>
-    </div>
 
     <div class="col-sm-5 col-sm-offset-5"> 
       <div class="form-actions">               

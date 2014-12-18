@@ -11,11 +11,7 @@
 <div class="row">
   
 <div class="dropdown pull-right">
-   <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
-      data-toggle="dropdown">
-      Profile
-      <span class="caret"></span>
-   </button>
+   <%= link_to 'Profile','#',class: "btn dropdown-toggle btn-primary-link btn-xs", id: "dropdownMenu1", :"data-toggle"=>"dropdown"%>
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
@@ -39,11 +35,7 @@
 </div>
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
-      data-toggle="dropdown" style="margin-right:20px">
-      Salary
-      <span class="caret"></span>
-   </button>
+    <%= link_to 'Salary','#',class: "btn dropdown-toggle btn-primary-link btn-xs", id: "dropdownMenu1", :"data-toggle"=>"dropdown", style: "margin-right:5px"%>
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
@@ -58,19 +50,11 @@
 </div>
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn btn-primary" 
-       style="margin-right:20px;">
-      <%= link_to "Delete",employees_remove_path(@employee),style:"color:white"%>
-</button>
+      <%= link_to "Delete",employees_remove_path(@employee), class: "btn btn-primary-link btn-xs", style: "margin-right:5px;"%>
 </div>
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn btn-primary" 
-       style="margin-right:20px;">
-       
-      <%= link_to "Timetable",time_tables_employee_timetable_path(@employee),style:"color:white"%>
-     
-</button>
+      <%= link_to "Timetable",time_tables_employee_timetable_path(@employee),class: "btn btn-primary-link btn-xs", style:"margin-right:5px;"%>
 </div>
 </div>
 <hr>
@@ -95,7 +79,7 @@
     <% unless @employee.image.blank? %>
       <%= image_tag @employee.image%>
     <% else %>
-      <%= image_tag "default_student.png" %>
+      <%= image_tag "employee.png" %>
     <% end %>
     </div>
     </div>

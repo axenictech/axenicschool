@@ -4,6 +4,7 @@ class EmployeesController < ApplicationController
     @employee_category_new = EmployeeCategory.new
     @categories1 = EmployeeCategory.where(status: true).order(:name)
     @categories2 = EmployeeCategory.where(status: false).order(:name)
+    authorize!  :create, @employee_category_new
   end
 
   def add_category
@@ -23,6 +24,7 @@ class EmployeesController < ApplicationController
 
   def edit_category
     @employee_category = EmployeeCategory.find(params[:category_id])
+    authorize! :create, @employee_category
   end
 
   def update_category
@@ -36,6 +38,7 @@ class EmployeesController < ApplicationController
   end
 
   def destroy_category
+    authorize! :delete, @employee_category
     @employee_category_new = EmployeeCategory.new
     @employee_category = EmployeeCategory.find(params[:id])
     if @employee_category.destroy
@@ -49,6 +52,7 @@ class EmployeesController < ApplicationController
     @employee_department_new = EmployeeDepartment.new
     @departments1 = EmployeeDepartment.where(status: true).order(:name)
     @departments2 = EmployeeDepartment.where(status: false).order(:name)
+    authorize! :create, @employee_department_new
   end
 
   def add_department
@@ -63,6 +67,7 @@ class EmployeesController < ApplicationController
 
   def edit_department
     @employee_department = EmployeeDepartment.find(params[:department_id])
+    authorize! :update, @employee_department
   end
 
   def update_department
@@ -76,6 +81,7 @@ class EmployeesController < ApplicationController
   end
 
   def destroy_department
+    authorize! :delete, @employee_department
     @employee_department_new = EmployeeDepartment.new
     @employee_department = EmployeeDepartment.find(params[:id])
     if @employee_department.destroy
@@ -89,6 +95,7 @@ class EmployeesController < ApplicationController
     @employee_position_new = EmployeePosition.new
     @positions1 = EmployeePosition.where(status: true).order(:name)
     @positions2 = EmployeePosition.where(status: false).order(:name)
+    authorize! :create, @employee_position_new
   end
 
   def add_position
@@ -103,6 +110,7 @@ class EmployeesController < ApplicationController
 
   def edit_position
     @employee_position = EmployeePosition.find(params[:position_id])
+    authorize! :update, @employee_position
   end
 
   def update_position
@@ -116,6 +124,7 @@ class EmployeesController < ApplicationController
   end
 
   def destroy_position
+    authorize! :delete, @employee_position
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.find(params[:id])
     if @employee_position.destroy
@@ -129,6 +138,7 @@ class EmployeesController < ApplicationController
     @bank_field_new = BankField.new
     @bank_fields1 = BankField.where(status: true).order(:name)
     @bank_fields2 = BankField.where(status: false).order(:name)
+    authorize! :create, @bank_field_new
   end
 
   def add_bank_field
@@ -141,6 +151,7 @@ class EmployeesController < ApplicationController
 
   def edit_bank_field
     @bank_field = BankField.find(params[:bank_field_id])
+    authorize! :update, @bank_field
   end
 
   def update_bank_field
@@ -154,6 +165,7 @@ class EmployeesController < ApplicationController
   end
 
   def destroy_bank_field
+    authorize! :delete, @bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.find(params[:id])
     flash[:notice] = 'Bank field deleted Successfully' if @bank_field.destroy
@@ -165,6 +177,7 @@ class EmployeesController < ApplicationController
     @payroll_category_new = PayrollCategory.new
     @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
     @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
+    authorize! :create, @payroll_category_new
   end
 
   def add_payroll_category
@@ -179,6 +192,7 @@ class EmployeesController < ApplicationController
 
   def edit_payroll_category
     @payroll_category = PayrollCategory.find(params[:payroll_category_id])
+    authorize! :update, @payroll_category
   end
 
   def update_payroll_category
@@ -192,6 +206,7 @@ class EmployeesController < ApplicationController
  end
 
   def destroy_payroll_category
+    authorize! :delete, @payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
     if @payroll_category.destroy
@@ -207,6 +222,7 @@ class EmployeesController < ApplicationController
     @payroll_category.update(status: false)
     @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
     @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
+    authorize! :create, @payroll_category
   end
 
   def inactive_payroll_category
@@ -215,12 +231,14 @@ class EmployeesController < ApplicationController
     @payroll_category.update(status: true)
     @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
     @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
+    authorize! :create, @payroll_category
   end
 
   def new_grade
     @employee_grade_new = EmployeeGrade.new
     @grade1 = EmployeeGrade.where(status: true).order(:name)
     @grade2 = EmployeeGrade.where(status: false).order(:name)
+    authorize! :create, @employee_grade_new
   end
 
   def add_grade
@@ -235,6 +253,7 @@ class EmployeesController < ApplicationController
 
   def edit_grade
     @employee_grade = EmployeeGrade.find(params[:grade_id])
+    authorize! :update, @employee_grade
   end
 
   def update_grade
@@ -248,6 +267,7 @@ class EmployeesController < ApplicationController
   end
 
   def destroy_grade
+    authorize! :delete, @employee_grade
     @employee_grade_new = EmployeeGrade.new
     @employee_grade = EmployeeGrade.find(params[:id])
     if @employee_grade.destroy
@@ -266,6 +286,7 @@ class EmployeesController < ApplicationController
       @id = Employee.last.id.next
       @employee.employee_number = 'E'+@date.to_s+@id.to_s
     end
+    authorize! :create, @employee
   end
 
   def create
@@ -280,6 +301,7 @@ class EmployeesController < ApplicationController
 
   def admission2
     @employee = Employee.find(params[:format])
+    authorize! :update, @employee
   end
 
   def admission2_create
@@ -290,11 +312,13 @@ class EmployeesController < ApplicationController
     else
       render 'admission2'
     end
+    authorize! :update, @employee
   end
 
   def admission3
     @employee = Employee.find(params[:format])
     @bank_fields = BankField.all
+    authorize! :update, @employee
   end
 
   def admission3_create
@@ -304,15 +328,17 @@ class EmployeesController < ApplicationController
    if request.post?
     params[:bank_details].each_pair do |k, v|
     EmployeeBankDetail.create(employee_id: @employee.id,bank_field_id: k,bank_info: v['bank_info'])
-  end
     end
+   end
     redirect_to employees_edit_privilege_path(@employee)
+    authorize! :update, @employee
   end
 
   def edit_privilege
     # @user = User.find(params[:format])
     @employee = Employee.find(params[:format])
     @privilege_tags = PrivilegeTag.all
+    authorize! :update, @employee
   end
 
   def update_privilege
@@ -338,6 +364,7 @@ class EmployeesController < ApplicationController
 
   def admission4
     @employee = Employee.find(params[:format])
+    authorize! :update, @employee
   end
 
   def search
@@ -352,11 +379,13 @@ class EmployeesController < ApplicationController
 
       @reporting_manager = Employee.where('first_name like ?' + other_conditions, "#{params[:search]}%")
     end
+    authorize! :read, @employee
   end
 
   def update_reporting_manager_name
     @employee = Employee.find(params[:id])
     @reporting_manager = Employee.find(params[:reporting_manager_id])
+    authorize! :update, @employee
   end
 
   def update_reporting_manager
@@ -368,15 +397,18 @@ class EmployeesController < ApplicationController
   def change_reporting_manager
     @employee = Employee.find(params[:format])
     @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
+    authorize! :update, @employee
   end
 
   def profile
     @employee = Employee.find(params[:format])
     @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
+    authorize! :read, @employee
   end
 
   def edit_profile
     @employee = Employee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def update_profile
@@ -403,7 +435,6 @@ class EmployeesController < ApplicationController
     if @employee.update(employee_params)
       redirect_to employees_profile_path(@employee)
       flash[:notice] = "Address details updated successfully for #{@employee.first_name}"
-
     else
       render 'edit_address_profile'
     end
@@ -450,9 +481,11 @@ class EmployeesController < ApplicationController
     @subject = Subject.find(params[:format])
     @assigned_employee = EmployeeSubject.create(employee_id: @employee.id, subject_id: @subject.id)
     @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
+    authorize! :update, @employee
  end
 
   def remove_employee
+    authorize! :delete, @employee
     @department = EmployeeDepartment.find(params[:department_id])
     @employee = Employee.find(params[:id])
     @employees = @department.employees.all
@@ -480,7 +513,8 @@ class EmployeesController < ApplicationController
 
   # names=params[:search].split(" ")
   # @employee = Employee.where("first_name LIKE ? OR last_name LIKE ? "+other_conditions,names.first+"%",names.last+"%")
-end
+    end
+    authorize! :read, Employee
   end
 
   def viewall_emp
@@ -506,7 +540,7 @@ end
           conditions += " AND gender like '#{params[:search][:gender]}'"
         end
       end
- end
+    end
 
     if params[:search][:employee_category_id]
       if conditions == ''
@@ -538,7 +572,7 @@ end
       else
         conditions += " AND country_id ='#{params[:search][:country_id]}'" unless params[:search][:country_id] == ''
       end
-   end
+    end
 
     if params[:search][:joining_date]
       if conditions == ''
@@ -546,7 +580,7 @@ end
       else
         conditions += " AND joining_date ='#{params[:search][:joining_date]}'" unless params[:search][:joining_date] == ''
       end
-   end
+    end
 
     if params[:search][:employee_department_id]
       if conditions == ''
@@ -570,7 +604,7 @@ end
       else
         conditions += " AND employee_grade_id='#{params[:search][:employee_grade_id]}'" unless params[:search][:employee_grade_id] == ''
       end
-  end
+    end
 
     if params[:search][:date_of_birth]
       if conditions == ''
@@ -578,7 +612,7 @@ end
       else
         conditions += " AND date_of_birth ='#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth] == ''
       end
-   end
+    end
 
     if @status = params[:search][:status]
 
@@ -636,6 +670,7 @@ end
     else
       @search += ' Status: All student'
     end
+    authorize! :read, @employee
    end
 
   def advance_search_result_pdf
@@ -660,6 +695,7 @@ end
   def monthly_payslip
     @employee = Employee.find(params[:format])
     @independent_categories = PayrollCategory.all
+    authorize! :update, @employee
   end
 
   def one_click_payslip
@@ -699,10 +735,12 @@ end
 
     redirect_to employees_payslip_path
     flash[:notice] = "salery slip Generated for the :#{salary_date.strftime('%B')} 'note' : 'employees whose salary generated manually,their salery slip was not generated by this proce'"
-   end
+    authorize! :update, @employee
+  end
 
   def payroll_category
     @employee = Employee.find(params[:format])
+    authorize! :update, @employee
   end
 
   def create_monthly_payslip
@@ -741,6 +779,7 @@ end
 
      end
     redirect_to employees_monthly_payslip_path(@employee)
+    authorize! :update, @employee
   end
 
   def employee_structure
@@ -755,6 +794,7 @@ end
       @salary.update(amount: @amount)
     end
     @employee.update_payroll(@payroll_category, @amount)
+    authorize! :update, @employee
   end
 
   def create_payslip_category
@@ -763,6 +803,7 @@ end
     @created_category = IndividualPayslipCategory.new(employee_id: @employee.id, name: params[:payslip][:name], amount: params[:payslip][:amount], is_deduction: params[:payslip][:is_deduction])
     @created_category.save
     redirect_to employees_monthly_payslip_path(@employee)
+    authorize! :update, @employee
   end
 
   def department_payslip
@@ -808,63 +849,76 @@ end
   def genral_profile
     @employee = Employee.find(params[:format])
     @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
+    authorize! :read, @employee
   end
 
   def genral_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def personal_profile
     @employee = Employee.find(params[:format])
     @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
+    authorize! :read, @employee
   end
 
   def personal_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
     @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
+    authorize! :read, @employee
   end
 
   def address_profile
     @employee = Employee.find(params[:format])
     @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
     @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
+    authorize! :read, @employee
   end
 
   def address_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
     @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
     @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
+    authorize! :read, @employee
   end
 
   def contact_profile
     @employee = Employee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def contact_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
- end
+    authorize! :read, @employee
+  end
 
   def bank_info
     @employee = Employee.find(params[:format])
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
+    authorize! :read, @employee
   end
 
   def bank_info_archived
     @employee = ArchivedEmployee.find(params[:format])
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
- end
+    authorize! :read, @employee
+  end
 
   def emp_payroll
     @employee = Employee.find(params[:format])
     # @payroll_details = EmployeeSalaryStructure.where(employee_id:@employee)
+    authorize! :read, @employee
   end
 
   def remove
     @employee = Employee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def change_to_former
     @employee = Employee.find(params[:format])
+    authorize! :update, @employee
   end
 
   def create_archived_employee
@@ -878,15 +932,16 @@ end
       @employee.destroy
       flash[:notice] = 'Employee #{@employee.first_name} is Archived Successfully'
       redirect_to employees_archived_employee_profile_path(@employee)
-
-  end
+    end
  end
 
   def archived_employee_profile
     @employee = ArchivedEmployee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def delete_employee
+    authorize! :delete, @employee
     @employee = Employee.find(params[:format])
     @employee.destroy
     flash[:notice] = "All Records of #{@employee.first_name} is Deleted Successfully"
@@ -936,19 +991,23 @@ end
 
   def edit_personal_profile
     @employee = Employee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def edit_address_profile
     @employee = Employee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def edit_contact_profile
     @employee = Employee.find(params[:format])
+    authorize! :read, @employee
   end
 
   def edit_bank_info
     @employee = Employee.find(params[:format])
     @bank_info = @employee.employee_bank_details.all
+    authorize! :read, @employee
   end
 
   def update_bank_details
@@ -959,6 +1018,7 @@ end
     end
     redirect_to employees_profile_path(@employee)
     flash[:notice] = "Bank details updated successfully for #{@employee.first_name}"
+    authorize! :read, @employee
   end
 
   private

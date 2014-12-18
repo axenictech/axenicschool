@@ -27,21 +27,33 @@
         <%end%> 
       <%end%>
       <%end%>
-      <div align="center">
-        <div>
-          <%unless @student.id==@finance_fees.first.student.id%>
-            <%= link_to '◄',finance_student_fees_details_path(id:@collection.id,finance_fee_id:@previous),remote:true%>
-          <%end%>
-            <%= @student.first_name+" "+@student.last_name %>
-          <%unless @student.id==@finance_fees.last.student.id%>
-            <%= link_to '►',finance_student_fees_details_path(id:@collection.id,finance_fee_id:@next),remote:true%>
-          <%end%>
-        </div>
+      <div>
+        <table class="fc-header" style="width:100%">
+        <tbody>
+          <tr>
+            <td class="fc-header-left">
+              <%unless @student.id==@finance_fees.first.student.id%>
+                <%= link_to '◄ prev',finance_student_fees_details_path(id:@collection.id,finance_fee_id:@previous),remote:true,class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
+              <%end%>
+              <%unless @student.id==@finance_fees.last.student.id%>
+                <%= link_to 'next ►',finance_student_fees_details_path(id:@collection.id,finance_fee_id:@next),remote:true, class: "fc-button fc-button-next fc-state-default fc-corner-right"%></p>
+              <%end%>
+              <span class="fc-header-space"></span>
+            </td>
+            <td class="fc-header-center">
+              <span class="fc-header-title"><h2><%= @student.first_name+" "+@student.last_name %></h2></span>
+            </td>
+            <td class="fc-header-right">
+              <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">Students fees</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       </div>
       <br/>
       <div>
       <br/>
-      <table align="center" class="table table-hover table-bordered" style="width:80%">
+      <table align="center" class="table table-striped table-bordered" style="width:80%">
       <%total=0%>
       <%discount=0%>
       <%fines=0%>

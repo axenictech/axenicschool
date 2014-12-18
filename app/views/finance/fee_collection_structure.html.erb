@@ -4,26 +4,24 @@
     <li><%= link_to 'Home',home_dashboard_path %></li>
     <li><%= link_to 'Finance',finance_index_path %></li>
     <li><%= link_to 'Manage Fees',finance_fees_path %></li>
-    <li><%= link_to 'Fee structure',finance_fee_structure_path %></li>
+    <li><%= link_to 'Fee structure',finance_fees_structure_path %></li>
     <li>Student fee</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 
-
-
-      <div class="box-content">
-        <fieldset>
-          <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <%= t('Fee collection date')%><span class="necessary-field">*</span>
-                <%= select :collection,:id, @collections.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_structure',a,function(response){});",class: "form-control"}%>
-              </div>
-            </div>
-          </div>
-        </fieldset>        
+<div class="box-content">
+  <fieldset>
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= t('Fee collection date')%><span class="necessary-field">*</span>
+          <%= select :collection,:id, @collections.uniq.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_structure',a,function(response){});",class: "form-control"}%>
+        </div>
       </div>
+    </div>
+  </fieldset>        
+</div>
     
 <div id="fees_structure"></div>

@@ -1,16 +1,6 @@
-  <%= form_for :batch, url:{action:'previous_exam_group'},method: :get,remote:true,html:{id: "batch_form"}  do |f| %>
-  <br>
+<%= form_for :batch, url:{action:'previous_exam_group'},method: :get,remote:true,html:{id: "batch_form"}  do |f| %>
 <b>Select Batch:</b>
   
   <%= f.select :id, @batches.collect {|b| [b.name,b.id]}, {prompt:true},{onchange:"$('#batch_form').submit();",class: "form-control",style:"width:250px"}%>
-</div></div>
-<% end %>
-<br>
-<div class="row">
-	
-	<div class="col-md-11">
-<div id="exam_div">
 
-</div>
-</div>
-</div>
+<% end %>

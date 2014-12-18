@@ -11,7 +11,7 @@
 <%= form_for :time,url:{action:'selectTimeEmployee',format:@employee.id},method: :get,remote:true,html:{id: "time_form"} do |f| %>
 
 
-      <%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:'Select Time'},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
+      <%= f.select :id, @timetables.uniq.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:'Select Timetable'},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
     <%end%>
   </div>
 </div>

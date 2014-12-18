@@ -11,7 +11,7 @@ class TimeTablesController < ApplicationController
     @time_table_entries.each do |tbe|
       @timetables << tbe.time_table
     end
-    authorize! :create, @timetable
+    authorize! :read, @employee
   end
 
   def new
@@ -68,7 +68,7 @@ class TimeTablesController < ApplicationController
         @employees.push t.employee
       end
     end
-    authorize! :create, TimeTable
+    authorize! :read, TimeTable
   end
 
   def time_table_pdf

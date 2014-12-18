@@ -1,11 +1,11 @@
  <% if @student.nil? %>
-    <div id="score-table" style="width:80%">
+    <div id="score-table">
     <div class="custom_header" align="left">
       <span class="student">Student not found</span>
      </div></div>
 <%else%>
 <% if @subjects.nil? %>
-    <div id="score-table" style="width:80%">
+    <div id="score-table">
     <div class="custom_header" align="left">
       <span class="student">Subjects not found</span>
      </div></div>
@@ -64,7 +64,7 @@
         <% marks_total = 0 %>
         <%end%>
       <% end %>
-      <tr class="tr-blank"></tr>
+      <tr class="tr-blank"><td colspan="3"><hr></td></tr>
       <tr class="tr-head">
         <th class="col-2">Total</th>
         <% @max_total = 0 %>
@@ -96,6 +96,7 @@
         <% @max_total = 0 %>
         <% @marks_total = 0 %>
         <% end %>
+
         <th><%= "#{total_marks || "-"}/"+total.to_s %></th>
       </tr>
       <tr></tr>

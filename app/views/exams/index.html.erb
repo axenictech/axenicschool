@@ -11,17 +11,6 @@
   <div class="box col-md-4">
     <div class="box-inner2">
       <div class="box-header well" data-original-title="">
-        <h2><%= link_to 'Settings' ,'/exam_setting'%></h2>
-      </div>
-      <div class="box-content">
-            Manage Grading Levels, Ranking Levels and Class Designations
-      </div>
-    </div>
-  </div>
-  <div class="box col-md-1"></div>
-  <div class="box col-md-4">
-    <div class="box-inner2">
-      <div class="box-header well" data-original-title="">
         <h2><%= link_to 'Exam Management','/exam_groups' %>
         </h2>
       </div>
@@ -30,9 +19,6 @@
       </div>
     </div>
   </div>
-</div>
-<br/><br/><br/>
-<div class="row">
   <div class="box col-md-1"></div>
   <div class="box col-md-4">
     <div class="box-inner2">
@@ -44,8 +30,23 @@
       </div>
     </div>
   </div>
-  
 </div>
+<% if can? :read, RankingLevel %>
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to 'Settings' ,'/exam_setting'%></h2>
+      </div>
+      <div class="box-content">
+            Manage Grading Levels, Ranking Levels and Class Designations
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
 
 
 

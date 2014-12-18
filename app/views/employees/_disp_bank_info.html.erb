@@ -4,14 +4,10 @@
 <% unless @bank_details.empty? %>
  <% @bank_details.each do |b| %>
 <div class="row">
-
-<div class="center">
   <div class="form-group">
     <div class="col-md-6"><b><%= b.bank_field.name %></b> </div>
         <div class="col-md-6"><%= b.bank_info%></div>
   </div>
-<br>
- </div>
  </div>
  <%end%>
 <%end%>

@@ -24,11 +24,13 @@
 		            <td class="center">
 		              <div class="label-success label label-default">
 		              <i class="glyphicon glyphicon-edit icon-white"></i> 
-		              <%= link_to 'Edit', finance_edit_automatic_transaction_path(a),remote:true%></div>
+		              <%= link_to 'Edit', finance_edit_automatic_transaction_path(a),class: 'a-action',remote:true %>
+		              </div>
 
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
-		              <%= link_to 'Delete' ,finance_delete_automatic_transaction_path(a),method: :delete, data:{confirm:"Are You sure to delete Asset '#{a.title}'?"},remote:true%></div>
+		              <%= link_to 'Delete' ,finance_delete_automatic_transaction_path(a),method: :delete, data:{confirm:"Are You sure to delete Asset '#{a.title}'?"},class: 'a-action',remote:true %>
+		              </div>
 		            </td>
 		          </tr>
 		        <% end %>

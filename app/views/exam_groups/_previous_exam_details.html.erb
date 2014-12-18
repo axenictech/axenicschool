@@ -3,7 +3,7 @@
     <h2>Previous Details</h2>
   </div>
 <div class="box-content">
-<table class="table table-bordered" >
+<table class="table table-striped" >
 <% unless @exams.empty?%>
 <thead>
   <tr>
@@ -19,12 +19,11 @@
 		<td><%= exam.maximum_marks%></td>
 		<td><%= exam.minimum_marks%></td>
 		</tr>
-    </tbody>
   <%end%>
+  </tbody>
 <%else%>
 <tr><th colspan="3"><h4 align="center">NO Record Found</h4></th></tr>
 <%end%>
 </table>
 </div>
 </div>
-

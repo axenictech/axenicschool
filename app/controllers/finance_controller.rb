@@ -1,10 +1,12 @@
 class FinanceController < ApplicationController
   def transaction_category
     @transaction_categories = FinanceTransactionCategory.all
+    authorize! :read, @transaction_categories.last
   end
 
   def new_transaction_category
     @transaction_category = FinanceTransactionCategory.new
+    authorize! :create, @transaction_category
   end
 
   def create_transaction_category
@@ -17,6 +19,7 @@ class FinanceController < ApplicationController
 
   def edit_transaction_category
     @transaction_category = FinanceTransactionCategory.find(params[:id])
+    authorize! :update, @transaction_category
   end
 
   def update_transaction_category
@@ -28,6 +31,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_transaction_category
+    authorize! :delete, @transaction_category
     @transaction_category = FinanceTransactionCategory.find(params[:id])
     if @transaction_category.destroy
       flash[:notice] = 'Transaction category successfully deleted...'
@@ -37,6 +41,7 @@ class FinanceController < ApplicationController
 
   def donation
     @donation = FinanceDonation.new
+    authorize! :create, @donation
   end
 
   def create_donation
@@ -52,6 +57,7 @@ class FinanceController < ApplicationController
 
   def donation_receipt
     @donation = FinanceDonation.find(params[:id])
+    authorize! :read, @donation
   end
 
   def finance_donation_receipt
@@ -62,10 +68,12 @@ class FinanceController < ApplicationController
 
   def donors
     @donors = FinanceDonation.all
+    authorize! :read, @donors
   end
 
   def edit_donation
     @donation = FinanceDonation.find(params[:id])
+    authorize! :update, @donation
   end
 
   def update_donation
@@ -80,6 +88,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_donation
+    authorize! :delete, @donation
     @donation = FinanceDonation.find(params[:id])
     @donation.destroy
     flash[:notice] = 'Donation deleted'
@@ -88,6 +97,7 @@ class FinanceController < ApplicationController
 
   def new_asset
     @asset = Asset.new
+    authorize! :create, @asset
   end
 
   def create_asset
@@ -100,10 +110,12 @@ class FinanceController < ApplicationController
 
   def view_asset
     @assets = Asset.all
+    authorize! :read, @assets.first
   end
 
   def edit_asset
     @asset = Asset.find(params[:id])
+    authorize! :update, @asset
   end
 
   def update_asset
@@ -115,6 +127,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_asset
+    authorize! :delete, @asset
     @assets = Asset.all
     @asset = Asset.find(params[:id])
     if @asset.destroy
@@ -130,10 +143,12 @@ class FinanceController < ApplicationController
 
   def each_asset_view
     @asset = Asset.find(params[:id])
+    authorize! :read, @asset
   end
 
   def new_liability
     @liability = Liability.new
+    authorize! :read, @liability
   end
 
   def create_liability
@@ -145,10 +160,12 @@ class FinanceController < ApplicationController
 
   def view_liability
     @liabilities = Liability.all
+    authorize! :read, @liabilities.first
   end
 
   def edit_liability
     @liability = Liability.find(params[:id])
+    authorize! :update, @liability
   end
 
   def update_liability
@@ -160,6 +177,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_liability
+    authorize! :delete, @liability
     @liabilities = Liability.all
     @liability = Liability.find(params[:id])
     if @liability.destroy
@@ -169,6 +187,7 @@ class FinanceController < ApplicationController
 
   def each_liability_view
     @liability = Liability.find(params[:id])
+    authorize! :read, @liability
   end
 
   def liability_list
@@ -179,11 +198,13 @@ class FinanceController < ApplicationController
 
   def automatic_transaction
     @automatic_transactions = FinanceTransactionTrigger.all
+    authorize! :read, @automatic_transactions.first
   end
 
   def new_automatic_transaction
     @automatic_transaction = FinanceTransactionTrigger.new
     @categories = FinanceTransactionCategory.all
+    authorize! :create, @automatic_transaction
   end
 
   def create_automatic_transaction
@@ -197,6 +218,7 @@ class FinanceController < ApplicationController
   def edit_automatic_transaction
     @automatic_transaction = FinanceTransactionTrigger.find(params[:id])
     @categories = FinanceTransactionCategory.all
+    authorize! :update, @automatic_transaction
   end
 
   def update_automatic_transaction
@@ -208,6 +230,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_automatic_transaction
+    authorize! :delete, @automatic_transaction
     @automatic_transaction = FinanceTransactionTrigger.find(params[:id])
     if @automatic_transaction.destroy
       flash[:notice] = 'Automatic transaction deleted successfully'
@@ -218,6 +241,7 @@ class FinanceController < ApplicationController
   def new_expense
     @transaction = FinanceTransaction.new
     @categories = FinanceTransactionCategory.where(is_income: false)
+    authorize! :create, @transaction
   end
 
   def create_expense
@@ -245,11 +269,13 @@ class FinanceController < ApplicationController
       flash[:alert] = 'Please select start date'
       render 'view_expense'
     end
+    authorize! :read, @expenses.first
   end
 
   def edit_expense
     @transaction = FinanceTransaction.find(params[:id])
     @categories = FinanceTransactionCategory.where(is_income: false)
+    authorize! :update, @transaction
   end
 
   def update_expense
@@ -264,6 +290,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_expense
+    authorize! :delete, @transaction
     @transaction = FinanceTransaction.find(params[:id])
     @transaction.destroy
     flash[:notice] = 'Expense has been deleted from accounts'
@@ -281,6 +308,7 @@ class FinanceController < ApplicationController
   def new_income
     @transaction = FinanceTransaction.new
     @categories = FinanceTransactionCategory.where(is_income: true)
+    authorize! :create, @transaction
   end
 
   def create_income
@@ -308,11 +336,13 @@ class FinanceController < ApplicationController
       flash[:alert] = 'Please select start date'
       render 'view_income'
     end
+    authorize! :read, @incomes.first
   end
 
   def edit_income
     @transaction = FinanceTransaction.find(params[:id])
     @categories = FinanceTransactionCategory.where(is_income: true)
+    authorize! :create, @transaction
   end
 
   def update_income
@@ -327,6 +357,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_income
+    authorize! :delete, @transaction
     @transaction = FinanceTransaction.find(params[:id])
     @transaction.destroy
     flash[:notice] = 'Income has been deleted from accounts'
@@ -355,6 +386,7 @@ class FinanceController < ApplicationController
       flash[:alert] = 'Please select start date'
       render 'transaction_report'
     end
+    authorize! :read, @categories.first
   end
 
   def expense_details
@@ -363,6 +395,7 @@ class FinanceController < ApplicationController
     @category = FinanceTransactionCategory.find(params[:category])
     @expenses = @category.finance_transactions.where(transaction_date: @start_date..@end_date)
     render 'expense_list'
+    authorize! :read, @category
   end
 
   def income_details
@@ -371,6 +404,7 @@ class FinanceController < ApplicationController
     @category = FinanceTransactionCategory.find(params[:category])
     @incomes = @category.finance_transactions.where(transaction_date: @start_date..@end_date)
     render 'income_list'
+    authorize! :read, @category
   end
 
   def finance_transaction_report
@@ -397,11 +431,13 @@ class FinanceController < ApplicationController
       flash[:alert] = 'Please select start date'
       render 'compare_report'
     end
+    authorize! :read, @categories.first
   end
 
   def new_master_category
     @master_category = FinanceFeeCategory.new
     @batches = Batch.all
+    authorize! :create, @master_category
   end
 
   def assign_batch
@@ -427,11 +463,13 @@ class FinanceController < ApplicationController
   def fees_list
     @batch = Batch.find(params[:batch][:id])
     @master_categories = @batch.finance_fee_categories.all
+    authorize! :read, @master_categories.first
   end
 
   def edit_master_category
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:id])
+    authorize! :update, @master_category
   end
 
   def update_master_category
@@ -444,6 +482,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_master_category
+    authorize! :delete, @master_category
     @batch = Batch.find(params[:batch_id])
     @master_category = @batch.finance_fee_categories.find(params[:id])
     if @master_category.destroy
@@ -455,11 +494,13 @@ class FinanceController < ApplicationController
   def new_fees_particular
     @fee = FinanceFeeParticular.new
     @categories = FinanceFeeCategory.all
+    authorize! :create, @fee
   end
 
   def category_batch
     @master_category = FinanceFeeCategory.find(params[:id])
     @batches = @master_category.batches
+    authorize! :read, @master_category
   end
 
   def create_fees_particular
@@ -498,22 +539,26 @@ class FinanceController < ApplicationController
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:id])
     @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
+    authorize! :read, @master_category
   end
 
   def new_particular_fee
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:id])
     @fee = FinanceFeeParticular.new
+    authorize! :create, @fee
   end
 
   def student_admission_no
     @master_category = FinanceFeeCategory.find(params[:id])
     @fee = FinanceFeeParticular.new
+    authorize! :read, @fee
   end
 
   def student_category
     @master_category = FinanceFeeCategory.find(params[:id])
     @fee = FinanceFeeParticular.new
+    authorize! :read, @fee
   end
 
   def create_particular_fee
@@ -539,6 +584,7 @@ class FinanceController < ApplicationController
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:master_id])
     @fee = @master_category.finance_fee_particulars.find(params[:id])
+    authorize! :update, @fee
   end
 
   def update_particular_fee
@@ -552,6 +598,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_particular_fee
+    authorize! :delete, @fee
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:master_id])
     @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
@@ -564,6 +611,7 @@ class FinanceController < ApplicationController
   def new_fee_discount
     @discount = FeeDiscount.new
     @categories = FinanceFeeCategory.all
+    authorize! :create, @discount
   end
 
   def discount_type
@@ -605,18 +653,21 @@ class FinanceController < ApplicationController
   def fee_category
     @batch = Batch.find(params[:id])
     @categories = @batch.finance_fee_categories.all
+    authorize! :read, @categories.first
   end
 
   def discount_view
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:id])
     @discounts = @master_category.fee_discounts.where(batch_id: @batch.id)
+    authorize! :read, @discounts.first
   end
 
   def edit_fee_discount
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:master_id])
     @discount = @master_category.fee_discounts.find(params[:id])
+    authorize! :update, @discount
   end
 
   def update_fee_discount
@@ -630,6 +681,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_fee_discount
+    authorize! :delete, @discount
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:master_id])
     @discount = @master_category.fee_discounts.find(params[:id])
@@ -642,6 +694,7 @@ class FinanceController < ApplicationController
   def new_fee_collection
     @collection = FinanceFeeCollection.new
     @categories = FinanceFeeCategory.all
+    authorize! :create, @collection
   end
 
   def create_fee_collection
@@ -676,12 +729,14 @@ class FinanceController < ApplicationController
   def view_fee_collection
     @batch = Batch.find(params[:id])
     @collections = @batch.finance_fee_collections.all
+    authorize! :read, @collections.first
   end
 
   def edit_fee_collection
     @batch = Batch.find(params[:batch_id])
     @collections = @batch.finance_fee_collections.all
     @collection = @batch.finance_fee_collections.find(params[:id])
+    authorize! :update, @collection
   end
 
   def update_fee_collection
@@ -694,6 +749,7 @@ class FinanceController < ApplicationController
   end
 
   def delete_fee_collection
+    authorize! :delete, @collection
     @batch = Batch.find(params[:batch_id])
     @collections = @batch.finance_fee_collections.all
     @collection = @batch.finance_fee_collections.find(params[:id])
@@ -706,16 +762,19 @@ class FinanceController < ApplicationController
     @collection = FinanceFeeCollection.find(params[:id])
     @particulars = @collection.fee_collection_particulars
     @discounts = @collection.fee_collection_discounts
+    authorize! :read, @collection
   end
 
   def fees_submission_batch
     @batches=Batch.includes(:course).all
     @collections=Batch.first.finance_fee_collections if Batch.first
+    authorize! :read, @collections.first
   end
 
   def fee_collection_date
     @batch = Batch.find(params[:id])
     @collections = @batch.finance_fee_collections.all
+    authorize! :read, @collections.first
   end
 
   def student_fees
@@ -730,6 +789,7 @@ class FinanceController < ApplicationController
     @discounts = @collection.fee_collection_discounts
     @transactions = @fee.finance_transactions
     @fines = @fee.finance_fines
+    authorize! :read, @collection
   end
 
   def student_fees_details
@@ -748,6 +808,7 @@ class FinanceController < ApplicationController
     @discounts = @collection.fee_collection_discounts
     @transactions = @fee.finance_transactions
     @fines = @fee.finance_fines
+    authorize! :read, @collection
   end
 
   def pay_fine
@@ -768,6 +829,7 @@ class FinanceController < ApplicationController
     @discounts = @collection.fee_collection_discounts
     @transactions = @fee.finance_transactions
     @fines = @fee.finance_fines
+    authorize! :read, @collection
   end
 
   def pay_fee
@@ -795,6 +857,7 @@ class FinanceController < ApplicationController
     @discounts = @collection.fee_collection_discounts
     @transactions = @fee.finance_transactions
     @fines = @fee.finance_fines
+    authorize! :read, @collection
   end
 
   def student_fee_receipt
@@ -819,6 +882,7 @@ class FinanceController < ApplicationController
   def fees_collection_student
     @student = Student.find(params[:id])
     @collections = @student.finance_fee_collections
+    authorize! :read, @collections.first
   end
 
   def student_fees_submission
@@ -831,6 +895,7 @@ class FinanceController < ApplicationController
     @discounts = @collection.fee_collection_discounts
     @transactions = @fee.finance_transactions
     @fines = @fee.finance_fines
+    authorize! :read, @collection
   end
 
   def student_search
@@ -841,6 +906,7 @@ class FinanceController < ApplicationController
   def fee_collection_structure
     @student = Student.find(params[:id])
     @collections = @student.finance_fee_collections
+    authorize! :read, @collections.first
   end
 
   def student_fees_structure
@@ -849,6 +915,7 @@ class FinanceController < ApplicationController
     @category = @collection.finance_fee_category
     @particulars = @collection.fee_collection_particulars
     @discounts = @collection.fee_collection_discounts
+    authorize! :read, @collection
   end
 
   def fee_structure
@@ -865,6 +932,7 @@ class FinanceController < ApplicationController
     @courses=Course.all
     @batches=Course.first.batches if Course.first
     @collections=Batch.first.finance_fee_collections if Batch.first 
+    authorize! :read, @collections.first
   end
 
   def batch_choice
@@ -875,11 +943,13 @@ class FinanceController < ApplicationController
   def collection_choice
     @batch = Batch.find(params[:id])
     @collections = @batch.finance_fee_collections
+    authorize! :read, @collections.first
   end
 
   def defaulter_students
     @collection = FinanceFeeCollection.find(params[:id])
     @students = @collection.students
+    authorize! :read, @collection
   end
 
   def fees_defaulters_list
@@ -899,6 +969,7 @@ class FinanceController < ApplicationController
     @discounts = @collection.fee_collection_discounts
     @transactions = @fee.finance_transactions
     @fines = @fee.finance_fines
+    authorize! :read, @collection
   end
 
   def approve_monthly_payslip

@@ -4,6 +4,7 @@ class ExamsController < ApplicationController
     @batch = @exam_group.batch
     @subjects = @batch.subjects.where(no_exams: false)
     @exam = @exam_group.exams.build
+    authorize! :create, @exam_group
   end
 
   def create
@@ -24,6 +25,7 @@ class ExamsController < ApplicationController
     @exam_group = @exam.exam_group
     @batch = @exam.exam_group.batch
     @subjects = @batch.subjects.where(no_exams: false)
+    authorize! :update, @exam
   end
 
   def update
@@ -54,6 +56,7 @@ class ExamsController < ApplicationController
       end
     end
     @exam_grade = @exam.exam_group.batch.grading_levels.all
+    authorize! :update, @exam
   end
 
   def update_exam_score
@@ -128,6 +131,7 @@ class ExamsController < ApplicationController
   end
 
   def destroy
+    authorize! :delete, @exam
     @exam = Exam.find(params[:id])
     @exam.destroy
     redirect_to exam_groups_exams_path(@exam.exam_group)
