@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords'}
   root 'home#dashboard'
-
+  get 'home/dashboard'
   resources :home do
     get :dashboard
   end
