@@ -126,6 +126,8 @@ get 'exam_reports/:exam_group_id/student_exam_report/:student_id',
 get 'exam_reports/:batch_id/student_report/:student_id',
                     to: 'exam_reports#student_report',as: 'exam_reports_student_report'
 get 'exam_reports/:exam_group_id/consolidated_report',to: 'exam_reports#consolidated_report',as: 'exam_reports_consolidated_report'
+<<<<<<< HEAD
+
 # get 'exam_reports/:batch_id/consolidated_archived_report',
                     # to: 'exam_reports#consolidated_archived_report',as: 'exam_reports_consolidated_archived_report'
 # get 'exam_reports/archived_student_report'
@@ -145,6 +147,7 @@ get 'exam_reports/generate_student_ranking_report3'
 get 'exam_reports/view_transcripts'
 get 'exam_reports/generate_view_transcripts'
 # get 'exam_reports/:student_id/archived_student/',to: 'exam_reports#archived_student',as: 'exam_reports_archived_student'
+
 get 'exam_reports/:student_id/student_view_transcripts/',to: 'exam_reports#student_view_transcripts',as: 'exam_reports_student_view_transcripts'
 get 'exam_reports/ranking_level_report'
 get 'exam_reports/select_mode'
@@ -636,6 +639,7 @@ resources :exam_reports do
     get :consolidated_archived_report
   end
 end
+
 
 resources :courses do
   resources :exam_setting

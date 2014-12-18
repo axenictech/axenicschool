@@ -254,7 +254,7 @@ class ExamReportsController < ApplicationController
   end
 
   def subject_wise_ranking_report
-    @subject = Subject.find(params[:subject_id])
+    @subject = Subject.find(params[:id])
     @batch = @subject.batch
     @students = @batch.students.all
     @exam_groups = @batch.exam_groups.where(result_published: true)
