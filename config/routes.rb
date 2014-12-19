@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
 devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords'}
   root 'home#dashboard'
-  get 'home/dashboard'
   resources :home do
-    get :dashboard
+    collection { get :dashboard }
   end
 
   resources :categories
@@ -139,6 +138,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :elective
       get :assign_all
       get :remove_all
+      get :archived_profile
     end
     resources :guardians
 
@@ -195,7 +195,12 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :showdep
     end
   end
-  resources :calender
+  
+  resources :calender do
+    member do
+      get :change
+    end
+  end
  
 
   resources :weekdays do
