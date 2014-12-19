@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords'}
   root 'home#dashboard'
 
-
   resources :home do
     collection { get :dashboard }
 
@@ -140,6 +139,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :elective
       get :assign_all
       get :remove_all
+      get :archived_profile
     end
     resources :guardians
 
@@ -300,6 +300,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :showdep
     end
   end
+
   resources :calender do 
     collection do
       get :event_view
@@ -310,6 +311,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
 
     end
   end 
+
  
 
   resources :weekdays do

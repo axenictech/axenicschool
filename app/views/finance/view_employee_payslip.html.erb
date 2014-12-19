@@ -1,16 +1,16 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Finance',finance_index_path %></li>
-    <li><%= link_to 'Employee Payslip',finance_payslip_path %></li>
-    <li><%= link_to 'Payslip details',finance_view_monthly_payslip_path %></li>
+    <li><%= link_to 'Employee Payslip',payslip_finance_index_path %></li>
+    <li><%= link_to 'Payslip details',view_monthly_payslip_finance_index_path %></li>
     <li>Employee payslip</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
   <div class="col-md-12">
-    <div class="pull-right"><%= link_to 'Pdf Report',finance_employee_payslip_path(id:@employee.id,date:@date,format:"pdf"),class: "btn btn-primary-link btn-xs"%>
+    <div class="pull-right"><%= link_to 'Pdf Report',employee_payslip_finance_index_path(id:@employee.id,date:@date,format:"pdf"),class: "btn btn-primary-link btn-xs"%>
     </div>
   </div>
 </div>
