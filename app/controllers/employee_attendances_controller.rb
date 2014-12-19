@@ -81,7 +81,7 @@ class EmployeeAttendancesController < ApplicationController
   end
 
   def display
-    @deparment = EmployeeDepartment.find(params[:department_id])
+    @deparment = EmployeeDepartment.find(params[:id])
     @employees = @deparment.employees.all
     @today = params[:nextdate].to_date
     @start_date = @today.beginning_of_month
