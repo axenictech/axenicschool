@@ -1,9 +1,9 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Human Resources','/employees'%></li>
-    <li><%= link_to 'Create Payslip',employees_payslip_path%></li>
-    <li><%= link_to 'Select Employee',employees_select_employee_department_path%> </li>
+    <li><%= link_to 'Create Payslip',payslip_employees_path%></li>
+    <li><%= link_to 'Select Employee',select_employee_department_employees_path%> </li>
     <li>Monthly Payslip</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>

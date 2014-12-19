@@ -435,7 +435,7 @@ class StudentsController < ApplicationController
       @student_subject_delete.each(&:destroy)
     end
     flash[:notice_ele] = "Elective subject #{@subject.name} assigned to students successfully"
-    redirect_to students_elective_path(@subject)
+    redirect_to elective_student_path(@subject)
     authorize! :create, @student
   end
 

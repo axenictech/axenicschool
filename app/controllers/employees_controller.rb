@@ -282,11 +282,11 @@ class EmployeesController < ApplicationController
     @date = Date.today.strftime('%Y%m%d')
     if Employee.first.nil?
       @employee.employee_number = 1
-      flash[:notice] = t('first_emp') + ' ' + @employee.employee_number
+      # flash[:notice] = t('first_emp') + ' ' + @employee.employee_number
     else
       @last_employee = Employee.last
       @employee.employee_number = @last_employee.employee_number.next
-      flash[:notice] = t('last_emp') + ' ' + @last_employee.employee_number
+      # flash[:notice] = t('last_emp') + ' ' + @last_employee.employee_number
     end
     authorize! :create, @employee
   end
@@ -486,7 +486,6 @@ class EmployeesController < ApplicationController
  end
 
   def remove_employee
-    authorize! :delete, @employee
     @department = EmployeeDepartment.find(params[:department_id])
     @employee = Employee.find(params[:id])
     @employees = @department.employees.all
@@ -494,6 +493,7 @@ class EmployeesController < ApplicationController
     @assigned_employee = EmployeeSubject.where(employee_id: @employee.id, subject_id: @subject.id)
     @assigned_employee.destroy_all(employee_id: @employee.id, subject_id: @subject.id)
     @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
+    authorize! :read, @employee
   end
 
   def search_employee
