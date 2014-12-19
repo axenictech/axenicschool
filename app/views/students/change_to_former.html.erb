@@ -1,9 +1,9 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-     <li><%= link_to 'Student Details','/students' %></li>
+     <li><%= link_to 'Student Details',students_path %></li>
      <li><%= link_to 'Profile',profile_student_path(@student.id)%></li>
-    <li><%= link_to 'Remove Student',remove_student_path(@student.id)%></li>
+    <li><%= link_to 'Remove Student',remove_students_path(@student.id)%></li>
     <li>Leaving School</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
