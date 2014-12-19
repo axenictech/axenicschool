@@ -1,9 +1,11 @@
 <div>
   <ul class="breadcrumb">
      <li><%= link_to 'Home',dashboard_home_index_path %></li>
-     <li><%= link_to 'Student Details','/students' %></li>
-      <li><%= link_to 'Student Profile',students_profile_path(@student.id)%></li>
-	<li><%= link_to 'Guardians Details',students_dispguardian_path(@student.id)%></li>
+
+     <li><%= link_to 'Student Details',students_path %></li>
+      <li><%= link_to 'Student Profile',profile_student_path(@student.id)%></li>
+	<li><%= link_to 'Guardians Details',dispguardian_students_path(@student.id)%></li>
+
      <li>Edit Parent/guardian details</li>
   </ul>
 </div>

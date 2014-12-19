@@ -1,7 +1,7 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-     <li><%= link_to 'Student Details','/students' %></li>
+     <li><%= link_to 'Student Details',students_path %></li>
      <li>Profile</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
@@ -14,7 +14,7 @@
       <%= link_to 'Reports', archived_report_students_path(@student), class: "btn btn-primary-link btn-xs" %>
       <%= link_to "Guardians", archived_student_guardian_students_path(@student), class: "btn btn-primary-link btn-xs" %>
       <%= link_to "Send email",report_email_students_path(@student), class: "btn btn-primary-link btn-xs" %>
-      <%= link_to "Generate TC", generate_tc_students_path(@student, format:'pdf'), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to "Generate TC", generate_tc_student_path(@student, format:'pdf'), class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>

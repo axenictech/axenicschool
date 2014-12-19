@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
-     <li><%= link_to 'Student Details','/students' %></li>
-      <li><%= link_to 'Profile',students_profile_path(@student.id)%></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
+     <li><%= link_to 'Student Details',students_path %></li>
+      <li><%= link_to 'Profile',profile_student_path(@student.id)%></li>
        <li>Reports Center</li>
 
   </ul>
@@ -25,7 +25,7 @@
           <div class="col-md-4">
           <h4>Recent Exams</h4>
       <% @batch.exam_groups.all.each do |eg|%>
-      <p><%=link_to eg.name,students_recent_exam_report_path(exam_group_id:eg.id,student_id:@student.id) %></p>
+      <p><%=link_to eg.name,recent_exam_report_students_path(exam_group_id:eg.id,student_id:@student.id) %></p>
       <%end%>
       </div>
       <div class="col-md-4">
@@ -36,7 +36,7 @@
         <p><%=link_to s.name,subject_wise_report_students_path(subject_id:s.id,student_id:@student.id)%></p>
         <%else%>
           <% unless is_elective.nil?%>
-            <p><%=link_to s.name,students_subject_wise_report_path(subject_id:s.id,student_id:@student.id)%></p>
+            <p><%=link_to s.name,subject_wise_report_students_path(subject_id:s.id,student_id:@student.id)%></p>
           <%end%>
         <%end%>
       <%end%>
@@ -52,7 +52,7 @@
             <h3>Attendance</h3>
             <hr>
              <h4>Detailed Reports</h4>
-              <p><%=link_to 'Current year report',students_attendance_report_path(@student.id)%></p>
+              <p><%=link_to 'Current year report',attendance_report_students_path(@student.id)%></p>
    
           </div>
           </fieldset>
@@ -60,49 +60,3 @@
       </div>
       </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-    <h3>Attendance</h3>
-    <h4>Detailed Reports</h4>
-    <p><%=link_to 'Current year report',attendance_report_students_path(@student.id)%></p>
-  </div>
-=======
->>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
-
-    

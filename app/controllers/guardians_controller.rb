@@ -41,8 +41,8 @@ class GuardiansController < ApplicationController
     @student = Student.find(params[:student_id])
     @guard = @student.guardians.find(params[:id])
     if @guard.update(guardian_params)
-      redirect_to students_dispguardian_path(@guard.student)
-      els e
+      redirect_to dispguardian_students_path(@guard.student)
+      else
       render 'edit '
    end
   end
