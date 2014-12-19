@@ -8,7 +8,7 @@
   <ul >
     <% @batch.students.each do |s| %>
       <li>
-      <%=link_to s.first_name+" "+s.last_name,exam_reports_student_exam_report_path(@exam_group,s),remote:true%>
+      <%=link_to s.first_name+" "+s.last_name,student_exam_report_exam_report_path(@exam_group,s),remote:true%>
       </li>
     <% end %>
   </ul>

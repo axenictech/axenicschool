@@ -1,6 +1,6 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Exams','/exams'%></li>
     <li>Connect Exams </li>
   </ul>
@@ -19,13 +19,13 @@
             <div class="box-content">
             <fieldset>
 
- <%=form_for :connect_exam , url:{action:'update_connect_exam',format:@batch.id}, method: :get do |f| %>
+ <%=form_for :connect_exam , url:{action:'update_connect_exam',id:@batch.id}, method: :patch do |f| %>
   <div class="row">
   <div class="col-md-9"></div>
 
         <b>Select:</b> 
-        <%= link_to  'All', exam_groups_assign_all_path(@batch),remote:true,class: "btn btn-primary-link btn-xs" %>&nbsp;
-        <%= link_to  'None', exam_groups_remove_all_path(@batch), remote:true,class: "btn btn-primary-link btn-xs" %>
+        <%= link_to  'All', assign_all_exam_group_path(@batch),remote:true,class: "btn btn-primary-link btn-xs" %>&nbsp;
+        <%= link_to  'None', remove_all_exam_group_path(@batch), remote:true,class: "btn btn-primary-link btn-xs" %>
       
 
     </div>

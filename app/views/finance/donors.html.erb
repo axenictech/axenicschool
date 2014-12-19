@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Finance',finance_index_path %></li>
-    <li><%= link_to 'Donation',finance_donation_path %></li>
+    <li><%= link_to 'Donation',donation_finance_index_path %></li>
     <li>Donors list</li>
   </ul>
 </div>
@@ -31,7 +31,7 @@
 		        <% @donors.each do |d| %>
 		          <tr>
 		            <td>
-		              <%= link_to d.donor,finance_donation_receipt_path(d)%>
+		              <%= link_to d.donor,donation_receipt_finance_path(d)%>
 		            </td>
 		            <td class="col-3"><%= d.description%></td>
 		            <td class="col-3"><%= d.amount%></td>
@@ -39,11 +39,11 @@
 		            <td class="center">
 		              <div class="label-success label label-default">
 		              <i class="glyphicon glyphicon-edit icon-white"></i> 
-		              <%= link_to 'Edit',finance_edit_donation_path(d), class: 'a-action'%></div>
+		              <%= link_to 'Edit',edit_donation_finance_path(d), class: 'a-action'%></div>
 
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
-		              <%= link_to 'Delete' ,finance_delete_donation_path(d),method: :delete, data:{confirm:"Are You sure to delete donor '#{d.donor}'?"}, class: 'a-action'%></td>	</div>
+		              <%= link_to 'Delete' ,delete_donation_finance_path(d),method: :delete, data:{confirm:"Are You sure to delete donor '#{d.donor}'?"}, class: 'a-action'%></td>	</div>
 		            </td>
 		          </tr>
 		        <% end %>

@@ -33,10 +33,10 @@
           <tr>
             <td class="fc-header-left">
               <%unless @student.id==@finance_fees.first.student.id%>
-                <%= link_to '◄ prev',finance_student_fees_details_path(id:@collection.id,finance_fee_id:@previous),remote:true,class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
+                <%= link_to '◄ prev',student_fees_details_finance_path(id:@collection.id,finance_fee_id:@previous),remote:true,class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
               <%end%>
               <%unless @student.id==@finance_fees.last.student.id%>
-                <%= link_to 'next ►',finance_student_fees_details_path(id:@collection.id,finance_fee_id:@next),remote:true, class: "fc-button fc-button-next fc-state-default fc-corner-right"%></p>
+                <%= link_to 'next ►',student_fees_details_finance_path(id:@collection.id,finance_fee_id:@next),remote:true, class: "fc-button fc-button-next fc-state-default fc-corner-right"%></p>
               <%end%>
               <span class="fc-header-space"></span>
             </td>

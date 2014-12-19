@@ -1,10 +1,10 @@
 
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
-     <li><%=link_to 'Step 1',students_admission1_path%></li>
-      <li><%=link_to 'Step 2',students_admission2_path(@student.id)%></li>
-       <li><%=link_to 'Step 2.1',students_admission2_1_path(@student.id)%></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
+     <li><%=link_to 'Step 1',admission1_students_path%></li>
+      <li><%=link_to 'Step 2',admission2_students_path(@student.id)%></li>
+       <li><%=link_to 'Step 2.1',admission2_1_students_path(@student.id)%></li>
      <li>Admission(Step 3 - Emergency Contact)</li>
   </ul>
 </div>

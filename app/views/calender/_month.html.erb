@@ -37,8 +37,8 @@
       <tbody>
         <tr>
           <td class="fc-header-left">
-            <%= link_to "◄ prev", calender_change_path(@show_month-1.month),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
-            <%= link_to "next ►", calender_change_path(@show_month+1.month),remote:true, class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
+            <%= link_to "◄ prev", change_calender_path(@show_month-1.month),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
+            <%= link_to "next ►", change_calender_path(@show_month+1.month),remote:true, class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
             <span class="fc-header-space"></span>
           </td>
           <td class="fc-header-center">
