@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
 devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords'}
   root 'home#dashboard'
-  get 'home/dashboard'
+
   resources :home do
-    get :dashboard
+    collection { get :dashboard }
   end
 
   resources :categories
@@ -179,6 +179,110 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     end
   end
 
+  resources :exam_reports do
+    collection do
+      get :report_center
+      get :exam_wise_report
+      get :subject_wise_report
+      get :generate_exam_report
+      get :select_batch
+      get :choose_batch
+      get :generate_subject_report
+      get :grouped_exam_report
+      get :generate_grouped_report
+      get :archived_student_report
+      get :select_course
+      get :generate_archived_report
+      get :exam_group_wise_report
+      get :student_ranking_per_subject
+      get :rank_report_batch
+      get :generate_ranking_report
+      get :student_ranking_per_batch
+      get :generate_student_ranking_report
+      get :student_ranking_per_course
+      get :generate_student_ranking_report2
+      get :student_ranking_per_school
+      get :student_ranking_per_attendance
+      get :generate_student_ranking_report3
+      get :view_transcripts
+      get :generate_view_transcripts
+      get :ranking_level_report
+      get :select_mode
+      get :select_rank
+      get :select_rank_mode
+      get :generate_ranking_level_report
+      get :combined_report
+      get :combined_details
+      get :all
+      get :none
+      get :all1
+      get :none1
+      get :generate_combined_report
+      get :exam_wise_students_report
+      get :exam_wise_consolidated_report
+      get :subject_wise_students_report
+      get :grouped_exam_students_report
+      get :archived_students_exam_report
+      get :archived_students_consolidated_report
+      get :subject_wise_ranking_report
+      get :batch_wise_ranking_report
+      get :course_wise_ranking_report
+      get :school_wise_ranking_report
+      get :attendance_wise_ranking_report
+      get :students_transcripts_report
+    end
+    member do
+      get :student_exam_report
+      get :student_report
+      get :consolidated_report
+      get :consolidated_archived_report
+      get :archived_student
+      get :student_view_transcripts
+    end
+  end
+
+  resources :exam_setting do
+    member do
+      get :setting
+      get :settingrank
+      get :editRank
+      delete :destroyRank
+    end
+    collection do
+      get :select
+      get :selectrank
+      get :newrank
+      post :createrank
+      patch :updateRank
+    end
+  end
+
+  resources :exam_groups do
+    collection do
+      patch :update_exam_score
+      get :select
+      get :connect_exam
+      get :assign_all
+      get :remove_all
+      get :update_connect_exam
+      get :publish_exam
+      get :publish_result
+      get :previous_exam_data
+      get :previous_exam
+      get :previous_exam_group
+      get :previous_exam_details
+      get :previous_exam_scores
+    end
+    member do
+      patch :exam_group_create
+      get :exams
+    end
+  end
+
+  resources :exams do
+    collection { patch :update_exam_score }
+    member { get :exam_score }
+  end
 
   resources :class_timings do
     collection do
@@ -253,86 +357,10 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     resources :time_table_entries
   end
 
-resources :exam_setting do
-   collection do
-     get :newrank
-     get :selectrank
-     post :createrank
-     patch :updateRank
-     get :select
-   end
-   member do
-     delete :destroyRank
-     get :setting
-     get :settingrank
-     get :editRank
-  end
-end
-
-resources :exam_groups do
-
-	collection do 
-		get :select
-		get :previous_exam_data
-		get :publish_exam
-		get :connect_exam
-		get :publish_result
-
-	end
-	member do
-		get :exams
-    post :exam_group_create
-    get :assign_all
-    get :remove_all
-    patch :update_connect_exam
-
-	end
-
-  resources :exams 
-end
-
-resources :exams do
-	member do 
-		get :exam_score
-	end
-    resources :exam_scores
-  end
-
-resources :online_exam_groups
-
-resources :exam_reports do
-  collection do
-    get :report_center
-    get :exam_wise_report
-    get :select_batch
-    get :generate_exam_report
-    get :subject_wise_report
-    get :choose_batch
-    get :generate_subject_report
-    get :subject_wise_students_report
-    get :grouped_exam_report
-    get :generate_grouped_report
-    get :archived_student_report
-    get :select_course
-    get :generate_archived_report
-    get :archived_students_consolidated_report
-    get :exam_group_wise_report
-    get :archived_students_exam_report
-    get :exam_wise_students_report
-
-  end
-  member do
-    get :archived_student
-    get :consolidated_archived_report
-    get :consolidated_report
-    get :student_exam_report
-  end
-end
 
   resources :courses do
     resources :exam_setting
   end
-  resources :online_exams
 
   resources :setting do
     collection do
