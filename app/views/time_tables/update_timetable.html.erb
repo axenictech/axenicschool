@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Time Table',time_tables_path %></li>
-     <li><%= link_to 'Edit Time Table',  time_tables_edit_timetable_path %></li>
+     <li><%= link_to 'Edit Time Table',edit_timetable_time_tables_path %></li>
   
     
     <li>Update Time Table</li>
@@ -13,7 +13,7 @@
   <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'Edit entries',time_table_entries_path(@time_table), class: "btn btn-primary-link btn-xs" %>
-     <%=link_to 'Delete',time_tables_time_table_delete_path(@time_table), method: :delete, data:{ confirm: "Are you sure to delete"}, class: "btn btn-primary-link btn-xs" %>
+     <%=link_to 'Delete',time_table_delete_time_tables_path(@time_table), method: :delete, data:{ confirm: "Are you sure to delete"}, class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>

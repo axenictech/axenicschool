@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords'}
   root 'home#dashboard'
 
+
   resources :home do
     collection { get :dashboard }
+
   end
 
   resources :categories
@@ -75,7 +77,6 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     resources :subjects do
       collection do
         get :subject
-        get :select
       end
     end
     resources :elective_groups do
