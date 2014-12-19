@@ -928,7 +928,7 @@ class EmployeesController < ApplicationController
       p @archived_employee
       @employee.destroy
       flash[:notice] = 'Employee #{@employee.first_name} is Archived Successfully'
-      redirect_to employees_archived_employee_profile_path(@employee)
+      redirect_to archived_employee_profile_employees_path(@employee)
     end
  end
 

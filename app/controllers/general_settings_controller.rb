@@ -9,7 +9,7 @@ class GeneralSettingsController < ApplicationController
 
     if @general_setting.update(general_setting_params)
       flash[:notice] = 'General settings updated successfully'
-      redirect_to home_dashboard_path
+      redirect_to dashboard_home_index_path
     else
       render 'new'
     end
