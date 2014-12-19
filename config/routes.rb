@@ -195,12 +195,22 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :showdep
     end
   end
-  resources :calender
+  resources :calender do 
+    collection do
+      get :event_view
+    end
+
+    member do 
+      get :change 
+
+    end
+  end 
  
 
   resources :weekdays do
     collection do
       get :select
+
     end
   end
   
@@ -267,9 +277,14 @@ resources :exam_groups do
 		get :publish_exam
 		get :connect_exam
 		get :publish_result
+
 	end
 	member do
 		get :exams
+    post :exam_group_create
+    get :assign_all
+    get :remove_all
+    patch :update_connect_exam
 
 	end
 
@@ -303,10 +318,14 @@ resources :exam_reports do
     get :archived_students_consolidated_report
     get :exam_group_wise_report
     get :archived_students_exam_report
+    get :exam_wise_students_report
+
   end
   member do
     get :archived_student
     get :consolidated_archived_report
+    get :consolidated_report
+    get :student_exam_report
   end
 end
 

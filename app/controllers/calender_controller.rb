@@ -7,7 +7,7 @@ class CalenderController < ApplicationController
   end
 
   def change
-    @show_month = params[:format].to_date
+    @show_month = params[:id].to_date
     @start_date = @show_month.beginning_of_month
     @start_date_day = @start_date.wday
     @last_day = @show_month.end_of_month
