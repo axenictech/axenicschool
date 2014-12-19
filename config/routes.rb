@@ -300,17 +300,24 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :showdep
     end
   end
-  
-  resources :calender do
-    member do
-      get :change
+
+  resources :calender do 
+    collection do
+      get :event_view
     end
-  end
+
+    member do 
+      get :change 
+
+    end
+  end 
+
  
 
   resources :weekdays do
     collection do
       get :select
+
     end
   end
   
@@ -352,6 +359,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
   resources :batches do
     resources :time_table_entries
   end
+
 
   resources :courses do
     resources :exam_setting
