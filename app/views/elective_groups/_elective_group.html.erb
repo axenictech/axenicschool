@@ -14,7 +14,7 @@
     <% @elective_groups.each do |elective_group| %>
       <tr>
         <td>
-          <%= link_to elective_group.name, elective_groups_elective_subject_path(elective_group) %>
+          <%= link_to elective_group.name, elective_subject_elective_group_path(elective_group) %>
         </td>
         <td class="center">
           <div class="label-success label label-default">
@@ -27,7 +27,7 @@
 
           <div class="label-primary label label-default">
           <i class="glyphicon glyphicon-plus icon-white"></i>
-          <%=link_to 'Add Elective Subject',elective_groups_elective_subject_path(elective_group), class: "a-action" %></div>
+          <%=link_to 'Add Elective Subject',elective_subject_elective_group_path(elective_group), class: "a-action" %></div>
         </td>
       </tr>
     <% end %>

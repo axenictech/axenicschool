@@ -23,11 +23,12 @@
             <td class="center">
               <div class="label-primary label label-default">
               <i class="glyphicon glyphicon-share icon-white"></i> 
-              <%= link_to 'Batch Transfer', batch_transfers_transfer_path(batch),class: "a-action"%></div>
+              <%= link_to 'Batch Transfer', transfer_batch_transfer_path(batch),class: "a-action"%></div>
 
               <div class="label-primary label label-default">
               <i class="glyphicon glyphicon-flag icon-white"></i> 
-              <%= link_to 'Graduation',batch_transfers_graduation_path(batch), class: "a-action"%></div>
+              <%= link_to 'Graduation',
+              graduation_batch_transfer_path(batch), class: "a-action"%></div>
             </td>
           </tr>
         <% end %>
