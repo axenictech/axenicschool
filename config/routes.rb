@@ -131,6 +131,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       post :archived_student_create
       post :assign_elective
       get :batch_details
+      get :recent_exam_report
     end
     member do
       get :profile

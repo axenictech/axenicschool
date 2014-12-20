@@ -1,10 +1,9 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-     <li><%= link_to 'Student Details','/students' %></li>
-     
-     <li><%= link_to 'Profile',archived_student_profile_student_path(@student)%></li>
-     <li>Guardians</li>
+    <li><%= link_to 'Student Details',students_path %></li>
+    <li><%= link_to 'Profile',archived_student_profile_student_path(@student)%></li>
+    <li>Guardians</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 

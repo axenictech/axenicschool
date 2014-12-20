@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-    <li><%= link_to 'Exams','/exams'%></li>
-    <li><%= link_to 'Exam Management','/exam_groups'%></li>
+    <li><%= link_to 'Exams',exams_path%></li>
+    <li><%= link_to 'Exam Management',exam_groups_path%></li>
     <li> Previous Exam Data</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
