@@ -4,12 +4,12 @@
            <% @priority={"index"=>@index}%>
             <td><%= r.name %></td>
                  <% unless r==@rank_levels.last%>
-                 <td><%=link_to '▼',exam_setting_decrease_priority_path(r.course,r,@priority),remote:true%></td>
+                 <td><%=link_to '▼',decrease_priority_exam_setting_path(r.course,r,@priority),remote:true%></td>
                  <%else%>
                  <td></td>
                  <%end%>
                  <% unless r==@rank_levels.first%>
-                 <td><%=link_to '▲',exam_setting_increase_priority_path(r.course,r,@priority),remote:true%></td>
+                 <td><%=link_to '▲',increase_priority_exam_setting_path(r.course,r,@priority),remote:true%></td>
                  <%else%>
                  <td></td>
                  <%end%>
