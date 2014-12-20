@@ -34,7 +34,7 @@
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
-              <%= link_to 'delete',[subject.batch,subject],remote: true,method: :delete,data:{confirm:"Are you sure to delete subject: #{subject.name}?"}, class: "a-action"%></div>
+              <%= link_to 'delete',[subject.batch,subject],method: :delete,data:{confirm:"Are you sure to delete subject: #{subject.name}?"}, class: "a-action"%></div>
             </td>
           </tr>
         <% end %>

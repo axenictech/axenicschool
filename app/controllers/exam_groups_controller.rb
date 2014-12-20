@@ -59,7 +59,7 @@ class ExamGroupsController < ApplicationController
     @exam_group = ExamGroup.find(params[:id])
     @exams = @exam_group.exams.all
     @course = @exam_group.batch.course
-    authroize! :read, @exam_group
+    #authroize! :read, @exam_group
   end
 
   def previous_exam

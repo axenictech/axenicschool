@@ -1,9 +1,9 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-    <li><%= link_to 'Exams','/exams'%></li>
-    <li><%= link_to 'Exam Management','/exam_groups'%></li>
-    <li><%= link_to 'Previous Exam Data',exam_groups_previous_exam_data_path%></li>
+    <li><%= link_to 'Exams',exams_path%></li>
+    <li><%= link_to 'Exam Management',exam_groups_path%></li>
+    <li><%= link_to 'Previous Exam Data',previous_exam_data_exam_groups_path%></li>
     <li> Previous Exam Score</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>

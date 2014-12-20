@@ -4,7 +4,7 @@
     <li><%= link_to 'Examination','/exams'%></li>
     <li><%= link_to 'Exam Management','/exam_groups'%> </li>
     <li><%= link_to 'Exam Group', exam_group_path(@exam_group.batch)%> </li>
-    <li><%= link_to 'Exam',exam_groups_exams_path(@exam_group.id)%></li>
+    <li><%= link_to 'Exam',exams_exam_group_path(@exam_group.id)%></li>
     <li>New Exam Create</li>
   </ul>
 </div>
