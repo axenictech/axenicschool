@@ -46,6 +46,7 @@ class EmployeesController < ApplicationController
     end
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
+    redirect_to dashboard_home_index_path 
   end
 
   def new_department
@@ -89,6 +90,7 @@ class EmployeesController < ApplicationController
     end
     @departments1 = EmployeeDepartment.is_status
     @departments2 = EmployeeDepartment.not_status
+    redirect_to dashboard_home_index_path 
   end
 
   def new_position
@@ -132,6 +134,8 @@ class EmployeesController < ApplicationController
     end
     @positions1 = EmployeePosition.is_status
     @positions2 = EmployeePosition.not_status
+     redirect_to dashboard_home_index_path 
+
   end
 
   def new_bank_field
@@ -171,6 +175,7 @@ class EmployeesController < ApplicationController
     flash[:notice] = 'Bank field deleted Successfully' if @bank_field.destroy
     @bank_fields1 = BankField.is_status
     @bank_fields2 = BankField.not_status
+     redirect_to dashboard_home_index_path 
   end
 
   def new_payroll_category
@@ -214,7 +219,8 @@ class EmployeesController < ApplicationController
     end
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
-  end
+      redirect_to dashboard_home_index_path 
+   end
 
   def active_payroll_category
     @payroll_category_new = PayrollCategory.new
@@ -275,6 +281,8 @@ class EmployeesController < ApplicationController
     end
     @grade1 = EmployeeGrade.is_status
     @grade2 = EmployeeGrade.not_status
+      redirect_to dashboard_home_index_path 
+
   end
 
   def admission1

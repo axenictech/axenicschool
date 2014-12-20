@@ -62,6 +62,7 @@ class TimeTableEntriesController < ApplicationController
     unless @delete_time.nil?
     @time = @delete_time.time_table.id
   end
+    redirect_to dashboard_home_index_path 
   end
 
   def new

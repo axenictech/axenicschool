@@ -80,7 +80,7 @@
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
-              <%= link_to 'Delete',destroy_grade_employee_path(c),remote: true,
+              <%= link_to 'Delete',destroy_grade_employee_path(c),
                     method: :delete, data: { confirm: "Are you sure to delete #{c.name}?" },class: "a-action"%></div>
             </td>
 
@@ -123,7 +123,7 @@
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
-              <%= link_to 'Delete',destroy_grade_employee_path(c),remote: true,
+              <%= link_to 'Delete',destroy_grade_employee_path(c),
                     method: :delete, data: { confirm: "Are you sure to delete #{c.name}?" },class: "a-action"%></div>
             </td>
 
