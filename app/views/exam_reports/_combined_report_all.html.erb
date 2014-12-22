@@ -6,8 +6,8 @@
   </div>
   <div class="fee_category_scroll">
     <div class="sel-list">
-    Select: <%= link_to 'All',exam_reports_all_path(@batch),remote:true%>,
-    <%= link_to 'None',exam_reports_none_path(@batch),remote:true%>
+    Select: <%= link_to 'All',all_exam_reports_path(@batch),remote:true%>,
+    <%= link_to 'None',none_exam_reports_path(@batch),remote:true%>
     </div>
     <div id="all_class_designations"><%= render 'class_designation'%></div>
   </div>
@@ -19,8 +19,8 @@
   </div>
   <div class="fee_category_scroll">
     <div class="sel-list">
-   	Select: <%= link_to 'All',exam_reports_all1_path(@batch),remote:true%>,
-    <%= link_to 'None',exam_reports_none1_path(@batch),remote:true%>
+   	Select: <%= link_to 'All',all1_exam_reports_path(@batch),remote:true%>,
+    <%= link_to 'None',none1_exam_reports_path(@batch),remote:true%>
     </div>
     <div id="all_ranking_levels"><%= render 'ranking_level'%></div>
   </div>

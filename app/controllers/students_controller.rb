@@ -13,9 +13,8 @@ class StudentsController < ApplicationController
       @id = Student.last.id.next
       @student.admission_no = 'S'+@date.to_s+@id.to_s
     end
-    @batches = Batch.all
-    authorize! :create, @student
     @batches = Batch.includes(:course).all
+    authorize! :create, @student
   end
 
   def create

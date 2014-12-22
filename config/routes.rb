@@ -7,7 +7,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
   resources :home do
     collection { get :dashboard }
 
-  end
+  end 
 
   resources :categories
 
@@ -131,6 +131,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       post :archived_student_create
       post :assign_elective
       get :batch_details
+      get :recent_exam_report
     end
     member do
       get :profile
@@ -233,7 +234,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :attendance_wise_ranking_report
       get :students_transcripts_report
     end
-    member do
+    member do 
       get :student_exam_report
       get :student_report
       get :consolidated_report
@@ -249,6 +250,10 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :settingrank
       get :editRank
       delete :destroyRank
+      get :edit_course
+      delete :course
+      get :decrease_priority
+      get :increase_priority
     end
     collection do
       get :select
