@@ -6,21 +6,17 @@
         width:100%;
         margin: 0 auto;
       }
-
-       
       #head {
         height: 100px;
         width: 700px;
         text-align: center;
         font-size: 40px;
         border-color: black;
-
       }
       #head_info {
         text-align: center;
         font-size: 15px;
       }
-
     </style>
   </head>
   <body>
@@ -33,17 +29,14 @@
         </div>
       </div>
       <hr>
-       <br/><h3><center>Student Academic Report </center></h3>
-    <br>
-
+      <br/><h3><center>Student Academic Report </center></h3>
+      <br>
       <h3><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %> - <%= @subject.name.capitalize %></h3>
       <span><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
-     
-   
-<br>
 
-
-
+    </div>
+  </div>
+  <br>
 <table cellpadding="5" cellspacing="5" width="700">
         <tr>
           <td>Exam Name</td>
@@ -80,9 +73,12 @@
                     <td> <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-') %></td>
                     <% end %>
                   <% end %>
+>>>>>>> b6e91866dbbc455eea40320fe6cec93b57d5d778
                 <% end %>
-            </tr>
-      </table>
-</div>
-</body>
-</html>
+              <% end %>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    </body>
+  </html>

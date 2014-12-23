@@ -58,7 +58,7 @@
   </div>
   <div class="box-content">
     <ul id="comments-list">
-      <%= render @newscast.comments.order(created_at: :desc) %>
+      <%= render @newscast.comments.includes(:user).order(created_at: :desc) %>
       <h3 id="comments-heading"></h3>
     </ul>    
   </div>
