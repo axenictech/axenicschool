@@ -1,11 +1,10 @@
 <ul class="errors"></ul>
-
 <div class="row">
 <div class="col-md-2"></div>
 <div class="col-md-6">
 <div class="box-inner">
 <div class="box-header well">
-   <h2> Exam</h2>
+   <h2> Create Exam</h2>
  </div>
 <%= form_for [@exam_group,@exam] do |f| %>
 <fieldset>
@@ -38,9 +37,6 @@
 <%=f.date_field :end_time ,style: "width: 250px", class: "form-control",required:true%>
 </div>
 
-
-
-
 <% unless @exam_group.exam_type=="Grades"%>
 <div class="form-group">
 <b>Maximum Marks:</b>
@@ -54,7 +50,7 @@
 
 <%end%>
 <div class="form-group">
-<%= f.submit ' Submit', class: "btn btn-primary" %>
+<%= f.submit 'Submit', class: "btn btn-primary" %>
 </div>
 </div>
 </div>
