@@ -68,6 +68,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subjects do
+      collection do
+        get :select
+      end
+    end
+
   resources :batches do
     member do
       get :display

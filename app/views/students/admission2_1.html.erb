@@ -15,17 +15,25 @@
        
       </div>
         <div class="box-content">
-         <h4>Following guardians has been saved for <%= @student.first_name + ' ' + @student.last_name %> </h4>
+        <h4><b>Following guardians has been saved for <%= @student.first_name + ' ' + @student.last_name %> </b></h4>
         <ol>
         <% @student.guardians.each do |p| %>
-          <li><h5><%= p.first_name+' '+p.last_name %> - <%= p.relation %></h5></li>
+          <li><h5><b><%= p.first_name+' '+p.last_name %> - <%= p.relation %>M</b></h5></li>
         <%  end %>
         </ol>
+        
 
-        <div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pull-right"> 
         <%= link_to "Add Another Guardian", admission2_students_path(@student),class: "btn btn-primary"%>
         <%= link_to "Finish",admission3_students_path(@student),class: "btn btn-default"%>
-        </div>
+            </div>
+          </div>
+          </div>
+
+
+
       </div>
     </div>
 </div>
