@@ -19,6 +19,7 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
+    @batches=Batch.all.includes(:course)
     if @student.save
       flash[:notice] = 'Student Reord saved successfully please fill the parent detail'
 

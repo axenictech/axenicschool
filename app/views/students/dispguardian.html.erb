@@ -53,7 +53,7 @@
   
   <fieldset>
  <div class="col-md-6">
-      <table id="datatable" class="table table-striped table-bordered responsive">
+      <table id="datatable" class="table table-bordered responsive">
 
 
    
@@ -82,14 +82,14 @@
     </tr>
 
      <tr>
-    			<th> Phone 1:</th>
+    			<th> Contact Number:</th>
         		<td > <%= p.office_phone1 %></td>
         
     </tr>
 
 
      <tr>
-    			<th> Phone 2:</th>
+    			<th> Phone Number:</th>
         		<td > <%= p.office_phone2 %></td>
         
     </tr>
@@ -104,7 +104,7 @@
       </table>
       </div>
        <div class="col-md-6">
-       <table id="datatable" class="table table-striped table-bordered responsive">
+       <table id="datatable" class="table table-bordered responsive">
 
      
      <tr>
@@ -130,9 +130,17 @@
         		<td > <%= p.occupation %></td>
         
     </tr>
-
+   <tr>
+          <th></th>
+          <td></td>
+    </tr>
+     <tr>
+          <th></th>
+          <td></td>
+    </tr>
+  
     <tr >
-    <th></th>
+        <td></td>
     		<td><%= link_to "Edit",edit_student_guardian_path(@student,p),class: "btn btn-primary"%>
     			<%= link_to "Delete",[p.student,p], method: :delete, data: { confirm: "Are you sure to delete"} ,class: 'btn btn-danger'%>
     		</td>

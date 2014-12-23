@@ -32,75 +32,80 @@ Note:&nbsp;&nbsp;<font color="red">Fields Marked with * must be filled</font>
         <div class="col-sm-4">
           
             <div class="form-group">
-       <%= t('First Name')%><span class="necessary-field">*</span>
+      <b>First Name:</b>
+       <span style="color:red">*</span>
          <%=f.text_field :first_name,placeholder: "First Name", class: "form-control"%>
            </div>
              <div class="form-group">
-       <%= t('Last Name')%><span class="necessary-field">*</span>
+      <b>Last Name:</b>
+       <span style="color:red">*</span>
          <%=f.text_field :last_name,placeholder: "Last Name", class: "form-control"%>
        </div>
 
          <div class="form-group">
-       <%= t('Relation')%><span class="necessary-field">*</span>
+      <b>Relation:</b>
+       <span style="color:red">*</span>
          <%=f.text_field :relation,placeholder: "Relation", class: "form-control"%>
        </div>
 
          <div class="form-group">
-       <%= t('Email')%>
+      <b>Email:</b>
          <%=f.text_field :email,placeholder: "Email", class: "form-control"%>
        </div>
 
          <div class="form-group">
-       <%= t('Office Phone1')%>
-         <%=f.text_field :office_phone1,placeholder: "Office Phone1", class: "form-control"%>
+      <b>Contact Number:</b>
+       <span style="color:red">*</span>
+         <%=f.text_field :office_phone1,placeholder: "Contact Number", class: "form-control"%>
        </div>
 
          <div class="form-group">
-       <%= t('Office Phone2')%>
-         <%=f.text_field :office_phone2,placeholder: "Office Phone2", class: "form-control"%>
+        <b>Office Phone:</b>
+         <%=f.text_field :office_phone2,placeholder: "Office Phone", class: "form-control"%>
        </div>
          <div class="form-group">
-       <%= t('Office Address Line1')%>
+        <b>Office Address Line1:</b>
          <%=f.text_field :office_address_line1,placeholder: "Office Address Line1", class: "form-control"%>
        </div>
 </div>
    <div class="col-sm-1"></div>
       <div class="col-sm-4">
           <div class="form-group">
-       <%= t('Office Address Line2')%>
+        <b>Office Address Line2:</b>
          <%=f.text_field :office_address_line2,placeholder: "Office Address Line2", class: "form-control"%>
        </div>
            <div class="form-group">
-       <%= t('City')%>
+        <b>City:</b>
          <%=f.text_field :city,placeholder: "City", class: "form-control"%>
        </div>
            <div class="form-group">
-       <%= t('Country')%>
+        <b>Country:</b>
+        <span style="color:red">*</span>
          <%=f.select :country_id, Country.all.collect{|c| [c.name, c.id]},{prompt:true},{class: "form-control"}%>
        </div>
 
             <div class="form-group">
-       <%= t('dob')%>
+        <b>Date of Birth:</b>
          <%=f.date_field :dob,class: "form-control"%>
        </div>
             <div class="form-group">
-       <%= t('Occupation')%>
+        <b>Occupation:</b>
          <%=f.text_field :occupation,placeholder: "Occupation", class: "form-control"%>
        </div>
 
            <div class="form-group">
-       <%= t('Income')%>
+         <b>Income:</b>
          <%=f.text_field :income,placeholder: "Income", class: "form-control"%>
        </div>
           <div class="form-group">
-       <%= t('Education')%>
+          <b>Education:</b>
          <%=f.text_field :education,placeholder: "Education", class: "form-control"%>
        </div>
      </div>
      </div>
    <div class="col-sm-5 col-sm-offset-5"> 
       <div class="form-actions">               
-        <%= f.submit 'Submit', class: "btn btn-success"%>
+        <%= f.submit 'Submit', class: "btn btn-primary"%>
       </div>
     </div>
   </fieldset>        

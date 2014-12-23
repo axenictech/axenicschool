@@ -33,10 +33,10 @@
       <hr>
  <%= form_for([@newscast, @newscast.comments.build]) do |f| %>
       <% if @comment.errors.any?%>
-          <div class ="errorExplanation" id="error_explanation">
+          <div class="alert alert-danger">
             <ul>
               <% @comment.errors.full_messages.each do |msg| %>
-              <li style="width:300px"><%= msg%></li>
+              <li><%= msg%></li>
               <% end %>
             </ul> 
           </div>

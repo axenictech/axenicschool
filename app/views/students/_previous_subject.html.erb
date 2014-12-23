@@ -6,7 +6,9 @@
     </div>
 
     <div class="modal-body">
-     <ul class="errors"></ul>
+     <ul class="errors">
+     	 
+     </ul>
       <%= form_for @previous_subject, url:{action:'previous_subject_create'}, method: :post,remote:true do |f| %>
 
       <table class="table" style="width:500px" >
@@ -15,13 +17,13 @@
 	
 	
 	<tr>
-	  <td><%= f.label :subject %></td>
-	  <td><%= f.text_field :subject%></td>
+	  <td><b>Subject:</b></td>
+	  <td><%= f.text_field :subject,class: "form-control",style: "width:200px"%></td>
 	</tr>
 	    
 	<tr>
-	  <td><%= f.label :mark%></td>
-	  <td><%= f.text_field :mark%></td>
+	  <td><b>Mark:</b></td>
+	  <td><%= f.text_field :mark,class: "form-control",style: "width:200px"%></td>
 	</tr>
 	
 	<tr>
