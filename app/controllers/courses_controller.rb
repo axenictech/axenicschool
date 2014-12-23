@@ -1,4 +1,7 @@
+# Course Controller
 class CoursesController < ApplicationController
+  before_filter :find_course, only: \
+  [:show, :grouped_batches, :assign_all, :remove_all, :edit, :update]
   def index
     @courses ||= Course.all
     authorize! :read, @courses.first
@@ -13,27 +16,25 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(postparam)
-    if  @course.save
+    if @course.save
       flash[:notice] = t('course_created')
       redirect_to courses_path
     else
-      render action: 'new'
+      render 'new'
     end
   end
 
   def show
-    @course = Course.find(params[:id])
-    @batch = @course.batches.find_by_course_id(params[:id])
+    @batch = @course.batches.where(course_id: params[:id]).take
     @batches = @course.batches.all
     authorize! :read, @course
   end
 
   def grouped_batches
-    @course = Course.find(params[:id])
     @batches = @course.batches.all
     @batch_groups = @course.batch_groups.all
     @batch_group = BatchGroup.new
-    authorize! :create, @course    
+    authorize! :create, @course
   end
 
   def create_batch_group
@@ -55,20 +56,21 @@ class CoursesController < ApplicationController
         render template: 'courses/grouped_batches'
     end
     else
-      flash[:notice_batch_group] = T('batch_select')
+      flash[:notice_batch_group] = t('batch_select')
       redirect_to grouped_batches_course_path(@course)
       end
   end
 
   def edit_batch_group
-    @batch_group = BatchGroup.find(params[:id])
+    @batch_group = BatchGroup.where(id: params[:id]).take
     @course = @batch_group.course
     @batches = @course.batches.all
     authorize! :update, @course
   end
 
   def update_batch_group
-    @batch_group = BatchGroup.find(params[:batch_group][:batch_group_id])
+    @batch_group = BatchGroup.where(id: \
+      params[:batch_group][:batch_group_id]).take
     @batch_group.update(name: params[:batch_group][:name])
     @course = @batch_group.course
     flash[:notice_batch_group] = t('batch_group_updated')
@@ -86,13 +88,11 @@ class CoursesController < ApplicationController
   end
 
   def assign_all
-    @course = Course.find(params[:id])
     @batches = @course.batches.all
     authorize! :read, @course
   end
 
   def remove_all
-    @course = Course.find(params[:id])
     @batches = @course.batches.all
     authorize! :read, @course
   end
@@ -107,12 +107,10 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    @course = Course.find(params[:id])
     authorize! :update, @course
   end
 
   def update
-    @course = Course.find(params[:id])
     @course.update(postparam)
     @courses = Course.all
     flash[:notice] = t('course_updated')
@@ -120,7 +118,11 @@ class CoursesController < ApplicationController
 
   private
 
+  def find_course
+    @course = Course.where(id: params[:id]).take
+  end
+
   def postparam
-    params.require(:course).permit(:course_name, :section_name, :code, :grading_type, batches_attributes: [:name, :start_date, :end_date])
+    params.require(:course).permit!
   end
 end
