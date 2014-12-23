@@ -34,7 +34,7 @@
         </div>
       </div>
       <hr>
-      
+        
       <br/>
 
         <center>
@@ -55,9 +55,9 @@
          
  <table cellpadding="5" cellspacing="5" width="700">
    <tr>
-                <td>Subject Code</td>
-                <td>Subject Title</td>
-                <td>Percentage(%)</td>
+                <th>Subject Code</th>
+                <th>Subject Title</th>
+                <th>Percentage(%)</th>
               </tr>
         <% max_total = 0 %>
         <% marks_total = 0 %>
@@ -76,9 +76,9 @@
               <% end %>
               <% end %>
                   <tr class="tr-<%= cycle('odd', 'even') %>">
-                    <td> <%= subject.code %></td>
-                    <td> <%= subject.name %></td>
-                    <td><%= "%.2f" %(marks_total*100/max_total)+"%" unless max_total==0%></td>
+                    <td align="center"> <%= subject.code %></td>
+                    <td align="center"> <%= subject.name %></td>
+                    <td align="center"><%= "%.2f" %(marks_total*100/max_total)+"%" unless max_total==0%></td>
                   </tr>
           <% max_total = 0 %>
           <% marks_total = 0 %>

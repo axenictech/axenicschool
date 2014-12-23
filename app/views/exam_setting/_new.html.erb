@@ -6,7 +6,7 @@
                 <td>
                 <div class="label-success label label-default">
               		<i class="glyphicon glyphicon-edit icon-white"></i>
-                	<%=link_to 'Edit',edit_course_exam_setting_path(c.course,c),remote: true,class: "a-action"%></div>
+                	<%=link_to 'Edit',edit_exam_setting_path(c.course,class_des:c),remote: true,class: "a-action"%></div>
                 <div class="label-danger label label-default">
               		<i class="glyphicon glyphicon-trash icon-white"></i> 
                  	<%= link_to 'Delete', course_exam_setting_path(c.course,c),remote:true,

@@ -17,10 +17,11 @@
    	<%= form_for @student, url:{action:'update_immediatecontact'},method: :patch do |f| %>
    	<%= hidden_field_tag :id,@student.id %>	
 	<% @student.guardians.each do|g|%>
-     <%= f.radio_button "immediate_contact",g.id, :checked =>true%>
-			 <%= g.first_name+" "+g.last_name+" - "+g.relation %>
+   <b> <h4> <%= f.radio_button "immediate_contact",g.id, :checked =>true%>
+			 <%= g.first_name+" "+g.last_name+" - "+g.relation %></h4></b>
+       <br>
 	<%end%>
-	<br><br>
+
 		<div align="center"><%= f.submit 'Finish',class: "btn btn-primary"%></div>
 	
  <%end%>

@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
       @id = Student.last.id.next
       @student.admission_no = 'S'+@date.to_s+@id.to_s
     end
-    @batches = Batch.includes(:course).all
+     @batches=Batch.all.includes(:course)
     authorize! :create, @student
   end
 
@@ -517,7 +517,7 @@ class StudentsController < ApplicationController
 
   def dispguardian
     @student = Student.find(params[:format])
-    @guards = @student.guardians.all
+    @guards = @student.guardians.all.includes(:country)
     authorize! :read, @student
   end
 

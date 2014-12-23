@@ -250,7 +250,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       get :settingrank
       get :editRank
       delete :destroyRank
-      get :edit_course
+      get :edit
       delete :course
       get :decrease_priority
       get :increase_priority
@@ -269,9 +269,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       patch :update_exam_score
       get :select
       get :connect_exam
-      get :assign_all
-      get :remove_all
-      get :update_connect_exam
+      
       get :publish_exam
       get :publish_result
       get :previous_exam_data
@@ -283,6 +281,9 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     member do
       patch :exam_group_create
       get :exams
+      patch :update_connect_exam
+      get :assign_all
+      get :remove_all
     end
   end
 

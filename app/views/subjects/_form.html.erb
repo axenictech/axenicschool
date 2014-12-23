@@ -1,4 +1,5 @@
 <div class="modal-body">
+<div id="flash"><%= render 'layouts/messages'%></div>
     <ul class="errors"></ul>
     <%= form_for [@batch,@elective_group, @subject],remote: true do |f|%>
         
