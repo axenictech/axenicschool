@@ -1,5 +1,9 @@
 # employee controller
 class EmployeesController < ApplicationController
+  
+  before_filter :grade,only:[:edit_grade,:update_grade,:destroy_grade]
+  before_filter :category,only:[:edit_category,:update_category,:destroy_category]
+
   def new_category
     @employee_category_new = EmployeeCategory.new
     @categories1 = EmployeeCategory.is_status
@@ -19,13 +23,11 @@ class EmployeesController < ApplicationController
   end
 
   def edit_category
-    @employee_category = EmployeeCategory.find(params[:id])
     authorize! :create, @employee_category
   end
 
   def update_category
     @employee_category_new = EmployeeCategory.new
-    @employee_category = EmployeeCategory.find(params[:id])
     flash[:notice] = t('emp_update_category') if @employee_category.update(category_params)
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
@@ -34,7 +36,6 @@ class EmployeesController < ApplicationController
   def destroy_category
     authorize! :delete, @employee_category
     @employee_category_new = EmployeeCategory.new
-    @employee_category = EmployeeCategory.find(params[:id])
     flash[:notice] = t('emp_delete_category') if @employee_category.destroy
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
@@ -222,13 +223,11 @@ class EmployeesController < ApplicationController
   end
 
   def edit_grade
-    @employee_grade = EmployeeGrade.find(params[:id])
     authorize! :update, @employee_grade
   end
 
   def update_grade
     @employee_grade_new = EmployeeGrade.new
-    @employee_grade = EmployeeGrade.find(params[:id])
     flash[:notice] = t('up_grade') if @employee_grade.update(grade_params)
     @grade1 = EmployeeGrade.is_status
     @grade2 = EmployeeGrade.not_status
@@ -237,7 +236,6 @@ class EmployeesController < ApplicationController
   def destroy_grade
     authorize! :delete, @employee_grade
     @employee_grade_new = EmployeeGrade.new
-    @employee_grade = EmployeeGrade.find(params[:id])
     flash[:notice] = t('dest_grade') if @employee_grade.destroy
     @grade1 = EmployeeGrade.is_status
     @grade2 = EmployeeGrade.not_status
@@ -1004,5 +1002,13 @@ class EmployeesController < ApplicationController
 
   def payroll_category_params
     params.require(:payroll_category).permit(:name, :percentage, :status, :is_deduction, :payroll_category_id)
+  end
+
+  def grade
+    @employee_grade = EmployeeGrade.find(params[:id])
+  end
+
+  def category
+    @employee_category = EmployeeCategory.find(params[:id])
   end
 end
