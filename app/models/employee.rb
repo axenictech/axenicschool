@@ -104,6 +104,7 @@ class Employee < ActiveRecord::Base
     self.employee_number = date.to_s + Employee.last.employee_number.next.to_s unless Employee.first.nil?
   end
 
+ 
   private
 
   def create_user_account
