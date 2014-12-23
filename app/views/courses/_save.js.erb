@@ -8,4 +8,5 @@ $("ul.errors").html("")
 <% else %>
    $("#modal").modal("hide")
    $("#view_details").html("<%= j render 'view'%>")
+   $("#flash").html("<%= j render 'layouts/messages'%>")
 <% end %>

@@ -8,7 +8,6 @@ Bundler.require(*Rails.groups)
 
 module Educulture
   class Application < Rails::Application
-    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -25,6 +24,7 @@ module Educulture
     config.active_record.whitelist_attributes :false
     # Configure sensitive parameters which will be filtered from the log file.
     config.middleware.use 'PDFKit::Middleware', print_media_type: true
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join("vendor", "assets", "images")
   end
 end

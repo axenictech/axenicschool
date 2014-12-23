@@ -96,7 +96,24 @@ class Employee < ActiveRecord::Base
     end
   end
 
-  
+  def assign(batch, id)
+    if batch.employee_id.blank?
+      assigned_emps = []
+    else
+      assigned_emps = batch.employee_id.split(',')
+    end
+    assigned_emps.push(id.to_s)
+    batch.update employee_id: assigned_emps.join(',')
+    assigned_emps.join(',')
+  end
+
+  def remove(batch, id)
+    assigned_emps = batch.employee_id.split(',')
+    assigned_emps.delete(id.to_s)
+    assign_employees = assigned_emps.join(',')
+    batch.update employee_id: assign_employees
+    assign_employees
+  end
 
   def emp_no
     date = Date.today.strftime('%Y%m%d')

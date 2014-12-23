@@ -1,15 +1,17 @@
+# Categories Controller
 class CategoriesController < ApplicationController
+  before_filter :find_category, only: [:edit, :update, :destroy]
   def index
     @category = Category.new
-    @categorys = Category.all
+    @categorys ||= Category.all
     authorize! :create, @category
   end
 
   def create
-    @categorys = Category.all
+    @categorys ||= Category.all
     @category = Category.new(category_params)
     if @category.save
-      flash[:notice] = 'Student category created successfully'
+      flash[:notice] = t('category_create')
       redirect_to categories_path
     else
       render 'index'
@@ -17,29 +19,26 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
     authorize! :update, @category
   end
 
   def update
-    @category = Category.find(params[:id])
     @category.update(category_params)
-    flash[:notice] = 'Student category updated successfully'
+    flash[:notice] = t('category_update')
   end
 
   def destroy
     authorize! :delete, @category
-    @category = Category.find(params[:id])
-    if @category.destroy
-      flash[:notice] = 'Student category deleted successfully  '
-      redirect_to categories_path
-    else
-      flash[:notice] = 'Student category unable to delete '
-      redirect_to categories_path
-    end
+    @category.destroy
+    flash[:notice] = t('category_delete')
+    redirect_to categories_path
   end
 
   private
+
+  def find_category
+    @category = Category.where(id: params[:id]).take
+  end
 
   def category_params
     params.require(:category).permit(:name)

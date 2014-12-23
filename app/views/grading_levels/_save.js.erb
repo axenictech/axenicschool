@@ -5,5 +5,6 @@ $("ul.errors").html("")
 		<% end %>
 <% else %>
 $('#batch_div').html("<%= j render 'grading_level'%>");
-  $("#myModal").modal("hide")
+$("#myModal").modal("hide")
+$('#flash').html("<%= j render 'layouts/messages'%>")
 <% end %>

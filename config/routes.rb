@@ -68,6 +68,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subjects do
+    collection { get :select }
+  end
+
   resources :batches do
     member do
       get :display
@@ -75,7 +79,6 @@ Rails.application.routes.draw do
     resources :subjects do
       collection do
         get :subject
-        get :select
       end
     end
     resources :elective_groups do

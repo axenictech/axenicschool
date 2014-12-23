@@ -1,7 +1,7 @@
 # Course Controller
 class CoursesController < ApplicationController
   before_filter :find_course, only: \
-  [:show, :grouped_batches, :assign_all, :remove_all, :edit, :update]
+  [:show, :grouped_batches, :assign_all, :remove_all, :edit, :update, :destroy]
   def index
     @courses ||= Course.all
     authorize! :read, @courses.first
@@ -26,45 +26,40 @@ class CoursesController < ApplicationController
 
   def show
     @batch = @course.batches.where(course_id: params[:id]).take
-    @batches = @course.batches.all
+    @batches ||= @course.batches.includes(:course)
     authorize! :read, @course
   end
 
   def grouped_batches
-    @batches = @course.batches.all
-    @batch_groups = @course.batch_groups.all
+    @batches ||= @course.batches
+    @batch_groups ||= @course.batch_groups
     @batch_group = BatchGroup.new
     authorize! :create, @course
   end
 
   def create_batch_group
-    @course = Course.find(params[:batch_group][:course_id])
-    batches = params[:batches]
-    @batches = @course.batches.all
-    unless batches.nil?
-      @batch_groups = @course.batch_groups.all
-      name = params[:batch_group][:name]
-      @batch_group = BatchGroup.new(name: name, course_id: @course.id)
+    @course = Course.where(id: params[:batch_group][:course_id]).take
+    if params[:batches].present?
+      @batch_groups ||= @course.batch_groups
+      @batch_group = BatchGroup.new(name: \
+        params[:batch_group][:name], course_id: @course.id)
       if @batch_group.save
-        batches.each  do |batch|
-          @group_batch = GroupBatch.new(batch_group_id: @batch_group.id, batch_id: batch)
-          @group_batch.save
-        end
-        flash[:notice_batch_group] = t('batch_group_created')
+        @batch_group.create_group_batch(params[:batches], @batch_group)
+        flash[:notice] = t('batch_group_created')
         redirect_to grouped_batches_course_path(@course)
       else
-        render template: 'courses/grouped_batches'
-    end
-    else
-      flash[:notice_batch_group] = t('batch_select')
-      redirect_to grouped_batches_course_path(@course)
+        render '/courses/grouped_batches'
       end
+    else
+      flash[:alert] = t('batch_select')
+      redirect_to grouped_batches_course_path(@course)
+    end
   end
 
   def edit_batch_group
     @batch_group = BatchGroup.where(id: params[:id]).take
     @course = @batch_group.course
-    @batches = @course.batches.all
+    @batches ||= @course.batches
     authorize! :update, @course
   end
 
@@ -73,37 +68,32 @@ class CoursesController < ApplicationController
       params[:batch_group][:batch_group_id]).take
     @batch_group.update(name: params[:batch_group][:name])
     @course = @batch_group.course
-    flash[:notice_batch_group] = t('batch_group_updated')
+    flash[:notice] = t('batch_group_updated')
   end
 
   def delete_batch_group
-    authorize! :delete, @course
-    @batch_group = BatchGroup.find(params[:format])
-    @course = @batch_group.course
-    @group_batches = GroupBatch.where(batch_group_id: @batch_group.id)
-    @group_batches.each(&:destroy)
+    @batch_group = BatchGroup.where(id: params[:id]).take
+    authorize! :delete, @batch_group
     @batch_group.destroy
-    flash[:notice_batch_group] = t('batch_group_deleted')
-    redirect_to grouped_batches_course_path(@course)
+    flash[:notice] = t('batch_group_deleted')
+    redirect_to grouped_batches_course_path(@batch_group.course)
   end
 
   def assign_all
-    @batches = @course.batches.all
+    @batches ||= @course.batches
     authorize! :read, @course
   end
 
   def remove_all
-    @batches = @course.batches.all
+    @batches ||= @course.batches
     authorize! :read, @course
   end
 
   def destroy
     authorize! :delete, @course
-    @course = Course.find(params[:format])
-    if @course.destroy
-      flash[:notice] = t('course_deleted')
-      redirect_to courses_path
-    end
+    @course.destroy
+    flash[:notice] = t('course_deleted')
+    redirect_to courses_path
   end
 
   def edit
@@ -112,7 +102,7 @@ class CoursesController < ApplicationController
 
   def update
     @course.update(postparam)
-    @courses = Course.all
+    @courses ||= Course.all
     flash[:notice] = t('course_updated')
   end
 
