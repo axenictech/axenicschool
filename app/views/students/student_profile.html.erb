@@ -6,19 +6,14 @@
         width:100%;
         margin: 0 auto;
       }
-<<<<<<< HEAD
-      
-=======
 
-       
->>>>>>> 255009e2b68685ed8b5d4f9bac53475cea93015d
       #head {
         height: 100px;
         width: 700px;
         text-align: center;
         font-size: 40px;
         border-color: black;
-<<<<<<< HEAD
+
 
       }
       #head_info {
@@ -26,15 +21,7 @@
         font-size: 15px;
       }
 
-=======
-
-      }
-      #head_info {
-        text-align: center;
-        font-size: 15px;
-      }
-
->>>>>>> 255009e2b68685ed8b5d4f9bac53475cea93015d
+ 
     </style>
   </head>
   <body>
@@ -47,7 +34,7 @@
         </div>
       </div>
       <hr>
-<<<<<<< HEAD
+
       <br/><h3><center>Student Profile</center></h3><br/>
       <table cellpadding="5" cellspacing="5" width="700">
         <tr><th colspan="3" bgcolor="99CCFF" align="left">Admission Details</th></tr>
@@ -179,18 +166,16 @@
           </tr>
           </table><br/>
           <table cellpadding="5" cellspacing="5" width="700">
-            <tr><th colspan="3" bgcolor="99CCFF" align="left">Student Previous Institution Details</th></tr>
+            
             <% unless @student_previous_subject_marks.nil? %>
-              <tr>
-                <td align="center">Subject Name</td>
-                <td></td>
-                <td align="center">Marks</td>
+              <tr bgcolor="99CCFF">
+                <th align="left">Subject Name</th>
+                <th align="right">Marks</th>
               </tr>
               <% @student_previous_subject_marks.each do |psm| %>
                 <tr>
                   <td><%= psm.subject %></td>
-                  <td>:</td>
-                  <td><%= psm.mark %></td>
+                  <td align="right"><%= psm.mark %></td>
                 </tr>
               <%end%>
             <%end%>  
@@ -198,119 +183,5 @@
         <%end%>  
     </div>
   </body>
-=======
 
-
-<table cellpadding="4" cellspacing="5" width="700">
-<tr>
-    <th colspan="5">
-
-      <h3 align="left"> <%= @student.first_name.capitalize %> <%= @student.middle_name.capitalize %> <%= @student.last_name.capitalize %>  </h3>
-      <h4 align="left"> Course : <%= @student.batch.course.course_name %> </h4>
-      <h4 align="left"> Batch : <%= @student.batch.name %> </h4>
-      <h4 align="left"> Admission no. : <%= @student.admission_no %> </h4>
-   </th>
-  </tr>
-
-<tr>
-    <th colspan="4" bgcolor="99CCFF" align="left">Student Personal Details</th>
-</tr>
-<tr>
-    <td>Admission Date </td><td><%= @student.admission_date %></td>
-     <td >Mobile</td><td ><%= @student.phone2 %> </td>
-</tr>
-<tr>
-    <td >Date of birth</td><td  ><%= @student.date_of_birth%></td>
-     <td >Email</td><td > <%= @student.email %> </td>
-</tr>
-
-<tr>
-    <td >Blood group</td><td  ><%= @student.blood_group %>
-    </td>
-    <td >Phone</td><td >  <%= @student.phone1 %>  </td>
-</tr>
-<tr>
-    <td >Gender</td><td ><%= @student.gender %></td>
-    <td >Nationality</td><td ><%= @student.nationality.name %></td>
-</tr>
-<tr>
-    <td >Language</td><td > <%= @student.language %> </td>
-    <td >Category</td><td > <%= @student.category.name %> </td>
-</tr>
-<tr>
-    <td >Religion</td><td > <%= @student.religion %> </td>
-    <td >Address</td><td > <%= @student.address_line1+" "+@student.address_line2 %> </td>
-</tr>
-<tr>
-    <td >City</td><td ><%= @student.city %> </td>
-    <td >State</td><td > <%= @student.state %> </td>
-</tr>
-<tr>
-    <td >Country</td><td > <%= @student.country.name %></td>
-    
-</tr>
-
-   
-   
-<% unless @immediate_contact.nil? %>
-<tr>
-    <td  colspan="1">Immediate Contact</td>
-    <td  ><font color="blue"><%= @immediate_contact.first_name+" "+@immediate_contact.last_name %></font></td>
-</tr>
-<%end%>
-<br/``>
-<tr>
-    <th colspan="4" bgcolor="99CCFF" align="left">Student Previous Institution Details</th>
-</tr>
-<br/>
-<% unless @student_previous_data.nil? %>
-<tr>
-  <td >Institution Name</td>
-  <td  >
-  <%= @student_previous_data.institution %>
-  </td>
-</tr>
-<tr>
-  <td >Year</td>
-  <td  >
-  <%= @student_previous_data.year %>
-  </td>
-</tr>
-<tr>
-  <td >Course</td>
-  <td  >
-  <%= @student_previous_data.course %>
-  </td>
-</tr>
-<tr>
-  <td >Total Marks</td>
-  <td  >
-  <%= @student_previous_data.total_mark %>
-  </td>
-</tr>
-
-<tr>
-    <th colspan="4" bgcolor="99CCFF" align="left">Student Previous Subject Marks</th>
-</tr>
-<% unless @student_previous_subject_marks.nil? %>
-<tr>
-  <td ><font color="green">Subject Name</font></td>
-  <td  ><font color="green">Marks</font></td>
-</tr>
-<% @student_previous_subject_marks.each do |psm| %>
-<tr>
-  <td ><%= psm.subject %></td>
-  <td  ><%= psm.mark %></td>
-</tr>
-<%end%>
-<%end%>
-<%end%>
-<tr>
-  <td  colspan="4"></td>
-</tr>
-</tbody>
-</table>
-</div>
-</body>
->>>>>>> 255009e2b68685ed8b5d4f9bac53475cea93015d
 </html>

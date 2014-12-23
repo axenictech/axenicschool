@@ -1,92 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style type="text/css">
-.page {
-    width:100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
+
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
 
 
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
 
-.hor_line{
-    width:100%;
-    background: #ADACAB;
-    height: 1px;
-}
+ 
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+        
+      <br/>
 
-#title h1{
-    margin-bottom: 2px;
-    font-weight: normal;
+        <center>
+      <h3><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %></h3></center>
 
-}
-
-#student_main_info h4{
-    color: #555555;
-    margin-top: 2px;
-    font-weight: normal;
-}
-
-#student_main_info h2{
-    margin-bottom: 2px;
-    font-weight: normal;
-
-}
-
-
-.odd{
-    height:auto;
-    background: #EEEEEE;
-    
-}
-
-.even{
-    
-    height:auto;
-    background: #fff;
-    
-    
-}
-
-.even td{
-   
-   padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-}
-
-.odd td{
-  padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-
-}
-
-table#pdf-table{
-   border: 1px solid #ADACAB;
-   border-left: 0px solid #ADACAB;
-}
-
-</style>
-</head>
-<body>
-<div class="hor_line"></div>
-<div id="title">
-<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
-<h4><small><%= @general_setting.school_or_college_address%><br/>
-  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
-<div class="page-yield" class="available_sections">
-  <div class="hor_line"></div>
-  <div id="student_profile_heading" class="section">
-    <div id ="student_main_info">
-      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %></h2>
       <span><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
       <h4><%= t('student_transcript_report') %></h4>
-    </div>
-  </div>
+   <br>
  <% general_subjects = @batch.subjects.where(elective_group_id:nil) %>
           <% student_electives = StudentSubject.where(student_id: @student.student_id,batch_id: @batch.id) %>
           <% elective_subjects = [] %>
@@ -97,11 +53,11 @@ table#pdf-table{
           <% unless @subjects.empty? %>
             <% total_credits=0 %>
          
-<table id="pdf-table" width="100%" cellpadding="1" cellspacing="1" border="1">
-  <tr class="tr-head">
-                <td class="col-2"><font color="blue">Subject Code</font></td>
-                <td class="col-2"><font color="blue">Subject Title</font></td>
-                <td class="col-2"><font color="blue">Percentage(%)</font></td>
+ <table cellpadding="5" cellspacing="5" width="700">
+   <tr>
+                <th>Subject Code</th>
+                <th>Subject Title</th>
+                <th>Percentage(%)</th>
               </tr>
         <% max_total = 0 %>
         <% marks_total = 0 %>
@@ -120,9 +76,9 @@ table#pdf-table{
               <% end %>
               <% end %>
                   <tr class="tr-<%= cycle('odd', 'even') %>">
-                    <td class="col-1"> <%= subject.code %></td>
-                    <td class="col-3"> <%= subject.name %></td>
-                    <td class="col-3"><%= "%.2f" %(marks_total*100/max_total)+"%" unless max_total==0%></td>
+                    <td align="center"> <%= subject.code %></td>
+                    <td align="center"> <%= subject.name %></td>
+                    <td align="center"><%= "%.2f" %(marks_total*100/max_total)+"%" unless max_total==0%></td>
                   </tr>
           <% max_total = 0 %>
           <% marks_total = 0 %>
@@ -130,7 +86,7 @@ table#pdf-table{
                 <% end %>
                 <tr class="tr-blank"></tr>
                 <tr class="tr-head">
-                  <td colspan="2" align="right"><font color="blue">Total</font></td>
+                  <td colspan="2" align="right">Total</td>
                   <td><%="%.2f" %(@mark*100/@total)+"%" unless @total==0%></td>
                 </tr>    
 </table>

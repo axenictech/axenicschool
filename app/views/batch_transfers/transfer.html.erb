@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Settings',setting_index_path %></li>
-    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Manage Course / Batch',course_batch_setting_index_path %></li>
     <li><%= link_to 'Course',courses_path %></li>
     <li><%= link_to 'Batch',batches_path%></li>
     <li><%= link_to 'Batch Transfer',batch_transfers_path%></li>
@@ -19,11 +19,11 @@
     </div>
     <div class="col-md-6">      
       <%= f.hidden_field :batch_id, value: @batch.id%>
-      <%= f.select :id,@batchs.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:'Select a batch'%>
+      <%= f.select :id,@batchs.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:'Select a batch',class: "form-control"%>
     </div>
 </div>   
 <hr>
-<div class="row" align="right" style="margin-right:20px">s
+<div class="row" align="right" style="margin-right:20px">
   <%= link_to "Assign All",assign_all_batch_transfers_path(@batch),remote:true, class: 'btn btn-primary-link btn-xs'%>
   <%= link_to "Remove All",remove_all_batch_transfers_path(@batch),remote:true, class: 'btn btn-primary-link btn-xs' %>
 </div>

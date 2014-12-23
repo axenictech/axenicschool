@@ -1,6 +1,6 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'News', newscasts_path %></li>
     <li><%= @newscast.title %></li>
   </ul>
@@ -18,7 +18,7 @@
   </div>
 </div>
 <hr>
-<% end %>
+<% end %> 
  <div class="col-md-6">
  <div class="box-inner">
     <div class="box-header well" data-original-title="">
@@ -58,7 +58,7 @@
   </div>
   <div class="box-content">
     <ul id="comments-list">
-      <%= render @newscast.comments.order(created_at: :desc) %>
+      <%= render @newscast.comments.includes(:user).order(created_at: :desc) %>
       <h3 id="comments-heading"></h3>
     </ul>    
   </div>

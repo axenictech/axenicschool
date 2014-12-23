@@ -65,6 +65,7 @@ class SubjectsController < ApplicationController
 
     @elective_subjects = @elective_group.subjects.all if params[:elective_group_id]
     @subject.destroy
+    redirect_to dashboard_home_index_path 
     flash[:notice] = 'Subject deleted Successfully'
     flash[:notice2] = 'Elective Subject deleted Successfully' if params[:elective_group_id]
   end

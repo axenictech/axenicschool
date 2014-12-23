@@ -2,12 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
   root 'home#dashboard'
-  get 'home/dashboard'
+
   resources :home do
-    collection do
-      get :dashboard
-    end
-  end
+    collection { get :dashboard }
+  end 
 
   resources :categories
 
@@ -130,6 +128,7 @@ Rails.application.routes.draw do
       post :archived_student_create
       post :assign_elective
       get :batch_details
+      get :recent_exam_report
     end
     member do
       get :profile
@@ -139,6 +138,7 @@ Rails.application.routes.draw do
       get :elective
       get :assign_all
       get :remove_all
+      get :archived_profile
     end
     resources :guardians
 
@@ -179,6 +179,117 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :exam_reports do
+    collection do
+      get :report_center
+      get :exam_wise_report
+      get :subject_wise_report
+      get :generate_exam_report
+      get :select_batch
+      get :choose_batch
+      get :generate_subject_report
+      get :grouped_exam_report
+      get :generate_grouped_report
+      get :archived_student_report
+      get :select_course
+      get :generate_archived_report
+      get :exam_group_wise_report
+      get :student_ranking_per_subject
+      get :rank_report_batch
+      get :generate_ranking_report
+      get :student_ranking_per_batch
+      get :generate_student_ranking_report
+      get :student_ranking_per_course
+      get :generate_student_ranking_report2
+      get :student_ranking_per_school
+      get :student_ranking_per_attendance
+      get :generate_student_ranking_report3
+      get :view_transcripts
+      get :generate_view_transcripts
+      get :ranking_level_report
+      get :select_mode
+      get :select_rank
+      get :select_rank_mode
+      get :generate_ranking_level_report
+      get :combined_report
+      get :combined_details
+      get :all
+      get :none
+      get :all1
+      get :none1
+      get :generate_combined_report
+      get :exam_wise_students_report
+      get :exam_wise_consolidated_report
+      get :subject_wise_students_report
+      get :grouped_exam_students_report
+      get :archived_students_exam_report
+      get :archived_students_consolidated_report
+      get :subject_wise_ranking_report
+      get :batch_wise_ranking_report
+      get :course_wise_ranking_report
+      get :school_wise_ranking_report
+      get :attendance_wise_ranking_report
+      get :students_transcripts_report
+    end
+    member do 
+      get :student_exam_report
+      get :student_report
+      get :consolidated_report
+      get :consolidated_archived_report
+      get :archived_student
+      get :student_view_transcripts
+    end
+  end
+
+  resources :exam_setting do
+    member do
+      get :setting
+      get :settingrank
+      get :editRank
+      delete :destroyRank
+      get :edit
+      delete :course
+      get :decrease_priority
+      get :increase_priority
+    end
+    collection do
+      get :select
+      get :selectrank
+      get :newrank
+      post :createrank
+      patch :updateRank
+    end
+  end
+
+  resources :exam_groups do
+    collection do
+      patch :update_exam_score
+      get :select
+      get :connect_exam
+      
+      get :publish_exam
+      get :publish_result
+      get :previous_exam_data
+      get :previous_exam
+      get :previous_exam_group
+      get :previous_exam_details
+      get :previous_exam_scores
+    end
+    member do
+      patch :exam_group_create
+      get :exams
+      patch :update_connect_exam
+      get :assign_all
+      get :remove_all
+    end
+  end
+
+  resources :exams do
+    collection { patch :update_exam_score }
+    member { get :exam_score }
+  end
+
+
   resources :class_timings do
     collection do
       get :select
@@ -194,11 +305,22 @@ Rails.application.routes.draw do
       get :showdep
     end
   end
-  resources :calender
+
+  resources :calender do 
+    collection do
+      get :event_view
+    end
+
+    member do 
+      get :change 
+
+    end
+  end 
 
   resources :weekdays do
     collection do
       get :select
+
     end
   end
 
@@ -238,6 +360,7 @@ Rails.application.routes.draw do
   resources :batches do
     resources :time_table_entries
   end
+
 
   resources :exam_setting do
     collection do
@@ -309,7 +432,6 @@ Rails.application.routes.draw do
   resources :courses do
     resources :exam_setting
   end
-  resources :online_exams
 
   resources :setting do
     collection do

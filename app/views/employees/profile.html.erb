@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
      <li><%= link_to 'Human Resources',employees_path %></li>
-    <li><%= link_to 'HR Management',employees_employee_management_path %></li>
+    <li><%= link_to 'HR Management',employee_management_employees_path %></li>
   
    <li>Employee Profile</li>
   </ul>
@@ -54,7 +54,7 @@
 </div>
 
 <div class="dropdown pull-right">
-      <%= link_to "Timetable",time_tables_employee_timetable_path(@employee),class: "btn btn-primary-link btn-xs", style:"margin-right:5px;"%>
+      <%= link_to "Timetable",employee_timetable_time_tables_path(@employee),class: "btn btn-primary-link btn-xs", style:"margin-right:5px;"%>
 </div>
 </div>
 <hr>

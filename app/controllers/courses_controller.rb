@@ -41,6 +41,7 @@ class CoursesController < ApplicationController
     @batch_groups = @course.batch_groups.all
     @batch_group = BatchGroup.new
     authorize! :create, @course
+    
   end
 
   def create_batch_group

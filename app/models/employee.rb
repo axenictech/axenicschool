@@ -67,6 +67,8 @@ class Employee < ActiveRecord::Base
 
   validates :home_country_id, presence: true, on: :update
 
+  scope :not_status, -> { where(status: false).order(:name) }
+
   def archived_employee
     employee_attributes = attributes
     update_attributes(status_description: status)

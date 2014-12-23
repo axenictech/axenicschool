@@ -86,11 +86,12 @@ class AttendencesController < ApplicationController
 
     @attendence = Attendence.find(params[:id])
     @attendence.destroy
-
+   
     @students = @batch.students.all
     @time_table_entries = TimeTableEntry.where(subject_id: @subject.id, batch_id: @batch.id)
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
+     redirect_to attendence_register_attendences_path
   end
 
   def select_batch

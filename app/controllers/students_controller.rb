@@ -13,9 +13,8 @@ class StudentsController < ApplicationController
       @id = Student.last.id.next
       @student.admission_no = 'S' + @date.to_s + @id.to_s
     end
-    @batches = Batch.all
+     @batches=Batch.all.includes(:course)
     authorize! :create, @student
-    @batches = Batch.includes(:course).all
   end
 
   def create
@@ -60,8 +59,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     if @student.update(student_params)
       flash[:notice] = 'Student Reord updated successfully '
-
-      redirect_to profile_students_path(@student)
+      redirect_to profile_student_path(@student)
     else
       render 'edit'
     end
@@ -99,7 +97,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:student_previous_data][:student_id])
 
     if @previous_data.save
-      redirect_to profile_students_path(@student)
+      redirect_to profile_student_path(@student)
     else
       render template: 'students/previous_data', object: '@student'
     end
@@ -157,7 +155,7 @@ class StudentsController < ApplicationController
   end
 
   def archived_profile
-    @student = ArchivedStudent.find(params[:format])
+    @student = ArchivedStudent.find(params[:id])
     @immediate_contact = Guardian.find(@student.immediate_contact)
     @student_previous_data = StudentPreviousData.find_by_student_id(@student.student_id)
     @student_previous_subject_marks = StudentPreviousSubjectMark.where(student_id: @student.student_id)
@@ -432,7 +430,7 @@ class StudentsController < ApplicationController
       @student_subject_delete.each(&:destroy)
     end
     flash[:notice_ele] = "Elective subject #{@subject.name} assigned to students successfully"
-    redirect_to students_elective_path(@subject)
+    redirect_to elective_student_path(@subject)
     authorize! :create, @student
   end
 
@@ -511,12 +509,12 @@ class StudentsController < ApplicationController
     @archived_student = @student.archived_student
     @archived_student.update(status_description: params[:archived_student][:status_description])
     @student.destroy
-    redirect_to students_archived_profile_path(@archived_student)
+    redirect_to archived_profile_student_path(@archived_student)
   end
 
   def dispguardian
     @student = Student.find(params[:format])
-    @guards = @student.guardians.all
+    @guards = @student.guardians.all.includes(:country)
     authorize! :read, @student
   end
 

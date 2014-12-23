@@ -38,6 +38,7 @@ class EmployeeAttendancesController < ApplicationController
     end
     @active_leaves = EmployeeLeaveType.where(status: true).order(:name)
     @inactive_leaves = EmployeeLeaveType.where(status: false).order(:name)
+     redirect_to dashboard_home_index_path 
   end
 
   def edit_leave_type
@@ -81,7 +82,7 @@ class EmployeeAttendancesController < ApplicationController
   end
 
   def display
-    @deparment = EmployeeDepartment.find(params[:department_id])
+    @deparment = EmployeeDepartment.find(params[:id])
     @employees = @deparment.employees.all
     @today = params[:nextdate].to_date
     @start_date = @today.beginning_of_month

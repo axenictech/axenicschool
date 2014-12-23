@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Settings',setting_index_path %></li>
-    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Manage Course / Batch',course_batch_setting_index_path %></li>
     <li><%= link_to 'Course',courses_path %></li>
     <li>Batches</li>
   </ul>
@@ -13,7 +13,7 @@
   <div class="col-md-11">
     <div class="pull-right">
       <%= link_to 'New Batch', new_course_batch_path(@course), class: "btn btn-primary-link btn-xs" %>
-      <%= link_to 'Batch Group', courses_grouped_batches_path(@course), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Batch Group', grouped_batches_course_path(@course), class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>
@@ -37,7 +37,7 @@
         <% @batches.each do |batch| %>
           <tr>
             <td>
-              <%=link_to batch.course.code+" - "+batch.name , batches_display_path(batch) %>
+              <%=link_to batch.course.code+" - "+batch.name , display_batch_path(batch) %>
             </td>
             <td class="center">
               <div class="label-success label label-default">

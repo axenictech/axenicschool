@@ -115,7 +115,7 @@ class EmployeesController < ApplicationController
   end
 
   def new_bank_field
-    @bank_field_new = BankField.new
+    @bank_field_new = BankField.new_position
     @bank_fields1 = BankField.is_status
     @bank_fields2 = BankField.not_status
     authorize! :create, @bank_field_new

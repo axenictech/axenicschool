@@ -1,11 +1,11 @@
 
 <div>
   <ul class="breadcrumb">
-  <li><%= link_to 'Home',home_dashboard_path %></li>
+  <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Human Resources',employees_path %></li>
-      <li><%= link_to 'HR Management',employees_employee_management_path %></li>
-     <li><%= link_to 'Employee Profile',employees_profile_path(@employee.id)%></li>
-      <li><%= link_to 'Employee Remove',employees_remove_path(@employee.id)%></li>
+      <li><%= link_to 'HR Management',employee_management_employees_path %></li>
+     <li><%= link_to 'Employee Profile',profile_employees_path(@employee.id)%></li>
+      <li><%= link_to 'Employee Remove',remove_employees_path(@employee.id)%></li>
     <li>Leaving School</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>

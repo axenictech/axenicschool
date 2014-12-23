@@ -1,8 +1,8 @@
 <div>
   <ul class="breadcrumb">
-    <li><%= link_to 'Home',home_dashboard_path %></li>
-    <li><%= link_to 'Exams','/exams'%></li>
-    <li><%= link_to 'Exam Management','/exam_groups'%></li>
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
+    <li><%= link_to 'Exams',exams_path%></li>
+    <li><%= link_to 'Exam Management',exam_groups_path%></li>
     <li> Exam Group</li>
   </ul>
 </div>
@@ -40,7 +40,7 @@
 
         <tr>
 
-          <td><%= link_to eg.name ,exam_groups_exams_path(eg) %></td>
+          <td><%= link_to eg.name ,exams_exam_group_path(eg) %></td>
           <td>
             <% unless eg.result_published? %>
               <div class="label-danger label label-default">
@@ -58,9 +58,9 @@
               <div class="label-primary label label-default">
               <i class="glyphicon glyphicon-check icon-white"></i>
                 <% if eg.is_published? %>
-                <%= link_to 'Update exam schedule',exam_groups_publish_exam_path(eg), remote:true, class: "a-action" %>
+                <%= link_to 'Update exam schedule',publish_exam_exam_groups_path(eg), remote:true, class: "a-action" %>
                 <%else%>
-                <%= link_to 'Publish exam schedule',exam_groups_publish_exam_path(eg), remote:true, class: "a-action" %>
+                <%= link_to 'Publish exam schedule',publish_exam_exam_groups_path(eg), remote:true, class: "a-action" %>
                 <%end%>
               </div>
             <%end%>

@@ -2,14 +2,14 @@ class ExamGroupsController < ApplicationController
   def select
     @course = Course.find(params[:course][:id])
     @batches = @course.batches.all
-    authroize! :read, ExamGroup
+
   end
 
   def new
     @batch = Batch.find(params[:format])
     @exam_group = @batch.exam_groups.build
     @course = @batch.course
-    authroize! :create, ExamGroup
+    #authroize! :create, ExamGroup
   end
 
   def create
@@ -31,7 +31,7 @@ class ExamGroupsController < ApplicationController
     @exam_group.update(params_exam_group)
     @batch = @exam_group.batch
     @subjects = @batch.subjects.where(no_exams: false)
-    @exam_group.exams.build
+    @exam_group.examinds.build
   end
 
   def exam_group_create
@@ -45,21 +45,21 @@ class ExamGroupsController < ApplicationController
         end
       end
     end
-    authroize! :create, @exam_group
+    #authroize! :create, @exam_group
   end
 
   def show
     @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.all
     @course = @batch.course
-    authroize! :read, @exam_groups.first
+    #authroize! :read, @exam_groups.first
   end
 
   def exams
     @exam_group = ExamGroup.find(params[:id])
     @exams = @exam_group.exams.all
     @course = @exam_group.batch.course
-    authroize! :read, @exam_group
+    #authroize! :read, @exam_group
   end
 
   def previous_exam
@@ -96,24 +96,24 @@ class ExamGroupsController < ApplicationController
   def connect_exam
     @batch = Batch.find(params[:format])
     @exam_groups = @batch.exam_groups.all
-    authroize! :read, @exam_groups.first
+    #authroize! :read, @exam_groups.first
   end
 
   def assign_all
-    @batch = Batch.find(params[:format])
+    @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.all
-    authroize! :read, @exam_groups.first
+    #authroize! :read, @exam_groups.first
   end
 
   def remove_all
-    @batch = Batch.find(params[:format])
+    @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.all
-    authroize! :read, @exam_groups.first
+    #authroize! :read, @exam_groups.first
   end
 
   def update_connect_exam
     sum = 0
-    @batch = Batch.find(params[:format])
+    @batch = Batch.find(params[:id])
     exam_groups = params[:exam_groups]
     if exam_groups.present?
       params[:exam_group].each_pair do |_e, w|
@@ -147,7 +147,7 @@ class ExamGroupsController < ApplicationController
     @exam_group.exams.each(&:create_exam_event)
     @batch = @exam_group.batch
     @exam_groups = @batch.exam_groups.all
-    authroize! :read, @exam_group
+    #authroize! :read, @exam_group
   end
 
   def publish_result
@@ -170,12 +170,12 @@ class ExamGroupsController < ApplicationController
     else
       flash[:result_error] = 'Exam scheduled not published'
     end
-    redirect_to exam_groups_exams_path(@exam_group)
-    authroize! :read, @exam_group
+    redirect_to exams_exam_group_path(@exam_group)
+    #authroize! :read, @exam_group
   end
 
   def destroy
-    authroize! :delete, @exam_group
+    #authroize! :delete, @exam_group
     @exam_group = ExamGroup.find(params[:id])
     batch = @exam_group.batch
     @exam_group.destroy
