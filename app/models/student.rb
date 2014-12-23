@@ -16,7 +16,7 @@ class Student < ActiveRecord::Base
   validates :admission_no, presence: true
   validates :admission_date, presence: true
   validates :email, presence: true, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
-  
+
   validates :first_name, presence: true, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' }
   validates_length_of :first_name, minimum: 1, maximum: 20
 

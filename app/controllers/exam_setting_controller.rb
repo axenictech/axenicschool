@@ -149,14 +149,12 @@ class ExamSettingController < ApplicationController
   end
 
   def editRank
-
     @course = Course.find(params[:id])
     @rank_lev1 = @course.ranking_levels.find(params[:course_id])
 
     @course = Course.find(params[:course_id])
     @rank_lev1 = @course.ranking_levels.find(params[:id])
     authorize! :update, @rank_lev1
-
   end
 
   def updateRank

@@ -4,17 +4,13 @@ class EmployeesController < ApplicationController
     @employee_category_new = EmployeeCategory.new
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
-    authorize!  :create, @employee_category_new
+    authorize! :create, @employee_category_new
   end
 
   def add_category
     @employee_category_new = EmployeeCategory.new
     @employee_category = EmployeeCategory.new(category_params)
-
-    if @employee_category.save
-      flash[:notice] = 'Employee category created Successfully'
-    end
-
+    flash[:notice] = t('emp_add_category') if @employee_category.save
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
   end
@@ -30,9 +26,7 @@ class EmployeesController < ApplicationController
   def update_category
     @employee_category_new = EmployeeCategory.new
     @employee_category = EmployeeCategory.find(params[:id])
-    if @employee_category.update(category_params)
-      flash[:notice] = 'Employee category Updated Successfully'
-    end
+    flash[:notice] = t('emp_update_category') if @employee_category.update(category_params)
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
   end
@@ -41,9 +35,7 @@ class EmployeesController < ApplicationController
     authorize! :delete, @employee_category
     @employee_category_new = EmployeeCategory.new
     @employee_category = EmployeeCategory.find(params[:id])
-    if @employee_category.destroy
-      flash[:notice] = 'Employee category deleted Successfully'
-    end
+    flash[:notice] = t('emp_delete_category') if @employee_category.destroy
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
   end
@@ -58,9 +50,7 @@ class EmployeesController < ApplicationController
   def add_department
     @employee_department_new = EmployeeDepartment.new
     @employee_department = EmployeeDepartment.new(department_params)
-    if @employee_department.save
-      flash[:notice] = 'Employee department created Successfully'
-    end
+    flash[:notice] = t('add_emp_dept') if @employee_department.save
     @departments1 = EmployeeDepartment.is_status
     @departments2 = EmployeeDepartment.not_status
   end
@@ -73,9 +63,7 @@ class EmployeesController < ApplicationController
   def update_department
     @employee_department_new = EmployeeDepartment.new
     @employee_department = EmployeeDepartment.find(params[:id])
-    if @employee_department.update(department_params)
-      flash[:notice] = 'Employee department updated Successfully'
-    end
+    flash[:notice] = 'update_dept' if @employee_department.update(department_params)
     @departments1 = EmployeeDepartment.is_status
     @departments2 = EmployeeDepartment.not_status
   end
@@ -84,9 +72,7 @@ class EmployeesController < ApplicationController
     authorize! :delete, @employee_department
     @employee_department_new = EmployeeDepartment.new
     @employee_department = EmployeeDepartment.find(params[:id])
-    if @employee_department.destroy
-      flash[:notice] = 'Employee department deleted Successfully'
-    end
+    flash[:notice] = t('destroy_dept') if @employee_department.destroy
     @departments1 = EmployeeDepartment.is_status
     @departments2 = EmployeeDepartment.not_status
   end
@@ -101,9 +87,7 @@ class EmployeesController < ApplicationController
   def add_position
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.new(position_params)
-    if @employee_position.save
-      flash[:notice] = 'Employee position created Successfully'
-    end
+    flash[:notice] = t('add_pos') if @employee_position.save
     @positions1 = EmployeePosition.is_status
     @positions2 = EmployeePosition.not_status
   end
@@ -116,9 +100,7 @@ class EmployeesController < ApplicationController
   def update_position
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.find(params[:id])
-    if @employee_position.update(position_params)
-      flash[:notice] = 'Employee position updated Successfully'
-    end
+    flash[:notice] = t('up_pos') if @employee_position.update(position_params)
     @positions1 = EmployeePosition.is_status
     @positions2 = EmployeePosition.not_status
   end
@@ -127,9 +109,7 @@ class EmployeesController < ApplicationController
     authorize! :delete, @employee_position
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.find(params[:id])
-    if @employee_position.destroy
-      flash[:notice] = 'Employee position deleted Successfully'
-    end
+    flash[:notice] = t('dest_pos') if @employee_position.destroy
     @positions1 = EmployeePosition.is_status
     @positions2 = EmployeePosition.not_status
   end
@@ -157,9 +137,7 @@ class EmployeesController < ApplicationController
   def update_bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.find(params[:id])
-    if @bank_field.update(bank_field_params)
-      flash[:notice] = 'Bank field updated Successfully'
-    end
+    flash[:notice] = t('up_bank') if @bank_field.update(bank_field_params)
     @bank_fields1 = BankField.is_status
     @bank_fields2 = BankField.not_status
   end
@@ -183,9 +161,7 @@ class EmployeesController < ApplicationController
   def add_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.new(payroll_category_params)
-    if @payroll_category.save
-      flash[:notice] = 'Payroll catagory created Successfully'
-    end
+    flash[:notice] = t('add_pay') if @payroll_category.save
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
   end
@@ -198,9 +174,7 @@ class EmployeesController < ApplicationController
   def update_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
-    if @payroll_category.update(payroll_category_params)
-      flash[:notice] = 'Employee payroll category updated Successfully'
-    end
+    flash[:notice] = t('up_pay') if @payroll_category.update(payroll_category_params)
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
   end
@@ -209,9 +183,7 @@ class EmployeesController < ApplicationController
     authorize! :delete, @payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
-    if @payroll_category.destroy
-      flash[:notice] = 'Employee payroll category deleted Successfully'
-    end
+    flash[:notice] = t('dest_pay') if @payroll_category.destroy
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
   end
@@ -244,9 +216,7 @@ class EmployeesController < ApplicationController
   def add_grade
     @employee_grade_new = EmployeeGrade.new
     @employee_grade = EmployeeGrade.new(grade_params)
-    if @employee_grade.save
-      flash[:notice] = 'Employee Grade created Successfully'
-    end
+    flash[:notice] = t('emp_grade') if @employee_grade.save
     @grade1 = EmployeeGrade.is_status
     @grade2 = EmployeeGrade.not_status
   end
@@ -259,9 +229,7 @@ class EmployeesController < ApplicationController
   def update_grade
     @employee_grade_new = EmployeeGrade.new
     @employee_grade = EmployeeGrade.find(params[:id])
-    if @employee_grade.update(grade_params)
-      flash[:notice] = 'Employee Grade updated Successfully'
-    end
+    flash[:notice] = t('up_grade') if @employee_grade.update(grade_params)
     @grade1 = EmployeeGrade.is_status
     @grade2 = EmployeeGrade.not_status
   end
@@ -270,9 +238,7 @@ class EmployeesController < ApplicationController
     authorize! :delete, @employee_grade
     @employee_grade_new = EmployeeGrade.new
     @employee_grade = EmployeeGrade.find(params[:id])
-    if @employee_grade.destroy
-      flash[:notice] = 'Employee Grade deleted Successfully'
-    end
+    flash[:notice] = t('dest_grade') if @employee_grade.destroy
     @grade1 = EmployeeGrade.is_status
     @grade2 = EmployeeGrade.not_status
   end
@@ -280,14 +246,7 @@ class EmployeesController < ApplicationController
   def admission1
     @employee = Employee.new
     @date = Date.today.strftime('%Y%m%d')
-    if Employee.first.nil?
-      @employee.employee_number = 1
-      flash[:notice] = t('first_emp') + ' ' + @employee.employee_number
-    else
-      @last_employee = Employee.last
-      @employee.employee_number = @last_employee.employee_number.next
-      flash[:notice] = t('last_emp') + ' ' + @last_employee.employee_number
-    end
+    @employee.emp_no
     authorize! :create, @employee
   end
 
@@ -372,7 +331,6 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:format])
     unless params[:search].empty?
       other_conditions = ''
-      [] << 
       other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ''
       other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ''
       other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ''
@@ -382,7 +340,7 @@ class EmployeesController < ApplicationController
     end
     authorize! :read, @employee
   end
-
+   
   def update_reporting_manager_name
     @employee = Employee.find(params[:id])
     @reporting_manager = Employee.find(params[:reporting_manager_id])
@@ -948,14 +906,14 @@ class EmployeesController < ApplicationController
   def employee_profile
     @employee = Employee.find(params[:employee_id])
     @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
-     @general_setting = GeneralSetting.first
+    @general_setting = GeneralSetting.first
     render 'employee_profile', layout: false
   end
 
   def personal_profile_pdf
     @employee = Employee.find(params[:employee_id])
     @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
-     @general_setting = GeneralSetting.first
+    @general_setting = GeneralSetting.first
     render 'personal_profile_pdf', layout: false
   end
 
@@ -963,20 +921,20 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:employee_id])
     @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
     @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
-     @general_setting = GeneralSetting.first
+    @general_setting = GeneralSetting.first
     render 'address_profile_pdf', layout: false
   end
 
   def contact_profile_pdf
     @employee = Employee.find(params[:employee_id])
-     @general_setting = GeneralSetting.first
+    @general_setting = GeneralSetting.first
     render 'contact_profile_pdf', layout: false
   end
 
   def bank_info_pdf
     @employee = Employee.find(params[:employee_id])
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
-     @general_setting = GeneralSetting.first
+    @general_setting = GeneralSetting.first
     render 'bank_info_pdf', layout: false
   end
 
@@ -1029,7 +987,7 @@ class EmployeesController < ApplicationController
   end
 
   def department_params
-    params.require(:employee_department).permit(:name, :code, :status)
+    params.require(:employee_department).permit!
   end
 
   def position_params

@@ -40,10 +40,10 @@ class UsersController < ApplicationController
 
   def search
     unless params[:search].empty?
-  
+
       @users = User.where("concat_ws(' ',first_name,last_name)like ?
         OR concat_ws(' ',last_name,first_name)like ?
-        OR username like ?","#{params[:search]}%","#{params[:search]}%","#{params[:search]}%")
+        OR username like ?", "#{params[:search]}%", "#{params[:search]}%", "#{params[:search]}%")
     end
     authorize! :read, @user
   end

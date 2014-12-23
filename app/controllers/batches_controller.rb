@@ -1,9 +1,8 @@
 class BatchesController < ApplicationController
-  
-   def edit_master_category
+  def edit_master_category
     @batch = Batch.find(params[:id])
     @master_category = FinanceFeeCategory.find(params[:id])
-  end
+ end
 
   def update_master_category
     @batch = Batch.find(params[:id])
@@ -22,6 +21,7 @@ class BatchesController < ApplicationController
     end
     @master_categories = @batch.finance_fee_categories.all
   end
+
   def index
     @courses = Course.all
     authorize! :read, @courses.first
@@ -57,7 +57,7 @@ class BatchesController < ApplicationController
 
   def edit
     @batch = Batch.find(params[:id])
-    authorize! :update, @batch    
+    authorize! :update, @batch
   end
 
   def update
@@ -80,7 +80,7 @@ class BatchesController < ApplicationController
     else
       flash[:notice] = 'Batch unable to delete!'
       redirect_to course_path(@batch.course)
-    end   
+    end
   end
 
   def assign_tutor
@@ -88,7 +88,7 @@ class BatchesController < ApplicationController
     authorize! :read, @batch
   end
 
- def assign_tutorial
+  def assign_tutorial
     @emp = []
     @batch = Batch.find(params[:format])
     @department = EmployeeDepartment.find(params[:assign_tutor][:id])
@@ -101,7 +101,7 @@ class BatchesController < ApplicationController
       @employees = @emp
     end
     authorize! :read, @batch
-  end
+   end
 
   def assign_employee
     @batch = Batch.find(params[:id])

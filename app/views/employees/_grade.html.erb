@@ -76,11 +76,11 @@
             <td class="center">
               <div class="label-success label label-default">
               <i class="glyphicon glyphicon-edit icon-white"></i> 
-              <%= link_to 'Edit',edit_grade_employees_path(c),remote: true,class: "a-action"%></div>
+              <%= link_to 'Edit',edit_grade_employee_path(c),remote: true,class: "a-action"%></div>
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
-              <%= link_to 'Delete',destroy_grade_employees_path(c),remote: true,
+              <%= link_to 'Delete',destroy_grade_employee_path(c),remote: true,
                     method: :delete, data: { confirm: "Are you sure to delete #{c.name}?" },class: "a-action"%></div>
             </td>
 
@@ -119,7 +119,7 @@
             <td class="center">
               <div class="label-success label label-default">
               <i class="glyphicon glyphicon-edit icon-white"></i> 
-              <%=link_to 'Edit',edit_grade_employees_path(c),remote: true,class: "a-action"%></div>
+              <%=link_to 'Edit',edit_grade_employee_path(c),remote: true,class: "a-action"%></div>
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 

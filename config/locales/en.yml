@@ -33,5 +33,20 @@ en:
   Personal_details: " Personal details updated successfully for"
   Address_details: "Address_details updated successfully for"
   Contact_details: "Contact details updated successfully for"
-
-
+  emp_category: 'Employee category created Successfully'
+  emp_update_category: 'Employee category Updated Successfully'
+  emp_delete_category: 'Employee category deleted Successfully'
+  add_emp_dept: 'Employee department created Successfully'
+  update_dept: 'Employee department updated Successfully'
+  destroy_dept: 'Employee department deleted Successfully'
+  update_pos: 'Employee position updated Successfully'
+  add_pos: 'Employee position created Successfully'
+  up_pos: 'Employee position updated Successfully'
+  dest_pos: 'Employee position deleted Successfully'
+  up_bank: 'Bank field updated Successfully'
+  add_pay: 'Payroll catagory created Successfully'
+  up_pay: 'Employee payroll category updated Successfully'
+  dest_pay: 'Employee payroll category deleted Successfully'
+  emp_grade: 'Employee Grade created Successfully'
+  up_grade: 'Employee Grade updated Successfully'
+  dest_grade: 'Employee Grade deleted Successfully'

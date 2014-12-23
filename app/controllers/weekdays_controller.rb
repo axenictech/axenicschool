@@ -6,7 +6,6 @@ class WeekdaysController < ApplicationController
     authorize! :create, @weekday
 
     @weekdays = Batch.includes(:course).all
-
   end
 
   def create

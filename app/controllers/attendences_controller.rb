@@ -1,6 +1,6 @@
 class AttendencesController < ApplicationController
   def index
-   authorize! :read, Attendence
+    authorize! :read, Attendence
   end
 
   def attendence_register

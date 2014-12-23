@@ -766,8 +766,8 @@ class FinanceController < ApplicationController
   end
 
   def fees_submission_batch
-    @batches=Batch.includes(:course).all
-    @collections=Batch.first.finance_fee_collections if Batch.first
+    @batches = Batch.includes(:course).all
+    @collections = Batch.first.finance_fee_collections if Batch.first
     authorize! :read, @collections.first
   end
 
@@ -929,9 +929,9 @@ class FinanceController < ApplicationController
   end
 
   def fees_defaulters
-    @courses=Course.all
-    @batches=Course.first.batches if Course.first
-    @collections=Batch.first.finance_fee_collections if Batch.first 
+    @courses = Course.all
+    @batches = Course.first.batches if Course.first
+    @collections = Batch.first.finance_fee_collections if Batch.first
     authorize! :read, @collections.first
   end
 

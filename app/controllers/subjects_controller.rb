@@ -26,7 +26,7 @@ class SubjectsController < ApplicationController
 
     @elective_group = ElectiveGroup.find(params[:elective_group_id]) if params[:elective_group_id]
     @subject = @elective_group.subjects.build if params[:elective_group_id]
-    authorize! :create, @subject    
+    authorize! :create, @subject
    end
 
   def create
