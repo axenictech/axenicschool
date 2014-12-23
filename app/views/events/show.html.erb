@@ -46,19 +46,25 @@
 </div>
 <br>
 <div class="row">
-   <%unless @event.is_common? %>
-	<div class="form-group">
-		<div class="col-md-6"><%= link_to 'Select Batch',event_path,remote: true%></div>
-		<div class="col-md-6"><div id="batch_details"></div></div>
-
-<br>
-
-		<div class="col-md-6"><%= link_to 'Select Department',showdep_events_path,remote: true%></div>
+  <%unless @event.is_common? %>
+		<div class="form-group">
+			<div class="col-md-6"><%= link_to 'Select Batch',event_path,class: "btn btn-primary-link btn-xs",remote: true%>
+			</div>
+			<div class="col-md-6">
+				<div id="batch_details"></div>
+			</div>
+		</div>
+</div>
+<br/>
+<div class="row">
+	<div class="form-group">	
+		<div class="col-md-6"><%= link_to 'Select Department',showdep_events_path,class: "btn btn-primary-link btn-xs",remote: true%>
+		</div>
 		<div class="col-md-6"><div id="department_details"></div></div>
 	</div>
 <%end%>
 </div>
-
+</div>
 <br>
 	<div class="form-group">
 	<div class="col-md-6"><%=f.submit 'Confirm',

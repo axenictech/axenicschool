@@ -17,19 +17,22 @@
        
       </div>
         <div class="box-content">
-         <h4>Select one of the contact for Emergency Contact</h4>
+
+         <h4><b>Select one of the contact for Emergency Contact</b></h4>
    	<%= form_for @student, url:{action:'update_immediate_contact'},method: :patch do |f| %>
    	<%= hidden_field_tag :id,@student.id %>	
 	<% @student.guardians.each do|g|%>
-      <%= f.radio_button "immediate_contact",g.id, :checked =>true%>
-			 <%= g.first_name+" "+g.last_name+" - "+g.relation %>
+   <%= f.radio_button "immediate_contact",g.id, :checked =>true%>
+			    <b><%= g.first_name+" "+g.last_name+" - "+g.relation %>
+       </b>
+       <br><br>
 	<%end%>
    
    <div class="row">
       <div class="col-sm-1"></div>
         <div class="col-sm-4">
       <div class="form-actions">               
-       <%= f.submit 'Finish',class: "btn btn-primary"%>
+       <%= f.submit 'Finish',class: "btn btn-default"%>
           </div>
           </div>
 </div>
