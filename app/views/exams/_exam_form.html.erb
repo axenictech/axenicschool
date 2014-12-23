@@ -1,5 +1,5 @@
 <% if @subjects.empty? %>
- <h4 align="center">No subject Found </h4>
+ <h4 align="center">No subject Found</h4>
 <% else %>
 <div class="row">
 <ul class="errors " style="width:700px"></ul>
@@ -23,7 +23,7 @@
    
    
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <%=link_to 'change type',edit_exam_group_path(@exam_group) ,remote:true  %></div>
+    <%=link_to 'Change Type',edit_exam_group_path(@exam_group) %></div>
     </div>
     </div>
 <br>
@@ -57,14 +57,14 @@
   <tr>
     <th>Subjects</th>
   <% unless @exam_group.exam_type== "Grades"%>
-    <th >Max marks</th>
-    <th >Min marks</th>
+    <th >Max Marks</th>
+    <th >Min Marks</th>
     
   <%else%>
     <th></th><th></th>
   <% end %>
-    <th>start time</th>
-    <th>end time</th>
+    <th>Start Time</th>
+    <th>End Time</th>
     <th>Do Not Create</th>
   </tr> 
 </thead>

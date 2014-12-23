@@ -22,6 +22,7 @@
         <fieldset>
           <% if @newscast.errors.any?%>
             <div class="alert alert-danger alert-dismissable">
+            <h4>Errors prohibited to being Save:</h4>
            <ul>
           <% @newscast.errors.full_messages.each do |msg| %>
           <li style="width:300px"><%= msg%></li>

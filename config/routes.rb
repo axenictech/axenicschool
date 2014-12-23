@@ -69,10 +69,11 @@ Rails.application.routes.draw do
   end
 
   resources :subjects do
-    collection do
-      get :select
+
+      collection do
+        get :select
+      end
     end
-  end
 
   resources :batches do
     member do

@@ -6,21 +6,17 @@
         width:100%;
         margin: 0 auto;
       }
-
-       
       #head {
         height: 100px;
         width: 700px;
         text-align: center;
         font-size: 40px;
         border-color: black;
-
       }
       #head_info {
         text-align: center;
         font-size: 15px;
       }
-
     </style>
   </head>
   <body>
@@ -33,29 +29,21 @@
         </div>
       </div>
       <hr>
-
-      <br/><h3><center>Course Wise Ranking Report </center></h3>
-    <br>
-
+      <br/>
+      <h3><center>Course Wise Ranking Report </center></h3>
       <h4>Course:<%= @course.course_name.capitalize+" "+@course.section_name.capitalize%></h4>
-
-
-      
-    
-<table cellpadding="4" cellspacing="5" width="700">
-    
-       <tr bgcolor="99CCFF">
-        <th >Sr.No.</th>
-              <th><font color="blue">Sr.No.</font></th>
-              <th><font color="blue">Admission no</font></th>
-              <th><font color="blue">Student Name</font></th>  
-              <th><font color="blue">Batch</font></th>       
-              <th><font color="blue">Marks</font></th>
-              <th><font color="blue">Rank</font></th>
-            </tr>
-             <%ranks=[]%>  
-              <% total_mark=0%>                                                   
-            <% @batches.each do |batch| %>
+      <table cellpadding="4" cellspacing="5" width="700">
+        <tr bgcolor="99CCFF">
+          <th>Sr.No.</th>
+          <th>Admission no</th>
+          <th>Student Name</th>  
+          <th>Batch</th>       
+          <th>Marks</th>
+          <th>Rank</th>
+        </tr>
+        <%ranks=[]%>  
+        <% total_mark=0%>                                                   
+        <% @batches.each do |batch| %>
             <% batch.students.each do |student| %>
            <% grouped_exams=GroupedExamReport.where(student_id:student.id,batch_id:batch.id)%>
            <% grouped_exams.each do |ge|%>
