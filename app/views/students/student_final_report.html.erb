@@ -41,11 +41,11 @@
      <% max_total = 0 %>
         <% marks_total = 0 %>
       <tr>
-        <td>Subject</td>
+        <th>Subject</th>
         <% @exam_groups.each do |exam_group| %>
-          <td><%= exam_group.name %></td>
+          <td><%= exam_group.name %></t>
         <% end %>
-          <td>Total</td>
+          <th>Total</th>
       </tr>
 
       <% @subjects.each do |subject| %>
@@ -89,7 +89,7 @@
       <% end %>
     
       <tr>
-        <td>Total</td>
+        <th>Total</th>
         <% @max_total = 0 %>
         <% @marks_total = 0 %>
         <% total_marks=0%><%total=0%>
@@ -121,7 +121,7 @@
         <% @max_total = 0 %>
         <% @marks_total = 0 %>
         <% end %>
-        <td><%= "#{total_marks || "-"}/"+total.to_s %></td>
+        <th><%= "#{total_marks || "-"}/"+total.to_s %></th>
       </tr>
       <tr></tr>
     </table>

@@ -31,7 +31,7 @@ class ExamGroupsController < ApplicationController
     @exam_group.update(params_exam_group)
     @batch = @exam_group.batch
     @subjects = @batch.subjects.where(no_exams: false)
-    @exam_group.exams.build
+    @exam_group.examinds.build
   end
 
   def exam_group_create
@@ -170,8 +170,8 @@ class ExamGroupsController < ApplicationController
     else
       flash[:result_error] = 'Exam scheduled not published'
     end
-    redirect_to exam_groups_exams_path(@exam_group)
-    authroize! :read, @exam_group
+    redirect_to exams_exam_group_path(@exam_group)
+    #authroize! :read, @exam_group
   end
 
   def destroy

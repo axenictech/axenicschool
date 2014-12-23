@@ -56,7 +56,7 @@ class ExamReportsController < ApplicationController
 
   def student_exam_report
     @exam_group = ExamGroup.find(params[:id])
-    @student = Student.find(params[:student_id])
+    @student = Student.find(params[:id])
     authorize! :read, @exam_group
   end
 

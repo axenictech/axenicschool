@@ -132,15 +132,15 @@ class ExamSettingController < ApplicationController
   end
 
   def edit
-    @course = Course.find(params[:course_id])
-    @class_des1 = @course.class_designations.find(params[:id])
+    @course = Course.find(params[:id])
+    @class_des1 = @course.class_designations.find(params[:class_des])
     authorize! :update, @class_des1
   end
 
   def update
     @course = Course.find(params[:course_id])
     @class_dess = @course.class_designations.all
-    @class_des1 = @course.class_designations.find(params[:id])
+    @class_des1 = @course.class_designations.find(params[:class_des])
     if @class_des1.update(params_class)
       flash[:class_designation_notice] = 'Class Designation Updated Successfully'
     else
@@ -153,8 +153,8 @@ class ExamSettingController < ApplicationController
     @course = Course.find(params[:id])
     @rank_lev1 = @course.ranking_levels.find(params[:course_id])
 
-    @course = Course.find(params[:course_id])
-    @rank_lev1 = @course.ranking_levels.find(params[:id])
+    @course = Course.find(params[:id])
+    @rank_lev1 = @course.ranking_levels.find(params[:course_id])
     authorize! :update, @rank_lev1
 
   end
@@ -179,7 +179,7 @@ class ExamSettingController < ApplicationController
   def selectrank
     @course = Course.find(params[:course][:id])
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
-    authorize! :read, @ranking_levels.first
+    #authorize! :read, @ranking_levels.first
   end
 
   private
