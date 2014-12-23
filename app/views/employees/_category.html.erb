@@ -71,7 +71,9 @@
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
+
               <%= link_to 'Delete' ,destroy_category_employee_path(c),
+
                     method: :delete, data: { confirm: "Are you sure to delete #{c.name}?" },class: "a-action"%></div>
             </td>
 

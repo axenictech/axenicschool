@@ -7,7 +7,7 @@
 
 <div class="modal-body">
 <ul class="errors"></ul>
-<%= form_for @employee_department,url:{:action=>'update_department',department_id: @employee_department.id},method: :patch,remote: true do |f|%>
+<%= form_for @employee_department,url:{:action=>'update_department',id: @employee_department.id},method: :patch,remote: true do |f|%>
  <table class="table" style="width:85%">
         <tr>
             <td class="col-2"><%= f.label :Name , class: "control-label"%></td>

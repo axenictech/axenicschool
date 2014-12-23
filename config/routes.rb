@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
 
-devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords'}
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
   root 'home#dashboard'
-  get 'subjects/select'
 
   resources :home do
     collection { get :dashboard }
-
   end 
 
   resources :categories
@@ -35,7 +33,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     collection do
       get :select
     end
-  end 
+  end
   resources :batches do
     collection do
       get :select
@@ -77,14 +75,13 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     resources :subjects do
       collection do
         get :subject
+        get :select
       end
     end
     resources :elective_groups do
       resources :subjects
     end
   end
-
-  
 
   resources :students do
     collection do
@@ -292,6 +289,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     member { get :exam_score }
   end
 
+
   resources :class_timings do
     collection do
       get :select
@@ -319,15 +317,12 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     end
   end 
 
- 
-
   resources :weekdays do
     collection do
       get :select
 
     end
   end
-  
 
   resources :time_tables
 
@@ -362,11 +357,77 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
 
   end
 
-
   resources :batches do
     resources :time_table_entries
   end
 
+
+  resources :exam_setting do
+    collection do
+      get :newrank
+      get :selectrank
+      post :createrank
+      patch :updateRank
+      get :select
+    end
+    member do
+      delete :destroyRank
+      get :setting
+      get :settingrank
+      get :editRank
+    end
+  end
+
+  resources :exam_groups do
+
+    collection do
+      get :select
+      get :previous_exam_data
+      get :publish_exam
+      get :connect_exam
+      get :publish_result
+    end
+    member do
+      get :exams
+
+    end
+
+    resources :exams
+  end
+
+  resources :exams do
+    member do
+      get :exam_score
+    end
+    resources :exam_scores
+  end
+
+  resources :online_exam_groups
+
+  resources :exam_reports do
+    collection do
+      get :report_center
+      get :exam_wise_report
+      get :select_batch
+      get :generate_exam_report
+      get :subject_wise_report
+      get :choose_batch
+      get :generate_subject_report
+      get :subject_wise_students_report
+      get :grouped_exam_report
+      get :generate_grouped_report
+      get :archived_student_report
+      get :select_course
+      get :generate_archived_report
+      get :archived_students_consolidated_report
+      get :exam_group_wise_report
+      get :archived_students_exam_report
+    end
+    member do
+      get :archived_student
+      get :consolidated_archived_report
+    end
+  end
 
   resources :courses do
     resources :exam_setting
@@ -481,13 +542,14 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
       post :one_click_payslip_revert
       post :emp_search_result_pdf
       get :employee_structure
+
     end
     member do
       get :edit_category
       patch :update_category
       delete :destroy_category
       get :edit_department
-      patch :update_department
+      patch :update_department    
       delete :destroy_department
       get :edit_position
       patch :update_position

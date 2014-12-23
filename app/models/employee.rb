@@ -67,6 +67,8 @@ class Employee < ActiveRecord::Base
 
   validates :home_country_id, presence: true, on: :update
 
+  scope :not_status, -> { where(status: false).order(:name) }
+
   def archived_employee
     employee_attributes = attributes
     update_attributes(status_description: status)
@@ -94,6 +96,14 @@ class Employee < ActiveRecord::Base
     end
   end
 
+  
+
+  def emp_no
+    date = Date.today.strftime('%Y%m%d')
+    self.employee_number = date.to_s + '1' if Employee.first.nil?
+    self.employee_number = date.to_s + Employee.last.employee_number.next.to_s unless Employee.first.nil?
+  end
+
   private
 
   def create_user_account
@@ -106,7 +116,7 @@ class Employee < ActiveRecord::Base
       u.role = 'Employee'
       u.email = email
       u.general_setting_id = User.current.general_setting.id
-    end
+            end
     user.save
   end
 end

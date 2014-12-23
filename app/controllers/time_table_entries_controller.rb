@@ -60,7 +60,7 @@ class TimeTableEntriesController < ApplicationController
     @class_timing = @batch.class_timings.where(is_break: false)
     @subjects = @batch.subjects.all
     unless @delete_time.nil?
-    @time = @delete_time.time_table.id
+      @time = @delete_time.time_table.id
   end
     redirect_to dashboard_home_index_path 
   end

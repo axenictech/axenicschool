@@ -8,10 +8,10 @@ class StudentsController < ApplicationController
     # @batches = Batch.includes(:course).all
     @date = Date.today.strftime('%Y%m%d')
     if Student.first.nil?
-      @student.admission_no = 'S'+@date.to_s+'1'
+      @student.admission_no = 'S' + @date.to_s + '1'
     else
       @id = Student.last.id.next
-      @student.admission_no = 'S'+@date.to_s+@id.to_s
+      @student.admission_no = 'S' + @date.to_s + @id.to_s
     end
      @batches=Batch.all.includes(:course)
     authorize! :create, @student
@@ -37,7 +37,6 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:format])
     @guardian = @student.guardians.build
     authorize! :create, @student
-
   end
 
   def admission2_1
@@ -132,8 +131,7 @@ class StudentsController < ApplicationController
   def view_all
     @batches = Batch.includes(:course).all
     authorize! :read, @batches.first
-
-  end 
+  end
 
   def select
     @batch = Batch.find(params[:batch][:id])
@@ -176,9 +174,8 @@ class StudentsController < ApplicationController
   def report
     @student = Student.find(params[:format])
     @batch = @student.batch
-    
-    authorize! :read, @student
 
+    authorize! :read, @student
   end
 
   def archived_report
@@ -278,8 +275,8 @@ class StudentsController < ApplicationController
    end
 
   def advanced_search
-    @courses=Course.all
-    @batches=Course.first.batches.all if Course.first
+    @courses = Course.all
+    @batches = Course.first.batches.all if Course.first
     authorize! :read, @student
   end
 

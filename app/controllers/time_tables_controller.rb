@@ -73,10 +73,10 @@ class TimeTablesController < ApplicationController
 
   def time_table_pdf
     @time1 = TimeTable.find(params[:t])
-    @time = TimeTableEntry.where('batch_id like ?',params[:time_id])
+    @time = TimeTableEntry.where('batch_id like ?', params[:time_id])
     @batch = Batch.find(params[:batch_id])
     @subjects = @batch.subjects.all
-     @general_setting = GeneralSetting.first
+    @general_setting = GeneralSetting.first
     render 'time_table_pdf', layout: false
  end
 
