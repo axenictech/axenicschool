@@ -6,4 +6,5 @@ class EmployeePosition < ActiveRecord::Base
   validates :employee_category, presence: true
   scope :is_status, -> { includes(:employee_category).where(status: true).order(:name) }
   scope :not_status, -> { includes(:employee_category).where(status: false).order(:name) }
+  scope :shod, ->(id) { where(id: id).take }
 end

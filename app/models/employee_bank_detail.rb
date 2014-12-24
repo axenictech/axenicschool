@@ -1,3 +1,4 @@
+# bank details
 class EmployeeBankDetail < ActiveRecord::Base
   belongs_to :employee
   belongs_to :bank_field
@@ -9,4 +10,6 @@ class EmployeeBankDetail < ActiveRecord::Base
                                 bank_info: v['bank_info'])
     end
   end
+
+  scope :shod, ->(id) { where(id: id).take }
 end

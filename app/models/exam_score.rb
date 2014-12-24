@@ -6,7 +6,7 @@ class ExamScore < ActiveRecord::Base
   validates :remarks, length: { minimum: 1, maximum: 30 }, format: { with: /\A[a-zA-Z0-9._" "-\/]+\Z/ }, allow_blank: true
   validate :marks_cant_be_greater_than_maximum_marks
   validate :marks_cant_be_negative
-
+  scope :shod, ->(id) { where(id: id).take }
   def marks_cant_be_negative
     if  marks.present? && marks < 0
       errors.add(:marks, 'cannot be negative')

@@ -14,4 +14,5 @@
       <%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:"Select Time"},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
     <%end%>
   </div>
+  </div>
  <div id="time_div"></div>

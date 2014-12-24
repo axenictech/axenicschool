@@ -1,6 +1,6 @@
 class MonthlyPayslip < ActiveRecord::Base
   belongs_to :employee
-
+  scope :shod, ->(id) { where(id: id).take }
   def approve_salary
     update(is_approved: true)
     employee = self.employee
