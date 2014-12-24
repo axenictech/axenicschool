@@ -5,7 +5,7 @@ class FinanceDonation < ActiveRecord::Base
   validates :description, presence: true, length: { minimum: 1, maximum: 50 }
   validates :amount, presence: true, numericality: true
   validates :transaction_date, presence: true
-
+  scope :shod, ->(id) { where(id: id).take }
   def create_transaction
     category = FinanceTransactionCategory.find_by_name('Donation')
     transaction = category.finance_transactions.create(title: donor, description: description, amount: amount, transaction_date: transaction_date)

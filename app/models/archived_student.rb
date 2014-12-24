@@ -10,4 +10,5 @@ class ArchivedStudent < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
   # has_many   :finance_transactions, dependent: :destroy
   # has_many   :fee_category ,:class_name => "FinanceFeeCategory", dependent: :destroy
+  scope :shod, ->(id) { where(id: id).take }
 end

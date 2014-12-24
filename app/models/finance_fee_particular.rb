@@ -6,4 +6,5 @@ class FinanceFeeParticular < ActiveRecord::Base
   validates :description, presence: true, length: { minimum: 1, maximum: 50 }
   validates :admission_no, length: { minimum: 1, maximum: 30 }, numericality: { only_integer: true }, allow_blank: true
   validates :amount, length: { minimum: 1, maximum: 20 }, numericality: true, allow_blank: true
+  scope :shod, ->(id) { where(id: id).take }
 end

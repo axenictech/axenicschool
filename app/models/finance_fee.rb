@@ -4,7 +4,7 @@ class FinanceFee < ActiveRecord::Base
 
   has_many :finance_transactions
   has_many :finance_fines
-
+  scope :shod, ->(id) { where(id: id).take }
   def create_fine(fine)
     date = Date.today
     finance_fines.create(fine: fine, fine_date: date)

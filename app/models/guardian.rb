@@ -20,7 +20,7 @@ class Guardian < ActiveRecord::Base
   validates :income, numericality: { only_integer: true }, length: { in: 1..10 }, allow_blank: true
   validates :education, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
                         length: { in: 1..20 }, allow_blank: true
-
+  scope :shod, ->(id) { where(id: id).take }
   def create_user_account
     user = User.new do |u|
       u.first_name = first_name

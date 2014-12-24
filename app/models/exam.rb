@@ -14,7 +14,7 @@ class Exam < ActiveRecord::Base
   validate :start_time_cannot_be_less_than_past
   validate :end_time_cannot_be_less_than_past
   validate :max_marks_greater_than_min_marks
-
+  scope :shod, ->(id) { where(id: id).take }
   def end_time_cannot_be_less_than_start_time
     if  end_time.present? && end_time < start_time
       errors.add(:end_time, 'cannot be less than start time')
