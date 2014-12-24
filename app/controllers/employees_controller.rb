@@ -1,6 +1,5 @@
 # employee controller
 class EmployeesController < ApplicationController
-
   before_filter :grade, only: \
   [:edit_grade, :update_grade, :destroy_grade]
   before_filter :category, only:
@@ -11,7 +10,6 @@ class EmployeesController < ApplicationController
   [:edit_position, :update_position, :destroy_position]
   before_filter :bank_field, only: \
   [:edit_bank_field, :update_bank_field, :destroy_bank_field]
-
 
   def new_category
     @employee_category_new = EmployeeCategory.new
@@ -195,7 +193,7 @@ class EmployeesController < ApplicationController
   def active_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
-    @payroll_category.update(status: false)
+    @payroll_category.active
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
     authorize! :create, @payroll_category
@@ -204,7 +202,7 @@ class EmployeesController < ApplicationController
   def inactive_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
-    @payroll_category.update(status: true)
+    @payroll_category.inactive
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
     authorize! :create, @payroll_category
@@ -287,10 +285,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:format])
     @bank_fields = BankField.all
     if request.post?
-      params[:bank_details].each_pair do |k, v|
-        EmployeeBankDetail.create(employee_id: @employee.id,\
-                                  bank_field_id: k, bank_info: v['bank_info'])
-      end
+      EmployeeBankDetail.bankdetails(@employee, params[:bank_details])
     end
     redirect_to edit_privilege_employees_path(@employee)
     authorize! :update, @employee
@@ -339,7 +334,7 @@ class EmployeesController < ApplicationController
     end
     authorize! :read, @employee
   end
-   
+
   def update_reporting_manager_name
     @employee = Employee.find(params[:id])
     @reporting_manager = Employee.find(params[:reporting_manager_id])
@@ -988,7 +983,7 @@ class EmployeesController < ApplicationController
   end
 
   def department_params
-    params.requi*re(:employee_department).permit!
+    params.require(:employee_department).permit!
   end
 
   def position_params
@@ -1024,6 +1019,6 @@ class EmployeesController < ApplicationController
   end
 
   def bank_field
-      @bank_field = BankField.find(params[:id])
+    @bank_field = BankField.find(params[:id])
   end
 end

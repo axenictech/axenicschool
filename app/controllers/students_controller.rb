@@ -13,13 +13,13 @@ class StudentsController < ApplicationController
       @id = Student.last.id.next
       @student.admission_no = 'S' + @date.to_s + @id.to_s
     end
-     @batches=Batch.all.includes(:course)
+    @batches = Batch.all.includes(:course)
     authorize! :create, @student
   end
 
   def create
     @student = Student.new(student_params)
-    @batches=Batch.all.includes(:course)
+    @batches = Batch.all.includes(:course)
     if @student.save
       flash[:notice] = 'Student Reord saved successfully please fill the parent detail'
 
