@@ -4,8 +4,7 @@
             <td class="col-2"><%= gradinglevel.min_score %></td>
             <td class="col-2"><%= gradinglevel.description%></td>
             <td><%=link_to 'Edit',edit_batch_grading_level_path(gradinglevel.batch,gradinglevel),remote: true%></td>
-            <td><%= link_to 'Delete',[gradinglevel.batch,gradinglevel],remote: true,
-                    method: :delete, data: { confirm: "Are you sure to delete #{gradinglevel.name} grade?" } %>
+            <td><%= link_to 'Delete',[gradinglevel.batch,gradinglevel],method: :delete, data: { confirm: "Are you sure to delete #{gradinglevel.name} grade?" } %>
                     </td>
             
         </tr>   

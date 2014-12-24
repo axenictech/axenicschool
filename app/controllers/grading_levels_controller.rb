@@ -1,56 +1,60 @@
+# GradingLevels Controller
 class GradingLevelsController < ApplicationController
+  before_filter :find_batch, only: [:new, :create]
+  before_filter :find_grade, only: [:edit, :update, :destroy]
   def index
-    @batches = Batch.includes(:course).all
+    @batches ||= Batch.includes(:course).all
     authorize! :read, @batches.first
   end
 
   def new
-    @batch = Batch.find(params[:batch_id])
     @grading_level = GradingLevel.new
     @grading_level1 = @batch.grading_levels.build
     authorize! :create, @grading_level
   end
 
   def create
-    @batch = Batch.find(params[:batch_id])
-    @grading_levels = @batch.grading_levels.all
+    @grading_levels ||= @batch.grading_levels
     @grading_level1 = @batch.grading_levels.new(params_grade)
-    flash[:grading_level_notice] = 'Grade created successfully'
     @grading_level1.save
+    flash[:notice] = t('grade_create')
   end
 
   def edit
-    @batch = Batch.find(params[:batch_id])
-    @grading_level1 = @batch.grading_levels.find(params[:id])
     authorize! :update, @grading_level1
   end
 
   def update
-    @batch = Batch.find(params[:batch_id])
-    @grading_levels = @batch.grading_levels.all
-    @grading_level1 = @batch.grading_levels.find(params[:id])
-    flash[:grading_level_notice] = 'Grade updated successfully'
+    @grading_levels ||= @batch.grading_levels
     @grading_level1.update(params_grade)
+    flash[:notice] = t('grade_update')
   end
 
   def destroy
-    authorize! :create, @grading_level
-    @batch = Batch.find(params[:batch_id])
-    @grading_levels = @batch.grading_levels.all
-    @grading_level1 = @batch.grading_levels.find(params[:id])
-    flash[:grading_level_notice] = 'Grade deleted successfully'
+    authorize! :delete, @grading_level1
     @grading_level1.destroy
+    flash[:notice] = t('grade_delete')
+    redirect_to grading_levels_path
   end
 
   def select
-    @batch = Batch.find(params[:batch][:id])
-    @grading_levels = @batch.grading_levels.all
+    @batch = Batch.where(id: params[:batch][:id]).take
+    @grading_levels ||= @batch.grading_levels
     authorize! :read, @batch
   end
 
   private
 
+  def find_batch
+    @batch = Batch.where(id: params[:batch_id]).take
+  end
+
+  def find_grade
+    @batch = Batch.where(id: params[:batch_id]).take
+    @grading_level1 = @batch.grading_levels.where(id: params[:id]).take
+  end
+
   def params_grade
-    params.require(:grading_level).permit(:name, :min_score, :description)
+    params.require(:grading_level).permit!
   end
 end

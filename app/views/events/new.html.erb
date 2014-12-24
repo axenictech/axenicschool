@@ -12,7 +12,7 @@
   <div class="box col-md-7">
     <div class="box-inner">
       <div class="box-header well">
-        <h2> New Event Create</h2>
+        <h2> Create New Event</h2>
        
       </div>
         <div class="box-content">
@@ -32,13 +32,12 @@
        <div class="form-group">
 
           <%= f.label :title %>
-          <%= f.text_field :title,class: "form-control",style: "width: 350px" %>
-
-                </div>
+          <%= f.text_field :title,class: "form-control",placeholder: "Enter event title here",style: "width: 350px" %>
+        </div>
  <div class="form-group">
 
 <%=f.label :Description %>
-<%=f.text_field :description ,class: "form-control",style:"width: 350px" %>
+<%=f.text_field :description ,class: "form-control",style:"width: 350px",placeholder: "Enter event description here" %>
 
 </div>
 <div class="form-group">

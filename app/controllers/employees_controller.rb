@@ -1,8 +1,17 @@
 # employee controller
 class EmployeesController < ApplicationController
-  
-  before_filter :grade,only:[:edit_grade,:update_grade,:destroy_grade]
-  before_filter :category,only:[:edit_category,:update_category,:destroy_category]
+
+  before_filter :grade, only: \
+  [:edit_grade, :update_grade, :destroy_grade]
+  before_filter :category, only:
+  [:edit_category, :update_category, :destroy_category]
+  before_filter :department, only: \
+  [:edit_department, :update_department, :destroy_department]
+  before_filter :position, only: \
+  [:edit_position, :update_position, :destroy_position]
+  before_filter :bank_field, only: \
+  [:edit_bank_field, :update_bank_field, :destroy_bank_field]
+
 
   def new_category
     @employee_category_new = EmployeeCategory.new
@@ -28,7 +37,8 @@ class EmployeesController < ApplicationController
 
   def update_category
     @employee_category_new = EmployeeCategory.new
-    flash[:notice] = t('emp_update_category') if @employee_category.update(category_params)
+    flash[:notice] = t('emp_update_category') if \
+    @employee_category.update(category_params)
     @categories1 = EmployeeCategory.is_status
     @categories2 = EmployeeCategory.not_status
   end
@@ -57,14 +67,13 @@ class EmployeesController < ApplicationController
   end
 
   def edit_department
-    @employee_department = EmployeeDepartment.find(params[:id])
     authorize! :update, @employee_department
   end
 
   def update_department
     @employee_department_new = EmployeeDepartment.new
-    @employee_department = EmployeeDepartment.find(params[:id])
-    flash[:notice] = 'update_dept' if @employee_department.update(department_params)
+    flash[:notice] = 'update_dept' if \
+    @employee_department.update(department_params)
     @departments1 = EmployeeDepartment.is_status
     @departments2 = EmployeeDepartment.not_status
   end
@@ -72,7 +81,6 @@ class EmployeesController < ApplicationController
   def destroy_department
     authorize! :delete, @employee_department
     @employee_department_new = EmployeeDepartment.new
-    @employee_department = EmployeeDepartment.find(params[:id])
     flash[:notice] = t('destroy_dept') if @employee_department.destroy
     @departments1 = EmployeeDepartment.is_status
     @departments2 = EmployeeDepartment.not_status
@@ -94,13 +102,11 @@ class EmployeesController < ApplicationController
   end
 
   def edit_position
-    @employee_position = EmployeePosition.find(params[:id])
     authorize! :update, @employee_position
   end
 
   def update_position
     @employee_position_new = EmployeePosition.new
-    @employee_position = EmployeePosition.find(params[:id])
     flash[:notice] = t('up_pos') if @employee_position.update(position_params)
     @positions1 = EmployeePosition.is_status
     @positions2 = EmployeePosition.not_status
@@ -109,14 +115,13 @@ class EmployeesController < ApplicationController
   def destroy_position
     authorize! :delete, @employee_position
     @employee_position_new = EmployeePosition.new
-    @employee_position = EmployeePosition.find(params[:id])
     flash[:notice] = t('dest_pos') if @employee_position.destroy
     @positions1 = EmployeePosition.is_status
     @positions2 = EmployeePosition.not_status
   end
 
   def new_bank_field
-    @bank_field_new = BankField.new_position
+    @bank_field_new = BankField.new
     @bank_fields1 = BankField.is_status
     @bank_fields2 = BankField.not_status
     authorize! :create, @bank_field_new
@@ -131,13 +136,11 @@ class EmployeesController < ApplicationController
   end
 
   def edit_bank_field
-    @bank_field = BankField.find(params[:id])
     authorize! :update, @bank_field
   end
 
   def update_bank_field
     @bank_field_new = BankField.new
-    @bank_field = BankField.find(params[:id])
     flash[:notice] = t('up_bank') if @bank_field.update(bank_field_params)
     @bank_fields1 = BankField.is_status
     @bank_fields2 = BankField.not_status
@@ -146,7 +149,6 @@ class EmployeesController < ApplicationController
   def destroy_bank_field
     authorize! :delete, @bank_field
     @bank_field_new = BankField.new
-    @bank_field = BankField.find(params[:id])
     flash[:notice] = 'Bank field deleted Successfully' if @bank_field.destroy
     @bank_fields1 = BankField.is_status
     @bank_fields2 = BankField.not_status
@@ -175,15 +177,16 @@ class EmployeesController < ApplicationController
   def update_payroll_category
     @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
-    flash[:notice] = t('up_pay') if @payroll_category.update(payroll_category_params)
+    flash[:notice] = t('up_pay') if \
+    @payroll_category.update(payroll_category_params)
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
   end
 
   def destroy_payroll_category
     authorize! :delete, @payroll_category
-    @payroll_category_new = PayrollCategory.new
     @payroll_category = PayrollCategory.find(params[:id])
+    @payroll_category_new = PayrollCategory.new
     flash[:notice] = t('dest_pay') if @payroll_category.destroy
     @payroll_categories1 = PayrollCategory.not_deduction
     @payroll_categories2 = PayrollCategory.is_deduction
@@ -285,7 +288,8 @@ class EmployeesController < ApplicationController
     @bank_fields = BankField.all
     if request.post?
       params[:bank_details].each_pair do |k, v|
-        EmployeeBankDetail.create(employee_id: @employee.id, bank_field_id: k, bank_info: v['bank_info'])
+        EmployeeBankDetail.create(employee_id: @employee.id,\
+                                  bank_field_id: k, bank_info: v['bank_info'])
       end
     end
     redirect_to edit_privilege_employees_path(@employee)
@@ -302,12 +306,9 @@ class EmployeesController < ApplicationController
   def update_privilege
     @employee = Employee.find(params[:format])
     @user = User.find_by_employee_id("#{@employee.id}")
-
     privilege_tag = params[:privilege]
-
     if privilege_tag.present?
       privilege_tag.each  do |p_t|
-
         privileges = PrivilegeTag.find(p_t).privileges.all
 
         unless privileges.nil?
@@ -353,13 +354,15 @@ class EmployeesController < ApplicationController
 
   def change_reporting_manager
     @employee = Employee.find(params[:format])
-    @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
+    @reporting_manager = Employee.find(@employee\
+    .reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
     authorize! :update, @employee
   end
 
   def profile
     @employee = Employee.find(params[:format])
-    @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
+    @reporting_manager = Employee.find(@employee\
+    .reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
     authorize! :read, @employee
   end
 
@@ -402,7 +405,6 @@ class EmployeesController < ApplicationController
     if @employee.update(employee_params)
       redirect_to profile_employees_path(@employee)
       flash[:notice] = t('Contact_details') + ' ' + @employee.first_name
-
     else
       render 'edit_contact_profile'
     end
@@ -428,7 +430,7 @@ class EmployeesController < ApplicationController
     @department = EmployeeDepartment.find(params[:subject_assignment][:id])
     @employees = @department.employees.all
     @subject = Subject.find(params[:format])
-    @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
+    @assigned_employees = EmployeeSubject.assign_emp(@subject)
   end
 
   def assign_employee
@@ -436,13 +438,13 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     @employees = @department.employees.all
     @subject = Subject.find(params[:format])
-    @assigned_employee = EmployeeSubject.create(employee_id: @employee.id, subject_id: @subject.id)
+    @assigned_employee = EmployeeSubject.create(employee_id: \
+    @employee.id, subject_id: @subject.id)
     @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
     authorize! :update, @employee
- end
+  end
 
   def remove_employee
-    authorize! :delete, @employee
     @department = EmployeeDepartment.find(params[:department_id])
     @employee = Employee.find(params[:id])
     @employees = @department.employees.all
@@ -450,6 +452,7 @@ class EmployeesController < ApplicationController
     @assigned_employee = EmployeeSubject.where(employee_id: @employee.id, subject_id: @subject.id)
     @assigned_employee.destroy_all(employee_id: @employee.id, subject_id: @subject.id)
     @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
+    authorize! :read, @employee
   end
 
   def search_employee
@@ -985,7 +988,7 @@ class EmployeesController < ApplicationController
   end
 
   def department_params
-    params.require(:employee_department).permit!
+    params.requi*re(:employee_department).permit!
   end
 
   def position_params
@@ -1010,5 +1013,17 @@ class EmployeesController < ApplicationController
 
   def category
     @employee_category = EmployeeCategory.find(params[:id])
+  end
+
+  def department
+    @employee_department = EmployeeDepartment.find(params[:id])
+  end
+
+  def position
+    @employee_position = EmployeePosition.find(params[:id])
+  end
+
+  def bank_field
+      @bank_field = BankField.find(params[:id])
   end
 end

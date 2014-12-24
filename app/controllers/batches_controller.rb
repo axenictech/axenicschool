@@ -1,43 +1,23 @@
+# Batches Controller
 class BatchesController < ApplicationController
-  def edit_master_category
-    @batch = Batch.find(params[:id])
-    @master_category = FinanceFeeCategory.find(params[:id])
- end
-
-  def update_master_category
-    @batch = Batch.find(params[:id])
-    @master_category = @batch.finance_fee_categories.find(params[:id])
-    if @master_category.update(fee_category_params)
-      flash[:notice] = 'Finance fee category updated successfully'
-    end
-    @master_categories = @batch.finance_fee_categories.all
-  end
-
-  def delete_master_category
-    @batch = Batch.find(params[:id])
-    @master_category = @batch.finance_fee_categories.find(params[:id])
-    if @master_category.destroy
-      flash[:notice] = 'Finance fee category deleted successfully'
-    end
-    @master_categories = @batch.finance_fee_categories.all
-  end
-
+  before_filter :find_batch, only: \
+  [:display, :edit, :update, :delete, :assign_employee, :remove_employee]
   def index
-    @courses = Course.all
+    @courses ||= Course.all
     authorize! :read, @courses.first
-   end
+  end
 
   def new
-    @course = Course.find(params[:course_id])
+    @course = Course.where(id: params[:course_id]).take
     @batch = @course.batches.build
     authorize! :create, @batch
   end
 
   def create
-    @course = Course.find(params[:course_id])
+    @course = Course.where(id: params[:course_id]).take
     @batch = @course.batches.new(postparam)
     if @batch.save
-      flash[:notice] = 'Batch created successfully'
+      flash[:notice] = t('batch_create')
       redirect_to course_path(@course)
     else
       render 'new'
@@ -45,105 +25,71 @@ class BatchesController < ApplicationController
   end
 
   def display
-    @batch = Batch.find(params[:id])
-    @students = @batch.students.all
+    @batch = Batch.where(id: params[:id]).take
+    @students ||= @batch.students
     authorize! :read, @batch
   end
 
   def select
-    @course = Course.find(params[:course][:id])
+    @course = Course.where(id: params[:course][:id]).take
     authorize! :read, @batch
   end
 
   def edit
-    @batch = Batch.find(params[:id])
     authorize! :update, @batch
   end
 
   def update
-    @batch = Batch.find(params[:id])
-
     if @batch.update(postparam)
-      flash[:notice] = 'Batch updated successfully!'
+      flash[:notice] = t('batch_update')
       redirect_to course_path(@batch.course)
     else
       render 'edit'
     end
-    end
+  end
 
   def destroy
     authorize! :delete, @batch
-    @batch = Batch.find(params[:id])
-    if @batch.destroy
-      flash[:notice] = 'Batch deleted successfully!'
-      redirect_to course_path(@batch.course)
-    else
-      flash[:notice] = 'Batch unable to delete!'
-      redirect_to course_path(@batch.course)
-    end
+    @batch.destroy
+    flash[:notice] = t('batch_delete')
+    redirect_to course_path(@batch.course)
   end
 
   def assign_tutor
-    @batch = Batch.find(params[:format])
+    @batch = Batch.where(id: params[:format]).take
     authorize! :read, @batch
   end
 
   def assign_tutorial
-    @emp = []
-    @batch = Batch.find(params[:format])
-    @department = EmployeeDepartment.find(params[:assign_tutor][:id])
-    @emp1 = @department.employees.pluck(:id)
-    @emp1.each { |e| @emp << e.to_s }
-    if @batch.employee_id
-      @assign_employees = @batch.employee_id.split(',')
-      @employees = @emp - @assign_employees
-    else
-      @employees = @emp
-    end
+    @batch = Batch.where(id: params[:format]).take
+    @department = EmployeeDepartment.where(params[:assign_tutor][:id]).take
+    @employees ||= @department.assign_employee(@batch)
     authorize! :read, @batch
-   end
+  end
 
   def assign_employee
-    @batch = Batch.find(params[:id])
-    @employee = Employee.find(params[:format])
-    unless @batch.employee_id.blank?
-      @assigned_emps = @batch.employee_id.split(',')
-    else
-      @assigned_emps = []
-    end
-    @assigned_emps.push(params[:format].to_s)
-    @batch.update_attributes employee_id: @assigned_emps.join(',')
-    @assign_employees = @assigned_emps.join(',')
-
-    @emp = []
+    @employee = Employee.where(id: params[:format]).take
+    @assign_employees ||= @employee.assign(@batch, params[:format])
     @department = @employee.employee_department
-    @emp1 = @department.employees.pluck(:id)
-    @emp1.each { |e| @emp << e.to_s }
-    @assign_emp = @batch.employee_id.split(',')
-    @employees = @emp - @assign_emp
+    @employees ||= @department.assign_employee(@batch)
     authorize! :read, @batch
- end
+  end
 
   def remove_employee
-    @batch = Batch.find(params[:id])
     @employee = Employee.find(params[:format])
-
-    @assigned_emps = @batch.employee_id.split(',')
-    @removed_emps = @assigned_emps.delete(params[:format].to_s)
-    @assign_employees = @assigned_emps.join(',')
-    @batch.update_attributes employee_id: @assign_employees
-    @emp = []
+    @assign_employees ||= @employee.remove(@batch, params[:format])
     @department = @employee.employee_department
-    @emp1 = @department.employees.pluck(:id)
-    @emp1.each { |e| @emp << e.to_s }
-    @assign_emp = @batch.employee_id.split(',')
-    @employees = @emp - @assign_emp
+    @employees ||= @department.assign_employee(@batch)
     authorize! :read, @batch
   end
 
   private
 
+  def find_batch
+    @batch = Batch.where(id: params[:id]).take
+  end
+
   def postparam
-    params.require(:batch).permit(:name, :start_date, :end_date)
+    params.require(:batch).permit!
   end
 end

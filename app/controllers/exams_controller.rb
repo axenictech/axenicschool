@@ -14,7 +14,7 @@ class ExamsController < ApplicationController
     @exam = @exam_group.exams.new(params_exam)
     if @exam.save
       flash[:notice_exam] = 'created successfully'
-      redirect_to exam_groups_exams_path(@exam.exam_group)
+      redirect_to exams_exam_group_path(@exam.exam_group)
     else
       render 'new'
     end
