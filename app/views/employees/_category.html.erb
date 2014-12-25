@@ -13,17 +13,17 @@
   
  
 	 <div class="form-group">
-        <%= t('Name')%>
+        <b>Name:</b>
          <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
       </div>
 
       <div class="form-group">
-        <%= t('Prefix')%>
+        <b>Prefix:</b>
          <%=c.text_field :prefix, placeholder: "Prefix", class: "form-control"%>
       </div>
       
       <div class="form-group">
-         <%= t('Status')%>
+         <b>Status</b>
         <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
         <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
        </div>
