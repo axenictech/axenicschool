@@ -8,4 +8,5 @@ class FinanceTransaction < ActiveRecord::Base
   validates :amount, presence: true, numericality: true
   validates :transaction_date, presence: true
   validates :finance_transaction_category_id, presence: true
+  scope :shod, ->(id) { where(id: id).take }
 end

@@ -32,7 +32,7 @@ class ElectiveGroupsController < ApplicationController
     @subjects = @batch.subjects.where(elective_group_id: nil)
     @elective_groups = @batch.elective_groups.all
     @elective_group.destroy
-      redirect_to dashboard_home_index_path 
+    redirect_to dashboard_home_index_path
     flash[:notice] = 'Elective group deleted Successfully'
   end
 

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :home do
     collection { get :dashboard }
-  end 
+  end
 
   resources :categories
 
@@ -234,7 +234,7 @@ Rails.application.routes.draw do
       get :attendance_wise_ranking_report
       get :students_transcripts_report
     end
-    member do 
+    member do
       get :student_exam_report
       get :student_report
       get :consolidated_report
@@ -269,7 +269,7 @@ Rails.application.routes.draw do
       patch :update_exam_score
       get :select
       get :connect_exam
-      
+
       get :publish_exam
       get :publish_result
       get :previous_exam_data
@@ -292,7 +292,6 @@ Rails.application.routes.draw do
     member { get :exam_score }
   end
 
-
   resources :class_timings do
     collection do
       get :select
@@ -309,16 +308,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :calender do 
+  resources :calender do
     collection do
       get :event_view
     end
 
-    member do 
-      get :change 
+    member do
+      get :change
 
     end
-  end 
+  end
 
   resources :weekdays do
     collection do
@@ -363,7 +362,6 @@ Rails.application.routes.draw do
   resources :batches do
     resources :time_table_entries
   end
-
 
   resources :exam_setting do
     collection do
@@ -552,7 +550,7 @@ Rails.application.routes.draw do
       patch :update_category
       delete :destroy_category
       get :edit_department
-      patch :update_department    
+      patch :update_department
       delete :destroy_department
       get :edit_position
       patch :update_position

@@ -1,7 +1,7 @@
 class FeeCollectionParticularsStudent < ActiveRecord::Base
   belongs_to :student
   belongs_to :fee_collection_particular
-
+  scope :shod, ->(id) { where(id: id).take }
   def create_finance_fee(collection, student)
     last_receipt_no = FinanceFee.last.receipt_no if FinanceFee.last
     fee = FinanceFee.new

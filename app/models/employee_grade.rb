@@ -7,4 +7,5 @@ class EmployeeGrade < ActiveRecord::Base
   validates :max_hours_week,  numericality: { only_integer: true, greater_than: 0, less_than: 30 }
   scope :is_status, -> { where(status: true).order(:name) }
   scope :not_status, -> { where(status: false).order(:name) }
+  scope :shod, ->(id) { where(id: id).take }
 end

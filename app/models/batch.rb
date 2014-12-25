@@ -17,7 +17,7 @@ class Batch < ActiveRecord::Base
   has_and_belongs_to_many :finance_fee_categories
   has_and_belongs_to_many :online_exams
   has_many :finance_fee_collections
-
+  scope :shod, ->(id) { where(id: id).take }
   def end_date_cannot_be_less_than_start_date
     if end_date.present? && end_date < start_date
       errors.add(:end_date, "can't be less than start date")

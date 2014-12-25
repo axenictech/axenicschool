@@ -50,7 +50,7 @@ class Student < ActiveRecord::Base
   validates :phone1, numericality: { only_integer: true },
                      length: { minimum: 6, maximum: 11 }, allow_blank: true
   after_save :create_user_account
-
+  scope :shod, ->(id) { where(id: id).take }
   def archived_student
     student_attributes = attributes
     student_attributes['student_id'] = id
