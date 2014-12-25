@@ -20,7 +20,7 @@
     <fieldset>
       <% if @fee.errors.any?%>
         <div class="alert alert-danger" style="width:500px" >
-        <h4><%= t('Errors prohibited to being update:')%></h4>
+        <h4>Errors prohibited to being update:</h4>
           <ul>
             <% @fee.errors.full_messages.each do |msg| %>
             <li style="width:500px" align="left"><%= msg%></li>
@@ -33,50 +33,54 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
-          <%= t('Name')%><span class="necessary-field">*</span>
+          <b>Name:</b>
+          <span style="color:red">*</span>
           <%= f.text_field :name, placeholder: "Particular Name", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= t('Description')%><span class="necessary-field">*</span>
+          <b>Description:</b>
+          <span style="color:red">*</span>
           <%= f.text_field :description, placeholder: "Description", class: "form-control"%>
         </div>
         
         <div class="form-group">
-          <%= t('Create Using') %> 
+          <b>Create Using:</b>
         </div>
 
         <div class="form-group">
           <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('admission_no',function(response){
-            });"}%><%= t('Admission No.')%>
+            });"}%>Admission No.
         </div>
 
         <div class="form-group">
-          <%=radio_button_tag :mode,"category",'',{onclick:"$.get('category',function(response){});"}%><%= t('Student Category')%>
+          <%=radio_button_tag :mode,"category",'',{onclick:"$.get('category',function(response){});"}%>Student Category
         </div>
 
         <div class="form-group">
           <%=radio_button_tag :mode,"all",'',{onclick:"$('#hidden').html('')"}%><%=  t('All') %>
         </div>
-        
-        <div id="hidden"></div> 
+        </div>
+      <div class="col-md-4 col-md-offset-1">
 
         <div class="form-group">
-          <%= t('Amount') %>
+          <b>Amount:</b>
           <%= f.text_field :amount, placeholder: "Amount",class: "form-control" %>
         </div>
         
         <div class="form-group">
 
-          <%= t('Finance Fee Category') %>
+          <b>Finance Fee Category:</b>
+          <span style="color:red">*</span>
           <%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#finance_fee_particular_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",:style =>"width: 250px",class: "form-control"}%>
         </div>
         
         <div class="form-group">
-          <%= t('Select') %> &nbsp;&nbsp; &nbsp;&nbsp;
-          Select: &nbsp;&nbsp;
-          <%= link_to "All",select_all_finance_index_path,{onclick:"$('.check_box').prop('checked',true);",remote:true}%>&nbsp;&nbsp;
-          <%= link_to  "None",select_none_finance_index_path,{onclick:"$('.check_box').prop('checked',false);",remote:true}%>
+          <b>Select:</b> &nbsp;&nbsp; &nbsp;&nbsp;
+         
+          <%= link_to "All",select_all_finance_index_path,{onclick:"$('.check_box').prop('checked',true);",remote:true,class: "btn btn-primary-link btn-xs"}%>&nbsp;&nbsp;
+          <%= link_to  "None",select_none_finance_index_path,{onclick:"$('.check_box').prop('checked',false);",remote:true,class: "btn btn-primary-link btn-xs"}%>
+
         <div id="fee_category">
           <%= render 'category_batches_list'%></div>
         </div>

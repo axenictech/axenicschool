@@ -988,7 +988,7 @@ class EmployeesController < ApplicationController
   end
 
   def department_params
-    params.requi*re(:employee_department).permit!
+    params.require(:employee_department).permit!
   end
 
   def position_params

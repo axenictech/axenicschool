@@ -10,26 +10,29 @@
     <%= f.hidden_field :is_master,value:true%>
 		<div class="row">
 			<div class="col-md-1"></div>
-	        <div class="col-md-3"><%= f.label :name %></div>
+	        <div class="col-md-3"><b>Name:</b></div>
 	        <div class="col-md-7"><%= f.text_field :name,class: "form-control", placeholder: 'Name'%></div>
 	    </div><br/>
 	    <div class="row">
 	    <div class="col-md-1"></div>
-	        <div class="col-md-3"><%= f.label :description %></div>
+	        <div class="col-md-3"><b>Description:</b></div>
 	        <div class="col-md-7">
 	        <%= f.text_field :description,class: "form-control", placeholder: 'Description'%></div>
 	    </div><br/>
 	    <div class="row">
-	    <div class="col-md-1"></div>
-            <div class="col-md-3"><%= f.label :select_a_batch%></div>
-            <div class="col-md-7">
-            Select:&nbsp;&nbsp;
-            <%=link_to 'All',assign_batch_finance_index_path,remote:true%>&nbsp;&nbsp;
-            <%=link_to 'None',remove_batch_finance_index_path,remote:true%>&nbsp;&nbsp;
+	    <div class="col-sm-12">
+	    
+            <div class="col-sm-5"><b>Select Batch</b></div>
+            <div class="col-sm-7">
+            <b>Select:</b>&nbsp;&nbsp;
+            <%=link_to 'All',assign_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
+            <%=link_to 'None',remove_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
             </div>
         </div>
-
+        </div>
+       
         <div id="batch_list"><%= render 'batch_list'%></div><br/>
+     
 
         <div class="row">
         <div class="col-md-2"></div>
@@ -40,3 +43,4 @@
 </div>    
 </div>
 </div>
+

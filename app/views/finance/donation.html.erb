@@ -36,22 +36,24 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-4">
           <div class="form-group">
-            <%= t('Donor Name')%><span class="necessary-field">*</span>
+            <b>Donor Name:</b>
+            <span style="color:red">*</span>
             <%= f.text_field :donor,:style =>"width: 200px",placeholder: "Name of the donor", class: "form-control"%>
           </div>
 
           <div class="form-group">
-            <%= t('Description')%><span class="necessary-field">*</span>
+            <%= t('Description')%>
+            <span style="color:red">*</span>
             <%= f.text_field :description,:style =>"width: 200px", placeholder: "Description", class: "form-control"%>
           </div>
           
           <div class="form-group">
-            <%= t('Amount') %>
+            <b>Amount:</b>
             <%= f.text_field :amount,:style =>"width: 200px", placeholder: "Amount",class: "form-control" %>
           </div>
 
           <div class="form-group">
-            <%= t('Transction Date') %>
+            <b>Transction Date:</b>
             <%= f.date_field :transaction_date,:value => Time.now.strftime('%Y-%m-%d'),:style =>"width: 200px", class: "form-control"%>
           </div>
         </div>

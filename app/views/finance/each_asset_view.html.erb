@@ -25,16 +25,16 @@
               <table align="center" class="table" style="width:500px">
                 <tbody><tr class="tr-blank"></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Asset Name</td><td>:</td>
+                    <td class="col-2"><b>Asset Name:</b></td>
                     <td class="col-2"><%= @asset.title%></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Description</td><td>:</td>
+                    <td class="col-2"><b>Description:</b></td>
                     <td class="col-2"><%= @asset.description %></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Amount</td><td>:</td>
+                    <td class="col-2"><b>Amount:</b></td>
                     <td class="col-2"><%= @asset.amount%></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Created at</td><td>:</td>
+                    <td class="col-2"><b>Created at:</b></td>
                     <td class="col-2"><%= I18n.l(@asset.created_at,:format=>"%A, %d %B, %Y") %></td></tr>
                 </tbody>
                 </table> 

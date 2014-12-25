@@ -8,19 +8,20 @@
       <%= form_for @transaction_category,url:{action:'update_transaction_category',id:@transaction_category.id},method: :patch,remote:true do |f|%>
         <table class="table" style="width:85%">
           <tr>
-            <td class="col-2"><%= f.label :name , class: "control-label"%></td>
+            <td class="col-2"><b>Name:</b> </td>
             <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
           </tr>
           <tr>
-            <td class="col-2"><%= f.label :description , class: "control-label"%></td>
+            <td class="col-2"><b>Description:</b></td>
             <td><%=f.text_field :description,:style =>"width: 250px", class: "form-control" %></td>
           </tr>
           <tr>
             <td></td>
-            <td class="col-2"><%=f.check_box :is_income%>&nbsp;&nbsp;<%= f.label :is_under_income, class: "control-label"%></td>
+            <td class="col-2"><%=f.check_box :is_income%>&nbsp;&nbsp;is_under_income</td>
           </tr>
           <tr>
-            <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%></td>
+            <td colspan="2"><%= f.submit 'Update', class: "btn btn-success"%>
+            <%= f.submit 'Cancel', class: "btn btn-default"%></td>
           </tr>
         </table>
       <%end%>

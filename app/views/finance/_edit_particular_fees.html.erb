@@ -7,20 +7,21 @@
       <ul class="errors"></ul>
       <%= form_for @fee,url:{action:'update_particular_fee',batch_id:@batch.id,master_id:@master_category,id:@fee.id},method: :patch,remote: true do |f|%>
         <div class="row">
-          <div class="col-md-3"><%= f.label :name %></div>
+          <div class="col-md-3"><b>Name:</b></div>
           <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
         </div><br/>
         <div class="row">
-          <div class="col-md-3"><%= f.label :description %></div>
+          <div class="col-md-3"><b>Description:</b></div>
           <div class="col-md-3"><%= f.text_field :description,:style =>"width: 250px",class: "form-control"%></div>
         </div><br/>
         <div class="row">
-          <div class="col-md-3"><%= f.label :amount %></div>
+          <div class="col-md-3"><b>Amount:</b></div>
           <div class="col-md-3"><%= f.text_field :amount,:style =>"width: 250px",class: "form-control"%></div>
         </div><br/>
         <div class="row">
-          <div class="col-md-2"></div>
           <div class="col-md-3"><%= f.submit 'Update', class: "btn btn-success"%></div>
+          <div class="col-md-3"><%= f.submit 'Cancle', class: "btn btn-default"%></div>
+
         </div>
       <%end%>
     </div>    
