@@ -1,17 +1,13 @@
 <fieldset>
-
 <ul class="errors" style="width:150px"></ul>
-
 <%= form_for [@batch,@exam_group],url: {action: 'create',format: @batch.id} , remote: true do |f|%>
-
   <div class="form-group">
-           <b>Exam Group Name:</b>
-           <%=f.text_field :name ,style: "width: 250px", class: "form-control",placeholder: 'Exam Group Name',required: true%>
+    <b>Exam Group Name:</b>
+    <%=f.text_field :name ,style: "width: 250px", class: "form-control",placeholder: 'Exam Group Name',required: true%>
         </div>
-
-         <div class="form-group">
-          <b>Type:</b>
-           <%= f.select :exam_type,["Marks","Grades","Marks and Grades"],{prompt:true},{class: "form-control",style: "width: 250px"}%>
+      <div class="form-group">
+        <b>Type:</b>
+          <%= f.select :exam_type,["Marks","Grades","Marks and Grades"],{prompt:true},{class: "form-control",style: "width: 250px"}%>
          </div>
          <br>
        
