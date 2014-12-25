@@ -66,7 +66,7 @@ class Employee < ActiveRecord::Base
                          length: { minimum: 6, maximum: 11 }, allow_blank: true
 
   validates :home_country_id, presence: true, on: :update
-
+  scope :shod, ->(id) { where(id: id).take }
   scope :not_status, -> { where(status: false).order(:name) }
 
   def archived_employee

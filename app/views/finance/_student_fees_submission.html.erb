@@ -5,14 +5,14 @@
         <h2>Fee Reciept</h2>
       </div>
       <div class="box-content">
-        <div><%= t('fee_receipt_no') %>&nbsp;&nbsp;<span>:</span><%= @fee.nil? ? t('n_a') : @fee.receipt_no %></div>
+        <div><b>Fee Receipt No:</b>&nbsp;&nbsp;<span>:</span><%= @fee.nil? ? t('n_a') : @fee.receipt_no %></div>
         <% unless @category.nil? %>
-          <div><%= t('fee_category_name') %>&nbsp;&nbsp;<span>:</span><%= @category.name %></div>
+          <div><b>Fee Category Name:</b>&nbsp;&nbsp;<span>:</span><%= @category.name %></div>
         <% end %>
         <% unless @student.category.nil? %>
-          <div><%= t('student_category') %>&nbsp;&nbsp;<span>:</span><%= @student.category.name %></div>
+          <div><b>Student Category:</b>&nbsp;&nbsp;<span>:</span><%= @student.category.name %></div>
         <% end %>
-        <div><%= t('fee_collection_name') %>&nbsp;&nbsp;<span>:</span><%= @collection.name %></div>
+        <div><b>Fee Collection Name:</b>&nbsp;&nbsp;<span>:</span><%= @collection.name %></div>
         <br/>
         <% if @collection.is_due_date? %>
         <%unless @fee.is_paid?%>
@@ -94,7 +94,7 @@
           <%= form_for :transaction,url:{action:'pay_fee',finance_fee_id:@fee.id,id:@collection.id},remote:true do |f|%>
           <%= hidden_field_tag :pay_amount,pay_amount%>
             <div align="center">
-              <div><%= label_tag :amount%>:
+              <div><b>Amount:</b>
               <%= text_field_tag :amount, pay_amount%></div>
             </div>
             <br/>
@@ -106,7 +106,7 @@
             </div>
           <%end%>
         <%else%>
-          <div align="center"><b>Fees Paid</b></div>
+          <div align="center"><b>Fees Paid:</b></div>
             <br/>
           <div align="center">
               <%= link_to 'Print Receipt',student_fee_receipt_finance_index_path(id:@collection.id,finance_fee_id:@fee.id,format:"pdf"),class: "btn btn-success"%>

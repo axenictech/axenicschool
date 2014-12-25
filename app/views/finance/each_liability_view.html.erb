@@ -25,16 +25,16 @@
               <table align="center" class="table" style="width:500px">
                 <tbody><tr class="tr-blank"></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Liability Name</td><td>:</td>
+                    <td class="col-2"><b>Liability Name:</b></td>
                     <td class="col-2"><%= @liability.title%></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Description</td><td>:</td>
+                    <td class="col-2"><b>Description:</b></td>
                     <td class="col-2"><%= @liability.description %></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Amount</td><td>:</td>
+                    <td class="col-2"><b>Amount:</b></td>
                     <td class="col-2"><%= @liability.amount%></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Created at</td><td>:</td>
+                    <td class="col-2"><b>Created at:</b></td>
                     <td class="col-2"><%= I18n.l(@liability.created_at,:format=>"%A, %d %B, %Y") %></td></tr>
                 </tbody>
                 </table> 

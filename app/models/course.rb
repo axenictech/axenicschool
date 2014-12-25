@@ -12,4 +12,5 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :batches
   has_many :class_designations
   has_many :ranking_levels
+  scope :shod, ->(id) { where(id: id).take }
 end

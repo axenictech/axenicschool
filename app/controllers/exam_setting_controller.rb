@@ -177,7 +177,7 @@ class ExamSettingController < ApplicationController
   def selectrank
     @course = Course.find(params[:course][:id])
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
-    #authorize! :read, @ranking_levels.first
+    # authorize! :read, @ranking_levels.first
   end
 
   private

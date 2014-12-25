@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
                        format: { with: /\A[a-zA-Z0-9]+\Z/ }
   validates :first_name, presence: true, length: { in: 1..25 }, format: { with: /\A[a-zA-Z" "]+\Z/ }
   validates :last_name, presence: true, length: { in: 1..25 }, format: { with: /\A[a-zA-Z" "]+\Z/ }
-
+  scope :shod, ->(id) { where(id: id).take }
   def full_name
     first_name + ' ' + last_name
   end

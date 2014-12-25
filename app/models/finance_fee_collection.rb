@@ -13,7 +13,7 @@ class FinanceFeeCollection < ActiveRecord::Base
   validate :end_date_cannot_be_less_than_start_date
   validate :due_date_cannot_be_less_than_end_date
   validate :date_cannot_be_in_past
-
+  scope :shod, ->(id) { where(id: id).take }
   def end_date_cannot_be_less_than_start_date
     if end_date.present? && end_date < start_date
       errors.add(:end_date, "can't be less than start date")

@@ -22,11 +22,11 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-4">
           <div class="form-group">
-            <%= t('Start Date') %>
+            <b>Start Date:</b>
             <%= f.date_field :start_date,:style =>"width: 200px", class: "form-control"%>
           </div>
           <div class="form-group">
-            <%= t('End Date') %>
+             <b>End Date:</b>
             <%= f.date_field :end_date,:style =>"width: 200px", class: "form-control"%>
           </div>
         </div>
@@ -35,6 +35,7 @@
       <div class="col-sm-5 col-sm-offset-5"> 
         <div class="form-actions">               
           <%= f.submit 'View', class: "btn btn-primary"%>
+          <%= f.submit 'Cancel', class: "btn btn-default"%>
         </div>
       </div>
     </fieldset>        

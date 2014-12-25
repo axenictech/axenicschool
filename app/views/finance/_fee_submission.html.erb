@@ -6,14 +6,14 @@
       </div>
       <div class="box-content">
 
-      <div><%= t('fee_receipt_no') %>&nbsp;&nbsp;<span>:</span><%= @fee.nil? ? t('n_a') : @fee.receipt_no %></div>
+      <div><b>Fee Receipt No</b>&nbsp;&nbsp;<span>:</span><%= @fee.nil? ? t('n_a') : @fee.receipt_no %></div>
       <% unless @category.nil? %>
-        <div><%= t('fee_category_name') %>&nbsp;&nbsp;<span>:</span><%= @category.name %></div>
+        <div><b>Fee Category Name:</b>&nbsp;&nbsp;<span>:</span><%= @category.name %></div>
       <% end %>
       <% unless @student.category.nil? %>
-        <div><%= t('student_category') %>&nbsp;&nbsp;<span>:</span><%= @student.category.name %></div>
+        <div><b>Student Category:</b>&nbsp;&nbsp;<span>:</span><%= @student.category.name %></div>
       <% end %>
-      <div><%= t('fee_collection_name') %>&nbsp;&nbsp;<span>:</span><%= @collection.name %></div>
+      <div><b>Fee Collection Name: %>&nbsp;&nbsp;<span>:</span><%= @collection.name %></div>
       <br/>
       <% if @collection.is_due_date? %>
       <%unless @fee.is_paid?%>

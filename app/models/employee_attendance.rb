@@ -5,4 +5,5 @@ class EmployeeAttendance < ActiveRecord::Base
 
   validates :employee_leave_type_id, presence: true
   validates :reason, presence: true, length: { minimum: 1, maximum: 50 }, format: { with: /\A[a-z A-Z 0-9]+\z/, message: 'only allows letters' }
+  scope :shod, ->(id) { where(id: id).take }
 end

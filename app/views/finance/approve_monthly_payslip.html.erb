@@ -11,7 +11,7 @@
   <div class="col-sm-1"></div>
   <div class="col-sm-4">
     <div class="form-group">
-      <%= t('Select salary month') %>
+      <b>Select Salary Month:</b>
       <%= select :salary,:month, @salary_months.map {|c| [c.salary_date.strftime("%B %Y"),c.salary_date.strftime("%Y-%m-%d")]},{prompt:true},{onchange:"var a={date:$('#salary_month').val()}; $.get('approve_salary',a,function(response){});",remote:true,class: "form-control"}%>
     </div>
   </div>
