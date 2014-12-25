@@ -11,11 +11,11 @@
 <%= form_for @bank_field_new, url:{action:'add_bank_field'},remote:true do |c|%>
    <fieldset>
      <div class="form-group">
-        <%= t('Name')%>
+        <b>Name:</b>
          <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
       </div>
       <div class="form-group">
-         <%= t('Status')%>
+         <b>Status:</b>
         <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
         <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
        </div>

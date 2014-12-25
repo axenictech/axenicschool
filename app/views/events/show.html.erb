@@ -67,10 +67,11 @@
 </div>
 <br>
 	<div class="form-group">
-	<div class="col-md-6"><%=f.submit 'Confirm',
-	  class: "btn btn-primary"%></div>
+	<div class="col-md-6"><%= link_to 'Cancel',calender_index_path,class: "btn btn-default"%></div>
+	  
 	  <div class="col-md-6">
- 		<%= link_to 'Cancel',calender_index_path,class: "btn btn-primary"%></div>
+ 		<%=f.submit 'Confirm',class: "btn btn-primary"%>
+	  </div>
   </div>
 
 
