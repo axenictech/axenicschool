@@ -20,7 +20,7 @@
         <% end %>
       <% elsif @user.role.eql? "Employee"%>
         <% unless @employee.nil? %>
-         <%= link_to "View Profile",profile_employee_path(@employee.id), class: "btn btn-primary-link btn-xs"%>
+         <%= link_to "View Profile",profile_employees_path(@employee.id), class: "btn btn-primary-link btn-xs"%>
         <%end%>  
       <% end %>
       

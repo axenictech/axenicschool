@@ -1,10 +1,10 @@
-<table class="table table-striped table-bordered responsive">
+<table class="table table-striped responsive">
 		<thead>
 		<tr>
-		<th>Name</th>
-		<th>Total</th>
-		<th>Present</th>
-		<th>Percentage(%)</th>
+		<th align="center">Name</th>
+		<th align="center">Total</th>
+		<th align="center"> Present</th>
+		<th align="center">Percentage(%)</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -35,10 +35,10 @@
 		<%end%>
 		<% present_days=total_days-absent_days unless total_days==0 %>
 	<tr>
-		<td><%= student.first_name+" "+student.last_name%></td>
-		<td><%= total_days%></td>
-		<td><%= present_days%></td>
-		<td><%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %></td>
+		<td align="center"><%= student.first_name+" "+student.last_name%></td>
+		<td align="center"><%= total_days%></td>
+		<td align="center"><%= present_days%></td>
+		<td align="center"><%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %></td>
 	</tr>
 	<%end%>
 	</tbody>

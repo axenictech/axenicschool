@@ -1,40 +1,40 @@
 <div class="row">
   <div class="box-inner">
     <div class="box-header well">
-      <h2>Student Attendance</h2>
+      <h2>Student's Attendance</h2>
     </div>
 <div class="box-content">
  <div id="calendar" class="fc fc-ltr">
-    <table class="fc-header" style="width:100%">
-      <tbody>
-        <tr>
-          <td class="fc-header-left">
-            <%= link_to "◄ prev", display_attendence_path(@subject.id,:next=>(@today - 1.month)),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
-            <%= link_to "► next", display_attendence_path(@subject.id,:next=>(@today + 1.month)),remote:true , class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
-            <span class="fc-header-space"></span>
-          </td>
-          <td class="fc-header-center">
-            <span class="fc-header-title"><h2><%=@today.strftime("%B %Y") %></h2></span>
-          </td>
-          <td class="fc-header-right">
-            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">month view</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="fc-content" style="position: relative;">
+ 
+        <div class="row">
+        <div class="col-md-12">
+          <div align="center">
+         
+           <h3> <%= link_to "◄ Previous", display_attendence_path(@subject.id,:next=>(@today - 1.month)),remote:true,class: "fc-button fc-button-prev fc-state-default"%>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span align="center"><%=@today.strftime("%B %Y") %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to "Next ► ", display_attendence_path(@subject.id,:next=>(@today + 1.month)),remote:true  ,class: "fc-button fc-button-prev fc-state-default"%>
+         
+          <div class="pull-right">
+            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">Month View</span>
+          </div>
+          </h3>
+          </div>
+           </div>
+</div>
+<br>
+        <div class="fc-content" style="position: relative;">
       <div class="fc-view fc-view-month fc-grid" style="position:relative">
         <table class="fc-border-separate" style="width:100%" cellspacing="0">
           <thead>
             <tr class="fc-first fc-last">
-              <th class="fc-day-header fc-widget-header" style="padding:10px"><%= t('name') %></th>
+              <th class="fc-day fc-widget-content" style="height:40px;width:150px;padding:10px">Name</th>
               <% current_day = Date.today  %>
               <% (@start_date..@end_date).each do |date| %>
                 <%@time_table_entries.each do |d|%>
                 <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
                     <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
-                  <th style="background-color:rgb(248, 247, 247)" class="fc-day-header fc-widget-header"><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></th>
+                  <th style="background-color:rgb(207, 207, 207)" class="fc-day-header fc-widget-header"><div class="day themed_text"><%= I18n.l(date,:format=>"%a")  %></div> <div class="date"> <%= I18n.l(date,:format=>"%d") %></div></th>
                   <%end%>
                 <% else %>
                  <% if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
@@ -54,7 +54,7 @@
           <% unless is_valid_subject == 0 %>
             <tr class="fc-week">
               <th class="fc-day fc-widget-content" style="height:40px;padding:10px">
-                  <%= student.first_name %>
+                  <%= student.first_name %>&nbsp;&nbsp;<%= student.last_name %>
               </th>
 
               <% (@start_date..@end_date).each do |date| %>
@@ -63,7 +63,7 @@
 
             <%if I18n.l(date,:format=>"%A")==d.weekday.weekday%>
             <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
-              <td class="fc-day fc-widget-content" style="background-color:rgb(248, 247, 247)" id="attendance-employee-<%= student.id %>-day-<%= date %>">
+              <td class="fc-day fc-widget-content" style="background-color:rgb(207, 207, 207);" id="attendance-employee-<%= student.id %>-day-<%= date %>">
                 <% else %>
               <td class="fc-day fc-widget-content" id="attendance-employee-<%= student.id %>-day-<%= date %>">
                   <% end %>
@@ -85,7 +85,7 @@
         <%end%>
       </table>
       <br/>
-</div>
+
 </div>
 </div>
 </div>

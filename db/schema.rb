@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-=======
 
->>>>>>> c0b5e2bc1ccc307aca38510c002cfa6ab9b30964
 ActiveRecord::Schema.define(version: 20141223103416) do
 
   create_table "apply_leaves", force: true do |t|
@@ -1139,6 +1136,8 @@ ActiveRecord::Schema.define(version: 20141223103416) do
 
   add_index "weekdays", ["batch_id"], name: "index_weekdays_on_batch_id", using: :btree
 
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 ActiveRecord::Schema.define(version: 20_141_223_103_416) do
@@ -2267,4 +2266,5 @@ ActiveRecord::Schema.define(version: 20_141_223_103_416) do
 
 
 >>>>>>> c0b5e2bc1ccc307aca38510c002cfa6ab9b30964
+>>>>>>> 74aa313cc9f3a589c44fb261a9a044b4d2e09dce
 end

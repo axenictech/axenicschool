@@ -10,30 +10,30 @@
 <%= form_for @employee_grade,url:{:action=>'update_grade',grade_id: @employee_grade.id},method: :patch,remote: true do |f|%>
  <table class="table" style="width:85%">
         <tr>
-            <td class="col-2"><%= f.label :Name , class: "control-label"%></td>
+            <td class="col-2"><b>Name:</b></td>
             <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
         
         <tr>
-            <td class="col-2"><%= f.label :Priority , class: "control-label"%></td>
+            <td class="col-2"><b>Priority:</b></td>
              <td><%=f.text_field :priority ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
 
        <tr>
-            <td class="col-2"><%= f.label :Max_period_per_day , class: "control-label"%></td>
+            <td class="col-2"><b>Max Period Per Day:</b></td>
              <td><%=f.text_field :max_hours_day ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
 
         <tr>
-            <td class="col-2"><%= f.label :Max_period_per_week , class: "control-label"%></td>
+            <td class="col-2">Max_period_per_week</td>
              <td><%=f.text_field :max_hours_week  ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
 
 
 
-        <tr><td><%=f.label :Status%></td>
-             <td align="left"><%= f.radio_button "status", "true", checked: true %><%=f.label :Active%>
-             <%= f.radio_button "status", "false"%><%=f.label :Inactive%></td>
+        <tr><td><b>Status:</b></td>
+             <td align="left"><%= f.radio_button "status", "true", checked: true %><b>Active</b>
+             <%= f.radio_button "status", "false"%><b>Inactive</b></td>
         </tr>
 
 

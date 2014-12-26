@@ -91,6 +91,7 @@ class EmployeesController < ApplicationController
     authorize! :create, @employee_position_new
   end
 
+
   def add_position
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.new(position_params)

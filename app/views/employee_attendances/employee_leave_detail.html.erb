@@ -17,13 +17,13 @@
     </div>
    <div class="box-content">
   
-  <table id="datatable" class="table table-striped table-bordered responsive">
+  <table id="datatable" class="table table-striped responsive">
   <thead>
       <tr>
-        <td><%= 'Leave Types'%></td>
-        <td><%= 'Available Leave'%></td>
-        <td><%= 'Leave Taken'%></td>
-         <td><%= 'Last Reset Date' %></td>
+        <th>Leave Types</th>
+        <th>Available Leave</th>
+        <th>Leave Taken</th>
+         <th>Last Reset Date</th>
       </tr>
       </thead>
        <tbody>
@@ -50,7 +50,7 @@
 </div>
 </div>
 </div>
- <div class="col-sm-offset-5"><%= link_to "►Reset_Leave",employee_wise_leave_reset_employee_attendance_path(id:@employee.id),class: "btn btn-primary" %></div>
+ <div class="col-sm-offset-5"><%= link_to "►Reset_Leave",employee_wise_leave_reset_employee_attendance_path(id:@employee.id),class: "btn btn-success" %></div>
     <div>
 
 

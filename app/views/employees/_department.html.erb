@@ -11,17 +11,17 @@
  <%= form_for @employee_department_new, url:{action:'add_department'},remote:true do |c|%>
    <fieldset>
 	 <div class="form-group">
-        <%= t('Name')%>
+          <b>Name:</b>
          <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
       </div>
 
       <div class="form-group">
-        <%= t('Code')%>
+          <b>Code:</b>
          <%=c.text_field :code, placeholder: "Code", class: "form-control"%>
       </div>
       
       <div class="form-group">
-         <%= t('Status')%>
+         <b>Status:</b>
         <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
         <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
        </div>
@@ -51,7 +51,7 @@
          <div class="box-content">
     
       
-       <table id="datatable" class="table table-striped table-bordered responsive">
+       <table id="datatable" class="table table-striped responsive">
          <thead>
                <tr>
                  <th>Name</th>
@@ -92,7 +92,7 @@
               <h2>Inactive Department</h2>
              </div>
           <div class="box-content">
-             <table id="datatable" class="table table-striped table-bordered responsive">
+             <table id="datatable" class="table table-striped responsive">
          <thead>
                <tr>
                  <th>Name</th>

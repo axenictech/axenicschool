@@ -8,7 +8,7 @@
 <%= form_for @attendence,url:{action:'create',subject_id:@subject_id},remote:true  do |f|%>
   <div class="row">
     <div class="col-md-1"></div>
-      <div class="col-md-6">
+      <div class="col-md-8">
       <div class="form-group">
   
     <%=f.hidden_field :student_id,value:@student.id %>
@@ -17,12 +17,13 @@
     <%=f.hidden_field :time_table_entry_id,value:@time_table_entry_id %>
  
         <b>Reason for Absence:</b>
-        <%= f.text_field :reason, class: 'form-control', placeholder: 'Reason for Absence'%>
+        <%= f.text_field :reason, class: 'form-control', placeholder: 'Reason for Absence',style:"width:300px"%>
       </div>
     
        <div class="form-group">
         
         <%= f.submit 'Add', class: "btn btn-primary"%>
+        <%= link_to 'Close', '#', class: "btn btn-default", :'data-dismiss'=>"modal"%>
         </div>
         </div>
         </div>

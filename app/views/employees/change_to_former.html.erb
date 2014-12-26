@@ -30,7 +30,7 @@
 
 <%= form_for :remove, url:{action:'create_archived_employee',format:@employee.id}, method: :post do |f|%>
  <div class="form-group">
-     <b><h4>Reason For Leaving:</h4></b>
+     <b>Reason For Leaving:</b>
 	
 			<%=f.text_field :status_description,class: "form-control",style: "width:60%"%>
 		 </div>

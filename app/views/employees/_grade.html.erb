@@ -13,33 +13,35 @@
 <%= form_for @employee_grade_new ,url:{action:'add_grade'},remote:true do |c| %>
    <fieldset>
      <div class="form-group">
-        <%= t('Name')%>
-         <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
+         <div class="col-md-4"><b>Name:</b></div>
+         <div class="col-md-7"><%=c.text_field :name, placeholder: "Employee Grade Name", class: "form-control"%></div>
       </div>
-
+      <br> <br>
       <div class="form-group">
-        <%= t('Priority')%>
-         <%=c.text_field :priority, placeholder: "Priority", class: "form-control"%>
+           <div class="col-md-4"><b>Priority:</b></div>
+         <div class="col-md-7"><%=c.text_field :priority, placeholder: "Priority", class: "form-control"%></div>
       </div>
-
+       <br> <br>
       <div class="form-group">
-        <%= t('Max periods per day')%>
-         <%=c.text_field :max_hours_day, placeholder: "Max periods per day", class: "form-control"%>
+          <div class="col-md-4"><b>Max periods per day:</b></div>
+         <div class="col-md-7"><%=c.text_field :max_hours_day, placeholder: "Max periods per day", class: "form-control"%></div>
       </div>
-
+       <br> <br>
       <div class="form-group">
-        <%= t('Max periods per week')%>
-         <%=c.text_field :max_hours_week, placeholder: "Max periods per week", class: "form-control"%>
+         <div class="col-md-4"><b>Max periods per week:</b></div>
+        <div class="col-md-7"> <%=c.text_field :max_hours_week, placeholder: "Max periods per week", class: "form-control"%></div>
       </div>
-      
+       <br> <br>
       <div class="form-group">
-         <%= t('Status')%>
-        <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
-        <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
+          <div class="col-md-4"><b>Status:</b></div>
+        <div class="col-md-7"><%= c.radio_button "status", "true", checked: "checked" %> &nbsp;<b>Active</b>&nbsp;&nbsp;
+        <%= c.radio_button "status", "false"%> &nbsp;
+        <b>Inactive</b></div>
        </div>   
+        <br>
    <div class="col-sm-4 col-sm-offset-4"> 
        <div class="form-actions">               
-        <%= c.submit 'Create', class: "btn btn-success"%>
+        <%= c.submit 'Create', class: "btn btn-primary"%>
       </div>
       </div>
    </fieldset>
@@ -48,7 +50,7 @@
  </div>
 </div>
       <%if @grade1.empty? and @grade2.empty?%>
-<h3><div align="center">No records</div></h3>
+<h4><div align="center">No records</div></h4>
 <%else%>
 <div class="row">
   <div class="col-sm-6">
@@ -72,7 +74,7 @@
           <tbody>
            <%@grade1.each do |c| %>
             <tr>
-            <td class="col-3"><%=c.name%> (<%=c.priority%>)</td>
+            <td class="col-4"><%=c.name%> (<%=c.priority%>)</td>
             <td class="center">
               <div class="label-success label label-default">
               <i class="glyphicon glyphicon-edit icon-white"></i> 
@@ -85,7 +87,7 @@
                     method: :delete, data: { confirm: "Are you sure to delete #{c.name}?" },class: "a-action"%></div>
             </td>
 
-
+  
             </tr>
             <%end%>
           </tbody>
@@ -116,7 +118,7 @@
           <tbody>
            <% @grade2.each do |c| %>
             <tr>
-            <td class="col-3"><%=c.name%> (<%=c.priority%>)</td>
+            <td class="col-4"><%=c.name%> (<%=c.priority%>)</td>
             <td class="center">
               <div class="label-success label label-default">
               <i class="glyphicon glyphicon-edit icon-white"></i> 
