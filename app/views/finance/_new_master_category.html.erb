@@ -1,46 +1,44 @@
 <div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h3>Create Master Category</h3>
-</div>
-
-<div class="modal-body">
-<ul class="errors"></ul>
-    <%= form_for @master_category,url:{action:'create_master_category'},remote: true do |f|%>
-    <%= f.hidden_field :is_master,value:true%>
-		<div class="row">
-			<div class="col-md-1"></div>
-	        <div class="col-md-3"><b>Name:</b></div>
-	        <div class="col-md-7"><%= f.text_field :name,class: "form-control", placeholder: 'Name'%></div>
-	    </div><br/>
-	    <div class="row">
-	    <div class="col-md-1"></div>
-	        <div class="col-md-3"><b>Description:</b></div>
-	        <div class="col-md-7">
-	        <%= f.text_field :description,class: "form-control", placeholder: 'Description'%></div>
-	    </div><br/>
-	    <div class="row">
-	    <div class="col-sm-12">
-	    
-            <div class="col-sm-5"><b>Select Batch</b></div>
-            <div class="col-sm-7">
-            <b>Select:</b>&nbsp;&nbsp;
-            <%=link_to 'All',assign_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
-            <%=link_to 'None',remove_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
-            </div>
-        </div>
-        </div>
-       
-        <div id="batch_list"><%= render 'batch_list'%></div><br/>
-     
-
-        <div class="row">
-        <div class="col-md-2"></div>
-	        <div class="col-md-3"><%= f.submit 'Submit', class: "btn btn-primary"%></div>
-	        <div class="col-md-3"><%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></div>
-        </div>
-    <%end%>
-</div>    
-</div>
+	<div class="modal-content">
+		<div class="modal-header">
+			<h3>Create Master Category</h3>
+		</div>
+		<div class="modal-body">
+			<ul class="errors"></ul>
+	    <%= form_for @master_category,url:{action:'create_master_category'},remote: true do |f|%>
+		    <%= f.hidden_field :is_master,value:true%>
+				<div class="row">
+					<div class="col-md-1"></div>
+			    <div class="col-md-4"><b>Name :</b></div>
+			    <div class="col-md-7"><%= f.text_field :name,class: "form-control", placeholder: 'Name'%>
+			  	</div>
+			  </div><br/>
+			  <div class="row">
+			    <div class="col-md-1"></div>
+			    <div class="col-md-4"><b>Description :</b></div>
+			    <div class="col-md-7">
+			      <%= f.text_field :description,class: "form-control", placeholder: 'Description'%>
+			    </div>
+			  </div><br/>
+			  <div class="row">
+				  <div class="col-md-1"></div>
+			    <div class="col-md-4"><b>Select Batch :</b></div>
+		      <div class="col-md-7">
+		        <%=link_to 'All',assign_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
+		        <%=link_to 'None',remove_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
+		      </div>
+			  </div>
+		    <div id="batch_list"><%= render 'batch_list'%></div><br/>
+		    <div class="row">
+		      <div class="col-md-12">
+			      <center>
+			      	<%= f.submit 'Submit', class: "btn btn-primary"%>&nbsp;
+			      	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+			      </center>
+		      </div>
+			  </div>
+	    <%end%>
+		</div>    
+	</div>
 </div>
 

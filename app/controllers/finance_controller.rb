@@ -474,7 +474,7 @@ class FinanceController < ApplicationController
 
   def update_master_category
     @batch = Batch.find(params[:id])
-    @master_category = @batch.finance_fee_categories.find(params[:finance_id])
+    @master_category = @batch.finance_fee_categories.find(params[:id])
     if @master_category.update(fee_category_params)
       flash[:notice] = 'Finance fee category updated successfully'
     end

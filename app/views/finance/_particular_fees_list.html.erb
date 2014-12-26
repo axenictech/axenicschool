@@ -22,15 +22,14 @@
 		        <% @particular_fees.each do |m| %>
 		          <tr>
 		            <td class="col-3"><%= m.name %></td>
-					<td class="col-3"><%= m.category.nil? ? "-": m.category.name%></td>
-					<td class="col-3"><%= m.admission_no.nil? ? "-": m.admission_no%></td>
-					<td class="col-3"><%= m.amount %></td>
-					<td class="col-3"><%= m.created_at.to_date%></td>
+								<td class="col-3"><%= m.category.nil? ? "-": m.category.name%></td>
+								<td class="col-3"><%= m.admission_no.nil? ? "-": m.admission_no%></td>
+								<td class="col-3"><%= m.amount %></td>
+								<td class="col-3"><%= m.created_at.to_date%></td>
 		            <td class="center">
 		              <div class="label-success label label-default">
 		              <i class="glyphicon glyphicon-edit icon-white"></i> 
 		              <%= link_to 'Edit',edit_particular_fee_finance_path(@master_category,master_id:m,batch_id:@batch.id),remote:true, class: 'a-action'%></div>
-
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
 		              <%= link_to 'Delete',delete_particular_fee_finance_path(@master_category,fee:m,batch_id:@batch.id),method: :delete, data:{confirm:"Are You sure to delete '#{m.name}'?"},remote:true, class: 'a-action'%></div>
