@@ -3,18 +3,20 @@
 <%= form_for @payroll_category_new, url:{action:'add_payroll_category'},remote:true do |c|%>
 	<table class="table" style="width:500px" align="center">
 	<tbody>
-		<tr><td><%= c.label :Category_name%></td>
+		<tr><td><b>Category Name:</b></td>
 		<td><%= c.text_field :name%></td></tr>
-		<tr><td><%= c.label :Percentage%></td>
+		<tr><td><b>Percentage:</b></td>
 		<td><%= c.text_field :percentage%></td></tr>
 
-		<tr><td><%= c.label :Percentage_of%></td>
+		<tr><td><b>Percentage Of:</b></td>
 		<td><%= c.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 175px"%></td></tr>
 
-		<tr><td><%= c.label :Status%></td><td> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
-		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td></tr>
+		<tr><td><b>Status:</b></td>
+		<td> <%= c.radio_button "status", "true", checked: "checked" %> <b>Active</b> 
+		<%= c.radio_button "status", "false"%>
+		 <b>Inactive</b></td></tr>
 
-		<tr><td colspan="3" align="center"><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></td></tr>	
+		<tr><td colspan="3" align="center"><%= c.check_box :is_deduction%>  <b>Is deduction?</b></td></tr>	
 
 		<tr>
 			<td colspan="3" align="center"><%= c.submit 'Create', class: "btn btn-primary"%></td>
@@ -35,13 +37,22 @@
 	<%@payroll_categories1.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'Edit',edit_payroll_category_employee_path(c),remote:true%></td>
-			<td><%= link_to 'Delete' ,destroy_payroll_category_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
+			<td class="center">
+              <div class="label-success label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i> <%= link_to 'Edit',edit_payroll_category_employee_path(c),remote:true,class: "a-action"%></div></td>
+              <td class="center">
+              <div class="label-danger label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i>
+			<%= link_to 'Delete' ,destroy_payroll_category_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"},class: "a-action"%></div></td>	 
 			<% if c.status? %>
-			<td><%= link_to 'Active',active_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to activate this Category?"} %></td>	
+			<td class="center">
+              <div class="label-success label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i><%= link_to 'Active',active_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to activate this Category?"},class: "a-action"%></div></td>	
 			<% else %>
-			<td><%=link_to 'Inactive',inactive_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
-			<%end%>
+			<td class="center">
+              <div class="label-danger label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i><%=link_to 'Inactive',inactive_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"},class: "a-action"%></div></td>
+			<%end%> 
 			</tr>
 		<%end%>
 		
@@ -55,12 +66,20 @@
 	<%@payroll_categories2.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'Edit',edit_payroll_category_employee_path(c),remote:true%></td>
-			<td><%= link_to 'Delete' ,destroy_payroll_category_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	
+			<td class="center">
+              <div class="label-success label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i><%= link_to 'Edit',edit_payroll_category_employee_path(c),remote:true,class: "a-action"%></div></td>
+			<td class="center">
+              <div class="label-danger label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i><%= link_to 'Delete' ,destroy_payroll_category_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"},class: "a-action"%></div></td>	
 			 <% if c.status? %>
-			<td><%= link_to 'Active',active_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"} %></td>	
+			<td class="center">
+              <div class="label-success label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i><%= link_to 'Active',active_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"},class: "a-action"%></div></td>	
 			<% else %>
-			<td><%=link_to 'Inactive',inactive_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
+			<td class="center">
+              <div class="label-danger label label-default">
+              <i class="glyphicon glyphicon-edit icon-white"></i><%=link_to 'Inactive',inactive_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"},class: "a-action"%></div></td>
 			<%end%>
 			</tr>
 		<%end%>

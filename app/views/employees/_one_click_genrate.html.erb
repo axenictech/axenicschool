@@ -3,13 +3,13 @@
 
 				<table>
 				  <tr>
-				    <td><%=f.label :'salary_date'%></td>
+				    <td><b>Salary Date:</b></td>
 				    <td><%=f.date_field :joining_date,:value => Time.now.strftime('%Y-%m-%d')%></td>
 				  </tr>
 
 				  <tr>
 				    <td>
-				         <%=f.submit :'►go',class:'btn btn-success'%>
+				         <%=f.submit :'►go',class:'btn btn-primary'%>
 				     </td>
 				    </tr>
 				    </table>

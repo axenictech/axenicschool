@@ -8,10 +8,10 @@
 <%= form_for  @attendence,url:{:action=>'update_attendence',id:@attendence.id,subject_id:@subject_id,date:@today},method: :patch ,remote:true do |f|%>
    <div class="row">
     <div class="col-md-1"></div>
-      <div class="col-md-6">
+      <div class="col-md-8">
       <div class="form-group">
         <b>Reason for Absence:</b>
-        <%= f.text_field :reason, class: 'form-control', placeholder: 'Reason for Absence'%>
+        <%= f.text_field :reason, class: 'form-control', placeholder: 'Reason for Absence',style:"width:300px"%>
       </div>
    
        <div class="form-group">
