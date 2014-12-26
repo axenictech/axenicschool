@@ -1,16 +1,13 @@
 <%unless @batches.nil?%>
-    <% @batches.each do |batch|%>
-      <div class="row">
-       
-        <div class="col-md-12">
+  <% @batches.each do |batch|%>
+    <div class="row">
+      <div class="col-md-12">
         <div class="col-md-7">
-        <br><%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%>&nbsp;&nbsp;<%= batch.course.code+" "+batch.name%>
+          <%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%>&nbsp;&nbsp;<%= batch.course.code+" "+batch.name%>
         </div>
       </div>
-      </div>
-    <%end%>
+    </div>
+  <%end%>
 <%else%>
-	
-    <div class="row"><p>No Batches Found</p></div>
-  
+  <div class="row"><p>No Batches Found</p></div>
 <%end%>

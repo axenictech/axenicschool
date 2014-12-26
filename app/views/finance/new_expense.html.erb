@@ -9,7 +9,7 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'View Expense', 'view_expense', class: "btn btn-primary-link btn-xs" %>
     </div>
@@ -73,7 +73,7 @@
       <div class="col-sm-5 col-sm-offset-5"> 
         <div class="form-actions">               
           <%= f.submit 'Submit', class: "btn btn-primary"%>
-          <%= f.submit 'Cancel', class: "btn btn-default"%>
+          <%= f.submit "clear", :type => "reset", class: "btn btn-default"%>
         </div>
       </div>
     </fieldset>        
@@ -82,29 +82,3 @@
 </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
