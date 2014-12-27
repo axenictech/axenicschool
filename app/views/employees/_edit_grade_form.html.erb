@@ -8,39 +8,43 @@
 <div class="modal-body">
 <ul class="errors5"></ul>
 <%= form_for @employee_grade,url:{:action=>'update_grade',grade_id: @employee_grade.id},method: :patch,remote: true do |f|%>
- <table class="table" style="width:85%">
-        <tr>
-            <td class="col-2"><b>Name:</b></td>
-            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
-        
-        <tr>
-            <td class="col-2"><b>Priority:</b></td>
-             <td><%=f.text_field :priority ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
+ 
 
-       <tr>
-            <td class="col-2"><b>Max Period Per Day:</b></td>
-             <td><%=f.text_field :max_hours_day ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
+        <div class="form-group">
+         <div class="col-sm-4"><b>Name:</b></div>
+         <div class="col-sm-7"><%=f.text_field :name, class: "form-control"%></div>
+      </div>
+      <br><br><br>
+      <div class="form-group">
+           <div class="col-sm-4"><b>Priority:</b></div>
+         <div class="col-sm-7"><%=f.text_field :priority, class: "form-control"%></div>
+      </div>
+       <br><br>
+      <div class="form-group">
+          <div class="col-sm-4"><b>Max periods per day:</b></div>
+         <div class="col-sm-7"><%=f.text_field :max_hours_day,class: "form-control"%></div>
+      </div>
+       <br><br>
+      <div class="form-group">
+         <div class="col-sm-4"><b>Max periods per week:</b></div>
+        <div class="col-sm-7"> <%=f.text_field :max_hours_week, class: "form-control"%></div>
+      </div>
+       <br><br>
+      <div class="form-group">
+          <div class="col-sm-4"><b>Status:</b></div>
+        <div class="col-sm-7"><%= f.radio_button "status", "true", checked: "checked" %> &nbsp;<b>Active</b>&nbsp;&nbsp;
+        <%= f.radio_button "status", "false"%> &nbsp;
+        <b>Inactive</b></div>
+       </div>   
+        <hr>
 
-        <tr>
-            <td class="col-2">Max_period_per_week</td>
-             <td><%=f.text_field :max_hours_week  ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
+    <div class="col-sm-offset-3"> 
+       <div class="form-group">  
+           <%= f.submit 'Update', class: "btn btn-success"%>&nbsp;
+        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+        </div>
+    </div>
 
-
-
-        <tr><td><b>Status:</b></td>
-             <td align="left"><%= f.radio_button "status", "true", checked: true %><b>Active</b>
-             <%= f.radio_button "status", "false"%><b>Inactive</b></td>
-        </tr>
-
-
-        <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%>
-        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
-        </tr>
-    </table>
 <% end %>
 
 </div></div></div>
