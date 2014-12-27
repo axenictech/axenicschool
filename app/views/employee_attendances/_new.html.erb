@@ -16,7 +16,7 @@
     
      <tr>
        <td><b>Leave Type:</b></td>
-         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:'t').collect {|b| [b.name,b.id]},{prompt:'Select leave type'},{class: 'form-control'}%></td>
+         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:true).collect {|b| [b.name,b.id]},{prompt:'Select leave type'},{class: 'form-control'}%></td>
      </tr>
     <tr>
       <td><b>Reason for Absence:</b></td>

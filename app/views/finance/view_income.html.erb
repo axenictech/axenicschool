@@ -11,7 +11,7 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'Add income', 'new_income', class: "btn btn-primary-link btn-xs" %>
     </div>
@@ -43,11 +43,10 @@
         </div>
       </div>
 
-      <div class="col-sm-5 col-sm-offset-5"> 
-        <div class="form-actions">               
-          <%= f.submit 'View', class: "btn btn-primary"%>
-           <%= f.submit 'Cancel', class: "btn btn-default"%>
-        </div>
+      <div> 
+        <center>
+          <%= f.submit 'View', class: "btn btn-default"%>
+        </center>
       </div>
     </fieldset>        
   <% end %>

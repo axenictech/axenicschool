@@ -49,7 +49,7 @@ class FinanceController < ApplicationController
     if @donation.save
       @donation.create_transaction
       flash[:notice] = 'Donation accepted'
-      redirect_to finance_donation_receipt_path(@donation)
+      redirect_to donation_receipt_finance_path(@donation)
     else
       render 'donation'
     end

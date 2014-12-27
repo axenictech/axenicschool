@@ -8,23 +8,27 @@
 		    <%= form_for @master_category,url:{action:'update_master_category',batch_id:@batch.id,id:@master_category.id},method: :patch,remote: true do |f|%>
 		    <div class="row">
 					<div class="col-md-1"></div>
-			    <div class="col-md-3"><b>Name:</b></div>
+			    <div class="col-md-4"><b>Name :</b></div>
 			    <div class="col-md-7"><%= f.text_field :name,class: "form-control"%></div>
 			  </div><br/>
 			  <div class="row">
 			    <div class="col-md-1"></div>
-			    <div class="col-md-3"><b>Description:</b></div>
+			    <div class="col-md-4"><b>Description :</b></div>
 			    <div class="col-md-7"><%= f.text_field :description,class: "form-control"%></div>
 			  </div><br/>
 			  <div class="row">
 			    <div class="col-md-1"></div>
-			    <div class="col-md-3"><b>Batch:</div>
+			    <div class="col-md-4"><b>Batch :</div>
 			    <div class="col-md-7"><%= text_field_tag :batch,@batch.course.course_name+" "+@batch.name,readonly:true,class: "form-control"%></div>
 			  </div><br/>
 		    <div class="row">
-		      <div class="col-md-2"></div>
-			    <div class="col-md-3"><%= f.submit 'Update', class: "btn btn-success"%></div>
-			    <div class="col-md-3"><%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></div>
+		      <div class="col-md-12">
+		      	<center>
+		      		<%= f.submit 'Update', class: "btn btn-success"%>&nbsp;
+		      		<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+		      	</center>
+		      </div>
+			    
 		    </div>
 		  <%end%>
 		</div>    

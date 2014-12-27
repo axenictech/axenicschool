@@ -1,24 +1,29 @@
 <div class="modal-body">
         <ul class="errors"></ul>
 <%= form_for [@batch,@grading_level1],remote: true do |f|%>
- <table class="table" style="width:85%">
-        <tr>
-            <td class="col-2"><b>Name:</b></td>
-            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
-        <tr>
-            <td class="col-2"><b>Min Score:</b></td>
-            <td><%=f.text_field :min_score,:style =>"width: 250px", class: "form-control" %></td>
-        </tr>
-        <tr>
-            <td class="col-2"><b>Description:</b></td>
-            <td><%=f.text_field :description ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
-        <tr>
-        <td colspan="2"><%= f.submit 'Submit', class: "btn btn-primary"%>
-        <%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
-        </tr>
-    </table>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4"><b>Name :</b></div>
+    <div class="col-md-7"><%=f.text_field :name,placeholder:"Enter Name",class: "form-control"%></div>
+  </div><br/>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4"><b>Min Score :</b></div>
+    <div class="col-md-7"><%=f.text_field :min_score,placeholder: "Enter Minimum Score",class: "form-control"%></div>
+  </div><br/>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4"><b>Description :</b></div>
+    <div class="col-md-7"><%= f.text_field :description,placeholder: "Enter Description",class: "form-control"%></div>
+  </div><br/>
+  <div class="row">
+    <div class="col-md-12">
+      <center>
+        <%= f.submit 'Submit', class: "btn btn-primary"%>&nbsp;
+        <%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+      </center>
+    </div>
+  </div>
 <% end %>
 </div>
 

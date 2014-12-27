@@ -8,7 +8,7 @@
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'View income', 'view_income', class: "btn btn-primary-link btn-xs" %>
     </div>
@@ -69,11 +69,10 @@
         </div>
       </div>
 
-      <div class="col-sm-5 col-sm-offset-5"> 
-        <div class="form-actions">               
+      <div> 
+        <center>
           <%= f.submit 'Submit', class: "btn btn-primary"%>
-          <%= f.submit 'Cancel', class: "btn btn-default"%>
-        </div>
+        </center>
       </div>
     </fieldset>        
   <% end %>

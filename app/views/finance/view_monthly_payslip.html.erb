@@ -19,8 +19,8 @@
       <b>Select Month:</b>
       <%= f.select :date, @salary_months.map {|c| [c.salary_date.strftime("%B %Y"),c.salary_date.strftime("%Y-%m-%d")]},{prompt:true},class: "form-control"%>
     </div>
-    <%= f.submit "View",class: "btn btn-default"%>
-    <%= f.submit 'Cancel', class: "btn btn-default"%>
+    <div align="center"><%= f.submit "View",class: "btn btn-default"%>
+    </div>
         <%end%>
   </div>
 </div>
