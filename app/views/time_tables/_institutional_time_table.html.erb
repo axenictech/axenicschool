@@ -22,7 +22,7 @@
         </tr>
       </tbody>
     </table>
-<table id="datatable" class="table table-striped table-bordered responsive">
+<table id="datatable" class="table table-striped responsive">
 <tbody>
 <%@time_table.each do |t| %>
  <%@time_table_entries=TimeTableEntry.where(time_table_id:t.id)%>
@@ -44,7 +44,7 @@
 <%end%>
 <%end%>
 <%end%>
-<tr><td><%='No Time Assign For These Day' if @time_table_entries.blank?%></td></tr>
+<tr><td align="center"><%='No Time Assign For These Day' if @time_table_entries.blank?%></td></tr>
     </tbody>
 </table>
 </div>

@@ -20,7 +20,7 @@
     <fieldset>
       <% if @general_setting.errors.any?%>
         <div class="alert alert-danger" style="width:500px" >
-        <h4><%= t('Errors prohibited to being update:')%></h4>
+        <h4>Errors prohibited to being update:</h4>
           <ul>
             <% @general_setting.errors.full_messages.each do |msg| %>
             <li style="width:500px" align="left"><%= msg%></li>
@@ -33,32 +33,34 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
-          <%= t('School/College Name')%><span class="necessary-field">*</span>
+          <b>School/College Name:</b>
+          <span style="color:red">*</span>
           <%= f.text_field :school_or_college_name, placeholder: "School/College Name", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= t('School/College Phone No.')%><span class="necessary-field">*</span>
+          <b>School/College Phone No.:</b>
+           <span style="color:red">*</span>
           <%= f.text_field :school_or_college_phone_no, placeholder: "School/College Phone No", class: "form-control"%>
         </div>
         
         <div class="form-group">
-          <%= t('School/College Address')%>
+          <b>School/College Address:</b>
           <%= f.text_field :school_or_college_address, placeholder: "School/College Address", class: "form-control"%>
         </div>
 
         <div class="form-group">
-          <%= t('Finance_start_year_date') %>
+          <b>Finance Start Year Date:</b>
           <%= f.date_field :finance_start_year_date, class: "form-control" %>
         </div>
         
         <div class="form-group">
-          <%= t('Finance_end_year_date') %>
+          <b>Finance End Year Date:</b>
           <%= f.date_field :finance_end_year_date, class: "form-control" %>
         </div>
         
         <div class="form-group">
-          <%= t('Language') %>
+          <b>Language:</b>
           <%= f.select :language,Language.all.collect{|l| [l.name,l.id]}, {prompt:true}, {class: "form-control"} %>
         </div>
       </div>
@@ -66,39 +68,40 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
-          <%= t('Time_Zone') %>
+          <b>Time_Zone:</b>
           <%= f.select :time_zone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], {:selected => 'Indian Standard Time(IST) - GMT+05:30'}, { class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <%= t('Country') %>
+          <b>Country:</b>
           <%= f.select :country, Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
         </div>
 
         <div class="form-group">
-          <%= t('Upload Logo')%>
+          <b>Upload Logo:</b>
           <%= f.file_field :image, class: "form-control"%>
         </div>
 
         <div class="form-group">
-          <%= t('Include Grading Systems') %> &nbsp;&nbsp; &nbsp;&nbsp;
-          Select: &nbsp;&nbsp;
-          <%= link_to "All", all_general_settings_path,remote:true%>&nbsp;&nbsp;
-          <%= link_to  "None", none_general_settings_path,remote:true%>
+          <b>Include Grading Systems:</b> <br>
+          <div class= "col-sm-12 col-sm-offset-8">
+          <%= link_to "All", all_general_settings_path,remote:true,class: "btn btn-primary-link btn-xs"%>
+          <%= link_to  "None", none_general_settings_path,remote:true,class: "btn btn-primary-link btn-xs"%></div>
+          <br>
           <p id="grading_system"><%= render 'grading_type'%></p>
         </div>
 
         <div class="form-group">
-          <%= f.check_box :addmission_number_auto_increament, {:checked=>true} %>  <%= t('Enable Auto Increment Student Admission No.')%>
+          <%= f.check_box :addmission_number_auto_increament, {:checked=>true} %>  <b>Enable Auto Increment Student Admission No.</b>
         </div>
 
         <div class="form-group">
           <%= f.check_box :employee_number_auto_increament, {:checked=>true} %> 
-          <%= t('Enable Auto Increment Employee No.')%>
+          <b>Enable Auto Increment Employee No.</b>
         </div>
         <div class="form-group">
           <%= f.check_box :enable_news_comment_moderation, {:checked=>false} %> 
-          <%=  t('Enable News Comment Moderation') %>
+          <b>Enable News Comment Moderation</b>
         </div>
       </div>
     </div>

@@ -29,17 +29,18 @@
               <%end%></ul></div>
           <%end%>
           <%= c.hidden_field :course_id, value: @course.id%>
-          <div class="col-sm-7 col-sm-offset-1">
+          <div class="col-sm-12">
             <div class="form-group">
-              <%=c.label :name %>
+              <b>Name:</b>                     
               <%=c.text_field :name ,:style =>"width: 350px", class: "form-control", placeholder: "Batch Group Name"%>
             </div>
             <div class="pull-right">
-            Select:&nbsp;&nbsp;&nbsp;&nbsp;
-            <%= link_to "All",assign_all_course_path(@course),remote:true%>&nbsp;&nbsp;
-            <%= link_to "None",remove_all_course_path(@course),remote:true %></div>
+              <b> Select:</b>
+            <%= link_to "All",assign_all_course_path(@course),remote:true,class: "btn btn-primary-link btn-xs"%>
+            <%= link_to "None",remove_all_course_path(@course),remote:true,class: "btn btn-primary-link btn-xs" %></div>
+            <br>
             <div id="batch_view"><%= render 'all_batch' %></div>
-          <div class="col-sm-7 col-sm-offset-6"> 
+          <div class="col-sm-offset-5"> 
             <div class="form-actions">               
               <%=c.submit 'Submit', class: "btn btn-primary"%>
             </div>

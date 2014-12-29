@@ -7,12 +7,18 @@
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-3">
+  <div class="col-md-1"></div>
+  <div class="col-md-8">
  <%= form_for :time,url:{action:'selectTime'},method: :get,remote:true,html:{id: "time_form"} do |f| %>
 
       <%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:"Select Time"},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
     <%end%>
   </div>
   </div>
+  <br>
+  <div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-8">
  <div id="time_div"></div>
+</div>
+</div>

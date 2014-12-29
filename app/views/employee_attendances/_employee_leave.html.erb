@@ -2,8 +2,8 @@
 <div align="center">
 <ul class="errors"></ul></div>
 <div class="row">
-<div class="col-md-3"></div>
-<div class="box col-md-6">
+
+<div class="box col-md-8 col-md-offset-2">
   <div class="box-inner">
     <div class="box-header well">
       <h2>Add new leave types</h2>
@@ -14,38 +14,42 @@
   
  
    <div class="form-group">
-        <b>Leave Name:</b>
-         <%=c.text_field :name, placeholder: "Leave Name", class: "form-control"%>
+        <div class="col-md-3"><b>Leave Name:</b></div>
+        <div class="col-md-6"><%=c.text_field :name, placeholder: "Leave Name", class: "form-control"%></div>
       </div>
-
+      <br><br>
       <div class="form-group">
-        <b>Leave Code:</b>
-         <%=c.text_field :code, placeholder: "Leave Code", class: "form-control"%>
+        <div class="col-md-3"><b>Leave Code:</b></div>
+        <div class="col-md-6"><%=c.text_field :code, placeholder: "Leave Code", class: "form-control"%></div>
       </div>
+      <br><br>
        <div class="form-group">
-        <b>Max Leave Count:</b>
-         <%=c.text_field :max_leave_count, placeholder: "Max Leave Count", class: "form-control"%>
+        <div class="col-md-3"><b>Maximum Leave Count:</b></div>
+        <div class="col-md-6"><%=c.text_field :max_leave_count, placeholder: "Max Leave Count", class: "form-control"%></div>
       </div>
+      <br><br>
       <div class="form-group">
-        <b>Enable Carry Forward:</b>
-         <%=c.check_box :enable_carry_forward, :checked => false%>
-      </div>
+        <div class="col-md-6"><%=c.check_box :enable_carry_forward, :checked => false%><b>Enable Carry Forward:</b></div></div>
+         
+    
+        <br>
       <div class="form-group">
-         <b>Status:</b>&nbsp;&nbsp;
-        <%= c.radio_button "status", "true", checked: "checked" %>&nbsp; <b>Active</b>&nbsp;&nbsp;
-        <%= c.radio_button "status", "false"%>&nbsp; <b>Inactive</b>
+          <div class="col-md-3"><b>Status:</b></div>
+        <div class="col-md-6"> <%= c.radio_button "status", "true", checked: "checked" %>&nbsp; <b>Active</b>&nbsp;&nbsp;
+        <%= c.radio_button "status", "false"%>&nbsp; <b>Inactive</b></div>
        </div>
-   
+   <br><br>
       <div class="col-sm-4 col-sm-offset-4"> 
        <div class="form-actions">               
         <%= c.submit 'Create', class: "btn btn-primary"%>
       </div>
       </div>
-   </fieldset>
-    </div>
+  </fieldset>
   </div>
- </div>
-</div>
+  </div>
+  </div>
+  </div>
+
 <% if @active_leaves.empty? and  @inactive_leaves.empty?%>
 <h3 align="center">No records</h3>
 <%else%>

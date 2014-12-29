@@ -9,11 +9,11 @@
 
           <%= c.hidden_field :batch_group_id, value: @batch_group.id%>
             <div class="form-group">
-              <%=c.label :name %>
+             <b>Name:</b>
               <%=c.text_field :name, class: "form-control"%>
             </div>
         <div class="modal-footer">
-            <%= c.submit 'update', class: "btn btn-primary"%>
+            <%= c.submit 'Update', class: "btn btn-primary"%>
             <%= link_to 'Close', '#', class: "btn btn-default", :'data-dismiss'=>"modal"%>
         </div>
         <% end %>

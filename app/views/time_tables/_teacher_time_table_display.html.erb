@@ -7,11 +7,11 @@
 
 <% unless @time.empty? %>
     <div class="box-content">
- <table id="datatable" class="table table-striped table-bordered responsive">
+ <table id="datatable" class="table table-striped responsive">
         <tr>
          <td></td>
          <% @weekdays.each do |weekday| %>
-            <th colspan="<%=@class_timings.count %>"><%= weekday.weekday%></th>
+            <th colspan="<%=@class_timings.count %>"><%= weekday.weekday %></th>
           <%end%>
         </tr>
         <tr> 
@@ -42,7 +42,7 @@
     <%end%>
   </table>
  <%else%>
-  <%='No timetable entries found'%>
+  <div align="center"><%='No timetable entries found'%></div>
   <%end%>
 </div>
 </div>

@@ -210,7 +210,7 @@ class TimeTablesController < ApplicationController
       @timetable.errors.add(:end_date, "can't be less than start date")
     end
     if @timetable.update(time_table)
-      flash[:notice] = 'Updated Successfully'
+      flash[:notice] = 'Timetable Updated Successfully'
       redirect_to time_tables_edit_timetable_path(@timetable)
     else
       render 'update_timetable'

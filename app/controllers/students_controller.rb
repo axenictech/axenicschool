@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     @batches = Batch.all.includes(:course)
     if @student.save
-      flash[:notice] = 'Student Reord saved successfully please fill the parent detail'
+      flash[:notice] = 'Student Record saved successfully please fill the parent detail'
 
       redirect_to admission2_students_path(@student)
     else
@@ -59,7 +59,7 @@ class StudentsController < ApplicationController
   def update
     @student = Student.find(params[:id])
     if @student.update(student_params)
-      flash[:notice] = 'Student Reord updated successfully '
+      flash[:notice] = 'Student Record updated successfully '
       redirect_to profile_student_path(@student)
     else
       render 'edit'
