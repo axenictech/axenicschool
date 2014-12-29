@@ -6,4 +6,16 @@ class EmployeeSubject < ActiveRecord::Base
   def self.assign_emp(sub)
     where(subject_id: sub.id)
   end
+  def self.allot_work(employee_subj_ids)
+    status, error_carrier = false, new
+    transaction do
+      emp_subjs = []
+      employee_subj_ids.each do |subj_id, emp_id|
+        subject_asso = find_or_create_by(subject_id: subj_id)
+        subject_asso.employee_id = emp_id
+        subject_asso.save
+        emp_subjs << subject_asso
+      end
+    end
+end
 end
