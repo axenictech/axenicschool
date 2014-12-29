@@ -15,20 +15,18 @@ class ClassTimingsController < ApplicationController
     @batch = Batch.find(params[:batch_id])
     @class_timings = @batch.class_timings.all
     @class_timing1 = @batch.class_timings.new(params_class)
-    if @class_timing1.save
-      flash[:class_time_notice] = 'Class Timing Created Successfully'
-    end
-   end
+    @class_timing1.save
+    flash[:notice] = t('class_timing_create')
+  end
 
   def destroy
     authorize! :destroy, @class_timing1
     @batch = Batch.find(params[:batch_id])
     @class_timings = @batch.class_timings.all
     @class_timing1 = @batch.class_timings.find(params[:id])
-    if @class_timing1.destroy
-      flash[:class_time_notice] = 'Class Timing Deleted Successfully'
-    end
- end
+    @class_timing1.destroy
+    flash[:notice] = t('class_timing_delete')
+  end
 
   def edit
     @batch = Batch.find(params[:batch_id])
@@ -41,7 +39,7 @@ class ClassTimingsController < ApplicationController
     @class_timings = @batch.class_timings.all
     @class_timing1 = @batch.class_timings.find(params[:id])
     if @class_timing1.update(params_class)
-      flash[:class_time_notice] = 'Class Timing Updated Successfull y'
+     flash[:notice] = t('class_timing_update')
     end
   end
 

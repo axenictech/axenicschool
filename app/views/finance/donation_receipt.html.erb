@@ -30,26 +30,31 @@
               <table align="center" class="table" style="width:500px">
                 <tbody><tr class="tr-blank"></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Donor</td><td>:</td>
+                    <td class="col-2"><b>Donor:</b></td>
                     <td class="col-2"><%= @donation.donor %></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Description</td><td>:</td>
+                    <td class="col-2"><b>Description:</b></td>
                     <td class="col-2"><%= @donation.description %></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Amount</td><td>:</td>
+                    <td class="col-2"><b>Amount:</b></td>
                     <td class="col-2"><%= @donation.amount %></td></tr>
                   <tr class="tr-head">
-                    <td class="col-2">Transcation Id</td><td>:</td>
+                    <td class="col-2"><b>Transcation Id:</b></td>
                     <td class="col-2"><%= @donation.finance_transaction.id%></td></tr>
                   <tr class="tr-head">
-                    <td colspan="3" align="center"><%= link_to 'Print receipt',donation_receipt_path(@donation,format:"pdf"),class: "btn btn-primary"%></td></tr>
+                    <td colspan="3" align="center"></td></tr>
                   <tr class="tr-blank"></tr>
                 </tbody>
                 </table> 
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <div>
+          <center>
+            <%= link_to 'Print receipt',donation_receipt_finance_path(@donation,format:"pdf"),class: "btn btn-primary"%>
+          </center>
+        </div>
     </div>
   </div>
 </div>

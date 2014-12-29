@@ -30,28 +30,29 @@
   <div class="col-sm-7 col-sm-offset-1">
         <div class="form-group">
          
-          <%= f.label :username%>
+          <b>Username:</b>
              <%= f.text_field :username, class: "form-control", style: "width: 350px", placeholder: ""  %>
         </div>
         <div class="form-group">
         
-               <b><%= f.label :first_name %></b>
+               <b>First Name:</b>
               <%= f.text_field :first_name, class: "form-control", style: "width: 350px", placeholder: "" %>
         </div>
         <div class="form-group">
-              <b><%= f.label :last_name %></b>
+              <b>Last Name:</b>
               <%= f.text_field :last_name, class: "form-control", style: "width: 350px", placeholder: "" %>
               </div>
         <div class="form-group">
-              <b><%= f.label :email %></b>
+              <b>Email:</b>
               <%= f.text_field :email, class: "form-control", style: "width: 350px", placeholder: ""%>
               </div>
         <div class="form-group">      
-              <b><%= f.label :password %></b>
+              <b>Password:</b>
               <%= f.password_field :password, class: "form-control", style: "width: 350px", placeholder: "" %>
                <%= f.hidden_field :role, value: 'Admin' %>
                </div>
-        <div class="form-group">      
+        <div class="form-group">  
+         <div align="center">    
             <%= f.submit "Create",class: "btn btn-primary" %>
             </div>
         </div>

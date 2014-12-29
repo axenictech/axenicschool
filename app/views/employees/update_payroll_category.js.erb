@@ -1,6 +1,7 @@
 $("ul.errors8").html("")
 <% if  @payroll_category.errors.any? %>
 		<%  @payroll_category.errors.full_messages.each do |message| %>
+		$("ul.errors").addClass("alert alert-danger alert-dismissable")  
 		$("ul.errors8").append($("<li align ='left' style = 'width:500px'/>").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>

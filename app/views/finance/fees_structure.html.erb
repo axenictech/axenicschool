@@ -13,7 +13,7 @@
   <div class="col-sm-4">
     <%= form_for :student, url:{action:'student_search'}, method: :get,remote:true,html:{id: "student_form"} do |f|%>
       <div class="form-group">
-        <%= t('Search Student') %>
+        <b>Search Student:</b>
         <%= text_field_tag :search,"",{oninput:"$('#student_form').submit();", placeholder: 'Search Student',class: "form-control"}%>
       </div>
     <%end%>  

@@ -10,7 +10,7 @@
 </div>
 Note:<font color="red">Fields Marked with * must be filled</font>
 <div id="flash"><%= render 'layouts/messages'%></div>
-
+ 
 
 <div class="row">
   <div class="box col-md-12">
@@ -37,7 +37,8 @@ Note:<font color="red">Fields Marked with * must be filled</font>
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
          <div class="form-group">
-       <%= t('Date of birth')%><span class="necessary-field">*</span>
+       <b>Date of birth:</b>
+
          <%=f.date_field :date_of_birth,:value => Time.now.strftime('%Y-%m-%d'), class: "form-control"%>
        </div>
 
@@ -47,16 +48,16 @@ Note:<font color="red">Fields Marked with * must be filled</font>
        </div>
 
           <div class="form-group">
-       <%= t('Father Name')%>
+         <b>Father Name:</b>
          <%=f.text_field :father_name,placeholder: "Father Name",class: "form-control"%>
        </div>
 
     </div>
 
       <div class="col-sm-1"></div>
-      <div class="col-sm-4">
-             <div class="form-group">
-       <%= t('Mother Name')%>
+        <div class="col-sm-4">
+          <div class="form-group">
+         <b>Mother Name:</b>
          <%=f.text_field :mother_name,placeholder: "Mother Name",class: "form-control"%>
        </div>
 
@@ -74,7 +75,7 @@ Note:<font color="red">Fields Marked with * must be filled</font>
   </div>
   <div class="col-sm-5 col-sm-offset-5"> 
       <div class="form-actions">               
-        <%= f.submit 'Update', class: "btn btn-primary"%>
+        <%= f.submit 'Update', class: "btn btn-success"%>
       </div>
     </div>
   </fieldset>        

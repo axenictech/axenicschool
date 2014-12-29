@@ -10,7 +10,7 @@
  <thead>
   <tr>
     <th>
-      <%= t('name') %>
+      Name
     </th>
     <% @leave_types.each do |lt| %>
     <th>
@@ -18,7 +18,7 @@
     </th>
   <% end %>
     <th>
-      <%= t('total') %>
+      Total
     </th>
   </tr>
   </thead>
@@ -53,4 +53,4 @@
   <%end%>
   </tbody>
  </table>
- <div class="col-sm-offset-5"><%=link_to 'PDF Report',attendance_report_pdf_employee_attendance_path(id:@deparment.id,format:"pdf"),class: "btn btn-primary"%></div>
+ <div class="col-sm-offset-5"><%=link_to 'PDF Report',attendance_report_pdf_employee_attendance_path(id:@deparment.id,format:"pdf"),class: "btn btn-success"%></div>

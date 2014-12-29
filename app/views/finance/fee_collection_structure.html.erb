@@ -16,7 +16,7 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
-          <%= t('Fee collection date')%><span class="necessary-field">*</span>
+          <b>Fee collection date:</b><span style="color:red">*</span>
           <%= select :collection,:id, @collections.uniq.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_structure',a,function(response){});",class: "form-control"}%>
         </div>
       </div>

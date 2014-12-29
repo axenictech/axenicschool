@@ -11,21 +11,21 @@
  <%= form_for @employee_department_new, url:{action:'add_department'},remote:true do |c|%>
    <fieldset>
 	 <div class="form-group">
-        <%= t('Name')%>
-         <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
+          <div class="col-md-3"><b>Name:</b></div>
+         <div class="col-md-8"><%=c.text_field :name, placeholder: "Name", class: "form-control"%></div>
       </div>
-
+      <br><br>
       <div class="form-group">
-        <%= t('Code')%>
-         <%=c.text_field :code, placeholder: "Code", class: "form-control"%>
+          <div class="col-md-3"><b>Code:</b></div>
+         <div class="col-md-8"><%=c.text_field :code, placeholder: "Code", class: "form-control"%></div>
       </div>
-      
+      <br><br>
       <div class="form-group">
-         <%= t('Status')%>
-        <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
-        <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
+         <div class="col-md-3"><b>Status:</b></div>
+        <div class="col-md-8"><%= c.radio_button "status", "true", checked: "checked" %> &nbsp;<b>Active</b>&nbsp;&nbsp;
+        <%= c.radio_button "status", "false"%> &nbsp;<b>Inactive</b></div>
        </div>
-   
+   <br><br>
    <div class="col-sm-4 col-sm-offset-4"> 
        <div class="form-actions">               
         <%= c.submit 'Create', class: "btn btn-primary"%>
@@ -51,7 +51,7 @@
          <div class="box-content">
     
       
-       <table id="datatable" class="table table-striped table-bordered responsive">
+       <table id="datatable" class="table table-striped responsive">
          <thead>
                <tr>
                  <th>Name</th>
@@ -92,7 +92,7 @@
               <h2>Inactive Department</h2>
              </div>
           <div class="box-content">
-             <table id="datatable" class="table table-striped table-bordered responsive">
+             <table id="datatable" class="table table-striped responsive">
          <thead>
                <tr>
                  <th>Name</th>

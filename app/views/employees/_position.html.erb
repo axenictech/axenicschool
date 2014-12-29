@@ -10,26 +10,30 @@
   <div class="box-content">
 <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%>
    <fieldset>
+   <div class="col-md-offset-1">
+   <br>
 	 <div class="form-group">
-        <%= t('Name')%>
-         <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
+       <div class="col-md-3"><b>Name :</b></div>
+         <%=c.text_field :name, placeholder: "Employee Position Name", class: "form-control",style:"width:250px"%>
       </div>
 
    
         <div class="form-group">
-       <%= c.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control",style:"width:350px"%>
+         <div class="col-md-3"><b>Select :</b></div>
+       <%= c.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control",style:"width:250px"%>
        </div>
-
+       <br>
       <div class="form-group">
-         <%= t('Status')%>
-        <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
-        <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
+         <div class="col-md-3"> <b>Status :</b></div>
+        <%= c.radio_button "status", "true", checked: "checked" %>&nbsp; <b>Active</b>&nbsp;&nbsp;
+        <%= c.radio_button "status", "false"%> &nbsp;<b>Inactive</b> 
        </div>
         
 
    <div class="col-sm-4 col-sm-offset-4"> 
        <div class="form-actions">               
         <%= c.submit 'Create', class: "btn btn-primary"%>
+      </div>
       </div>
       </div>
    </fieldset>

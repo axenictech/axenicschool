@@ -7,10 +7,8 @@ class TimeTablesController < ApplicationController
   def employee_timetable
     @timetables = []
     @employee = Employee.find(params[:format])
-    @time_table_entries = TimeTableEntry.where(employee_id: @employee)
-    @time_table_entries.each do |tbe|
-      @timetables << tbe.time_table
-    end
+    @time_table_entries = TimeTableEntry.emp(@employee)
+    @timetables = TimeTableEntry.emptime(@time_table_entries)
     authorize! :read, @employee
   end
 
@@ -20,21 +18,16 @@ class TimeTablesController < ApplicationController
   end
 
   def selectTime
-    @time = TimeTableEntry.where(time_table_id: params[:time][:id])
+    @time = TimeTableEntry.time(params[:time][:id])
     @time1 = TimeTable.find(params[:time][:id])
-    @batches = []
-    unless @time.nil?
-      @time.each do |t|
-        @batches.push t.batch
-      end
-    end
+    @batches = TimeTableEntry.select(@time)
     authorize! :read, @time1
   end
 
   def select
     @time1 = TimeTable.find(params[:t])
     @batch = Batch.find(params[:batch][:id])
-    @class_timing = @batch.class_timings.where(is_break: false)
+    @class_timing = @batch.class_timings.is_break
     @subjects = @batch.subjects.all
     authorize! :read, @time1
   end
@@ -42,7 +35,7 @@ class TimeTablesController < ApplicationController
   def timetable
     @today = Date.today
     @time_end = TimeTable.all
-    @time_table = TimeTable.where('time_tables.start_date <= ? AND time_tables.end_date >= ?', @today, @today)
+    @time_table = TimeTable.inst(@today)
     @batches = Batch.all
     authorize! :read, @time_end.first
   end
@@ -51,29 +44,23 @@ class TimeTablesController < ApplicationController
     @time_end = TimeTable.all
     @today = params[:next].to_date
     @batches = Batch.all
-    @time_table = TimeTable.where('time_tables.start_date <= ? AND time_tables.end_date >= ?', @today, @today)
+    @time_table = TimeTable.inst_next(@today)
     authorize! :read, @time_end.first
   end
 
   def selectTimeEmployee
     @employee = Employee.find(params[:format])
     @time = TimeTableEntry.where(employee_id: @employee.id)
-    @weekdays = []
-    @class_timings = []
-    @employees = []
-    unless @time.nil?
-      @time.each do |t|
-        @weekdays.push t.weekday
-        @class_timings.push t.class_timing
-        @employees.push t.employee
-      end
-    end
+    all = TimeTableEntry.selectemp(@time)
+    @weekdays = all[0]
+    @class_timings = all[1]
+    @employees = all[2]
     authorize! :read, TimeTable
   end
 
   def time_table_pdf
     @time1 = TimeTable.find(params[:t])
-    @time = TimeTableEntry.where('batch_id like ?', params[:time_id])
+    @time = TimeTableEntry.timepdf(params[:time_id])
     @batch = Batch.find(params[:batch_id])
     @subjects = @batch.subjects.all
     @general_setting = GeneralSetting.first
@@ -81,11 +68,13 @@ class TimeTablesController < ApplicationController
  end
 
   def teacher_time_table_display
-    @time = TimeTableEntry.where(time_table_id: params[:time][:id])
+    @time = TimeTableEntry.time(params[:time][:id])
     @time_table = TimeTable.find(params[:time][:id])
     @timetable_entries = @time_table.time_table_entries
-    @weekdays = @timetable_entries.collect(&:weekday).uniq.sort! { |a, b| a.weekday <=> b.weekday }
-    @class_timings = @timetable_entries.collect(&:class_timing).uniq.sort! { |a, b| a.start_time <=> b.start_time }
+    @weekdays = @timetable_entries.collect(&:weekday) \
+                .uniq.sort! { |a, b| a.weekday <=> b.weekday }
+    @class_timings = @timetable_entries.collect(&:class_timing) \
+                     .uniq.sort! { |a, b| a.start_time <=> b.start_time }
     @employees = @timetable_entries.collect(&:employee).uniq
     authorize! :read, @time_table
   end
@@ -120,36 +109,12 @@ class TimeTablesController < ApplicationController
 
   def create
     @time_table = TimeTable.new(time_table)
-    @error = false
-    previous = TimeTable.where('end_date >= ? AND start_date <= ?', @time_table.start_date, @time_table.start_date)
-    unless previous.empty?
-      @error = true
-      @time_table.errors.add(:start_date, 'is within the range of another timetable')
-    end
-    foreword = TimeTable.where('end_date >= ? AND start_date <= ?', @time_table.end_date, @time_table.end_date)
-    unless foreword.empty?
-      @error = true
-      @time_table.errors.add(:end_date, 'is within the range of another timetable')
-    end
-    fully_overlapping = TimeTable.where('end_date <= ? AND start_date >= ?', @time_table.end_date, @time_table.start_date)
-    unless fully_overlapping.empty?
-      @error = true
-      @time_table.errors.add(:end_date, 'timetable_in_between_given_dates')
-    end
-    if @time_table.end_date < @time_table.start_date
-      @error = true
-      @time_table.errors.add(:end_date, "can't be less than start date")
-    end
+    @error = @time_table.create_time_table(@time_table)
     unless @error
-      if @time_table.save
-        redirect_to time_table_entries_path(@time_table)
-
-      else
-        render 'new_timetable'
-      end
+      @time_table.save ? (redirect_to time_table_entries_path(@time_table)) : (render 'new_timetable')
     else
       render 'new_timetable'
-     end
+    end
   end
 
   def edit_timetable
@@ -174,44 +139,17 @@ class TimeTablesController < ApplicationController
   def time_table_delete
     authorize! :delete, @time
     @time = TimeTable.find(params[:format])
-    if @time.destroy
-      redirect_to time_tables_path
-      flash[:notice] = 'Timetable deleted successfully'
-    end
+      if @time.destroy
+        redirect_to time_tables_path
+        flash[:notice] = 'Timetable deleted successfully'
+      end
   end
 
   def update_timetable_values
     @timetable = TimeTable.find(params[:format])
-
-    @error = false
-    previous = TimeTable.where('end_date >= ? AND start_date <= ?', @timetable.start_date, @timetable.start_date)
-
-    unless previous.empty?
-      @error = true
-      @timetable.errors.add(:start_date, 'is within the range of another timetable')
-    end
-
-    foreword = TimeTable.where('end_date >= ? AND start_date <= ?', @timetable.end_date, @timetable.end_date)
-
-    unless foreword.empty?
-      @error = true
-      @timetable.errors.add(:end_date, 'is within the range of another timetable')
-    end
-
-    fully_overlapping = TimeTable.where('end_date <= ? AND start_date >= ?', @timetable.end_date, @timetable.start_date)
-
-    unless fully_overlapping.empty?
-      @error = true
-      @timetable.errors.add(:end_date, 'timetable_in_between_given_dates')
-    end
-
-    if @timetable.end_date < @timetable.start_date
-      @error = true
-      @timetable.errors.add(:end_date, "can't be less than start date")
-    end
     if @timetable.update(time_table)
       flash[:notice] = 'Updated Successfully'
-      redirect_to time_tables_edit_timetable_path(@timetable)
+      redirect_to edit_timetable_time_tables_path(@timetable)
     else
       render 'update_timetable'
     end

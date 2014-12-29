@@ -2,19 +2,15 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Examination',exams_path %></li>
-     <li><%= link_to 'Setting',exam_setting_index_path %></li>
+     <li><%= link_to 'Settings',exam_setting_index_path %></li>
     <li>Ranking Level</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 <br/><br/>
 <div class="row">
   <div class="col-md-12">
-   <%= form_for :course, url:{action:'selectrank'},method: :get,remote:true, html:{id:"class_form"} do  |f| %>
-    
-       <%= f.select :id, @courses.collect {|b| [b.course_name,b.id]}, {prompt:"Select Course"},{onchange:"$('#class_form').submit();",class: "form-control",style:"width:350px"} %>
-
-
-
+    <%= form_for :course, url:{action:'selectrank'},method: :get,remote:true, html:{id:"class_form"} do  |f| %>
+      <%= f.select :id, @courses.collect {|b| [b.course_name,b.id]}, {prompt:"Select Course"},{onchange:"$('#class_form').submit();",class: "form-control",style:"width:350px"} %>
     <%end%>
   </div>
 </div>

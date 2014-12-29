@@ -15,17 +15,20 @@
       <% end %>
     </tr> 
  
-<% @batch.weekdays.reverse_each do |w|%>
+<% @batch.weekdays.each do |w|%>
       <tr>
         <th><%=w.weekday%></th>
         <% @class_timing.each do |c|%>
          <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_time_table_id(c.id,w.id,@time) %>
         <td>
         <%unless @present.nil? %>
-         <font color="red"><%= @present.subject.name %></font><br/>
-       <font color="blue"><%= @present.employee.first_name+" "+@present.employee.last_name%></font><br/>
-        <div id="image">
-        <%=link_to image_tag("uploadify-cancel.png",width:"10%"),delete_time_time_table_entries_path(@present), method: :delete, data:{ confirm: "Are you sure to delete"}%></div>
+       
+         <font color="red"><b><%= @present.subject.name %></b></font><br>
+
+       <font color="blue"><b><%= @present.employee.first_name+" "+@present.employee.last_name%></b></font>
+         &nbsp;&nbsp;&nbsp;&nbsp;
+        <%=link_to image_tag("uploadify-cancel.png",width:"4%"),delete_time_time_table_entries_path(@present), method: :delete, data:{ confirm: "Are you sure to delete"}%>
+       
         <%else%>
      <%=button_tag "Assign Here",{onclick:"
        $('#timing_id').val(#{c.id});

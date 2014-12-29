@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="pull-right">
-    		<%= link_to 'Pdf Report',expense_report_finance_index_path(start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-primary-link btn-xs"%>
+    		<%= link_to 'Pdf Report',finance_expense_report_finance_index_path(start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-primary-link btn-xs"%>
     	</div>
 	</div>
 </div>
@@ -31,10 +31,10 @@
 		        <thead>
 		          <tr>
 		            <th>Name</th>
-					<th>Description</th>
-					<th>Amount</th>
-					<th>Transaction Date</th>
-					<th>Action</th>
+								<th>Description</th>
+								<th>Amount</th>
+								<th>Transaction Date</th>
+								<th>Action</th>
 		          </tr>
 		        </thead>
 		        <tbody>
@@ -68,10 +68,3 @@
 	  </div>
   </div>
 </div>
-
-
-
-
-
-
-

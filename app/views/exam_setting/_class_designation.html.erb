@@ -1,29 +1,36 @@
-
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
-<%= link_to 'Add',setting_exam_setting_path(@course),remote: true,class: "btn btn-primary"%>
-</div> 
-</div>
+      <%= link_to 'Create Class Designation',setting_exam_setting_path(@course),remote:true , class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="box col-md-12">
-  <div class="box-inner">
-    <div class="box-header well">
-      <h2>Class Designations Details</h2>
-    </div>
-
-    <div class="box-content">
-   <table id="datatable" class="table table-striped table-bordered responsive">
-  <thead>
-  	<tr>
-        <th>Name</th>
-        <th>Marks</th>
-        <th>Action</th>
-     </tr>
-  </thead>
-    <tbody class="product-index">
-      <%= render 'new' %>
-    </tbody>
-
-</table>
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Class Designation Details</h2>
+      </div>
+    </div>  
+  </div>  
+  <div class="box-content">
+    <table id="datatable" class="table table-striped table-bordered responsive">
+      <thead>
+  	    <tr>
+          <th>Name</th>
+          <th>Marks</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <% if @class_dess.empty? %>
+        <tr>
+          <th colspan="3"><center>No record found.</center></th>
+        </tr>
+      <%else%>  
+        <tbody class="product-index">
+          <%= render 'new' %>
+        </tbody>
+      <%end%>
+    </table>
+  </div>
+</div>

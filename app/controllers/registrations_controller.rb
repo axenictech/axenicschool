@@ -1,3 +1,4 @@
+# Registrations Controller
 class RegistrationsController < Devise::RegistrationsController
   layout false
 

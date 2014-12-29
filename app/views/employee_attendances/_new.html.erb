@@ -1,4 +1,3 @@
-
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
@@ -15,20 +14,20 @@
   <table class="table" align="center">
     
      <tr>
-       <td><%=c.label :Leave_Type %></td>
-         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:'t').collect {|b| [b.name,b.id]},{prompt:'Select leave type'},{class: 'form-control'}%></td>
+       <td><b>Leave Type:</b></td>
+         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:true).collect {|b| [b.name,b.id]},{prompt:'Select leave type'},{class: 'form-control'}%></td>
      </tr>
     <tr>
-      <td><%= c.label :Reason_for_absence%></td>
+      <td><b>Reason for Absence:</b></td>
       <td><%= c.text_field :reason, class: 'form-control', placeholder: 'Reason for absence'%></td>
     </tr>
     <tr>        
-   <td><%=c.label :Half_Day%></td>
-    <td><%= c.check_box :is_half_day,:checked => false %> </td>
+   <td><%= c.check_box :is_half_day,:checked => false %>
+    <b>Half Day</b></td>
     </tr>
     
     <tr>
-    <td colspan="2"><%= c.submit 'Create', class: "btn btn-primary"%>
+    <td colspan="2" align="center"><%= c.submit 'Create', class: "btn btn-primary"%>
         	<%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
         </tr>
 

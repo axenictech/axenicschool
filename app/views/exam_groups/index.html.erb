@@ -10,7 +10,6 @@
   <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'Previous Batch Exams', previous_exam_data_exam_groups_path, class: "btn btn-primary-link btn-xs" %>
-      
     </div>
   </div>
 </div>
@@ -19,25 +18,17 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-5">
-
-	<%= form_for :course, url:{action:'select'},method: :get,remote:true,html:{id: "exam_form"}  do |f| %>
+  <%= form_for :course, url:{action:'select'},method: :get,remote:true,html:{id: "exam_form"}  do |f| %>
    <b>Select Course:</b>
-
   <%= f.select :id, Course.all.collect {|b| [b.course_name+" "+b.section_name,b.id]}, {prompt:true},{onchange:"$('#exam_form').submit();",class: "form-control",style: "width:300px"}%>
-
   <% end %>
   </div>
 </div>
 <br/><br/>
- 
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-5">
- <div id="exam_div">
+    <div id="exam_div"></div>
   </div>
 </div>
-</div>
-
-<div id="exam_details">
-  
-</div>
+<div id="exam_details"></div>

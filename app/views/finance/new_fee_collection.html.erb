@@ -19,7 +19,7 @@
     <fieldset>
       <% if @collection.errors.any?%>
         <div class="alert alert-danger" style="width:500px" >
-        <h4><%= t('Errors prohibited to being saved:')%></h4>
+        <h4>Errors prohibited to being saved:</h4>
           <ul>
             <% @collection.errors.full_messages.each do |msg| %>
             <li style="width:500px" align="left"><%= msg%></li>
@@ -32,45 +32,40 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
-          <%= t('Finance Fee Category') %>
+           <b>Finance Fee Category:</b> <span style="color:red">*</span>
           <%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#finance_fee_collection_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",:style =>"width: 250px",class: "form-control"}%>
 
         </div>
         <div class="form-group">
-        <%= t('Select Batch') %>
-          Select:&nbsp;&nbsp;<%= link_to "All",select_all_finance_index_path,{onclick:"$('.check_box').prop('checked',true);",remote:true}%>&nbsp;&nbsp;<%= link_to "None",select_none_finance_index_path,{onclick:"$('.check_box').prop('checked',false);",remote:true}%>
+        <b>Select Batch:</b> 
+          <%= link_to "All",select_all_finance_index_path,{onclick:"$('.check_box').prop('checked',true);",remote:true,class: "btn btn-primary-link btn-xs"}%>&nbsp;&nbsp;
+          <%= link_to "None",select_none_finance_index_path,{onclick:"$('.check_box').prop('checked',false);",remote:true,class: "btn btn-primary-link btn-xs"}%>
 
         <div id="fee_category"><%= render 'category_batches_list'%></div>
         </div>
+        </div>
+        <div class="col-sm-4 col-sm-offset-1">
         <div class="form-group">
-          <%= t('Fee Collection Name')%><span class="necessary-field">*</span>
+          <b>Fee Collection Name:</b>
+           <span style="color:red">*</span>
           <%= f.text_field :name, placeholder: "Fee Collection Name",:style =>"width: 250px", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= t('Start Date')%>
+          <b>Start Date:</b>
           <%= f.date_field :start_date,:style =>"width: 250px",class: "form-control"%>
         </div>
 
         <div class="form-group">
-          <%= t('End Date')%>
+          <b>End Date:</b>
           <%= f.date_field :end_date,:style =>"width: 250px",class: "form-control"%>
         </div>
 
         <div class="form-group">
-          <%= t('Due Date')%>
+          <b>Due Date:</b>
           <%= f.date_field :due_date,:style =>"width: 250px",class: "form-control"%>
         </div>
       </div>
-
-      <div class="col-sm-1"></div>
-      <div class="col-sm-4">
-        <div class="form-group">
-          
-        </div>
-      </div>
-    </div>
-
     <div class="col-sm-5 col-sm-offset-5"> 
       <div class="form-actions">               
         <%= f.submit 'Submit', class: "btn btn-primary"%>

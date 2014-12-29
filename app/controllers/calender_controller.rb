@@ -14,6 +14,6 @@ class CalenderController < ApplicationController
   end
 
   def event_view
-    @event = Event.find(params[:event_id])
+    @event = Event.shod(params[:event_id])
   end
 end

@@ -29,7 +29,9 @@
     <tbody>
 
        <tr>
-     	  <td class="col-4" colspan="4"><%=f.label :"Search by Name"%><%= text_field_tag :search,"",{oninput:"$('#user_form').submit();", class: 'form-control',placeholder:'Search by name', style: 'width:250px'}%></td>
+     	  <td class="col-4" colspan="4">
+        <b>Search by Name:</b>
+        <%= text_field_tag :search,"",{oninput:"$('#user_form').submit();", class: 'form-control',placeholder:'Search by name', style: 'width:250px'}%></td>
      </tr>
 
  	 <tr>

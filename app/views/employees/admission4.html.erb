@@ -18,7 +18,7 @@
       <h2>Select Reporting Manager</h2>
     </div>
    <div class="box-content">
- <table id="datatable" class="table table-striped table-bordered responsive">
+ <table id="datatable" class="table table-striped responsive">
 
 <%= form_for :advance_search, url:{action:'search',format:@employee.id}, method: :get,remote:true,html:{id: "user_form"} do |f|%>
     <tbody>   
@@ -26,7 +26,8 @@
         <td colspan="4"><%= t('selected_manager : ') %><div id="name_emp1"></div></td>
       </tr>          
       <tr>
-     	  <td colspan="4"><%=f.label :"Search by Name"%>
+     	  <td colspan="4">
+        <b>Search by Name:</b>
           <%= text_field_tag :search,"",{oninput:"$('#user_form').submit();",class: 'form-control', placeholder: 'Search by name',style: 'width:250px'}%></td></tr>
    	  <tr>
          <td class="col-3"><%= f.select :employee_department_id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:"select department"},{onchange:"$('#user_form').submit();", class: 'form-control'}%></td>

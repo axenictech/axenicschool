@@ -12,7 +12,8 @@
     <tbody>
     
    	<tr>     
-          <td ><h4><%=f.label :"Salery Date" %>:<span class="necessary-field">*</span></h4></td>
+          <td><b>Salery Date:</b>
+          <span style:"color:red">*</span></td>
           <td ><%=f.date_field :salery_date,:value => Time.now.strftime('%Y-%m-%d'),class: "form-control",style: "width:250px"%></td>
      </tr>
    <tr></tr>
@@ -21,12 +22,12 @@
         
           <% if c.payroll_category_id.nil? %>
           <tr style="background-color:green">
-            <td ><h4><%= f.label :""%><%=c.name%>:</h4></td>
+            <td ><b><%=c.name%>:</b></td>
             <td ><%= text_field_tag "amounts[#{val.nil? ? 0.00 : val.amount.to_f}]",val.nil? ? 0.00 : val.amount,onblur:"var a={amount:$(this).val(),employee_id:#{@employee.id},id:#{c.id}}; $.get('employee_structure',a,function(response){});",class: "form-control",style: "width:250px"%></td>
             </tr>
           <%else%>
           <tr>
-            <td ><h4><%= f.label :""%><%=c.name%>:</h4></td>
+            <td ><b><%=c.name%>:</b></td>
             <td ><%= text_field_tag "amounts[#{val.nil? ? 0.00 : val.amount.to_f}]", val.nil? ? 0.00 : val.amount,readonly:true,class: "form-control",style: "width:250px"%></td>
             </tr>
           <%end%>

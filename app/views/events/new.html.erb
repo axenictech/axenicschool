@@ -21,37 +21,39 @@
   <div class="box col-md-6">
      <%= form_for :event ,url:{action:'create'} do |f| %>
         <div class="form-group">
-        <%=f.label :start_date%>
+        <b>Start Date:</b>
         <%=f.date_field :start_date ,value: @start_date,readonly:true,:id=>'datetimepicker2',class: "form-control",style: "width: 350px"%>
         </div>
 
           <div class="form-group">
-          <%=f.label :end_date%>
+          <b>End Date:</b>
           <%=f.date_field :end_date ,value: @start_date,:id=>'datetimepicker2',class: "form-control",style: "width: 350px"%></div>
 
        <div class="form-group">
 
-          <%= f.label :title %>
+          <b>Title:</b>
           <%= f.text_field :title,class: "form-control",placeholder: "Enter event title here",style: "width: 350px" %>
         </div>
- <div class="form-group">
+       <div class="form-group">
 
-<%=f.label :Description %>
-<%=f.text_field :description ,class: "form-control",style:"width: 350px",placeholder: "Enter event description here" %>
+      <b>Description:</b>
+      <%=f.text_field :description ,class: "form-control",style:"width: 350px",placeholder: "Enter event description here" %>
 
-</div>
-<div class="form-group">
-    <%= f.check_box :is_holiday, {:checked=>false}%> 
+      </div>
+        <div class="form-group">
+        <%= f.check_box :is_holiday, {:checked=>false}%> 
 
-        <%= label_tag(:is_holiday, "Holiday") %>
+        <b>Holiday?</b>
         </div>
         
         <div class="form-group">
-<%= f.check_box :is_common, {:checked=>false}%> 
-        <%= label_tag(:is_common, "Event common to all") %>
+        <%= f.check_box :is_common, {:checked=>false}%> 
+        <b>Event common to all</b>
         </div>
         <div class="form-group">
+        <div class="col-md-3 col-md-offset-6">
    <%= f.submit :'Create Event',class: "btn btn-primary"%>
+   </div>
 </div>
   <% end %>
   </div>

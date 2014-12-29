@@ -1,6 +1,7 @@
 $("ul.errors4").html("")
 <% if  @bank_field.errors.any? %>
 		<%  @bank_field.errors.full_messages.each do |message| %>
+		$("ul.errors4").addClass("alert alert-danger alert-dismissable")  
 		$("ul.errors4").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>

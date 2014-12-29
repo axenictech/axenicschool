@@ -6,34 +6,43 @@
 <div class="modal-body">
 <ul class="errors8"></ul>
 <%= form_for @payroll_category,url:{:action=>'update_payroll_category',payroll_category_id: @payroll_category.id},method: :patch,remote: true do |f|%>
- <table class="table" style="width:85%">
-        <tr>
-            <td class="col-2"><%= f.label :Category_Name , class: "control-label"%></td>
-            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
+  <div class="form-group">
+        <div class="col-sm-5"><b>Category Name :</b></div>
+         <div class="col-sm-7"><%=f.text_field :name, class: "form-control"%></div>
+      </div>
+    <br><br>
+      <div class="form-group">
+        <div class="col-sm-5"><b>Percentage :</b></div>
+         <div class="col-sm-7"><%=f.text_field :percentage,  class: "form-control"%></div>
+      </div>
+      <br><br>
+        <div class="form-group">
+         <div class="col-sm-5"><b>Percentage of:</b></div>
+         <div class="col-sm-7">
+       <%= f.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control"%>
+       </div></div>
+      <br><br>
+      <div class="form-group">
+        <div class="col-sm-5"> <b>Status :</b></div>
+        <div class="col-sm-7"><%= f.radio_button "status", "true", checked: "checked" %>&nbsp; <b>Active</b>&nbsp;&nbsp;
+        <%= f.radio_button "status", "false"%> &nbsp;<b>Inactive</b>
+       </div></div>
+         <br>
+
+        <div class="form-group">
+         <div class="col-sm-7">
+        <%= f.check_box :is_deduction%>
+         <b>Is Deduction?</b>
+         </div></div><br>
+<hr>
+   <div class="col-sm-offset-3"> 
+       <div class="form-actions">               
+        <%= f.submit 'Update', class: "btn btn-success"%>&nbsp;
+          <%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+      </div>
+      </div>
+
         
-        <tr>
-            <td class="col-2"><%= f.label :Percentage , class: "control-label"%></td>
-             <td><%=f.text_field :percentage ,:style =>"width: 250px", class: "form-control"%></td>
-        <tr>
-
-        <tr><td class="col-2"><%= f.label :Percentage_of%></td>
-             <td class="col-2"><%= f.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},:style =>"width: 250px"%></td>
-        </tr>
-
-        <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
-             <td><%= f.radio_button "status", "true", checked: "checked" %><%=f.label :Active%>
-            <%= f.radio_button "status", "false"%><%=f.label :Inactive%></td>
-        <tr>
-
-   <td colspan="2"><%= f.check_box :is_deduction%> <%=f.label :is_deduction%></td>
-        </tr>
-
-        <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%>
-        	<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
-        </tr>
-
-    </table>
 <% end %>
 
 

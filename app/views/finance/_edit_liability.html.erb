@@ -7,27 +7,34 @@
     <div class="modal-body">
       <ul class="errors"></ul>
       <%= form_for @liability,url:{action: 'update_liability',id:@liability.id},method: :patch,remote: true do |f|%>
-        <table class="table" style="width:85%">
-          <tr>
-            <td class="col-2"><%= f.label :title, class: "control-label"%></td>
-            <td><%=f.text_field :title ,:style =>"width: 250px", class: "form-control"%></td>
-          </tr>
-          <tr>
-            <td class="col-2"><%= f.label :description , class: "control-label"%></td>
-            <td><%=f.text_field :description ,:style =>"width: 250px", class: "form-control"%></td>
-          </tr>
-          <tr>
-            <td class="col-2"><%= f.label :amount , class: "control-label"%></td>
-            <td><%=f.text_field :amount ,:style =>"width: 250px", class: "form-control"%></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="col-2"><%=f.check_box :is_solved%>&nbsp;&nbsp;<%= f.label :is_solved?, class: "control-label"%></td>
-          </tr>
-          <tr>
-            <td colspan="2"><%= f.submit 'Save', class: "btn btn-primary"%></td>
-          </tr>
-        </table>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Title :</b></div>
+          <div class="col-md-7"><%=f.text_field :title,placeholder:"Title",class: "form-control"%></div>
+        </div><br/>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Description :</b></div>
+          <div class="col-md-7"><%= f.text_field :description,placeholder: "Description",class: "form-control"%></div>
+        </div><br/>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Amount :</b></div>
+          <div class="col-md-7"><%=f.text_field :amount,placeholder: "Amount",class: "form-control"%></div>
+        </div><br/>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-4"></div>
+          <div class="col-md-7"><%=f.check_box :is_solved%>&nbsp;&nbsp;<b>Make Liability Solved</b></div>
+        </div><br/>
+        <div class="row">
+          <div class="col-md-12">
+            <center>
+              <%= f.submit 'Update', class: "btn btn-success"%>&nbsp;
+              <%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+            </center>
+          </div>
+        </div>
       <%end%>
     </div>
   </div>

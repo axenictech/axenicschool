@@ -31,18 +31,21 @@
             </div>  
           <%end%>
         <div class="col-sm-7 col-sm-offset-1">
+
             <div class="form-group">
-              <%=f.label :Title %>
+              <b>Title:</b>
               <%=f.text_field :title, class: "form-control", style: "width: 350px", placeholder: "News Title"%>
             </div>
               
               <div class="form-group">
-               <%=f.label :Content %>
-               <%=f.text_area :content,style: 'width:350px;height:200px', placeholder: "News Content", class: "form-control"%>
-              </div>  
-              <div class="col-sm-7 col-sm-offset-6"> 
-                <div class="form-actions">               
-                <%= f.submit 'Publish News', class: "btn btn-success"%>
+
+               <b>Content:</b>
+               <%=f.text_area :content,style: 'width:350px;height:200px', placeholder: "News Content", class: "form-control col-sm-7"%>
+              </div> 
+              <br><br>
+              <div class="col-sm-offset-6"> 
+                <div class="form-group">               
+                <%= f.submit 'Publish News', class: "btn btn-primary"%>
                 </div>
             </div>
                 

@@ -25,7 +25,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @batch = @course.batches.where(course_id: params[:id]).take
+    @batch = @course.batches.shod(params[:id])
     @batches ||= @course.batches.includes(:course)
     authorize! :read, @course
   end
@@ -38,7 +38,7 @@ class CoursesController < ApplicationController
   end
 
   def create_batch_group
-    @course = Course.where(id: params[:batch_group][:course_id]).take
+    @course = Course.shod(params[:batch_group][:course_id])
     if params[:batches].present?
       @batch_groups ||= @course.batch_groups
       @batch_group = BatchGroup.new(name: \
@@ -57,22 +57,21 @@ class CoursesController < ApplicationController
   end
 
   def edit_batch_group
-    @batch_group = BatchGroup.where(id: params[:id]).take
+    @batch_group = BatchGroup.shod(params[:id])
     @course = @batch_group.course
     @batches ||= @course.batches
     authorize! :update, @course
   end
 
   def update_batch_group
-    @batch_group = BatchGroup.where(id: \
-      params[:batch_group][:batch_group_id]).take
+    @batch_group = BatchGroup.shod(params[:batch_group][:batch_group_id])
     @batch_group.update(name: params[:batch_group][:name])
     @course = @batch_group.course
     flash[:notice] = t('batch_group_updated')
   end
 
   def delete_batch_group
-    @batch_group = BatchGroup.where(id: params[:id]).take
+    @batch_group = BatchGroup.shod(params[:id])
     authorize! :delete, @batch_group
     @batch_group.destroy
     flash[:notice] = t('batch_group_deleted')
@@ -109,7 +108,7 @@ class CoursesController < ApplicationController
   private
 
   def find_course
-    @course = Course.where(id: params[:id]).take
+    @course = Course.shod(params[:id])
   end
 
   def postparam

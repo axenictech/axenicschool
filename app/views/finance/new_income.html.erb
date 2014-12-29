@@ -8,7 +8,7 @@
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
-  <div class="col-md-11">
+  <div class="col-md-12">
     <div class="pull-right">
       <%= link_to 'View income', 'view_income', class: "btn btn-primary-link btn-xs" %>
     </div>
@@ -27,7 +27,7 @@
     <fieldset>
       <% if @transaction.errors.any?%>
         <div class="alert alert-danger" style="width:500px" >
-        <h4><%= t('Errors prohibited to being update:')%></h4>
+        <h4>Errors prohibited to being update:</h4>
           <ul>
             <% @transaction.errors.full_messages.each do |msg| %>
             <li style="width:500px" align="left"><%= msg%></li>
@@ -40,37 +40,39 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-4">
           <div class="form-group">
-            <%= t('Title')%><span class="necessary-field">*</span>
+            <b>Title:</b>
+            <span style="color:red">*</span>
             <%= f.text_field :title,:style =>"width: 200px",placeholder: "Title", class: "form-control"%>
           </div>
 
           <div class="form-group">
-            <%= t('Description')%><span class="necessary-field">*</span>
+            <b>Description:</b>
+            <span style="color:red">*</span>
             <%= f.text_field :description,:style =>"width: 200px", placeholder: "Description", class: "form-control"%>
           </div>
           
           <div class="form-group">
-            <%= t('Amount') %>
+             <b>Amount:</b>
             <%= f.text_field :amount,:style =>"width: 200px", placeholder: "Amount",class: "form-control" %>
           </div>
 
           <div class="form-group">
-            <%= t('Transction Date') %>
+            <b>Transction Date:</b>
             <%= f.date_field :transaction_date,:value => Time.now.strftime('%Y-%m-%d'),:style =>"width: 200px", class: "form-control"%>
           </div>
           
           <div class="form-group">
 
-            <%= t('Category') %>
+              <b>Category:</b>
             <%= f.select :finance_transaction_category_id, @categories.collect {|b| [b.name,b.id]},{prompt:true},:style =>"width: 200px", class: "form-control"%>
           </div>
         </div>
       </div>
 
-      <div class="col-sm-5 col-sm-offset-5"> 
-        <div class="form-actions">               
+      <div> 
+        <center>
           <%= f.submit 'Submit', class: "btn btn-primary"%>
-        </div>
+        </center>
       </div>
     </fieldset>        
   <% end %>
