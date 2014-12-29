@@ -31,6 +31,7 @@
           <%= c.hidden_field :course_id, value: @course.id%>
           <div class="col-sm-12">
             <div class="form-group">
+
               <b>Name:</b>                     
               <%=c.text_field :name ,:style =>"width: 350px", class: "form-control", placeholder: "Batch Group Name"%>
             </div>
@@ -39,6 +40,7 @@
             <%= link_to "All",assign_all_course_path(@course),remote:true,class: "btn btn-primary-link btn-xs"%>
             <%= link_to "None",remove_all_course_path(@course),remote:true,class: "btn btn-primary-link btn-xs" %></div>
             <br>
+
             <div id="batch_view"><%= render 'all_batch' %></div>
           <div class="col-sm-offset-5"> 
             <div class="form-actions">               

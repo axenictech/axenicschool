@@ -37,7 +37,7 @@ class CategoriesController < ApplicationController
   private
 
   def find_category
-    @category = Category.where(id: params[:id]).take
+    @category = Category.shod(params[:id])
   end
 
   def category_params

@@ -42,14 +42,19 @@
                     <td class="col-2"><b>Transcation Id:</b></td>
                     <td class="col-2"><%= @donation.finance_transaction.id%></td></tr>
                   <tr class="tr-head">
-                    <td colspan="3" align="center"><%= link_to 'Print receipt',donation_receipt_path(@donation,format:"pdf"),class: "btn btn-primary"%></td></tr>
+                    <td colspan="3" align="center"></td></tr>
                   <tr class="tr-blank"></tr>
                 </tbody>
                 </table> 
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <div>
+          <center>
+            <%= link_to 'Print receipt',donation_receipt_finance_path(@donation,format:"pdf"),class: "btn btn-primary"%>
+          </center>
+        </div>
     </div>
   </div>
 </div>

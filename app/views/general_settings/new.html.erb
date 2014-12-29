@@ -33,34 +33,46 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
+
           <b>School/College Name:</b>
           <span style="color:red">*</span>
+
           <%= f.text_field :school_or_college_name, placeholder: "School/College Name", class: "form-control" %>
         </div>
 
         <div class="form-group">
+
           <b>School/College Phone No.:</b>
            <span style="color:red">*</span>
+
           <%= f.text_field :school_or_college_phone_no, placeholder: "School/College Phone No", class: "form-control"%>
         </div>
         
         <div class="form-group">
+
           <b>School/College Address:</b>
+
           <%= f.text_field :school_or_college_address, placeholder: "School/College Address", class: "form-control"%>
         </div>
 
         <div class="form-group">
-          <b>Finance Start Year Date:</b>
+
+          <b>Finance Start Year Date :</b>
+
           <%= f.date_field :finance_start_year_date, class: "form-control" %>
         </div>
         
         <div class="form-group">
-          <b>Finance End Year Date:</b>
+
+          <b>Finance End Year Date :</b>
+
           <%= f.date_field :finance_end_year_date, class: "form-control" %>
         </div>
         
         <div class="form-group">
-          <b>Language:</b>
+         
+          <b>Language :</b>
+
           <%= f.select :language,Language.all.collect{|l| [l.name,l.id]}, {prompt:true}, {class: "form-control"} %>
         </div>
       </div>
@@ -68,26 +80,34 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
-          <b>Time_Zone:</b>
+
+          <b>Time Zone :</b>
+
           <%= f.select :time_zone, ['Greeneich Mean Time(GMT-GMT+00:00)','Eastern European Time(EET) - GMT+02:00','Pakistan Lahore Time(PLT) - GMT+05:00','Indian Standard Time(IST) - GMT+05:30','Australia Eastern Time(AET) - GMT+10:00'], {:selected => 'Indian Standard Time(IST) - GMT+05:30'}, { class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <b>Country:</b>
+
+          <b>Country :</b>
+
           <%= f.select :country, Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
         </div>
 
         <div class="form-group">
-          <b>Upload Logo:</b>
+
+          <b>Upload Logo :</b>
+
           <%= f.file_field :image, class: "form-control"%>
         </div>
 
         <div class="form-group">
+
           <b>Include Grading Systems:</b> <br>
           <div class= "col-sm-12 col-sm-offset-8">
           <%= link_to "All", all_general_settings_path,remote:true,class: "btn btn-primary-link btn-xs"%>
           <%= link_to  "None", none_general_settings_path,remote:true,class: "btn btn-primary-link btn-xs"%></div>
           <br>
+
           <p id="grading_system"><%= render 'grading_type'%></p>
         </div>
 

@@ -10,7 +10,7 @@
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
-              <%=link_to 'Delete',[c.batch,c],remote: true,
+              <%=link_to 'Delete',[c.batch,c],
                     method: :delete, data: { confirm: "Are you sure to delete #{c.name} Class Timing?" },class: "a-action"%></div>
             </td>
           </tr>
