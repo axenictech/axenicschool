@@ -15,7 +15,7 @@
       <% end %>
     </tr> 
  
-<% @batch.weekdays.reverse_each do |w|%>
+<% @batch.weekdays.each do |w|%>
       <tr>
         <th><%=w.weekday%></th>
         <% @class_timing.each do |c|%>

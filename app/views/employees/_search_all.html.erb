@@ -8,10 +8,10 @@
    <div class="box-content">
 
 
-<% if @reporting_manager.nil? %>
+<% if @reporting_man.nil? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
-<% if @reporting_manager.empty? %>
+<% if @reporting_man.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
  <div class="col-md-1"></div>
@@ -24,7 +24,7 @@
       </tr>
       </thead>
       <tbody>
-      <%@reporting_manager.each do |emp|%>
+      <%@reporting_man.each do |emp|%>
           <tr>
                 <td col-md-1><%= link_to emp.first_name,update_reporting_manager_name_employee_path(@employee,reporting_manager_id:emp),remote:true%></td>
                 <td col-md-1><%= emp.id%></td>

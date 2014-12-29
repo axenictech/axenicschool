@@ -12,4 +12,8 @@ class MonthlyPayslip < ActiveRecord::Base
     t.transaction_date = Date.today
     t.save
   end
+
+  def self.view(s, e)
+    find_by_salary_date_and_employee_id(s, e)
+  end
 end
