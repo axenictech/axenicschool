@@ -302,17 +302,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:format])
     @user = User.find_by_employee_id("#{@employee.id}")
     privilege_tag = params[:privilege]
-    if privilege_tag.present?
-      privilege_tag.each  do |p_t|
-        privileges = PrivilegeTag.find(p_t).privileges.all
-
-        unless privileges.nil?
-          privileges.each do |p|
-            PrivilegeUsers.create(user_id: @user.id, privilege_id: p.id)
-          end
-        end
-      end
-    end
+    PrivilegeUsers.privilege_update(privilege_tag, @user)
     redirect_to admission4_employees_path(@employee)
   end
 
@@ -323,15 +313,7 @@ class EmployeesController < ApplicationController
 
   def search
     @employee = Employee.find(params[:format])
-    unless params[:search].empty?
-      other_conditions = ''
-      other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ''
-      other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ''
-      other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ''
-      other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ''
-
-      @reporting_manager = Employee.where('first_name like ?' + other_conditions, "#{params[:search]}%")
-    end
+    @reporting_man = Employee.search2(params[:advance_search], params[:search])
     authorize! :read, @employee
   end
 
@@ -433,9 +415,8 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     @employees = @department.employees.all
     @subject = Subject.find(params[:format])
-    @assigned_employee = EmployeeSubject.create(employee_id: \
-    @employee.id, subject_id: @subject.id)
-    @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
+    @assigned_employee = EmployeeSubject.ass_emp(@employee, @subject)
+    @assigned_employees = EmployeeSubject.ass_emp1(@subject)
     authorize! :update, @employee
   end
 
@@ -444,9 +425,9 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     @employees = @department.employees.all
     @subject = Subject.find(params[:format])
-    @assigned_employee = EmployeeSubject.where(employee_id: @employee.id, subject_id: @subject.id)
-    @assigned_employee.destroy_all(employee_id: @employee.id, subject_id: @subject.id)
-    @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
+    @assigned_employee = EmployeeSubject.rem_emp(@employee, @subject)
+    @assigned_employee.dest(@employee, @subject)
+    @assigned_employees = EmployeeSubject.rem_emp2(@subject)
     authorize! :read, @employee
   end
 
@@ -455,16 +436,7 @@ class EmployeesController < ApplicationController
   end
 
   def search_emp
-    unless params[:search].empty?
-      other_conditions = ''
-
-      other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ''
-      other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ''
-      other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ''
-      other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ''
-
-      @employee = Employee.where('first_name LIKE ?' + other_conditions, "#{params[:search]}%")
-    end
+    @employee = Employee.search2(params[:advance_search], params[:search])
     authorize! :read, Employee
   end
 
@@ -480,147 +452,8 @@ class EmployeesController < ApplicationController
   end
 
   def advance_search_emp
-    conditions = ''
-    conditions += "concat_ws(' ',first_name,last_name) like '#{params[:search][:name]}%'" unless params[:search][:name] == ''
-
-    if params[:search][:gender]
-      unless params[:search][:gender].eql? 'All'
-        if conditions == ''
-          conditions += "gender like '#{params[:search][:gender]}'"
-        else
-          conditions += " AND gender like '#{params[:search][:gender]}'"
-        end
-      end
-    end
-
-    if params[:search][:employee_category_id]
-      if conditions == ''
-        conditions += "employee_category_id = #{params[:search][:employee_category_id]}" unless params[:search][:employee_category_id] == ''
-      else
-        conditions += " AND employee_category_id = #{params[:search][:employee_category_id]}" unless params[:search][:employee_category_id] == ''
-      end
-    end
-
-    if params[:search][:blood_group]
-      if conditions == ''
-        conditions += "blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group] == ''
-      else
-        conditions += " AND blood_group like '#{params[:search][:blood_group]}'" unless params[:search][:blood_group] == ''
-      end
-    end
-
-    if params[:search][:marital_status]
-      if conditions == ''
-        conditions += "marital_status like '#{params[:search][:marital_status]}'" unless params[:search][:marital_status] == ''
-      else
-        conditions += " AND marital_status like '#{params[:search][:marital_status]}'" unless params[:search][:marital_status] == ''
-      end
-    end
-
-    if params[:search][:country_id]
-      if conditions == ''
-        conditions += "country_id='#{params[:search][:country_id]}'" unless params[:search][:country_id] == ''
-      else
-        conditions += " AND country_id ='#{params[:search][:country_id]}'" unless params[:search][:country_id] == ''
-      end
-    end
-
-    if params[:search][:joining_date]
-      if conditions == ''
-        conditions += "joining_date='#{params[:search][:joining_date]}'" unless params[:search][:joining_date] == ''
-      else
-        conditions += " AND joining_date ='#{params[:search][:joining_date]}'" unless params[:search][:joining_date] == ''
-      end
-    end
-
-    if params[:search][:employee_department_id]
-      if conditions == ''
-        conditions += "employee_department_id='#{params[:search][:employee_department_id]}'" unless params[:search][:employee_department_id] == ''
-      else
-        conditions += " AND employee_department_id='#{params[:search][:employee_department_id]}'" unless params[:search][:employee_department_id] == ''
-      end
-    end
-
-    if params[:search][:employee_position_id]
-      if conditions == ''
-        conditions += "employee_position_id='#{params[:search][:employee_position_id]}'" unless params[:search][:employee_position_id] == ''
-      else
-        conditions += " AND employee_position_id='#{params[:search][:employee_position_id]}'" unless params[:search][:employee_position_id] == ''
-      end
-     end
-
-    if params[:search][:employee_grade_id]
-      if conditions == ''
-        conditions += "employee_grade_id='#{params[:search][:employee_grade_id]}'" unless params[:search][:employee_grade_id] == ''
-      else
-        conditions += " AND employee_grade_id='#{params[:search][:employee_grade_id]}'" unless params[:search][:employee_grade_id] == ''
-      end
-    end
-
-    if params[:search][:date_of_birth]
-      if conditions == ''
-        conditions += "date_of_birth='#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth] == ''
-      else
-        conditions += " AND date_of_birth ='#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth] == ''
-      end
-    end
-
-    if @status = params[:search][:status]
-
-      if params[:search][:status] == 'all'
-        @employee1 = Employee.where(conditions)
-        @employee2 = ArchivedEmployee.where(conditions)
-        @employees = @employee1 + @employee2
-      elsif params[:search][:status] == 'present'
-        @employees = Employee.includes(:employee_department).where(conditions)
-      else
-        @employees = ArchivedEmployee.where(conditions)
-      end
-    end
-
-    @search = ''
-    @search += ' Name: ' + params[:search][:name].to_s + ', ' unless params[:search][:name].empty?
-
-    if  params[:search][:gender] == 'All'
-      @search += ' Gender: All' + ', '
-    else
-      @search += ' Gender: ' + params[:search][:gender].to_s + ', ' unless params[:search][:gender].empty?
-    end
-
-    @search += ' Blood group: ' + params[:search][:blood_group].to_s + ', ' unless params[:search][:blood_group].empty?
-    @search += ' Marital Status: ' + params[:search][:marital_status].to_s + ', ' unless params[:search][:marital_status].empty?
-
-    if params[:search][:country_id].present?
-      @search += ' Country: ' + Country.find(params[:search][:country_id]).name + ', '
-    end
-
-    if params[:search][:employee_category_id].present?
-      @search += ' Category: ' + EmployeeCategory.find(params[:search][:employee_category_id]).name + ', '
-    end
-
-    @search += 'Joining date:' +  params[:search][:joining_date].to_s + ', ' unless  params[:search][:joining_date].empty?
-
-    if params[:search][:employee_department_id].present?
-      @search += ' Department: ' + EmployeeDepartment.find(params[:search][:employee_department_id]).name + ', '
-     end
-
-    if params[:search][:employee_position_id].present?
-      @search += ' Position: ' + EmployeePosition.find(params[:search][:employee_position_id]).name + ', '
-     end
-
-    if params[:search][:employee_grade_id].present?
-      @search += ' Grade: ' + EmployeeGrade.find(params[:search][:employee_grade_id]).name + ', '
-     end
-
-    @search += ' Date of birth: ' +  params[:search][:date_of_birth].to_s + ', ' unless  params[:search][:date_of_birth].empty?
-
-    if params[:search][:status] == 'present'
-      @search += 'Staus: Present student'
-    elsif params[:search][:status] == 'former'
-      @search += 'Staus: Former student'
-    else
-      @search += ' Status: All student'
-    end
+    @employees = Employee.adv_search(params[:search])
+    @search = Employee.adv_search2(params[:search])
     authorize! :read, @employee
   end
 
@@ -657,35 +490,10 @@ class EmployeesController < ApplicationController
     salary_date = params[:payslip][:joining_date].to_date
     @employees = Employee.all
     already_created = MonthlyPayslip.all.pluck(:employee_id)
-    @employees.each do |emp|
-      if already_created.include? emp.id
-
-      else
-            counter = 0
-            tot = 0
-            tot_deduction = 0
-            grand_tot = 0
-            amount = EmployeeSaleryStructure.where(employee_id: emp[counter]).pluck(:amount)
-            amount.each do |i|
-              tot += i.to_f
-            end
-
-            is_deduction = PayrollCategory.where(is_deduction: 'true')
-            is_deduction.each do |i|
-              amount = EmployeeSaleryStructure.where(employee_id: emp.id, payroll_category_id: i).pluck(:amount)
-              amount.each do   |i|
-                tot_deduction += i.  to_f
-              end
-
-            end
-            grand_tot = tot - tot_deduction
-            MonthlyPayslip.create(employee_id: emp.id, amount: grand_tot, is_approved: false, salary_date: salary_date)
-            counter += 1
-        end
-    end
-
+    @employees.one_click(@employees, already_created, salary_date)
     redirect_to payslip_employees_path
-    flash[:notice] = "salery slip Generated for the :#{salary_date.strftime('%B')} 'note' : 'employees whose salary generated manually,their salery slip was not generated by this proce'"
+    flash[:notice] = "#{t('one')}" + \
+      ":#{salary_date.strftime('%B')}" + "#{t('one_click')}"
     authorize! :update, @employee
   end
 
@@ -698,37 +506,9 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:format])
     @salary_date = Date.parse(params[:salery_slip][:salery_date])
     unless @salary_date.to_date < @employee.joining_date.to_date
-      start_date = @salary_date - ((@salary_date.day - 1).days)
-      end_date = start_date + 1.month
-
-      payslip_exists = @employee.monthly_payslips.where(salary_date: start_date..end_date).take
-      total_salary = 0
-      tot_deduction = 0
-      amount = []
-      is_deduction = PayrollCategory.where(is_deduction: 'true')
-      is_deduction.each do |i|
-        amount = EmployeeSaleryStructure.where(employee_id: @employee.id, payroll_category_id: i).pluck(:amount)
-        amount.each do |i |
-          tot_deduction += i.to_f
-        end
-
-      end
-
-      params[:amounts].each do |amount|
-        total_salary += amount[0].to_f
-      end
-      total_salary -= tot_deduction.to_f
-
-      b = MonthlyPayslip.where(employee_id: @employee.id, salary_date: @salary_date).pluck(:salary_date)
-      if b[0].present?
-        if b[0] == @salary_date.strftime('%b')
-          flash[:notice] = 'Payslip of ' + @employee.first_name + ' is already generated'
-      end
-      else
-        MonthlyPayslip.create(salary_date: @salary_date, employee_id: params[:format], amount: total_salary)
-         end
-
-     end
+      flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('payslip')}"
+      @employee.create_payslip(@employee, @salary_date, params[:amount])
+    end
     redirect_to monthly_payslip_employees_path(@employee)
     authorize! :update, @employee
   end
@@ -738,12 +518,7 @@ class EmployeesController < ApplicationController
     @independent_categories = PayrollCategory.all
     @amount = params[:amount]
     @payroll_category = params[:id]
-    @salary = EmployeeSaleryStructure.where(employee_id: @employee.id, payroll_category_id: @payroll_category).take
-    if @salary.nil?
-      EmployeeSaleryStructure.create(employee_id: @employee.id, payroll_category_id: @payroll_category, amount: @amount)
-    else
-      @salary.update(amount: @amount)
-    end
+    @salary = Employee.emp(@employee, @payroll_category, @amount)
     @employee.update_payroll(@payroll_category, @amount)
     authorize! :update, @employee
   end
@@ -751,7 +526,8 @@ class EmployeesController < ApplicationController
   def create_payslip_category
     @employee = Employee.find(params[:format])
     @salary_date = (params[:salary_date])
-    @created_category = IndividualPayslipCategory.new(employee_id: @employee.id, name: params[:payslip][:name], amount: params[:payslip][:amount], is_deduction: params[:payslip][:is_deduction])
+    @created_category = IndividualPayslipCategory\
+                        .create_category(@employee, params[:payslip])
     @created_category.save
     redirect_to monthly_payslip_employees_path(@employee)
     authorize! :update, @employee
@@ -769,11 +545,11 @@ class EmployeesController < ApplicationController
   end
 
   def one_click_payslip_revert
-    salary_date = params[:payslip][:joining_date].to_date
+    @salary_date = params[:payslip][:joining_date].to_date
     b = MonthlyPayslip.where(salary_date: @salary_date).pluck(:salary_date)
     if b[0].present?
       if b[0] == @salary_date.strftime('%b')
-        flash[:notice] = 'Payslip of ' + @employee.first_name + ' is already generated'
+        flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('pay')}"
       end
     end
     redirect_to employees_payslip_path
@@ -786,20 +562,19 @@ class EmployeesController < ApplicationController
   end
 
   def view_employee_payslip
-    @payslip = MonthlyPayslip.find_by_salary_date_and_employee_id(params[:salary_date], params[:employee_id])
+    @payslip = MonthlyPayslip.view(params[:salary_date], params[:employee_id])
     @independent_categories = PayrollCategory.all
   end
 
   def employee_individual_payslip_pdf
     @payslip = MonthlyPayslip.find(params[:payslip])
-
     @independent_categories = PayrollCategory.all
     render 'employee_individual_payslip_pdf', layout: false
   end
 
   def genral_profile
     @employee = Employee.find(params[:format])
-    @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
+    @reporting_manager = Employee.rep_man(@employee)
     authorize! :read, @employee
   end
 
@@ -810,27 +585,27 @@ class EmployeesController < ApplicationController
 
   def personal_profile
     @employee = Employee.find(params[:format])
-    @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
+    @country = Country.per(@employee)
     authorize! :read, @employee
   end
 
   def personal_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
-    @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
+    @country = Country.per(@employee)
     authorize! :read, @employee
   end
 
   def address_profile
     @employee = Employee.find(params[:format])
-    @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
-    @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
+    @home_country = Country.home_country(@employee)
+    @office_country = Country.office_country(@employee)
     authorize! :read, @employee
   end
 
   def address_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
-    @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
-    @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
+    @home_country = Country.home_country(@employee)
+    @office_country = Country.office_country(@employee)
     authorize! :read, @employee
   end
 
@@ -846,13 +621,13 @@ class EmployeesController < ApplicationController
 
   def bank_info
     @employee = Employee.find(params[:format])
-    @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
+    @bank_details = EmployeeBankDetail.bank_details(@employee)
     authorize! :read, @employee
   end
 
   def bank_info_archived
     @employee = ArchivedEmployee.find(params[:format])
-    @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
+    @bank_details = EmployeeBankDetail.bank_details(@employee)
     authorize! :read, @employee
   end
 
@@ -874,17 +649,13 @@ class EmployeesController < ApplicationController
 
   def create_archived_employee
     @employee = Employee.find(params[:format])
-
-    if request.post?
-      EmployeeSubject.destroy_all(employee_id: @employee.id)
-      @archived_employee = @employee.archived_employee
-      p 'archived employee'
-      p @archived_employee
-      @employee.destroy
-      flash[:notice] = 'Employee #{@employee.first_name} is Archived Successfully'
-      redirect_to employees_archived_employee_profile_path(@employee)
-    end
- end
+    return unless request.post?
+    EmployeeSubject.destroy_all(employee_id: @employee.id)
+    @archived_employee = @employee.archived_employee
+    @employee.destroy
+    flash[:notice] = 'Employee' + "#{@employee.first_name}" + "#{t('archived')}"
+    redirect_to archived_employee_profile_employees_path(@employee)
+  end
 
   def archived_employee_profile
     @employee = ArchivedEmployee.find(params[:format])
@@ -895,40 +666,40 @@ class EmployeesController < ApplicationController
     authorize! :delete, @employee
     @employee = Employee.find(params[:format])
     @employee.destroy
-    flash[:notice] = "All Records of #{@employee.first_name} is Deleted Successfully"
+    flash[:notice] = "#{t('all')}" + " #{@employee.first_name}" + "#{t('del')}"
     redirect_to @employee
   end
 
   def employee_profile
-    @employee = Employee.find(params[:employee_id])
-    @reporting_manager = Employee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
+    @employee = ArchivedEmployee.find(params[:employee_id])
+    @reporting_manager = Employee.report(@employee)
     @general_setting = GeneralSetting.first
     render 'employee_profile', layout: false
   end
 
   def personal_profile_pdf
-    @employee = Employee.find(params[:employee_id])
-    @country = Country.find(@employee.country_id).name unless @employee.country_id.nil?
+    @employee = ArchivedEmployee.find(params[:employee_id])
+    @country = Country.findcountry(@employee)
     @general_setting = GeneralSetting.first
     render 'personal_profile_pdf', layout: false
   end
 
   def address_profile_pdf
-    @employee = Employee.find(params[:employee_id])
-    @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
-    @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
+    @employee = ArchivedEmployee.find(params[:employee_id])
+    @home_country = Country.home_country(@employee)
+    @office_country = Country.office_country(@employee)
     @general_setting = GeneralSetting.first
     render 'address_profile_pdf', layout: false
   end
 
   def contact_profile_pdf
-    @employee = Employee.find(params[:employee_id])
+    @employee = ArchivedEmployee.find(params[:employee_id])
     @general_setting = GeneralSetting.first
     render 'contact_profile_pdf', layout: false
   end
 
   def bank_info_pdf
-    @employee = Employee.find(params[:employee_id])
+    @employee = ArchivedEmployee.find(params[:employee_id])
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
     @general_setting = GeneralSetting.first
     render 'bank_info_pdf', layout: false
@@ -964,11 +735,11 @@ class EmployeesController < ApplicationController
   def update_bank_details
     @employee = Employee.find(params[:format])
     params[:banks].each_pair do |k, v|
-      @bank_info = EmployeeBankDetail.find_by_id_and_employee_id(k, @employee.id)
+      @bank_info = EmployeeBankDetail.up(@employee, k)
       @bank_info.update(bank_info: v[:bank_info])
     end
     redirect_to profile_employees_path(@employee)
-    flash[:notice] = "Bank details updated successfully for #{@employee.first_name}"
+    flash[:notice] = "#{t('bank')}" + " #{@employee.first_name}"
     authorize! :read, @employee
   end
 

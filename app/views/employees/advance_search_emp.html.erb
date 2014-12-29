@@ -13,7 +13,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right"><%= link_to "Search Again", 'advance_search',class: "btn btn-primary-link btn-xs"%>
-    <% unless @employees.empty? %>
+    <% if @employees.present? %>
     <%employees=[]%>
     <% @employees.each do |e|%>
         <% employees<< e %>
@@ -65,7 +65,11 @@
           <%=  emp.employee_department.name unless emp.employee_department.nil?%>
           </td>
           <td class="col-3">
-            <%= link_to 'View Profile' ,profile_employees_path(emp)%>
+            <%if Employee.where(id:emp.id).present?%>
+                <%= link_to 'View Profile' ,profile_employees_path(emp)%>
+            <%else%>
+               <%= link_to 'View Profile' ,archived_employee_profile_employees_path(emp)%>
+            <%end%>
           </td>
 
         </tr>

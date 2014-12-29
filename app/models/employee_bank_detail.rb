@@ -12,4 +12,9 @@ class EmployeeBankDetail < ActiveRecord::Base
   end
 
   scope :shod, ->(id) { where(id: id).take }
+  scope :bank_details, -> (emp) { where(employee_id: emp.id) }
+
+  def self.up(emp, k)
+    find_by_id_and_employee_id(k, emp.id)
+  end
 end
