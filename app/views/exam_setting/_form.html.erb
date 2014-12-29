@@ -1,21 +1,24 @@
 <div class="modal-body">
-        <ul class="errors"></ul>
+<ul class="errors"></ul>
 <%= form_for [@course,@class_des1],url:{:action=>'create',id:@course},remote: true do |f|%>
- <div class="form-group">
-  <b>Name:</b>
-  <%=f.text_field :name ,style: "width: 250px", class: "form-control"%>
-</div>
-
-<div class="form-group">
-  <b>Marks:</b>
-  <%=f.text_field :marks,style: "width: 250px", class: "form-control"%>
-</div>
-
-<div class="form-group">
-<%= f.submit 'Submit', class: "btn btn-primary"%>
-&nbsp;&nbsp;
-<%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
-        </div>
+	<div class="row">
+	  <div class="col-md-1"></div>
+	  <div class="col-md-3"><b>Name :</b></div>
+	  <div class="col-md-8"><%=f.text_field :name,placeholder:"Name",class: "form-control"%></div>
+	</div><br/>
+	<div class="row">
+	  <div class="col-md-1"></div>
+	  <div class="col-md-3"><b>Marks :</b></div>
+	  <div class="col-md-8"><%= f.text_field :marks,placeholder: "Marks",class: "form-control"%></div>
+	</div><br/>
+	<div class="row">
+	  <div class="col-md-12">
+	    <center>
+	      <%= f.submit 'Submit', class: "btn btn-primary"%>&nbsp;
+	      <%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+	    </center>
+	  </div>
+	</div>
 <% end %>
 </div>
 

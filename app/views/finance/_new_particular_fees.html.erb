@@ -8,16 +8,19 @@
 <ul class="errors"></ul>
     <%= form_for @fee,url:{action:'create_particular_fee',id:@master_category,batch_id:@batch.id},remote: true do |f|%>
     <div class="row">
-        <div class="col-md-3"><%= f.label :name %></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4"><b>Name :</b></div>
         <div class="col-md-7"><%= f.text_field :name, placeholder: 'Name',class: "form-control"%></div>
       </div><br/>
       <div class="row">
-          <div class="col-md-3"><%= f.label :description %></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Description :</b></div>
           <div class="col-md-7"><%= f.text_field :description,class: "form-control", placeholder:'Description'%>
           </div>
       </div><br/>
       <div class="row">
-        <div class="col-md-3"><%= f.label :create_using %></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4"><b>Create Using :</b></div>
           <div class="col-md-7">
           <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('student_admission_no',#{@master_category.id},function(response){});"}%><%='Admission no'%><br/>
           <%=radio_button_tag :mode,"category",'',{onclick:"$.get('student_category',#{@master_category.id},function(response){});"}%><%= 'Student Category'%><br/>
@@ -25,12 +28,18 @@
       </div><br/>
       <div id="hidden"></div><br/>
       <div class="row">
-          <div class="col-md-3"><%= f.label :amount %></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Amount :</b></div>
           <div class="col-md-7"><%= f.text_field :amount,class: "form-control", placeholder:'Amount'%></div>
       </div><br/>
       <div class="row">
-      <div class="col-md-2"></div>
-        <div class="col-md-3"><%= f.submit 'Submit', class: "btn btn-primary"%></div>
+      <div class="col-md-12">
+        <center>
+          <%= f.submit 'Submit', class: "btn btn-primary"%>&nbsp;
+          <%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+        </center>
+      </div>
+      
       </div>
     <%end%>
 </div>    

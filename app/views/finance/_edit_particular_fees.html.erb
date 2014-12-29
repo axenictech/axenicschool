@@ -7,20 +7,27 @@
       <ul class="errors"></ul>
       <%= form_for @fee,url:{action:'update_particular_fee',batch_id:@batch.id,master_id:@master_category,id:@fee.id},method: :patch,remote: true do |f|%>
         <div class="row">
-          <div class="col-md-3"><%= f.label :name %></div>
-          <div class="col-md-3"><%= f.text_field :name,:style =>"width: 250px",class: "form-control"%></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Name :</b></div>
+          <div class="col-md-7"><%= f.text_field :name,placeholder: "Name",class: "form-control"%></div>
         </div><br/>
         <div class="row">
-          <div class="col-md-3"><%= f.label :description %></div>
-          <div class="col-md-3"><%= f.text_field :description,:style =>"width: 250px",class: "form-control"%></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Description :</b></div>
+          <div class="col-md-7"><%= f.text_field :description,placeholder: "Description",class: "form-control"%></div>
         </div><br/>
         <div class="row">
-          <div class="col-md-3"><%= f.label :amount %></div>
-          <div class="col-md-3"><%= f.text_field :amount,:style =>"width: 250px",class: "form-control"%></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4"><b>Amount :</b></div>
+          <div class="col-md-7"><%= f.text_field :amount,placeholder: "Amount",class: "form-control"%></div>
         </div><br/>
         <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-3"><%= f.submit 'Update', class: "btn btn-success"%></div>
+          <div class="col-md-12">
+            <center>
+              <%= f.submit 'Update', class: "btn btn-success"%>&nbsp;
+              <%= link_to 'cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+            </center>
+          </div>
         </div>
       <%end%>
     </div>    

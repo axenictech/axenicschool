@@ -11,29 +11,33 @@
  <%= form_for @payroll_category_new, url:{action:'add_payroll_category'},remote:true do |c|%>
    <fieldset>
 	 <div class="form-group">
-        <%= t('Category_name')%>
-         <%=c.text_field :name, placeholder: "Category_name", class: "form-control"%>
+        <div class="col-md-4"><b>Category Name :</b></div>
+         <div class="col-md-8"><%=c.text_field :name, placeholder: "Payroll Category Name", class: "form-control"%></div>
       </div>
-
+    <br><br>
       <div class="form-group">
-        <%= t('Percentage')%>
-         <%=c.text_field :percentage, placeholder: "Percentage", class: "form-control"%>
+        <div class="col-md-4"><b>Percentage :</b></div>
+         <div class="col-md-8"><%=c.text_field :percentage, placeholder: "Percentage", class: "form-control"%></div>
       </div>
+      <br><br>
         <div class="form-group">
-       <%= c.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control",style:"width:350px"%>
-       </div>
-
+        <div class="col-md-8 col-md-offset-4">
+       <%= c.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control"%>
+       </div></div>
+      <br><br>
       <div class="form-group">
-         <%= t('Status')%>
-        <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
-        <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
-       </div>
-        
+        <div class="col-md-4"> <b>Status :</b></div>
+        <div class="col-md-8"><%= c.radio_button "status", "true", checked: "checked" %> &nbsp;<b>Active</b>&nbsp;&nbsp;
+        <%= c.radio_button "status", "false"%> &nbsp;<b>Inactive</b>
+       </div></div>
+         <br>
 
         <div class="form-group">
+         <div class="col-md-4">
         <%= c.check_box :is_deduction%>
-         <%= t('is_deduction?')%>
-         </div>
+         <b>Is Deduction?</b>
+         </div></div>
+<br>
    <div class="col-sm-4 col-sm-offset-4"> 
        <div class="form-actions">               
         <%= c.submit 'Create', class: "btn btn-primary"%>
@@ -85,7 +89,7 @@
 
             <% if c.status? %>
 			<td>
-              <div class="label-success label label-default">
+            <div class="label-success label label-default">
              
 			<%= link_to 'Active',active_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"},class: "a-action" %></div></td>	
 			<% else %>
@@ -115,7 +119,7 @@
               <h2>Deductions</h2>
              </div>
           <div class="box-content">
-             <table id="datatable" class="table table-striped table-bordered responsive">
+             <table id="datatable" class="table table-striped responsive">
          <thead>
                <tr>
                  <th>Name</th>

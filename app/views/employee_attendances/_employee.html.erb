@@ -10,7 +10,7 @@
         <tr>
           <td class="fc-header-left">
             <%= link_to "◄ prev",display_employee_attendance_path(@deparment.id,nextdate:(@today-1.month)),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
-            <%= link_to "► next", display_employee_attendance_path(@deparment.id,nextdate:(@today+1.month)),remote:true,class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
+            <%= link_to "Next ►", display_employee_attendance_path(@deparment.id,nextdate:(@today+1.month)),remote:true,class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
             <span class="fc-header-space"></span>
           </td>
           <td class="fc-header-center">
@@ -27,7 +27,7 @@
 <table class="table table-bordered" class="fc-border-separate" cellspacing="0">
 <thead>
   <tr>
-    <th><%= t('name') %></th>
+    <th>Name</th>
     <% current_day = Date.today  %>
     <% (@start_date..@end_date).each do |date| %>
       <% if current_day.strftime("%a %d %y") == date.strftime("%a %d %y") %>
@@ -41,7 +41,7 @@
     <% @employees.each do |employee| %>
     <tr class="tr-<%= cycle('odd', 'even')  %>">
       <th class="td-name">
-        <%= employee.first_name %>
+        <%= employee.first_name %>&nbsp;<%= employee.last_name %>
        </th>
       <% (@start_date..@end_date).each do |date| %>
         <% @absent = EmployeeAttendance.find_by_employee_id_and_attendance_date(employee.id, date) %>

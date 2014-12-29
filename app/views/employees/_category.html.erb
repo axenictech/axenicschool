@@ -1,5 +1,7 @@
 <div align="center">
+ 
 <ul class="errors1"></ul></div>
+
 <div class="row">
 <div class="col-md-3"></div>
 <div class="box col-md-6">
@@ -8,24 +10,25 @@
       <h2>Employee Category</h2>
     </div>
   <div class="box-content">
+
   <%= form_for @employee_category_new, url:{action:'add_category'},remote:true do |c|%>
    <fieldset>
   
  
 	 <div class="form-group">
-        <%= t('Name')%>
-         <%=c.text_field :name, placeholder: "Name", class: "form-control"%>
+        <div class="col-md-3"><b>Name:</b></div>
+         <%=c.text_field :name, placeholder: "Name", class: "form-control",style:"width:250px"%>
       </div>
 
       <div class="form-group">
-        <%= t('Prefix')%>
-         <%=c.text_field :prefix, placeholder: "Prefix", class: "form-control"%>
+        <div class="col-md-3"><b>Prefix:</b></div>
+         <%=c.text_field :prefix, placeholder: "Prefix", class: "form-control",style:"width:250px"%>
       </div>
       
       <div class="form-group">
-         <%= t('Status')%>
-        <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%>
-        <%= c.radio_button "status", "false"%> <%=c.label :Inactive%> 
+         <div class="col-md-3"><b>Status:</b></div>
+        <%= c.radio_button "status", "true", checked: "checked" %> <b>Active</b>
+        <%= c.radio_button "status", "false"%> <b>Inactive</b>
        </div>
    
       <div class="col-sm-4 col-sm-offset-4"> 

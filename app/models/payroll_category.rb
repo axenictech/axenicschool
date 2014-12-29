@@ -5,5 +5,10 @@ class PayrollCategory < ActiveRecord::Base
   validates :percentage, numericality: { integer_and_decimal: true, greater_than: 0, less_than: 100 }, allow_blank: true
   scope :is_deduction, -> { where(is_deduction: true).order(:name) }
   scope :not_deduction, -> { where(is_deduction: false).order(:name) }
+
+  scope :active, -> { update(status: false) }
+  scope :inactive, -> { update(status: true) }
+
   scope :shod, ->(id) { where(id: id).take }
+
 end

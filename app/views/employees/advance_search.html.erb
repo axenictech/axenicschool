@@ -9,7 +9,7 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
   <div class="col-md-2"></div>
-       <div class="box col-md-6">
+       <div class="box col-md-8">
         <div class="box-inner">
             <div class="box-header well" data-original-title="">
                 
@@ -19,12 +19,12 @@
      <fieldset>
         <div class="col-sm-6">
             <div class="form-group">
-        <%= f.label :employee_name %>
+        <b>Employee Name:</b>
         <%=f.text_field :name, placeholder:'Empoyee Name', class: "form-control"%>
        </div>
 
        <div class="form-group">
-           <%=f.label :Blood_Group%>
+           <b>Blood Group:</b>
             <%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{prompt:true},{class:"form-control"}%>
       </div>
       
@@ -33,56 +33,57 @@
       </div>
 
       <div class="form-group">
-        <%=f.label :joining_date %><span class="necessary-field">*</span>
+       <b>Joining Date:</b>
+        
           <%=f.date_field :joining_date,:value => Time.now.strftime('%Y-%m-%d'),class:"form-control"%>
       </div>
 
       <div class="form-group">
-      <%=f.label :Position%>
+          <b>Position:</b>
          <%= f.select :employee_position_id,EmployeePosition.all.collect {|b| [b.name,b.id]},{prompt:true},{class:"form-control"}%>
       </div>
        
             <div class="form-group">
-        <%= f.label :gender%>
-        <%=f.radio_button :gender,"All", :checked => "checked" %>All
-          <%=f.radio_button :gender,"Male"%>Male
-          <%=f.radio_button :gender,"Female"%>Female
+        <b>Gender:</b>&nbsp;&nbsp;
+        <%=f.radio_button :gender,"All", :checked => "checked" %>&nbsp;<b>All</b>&nbsp;&nbsp;
+          <%=f.radio_button :gender,"Male"%>&nbsp;<b>Male</b>&nbsp;&nbsp;
+          <%=f.radio_button :gender,"Female"%>&nbsp;<b>Female</b>
         </div>
     </div>
       <div class="col-md-6">
         <div class="form-group">
-         <%=f.label :Date_of_Birth%>
+         <b>Date of Birth:</b>
         <%=f.date_field :date_of_birth,:value => Time.now.strftime('%Y-%m-%d'),class:"form-control"%>
         </div>
 
        <div class="form-group">
-        <%=f.label :"Marital-Status"%>
+        <b>Marital-Status:</b>
       <%=f.select :marital_status, ["single","married","divorced"],{prompt:true},{class:"form-control"}%>
       </div>
 
       <div class="form-group">
-       <%=f.label :Category%>
+       <b>Category:</b>
          <%= f.select :employee_category_id, EmployeeCategory.all.collect {|b| [b.name,b.id]},{prompt:true},{class:"form-control"}%>
       </div>
 
       <div class="form-group">
-         <%=f.label :Department%>
+        <b>Department:</b>
          <%= f.select :employee_department_id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:true},{class:"form-control"}%>
       </div>
         <div class="form-group">
-      <%=f.label :Grade%>
+          <b>Grade:</b>
          <%= f.select :employee_grade_id, EmployeeGrade.all.collect {|b| [b.name,b.id]},{prompt:true},{class:"form-control"}%>
 </div>
 
    <div class="form-group">
-      <%= f.label :status%>:&nbsp;
-        <%= f.radio_button :status,"present",:checked => "checked"%>Present&nbsp;&nbsp;
-          <%= f.radio_button  :status,"former"%>Former&nbsp;&nbsp;
-          <%= f.radio_button  :status,"all"%>All
+      <b>Status:</b>&nbsp;&nbsp;
+        <%= f.radio_button :status,"present",:checked => "checked"%>&nbsp;<b>Present</b>&nbsp;&nbsp;
+          <%= f.radio_button  :status,"former"%>&nbsp;<b>Former</b>&nbsp;&nbsp;
+          <%= f.radio_button  :status,"all"%>&nbsp;<b>All</b>
          </div>
          </div>
 
-       <div align="center"><%= f.submit 'Search', class: "btn btn-primary"%></div>
+       <div align="center"><%= f.submit 'Search', class: "btn btn-success"%></div>
   
  
   </fieldset>

@@ -8,27 +8,34 @@
 <div class="modal-body">
 <ul class="errors"></ul>
 <%= form_for @employee_position,url:{:action=>'update_position',position_id: @employee_position.id},method: :patch,remote:true do |f|%>
- <table class="table" style="width:85%">
-        <tr>
-            <td class="col-2"><%= f.label :Name , class: "control-label"%></td>
-            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
-        
-        <tr>
-            <td class="col-2"><%= f.label :Employee_Category , class: "control-label"%></td>
-             <td><%=f.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true} ,:style =>"width: 250px", class: "form-control"%></td>
-        <tr>
+          <div class="form-group">
+         <div class="col-sm-4"><b>Name :</b></div>
+         <div class="col-sm-7">
+             <%=f.text_field :name , class: "form-control"%>
+             </div>
+             </div>
+        <br><br><br>
+        <div class="form-group">
+         <div class="col-sm-4"><b>Employee Category :</b></div>
+           <div class="col-sm-7">  <%=f.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true} , class: "form-control"%></div></div>
+      <br><br>
+          <div class="form-group">
+         <div class="col-sm-4"><b>Status :</b></div>
+            <div class="col-sm-7"> <%= f.radio_button "status", "true", checked: "checked" %>&nbsp;<b>Active</b>&nbsp;&nbsp;
+            <%= f.radio_button "status", "false"%>&nbsp;<b>Inactive</b>
+            </div></div>
+            <br>
+          <hr>
+            <div class="form-group">
+             <div class="col-sm-offset-3">
+           <%= f.submit 'Update', class: "btn btn-success"%>
+        	<%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
+          </div></div>
 
-           <tr><td class="col-2"><%= f.label :status , class: "control-label"%></td>
-             <td><%= f.radio_button "status", "true", checked: "checked" %><%=f.label :Active%>
-            <%= f.radio_button "status", "false"%><%=f.label :Inactive%></td>
-        <tr>
 
-
-        <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%>
-        	<%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
-        </tr>
-    </table>
 <% end %>
 
-</div></div></div>
+</div>
+</div>
+</div>
+</div>

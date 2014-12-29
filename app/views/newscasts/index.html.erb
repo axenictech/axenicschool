@@ -17,10 +17,10 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 col-md-offset-1">
     <%= form_for :newscast, url:{action:'select'},method: :get,html:{id: 'newscast_form'},remote:true do |f| %>
 
-      <%= f.label :search_news ,class: "label-control"%>
+      <b>Search News:</b>
       <%= f.text_field :title,{oninput:"$('#newscast_form').submit();",class: "form-control",placeholder:'Enter News Title',style:"width:300px"}%>
       <% end %>
   </div>

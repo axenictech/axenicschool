@@ -30,7 +30,7 @@ Note:<font color="red">Fields Marked with * must be filled</font>
  	 <% @bank_fields.each do |bd| %>
 
        <div class="form-group">
-       <%= bd.name %>
+       <b><%= bd.name %>:</b>
          <%=f.text_field :bank_info,:index => bd.id,placeholder: "Name", class: "form-control"%>
        </div>
  <% end %>

@@ -1,4 +1,4 @@
 <div class="form-group">
-    <%= label_tag :category %>
+    <b>Category:</b>
     <%= select :category,:id,Category.all.collect {|c| [c.name,c.id]},{prompt:true},{:style =>"width: 250px",class: "form-control"}%>
 </div>

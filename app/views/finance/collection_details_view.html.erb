@@ -48,28 +48,28 @@
 		        <thead>
 		          <tr>
 		            <th>Particular</th>
-								<th>Student Category</th>
-								<th>Student Name</th>
-								<th>Amount(Rs.)</th>
-								<th>Created Date</th>
+					<th>Student Category</th>
+					<th>Student Name</th>
+					<th>Amount(Rs.)</th>
+					<th>Created Date</th>
 		          </tr>
 		        </thead>
 		        <tbody>
 		        <% @particulars.each do |p| %>
 		          <tr>
 		            <td class="col-3"><%= p.name%></td>
-								<td class="col-3"><%= p.category.nil? ? "-": p.category.name%></td>
-								<td class="col-3"><%= p.admission_no.nil? ? "-": p.student_name%></td>
-								<td class="col-3"><%= p.collection_amount%></td>
-								<td class="col-3"><%= p.created_at.to_date%></td>
+					<td class="col-3"><%= p.category.nil? ? "-": p.category.name%></td>
+					<td class="col-3"><%= p.admission_no.nil? ? "-": p.student_name%></td>
+					<td class="col-3"><%= p.collection_amount%></td>
+					<td class="col-3"><%= p.created_at.to_date%></td>
 		          </tr>
 		          <%total+=p.collection_amount%>
 		        <% end %>
 		        </tbody>
 		      </table>
 		    <%else%>
-					<center><h5>No particular found for this fee category</h5></center>
-				<%end%>
+				  <center><h5>No particular found for this fee category</h5></center>
+			  <%end%>
 	    </div>
 	  </div>
   </div>
@@ -111,9 +111,3 @@
 	  </div>
   </div>
 </div>
-
-
-
-
-
-

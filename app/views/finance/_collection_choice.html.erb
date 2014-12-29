@@ -1,4 +1,4 @@
 <% unless @collections.nil? %>
-	<%= t('Select fee collection date') %>
+	<b>Select Fee Collection Date:</b>
   <%= select :collection,:id, @collections.collect {|c| [c.name+" "+c.created_at.to_date.to_s,c.id]},{prompt:true},{onchange:"var a={id: $('#collection_id').val()};$.get('defaulter_students',a,function(response){});",class: "form-control"}%>
 <%end%>

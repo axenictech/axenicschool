@@ -2,7 +2,7 @@
   <div class="box col-md-12">
   <div class="box-inner">
     <div class="box-header well">
-      <h2><%= t('Employee list')%></h2>
+      <h3>Employee list</h3>
     </div>
 
     <div class="box-content">
@@ -23,7 +23,7 @@
               <%=  employee.first_name+" "+employee.last_name  %>
             </td>
             <td class="center">
-              <%= check_box_tag "employees[]", employee.id,false,class: 'check_box'%>Assign
+              <%= check_box_tag "employees[]", employee.id,false,class: 'check_box'%><b>Assign</b>
             </td>
           </tr>
         <% end %>
