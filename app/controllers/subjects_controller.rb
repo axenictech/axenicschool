@@ -1,89 +1,95 @@
+# Subject Controller
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:edit, :update, :destroy]
 
   def index
-    @batches = Batch.includes(:course).all
+    @batches ||= Batch.includes(:course)
     authorize! :read, @batches.first
   end
 
   def select
-    @batch = Batch.find(params[:batch][:id])
-    @subjects = @batch.subjects.where(elective_group_id: nil)
-    @elective_groups = @batch.elective_groups.all
+    @batch = Batch.shod(params[:batch][:id])
+    @subjects ||= @batch.normal_subjects
+    @elective_groups ||= @batch.elective_groups
     authorize! :read, @batch
   end
 
   def subject
-    @batch = Batch.find(params[:batch_id])
-    @subjects = @batch.subjects.where(elective_group_id: nil)
-    @elective_groups = @batch.elective_groups.all
+    @batch = Batch.shod(params[:batch_id])
+    @subjects ||= @batch.normal_subjects
+    @elective_groups ||= @batch.elective_groups
     authorize! :read, @batch
   end
 
   def new
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.shod(params[:batch_id])
     @subject = @batch.subjects.build
-
-    @elective_group = ElectiveGroup.find(params[:elective_group_id]) if params[:elective_group_id]
+    @elective_group = ElectiveGroup.shod(params[:elective_group_id]) \
+    if params[:elective_group_id]
     @subject = @elective_group.subjects.build if params[:elective_group_id]
     authorize! :create, @subject
-   end
+  end
 
   def create
-    @batch = Batch.find(params[:batch_id])
-    @subjects = @batch.subjects.where(elective_group_id: nil)
-    @elective_groups = @batch.elective_groups.all
+    @batch = Batch.shod(params[:batch_id])
+    @subjects ||= @batch.normal_subjects
+    @elective_groups ||= @batch.elective_groups
     @subject = @batch.subjects.new(subject_params)
+    flash[:notice] = t('subject_create')
+    flash[:notice] = t('elective_create') if params[:elective_group_id]
+  end
 
-    @elective_group = ElectiveGroup.find params[:elective_group_id] if params[:elective_group_id]
-    @subject = @elective_group.subjects.new(subject_params) if params[:elective_group_id]
-    @elective_subjects = @elective_group.subjects.all if params[:elective_group_id]
+  def create_elective
+    @elective_group = ElectiveGroup.shod params[:elective_group_id] \
+    if params[:elective_group_id]
+    @subject = @elective_group.subjects.new(subject_params) \
+    if params[:elective_group_id]
+    @elective_subjects ||= @elective_group.subjects \
+    if params[:elective_group_id]
     @subject.save
     @subject.update(batch_id: @batch.id) if params[:elective_group_id]
-    flash[:notice] = 'Subject Created Successfully'
-    flash[:notice2] = 'Elective Subject Created Successfully' if params[:elective_group_id]
-   end
+  end
 
   def edit
     authorize! :update, @subject
   end
 
   def update
-    @subjects = @batch.subjects.where(elective_group_id: nil)
-    @elective_groups = @batch.elective_groups.all
-
-    @elective_subjects = @elective_group.subjects.all if params[:elective_group_id]
+    @subjects ||= @batch.normal_subjects
+    @elective_groups ||= @batch.elective_groups
+    @elective_subjects ||= @elective_group.subjects \
+    if params[:elective_group_id]
     @subject.update(subject_params)
-    flash[:notice] = 'Subject updated Successfully'
-    flash[:notice2] = 'Elective Subject updated Successfully' if params[:elective_group_id]
+    flash[:notice] = t('subject_update')
+    flash[:notice] = t('elective_update') if params[:elective_group_id]
   end
 
   def destroy
     authorize! :delete, @subject
-    @subjects = @batch.subjects.where(elective_group_id: nil)
-    @elective_groups = @batch.elective_groups.all
-
-    @elective_subjects = @elective_group.subjects.all if params[:elective_group_id]
+    @subjects ||= @batch.normal_subjects
+    @elective_groups ||= @batch.elective_groups
+    @elective_subjects ||= @elective_group.subjects \
+    if params[:elective_group_id]
     @subject.destroy
-    redirect_to dashboard_home_index_path
-    flash[:notice] = 'Subject deleted Successfully'
-    flash[:notice2] = 'Elective Subject deleted Successfully' if params[:elective_group_id]
+    redirect_to subjects_path
+    flash[:notice] = t('subject_delete')
+    flash[:notice] = t('elective_delete') if params[:elective_group_id]
   end
 
   private
 
   def set_subject
     if params[:elective_group_id]
-      @batch = Batch.find(params[:batch_id])
-      @elective_group = ElectiveGroup.find(params[:elective_group_id])
-      @subject = @elective_group.subjects.find(params[:id])
+      @batch = Batch.shod(params[:batch_id])
+      @elective_group = ElectiveGroup.shod(params[:elective_group_id])
+      @subject = @elective_group.subjects.shod(params[:id])
     else
-      @batch = Batch.find(params[:batch_id])
-      @subject = @batch.subjects.find(params[:id])
+      @batch = Batch.shod(params[:batch_id])
+      @subject = @batch.subjects.shod(params[:id])
     end
   end
 
   def subject_params
-    params.require(:subject).permit(:name, :code, :max_weekly_classes, :no_exams)
-   end
+    params.require(:subject).permit!
+  end
 end
