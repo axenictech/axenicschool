@@ -35,6 +35,7 @@ class SubjectsController < ApplicationController
     @subjects ||= @batch.normal_subjects
     @elective_groups ||= @batch.elective_groups
     @subject = @batch.subjects.new(subject_params)
+    create_elective
     flash[:notice] = t('subject_create')
     flash[:notice] = t('elective_create') if params[:elective_group_id]
   end
