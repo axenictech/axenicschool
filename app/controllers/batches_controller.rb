@@ -8,13 +8,13 @@ class BatchesController < ApplicationController
   end
 
   def new
-    @course = Course.where(id: params[:course_id]).take
+    @course = Course.shod(params[:course_id])
     @batch = @course.batches.build
     authorize! :create, @batch
   end
 
   def create
-    @course = Course.where(id: params[:course_id]).take
+    @course = Course.shod(params[:course_id])
     @batch = @course.batches.new(postparam)
     if @batch.save
       flash[:notice] = t('batch_create')
@@ -25,13 +25,13 @@ class BatchesController < ApplicationController
   end
 
   def display
-    @batch = Batch.where(id: params[:id]).take
+    @batch = Batch.shod(params[:id])
     @students ||= @batch.students
     authorize! :read, @batch
   end
 
   def select
-    @course = Course.where(id: params[:course][:id]).take
+    @course = Course.shod(params[:course][:id])
     authorize! :read, @batch
   end
 
@@ -56,19 +56,19 @@ class BatchesController < ApplicationController
   end
 
   def assign_tutor
-    @batch = Batch.where(id: params[:format]).take
+    @batch = Batch.shod(params[:format])
     authorize! :read, @batch
   end
 
   def assign_tutorial
-    @batch = Batch.where(id: params[:format]).take
-    @department = EmployeeDepartment.where(params[:assign_tutor][:id]).take
+    @batch = Batch.shod(params[:format])
+    @department = EmployeeDepartment.shod(params[:assign_tutor][:id])
     @employees ||= @department.assign_employee(@batch)
     authorize! :read, @batch
   end
 
   def assign_employee
-    @employee = Employee.where(id: params[:format]).take
+    @employee = Employee.shod(params[:format])
     @assign_employees ||= @employee.assign(@batch, params[:format])
     @department = @employee.employee_department
     @employees ||= @department.assign_employee(@batch)
@@ -76,7 +76,7 @@ class BatchesController < ApplicationController
   end
 
   def remove_employee
-    @employee = Employee.find(params[:format])
+    @employee = Employee.shod(params[:format])
     @assign_employees ||= @employee.remove(@batch, params[:format])
     @department = @employee.employee_department
     @employees ||= @department.assign_employee(@batch)
@@ -86,7 +86,7 @@ class BatchesController < ApplicationController
   private
 
   def find_batch
-    @batch = Batch.where(id: params[:id]).take
+    @batch = Batch.shod(params[:id])
   end
 
   def postparam

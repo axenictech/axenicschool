@@ -1,23 +1,27 @@
+# comments controller
 class CommentsController < ApplicationController
+  before_filter :find_news
   def create
-    @newscast = Newscast.find(params[:newscast_id])
     @comment = @newscast.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
       redirect_to newscast_path(@newscast)
     else
-      render template: 'newscasts/show'
+      render '/newscasts/show'
     end
   end
 
   def destroy
-    @newscast = Newscast.find(params[:newscast_id])
-    @comment = @newscast.comments.find(params[:id])
+    @comment = @newscast.comments.shod(params[:id])
     @comment.destroy
     redirect_to newscast_path(@newscast)
   end
 
   private
+
+  def find_news
+    @newscast = Newscast.shod(params[:newscast_id])
+  end
 
   def comment_params
     params.require(:comment).permit!
