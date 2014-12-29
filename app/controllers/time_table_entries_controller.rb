@@ -11,7 +11,7 @@ class TimeTableEntriesController < ApplicationController
   def select
     @time = params[:format]
     @batch = Batch.find(params[:batch][:id])
-    @class_timing = @batch.class_timings.where(is_break: false)
+    @class_timing = @batch.class_timings.is_break
     @subjects = @batch.subjects.all
     authorize! :read, TimeTableEntry
   end
@@ -48,7 +48,7 @@ class TimeTableEntriesController < ApplicationController
 
     @time = params[:time_table_id]
     @subjects = @batch.subjects.all
-    @class_timing = @batch.class_timings.where(is_break: false)
+    @class_timing = @batch.class_timings.is_break
     @teachers = EmployeeSubject.where(subject_id: @subject.id)
   end
 
@@ -57,7 +57,7 @@ class TimeTableEntriesController < ApplicationController
     @delete_time = TimeTableEntry.find(params[:format])
     @delete_time.destroy
     @batch = @delete_time.batch
-    @class_timing = @batch.class_timings.where(is_break: false)
+    @class_timing = @batch.class_timings.is_break
     @subjects = @batch.subjects.all
     unless @delete_time.nil?
       @time = @delete_time.time_table.id

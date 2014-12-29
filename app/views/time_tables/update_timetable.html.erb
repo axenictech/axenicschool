@@ -19,7 +19,7 @@
 </div>
 <br/>
 <div class="row">
-  <div class="box col-md-10 col-md-offset-1">
+  <div class="box col-md-6">
   <div class="box-inner">
     <div class="box-header well" data-original-title="">
       <h2>Edit Time Table</h2>
@@ -38,25 +38,23 @@
             </div>
         <% end %>
   
-   <div class="col-md-offset-2">
+   <div class="col-sm-7 col-sm-offset-1">
                   <div class="form-group">
-
-          <div class="col-md-3"><b>Start Date:</b></div>
+        <%= t('start_date') %>
         
-           <div class="col-md-7"><%= f.date_select :start_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %></div>
+          <%= f.date_select :start_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
           </div>
-          <br><br>
       <div class="form-group">
 
-         <div class="col-md-3"><b>End Date:</b></div>
+     <%= t('end_date') %>
         
-           <div class="col-md-7"><%= f.date_select :end_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %></div>
+          <%= f.date_select :end_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
         
       </div>
- <br><br>
-  <div class="col-sm-offset-4"> 
+
+  <div class="col-sm-7 col-sm-offset-6"> 
                 <div class="form-actions">
-         <%=f.submit :"Update",class:"btn btn-success" %>
+      <%=f.submit :"►Update",class:"btn btn-primary" %>
 
 
             </div>

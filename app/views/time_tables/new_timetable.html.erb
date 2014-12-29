@@ -5,19 +5,18 @@
     
     <li>New Time Table</li>
   </ul>
-</div>
- <div id="flash" align="center"><%= render 'layouts/messages'%></div>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
 
 
 <div class="row">
-  <div class="box col-md-9 col-md-offset-1">
+  <div class="box col-md-9">
   <div class="box-inner">
     <div class="box-header well" data-original-title="">
       <h2>New Time Table</h2>
     </div>
     <hr/>
     <div class="box-content">
-   
 <%=form_for @time_table do |f| %>
   <fieldset>
 
@@ -30,27 +29,26 @@
             </ul>
             </div>
         <% end %>
-       
-         <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-2"></div>
+     <div class="col-md-8">
                   <div class="form-group">
-                  <div class="col-md-3"> <b>Start Date:</b></div>
-          <div class="col-md-6"><%= f.date_select :start_date,:use_month_numbers=>true,:start_year => Date.current.year-1, :end_year => Date.current.year+1,:order=>[:day,:month,:year]%></div></div>
-          <br><br>
+                  <b>Start Date:</b>
+                &nbsp;
+          <%= f.date_select :start_date,:use_month_numbers=>true,:start_year => Date.current.year-1, :end_year => Date.current.year+1,:order=>[:day,:month,:year]%></div>
        <div class="form-group">
-         <div class="col-md-3"> <b>End Date:</b></div>
-          
+         <b>End Date:</b>
+            &nbsp;&nbsp;&nbsp;
         
-           <div class="col-md-6"><%= f.date_select :end_date,:use_month_numbers=>true,:start_year => Date.current.year-1,:end_year => Date.current.year+1,:order=>[:day,:month,:year]%></div>
+          <%= f.date_select :end_date,:use_month_numbers=>true,:start_year => Date.current.year-1,:end_year => Date.current.year+1,:order=>[:day,:month,:year]%>
        </div>
-      
-          <br><br>
-              <div class="col-sm-offset-3"> 
+          <br>
+              <div class="col-sm-8 col-sm-offset-4"> 
                 <div class="form-actions">
         <%= f.submit 'Create', class: "btn btn-primary"%>
             </div>
             </div>
                 
-              </div> 
+              </div>
             </fieldset>
   <% end %>
 </div>

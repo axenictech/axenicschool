@@ -1,3 +1,4 @@
+# Setting Controller
 class SettingController < ApplicationController
   def index
     authorize! :read, GeneralSetting

@@ -1,5 +1,6 @@
 
 en:
+  authorize: 'You are not Authorized'
   hello: "Hello world"
   first_name: "First Name"
   admission_no: "Admission No"
@@ -55,3 +56,17 @@ en:
   elective_group_create: 'Elective group Created Successfully'
   elective_group_update: 'Elective group updated Successfully'
   elective_group_delete: 'Elective group deleted Successfully'
+  weekday_create: 'Weekday created successfully'
+  user_create: 'User created successfully'
+  user_update: 'User updated successfully'
+  pass_change: 'Password changed successfully'
+  user_delete: 'User deleted successfully'
+  subject_create: 'Subject Created Successfully'
+  elective_create: 'Elective Subject Created Successfully'
+  subject_update: 'Subject updated Successfully'
+  elective_update: 'Elective Subject updated Successfully'
+  subject_delete: 'Subject deleted Successfully'
+  elective_delete: 'Elective Subject deleted Successfully'
+  news_add: 'News added successfully'
+  news_update: 'News updated successfully'
+  news_delete: 'News deleted successfully'

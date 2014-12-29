@@ -1,39 +1,24 @@
+# Weekdays Controller
 class WeekdaysController < ApplicationController
   def index
     @weekday = Weekday.new
-    @day = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
-    @days = %w(0 1 2 3 4 5 6)
+    @day ||= Weekday.day
+    @days ||= Weekday.days
+    @weekdays ||= Batch.includes(:course).all
     authorize! :create, @weekday
-
-    @weekdays = Batch.includes(:course).all
   end
 
   def create
-    @day = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
-    @days = %w(0 1 2 3 4 5 6)
-
-    @batch = params[:weekday][:batch_id]
-
-    @batch = @batch = Batch.find(params[:weekday][:batch_id])
-    week = []
-    week = params[:weekdays]
-
-    @weekdays = Weekday.where(batch_id: @batch.id)
-    unless @weekdays.nil?
-      @weekdays.destroy_all
-    end
-    week.each  do |w|
-      divas = @day[w.to_i]
-      weekday = Weekday.new(batch_id: @batch.id, weekday: divas)
-      weekday.save
-    end
-    flash[:notice] = 'Weekdays created successfully'
+    @day ||= Weekday.day
+    @days ||= Weekday.days
+    @batch = Weekday.set_day(params[:weekday][:batch_id], params[:weekdays])
+    flash[:notice] = t('weekday_create')
   end
 
   def select
-    @day = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
-    @days = %w(0 1 2 3 4 5 6)
-    @batch = Batch.find(params[:batch][:id])
+    @day ||= Weekday.day
+    @days ||= Weekday.days
+    @batch = Batch.shod(params[:batch][:id])
     authorize! :read, Weekday
   end
 end

@@ -3,14 +3,17 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_and_belongs_to_many :privileges
   belongs_to :general_setting
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :validatable, :timeoutable
 
-  validates :username, presence: true, uniqueness: true, length: { in: 1..50 },
-                       format: { with: /\A[a-zA-Z0-9]+\Z/ }
-  validates :first_name, presence: true, length: { in: 1..25 }, format: { with: /\A[a-zA-Z" "]+\Z/ }
-  validates :last_name, presence: true, length: { in: 1..25 }, format: { with: /\A[a-zA-Z" "]+\Z/ }
+  validates :username, presence: true, uniqueness: true, length: \
+  { in: 1..50 }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
+  validates :first_name, presence: true, length: { in: 1..25 }, format: \
+  { with: /\A[a-zA-Z" "]+\Z/ }
+  validates :last_name, presence: true, length: { in: 1..25 }, format: \
+  { with: /\A[a-zA-Z" "]+\Z/ }
   scope :shod, ->(id) { where(id: id).take }
+  scope :role_wise_users, ->(role) { where(role: role) }
   def full_name
     first_name + ' ' + last_name
   end
@@ -29,5 +32,24 @@ class User < ActiveRecord::Base
   end
   def self.current=(user)
     Thread.current[:user] = user
+  end
+
+  def student
+    return unless role == 'Student' || role == 'Parent'
+    std = ArchivedStudent.where(student_id: student_id).take
+    std = Student.shod(student_id) if std.nil?
+    std
+  end
+
+  def employee
+    return unless role == 'Employee'
+    Employee.shod(employee_id)
+  end
+
+  def self.search_user(search)
+    return if search.empty?
+    where("concat_ws(' ',first_name,last_name)like ? \
+      OR concat_ws(' ',last_name,first_name)like ? \
+      OR username like ?", "#{search}%", "#{search}%", "#{search}%")
   end
 end
