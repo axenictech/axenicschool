@@ -38,7 +38,7 @@ class GradingLevelsController < ApplicationController
   end
 
   def select
-    @batch = Batch.where(id: params[:batch][:id]).take
+    @batch = Batch.shod(params[:batch][:id])
     @grading_levels ||= @batch.grading_levels
     authorize! :read, @batch
   end
@@ -46,12 +46,12 @@ class GradingLevelsController < ApplicationController
   private
 
   def find_batch
-    @batch = Batch.where(id: params[:batch_id]).take
+    @batch = Batch.shod(params[:batch_id])
   end
 
   def find_grade
-    @batch = Batch.where(id: params[:batch_id]).take
-    @grading_level1 = @batch.grading_levels.where(id: params[:id]).take
+    @batch = Batch.shod(params[:batch_id])
+    @grading_level1 = @batch.grading_levels.shod(params[:id])
   end
 
   def params_grade

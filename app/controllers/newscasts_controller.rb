@@ -1,51 +1,50 @@
+# Newscasts Controller
 class NewscastsController < ApplicationController
   def new
     @newscast = Newscast.new
   end
 
   def select
-    unless params[:newscast][:title].empty?
-      @newscasts = Newscast.where('title like ?', "#{params[:newscast][:title]}%")
-    end
+    @newscasts ||= Newscast.news(params[:newscast][:title])
   end
 
   def create
     @newscast = Newscast.new(newscast_params)
     @newscast.user_id = current_user.id
     if @newscast.save
-      redirect_to newscast_path(@newscast), notice: 'News added successfully'
+      redirect_to newscast_path(@newscast), notice: t('news_add')
     else
       render 'new'
-   end
+    end
   end
 
   def edit
-    @newscast = Newscast.find(params[:id])
+    @newscast = Newscast.shod(params[:id])
   end
 
   def update
-    @newscast = Newscast.find(params[:id])
+    @newscast = Newscast.shod(params[:id])
     if @newscast.update(newscast_params)
-      redirect_to newscast_path(@newscast), notice: 'News updated successfully!!!'
+      redirect_to newscast_path(@newscast), notice: t('news_update')
     else
       render 'edit'
     end
   end
 
   def destroy
+    @newscast = Newscast.shod(params[:id])
     authorize! :delete, @newscast
-    @newscast = Newscast.find(params[:id])
     @newscast.destroy
-    redirect_to newscasts_path(@newscast), notice: 'News deleted succefully!'
+    redirect_to newscasts_path(@newscast), notice: t('news_delete')
   end
 
   def show
-    @newscast = Newscast.find(params[:id])
+    @newscast = Newscast.shod(params[:id])
     @comment = @newscast.comments.new
   end
 
   def display
-    @newscasts = Newscast.order(created_at: :desc)
+    @newscasts ||= Newscast.order(created_at: :desc).includes(:user)
   end
 
   private
