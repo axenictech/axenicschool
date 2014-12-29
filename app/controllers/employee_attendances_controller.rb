@@ -108,6 +108,8 @@ class EmployeeAttendancesController < ApplicationController
         if @attendance.is_half_day
           leave_taken = @emp_leave.leave_taken.to_f + (0.5)
           @emp_leave.update(leave_taken: leave_taken)
+           p "------------------------------------------------"
+          p  leave_taken
         else
           leave_taken = @emp_leave.leave_taken.to_f + (1)
           @emp_leave.update(leave_taken: leave_taken)
