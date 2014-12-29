@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223103416) do
+ActiveRecord::Schema.define(version: 20141229062529) do
 
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
@@ -363,7 +363,7 @@ ActiveRecord::Schema.define(version: 20141223103416) do
     t.integer  "employee_id"
     t.integer  "employee_leave_type_id"
     t.decimal  "leave_count",            precision: 10, scale: 0
-    t.decimal  "leave_taken",            precision: 10, scale: 0
+    t.decimal  "leave_taken",            precision: 10, scale: 2
     t.date     "reset_date"
     t.datetime "created_at"
     t.datetime "updated_at"

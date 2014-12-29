@@ -1,34 +1,36 @@
 <div class="modal-body">
         <ul class="errors"></ul>
 <%= form_for [@batch,@class_timing1],remote: true do |f|%>
-  <div class="form-group">
-            <div class="col-md-4"> <b>Name:</b></div>
-             <div class="col-md-8"><%=f.text_field :name , class: "form-control"%></div>
-             </div>
+ <table class="table">
+        <tr>
+            <td class="col-2"><%= f.label :name , class: "control-label"%></td>
+            <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+        
+        <tr>
+            <td class="col-2"><%= f.label :Start_time , class: "control-label"%></td>
 
-             <br><br> <br>
+        
+            <td><%=f.time_select :start_time,:style =>"width: 250px", class: "form-control" %></td>
+        </tr>
+        
+        <tr>
+            <td class="col-2"><%= f.label :End_time, class: "control-label"%></td>
+            <td><%=f.time_select :end_time ,:style =>"width: 250px", class: "form-control"%></td>
+        </tr>
+        
+          
+        <tr>
+            <td></td>
+            <td><%= f.check_box :is_break, :checked => false %> Is a break</td>
+        </tr>
 
-             <div class="form-group">
-            <div class="col-md-4"> <b>Start Time:</b></div>
-            <div class="col-md-8"><%=f.time_select :start_time, class: "form-control" %></div>
-            </div>
-            <br><br>
-             <div class="form-group">
-            <div class="col-md-4"><b>End Time:</b></div>
-           <div class="col-md-8"> <%=f.time_select :end_time , class: "form-control"%></div>
-            </div>
-            <br><br>
-           <div class="form-group">
-            <div class="col-md-7 col-md-offset-1">
-          <%= f.check_box :is_break %>&nbsp;&nbsp;<b>Is a break:</b>
-          </div></div>
-          <br><hr>
-           <div class="form-group">
-            <div class="col-md-offset-3">
-          <%= f.submit 'Submit', class: "btn btn-primary"%>&nbsp;
-          <%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%>
-          </div>
-          </div>
+
+        <tr>
+        <td colspan="2"><%= f.submit 'Submit', class: "btn btn-primary"%>
+        <%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+        </tr>
+    </table>
 <% end %>
 </div>
 

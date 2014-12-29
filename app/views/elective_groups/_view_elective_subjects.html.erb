@@ -24,7 +24,7 @@
               <%= link_to 'edit',edit_batch_elective_group_subject_path(@elective_group.batch,@elective_group,subject),remote:true,class: "a-action"%></div>
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
-              <%= link_to 'delete',[@elective_group.batch,@elective_group,subject],remote:true,method: :delete, data:{confirm:"Are you sure to delete elective subject: #{subject.name}?"}, class: "a-action"%></div>
+              <%= link_to 'delete',[@elective_group.batch,@elective_group,subject],method: :delete, data:{confirm:"Are you sure to delete elective subject: #{subject.name}?"}, class: "a-action"%></div>
 
               <div class="label-primary label label-default">
               <i class="glyphicon glyphicon-list-alt icon-white"></i>

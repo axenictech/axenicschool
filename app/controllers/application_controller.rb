@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_filter :set_current_user
   rescue_from CanCan::AccessDenied do |_exception|
-    redirect_to root_url, alert: 'You are not Authorized'
+    redirect_to root_url, alert: t('authorize')
   end
 
   def set_current_user

@@ -33,9 +33,11 @@
       </div>
 
       <div class="form-group">
+
        <b>Joining Date:</b>
         
           <%=f.date_field :joining_date,:value => Time.now.strftime('%Y-%m-%d'),class:"form-control"%>
+
       </div>
 
       <div class="form-group">
@@ -52,6 +54,7 @@
     </div>
       <div class="col-md-6">
         <div class="form-group">
+
          <b>Date of Birth:</b>
         <%=f.date_field :date_of_birth,:value => Time.now.strftime('%Y-%m-%d'),class:"form-control"%>
         </div>
@@ -76,10 +79,17 @@
 </div>
 
    <div class="form-group">
+<<<<<<< HEAD
+      <%= f.label :status%>:&nbsp;
+        <%= f.radio_button :status,"present"%>Present&nbsp;&nbsp;
+          <%= f.radio_button  :status,"former"%>Former&nbsp;&nbsp;
+          <%= f.radio_button  :status,"all",:checked => "checked"%>All
+=======
       <b>Status:</b>&nbsp;&nbsp;
         <%= f.radio_button :status,"present",:checked => "checked"%>&nbsp;<b>Present</b>&nbsp;&nbsp;
           <%= f.radio_button  :status,"former"%>&nbsp;<b>Former</b>&nbsp;&nbsp;
           <%= f.radio_button  :status,"all"%>&nbsp;<b>All</b>
+>>>>>>> ad30215651e9cbdb5975f7ade66e6351690e7885
          </div>
          </div>
 

@@ -6,7 +6,7 @@ class GeneralSettingsController < ApplicationController
   end
 
   def update
-    @general_setting = GeneralSetting.where(id: params[:id]).take
+    @general_setting = GeneralSetting.shod(params[:id])
     if @general_setting.update(general_setting_params)
       flash[:notice] = t('setting_update')
       redirect_to dashboard_home_index_path

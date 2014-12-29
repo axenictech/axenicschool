@@ -15,7 +15,7 @@
       <% end %>
     </tr> 
  
-<% @batch.weekdays.reverse_each do |w|%>
+<% @batch.weekdays.each do |w|%>
       <tr>
         <th><%=w.weekday%></th>
         <% @class_timing.each do |c|%>
@@ -53,7 +53,7 @@
 <div id="emp_div"></div>
 
 <%else%>
-<h4 align="center">Yet class timing are not assigned for this batch,Assign from Set class timings</h4>
+<h4>Yet class timing are not assigned for this batch,Assign from Set class timings</h4>
 <%end%>
 </div>
 </div>

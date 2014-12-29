@@ -1,3 +1,4 @@
+# Events Controller
 class EventsController < ApplicationController
   def new
     @event = Event.new
@@ -12,38 +13,19 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
-    @batches = Batch.all
+    @event = Event.shod(params[:id])
+    @batches ||= Batch.all
     authorize! :read, @event
   end
 
   def showdep
-    @departments = EmployeeDepartment.all
+    @departments ||= EmployeeDepartment.all
     authorize! :create, Event
   end
 
   def update
-    event = params[:event_id]
-    @event = Event.find(event)
-    if @event.is_common?
-      Batch.all.each do |batch|
-        BatchEvent.create(batch_id: batch.id, event_id: event)
-      end
-      EmployeeDepartment.all.each do |dept|
-        EmployeeDepartmentEvent.create(employee_department_id: dept.id, event_id: event)
-      end
-    else
-      unless params[:batches].nil?
-        params[:batches].each do |batch|
-          BatchEvent.create(batch_id: batch, event_id: event)
-        end
-      end
-      unless params[:departments].nil?
-        params[:departments].each do |dept|
-          EmployeeDepartmentEvent.create(employee_department_id: dept, event_id: event)
-        end
-      end
-    end
+    @event = Event.shod(params[:event_id])
+    @event.create_to_all
     redirect_to calender_index_path
   end
 

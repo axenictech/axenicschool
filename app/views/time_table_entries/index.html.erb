@@ -7,7 +7,7 @@
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
-  <div class="col-md-11 col-md-offset-1">
+  <div class="col-md-12">
    <%= form_for :batch, url:{action:'select',format:@time},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
       <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name, b.id]},{prompt:'Select a batch'},{onchange:"$('#batch_form').submit();",class: "form-control",style:"width:350px"} %>  
     <%end%>
