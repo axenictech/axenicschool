@@ -21,7 +21,7 @@
     <%= form_for :newscast, url:{action:'select'},method: :get,html:{id: 'newscast_form'},remote:true do |f| %>
 
       <b>Search News:</b>
-      <%= f.text_field :title,{oninput:"$('#newscast_form').submit();",class: "form-control",placeholder:'Enter News Title',style:"width:300px"}%>
+      <%= f.text_field :title,{oninput:"$('#newscast_form').submit();",class: "form-control",placeholder:'News Title',style:"width:300px"}%>
       <% end %>
   </div>
 </div>
