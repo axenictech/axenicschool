@@ -1,79 +1,52 @@
 class BatchTransfersController < ApplicationController
   def index
-    @courses = Course.all
+    @courses ||= Course.all
     @course = Course.new
     authorize! :read, @course
   end
 
   def select
-    @course = Course.find(params[:batch_transfer][:id])
+    @course = Course.shod(params[:batch_transfer][:id])
     authorize! :read, @course
   end
 
   def transfer
-    @batch = Batch.find(params[:id])
-    @batchs = Batch.includes(:course).all
-    @students = @batch.students.all
+    @batch = Batch.shod(params[:id])
+    @batchs ||= Batch.includes(:course).all
+    @students ||= @batch.students
     authorize! :read, @batch
   end
 
   def assign_all
-    @batch = Batch.find(params[:format])
-    @students = @batch.students.all
+    @batch = Batch.shod(params[:format])
+    @students ||= @batch.students
     authorize! :read, @batch
   end
 
   def remove_all
-    @batch = Batch.find(params[:format])
-    @students = @batch.students.all
+    @batch = Batch.shod(params[:format])
+    @students ||= @batch.students
     authorize! :read, @batch
   end
 
   def student_transfer
-    @batch = Batch.find(params[:transfer][:batch_id])
-    transfer_batch_id = params[:transfer][:id]
-    students = params[:students]
-    if students.present?
-      students.each  do |student|
-        @student = Student.find(student)
-        @student.update(batch_id: transfer_batch_id)
-      end
-      flash[:notice_transfer] = 'Students transfer successfully'
-    else
-      flash[:notice_transfer] = 'Please select student'
-    end
+    @batch = Batch.shod(params[:transfer][:batch_id])
+    @batch.trans(params[:students], params[:transfer][:id])
+    flash[:notice] = t('batch_transfer')
     redirect_to transfer_batch_transfer_path(@batch)
     authorize! :create, @batch
   end
 
   def graduation
-    @batch = Batch.find(params[:id])
-    @students = @batch.students.all
+    @batch = Batch.shod(params[:id])
+    @students ||= @batch.students
     authorize! :read, @batch
   end
 
   def former_student
-    @batch = Batch.find(params[:graduate][:batch_id])
-    status = params[:graduate][:status_description]
-    students = params[:students]
-    if students.present?
-      students.each  do |student|
-        @student = Student.find(student)
-        @archived_student = ArchivedStudent.new(student_id: student, status_description: status,
-                                                admission_no: @student.admission_no, admission_date: @student.admission_date, first_name: @student.first_name,
-                                                middle_name: @student.middle_name, last_name: @student.last_name, batch_id: @student.batch_id,
-                                                date_of_birth: @student.date_of_birth, blood_group: @student.blood_group, birth_place: @student.birth_place,
-                                                nationality_id: @student.nationality_id, language: @student.language, category_id: @student.category_id,
-                                                religion: @student.religion, address_line1: @student.address_line1, address_line2: @student.address_line2,
-                                                city: @student.city, state: @student.state, pin_code: @student.pin_code, country_id: @student.country_id,
-                                                phone1: @student.phone1, phone2: @student.phone2, email: @student.email)
-        @archived_student.save
-        @student.destroy
-      end
-      flash[:notice_gradute] = 'Students trasferred to former students database successfully'
-    else
-      flash[:notice_gradute] = 'Please select student'
-  end
+    @batch = Batch.shod(params[:graduate][:batch_id])
+    @batch.graduate(params[:students], params[:graduate][:status_description])
+    flash[:notice] = t('graduate')
     redirect_to graduation_batch_transfer_path(@batch)
     authorize! :create, @batch
   end
