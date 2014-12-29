@@ -17,7 +17,8 @@
       </div>
       <br><br>
         <div class="form-group">
-        <div class="col-sm-7 col-sm-offset-5">
+         <div class="col-sm-5"><b>Percentage of:</b></div>
+         <div class="col-sm-7">
        <%= f.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control"%>
        </div></div>
       <br><br>

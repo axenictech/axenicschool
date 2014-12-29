@@ -33,7 +33,8 @@
 						});", class: 'form-control'}%>
 			</div>
 			
-			<div class="form-group"><%= f.label :batch_name %>
+			<div class="form-group">
+			<b>Batch Name:</b>
 			<div id="batch_view"><%= render 'all_batch'%>
 			</div>
 			</div>
@@ -66,7 +67,7 @@
 			</div>
 
 			<div class="form-group">
-				<b>Date Of Birth:</b>
+				<b>Date of Birth:</b>
 				<%=f.date_field :date_of_birth,class:"form-control"%>
 			</div>
 

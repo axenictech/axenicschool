@@ -21,7 +21,8 @@
       </div>
       <br><br>
         <div class="form-group">
-        <div class="col-md-8 col-md-offset-4">
+       <div class="col-md-4"><b>Percentage of :</b></div>
+         <div class="col-md-8">
        <%= c.select :payroll_category_id,PayrollCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control"%>
        </div></div>
       <br><br>
@@ -33,11 +34,11 @@
          <br>
 
         <div class="form-group">
-         <div class="col-md-4">
+         <div class="col-md-offset-1">
         <%= c.check_box :is_deduction%>
          <b>Is Deduction?</b>
          </div></div>
-<br>
+
    <div class="col-sm-4 col-sm-offset-4"> 
        <div class="form-actions">               
         <%= c.submit 'Create', class: "btn btn-primary"%>
