@@ -1,8 +1,7 @@
 class TimeTable < ActiveRecord::Base
-  # has_many :time_table_entries, dependent: :destroy
   has_many :time_table_entries, dependent: :destroy
   scope :shod, ->(id) { where(id: id).take }
-  scope :inst_next, -> (tn) { where('time_tables.start_date <= ? AND time_tables.end_date >= ?', tn, tn) }
+  scope :inst_next, -> (e) { where('time_tables.start_date <= ? AND time_tables.end_date >= ?', e, e) }
   scope :inst, -> (t) { where('time_tables.start_date <= ? AND time_tables.end_date >= ?', t, t) }
 
   def create_time_table(t)
