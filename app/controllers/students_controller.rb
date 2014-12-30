@@ -1,3 +1,4 @@
+# Students Controller
 class StudentsController < ApplicationController
   def index
     authorize! :create, Student
@@ -5,14 +6,7 @@ class StudentsController < ApplicationController
 
   def admission1
     @student = Student.new
-    # @batches = Batch.includes(:course).all
-    @date = Date.today.strftime('%Y%m%d')
-    if Student.first.nil?
-      @student.admission_no = 'S' + @date.to_s + '1'
-    else
-      @id = Student.last.id.next
-      @student.admission_no = 'S' + @date.to_s + @id.to_s
-    end
+    @student.admission_no = Student.set_admission_no
     @batches = Batch.all.includes(:course)
     authorize! :create, @student
   end
@@ -21,8 +15,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     @batches = Batch.all.includes(:course)
     if @student.save
-      flash[:notice] = 'Student Record saved successfully please fill the parent detail'
-
+      flash[:notice] = t('student_admission1')
       redirect_to admission2_students_path(@student)
     else
       render 'admission1'
@@ -30,36 +23,36 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.find(params[:id])
+    @student = Student.shod(params[:id])
     authorize! :read, @student
   end
 
   def admission2
-    @student = Student.find(params[:format])
+    @student = Student.shod(params[:format])
     @guardian = @student.guardians.build
     authorize! :create, @student
   end
 
   def admission2_1
-    @student = Student.find(params[:format])
+    @student = Student.shod(params[:format])
     authorize! :create, @student
   end
 
   def admission3
-    @student = Student.find(params[:format])
+    @student = Student.shod(params[:format])
     authorize! :create, @student
   end
 
   def edit
-    @student = Student.find(params[:id])
-    authorize! :update, @student
+    @student = Student.shod(params[:id])
     @batches = Batch.includes(:course).all
+    authorize! :update, @student
   end
 
   def update
-    @student = Student.find(params[:id])
+    @student = Student.shod(params[:id])
     if @student.update(student_params)
-      flash[:notice] = 'Student Record updated successfully '
+      flash[:notice] = t('student_update')
       redirect_to profile_student_path(@student)
     else
       render 'edit'

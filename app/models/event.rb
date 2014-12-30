@@ -3,25 +3,37 @@ class Event < ActiveRecord::Base
   has_many :batch_events
   scope :shod, ->(id) { where(id: id).take }
 
-  def create_to_all
+  def create_event(batches, departments)
     if is_common?
-      Batch.all.each do |batch|
-        BatchEvent.create(batch_id: batch.id, event_id: event)
-      end
-      EmployeeDepartment.all.each do |dept|
-        EmployeeDepartmentEvent.create(employee_department_id: dept.id, event_id: event)
-      end
+      common_to_all
     else
-      unless params[:batches].nil?
-        params[:batches].each do |batch|
-          BatchEvent.create(batch_id: batch, event_id: event)
-        end
-      end
-      unless params[:departments].nil?
-        params[:departments].each do |dept|
-          EmployeeDepartmentEvent.create(employee_department_id: dept, event_id: event)
-        end
-      end
+      batches_event(batches)
+      departments_event(departments)
+    end
+  end
+
+  def common_to_all
+    Batch.all.each do |batch|
+      BatchEvent.create(batch_id: batch.id, event_id: id)
+    end
+    EmployeeDepartment.all.each do |dept|
+      EmployeeDepartmentEvent.create(employee_department_id: \
+        dept.id, event_id: id)
+    end
+  end
+
+  def batches_event(batches)
+    return if batches.nil?
+    batches.each do |batch|
+      BatchEvent.create(batch_id: batch, event_id: id)
+    end
+  end
+
+  def departments_event(departments)
+    return if departments.nil?
+    departments.each do |dept|
+      EmployeeDepartmentEvent.create(employee_department_id: \
+      dept, event_id: id)
     end
   end
 end

@@ -13,6 +13,7 @@
       <%= link_to "Guardians", dispguardian_students_path(@student), class: "btn btn-primary-link btn-xs" %>
       <%= link_to "Send email",email_students_path(@student), class: "btn btn-primary-link btn-xs" %>
       <%= link_to "Delete", remove_students_path(@student), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'PDF Report',student_profile_student_path(@student,format:"pdf"),class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>
@@ -42,9 +43,7 @@
     </div>
     </div>
     </div>
-   
-<hr>
-
+   <hr>
 <div class="form-group">
     <h4><b><u><font color="brown">Student Personal Details:</font></u></b></h4>
 </div>
@@ -143,9 +142,6 @@
     <%end%>
 </div>
 </div>
-
-
-  
   <hr>
   <div class="form-group">
     <h4><b><u><font color="brown">Student Previous Institution Details:</font></u></b></h4>
@@ -174,30 +170,22 @@
     <div class="form-group">
     <div class="col-md-6"><b>Total Marks:</b></div>
     <div class="col-md-6"> <%= @student.student_previous_data.total_mark %></div></div>
-
 </div>
 </div>
-
-
  <hr>
   <div class="form-group">
     <h4><b><u><font color="brown">Student Previous Subject Marks:</font></u></b></h4>
 </div>
-
-
 <div class="row">
   <div class="col-md-6">
-  
     <div class="form-group">
     <div class="col-md-6"><b>Subject Name</b></div>
     <div class="col-md-6"><b>Marks</b></div>
     <br><br>
 <% unless @student.student_previous_subject_marks.nil? %>
   <% @student.student_previous_subject_marks.each do |psm| %>
-
     <div class="form-group">
      <div class="col-md-6"><%= psm.subject %></div>
-   
     <div class="col-md-6"><%= psm.mark %></div></div>
     <%end%>
     <%end%>
@@ -207,11 +195,9 @@
   <br>
 </div>
 </div>
-<div class="row">
-  <div class="col-md-8"></div>
-  <div class="col-md-3">
-    <%= link_to 'Edit',edit_student_path(@student),class: "btn btn-primary" %>
-<%= link_to 'PDF Report',student_profile_student_path(@student,format:"pdf"),class: "btn btn-success" %>
-</div>
+<div class="row" align="center">
+  
+    <%= link_to 'Update',edit_student_path(@student),class: "btn btn-success" %>
+
 </div><br/>
 </div>

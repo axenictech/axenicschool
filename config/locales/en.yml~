@@ -82,3 +82,9 @@ en:
   news_update: 'News updated successfully'
   news_delete: 'News deleted successfully'
 
+  class_timing_create: 'Class Timing Created Successfully'
+  class_timing_delete: 'Class Timing Deleted Successfully'
+  class_timing_update: 'Class Timing Updated Successfully'
+  student_admission1: 'Student Record saved successfully please fill the parent detail'
+  student_update: 'Student Record updated successfully'
+

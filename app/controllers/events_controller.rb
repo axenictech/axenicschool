@@ -25,7 +25,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.shod(params[:event_id])
-    @event.create_to_all
+    @event.create_event(params[:batches], params[:departments])
     redirect_to calender_index_path
   end
 
