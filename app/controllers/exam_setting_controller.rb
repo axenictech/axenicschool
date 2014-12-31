@@ -1,22 +1,23 @@
+# exam setting controller
 class ExamSettingController < ApplicationController
   def index
     authorize! :read, GradingLevel
   end
 
   def new
-    @courses = Course.all
+    @courses ||= Course.all
     authorize! :read, ClassDesignation
   end
 
   def newrank
-    @courses = Course.all
+    @courses ||= Course.all
     authorize! :read, RankingLevel
   end
 
   def setting
     @course = Course.find(params[:id])
     @class_des = ClassDesignation.new
-    @class_dess = @course.class_designations.all
+    @class_dess ||= @course.class_designations.all
     @class_des1 = @course.class_designations.build
     authorize! :create, @class_des
   end
@@ -24,25 +25,24 @@ class ExamSettingController < ApplicationController
   def settingrank
     @course = Course.find(params[:id])
     @rank_lev = RankingLevel.new
-    @rank_levels = @course.ranking_levels.all
+    @rank_levels ||= @course.ranking_levels.all
     @rank_lev1 = @course.ranking_levels.build
     authorize! :create, @rank_lev
   end
 
   def create
     @course = Course.find(params[:id])
-    @class_dess = @course.class_designations.all
+    @class_dess ||= @course.class_designations.all
     @class_des1 = @course.class_designations.new(params_class)
     if @class_des1.save
-      flash[:class_designation_notice] = 'Class Designation Created Successfully'
+      flash[:notice] = t('create_class')
     else
-      flash[:class_designation_notice] = 'Class Designation Not Created Successfully'
+      flash[:notice] = t('not_create_class')
     end
   end
 
   def createrank
     @course = Course.find(params[:course_id])
-
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     @rank_lev1 = @course.ranking_levels.new(params_rank)
     @max_rank = RankingLevel.maximum('prioriy')
@@ -51,15 +51,15 @@ class ExamSettingController < ApplicationController
     end
     @rank_lev1.prioriy = @max_rank + 1.to_i
     if @rank_lev1.save
-      flash[:ranking_level_notice] = 'RankingLevel Created Successfully'
+      flash[:notice] = t('create_rank')
     else
-      flash[:ranking_level_notice] = 'RankingLevel not Created Successfully'
+      flash[:notice] = t('not_create_rank')
       render 'newrank'
     end
   end
 
   def increase_priority
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     @rank_lev1 = @course.ranking_levels.find(params[:id])
     selected = params[:index].to_i - 1.to_i
@@ -71,11 +71,11 @@ class ExamSettingController < ApplicationController
       end
       if (selected + 1.to_i == previous)
         current = p.prioriy
-        previous_pri = temp.prioriy
+        prev_pri = temp.prioriy
         p.update(prioriy: nil)
         temp.update(prioriy: current)
-        p.update(prioriy: previous_pri)
-       end
+        p.update(prioriy: prev_pri)
+      end
       previous = previous + 1.to_i
     end
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
@@ -83,12 +83,13 @@ class ExamSettingController < ApplicationController
   end
 
   def decrease_priority
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     @rank_lev1 = @course.ranking_levels.find(params[:id])
     selected = params[:index].to_i + 1.to_i
     next_pri = 0.to_i
     temp = nil
+    #@course.decrease_order(@rank_levels,selected,next_pri,temp)
     @rank_levels.each do |p|
       if (selected - 1.to_i == next_pri)
         temp = p
@@ -100,7 +101,7 @@ class ExamSettingController < ApplicationController
         temp.update(prioriy: current)
         p.update(prioriy: next_priority)
       end
-      next_pri = next_pri + 1.to_i
+        next_pri = next_pri + 1.to_i
     end
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     authorize! :create, @rank_lev1
@@ -109,12 +110,12 @@ class ExamSettingController < ApplicationController
   def destroy
     authorize! :delete, @class_des1
     @course = Course.find(params[:course_id])
-    @class_dess = @course.class_designations.all
+    @class_dess ||= @course.class_designations.all
     @class_des1 = @course.class_designations.find(params[:id])
     if @class_des1.destroy
-      flash[:class_designation_notice] = 'Class Designation Deleted Successfully'
+      flash[:notice] = t('del_class')
     else
-      flash[:class_designation_notice] = 'Class Designation Not Deleted Successfully'
+      flash[:notice] = t('not_del_class')
     end
   end
 
@@ -124,13 +125,12 @@ class ExamSettingController < ApplicationController
     @course = @rank_lev1.course
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     if @rank_lev1.destroy
-      flash[:ranking_level_notice] = 'RankingLevel Deleted Successfully'
+      flash[:notice] = t('del_rank')
     else
-      flash[:ranking_level_notice] = 'RankingLevel not Deleted Successfully'
+      flash[:notice] = t('not_del_rank')
       render 'newrank'
     end
   end
-
   def edit
     @course = Course.find(params[:id])
     @class_des1 = @course.class_designations.find(params[:class_des])
@@ -139,12 +139,12 @@ class ExamSettingController < ApplicationController
 
   def update
     @course = Course.find(params[:course_id])
-    @class_dess = @course.class_designations.all
+    @class_dess ||= @course.class_designations.all
     @class_des1 = @course.class_designations.find(params[:class_des])
     if @class_des1.update(params_class)
-      flash[:class_designation_notice] = 'Class Designation Updated Successfully'
+      flash[:notice] = t('update_class')
     else
-      flash[:class_designation_notice] = 'Class Designation Not Updated Successfully'
+      flash[:notice] = t('not_update_class')
     end
   end
 
@@ -162,15 +162,15 @@ class ExamSettingController < ApplicationController
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     @rank_lev1 = @course.ranking_levels.find(params[:id])
     if @rank_lev1.update(params_rank)
-      flash[:ranking_level_notice] = 'Ranking Level Updated Successfully'
+      flash[:notice] = t('update_rank')
     else
-      flash[:ranking_level_notice] = 'Ranking Level Designation Not Updated Successfully'
+      flash[:notice] = t('not_update_rank')
     end
   end
 
   def select
     @course = Course.find(params[:course][:id])
-    @class_dess = @course.class_designations.all
+    @class_dess ||= @course.class_designations.all
     authorize! :read, @class_dess.first
   end
 
