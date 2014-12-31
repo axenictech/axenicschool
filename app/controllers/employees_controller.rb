@@ -507,8 +507,12 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:format])
     @salary_date = Date.parse(params[:salery_slip][:salery_date])
     unless @salary_date.to_date < @employee.joining_date.to_date
-      flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('payslip')}"
-      @employee.create_payslip(@employee, @salary_date, params[:amount])
+      flag = @employee.create_payslip(@employee, @salary_date)
+      unless flag==0
+      flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('payslip')}" 
+      else
+       flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('p')}"  
+      end
     end
     redirect_to monthly_payslip_employees_path(@employee)
     authorize! :update, @employee

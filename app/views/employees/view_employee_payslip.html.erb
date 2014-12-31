@@ -28,7 +28,7 @@
         <h3>No salary slip found for this employee</h3>
     <%else%>   
     <%@emp=Employee.find(@payslip.employee_id)%>
-    <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:'true').pluck(:is_approved)%>
+    <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:true).pluck(:is_approved)%>
     <%if approved[0]==true%>
         <%status="(Approved)"%>
     <%else%>
@@ -53,7 +53,7 @@
       </tr>
       <%total=0%>
       
-        		<%is_deduction=PayrollCategory.where(is_deduction:'false')%>
+        		<%is_deduction=PayrollCategory.where(is_deduction:false)%>
         	<%is_deduction.each do |c| %>
       <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id: c.id).pluck(:amount) %>
 
@@ -78,7 +78,7 @@
         <div class="row">
       	<table class="table table-stried">
       		<%tot=0%>
-      		<%is_deduction=PayrollCategory.where(is_deduction:'true')%>
+      		<%is_deduction=PayrollCategory.where(is_deduction:true)%>
            <%is_deduction.each do |d|%>
             <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id:d.id).pluck(:amount)%>
             

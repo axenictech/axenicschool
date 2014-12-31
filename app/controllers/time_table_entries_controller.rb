@@ -1,6 +1,6 @@
 class TimeTableEntriesController < ApplicationController
   def index
-    @time = TimeTable.find(params[:format])
+    @time = TimeTable.shod(params[:format])
     flash[:notice] = "Time table structure created from #{@time.start_date.strftime('%B %Y')} - #{@time.end_date}"
     @batches = Batch.includes(:course).all
     @sub = params[:sub_id]
@@ -59,9 +59,7 @@ class TimeTableEntriesController < ApplicationController
     @batch = @delete_time.batch
     @class_timing = @batch.class_timings.is_break
     @subjects = @batch.subjects.all
-    unless @delete_time.nil?
-      @time = @delete_time.time_table.id
-  end
+    @time = @delete_time.time_table.id
     redirect_to dashboard_home_index_path
   end
 
