@@ -1,7 +1,7 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-    <li><%= link_to 'Time Table',time_tables_path %></li>
+    <li><%= link_to 'Timetable',time_tables_path %></li>
        <li>Work Allotment</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
@@ -23,26 +23,31 @@
     <div class="box-content">
 <%=form_for :employees_subjects,:html=>{:id=>'work_allotment_form'} do |f| %>
 <fieldset>
-<div class="col-md-12">
-  <table id="datatable" class="table table-bordered responsive col-md-offset-2" >
+
+  <table id="datatable" class="table table-bordered responsive" >
+  <div class="col-md-10 col-md-offset-1">
     <% @batches.each do |batch| %>
-       <tr><th colspan="2"><h4><b><%= batch.name%></b></h4></th>
+       <tr><td colspan="2"> 
+       <div class="box-header well"><h2><%= batch.name%></h2>
+       </div></td>
       </tr>
         <tr>
          <% batch.subjects.each do |subj| %>
-              <td><%=subj.name%></td>
+      
+              <td><b><%=subj.name%>:</b></td>
         <td><%=select_tag "employee_subjects[#{subj.id}]",options_for_select([[t('select_employee'),""]]+Employee.all.collect{|c| [c.first_name,c.id]},subj.employees.first.try(:id)),class: "form-control",style:"width:350px"%>
          </td>
+
           </tr>
          <%end%>
       <% end %>
-   
+   </div>
  </table>
          <p align="center"><%= f.submit 'update',class: "btn btn-success"%></p>
          </div>
          </fieldset>
      <% end %>
-  </div>
+
 </div>
 </div>
 </div>

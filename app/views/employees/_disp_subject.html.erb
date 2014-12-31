@@ -3,6 +3,7 @@
   <div class="col-md-11 col-md-offset-1">
 
   <%= form_for :subject_assignment, url:{action:'assign_subject_disp',format:@subject}, method: :get,remote:true,html:{id: "user"} do |f|%>
+   <b>Select a Subject:</b>
       <%= f.select :subject_id, @subject.all.collect {|b| [b.name,b.id]},{prompt:"Select Subject"},{onchange:"$('#user').submit();",class: "form-control",style:"width:300px"} %>  
     <%end%>
   </div>
