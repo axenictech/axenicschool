@@ -91,9 +91,9 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="col-md-4">
        <div class="form-group">
        <b>Gender:</b>
-        <span style="color:red">*</span>&nbsp;&nbsp;&nbsp;
-       <b>Male</b>&nbsp;&nbsp;<%= f.radio_button  "gender","Male", :checked => "checked" %>
-          &nbsp;&nbsp;&nbsp;<b>Female</b>&nbsp;&nbsp;<%= f.radio_button  "gender","Female"%>
+        <span style="color:red">*</span>&nbsp;&nbsp;
+       <%= f.radio_button  "gender","Male", :checked => "checked" %>&nbsp;&nbsp;<b>Male</b>&nbsp;&nbsp;
+         &nbsp;<%= f.radio_button  "gender","Female"%>&nbsp;&nbsp;<b>Female</b>
        </div>
        </div>
        <div class="col-md-4 col-sm-offset-1">

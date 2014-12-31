@@ -1,3 +1,4 @@
+# BatchTransfer Controller
 class BatchTransfersController < ApplicationController
   def index
     @courses ||= Course.all
