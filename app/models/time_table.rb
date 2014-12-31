@@ -1,13 +1,13 @@
 # Time Table Model
 class TimeTable < ActiveRecord::Base
-  # has_many :time_table_entries, dependent: :destroy
   has_many :time_table_entries, dependent: :destroy
   scope :shod, ->(id) { where(id: id).take }
-  
+
   def self.time_table_date(timetable)
     TimeTable.where('time_tables.start_date <= ?
       AND time_tables.end_date >= ?', timetable, timetable)
   end
+
 
   def create_time_table(t)
     error = false

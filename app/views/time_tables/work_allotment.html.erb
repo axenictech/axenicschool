@@ -22,7 +22,9 @@
  
     <div class="box-content">
 <%=form_for :employees_subjects,:html=>{:id=>'work_allotment_form'} do |f| %>
-  <table id="datatable" class="table table-striped table-bordered responsive">
+<fieldset>
+<div class="col-md-12">
+  <table id="datatable" class="table table-bordered responsive col-md-offset-2" >
     <% @batches.each do |batch| %>
        <tr><th colspan="2"><h4><b><%= batch.name%></b></h4></th>
       </tr>
@@ -34,9 +36,11 @@
           </tr>
          <%end%>
       <% end %>
- 
+   
  </table>
          <p align="center"><%= f.submit 'update',class: "btn btn-success"%></p>
+         </div>
+         </fieldset>
      <% end %>
   </div>
 </div>

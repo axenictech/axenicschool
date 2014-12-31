@@ -26,9 +26,9 @@
 
             <%= text_field_tag :search,"",{oninput:"$('#student_form').submit();",placeholder:'Search Student',class:"form-control",style: "width: 300px"}%>
           <br>
-			   	<%= f.radio_button  "status","present", :checked => "checked" %>Present Students
+			   	<%= f.radio_button  "status","present", :checked => "checked" %> &nbsp;<b>Present Students</b>
 			   	&nbsp;&nbsp;&nbsp;
-			   	<%= f.radio_button  "status","former"%>Former Students
+			   	<%= f.radio_button  "status","former"%>  &nbsp;<b>Former Students</b>
 			 	
 
  	</fieldset>
