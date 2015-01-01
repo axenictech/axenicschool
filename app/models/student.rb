@@ -75,6 +75,142 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def self.search(input, status)
+    return if input.empty?
+    if status.eql? 'present'
+      Student.where("concat_ws(' ',first_name,last_name)like '#{input}%' \
+        OR concat_ws(' ',last_name,first_name)like '#{input}%' \
+        OR admission_no like '#{input}%'")
+    else
+      ArchivedStudent.where("concat_ws(' ',first_name,last_name)like \
+        '#{input}%' OR concat_ws(' ',last_name,first_name)like '#{input}%' \
+        OR admission_no like '#{input}%'")
+    end
+  end
+
+  def self.advance_search(search, batch)
+    conditions = ''
+    conditions += "concat_ws(' ',first_name,last_name) \
+    like '#{search[:name]}%'" unless search[:name] == ''
+    if batch[:id]
+      if conditions == ''
+        conditions += "batch_id = #{batch[:id]}" unless batch[:id] == ''
+      else
+        conditions += " AND batch_id = #{batch[:id]}" unless batch[:id] == ''
+      end
+    end
+    if search[:category_id]
+      if conditions == ''
+        conditions += "category_id = #{search[:category_id]}" \
+        unless search[:category_id] == ''
+      else
+        conditions += " AND category_id = #{search[:category_id]}" \
+        unless search[:category_id] == ''
+      end
+    end
+    if search[:gender]
+      unless search[:gender].eql? 'All'
+        if conditions == ''
+          conditions += "gender like '#{search[:gender]}'"
+        else
+          conditions += " AND gender like '#{search[:gender]}'"
+        end
+      end
+    end
+    if search[:blood_group]
+      if conditions == ''
+        conditions += "blood_group like '#{search[:blood_group]}'" \
+        unless search[:blood_group] == ''
+      else
+        conditions += " AND blood_group like '#{search[:blood_group]}'" \
+        unless search[:blood_group] == ''
+      end
+    end
+    if search[:country_id]
+      if conditions == ''
+        conditions += "nationality_id ='#{search[:country_id]}'" \
+        unless search[:country_id] == ''
+      else
+        conditions += " AND nationality_id ='#{search[:country_id]}'" \
+        unless search[:country_id] == ''
+      end
+    end
+    if search[:admission_date]
+      if conditions == ''
+        conditions += "admission_date ='#{search[:admission_date]}'" \
+        unless search[:admission_date] == ''
+      else
+        conditions += " AND admission_date ='#{search[:admission_date]}'" \
+        unless search[:admission_date] == ''
+      end
+    end
+    if search[:date_of_birth]
+      if conditions == ''
+        conditions += "date_of_birth = '#{search[:date_of_birth]}'" \
+        unless search[:date_of_birth] == ''
+      else
+        conditions += " AND date_of_birth = '#{search[:date_of_birth]}'" \
+        unless search[:date_of_birth] == ''
+      end
+    end
+    if search[:status]
+      if search[:status] == 'all'
+        std1 = Student.where(conditions)
+        std2 = ArchivedStudent.where(conditions)
+        std1 + std2
+      elsif search[:status] == 'present'
+        Student.where(conditions)
+      else
+        ArchivedStudent.where(conditions)
+      end
+    end
+  end
+
+  def self.search_script(search, batch)
+    script = ''
+    script += ' Name: ' + search[:name].to_s + ', ' \
+    unless search[:name].empty?
+    if search[:course_id].present?
+      course = Course.shod(search[:course_id])
+      script += ' Course: ' + course.course_name + ', ' unless course.nil?
+    end
+    if batch[:id].present?
+      batch = Batch.shod(batch[:id])
+      script += ' Batch: ' + batch.name + ', ' unless batch.nil?
+    end
+    if search[:category_id].present?
+      script += ' Category: ' + Category.shod(search[:category_id]).name + ', '
+    end
+    if  search[:gender] == 'All'
+      script += ' Gender: All' + ', '
+    else
+      script += ' Gender: ' + search[:gender].to_s + ', ' \
+      unless search[:gender].empty?
+    end
+    script += ' Blood group: ' + search[:blood_group].to_s + ', ' \
+    unless search[:blood_group].empty?
+    if search[:country_id].present?
+      script += ' Country: ' + Country.shod(search[:country_id]).name + ', '
+    end
+    script += ' Admission date: ' +  search[:admission_date].to_s + ', ' \
+    unless  search[:admission_date].empty?
+    script += ' Date of birth: ' +  search[:date_of_birth].to_s + ', ' \
+    unless  search[:date_of_birth].empty?
+    if search[:status] == 'present'
+      script += ' Present student'
+    elsif search[:status] == 'former'
+      script += ' Former student'
+    else
+      script += ' All student'
+    end
+    script
+  end
+
+  def mail(subject, recipient, message)
+    user = User.discover(id, recipient)
+    UserMailer.student_email(user, subject, message).deliver
+  end
+
   private
 
   def create_user_account

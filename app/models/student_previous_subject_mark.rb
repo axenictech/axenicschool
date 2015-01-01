@@ -7,4 +7,5 @@ class StudentPreviousSubjectMark < ActiveRecord::Base
   validates :mark, numericality: { only_integer: true }
   validates_length_of :mark, minimum: 2, maximum: 3
   scope :shod, ->(id) { where(id: id).take }
+  scope :m, ->(id) { where(student_id: id) }
 end

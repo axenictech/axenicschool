@@ -11,6 +11,7 @@ class TimeTableEntry < ActiveRecord::Base
   scope :emp, ->(emp) { where(employee_id: emp.id) }
   scope :time, ->(time) { where(time_table_id: time) }
   scope :timepdf, ->(t) { where('batch_id like ?', t) }
+  scope :entries, ->(s, b) { where(subject_id: s, batch_id: b) }
 
   def self.select(s)
     batches = []
