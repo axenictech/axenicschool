@@ -114,19 +114,19 @@
     </tr>
 
      <tr>
-    		  <th> Country</th>	
+    		  <th> Country:</th>	
         		<td ><%= p.country.name unless p.country.nil?%></td>
         
     </tr>
 
     <tr>
-    			<th> Income</th>
+    			<th> Income:</th>
         		<td > <%= p.income %></td>
         
     </tr>
 
     <tr>
-    			<th> Occupation</th>
+    			<th> Occupation:</th>
         		<td > <%= p.occupation %></td>
         
     </tr>
@@ -141,7 +141,7 @@
   
     <tr >
         <td></td>
-    		<td><%= link_to "Edit",edit_student_guardian_path(@student,p),class: "btn btn-primary"%>
+    		<td><%= link_to "Edit",edit_student_guardian_path(@student,p),class: "btn btn-success"%>
     			<%= link_to "Delete",[p.student,p], method: :delete, data: { confirm: "Are you sure to delete"} ,class: 'btn btn-danger'%>
     		</td>
         
