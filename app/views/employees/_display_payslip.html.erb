@@ -8,12 +8,12 @@
       <div class="box-content">
         <table class="table table-striped">
           <thead>
-          <tr>
-            <th><%= 'Sr.no' %></th>
+          <tr>                            
+            <th><%= 'Sr. no' %></th>
             <th><%= 'Employee' %></th>
             <th><%= 'Employee no'%></th>
             <th><%= 'Net salary'%></th>
-            <th><%= 'Payslip_status'%></th>
+            <th><%= 'Payslip Status'%></th>
             <th></th>
           </tr>
           </thead>
@@ -21,7 +21,7 @@
           <%tot_amount=0%>
          
           <%approved_tot=0%>
-          <%approved=MonthlyPayslip.where(is_approved:'true').pluck(:amount)
+          <%approved=MonthlyPayslip.where(is_approved:true).pluck(:amount)
                 %>
                 <%counter=0.to_i%>
                 <%approved.each do |i|%>  
@@ -56,20 +56,20 @@
           </tr>
            <%count+=1%>
           <%end%>
-         
+         <tr><td colspan="6"><hr></td></tr>
           <tr class="tr-head">
-            <td class="col-1" ><%= "Total employees"%>: </td>
+            <td class="col-1" ><b><%= "Total Employees"%>:</b> </td>
 
             <td><%=count%></td>
-            <td class="col-1"><%= "Total salary"%> : </td>
+            <td class="col-1"><b><%= "Total Salary"%> : </b></td>
             <td><%=tot_amount%></td>
-            <td class="col-1"><%= 'Approved salary'%>: </td>
+            <td class="col-1"><b><%= 'Approved Salary'%>: </b></td>
             <td><%='%.02f'%approved_tot%></td>
           </tr>
 
         </table>
          <%else%>
-                <h2>No employees found</h2>
+                <h4 align="center">No employees found</h4>
          <%end%>
       
   </div>

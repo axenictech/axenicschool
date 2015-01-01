@@ -12,14 +12,14 @@
   <h4>Note:&nbsp;&nbsp;<font color="red">Insert previous Institution Details</font></h4>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-11 col-md-offset-1">
     <div class="pull-right">
       <%=link_to "Add subject", previous_subject_students_path(@student), remote: true,class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>
 </div>
 <div class="row">
-  <div class="box col-md-8">
+  <div class="box col-md-8 col-md-offset-1">
     <div class="box-inner">
       <div class="box-header well">
         <h2>Enter Previous Institution Data</h2>
@@ -30,8 +30,8 @@
         <%= form_for @previous_data,url:{action:'previous_data_create'} do |f| %>
     <%=f.hidden_field :student_id,value: @student.id %>
   <fieldset>
-   <div class="col-md-1"></div>
-   <div class="col-md-7">
+   
+   <div class="col-md-8 col-md-offset-2">
   <% if  @previous_data.errors.any? %>
          <div class="alert alert-danger" style="width:500px" >
            <h4>Errors prohibited to being Save:</h4>
@@ -42,6 +42,7 @@
           </ul>
          
       </div><% end %>
+      
       <div class="form-group">
         <b>Institution:</b>
          <%=f.text_field :institution,placeholder: "Institution", class: "form-control"%>

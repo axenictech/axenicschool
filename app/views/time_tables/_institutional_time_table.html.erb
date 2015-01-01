@@ -5,23 +5,28 @@
   <h2>Institutional Timetable</h2>
     </div>
      <div class="box-content">
-      <table class="fc-header" style="width:100%">
-      <tbody>
-        <tr>
-          <td class="fc-header-left">
-            <%= link_to "◄ prev",display_institutional_time_table_time_tables_path(:next=>(@today-1.day)),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
-            <%= link_to "► next", display_institutional_time_table_time_tables_path(:next=>(@today+1.day)),remote:true, class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
-            <span class="fc-header-space"></span>
-          </td>
-          <td class="fc-header-center">
-            <span class="fc-header-title"><h2><%= I18n.l(@today,:format=>" %d %B %Y") %></h2></span>
-          </td>
-          <td class="fc-header-right">
-            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">day view</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      
+
+
+<div class="row">
+        <div class="col-md-12">
+          <div align="center">
+         
+           <h3> <%= link_to "◄ Previous", display_institutional_time_table_time_tables_path(:next=>(@today-1.day)),remote:true,class: "fc-button fc-button-prev fc-state-default"%>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span align="center"><%= I18n.l(@today,:format=>" %d %B %Y") %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to "Next ► ", display_institutional_time_table_time_tables_path(:next=>(@today+1.day)),remote:true  ,class: "fc-button fc-button-prev fc-state-default"%>
+         
+          <div class="pull-right">
+            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">Day View</span>
+          </div>
+          </h3>
+          </div>
+           </div>
+</div>
+
+
+
 <table id="datatable" class="table table-striped table-bordered responsive">
 <tbody>
 <%@time_table.each do |t| %>
@@ -32,10 +37,10 @@
       <%if time.weekday.weekday==I18n.l(@today,:format=>"%A")%>
      <tr>
         <th>
-          <%='time'%><hr>
+          <%='Time'%><hr>
           <%=time.batch.name%>
          </th>
-        <td><%=@timing.start_time.strftime("%I:%M %p")+"-"+
+      <td><%=@timing.start_time.strftime("%I:%M %p")+"-"+
        @timing.end_time.strftime("%I:%M %p")%><hr>
       <%=@present.subject.name%><br/>
       <%=@present.employee.first_name%>
@@ -44,7 +49,7 @@
 <%end%>
 <%end%>
 <%end%>
-<tr><td><%='No Time Assign For These Day' if @time_table_entries.blank?%></td></tr>
+<tr><td><%='No Time Assign For These Days' if @time_table_entries.blank?%></td></tr>
     </tbody>
 </table>
 </div>

@@ -2,7 +2,7 @@
   <div class="box col-md-12">
   <div class="box-inner">
     <div class="box-header well">
-      <h2>Time Table</h2>
+      <h2>Timetable</h2>
     </div>
     
 <% if @class_timing.present? %>
@@ -47,13 +47,13 @@
  <%= form_for :sub,url:{action:'select_subject'},method: :get,remote:true,html:{id:"em"} do |f| %>
 
  <%= f.select :subject_id,@subjects.collect {|b| [b.name,b.id,"#{b.id}"]},{prompt:'Select Subject'},{
-  onchange: "$('#em').submit();",class: "form-control",style:"width:350px"}%>
+  onchange: "$('#em').submit();",class: "form-control",style:"width:300px"}%>
 <%end%>
 <br/>
 <div id="emp_div"></div>
 
 <%else%>
-<h4>Yet class timing are not assigned for this batch,Assign from Set class timings</h4>
+<h5>Yet class timing are not assigned for this batch,Assign from Set class timings</h5>
 <%end%>
 </div>
 </div>

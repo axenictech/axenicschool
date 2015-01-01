@@ -59,7 +59,7 @@ class ExamSettingController < ApplicationController
   end
 
   def increase_priority
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     @rank_lev1 = @course.ranking_levels.find(params[:id])
     selected = params[:index].to_i - 1.to_i
@@ -83,7 +83,7 @@ class ExamSettingController < ApplicationController
   end
 
   def decrease_priority
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     @rank_lev1 = @course.ranking_levels.find(params[:id])
     selected = params[:index].to_i + 1.to_i
