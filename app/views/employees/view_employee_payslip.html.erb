@@ -19,14 +19,15 @@
 <hr/>
 
 
-<% unless flash[:notice].nil? %> <%end%>
+<% unless flash[:notice].nil? %>   <%end%>
   <div class="row">
   <div class="col-md-12">
 <div class="box-inner">
     <div class="box-header">
     <%if @payslip.nil?%>
-        <h3>No salary slip found for this employee</h3>
+        <h2>No salary slip found for this employee</h2>
     <%else%>   
+
     <%@emp=Employee.find(@payslip.employee_id)%>
     <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:true).pluck(:is_approved)%>
     <%if approved[0]==true%>
@@ -39,11 +40,12 @@
     </div>
       <div class="box-content">
       <fieldset>
-      <h4>
+     
       <div class="col-md-2"></div>
       <div class="col-md-8">
     <div class="row">
-      <h3><font color="brown"><b>Salary:</b></font></h3>
+      <h4><font color="brown"><b>Salary:</b></font>
+      </h>
       </div>
        <div class="row">
       <table class="table table-stried">
@@ -73,7 +75,7 @@
         </div>
     
       <div class="row">
-      	<h3><font color="brown"><b>Deduction:</b></font></h3>
+      	<h4><font color="brown"><b>Deduction:</b></font></h4>
       	</div>
         <div class="row">
       	<table class="table table-stried">
@@ -111,11 +113,13 @@
      </div>
 
 </div>
-</h4>
+
 </fieldset>
+<%end%>
 </div>
+
 </div>
 
 </div>
 </div>
-<%end%>
+
