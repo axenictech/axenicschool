@@ -15,7 +15,7 @@ class FeeCollectionDiscount < ActiveRecord::Base
     else
       students = @batch.students
     end
-    if students.present?
+    if students.any?
       students.each do |s|
         student_discount = FeeCollectionDiscountsStudent.new
         student_discount.student_id = s.id
@@ -26,13 +26,12 @@ class FeeCollectionDiscount < ActiveRecord::Base
   end
 
   def collection_discount(total)
-    discount = (total * self.discount) / 100
+    (total * discount) / 100
   end
 
   def student_name
-    if type == 'Student'
-      student = Student.find_by_admission_no(admission_no)
-    end
-    name = student.first_name + ' ' + student.last_name
+    student = Student.find_by_admission_no(admission_no)\
+     if type == 'Student'
+    student.first_name + ' ' + student.last_name
   end
 end

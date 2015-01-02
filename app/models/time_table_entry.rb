@@ -11,6 +11,7 @@ class TimeTableEntry < ActiveRecord::Base
   scope :attendance, ->(s, b) { where(subject_id: s.id, batch_id: b.id) }
   scope :employees, ->(employee) { where(employee_id: employee.id) }
   scope :timetables, ->(time) { where(time_table_id: time) }
+
   def self.max_day(emp, week, time)
     TimeTableEntry.where(employee_id: emp.id, weekday_id: \
     week, time_table_id: time).count >= emp.employee_grade.max_hours_day
@@ -33,6 +34,7 @@ class TimeTableEntry < ActiveRecord::Base
       batches
     end
   end
+
   def self.employee_time_table(timetable)
     timetables = []
     timetable.each do |tbe|

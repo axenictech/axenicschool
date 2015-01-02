@@ -514,7 +514,7 @@ class EmployeesController < ApplicationController
     authorize! :update, @employee
   end
 
-  def create_monthly_payslip
+  def create_m7onthly_payslip
     @employee = Employee.find(params[:format])
     @salary_date = Date.parse(params[:salery_slip][:salery_date])
     unless @salary_date.to_date < @employee.joining_date.to_date
@@ -748,7 +748,7 @@ class EmployeesController < ApplicationController
 
   def edit_bank_info
     @employee = Employee.find(params[:format])
-    @bank_info = @employee.employee_bank_details.includes(:bank_field).all
+    @bank_info ||= @employee.employee_bank_details.includes(:bank_field).all
     authorize! :read, @employee
   end
 
@@ -778,11 +778,11 @@ class EmployeesController < ApplicationController
   end
 
   def position_params
-    params.require(:employee_position).permit(:name, :employee_category_id, :status)
+    params.require(:employee_position).permit!
   end
 
   def grade_params
-    params.require(:employee_grade).permit(:name, :priority, :status, :max_hours_day, :max_hours_week)
+    params.require(:employee_grade).permit!
   end
 
   def bank_field_params
@@ -790,7 +790,7 @@ class EmployeesController < ApplicationController
   end
 
   def payroll_category_params
-    params.require(:payroll_category).permit(:name, :percentage, :status, :is_deduction, :payroll_category_id)
+    params.require(:payroll_category).permit!
   end
 
   def grade
