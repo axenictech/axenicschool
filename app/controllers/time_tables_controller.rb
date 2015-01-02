@@ -139,10 +139,10 @@ class TimeTablesController < ApplicationController
   def time_table_delete
     authorize! :delete, @time
     @time = TimeTable.find(params[:format])
-      if @time.destroy
-        redirect_to time_tables_path
-        flash[:notice] = 'Timetable deleted successfully'
-      end
+    if @time.destroy
+      redirect_to time_tables_path
+      flash[:notice] = 'Timetable deleted successfully'
+    end
   end
 
   def update_timetable_values

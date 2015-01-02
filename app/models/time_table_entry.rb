@@ -22,9 +22,9 @@ class TimeTableEntry < ActiveRecord::Base
  end
  end
 
- def self.selectemp(e)
-   all = []
-   weekdays = []
+  def self.selectemp(e)
+    all = []
+    weekdays = []
     class_timings = []
     employees = []
     unless e.nil?
@@ -34,12 +34,12 @@ class TimeTableEntry < ActiveRecord::Base
         employees.push t.employee
       end
     end
-      all << weekdays
-      all << class_timings
-      all << employees
-      all
- end
-  def self.selecttime(e)
+    all << weekdays
+    all << class_timings
+    all << employees
+    all
+  end
+  def self.selecttime(_e)
     weekdays = []
     class_timings = []
     employees = []
@@ -51,13 +51,12 @@ class TimeTableEntry < ActiveRecord::Base
       end
     end
   end
-  
+
   def self.emptime(t)
-    timetables=[]
+    timetables = []
     t.each do |tbe|
       timetables << tbe.time_table
     end
-      timetables
+    timetables
   end
-
 end

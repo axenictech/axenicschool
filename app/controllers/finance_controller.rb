@@ -597,7 +597,7 @@ class FinanceController < ApplicationController
     end
   end
 
-  def delete_particular_fee 
+  def delete_particular_fee
     authorize! :delete, @fee
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:id])
