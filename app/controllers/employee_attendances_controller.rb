@@ -156,13 +156,13 @@ class EmployeeAttendancesController < ApplicationController
   def report_info
     @employee = Employee.find(params[:id])
     @attendance_report = EmployeeAttendance.find_by_employee_id(@employee.id)
-    @leave_types = EmployeeLeaveType.all
+    @leave_types ||= EmployeeLeaveType.all
     @leave_count = EmployeeLeave.where(employee_id: @employee)
     authorize! :create, @attendance_report
   end
 
   def update_employee_leave_reset_all
-    @leave_count = EmployeeLeave.all
+    @leave_count ||= EmployeeLeave.all
     f = EmployeeLeave.leave_reset(@leave_count)
     flash[:notice] = 'Leave count reset successful for all employees' if f == 1
   end
