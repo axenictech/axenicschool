@@ -32,17 +32,6 @@ class TimeTableEntry < ActiveRecord::Base
       batches
     end
   end
-  def self.select_employee(e)
-    weekdays, class_timings, employees = [], [], []
-    unless e.nil?
-      e.each do |t|
-        weekdays << t.weekday
-        class_timings << t.class_timing
-        employees << t.employee
-      end
-    end
-    [weekdays, class_timings, employees]
-  end
 
   def self.employee_time_table(timetable)
     timetables = []
