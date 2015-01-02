@@ -403,7 +403,6 @@ class Employee < ActiveRecord::Base
   def self.report(emp)
     find(emp.reporting_manager_id).first_name unless emp.reporting_manager_id.nil?
   end
-
   private
 
   def create_user_account

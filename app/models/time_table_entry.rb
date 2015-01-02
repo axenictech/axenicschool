@@ -45,20 +45,7 @@ class TimeTableEntry < ActiveRecord::Base
     [weekdays, class_timings, employees]
   end
 
-  def self.selecttime(e)
-    weekdays = []
-    class_timings = []
-    employees = []
-    unless time.nil?
-      time.each do |t|
-        weekdays.push t.weekday
-        class_timings.push t.class_timing
-        employees.push t.employee
-      end
-    end
-  end
-  
-  def self.employee_time_table(timetable)
+def self.employee_time_table(timetable)
     timetables = []
     timetable.each do |tbe|
       timetables << tbe.time_table

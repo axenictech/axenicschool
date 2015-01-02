@@ -8,7 +8,6 @@ class TimeTable < ActiveRecord::Base
       AND time_tables.end_date >= ?', timetable, timetable)
   end
 
-
   def create_time_table(t)
     error = false
     previous = TimeTable.where('end_date >= ? AND start_date <= ?', t.start_date, t.start_date)
@@ -44,4 +43,29 @@ class TimeTable < ActiveRecord::Base
     end
     today
   end
-end
+  
+  def update_time(time)
+    current = false
+    if time.start_date <= Date.today \
+       && time.end_date >= Date.today
+      current = true
+    end
+    return if time.start_date > Date.today \
+       && time.end_date > Date.today
+      removable = true
+  end
+  
+  def self.weekday_teacher(wt)
+    wt.collect(&:weekday) \
+                .uniq.sort! { |a, b| a.weekday <=> b.weekday }
+  end
+
+  def self.class_teacher(ct)
+   ct.collect(&:class_timing) \
+                     .uniq.sort! { |a, b| a.start_time <=> b.start_time }
+  end
+  
+  def self.employee_teacher(et)
+    et.collect(&:employee).uniq
+  end
+send
