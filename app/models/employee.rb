@@ -404,7 +404,6 @@ class Employee < ActiveRecord::Base
   def self.report(emp)
     find(emp.reporting_manager_id).first_name unless emp.reporting_manager_id.nil?
   end
-<<<<<<< HEAD
 
   def self.att_leave(emp)
     emp.each do |e|
@@ -428,8 +427,6 @@ class Employee < ActiveRecord::Base
     end
   end
 
-=======
->>>>>>> 453b8e6e16f6c48149a8b9386dda7bd3d1fd83cc
   private
 
   def create_user_account

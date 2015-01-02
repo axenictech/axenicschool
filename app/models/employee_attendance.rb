@@ -37,7 +37,7 @@ class EmployeeAttendance < ActiveRecord::Base
   def report(emp, lt)
     lt.each do |l|
       leave_count = EmployeeAttendance.where(employee_id: emp.id, \
-      	 employee_leave_type_id: l.id).size
+                                             employee_leave_type_id: l.id).size
     end
   end
 

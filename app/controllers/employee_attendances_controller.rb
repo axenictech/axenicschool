@@ -121,7 +121,7 @@ class EmployeeAttendancesController < ApplicationController
   end
 
   def destroy_attendance
-    # authorize! :destroy, @attendance
+    authorize! :destroy, @attendance
     @attendance = EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @reset_count = EmployeeLeave.edit_att(@attendance)
