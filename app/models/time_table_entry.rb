@@ -35,7 +35,7 @@ class TimeTableEntry < ActiveRecord::Base
     [weekdays, class_timings, employees]
   end
 
-  def self.selecttime(e)
+  def self.selecttime(_e)
     weekdays = []
     class_timings = []
     employees = []
@@ -47,7 +47,7 @@ class TimeTableEntry < ActiveRecord::Base
       end
     end
   end
-  
+
   def self.employee_time_table(timetable)
     timetables = []
     timetable.each do |tbe|

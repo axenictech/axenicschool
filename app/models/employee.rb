@@ -326,14 +326,14 @@ class Employee < ActiveRecord::Base
             tot = 0
             tot_deduction = 0
             grand_tot = 0
-            no_deduction = PayrollCategory.where(is_deduction:false)
+            no_deduction = PayrollCategory.where(is_deduction: false)
             no_deduction.each do |j|
-            amount = EmployeeSaleryStructure.where(employee_id: emp.id, payroll_category_id: j).pluck(:amount)
-            amount.each do |i|
-              tot += i.to_f
+              amount = EmployeeSaleryStructure.where(employee_id: emp.id, payroll_category_id: j).pluck(:amount)
+              amount.each do |i|
+                tot += i.to_f
+              end
             end
-            end 
-            is_deduction = PayrollCategory.where(is_deduction:true)
+            is_deduction = PayrollCategory.where(is_deduction: true)
             is_deduction.each do |i|
               amount = EmployeeSaleryStructure.where(employee_id: emp.id, payroll_category_id: i).pluck(:amount)
               amount.each do  |j|
@@ -342,7 +342,7 @@ class Employee < ActiveRecord::Base
             end
 
             grand_tot = tot - tot_deduction
-    
+
             MonthlyPayslip.create(employee_id: emp.id, amount: grand_tot, is_approved: false, salary_date: salary_date)
             counter += 1
       end
@@ -356,23 +356,23 @@ class Employee < ActiveRecord::Base
     total_salary = 0
     tot_deduction = 0
     amounts = []
-    is_deduction = PayrollCategory.where(is_deduction:true)
+    is_deduction = PayrollCategory.where(is_deduction: true)
     is_deduction.each do |i|
-      amounts = EmployeeSaleryStructure.where(employee_id: employee.id, payroll_category_id:i).pluck(:amount)
+      amounts = EmployeeSaleryStructure.where(employee_id: employee.id, payroll_category_id: i).pluck(:amount)
       amounts.each do |j|
         tot_deduction += j.to_f
       end
     end
 
     amo = []
-    is_deduction = PayrollCategory.where(is_deduction:false)
+    is_deduction = PayrollCategory.where(is_deduction: false)
     is_deduction.each do |i|
-      amo = EmployeeSaleryStructure.where(employee_id: employee.id, payroll_category_id:i).pluck(:amount)
+      amo = EmployeeSaleryStructure.where(employee_id: employee.id, payroll_category_id: i).pluck(:amount)
       amo.each do |j|
         total_salary += j.to_f
       end
     end
-  
+
     total_salary -= tot_deduction.to_f
     b = MonthlyPayslip.where(employee_id: employee.id, salary_date: salary_date).pluck(:salary_date)
     if b[0].present?
@@ -383,7 +383,7 @@ class Employee < ActiveRecord::Base
       MonthlyPayslip.create(salary_date: salary_date, employee_id: employee.id, amount: total_salary)
       flag = 0
        end
-       flag
+    flag
   end
 
   def self.emp(emp, payroll, amount)

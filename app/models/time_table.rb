@@ -8,7 +8,6 @@ class TimeTable < ActiveRecord::Base
       AND time_tables.end_date >= ?', timetable, timetable)
   end
 
-
   def create_time_table(t)
     error = false
     previous = TimeTable.where('end_date >= ? AND start_date <= ?', t.start_date, t.start_date)

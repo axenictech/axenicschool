@@ -91,7 +91,6 @@ class EmployeesController < ApplicationController
     authorize! :create, @employee_position_new
   end
 
-
   def add_position
     @employee_position_new = EmployeePosition.new
     @employee_position = EmployeePosition.new(position_params)
@@ -508,10 +507,10 @@ class EmployeesController < ApplicationController
     @salary_date = Date.parse(params[:salery_slip][:salery_date])
     unless @salary_date.to_date < @employee.joining_date.to_date
       flag = @employee.create_payslip(@employee, @salary_date)
-      unless flag==0
-      flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('payslip')}" 
+      unless flag == 0
+        flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('payslip')}"
       else
-       flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('p')}"  
+        flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('p')}"
       end
     end
     redirect_to monthly_payslip_employees_path(@employee)
