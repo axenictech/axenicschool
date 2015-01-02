@@ -33,11 +33,11 @@
         </div>
       </div>
       <hr>
-      <br/><h3><center>Time Table</center></h3><br/>
+      <br/><h3><center>Timetable</center></h3><br/>
       
       <br/>
       <table cellpadding="5" cellspacing="5" width="700">
-        <tr><th colspan="6" bgcolor="99CCFF" align="left">Time Table Details</th></tr>
+        <tr><th colspan="6" bgcolor="99CCFF" align="left">Timetable Details</th></tr>
         <tr>
     <td class="col-4"></td>
   <% @batch.class_timings.where(:is_break=>false).each do |c|%>
@@ -56,7 +56,7 @@
        <font color="blue"><%= @present.employee.first_name+" "+@present.employee.last_name%></font><br/>
        
         <%else%>
-     <%="Not Assigned"%></td>
+     <%="-"%></td>
         <%end%>
        <%end%>
        </tr>

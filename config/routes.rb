@@ -170,14 +170,14 @@ Rails.application.routes.draw do
       get :update_timetable
       patch :update_timetable_values
       delete :time_table_delete
-      get :selectTime
+      get :select_time
       get :select
       get :time_table_pdf
       get :teachers_timetable
       get :teacher_time_table_display
       get :timetable
       get :employee_timetable
-      get :selectTimeEmployee
+      get :select_time_employee
       get :display_institutional_time_table
     end
   end

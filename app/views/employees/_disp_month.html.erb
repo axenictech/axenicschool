@@ -3,13 +3,6 @@
 
 		<b>Select Month:</b>
 
-   		 <%= f.select :id,  @salary_dates.all.collect {|b| [b.salary_date.strftime("%B %Y")]},{prompt:true},{onchange:"$('#user_form').submit();",class:"form-control",style: "width:250px"}%>
+   		 <%= f.select :id,  @salary_dates.all.collect {|b| [b.salary_date.strftime("%B %Y")]},{prompt:"Select a Month"},{onchange:"$('#user_form').submit();",class:"form-control",style: "width:250px"}%>
    			<%end%>
-  <br>
-  <div class="row">
-
-  <div class="col-md-10"> 		 
-   		<div id="payslip_disp"></div>
-   	</div>
-   	</div>
- 
+  
