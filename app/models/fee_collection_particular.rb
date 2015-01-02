@@ -14,7 +14,7 @@ class FeeCollectionParticular < ActiveRecord::Base
     else
       students = @batch.students
     end
-    if students.present?
+    if students.any?
       students.each do |s|
         student_fee = FeeCollectionParticularsStudent.new
         student_fee.student_id = s.id
@@ -38,9 +38,8 @@ class FeeCollectionParticular < ActiveRecord::Base
   end
 
   def student_name
-    if admission_no.present?
-      student = Student.find_by_admission_no(admission_no)
-    end
-    name = student.first_name + ' ' + student.last_name
+    student = Student.find_by_admission_no(admission_no)\
+     if admission_no.present?
+    student.first_name + ' ' + student.last_name
   end
 end

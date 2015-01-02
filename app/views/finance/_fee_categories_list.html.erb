@@ -31,7 +31,7 @@
 
               <div class="label-danger label label-default">
               <i class="glyphicon glyphicon-trash icon-white"></i> 
-              <%= link_to 'Delete' ,delete_master_category_finance_path(@batch,m),method: :delete, data: { confirm: "Are you sure to delete Batch #{m.name}?" }, class: "a-action"%></div>
+              <%= link_to 'Delete' ,delete_master_category_finance_path(m, batch_id: @batch.id),method: :delete, data: { confirm: "Are you sure to delete Batch #{m.name}?" }, class: "a-action"%></div>
             </td>
           </tr>
         <% end %>

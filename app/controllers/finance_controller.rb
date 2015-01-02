@@ -119,16 +119,16 @@ class FinanceController < ApplicationController
   def update_asset
     @asset = Asset.shod(params[:id])
     @asset.update(asset_params)
+    @assets ||= Asset.all
     flash[:notice] = t('asset_update')
-    redirect_to view_asset_finance_index_path
   end
 
   def delete_asset
     @asset = Asset.shod(params[:id])
     authorize! :delete, @asset
-    @assets ||= Asset.all
     @asset.destroy
     flash[:notice] = t('asset_delete')
+    redirect_to view_asset_finance_index_path
   end
 
   def asset_list
@@ -398,9 +398,9 @@ class FinanceController < ApplicationController
     @end_date2 = params[:transaction][:end_date2].to_date
     if @start_date1.nil? || @start_date2.nil? \
       || @end_date1.nil? || @end_date2.nil?
-      @categories ||= FinanceTransactionCategory.all
+      render 'compare_report', alert: t('transaction_error')     
     else
-      render 'compare_report', alert: t('transaction_error')
+      @categories ||= FinanceTransactionCategory.all
     end
   end
 
@@ -469,13 +469,14 @@ class FinanceController < ApplicationController
   def create_fees_particular
     @categories ||= FinanceFeeCategory.all
     @fee = FinanceFeeParticular.new(fee_particular_params)
-    result = @fee.create_fee(params[:batches], params[:mode]\
-      , params[:admission_no], params[:category][:id])
-    if result == false
+    result = FinanceFeeParticular.create_fee(fee_particular_params\
+      , params[:batches], params[:mode]\
+      , params[:admission_no], params[:category])
+    if result == 1
+      render 'new_fees_particular'
+    else
       flash[:notice] = t('fee_create')
       redirect_to master_fees_finance_index_path
-    else
-      render 'new_fees_particular'
     end
   end
 
@@ -511,7 +512,7 @@ class FinanceController < ApplicationController
     @particular_fees ||= @master_category.particulars(@batch.id)
     @fee = @master_category.finance_fee_particulars.new(fee_particular_params)
     @fee.set(params[:mode], params[:admission_no]\
-      , params[:category][:id], batch)
+      , params[:category], @batch.id)
     @fee.save
     flash[:notice] = t('fee_create')
   end
@@ -555,13 +556,13 @@ class FinanceController < ApplicationController
   def create_fee_discount
     @categories ||= FinanceFeeCategory.all
     @discount = FeeDiscount.new(fee_discount_params)
-    result = @discount.create_discount(params[:batches]\
-      , params[:admission_no], params[:category][:id])
-    if result == false
+    result = FeeDiscount.create_discount(fee_discount_params\
+      , params[:batches], params[:admission_no], params[:category])
+    if result == 1
+      render 'new_fee_discount'
+    else
       flash[:notice] = t('discount_create')
       redirect_to new_fee_discount_finance_index_path
-    else
-      render 'new_fee_discount'
     end
   end
 
@@ -612,8 +613,7 @@ class FinanceController < ApplicationController
 
   def create_fee_collection
     @collection = FinanceFeeCollection.new(collection_params)
-    @master_category = @collection.finance_fee_category
-    result = @collection.create_collection(params[:batches], @master_category)
+    result = FinanceFeeCollection.fee(collection_params, params[:batches])
     if result == true
       @categories ||= FinanceFeeCategory.all
       render 'new_fee_collection'
@@ -637,9 +637,9 @@ class FinanceController < ApplicationController
   end
 
   def update_fee_collection
-    @batch = Batch.shod(params[:id])
+    @batch = Batch.shod(params[:batch_id])
     @collections ||= @batch.finance_fee_collections
-    @collection = @batch.finance_fee_collections.shod(params[:collection_id])
+    @collection = @batch.finance_fee_collections.shod(params[:id])
     @collection.update(collection_params)
     flash[:notice] = t('collection_update')
   end
@@ -901,9 +901,9 @@ class FinanceController < ApplicationController
     @department = EmployeeDepartment.shod(params[:payslip][:department])
     @date = params[:payslip][:date]
     @employees ||= @department.employees
-    return unless @employees.nil?
+    return if @employees.nil?
     @employees.each do |e|
-      salary = e.monthly_payslips.salary(@date)
+      salary = e.salary(@date)
       @payslips << salary unless salary.nil?
     end
   end
@@ -918,8 +918,8 @@ class FinanceController < ApplicationController
     @employee = Employee.shod(params[:id])
     @date = params[:date]
     @structures ||= @employee.employee_salery_structures
-    @salary = @employee.monthly_payslips.salary(@date)
-    @individual_salary = @employee.individual_payslip_categories.salary(@date)
+    @salary = @employee.salary(@date)
+    @individual_salary = @employee.personal_salary(@date)
   end
 
   def employee_payslip
@@ -927,8 +927,8 @@ class FinanceController < ApplicationController
     @employee = Employee.shod(params[:id])
     @date = params[:date]
     @structures ||= @employee.employee_salery_structures
-    @salary = @employee.monthly_payslips.salary(@date)
-    @individual_salary = @employee.individual_payslip_categories.salary(@date)
+    @salary = @employee.salary(@date)
+    @individual_salary = @employee.personal_salary(@date)
     render 'employee_payslip', layout: false
   end
 

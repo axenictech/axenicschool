@@ -70,18 +70,25 @@ class FinanceFeeCollection < ActiveRecord::Base
     end
   end
 
-  def create_collection(batches, category)
-    return if batches.present?
-    error = false
-    batches.each do |b|
-      self.batch_id = b
-      if save
-        create_collection_particular(b, category)
-        create_fee_collection_discount(b, category)
-      else
-        error = true
+  def self.fee(params, batches)
+    error = true
+    if batches.present?
+      batches.each do |b|
+        collection = new(params)
+        if collection.create_fee(b)
+          error = false
+        end
       end
     end
     error
+  end
+
+  def create_fee(batch)
+    self.batch_id = batch
+    category = finance_fee_category
+    if save
+      create_collection_particular(batch, category)
+      create_fee_collection_discount(batch, category)
+    end
   end
 end

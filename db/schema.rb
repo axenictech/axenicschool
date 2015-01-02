@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229062529) do
+ActiveRecord::Schema.define(version: 20150101113538) do
 
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
@@ -607,7 +607,7 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "finance_donations", force: true do |t|
     t.string   "donor"
     t.string   "description"
-    t.decimal  "amount",                 precision: 10, scale: 0
+    t.decimal  "amount",                 precision: 20, scale: 2
     t.date     "transaction_date"
     t.integer  "finance_transaction_id"
     t.datetime "created_at"
