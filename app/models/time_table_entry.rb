@@ -32,57 +32,9 @@ class TimeTableEntry < ActiveRecord::Base
       batches
     end
   end
-
-<<<<<<< HEAD
-  def self.selectemp(e)
-    all = []
-    weekdays = []
-    class_timings = []
-    employees = []
-    unless e.nil?
-      e.each do |t|
-        weekdays.push t.weekday
-        class_timings.push t.class_timing
-        employees.push t.employee
-      end
-    end
-    all << weekdays
-    all << class_timings
-    all << employees
-    all
-  end
-  def self.selecttime(_e)
-    weekdays = []
-    class_timings = []
-    employees = []
-    unless time.nil?
-      time.each do |t|
-        weekdays.push t.weekday
-        class_timings.push t.class_timing
-        employees.push t.employee
-=======
-  def self.select_employee(e)
-    weekdays, class_timings, employees = [], [], []
-    unless e.nil?
-      e.each do |t|
-        weekdays << t.weekday
-        class_timings << t.class_timing
-        employees << t.employee
->>>>>>> 453b8e6e16f6c48149a8b9386dda7bd3d1fd83cc
-      end
-    end
-    [weekdays, class_timings, employees]
-  end
-
-<<<<<<< HEAD
-  def self.emptime(t)
-    timetables = []
-    t.each do |tbe|
-=======
-def self.employee_time_table(timetable)
+  def self.employee_time_table(timetable)
     timetables = []
     timetable.each do |tbe|
->>>>>>> 453b8e6e16f6c48149a8b9386dda7bd3d1fd83cc
       timetables << tbe.time_table
     end
     timetables

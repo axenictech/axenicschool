@@ -19,7 +19,7 @@
       <tr>
         <td class="td"><div class="name"><%=w.weekday%></div></td>
         <% @class_timings.each do |c|%>
-         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id(c.id,w.id) %>
+         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_employee_id(c.id,w.id,@employee.id) %>
         <td>
         <%unless @present.nil? %>
          <font color="red"><%= @present.subject.name %></font><br/>
@@ -38,4 +38,6 @@
 </div>
 </div>
 </div>
+
+
 

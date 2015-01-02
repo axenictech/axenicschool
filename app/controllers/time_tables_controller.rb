@@ -51,18 +51,17 @@ class TimeTablesController < ApplicationController
 
   def select_time_employee
     @employee = Employee.find(params[:format])
-    @time = TimeTableEntry.where(employee_id: @employee.id)
-    all = TimeTableEntry.select_employee(@time)
-    @weekdays = all[0]
-    @class_timings = all[1]
-    @employees = all[2]
-    authorize! :read, TimeTable
+    time_table = TimeTable.find(params[:time][:id])
+    @timetable_entries = time_table.time_table_entries
+    @batches = @timetable_entries.collect(&:batch).uniq
+    @weekdays = TimeTable.weekday_teacher(@timetable_entries)
+    @class_timings = TimeTable.class_teacher(@timetable_entries)
+    authorize! :read, @time_table
   end
 
   def time_table_pdf
     @time1 = TimeTable.find(params[:t])
     @time = TimeTableEntry.time_table_pdf(params[:time_id])
-    @batch = Batch.find(params[:batch_id])
     @subjects ||= @batch.subjects.all
     @general_setting = GeneralSetting.first
     render 'time_table_pdf', layout: false
@@ -129,16 +128,9 @@ class TimeTablesController < ApplicationController
   def time_table_delete
     authorize! :delete, @time
     @time = TimeTable.find(params[:format])
-<<<<<<< HEAD
-    if @time.destroy
-      redirect_to time_tables_path
-      flash[:notice] = 'Timetable deleted successfully'
-    end
-=======
     @time.destroy
     redirect_to time_tables_path
     flash[:notice] = t('timetable_delete')
->>>>>>> 453b8e6e16f6c48149a8b9386dda7bd3d1fd83cc
   end
 
   def update_timetable_values
@@ -156,4 +148,4 @@ class TimeTablesController < ApplicationController
   def time_table
     params.require(:time_table).permit(:start_date, :end_date, :is_active)
   end
- end
+end
