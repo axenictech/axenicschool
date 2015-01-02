@@ -21,6 +21,7 @@ class Guardian < ActiveRecord::Base
   validates :education, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
                         length: { in: 1..20 }, allow_blank: true
   scope :shod, ->(id) { where(id: id).take }
+  scope :discover, ->(s, r) { where(student_id: s, relation: r).take }
   def create_user_account
     user = User.new do |u|
       u.first_name = first_name
