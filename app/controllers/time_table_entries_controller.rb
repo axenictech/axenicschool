@@ -28,8 +28,8 @@ class TimeTableEntriesController < ApplicationController
     @weekday = params[:weekday_id]
     @teacher = params[:teacher]
     @time = params[:time_table_id]
-    @subject = Subject.find(params[:subject_id])
-    @em = Employee.find(params[:teacher])
+    @subject = Subject.shod(params[:subject_id])
+    @em = Employee.shod(params[:teacher])
     @batch = @subject.batch
     if TimeTableEntry.max_day(@em, @weekday, @time)
       flash[:alert] = t('max_hours_day_exceeded')
@@ -38,7 +38,7 @@ class TimeTableEntriesController < ApplicationController
         if TimeTableEntry.max_subject(@subject, @time)
           flash[:alert] = t('subject_exceeded')
         else
-          @assign_time = TimeTableEntry.create(batch_id: @batch.id,class_timing_id: @class_timing_id, weekday_id: @weekday, employee_id: @teacher, subject_id: @subject.id, time_table_id: @time)
+          @assign_time = TimeTableEntry.create(batch_id: @batch.id, class_timing_id: @class_timing_id, weekday_id: @weekday, employee_id: @teacher, subject_id: @subject.id, time_table_id: @time)
         end
       else
         flash[:alert] = t('max_hours_week_exceeded')

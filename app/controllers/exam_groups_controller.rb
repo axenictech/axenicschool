@@ -22,7 +22,7 @@ class ExamGroupsController < ApplicationController
   def edit
     @exam_group = ExamGroup.find(params[:id])
     @batch = @exam_group.batch
-    #authroize! :update, @exam_group
+    # authroize! :update, @exam_group
   end
 
   def update

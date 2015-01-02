@@ -525,6 +525,18 @@ class FinanceController < ApplicationController
   end
 
   def update_particular_fee
+<<<<<<< HEAD
+    @batch = Batch.find(params[:batch_id])
+    @master_category = FinanceFeeCategory.find(params[:master_id])
+    @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
+    @fee = @master_category.finance_fee_particulars.find(params[:id])
+    if @fee.update(fee_particular_params)
+      flash[:notice] = 'Finance fee particulars updated successfully'
+    end
+  end
+
+  def delete_particular_fee
+=======
     @batch = Batch.shod(params[:batch_id])
     @master_category = FinanceFeeCategory.shod(params[:master_id])
     @particular_fees ||= @master_category.particulars(@batch.id)
@@ -537,6 +549,7 @@ class FinanceController < ApplicationController
     @batch = Batch.shod(params[:batch_id])
     @master_category = FinanceFeeCategory.shod(params[:id])
     @fee = @master_category.finance_fee_particulars.shod(params[:fee])
+>>>>>>> 453b8e6e16f6c48149a8b9386dda7bd3d1fd83cc
     authorize! :delete, @fee
     @particular_fees ||= @master_category.particulars(@batch.id)
     @fee.destroy

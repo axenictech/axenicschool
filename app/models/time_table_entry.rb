@@ -12,9 +12,9 @@ class TimeTableEntry < ActiveRecord::Base
   scope :employees, ->(employee) { where(employee_id: employee.id) }
   scope :timetables, ->(time) { where(time_table_id: time) }
   scope :time_table_pdf, ->(pdf) { where('batch_id like ?', pdf) }
-  
+
   def self.max_day(emp, week, time)
-   TimeTableEntry.where(employee_id: emp.id, weekday_id: week, time_table_id: time).count >= emp.employee_grade.max_hours_day
+    TimeTableEntry.where(employee_id: emp.id, weekday_id: week, time_table_id: time).count >= emp.employee_grade.max_hours_day
   end
 
   def self.max_week(emp, time)
@@ -33,31 +33,6 @@ class TimeTableEntry < ActiveRecord::Base
     end
   end
 
-  def self.select_employee(e)
-    weekdays, class_timings, employees = [], [], []
-    unless e.nil?
-      e.each do |t|
-        weekdays << t.weekday
-        class_timings << t.class_timing
-        employees << t.employee
-      end
-    end
-    [weekdays, class_timings, employees]
-  end
-
-  def self.selecttime(e)
-    weekdays = []
-    class_timings = []
-    employees = []
-    unless time.nil?
-      time.each do |t|
-        weekdays.push t.weekday
-        class_timings.push t.class_timing
-        employees.push t.employee
-      end
-    end
-  end
-  
   def self.employee_time_table(timetable)
     timetables = []
     timetable.each do |tbe|
