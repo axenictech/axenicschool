@@ -1,10 +1,9 @@
+# Time Table Entries Controller
 class TimeTableEntriesController < ApplicationController
   def index
     @time = TimeTable.shod(params[:format])
-    flash[:notice] = "Time table structure created from #{@time.start_date.strftime('%B %Y')} - #{@time.end_date}"
+    flash[:notice] = t('time_table') + "#{@time.start_date} - #{@time.end_date}"
     @batches = Batch.includes(:course).all
-    @sub = params[:sub_id]
-    @times = params[:time_id]
     authorize! :read, @time
   end
 
@@ -27,25 +26,22 @@ class TimeTableEntriesController < ApplicationController
     @weekday = params[:weekday_id]
     @teacher = params[:teacher]
     @time = params[:time_table_id]
-    @subject = Subject.find(params[:subject_id])
-    @em = Employee.find(params[:teacher])
+    @subject = Subject.shod(params[:subject_id])
+    @em = Employee.shod(params[:teacher])
     @batch = @subject.batch
-
-    unless TimeTableEntry.where(employee_id: @em.id, weekday_id: @weekday, time_table_id: @time).count >= @em.employee_grade.max_hours_day
-      if TimeTableEntry.where(employee_id: @em.id, time_table_id: @time).count < @em.employee_grade.max_hours_week
-
-        if TimeTableEntry.where(subject_id: @subject.id, time_table_id: @time).count >= @subject.max_weekly_classes
-          flash[:alert] = 'Warning : Weekly subject limit reached'
+    if TimeTableEntry.max_day(@em, @weekday, @time)
+      flash[:alert] = t('max_hours_day_exceeded')
+    else
+      if TimeTableEntry.max_week(@em, @time)
+        if TimeTableEntry.max_subject(@subject, @time)
+          flash[:alert] = t('subject_exceeded')
         else
           @assign_time = TimeTableEntry.create(batch_id: @batch.id, class_timing_id: @class_timing_id, weekday_id: @weekday, employee_id: @teacher, subject_id: @subject.id, time_table_id: @time)
-       end
+        end
       else
-        flash[:alert] = 'Warning : Max hours per week exceeded'
-     end
-    else
-      flash[:alert] = 'Warning : Max hours per day exceeded'
-     end
-
+        flash[:alert] = t('max_hours_week_exceeded')
+      end
+    end
     @time = params[:time_table_id]
     @subjects = @batch.subjects.all
     @class_timing = @batch.class_timings.is_break

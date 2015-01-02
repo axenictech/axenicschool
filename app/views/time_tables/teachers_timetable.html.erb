@@ -1,17 +1,17 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-    <li><%= link_to 'Time Table',time_tables_path %></li>
+    <li><%= link_to 'Timetable',time_tables_path %></li>
     
-    <li>Teacher Time Table</li>
+    <li>Teacher Timetable</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 <br/>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-11 col-md-offset-1">
 <%= form_for :time,url:{action:'teacher_time_table_display'},method: :get,remote:true,html:{id: "time_form"} do |f| %>
-
-      <%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:"Select Time Table"},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
+		<b> Select a Timetable: </b>
+      <%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:"Select a Timetable"},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
     <%end%>
   </div>
 </div>

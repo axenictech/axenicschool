@@ -19,7 +19,7 @@
     <% @days.each do |w| %>
      <tr>
         <% q = w.to_i %>
-        <td><%= @day[q] %></td>
+        <th><%= @day[q] %></th>
 <% @weekday= Weekday.find_by_batch_id_and_weekday(@batch.id,@day[q])%>
     <% if @weekday.nil? %>
         <td><%= check_box_tag "weekdays[]", w,false%></td>

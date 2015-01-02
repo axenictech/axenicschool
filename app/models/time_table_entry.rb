@@ -11,8 +11,20 @@ class TimeTableEntry < ActiveRecord::Base
   scope :attendance, ->(s, b) { where(subject_id: s.id, batch_id: b.id) }
   scope :employees, ->(employee) { where(employee_id: employee.id) }
   scope :timetables, ->(time) { where(time_table_id: time) }
-  scope :time_table_pdf, ->(pdf) { where('batch_id like ?', pdf) }
 
+  def self.max_day(emp, week, time)
+    TimeTableEntry.where(employee_id: emp.id, weekday_id: \
+    week, time_table_id: time).count >= emp.employee_grade.max_hours_day
+  end
+
+  def self.max_week(emp, time)
+    TimeTableEntry.where(employee_id: emp.id, time_table_id: \
+    time).count < emp.employee_grade.max_hours_week
+  end
+  def self.max_subject(subject, time)
+    TimeTableEntry.where(subject_id: subject.id, time_table_id: \
+    time).count >= subject.max_weekly_classes
+  end
   def self.select_time_table(time_table)
     batches = []
     unless time_table.nil?
@@ -22,6 +34,7 @@ class TimeTableEntry < ActiveRecord::Base
       batches
     end
   end
+
 
   def self.select_employee(e)
     weekdays, class_timings, employees = [], [], []

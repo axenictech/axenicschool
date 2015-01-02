@@ -1,12 +1,9 @@
 # Time Table Controller
 class TimeTablesController < ApplicationController
   def index
-    @timetable = TimeTable.new
-    authorize! :read, @timetable
   end
 
   def employee_timetable
-    @timetables = []
     @employee = Employee.shod(params[:format])
     @time_table_entries = TimeTableEntry.employees(@employee)
     @timetables = TimeTableEntry.employee_time_table(@time_table_entries)
@@ -29,41 +26,31 @@ class TimeTablesController < ApplicationController
     @time1 = TimeTable.find(params[:t])
     @batch = Batch.find(params[:batch][:id])
     @class_timing = @batch.class_timings.is_break
-    @subjects ||= @batch.subjects.all
     authorize! :read, @time1
   end
 
   def timetable
     @today = Date.today
-    @time_end = TimeTable.all
     @time_table = TimeTable.time_table_date(@today)
-    @batches = Batch.all
-    authorize! :read, @time_end.first
   end
 
   def display_institutional_time_table
-    @time_end = TimeTable.all
     @today = params[:next].to_date
-    @batches = Batch.all
     @time_table = TimeTable.time_table_date(@today)
-    authorize! :read, @time_end.first
   end
 
   def select_time_employee
     @employee = Employee.find(params[:format])
-    @time = TimeTableEntry.where(employee_id: @employee.id)
-    all = TimeTableEntry.select_employee(@time)
-    @weekdays = all[0]
-    @class_timings = all[1]
-    @employees = all[2]
-    authorize! :read, TimeTable
+    time_table = TimeTable.find(params[:time][:id])
+    @timetable_entries = time_table.time_table_entries
+    @weekdays = TimeTable.weekday_teacher(@timetable_entries)
+    @class_timings = TimeTable.class_teacher(@timetable_entries)
+    authorize! :read, time_table
   end
 
   def time_table_pdf
     @time1 = TimeTable.find(params[:t])
-    @time = TimeTableEntry.time_table_pdf(params[:time_id])
     @batch = Batch.find(params[:batch_id])
-    @subjects = @batch.subjects.all
     @general_setting = GeneralSetting.first
     render 'time_table_pdf', layout: false
   end
@@ -72,19 +59,12 @@ class TimeTablesController < ApplicationController
     @time = TimeTableEntry.timetables(params[:time][:id])
     @time_table = TimeTable.find(params[:time][:id])
     @timetable_entries = @time_table.time_table_entries
-    @weekdays = @timetable_entries.collect(&:weekday) \
-                .uniq.sort! { |a, b| a.weekday <=> b.weekday }
-    @class_timings = @timetable_entries.collect(&:class_timing) \
-                     .uniq.sort! { |a, b| a.start_time <=> b.start_time }
-    @employees = @timetable_entries.collect(&:employee).uniq
+    @weekdays = TimeTable.weekday_teacher(@timetable_entries)
+    @class_timings = TimeTable.class_teacher(@timetable_entries)
+    @employees = TimeTable.employee_teacher(@timetable_entries)
     authorize! :read, @time_table
   end
-
-  def sub
-    @subject = @batch.subjects.find(params[:subject][:id])
-    authorize! :create, TimeTable
-  end
-
+  
   def teachers_timetable
     @timetables ||= TimeTable.all
     authorize! :read, @timetables.first
@@ -92,9 +72,7 @@ class TimeTablesController < ApplicationController
 
   def work_allotment
     @employees ||= Employee.all
-    @emp_subs = []
     if request.post?
-      params[:employee_subjects]
       @error_obj = EmployeeSubject.allot_work(params[:employee_subjects])
       flash[:notice] = t('work_allotment_update')
     end
@@ -127,14 +105,7 @@ class TimeTablesController < ApplicationController
 
   def update_timetable
     @time_table = TimeTable.find(params[:format])
-    @current = false
-    if @time_table.start_date <= Date.today \
-       && @time_table.end_date >= Date.today
-      @current = true
-    end
-    return if @time_table.start_date > Date.today \
-       && @time_table.end_date > Date.today
-    @removable = true
+    @time_table.update_time(@time_table)
   end
 
   def time_table_delete
@@ -160,4 +131,4 @@ class TimeTablesController < ApplicationController
   def time_table
     params.require(:time_table).permit(:start_date, :end_date, :is_active)
   end
- end
+end

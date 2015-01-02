@@ -22,7 +22,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-4"><b>Create Using :</b></div>
           <div class="col-md-7">
-          <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('student_admission_no',#{@master_category.id},function(response){});"}%><%='Admission no'%><br/>
+          <%=radio_button_tag :mode,"admission_no",'',{onclick:"$.get('admission_no',#{@master_category.id},function(response){});"}%><%='Admission no'%><br/>
           <%=radio_button_tag :mode,"category",'',{onclick:"$.get('student_category',#{@master_category.id},function(response){});"}%><%= 'Student Category'%><br/>
           <%=radio_button_tag :mode,"all",'',{onclick:"$('#hidden').html('')"}%><%='All'%></div>
       </div><br/>

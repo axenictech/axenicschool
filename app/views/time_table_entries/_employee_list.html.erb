@@ -7,12 +7,13 @@
    <%=hidden_field_tag :batch_id%>
  <% @teachers.each do |e| unless e.employee.nil?
  	 %>
-      <div class="btn btn-primary" ><%= e.employee.first_name %></div>
-         <%=radio_button_tag "teacher",e.employee.id,:checked=>"unchecked" %>
+     <%=radio_button_tag "teacher",e.employee.id,:checked=>"unchecked" %>
+      <div class="btn btn-primary" ><%= e.employee.first_name %></div>&nbsp;&nbsp;&nbsp;
+        
       <% end %>
       <%end%>
      <%end%>
 <%else%>
-<h4>Yet teachers are not assigned for this subject,Assign from Work Allotment</h4>
+<h5>Yet teachers are not assigned for this subject,Assign from Work Allotment</h5>
 <%end%>
 

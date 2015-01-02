@@ -98,6 +98,7 @@ class Employee < ActiveRecord::Base
   scope :not_status, -> { where(status: false).order(:name) }
   scope :search1, ->(other_conditions, param)\
    { where('first_name like ?' + other_conditions, param + '%') }
+  scope :att_reg, -> { where.not(id: EmployeeLeave.all.pluck(:employee_id)) }
 
   def archived_employee
     employee_attributes = attributes
@@ -402,6 +403,35 @@ class Employee < ActiveRecord::Base
 
   def self.report(emp)
     find(emp.reporting_manager_id).first_name unless emp.reporting_manager_id.nil?
+  end
+
+  def salary(date)
+    monthly_payslips.where(salary_date: date).take
+  end
+
+  def personal_salary(date)
+    individual_payslip_categories.where(salary_date: date).take
+  end
+  def self.att_leave(emp)
+    emp.each do |e|
+      EmployeeLeaveType.all.each do |l|
+        @leave = EmployeeLeave.create(employee_id: e.id, \
+                                      employee_leave_type_id: l.id,\
+                                      leave_count: l.max_leave_count)
+      end
+    end
+  end
+
+  def leave_reset(emp)
+    leave_count = EmployeeLeave.where(employee_id: emp.id)
+    leave_count.each do |e|
+      leave_type = EmployeeLeaveType.find_by_id(e.employee_leave_type_id)
+      default_leave_count = leave_type.max_leave_count
+      available_leave = default_leave_count.to_f
+      leave_taken = 0
+      e.update(leave_taken: leave_taken, leave_count: available_leave,\
+               reset_date: Date.today)
+    end
   end
 
   private
