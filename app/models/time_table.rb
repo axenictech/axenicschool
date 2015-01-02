@@ -7,30 +7,35 @@ class TimeTable < ActiveRecord::Base
     TimeTable.where('time_tables.start_date <= ?
       AND time_tables.end_date >= ?', timetable, timetable)
   end
-
+  
   def create_time_table(t)
     error = false
-    previous = TimeTable.where('end_date >= ? AND start_date <= ?', t.start_date, t.start_date)
-    unless previous.empty?
-      error = true
-      t.errors.add(:start_date, 'is within the range of another timetable')
-    end
-    foreword = TimeTable.where('end_date >= ? AND start_date <= ?', t.end_date, t.end_date)
-    unless foreword.empty?
-      error = true
-      t.errors.add(:end_date, 'is within the range of another timetable')
-    end
-    fully_overlapping = TimeTable.where('end_date <= ? AND start_date >= ?', t.end_date, t.start_date)
+    create_error(t)
+    fully_overlapping = TimeTable.where('end_date <= ? AND
+      start_date >= ?', t.end_date, t.start_date)
     unless fully_overlapping.empty?
       error = true
-      t.errors.add(:end_date, 'timetable_in_between_given_dates')
+      t.errors.add(:end_date, 'timetable in between given dates')
     end
     if t.end_date < t.start_date
       error = true
       t.errors.add(:end_date, "can't be less than start date")
     end
     error
-   end
+  end
+
+  def create_error(t)
+    previous = TimeTable.where('end_date >= ? AND
+      start_date <= ?', t.start_date, t.start_date)
+    unless previous.empty?
+      t.errors.add(:start_date, 'is within the range of another timetable')
+    end
+    foreword = TimeTable.where('end_date >= ? AND
+      start_date <= ?', t.end_date, t.end_date)
+    unless foreword.empty?
+      t.errors.add(:end_date, 'is within the range of another timetable')
+    end
+  end
 
   def self.tte_for_the_day(batch, date)
     entries = TimeTableEntry.joins(:time_table, :class_timing, :weekday).where('
@@ -45,27 +50,24 @@ class TimeTable < ActiveRecord::Base
   end
   
   def update_time(time)
-    current = false
     if time.start_date <= Date.today \
        && time.end_date >= Date.today
-      current = true
     end
     return if time.start_date > Date.today \
        && time.end_date > Date.today
-      removable = true
   end
   
   def self.weekday_teacher(wt)
     wt.collect(&:weekday) \
-                .uniq.sort! { |a, b| a.weekday <=> b.weekday }
+      .uniq.sort! { |a, b| a.weekday <=> b.weekday }
   end
 
   def self.class_teacher(ct)
-   ct.collect(&:class_timing) \
-                     .uniq.sort! { |a, b| a.start_time <=> b.start_time }
+    ct.collect(&:class_timing) \
+      .uniq.sort! { |a, b| a.start_time <=> b.start_time }
   end
   
   def self.employee_teacher(et)
     et.collect(&:employee).uniq
   end
-send
+end
