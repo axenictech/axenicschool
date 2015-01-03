@@ -33,17 +33,9 @@
         </div>
       </div>
       <hr>
-
-
-
-
       <br/><h3><center>Exam Wise Student Report </center></h3>
     <br>
-
       <h4>Batch:<%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %></h4>
-      
-   
-
 <% @students.each do |student|%>
 <% exam_score = [] %>
 <% @exam_group.exams.each do |exam| %>
@@ -110,18 +102,9 @@
           <%end%>
           <td><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></td>
         </tr>
-      <%else%>
-        <tr class="tr-head">
-          <td>Final Grade:</td>
-          <td>-</td>
-        </tr>
-      <br>
       <% end %>
     </table>
     <%end%>
 </div>
-
- 
 </body>
-
 </html>

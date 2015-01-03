@@ -44,9 +44,9 @@
               <tr>
               <td class="col-3"><%= i+1%></td>
               <td class="col-3"><%= p.name%></td>
-              <td class="col-3"><%= p.collection_amount%></td>
+              <td class="col-3"><%= amt = p.amount%></td>
               </tr>
-            <%total+=p.collection_amount%>
+            <%total+=amt%>
             <%end%>
         <%else%>
         <h5>No fee collection particulars found</h5>
@@ -58,9 +58,9 @@
               <tr>
               <td class="col-3"><%= i+1%></td>
               <td class="col-3"><%= d.name+"("+d.discount.to_s+"%)"%></td>
-              <td class="col-3"><%= d.collection_discount(total)%></td>
+              <td class="col-3"><%= dis = d.collection_discount(total)%></td>
               </tr>
-              <%discount+=d.collection_discount(total)%>
+              <%discount+=dis%>
             <%end%>
         <%else%>
         <h5>No fee collection discount found</h5>

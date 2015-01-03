@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-6">      
       <%= f.hidden_field :batch_id, value: @batch.id%>
-      <%= f.select :id,@batchs.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:'Select a batch',class: "form-control"%>
+      <%= f.select :id,collect_batch,prompt:'Select a batch',class: "form-control"%>
     </div>
 </div>   
 <hr>

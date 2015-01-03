@@ -76,11 +76,6 @@
           <%end%>
           <th><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></th>
         </tr>
-      <%else%>
-        <tr class="tr-head">
-          <th>Final Grade:</th>
-          <th>-</th>
-        </tr>
       <% end %>
     </table>
 </div>

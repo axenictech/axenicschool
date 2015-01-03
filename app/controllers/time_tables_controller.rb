@@ -17,14 +17,14 @@ class TimeTablesController < ApplicationController
 
   def select_time
     @time = TimeTableEntry.timetables(params[:time][:id])
-    @time1 = TimeTable.find(params[:time][:id])
+    @time1 = TimeTable.shod(params[:time][:id])
     @batches = TimeTableEntry.select_time_table(@time)
     authorize! :read, @time1
   end
 
   def select
-    @time1 = TimeTable.find(params[:t])
-    @batch = Batch.find(params[:batch][:id])
+    @time1 = TimeTable.shod(params[:t])
+    @batch = Batch.shod(params[:batch][:id])
     @class_timing = @batch.class_timings.is_break
     authorize! :read, @time1
   end
@@ -40,8 +40,8 @@ class TimeTablesController < ApplicationController
   end
 
   def select_time_employee
-    @employee = Employee.find(params[:format])
-    time_table = TimeTable.find(params[:time][:id])
+    @employee = Employee.shod(params[:format])
+    time_table = TimeTable.shod(params[:time][:id])
     @timetable_entries = time_table.time_table_entries
     @weekdays = TimeTable.weekday_teacher(@timetable_entries)
     @class_timings = TimeTable.class_teacher(@timetable_entries)
@@ -49,15 +49,15 @@ class TimeTablesController < ApplicationController
   end
 
   def time_table_pdf
-    @time1 = TimeTable.find(params[:t])
-    @batch = Batch.find(params[:batch_id])
+    @time1 = TimeTable.shod(params[:t])
+    @batch = Batch.shod(params[:batch_id])
     @general_setting = GeneralSetting.first
     render 'time_table_pdf', layout: false
   end
 
   def teacher_time_table_display
     @time = TimeTableEntry.timetables(params[:time][:id])
-    @time_table = TimeTable.find(params[:time][:id])
+    @time_table = TimeTable.shod(params[:time][:id])
     @timetable_entries = @time_table.time_table_entries
     @weekdays = TimeTable.weekday_teacher(@timetable_entries)
     @class_timings = TimeTable.class_teacher(@timetable_entries)
@@ -104,20 +104,20 @@ class TimeTablesController < ApplicationController
   end
 
   def update_timetable
-    @time_table = TimeTable.find(params[:format])
+    @time_table = TimeTable.shod(params[:format])
     @time_table.update_time(@time_table)
   end
 
   def time_table_delete
     authorize! :delete, @time
-    @time = TimeTable.find(params[:format])
+    @time = TimeTable.shod(params[:format])
     @time.destroy
     redirect_to time_tables_path
     flash[:notice] = t('timetable_delete')
   end
 
   def update_timetable_values
-    @timetable = TimeTable.find(params[:format])
+    @timetable = TimeTable.shod(params[:format])
     if @timetable.update(time_table)
       flash[:notice] = t('timetable_update')
       redirect_to edit_timetable_time_tables_path(@timetable)

@@ -49,9 +49,9 @@
             <% if @exam_group.exam_type == "Marks" %>
               <th bgcolor="99CCFF" >Percentage(%)</th>
             <%elsif @exam_group.exam_type == "Grades"%>
-              <th bgcolor="99CCFF" >Grades(%)</th>
+              <th></th>
             <%else%>
-              <th bgcolor="99CCFF">Grades(%)</th>
+              <th></th>
               <th bgcolor="99CCFF">Percentage(%)</th>
             <% end %>
         </tr>
@@ -70,16 +70,22 @@
             <% end %>
           <% unless is_valid_subject == 0 %>
                 <% unless @exam_group.exam_type == "Grades" %>
+                  <% if @exam_group.exam_type == "Marks"%>
                   <td align="center">
-                      <%= exam_score.nil? ? '-' : exam_score.marks || "AB" %>
+                   <%= exam_score.nil? ? '-' : exam_score.marks || "AB" %>
                   </td>
+                <% else %>
+                  <td align="center">
+                   <%= exam_score.nil? ? '-' : exam_score.marks.to_s + ' | ' + exam_score.grading_level.name || "AB" %>
+                  </td>
+                <%end%>
                 <%else%>
-                   <td >-</td>
+                   <td ><%= exam_score.grading_level.name%></td>
                 <% end %>
                   <% total_marks = total_marks+(exam_score.marks || 0) unless exam_score.nil?  %>
-                  <% total_max_marks = total_max_marks+exam.maximum_marks unless exam_score.nil? %>
+                  <% total_max_marks = total_max_marks.to_f+exam.maximum_marks.to_f unless exam_score.nil? %>
             <%else%>
-                <td>-</td>
+                <td></td>
             <%end%>
             <%end%>
             <% if @exam_group.exam_type == "Marks and Grades"%>

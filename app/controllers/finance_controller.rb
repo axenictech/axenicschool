@@ -398,7 +398,7 @@ class FinanceController < ApplicationController
     @end_date2 = params[:transaction][:end_date2].to_date
     if @start_date1.nil? || @start_date2.nil? \
       || @end_date1.nil? || @end_date2.nil?
-      render 'compare_report', alert: t('transaction_error')     
+      render 'compare_report', alert: t('transaction_error')
     else
       @categories ||= FinanceTransactionCategory.all
     end
@@ -677,9 +677,9 @@ class FinanceController < ApplicationController
     @category = @collection.finance_fee_category
     @finance_fees ||= @collection.finance_fees
     @student = @finance_fees.first.student
-    @previous = @finance_fees.previous(@student)
-    @next = @finance_fees.next(@student)
-    @fee = @finance_fees.fee(@student)
+    @previous = @collection.previous(@student)
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
     student_fee2
     authorize! :read, @collection
   end
@@ -697,15 +697,14 @@ class FinanceController < ApplicationController
     @finance_fees ||= @collection.finance_fees
     @finance_fee = @finance_fees.shod(params[:finance_fee_id])
     @student = @finance_fee.student
-    @previous = @finance_fees.previous(@student)
-    @previous -= 1 if @student.id == @finance_fees.last.student.id
+    @previous = @collection.previous(@student)
     student_fees_details2
     authorize! :read, @collection
   end
 
   def student_fees_details2
-    @next = @finance_fees.next(@student)
-    @fee = @finance_fees.fee(@student)
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
     @particulars ||= @collection.fee_collection_particulars
     @discounts ||= @collection.fee_collection_discounts
     @transactions ||= @fee.finance_transactions
@@ -725,10 +724,9 @@ class FinanceController < ApplicationController
   end
 
   def pay_fine2
-    @previous = @finance_fees.previous(@student)
-    @previous -= 1 if @student.id == @finance_fees.last.student.id
-    @next = @finance_fees.next(@student)
-    @fee = @finance_fees.next(@student)
+    @previous = @collection.previous(@student)
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
     @particulars ||= @collection.fee_collection_particulars
     @discounts ||= @collection.fee_collection_discounts
     @transactions ||= @fee.finance_transactions
@@ -750,10 +748,9 @@ class FinanceController < ApplicationController
 
   def pay_fee2
     @student = @finance_fee.student
-    @previous = @finance_fees.previous(@student)
-    @previous -= 1 if @student.id == @finance_fees.last.student.id
-    @next = @finance_fees.next(@student)
-    @fee = @finance_fees.fee(@student)
+    @previous = @collection.previous(@student)
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
     @particulars ||= @collection.fee_collection_particulars
     @discounts ||= @collection.fee_collection_discounts
     @transactions ||= @fee.finance_transactions
@@ -772,7 +769,7 @@ class FinanceController < ApplicationController
 
   def student_fee_receipt2
     @student = @finance_fee.student
-    @fee = @finance_fees.fee(@student)
+    @fee = @collection.fee(@student)
     @particulars ||= @collection.fee_collection_particulars
     @discounts ||= @collection.fee_collection_discounts
     @fines ||= @fee.finance_fines
@@ -793,7 +790,7 @@ class FinanceController < ApplicationController
     @collection = FinanceFeeCollection.shod(params[:collection_id])
     @category = @collection.finance_fee_category
     @finance_fees ||= @collection.finance_fees
-    @fee = @finance_fees.fee(@student)
+    @fee = @collection.fee(@student)
     @particulars ||= @collection.fee_collection_particulars
     @discounts ||= @collection.fee_collection_discounts
     @transactions ||= @fee.finance_transactions
@@ -866,7 +863,7 @@ class FinanceController < ApplicationController
     @collection = FinanceFeeCollection.shod(params[:collection_id])
     @category = @collection.finance_fee_category
     @finance_fees ||= @collection.finance_fees
-    @fee = @finance_fees.fee(@student)
+    @fee = @collection.fee(@student)
     @particulars ||= @collection.fee_collection_particulars
     @discounts ||= @collection.fee_collection_discounts
     @transactions ||= @fee.finance_transactions
