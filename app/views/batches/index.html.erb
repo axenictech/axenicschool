@@ -23,8 +23,7 @@
   <div class="col-md-12">
     <%= form_for :course, url:{action:'select'},method: :get,remote:true,html:{id: "course_form"} do |f| %>
      
-      <%= f.select :id, @courses.collect {|c| [c.course_name,c.id]},
-      {prompt:'Select a course'},{onchange:"$('#course_form').submit();",class: "form-control",style:"width:350px"}%>       
+      <%= f.select :id,collect_course,{prompt:'Select a course'},{onchange:"batch_fun();",class: "form-control",style:"width:350px"}%>       
     <% end %>
   </div>
 </div>
