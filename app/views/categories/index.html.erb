@@ -25,11 +25,7 @@
       </div>
       <div class="col-sm-6">
         <fieldset>
-          <% if @category.errors.any? %>
-            <div class="alert alert-danger">
-              <ul><% @category.errors.full_messages.each do |msg| %><li style="width:300px"><%= msg %></li><% end %></ul>
-            </div>
-          <%end%>
+          <%=categories_error!%>
           <br/>
           <div class="form-group">
             <b>Category Name :</b>

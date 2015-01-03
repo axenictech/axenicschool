@@ -5,6 +5,7 @@
     </div>
   </div>
 </div>
+ 
 <div class="row">
   <div class="box col-md-12">
   <div class="box-inner">
@@ -20,14 +21,13 @@
             <th>Description</th>
             <th>Action</th>
           </tr>
-        </thead>
-        <% if @grading_levels.empty? %>
-          <tr>
-            <td colspan="4"><center>No record found.</center></td>
+         </thead>
+         <tr>
+           <td colspan="4"><%=grading_not_found!%></td>
           </tr>
-        <%else%>
-          <tbody>
-            <% @grading_levels.each do |gl| %>
+         <tbody>
+            
+            <% @grading_levels.any? do |gl| %>
               <tr>
                 <td><%= gl.name %></td>
                 <td><%= gl.min_score %></td>
@@ -42,7 +42,6 @@
                   <%= link_to 'Delete' ,[gl.batch,gl],method: :delete, data: { confirm: "Are you sure to delete #{gl.name} grade?" }, class: "a-action"%></div>
                 </td>
               </tr>
-            <% end %>
           </tbody>
         <%end%>
       </table>
