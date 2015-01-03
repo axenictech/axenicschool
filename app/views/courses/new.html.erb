@@ -22,14 +22,7 @@
     <%= form_for @course  do |c| %>
         
       <fieldset>
-        <% if @course.errors.any?%>
-          <div class="alert alert-danger alert-dismissable">
-            <ul><% @course.errors.full_messages.each do |msg|%>
-              <li><%= msg %></li>
-              <%end%></ul>
-          </div>  
-        <%end%>
-        
+        <%= course_error! %>
           <div class="col-sm-4">
             <div class="box">
               <div class="lead">

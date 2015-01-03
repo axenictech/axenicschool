@@ -86,8 +86,8 @@
             <% @particulars.each_with_index do |p,i|%>
               <td><%= i+1%></td>
               <td><%= p.name%></td>
-              <td align="right"><%= p.collection_amount%></td>
-              <%total+=p.collection_amount%>
+              <td align="right"><%= amt=p.amount%></td>
+              <%total+=amt%>
             <%end%>
           <%else%>
             <h5>No fee collection particulars found</h5>
@@ -107,9 +107,9 @@
               <tr>
                 <td><%= i+1%></td>
                 <td><%= d.name+"("+d.discount.to_s+"%)"%></td>
-                <td align="right"><%= d.collection_discount(total)%></td>
+                <td align="right"><%= dis=d.collection_discount(total)%></td>
               </tr>
-              <%discount+=d.collection_discount(total)%>
+              <%discount+=dis%>
             <%end%>
           </tr>
         <%else%>

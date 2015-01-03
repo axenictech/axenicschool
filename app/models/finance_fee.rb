@@ -35,16 +35,4 @@ class FinanceFee < ActiveRecord::Base
     end
     payment
   end
-
-  def previous(student)
-    where(student_id: student.id).take.id - 1
-  end
-
-  def next(student)
-    where(student_id: student.id).take.id + 1
-  end
-
-  def fee(student)
-    where(student_id: student.id).take
-  end
 end

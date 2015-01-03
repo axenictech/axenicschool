@@ -11,19 +11,23 @@ class FinanceFeeParticular < ActiveRecord::Base
   , numericality: true, allow_blank: true
   scope :shod, ->(id) { where(id: id).take }
 
-  def create_fee(batches, mode, adm_no, cat_id)
-    return if batches.present?
-    batches.each do |b|
-      set(mode, adm_no, cat_id, b)
+  def self.create_fee(params, batches, mode, adm_no, cat_id)
+    error = 1
+    if batches.present?
+      batches.each do |b|
+        fee = new(params)
+        fee.set(mode, adm_no, cat_id, b)
+        error = 0 if fee.save
+      end
     end
-    save ? true : false
+    error
   end
 
   def set(mode, adm_no, cat_id, batch)
     if mode == 'admission_no'
       self.admission_no, self.batch_id = adm_no, batch
     elsif mode == 'category'
-      self.category_id, self.batch_id = cat_id, batch
+      self.category_id, self.batch_id = cat_id[:id], batch
     else
       self.batch_id = batch
     end

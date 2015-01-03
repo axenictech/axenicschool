@@ -405,6 +405,13 @@ class Employee < ActiveRecord::Base
     find(emp.reporting_manager_id).first_name unless emp.reporting_manager_id.nil?
   end
 
+  def salary(date)
+    monthly_payslips.where(salary_date: date).take
+  end
+
+  def personal_salary(date)
+    individual_payslip_categories.where(salary_date: date).take
+  end
   def self.att_leave(emp)
     emp.each do |e|
       EmployeeLeaveType.all.each do |l|

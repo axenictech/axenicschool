@@ -4,8 +4,6 @@ class TimeTableEntriesController < ApplicationController
     @time = TimeTable.shod(params[:format])
     flash[:notice] = t('time_table') + "#{@time.start_date} - #{@time.end_date}"
     @batches = Batch.includes(:course).all
-    @sub = params[:sub_id]
-    @times = params[:time_id]
     authorize! :read, @time
   end
 
