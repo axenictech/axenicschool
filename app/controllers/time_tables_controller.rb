@@ -25,7 +25,7 @@ class TimeTablesController < ApplicationController
     authorize! :read, @time1
   end
 
-  def select
+  def selects
     @time1 = TimeTable.find(params[:t])
     @batch = Batch.find(params[:batch][:id])
     @class_timing = @batch.class_timings.is_break

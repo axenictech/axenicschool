@@ -1,3 +1,4 @@
+# ExamGroupsController
 class ExamGroupsController < ApplicationController
   def select
     @course = Course.find(params[:course][:id])
@@ -229,7 +230,6 @@ class ExamGroupsController < ApplicationController
   private
 
   def params_exam_group
-    params.require(:exam_group).permit(:name, :exam_type, :exam_date,
-                                       exams_attributes: [:subject_id, :maximum_marks, :minimum_marks, :start_time, :end_time])
+    params.require(:exam_group).permit!
   end
 end
