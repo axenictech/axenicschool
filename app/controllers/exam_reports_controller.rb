@@ -1,100 +1,100 @@
+# ExamReport Controller
 class ExamReportsController < ApplicationController
   def exam_wise_report
-    @batches = Batch.includes(:course).all
-    @exam_groups = Batch.first.exam_groups.all if Batch.first
-
-    @batches = Batch.includes(:course).all
-
-    @exam_groups = Batch.first.exam_groups.all
+    @batches ||= Batch.includes(:course).all
+    @exam_groups ||= Batch.first.exam_groups
+    @batches ||= Batch.includes(:course).all
+    @exam_groups ||= Batch.first.exam_groups
     authorize! :read, @exam_groups.first
   end
 
   def select
-    @course = Course.find(params[:exam][:course_id])
-    @batches = @course.batches.all
+    @course = Course.shod(params[:exam][:course_id])
+    @batches ||= @course.batches
     authorize! :read, ExamGroup
   end
 
   def select_batch
-    @batch = Batch.find(params[:batch_select][:id])
-    @exam_groups = @batch.exam_groups.all
+    @batch = Batch.shod(params[:batch_select][:id])
+    @exam_groups ||= @batch.exam_groups
     authorize! :read, @exam_groups.first
   end
 
   def generate_exam_report
-    if request.get?
-      if params[:exam_group_select][:id].present?
-        @exam_group = ExamGroup.find(params[:exam_group_select][:id])
-        @batch = @exam_group.batch
-        @student = @batch.students.last
-      else
-        flash[:notice_exam] = 'Please select exam group'
-        @batches = Batch.includes(:course).all
-        @exam_groups = Batch.first.exam_groups.all
-        render 'exam_wise_report'
-      end
+    if params[:exam_group_select][:id].present?
+      @exam_group = ExamGroup.shod(params[:exam_group_select][:id])
+      @batch, @student = @exam_group.batch, @batch.students.last
+    else
+      flash[:alert] = t('exam_report_error')
+      @batches ||= Batch.includes(:course).all
+      @exam_groups ||= Batch.first.exam_groups
+      render 'exam_wise_report'
     end
     authorize! :read, @exam_group
   end
 
   def exam_wise_students_report
-    @exam_group = ExamGroup.find(params[:exam_group_id])
+    @exam_group = ExamGroup.shod(params[:exam_group_id])
     @batch = @exam_group.batch
-    @students = @batch.students.all
+    @students ||= @batch.students
     @general_setting = GeneralSetting.first
     render 'exam_wise_students_report', layout: false
   end
 
   def exam_wise_consolidated_report
-    @exam_group = ExamGroup.find(params[:exam_group_id])
+    @exam_group = ExamGroup.shod(params[:exam_group_id])
     @batch = @exam_group.batch
     @general_setting = GeneralSetting.first
     render 'exam_wise_consolidated_report', layout: false
   end
 
   def student_exam_report
-    @exam_group = ExamGroup.find(params[:id])
-    @student = Student.find(params[:id])
+    @exam_group = ExamGroup.shod(params[:id])
+    @student = Student.shod(params[:id])
     authorize! :read, @exam_group
   end
 
   def consolidated_report
-    @exam_group = ExamGroup.find(params[:exam_group_id])
+    @exam_group = ExamGroup.shod(params[:exam_group_id])
     @batch = @exam_group.batch
     authorize! :read, @exam_group
   end
 
   def subject_wise_report
-    @batches = Batch.includes(:course).all
-    @subjects = Batch.first.subjects.all if Batch.first
-
-    @batches = Batch.includes(:course).all
-
-    @subjects = Batch.first.subjects.all
+    @batches ||= Batch.includes(:course).all
+    @subjects ||= Batch.first.subjects
+    @batches ||= Batch.includes(:course).all
+    @subjects ||= Batch.first.subjects
     authorize! :read, ExamGroup
   end
 
   def choose_batch
-    @batch = Batch.find(params[:batch_choose][:id])
-    @subjects = @batch.subjects.all
+    @batch = Batch.shod(params[:batch_choose][:id])
+    @subjects ||= @batch.subjects
     authorize! :read, ExamGroup
   end
 
   def generate_subject_report
-    if request.get?
-      if params[:subject_select][:id].present?
-        @subject = Subject.find(params[:subject_select][:id])
-        @batch = @subject.batch
-        @exam_groups = @batch.exam_groups.where(result_published: true)
-        @students = @batch.students.all
-      else
-        flash[:notice_s_r] = 'Please select subject'
-        @batches = Batch.includes(:course).all
-        @subjects = Batch.first.subjects.all
-        render 'subject_wise_report'
-      end
+    if params[:subject_select][:id].present?
+      @subject = Subject.shod(params[:subject_select][:id])
+      generate_subject_report2
+    else
+      generate_subject_report3
     end
     authorize! :read, @exam_groups.first
+  end
+
+  def generate_subject_report2
+    @batch = @subject.batch
+    @exam_groups ||= @batch.result_published
+    @students ||= @batch.students
+  end
+
+  def generate_subject_report3
+    flash[:alert] = t('subject_report_error')
+    @batches ||= Batch.includes(:course).all
+    @subjects ||= Batch.first.subjects
+    render 'subject_wise_report'
   end
 
   def subject_wise_students_report

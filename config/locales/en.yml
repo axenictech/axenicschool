@@ -82,8 +82,6 @@ en:
   timetable_update : 'Timetable updated successfully'
   work_allotment_update : 'Work Allotment updated successfully'
   news_delete: 'News deleted successfully'
-
-
   create_rank: 'Ranking level created successfully'
   not_create_rank: 'Ranking levle not created successfully'
   create_class: 'Class designation created successfully'
@@ -96,7 +94,6 @@ en:
   not_update_class: 'Class designation not updated successfully'
   update_rank: 'Rank level updated successfully'
   not_update_rank: 'Rank level not updated successfully'
-
   class_timing_create: 'Class Timing Created Successfully'
   class_timing_delete: 'Class Timing Deleted Successfully'
   class_timing_update: 'Class Timing Updated Successfully'
@@ -146,3 +143,5 @@ en:
   subject_exceeded: 'Warning : Weekly subject limit reached'
   max_hours_week_exceeded: 'Warning : Max hours per week exceeded'
   max_hours_day_exceeded: 'Warning : Max hours per day exceeded'
+  exam_report_error: 'Please select exam group'
+  subject_report_error: 'Please select subject'
