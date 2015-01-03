@@ -44,6 +44,10 @@ class Batch < ActiveRecord::Base
     end
   end
 
+  def result_published
+    exam_groups.where(result_published: true)
+  end
+
   def graduate(students, status)
     return unless students.present?
     students.each  do |s|

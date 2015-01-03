@@ -127,6 +127,10 @@ class EmployeeAttendancesController < ApplicationController
     @reset_count = EmployeeLeave.edit_att(@attendance)
     @reset_count.destroy_att(@reset_count, @attendance)
     @date = @attendance.attendance_date
+    dest_att
+  end
+
+  def dest_att
     @deparment = @employee.employee_department
     @employees = @deparment.employees.all
     @today = @date.to_date

@@ -514,7 +514,7 @@ class EmployeesController < ApplicationController
     authorize! :update, @employee
   end
 
-  def create_m7onthly_payslip
+  def create_monthly_payslip
     @employee = Employee.find(params[:format])
     @salary_date = Date.parse(params[:salery_slip][:salery_date])
     unless @salary_date.to_date < @employee.joining_date.to_date
