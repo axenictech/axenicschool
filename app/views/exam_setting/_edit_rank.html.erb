@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body">
         <ul class="errors"></ul>
-<%= form_for [@course,@rank_lev1],url:{:action=>'updateRank',course_id: @course.id,id: @rank_lev1},method: :patch,remote: true do |f|%>
+<%= form_for [@course,@rank_lev1],url:{:action=>'update_rank',course_id: @course.id,id: @rank_lev1},method: :patch,remote: true do |f|%>
 <div class="form-group">
   <b>Name:</b>
   <%=f.text_field :name ,style: "width: 250px",placeholder:"Name",class: "form-control"%>

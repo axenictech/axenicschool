@@ -102,12 +102,10 @@ en:
   class_timing_update: 'Class Timing Updated Successfully'
   student_admission1: 'Student Record saved successfully please fill the parent detail'
   student_update: 'Student Record updated successfully'
-<<<<<<< HEAD
-
   #exams
   update_exam: 'Exam updated successfully'
   create_exam: 'Exam created successfully'
-=======
+
   assign_elective: "Elective subject assigned to students successfully"
   transaction_category_create: 'Transaction category successfully created'
   transaction_category_update: 'Transaction category successfully updated'
@@ -150,4 +148,4 @@ en:
   subject_exceeded: 'Warning : Weekly subject limit reached'
   max_hours_week_exceeded: 'Warning : Max hours per week exceeded'
   max_hours_day_exceeded: 'Warning : Max hours per day exceeded'
->>>>>>> 2054446ff56df1dc7b5aa6e37ca586728dfee865
+
