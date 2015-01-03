@@ -26,17 +26,6 @@ class FeeCollectionParticular < ActiveRecord::Base
     end
   end
 
-  def collection_amount
-    amount = 0
-    students = self.students
-    if students.present?
-      students.each do |_s|
-        amount += self.amount
-      end
-    end
-    amount
-  end
-
   def student_name
     student = Student.find_by_admission_no(admission_no)\
      if admission_no.present?
