@@ -9,7 +9,7 @@ class TimeTableEntry < ActiveRecord::Base
   belongs_to :time_table
   scope :shod, ->(id) { where(id: id).take }
   scope :attendance, ->(s, b) { where(subject_id: s.id, batch_id: b.id) }
-  scope :employees, ->(employee) { where(employee_id: employee.id) }
+  scope :employees, ->(employee) { where(employee_id: employee.id).includes(:time_table) }
   scope :timetables, ->(time) { where(time_table_id: time) }
 
   def self.max_day(emp, week, time)
