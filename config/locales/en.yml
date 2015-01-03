@@ -145,3 +145,4 @@ en:
   max_hours_day_exceeded: 'Warning : Max hours per day exceeded'
   exam_report_error: 'Please select exam group'
   subject_report_error: 'Please select subject'
+  group_error: 'Please select batch'

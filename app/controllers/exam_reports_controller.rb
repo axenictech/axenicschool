@@ -23,14 +23,23 @@ class ExamReportsController < ApplicationController
   def generate_exam_report
     if params[:exam_group_select][:id].present?
       @exam_group = ExamGroup.shod(params[:exam_group_select][:id])
-      @batch, @student = @exam_group.batch, @batch.students.last
+      generate_exam_report2
     else
-      flash[:alert] = t('exam_report_error')
-      @batches ||= Batch.includes(:course).all
-      @exam_groups ||= Batch.first.exam_groups
-      render 'exam_wise_report'
+      generate_exam_report3
     end
     authorize! :read, @exam_group
+  end
+
+  def generate_exam_report2
+    @batch = @exam_group.batch
+    @student = @batch.students.first
+  end
+
+  def generate_exam_report3
+    flash[:alert] = t('exam_report_error')
+    @batches ||= Batch.includes(:course).all
+    @exam_groups ||= Batch.first.exam_groups
+    render 'exam_wise_report'
   end
 
   def exam_wise_students_report
@@ -50,12 +59,12 @@ class ExamReportsController < ApplicationController
 
   def student_exam_report
     @exam_group = ExamGroup.shod(params[:id])
-    @student = Student.shod(params[:id])
+    @student = Student.shod(params[:format])
     authorize! :read, @exam_group
   end
 
   def consolidated_report
-    @exam_group = ExamGroup.shod(params[:exam_group_id])
+    @exam_group = ExamGroup.shod(params[:id])
     @batch = @exam_group.batch
     authorize! :read, @exam_group
   end
@@ -98,118 +107,127 @@ class ExamReportsController < ApplicationController
   end
 
   def subject_wise_students_report
-    @subject = Subject.find(params[:id])
+    @subject = Subject.shod(params[:id])
     @batch = @subject.batch
-    @exam_groups = @batch.exam_groups.where(result_published: true)
-    @students = @batch.students.all
+    @exam_groups ||= @batch.result_published
+    @students ||= @batch.students
     @general_setting = GeneralSetting.first
     render 'subject_wise_students_report', layout: false
   end
 
   def grouped_exam_report
-    @batches = Batch.includes(:course).all
-
+    @batches ||= Batch.includes(:course).all
     authorize! :read, ExamGroup
   end
 
   def generate_grouped_report
-    if request.get?
-      if params[:batch_option][:id].present?
-        @batch = Batch.find(params[:batch_option][:id])
-        @students = @batch.students.all
-        @student = @batch.students.last
-        @exam_groups = @batch.exam_groups.where(result_published: true)
-        @subjects = @batch.subjects.all
-      else
-        flash[:notice_b] = 'Please select batch'
-        @batches = Batch.includes(:course).all
-        render 'grouped_exam_report'
-      end
+    if params[:batch_option][:id].present?
+      @batch = Batch.shod(params[:batch_option][:id])
+      generate_grouped_report2
+    else
+      generate_grouped_report3
     end
     authorize! :read, ExamGroup
   end
 
+  def generate_grouped_report2
+    @students ||= @batch.students
+    @student = @batch.students.first
+    @exam_groups ||= @batch.result_published
+    @subjects ||= @batch.subjects
+  end
+
+  def generate_grouped_report3
+    flash[:alert] = t('group_error')
+    @batches ||= Batch.includes(:course).all
+    render 'grouped_exam_report'
+  end
+
   def grouped_exam_students_report
-    @batch = Batch.find(params[:batch_id])
-    @students = @batch.students.all
-    @exam_groups = @batch.exam_groups.where(result_published: true)
-    @subjects = @batch.subjects.all
+    @batch = Batch.shod(params[:batch_id])
+    @students ||= @batch.students
+    @exam_groups ||= @batch.result_published
+    @subjects ||= @batch.subjects
     @general_setting = GeneralSetting.first
     render 'grouped_exam_students_report', layout: false
   end
 
   def student_report
-    @batch = Batch.find(params[:batch_id])
-    @exam_groups = @batch.exam_groups.where(result_published: true)
-    @student = Student.find(params[:student_id])
-    @subjects = @batch.subjects.all
+    @batch = Batch.shod(params[:id])
+    @exam_groups ||= @batch.result_published
+    @student = Student.shod(params[:student_id])
+    @subjects ||= @batch.subjects
     authorize! :read, @exam_groups.first
   end
 
   def archived_student_report
-    @courses = Course.all
-    @batches = Course.first.batches.all if Course.first
-    @courses = Course.all
-    @batches = Course.first.batches.all
+    @courses ||= Course.all
+    @batches ||= Course.first.batches
     authorize! :read, ExamGroup
   end
 
   def select_course
-    @course = Course.find(params[:course_select][:id])
-    @batches = @course.batches.all
+    @course = Course.shod(params[:course_select][:id])
+    @batches ||= @course.batches
     authorize! :read, ExamGroup
   end
 
   def generate_archived_report
-    if request.get?
-      if params[:batch_select][:id].present?
-        @batch = Batch.find(params[:batch_select][:id])
-        @students = @batch.archived_students.all
-        @student = @batch.archived_students.last
-        @exam_groups = @batch.exam_groups.where(result_published: true)
-        @subjects = @batch.subjects.all
-      else
-        flash[:notice_arch] = 'Please select batch'
-        @courses = Course.all
-        @batches = Course.first.batches.all
-        render 'archived_student_report'
-      end
+    if params[:batch_select][:id].present?
+      @batch = Batch.shod(params[:batch_select][:id])
+      generate_archived_report2
+    else
+      generate_archived_report3
     end
     authorize! :read, ExamGroup
   end
 
+  def generate_archived_report2
+    @students ||= @batch.archived_students
+    @student = @batch.archived_students.first
+    @exam_groups ||= @batch.result_published
+    @subjects ||= @batch.subjects
+  end
+
+  def generate_archived_report3
+    flash[:alert] = t('group_error')
+    @courses ||= Course.all
+    @batches ||= Course.first.batches
+    render 'archived_student_report'
+  end
+
   def archived_students_exam_report
-    @batch = Batch.find(params[:id])
-    @students = @batch.archived_students.all
-    @exam_groups = @batch.exam_groups.where(result_published: true)
-    @subjects = @batch.subjects.all
+    @batch = Batch.shod(params[:id])
+    @students ||= @batch.archived_students
+    @exam_groups ||= @batch.result_published
+    @subjects ||= @batch.subjects
     @general_setting = GeneralSetting.first
     render 'archived_students_exam_report', layout: false
   end
 
   def archived_student
-    @student = ArchivedStudent.find(params[:id])
+    @student = ArchivedStudent.shod(params[:id])
     @batch = @student.batch
-    @exam_groups = @batch.exam_groups.where(result_published: true)
-    @subjects = @batch.subjects.all
+    @exam_groups ||= @batch.result_published
+    @subjects ||= @batch.subjects
     authorize! :read, @exam_groups.first
   end
 
   def consolidated_archived_report
-    @batch = Batch.find(params[:id])
-    @exam_groups = @batch.exam_groups.all
+    @batch = Batch.shod(params[:id])
+    @exam_groups ||= @batch.exam_groups
     authorize! :read, @exam_groups.first
   end
 
   def exam_group_wise_report
-    @exam_group = ExamGroup.find(params[:exam_group_option][:id])
+    @exam_group = ExamGroup.shod(params[:exam_group_option][:id])
     @batch = @exam_group.batch
     authorize! :read, @exam_group
   end
 
   def archived_students_consolidated_report
-    @batch = Batch.find(params[:id])
-    @exam_groups = @batch.exam_groups.where(result_published: true)
+    @batch = Batch.shod(params[:id])
+    @exam_groups ||= @batch.result_published
     @general_setting = GeneralSetting.first
     render 'archived_students_consolidated_report', layout: false
   end
@@ -218,7 +236,6 @@ class ExamReportsController < ApplicationController
     @batches = Batch.all
     @subjects = Batch.last.subjects.all if Batch.last
     @batches = Batch.all
-
     @subjects = Batch.last.subjects.all
     authorize! :read, ExamGroup
   end
