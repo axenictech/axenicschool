@@ -73,9 +73,5 @@ module TimeTablesHelper
     TimeTableEntry.where(class_timing_id: time.class_timing_id\
         , weekday_id: time.weekday_id, time_table_id: time.time_table).take
   end
-
-  def class_time
-    ClassTiming.where(is_break: false).take
-  end
 end
 
