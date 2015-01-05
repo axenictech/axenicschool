@@ -4,7 +4,7 @@
     <% @priority={"index"=>@index}%>
     <td><%= r.name %></td>
     <% unless r==@rank_levels.last%>
-      <td><%=link_to '▼',decrease_priority_exam_setting_path(r.course,r,@priority),remote:true%><div><%=r.course.id%>-<%=r.id%>-<%=@index%></div></td>
+      <td><%=link_to '▼',decrease_priority_exam_setting_path(r.course,r,@priority),remote:true%></td>
     <%else%>
       <td></td>
     <%end%>
