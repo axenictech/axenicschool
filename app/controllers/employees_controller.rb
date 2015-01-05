@@ -509,12 +509,12 @@ class EmployeesController < ApplicationController
   def create_monthly_payslip2
     unless @salary_date.to_date < @employee.joining_date.to_date
       flag = @employee.create_payslip(@employee, @salary_date)
-      payslip(flag, @employee)
+      paysli(flag, @employee)
     end
     redirect_to monthly_payslip_employees_path(@employee)
   end
 
-  def payslip(flag, employee)
+  def paysli(flag, employee)
     if flag == 0
       flash[:notice] = 'Payslip of ' + employee.first_name + "#{t('p')}"
     else
@@ -563,7 +563,7 @@ class EmployeesController < ApplicationController
   def view_payslip
     @salary_dates = MonthlyPayslip.all
     @department = EmployeeDepartment.shod(params[:format])
-    @employees = @department.employees.all
+    @employees = @department.employees
   end
 
   def view_employee_payslip

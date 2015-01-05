@@ -70,4 +70,8 @@ class TimeTable < ActiveRecord::Base
   def self.employee_teacher(et)
     et.collect(&:employee).uniq
   end
+
+  def full_time
+    start_date.strftime('%d %b %Y') + '-' + end_date.strftime('%d %b %Y')
+  end
 end

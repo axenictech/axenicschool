@@ -9,14 +9,14 @@ class TimeTableEntriesController < ApplicationController
 
   def select
     @time = params[:format]
-    @batch = Batch.find(params[:batch][:id])
+    @batch = Batch.shod(params[:batch][:id])
     @class_timing = @batch.class_timings.is_break
     @subjects = @batch.subjects.all
     authorize! :read, TimeTableEntry
   end
 
   def select_subject
-    @subject = Subject.find(params[:sub][:subject_id])
+    @subject = Subject.shod(params[:sub][:subject_id])
     @teachers = EmployeeSubject.where(subject_id: @subject.id)
     authorize! :read, TimeTableEntry
   end
@@ -69,7 +69,7 @@ class TimeTableEntriesController < ApplicationController
 
   def delete_time
     authorize! :delete, @delete_time
-    @delete_time = TimeTableEntry.find(params[:format])
+    @delete_time = TimeTableEntry.shod(params[:format])
     @delete_time.destroy
     @batch = @delete_time.batch
     @class_timing = @batch.class_timings.is_break
@@ -79,7 +79,7 @@ class TimeTableEntriesController < ApplicationController
   end
 
   def new
-    @timetable = TimeTable.find(params[:format])
+    @timetable = TimeTable.shod(params[:format])
     @batches = Batch.all
     authorize! :create, @timetable
   end
