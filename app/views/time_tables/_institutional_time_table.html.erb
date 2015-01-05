@@ -30,20 +30,20 @@
 <table id="datatable" class="table table-striped table-bordered responsive">
 <tbody>
 <%@time_table.each do |t| %>
- <%@time_table_entries=TimeTableEntry.where(time_table_id:t.id)%>
+ <%@time_table_entries=time_table_id(t)%>
  <%@time_table_entries.each do |time|%>
-   <% @timing = ClassTiming.find(time.class_timing_id) %>
-     <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_time_table_id(time.class_timing_id,time.weekday_id,time.time_table) %>  
+   <% timing = class_timing_id(time)%>
+     <% present=institutional_time_table(time) %>  
       <%if time.weekday.weekday==I18n.l(@today,:format=>"%A")%>
      <tr>
         <th>
           <%='Time'%><hr>
           <%=time.batch.name%>
          </th>
-      <td><%=@timing.start_time.strftime("%I:%M %p")+"-"+
-       @timing.end_time.strftime("%I:%M %p")%><hr>
-      <%=@present.subject.name%><br/>
-      <%=@present.employee.first_name%>
+      <td><%=timing.start_time.strftime("%I:%M %p")+"-"+
+       timing.end_time.strftime("%I:%M %p")%><hr>
+      <%=present.subject.name%><br/>
+      <%=present.employee.first_name%>
     </td>
    </tr>
 <%end%>

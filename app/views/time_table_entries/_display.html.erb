@@ -19,13 +19,13 @@
       <tr>
         <th><%=w.weekday%></th>
         <% @class_timing.each do |c|%>
-         <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_time_table_id(c.id,w.id,@time) %>
+         <% present=present_time_table_entry(c,w,@time) %>
         <td>
-        <%unless @present.nil? %>
+        <%unless present.nil? %>
        
-         <font color="red"><b><%= @present.subject.name %></b></font><br>
+         <font color="red"><b><%= present.subject.name %></b></font><br>
 
-       <font color="blue"><b><%= @present.employee.first_name+" "+@present.employee.last_name%></b></font>
+       <font color="blue"><b><%= present.employee.first_name+" "+present.employee.last_name%></b></font>
          &nbsp;&nbsp;&nbsp;&nbsp;
         <%=link_to image_tag("uploadify-cancel.png",width:"4%"),delete_time_time_table_entries_path(@present), method: :delete, data:{ confirm: "Are you sure to delete"}%>
        
@@ -46,8 +46,8 @@
   <div class="col-md-12">
  <%= form_for :sub,url:{action:'select_subject'},method: :get,remote:true,html:{id:"em"} do |f| %>
 
- <%= f.select :subject_id,@subjects.collect {|b| [b.name,b.id,"#{b.id}"]},{prompt:'Select Subject'},{
-  onchange: "$('#em').submit();",class: "form-control",style:"width:300px"}%>
+ <%= f.select :subject_id,collect_subject,{prompt:'Select Subject'},{
+  onchange: "time_subject_fun();",class: "form-control",style:"width:300px"}%>
 <%end%>
 <br/>
 <div id="emp_div"></div>
