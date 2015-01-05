@@ -8,9 +8,10 @@
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 <br/><br/>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-11 col-md-offset-1">
   <%= form_for :course, url:{action:'select'},method: :get,remote:true, html:{id:"class_form"} do  |f| %>
-      <%= f.select :id, @courses.collect {|b| [b.course_name,b.id]}, {prompt:"Select Course"},{onchange:"$('#class_form').submit();",class: "form-control",style:"width:350px"} %>  
+  <b>Select a Course:</b>
+      <%= f.select :id, @courses.collect {|b| [b.course_name,b.id]}, {prompt:"Select a Course"},{onchange:"$('#class_form').submit();",class: "form-control",style:"width:300px"} %>  
     <%end%>
   </div>
 </div>
