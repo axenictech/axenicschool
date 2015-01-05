@@ -33,9 +33,13 @@ class BatchTransfersController < ApplicationController
   def student_transfer
     @batch = Batch.shod(params[:transfer][:batch_id])
     @batch.trans(params[:students], params[:transfer][:id])
+    student_transfer2
+    authorize! :create, @batch
+  end
+
+  def student_transfer2
     flash[:notice] = t('batch_transfer')
     redirect_to transfer_batch_transfer_path(@batch)
-    authorize! :create, @batch
   end
 
   def graduation
@@ -47,8 +51,12 @@ class BatchTransfersController < ApplicationController
   def former_student
     @batch = Batch.shod(params[:graduate][:batch_id])
     @batch.graduate(params[:students], params[:graduate][:status_description])
+    former_student2
+    authorize! :create, @batch
+  end
+
+  def former_student2
     flash[:notice] = t('graduate')
     redirect_to graduation_batch_transfer_path(@batch)
-    authorize! :create, @batch
   end
 end

@@ -1,7 +1,6 @@
 class CreateArchivedEmployees < ActiveRecord::Migration
   def change
     create_table :archived_employees do |t|
-
       t.references :employee_category
       t.string :employee_number
       t.date :joining_date

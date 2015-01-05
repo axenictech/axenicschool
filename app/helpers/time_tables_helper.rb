@@ -21,7 +21,7 @@ module TimeTablesHelper
   end
 
   def weekday_batch(batch, day)
-    weekday = Weekday.find_by_batch_id_and_weekday(batch.id, day)
+    weekday = Weekday.where(batch_id: batch.id, weekday: day).take
     weekday
   end
 

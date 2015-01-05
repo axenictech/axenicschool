@@ -146,4 +146,10 @@ en:
   exam_report_error: 'Please select exam group'
   subject_report_error: 'Please select subject'
   group_error: 'Please select batch'
-
+  exam_report_error: 'Please select exam group'
+  subject_report_error: 'Please select subject'
+  group_error: 'Please select batch'
+  subject_rank_error: 'Please select subject'
+  batch_rank_error: 'Please select batch'
+  course_rank_error: 'Please select course'
+  attendance_error: 'End date cannot be less than start date'

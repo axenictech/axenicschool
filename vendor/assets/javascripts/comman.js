@@ -30,3 +30,7 @@ function time_batch_function(){
 	$('#time_form').submit();
 
 }
+
+function exam_group(){
+	$('#exam_form').submit();
+}

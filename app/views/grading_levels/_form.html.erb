@@ -2,17 +2,17 @@
         <ul class="errors"></ul>
 <%= form_for [@batch,@grading_level1],remote: true do |f|%>
   <div class="row">
-    <div class="col-md-1"></div>
+    
     <div class="col-md-4"><b>Name :</b></div>
     <div class="col-md-7"><%=f.text_field :name,placeholder:"Grade Level Name",class: "form-control"%></div>
   </div><br/>
   <div class="row">
-    <div class="col-md-1"></div>
+   
     <div class="col-md-4"><b>Min Score :</b></div>
     <div class="col-md-7"><%=f.text_field :min_score,placeholder: "Minimum Score",class: "form-control"%></div>
   </div><br/>
   <div class="row">
-    <div class="col-md-1"></div>
+    
     <div class="col-md-4"><b>Description :</b></div>
     <div class="col-md-7"><%= f.text_field :description,placeholder: "Description",class: "form-control"%></div>
   </div><br/>

@@ -10,4 +10,14 @@ module CoursesHelper
     HTML
     html.html_safe
   end
+
+  def course_not_found!
+    return unless  @courses.empty?
+    html = <<-HTML
+     <div>
+      <h4 align="center">No record found</h4>
+    </div>
+    HTML
+    html.html_safe
+  end
 end

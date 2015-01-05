@@ -1,8 +1,5 @@
 # Time Table Controller
 class TimeTablesController < ApplicationController
-  def index
-  end
-
   def employee_timetable
     @employee = Employee.shod(params[:format])
     @time_table_entries = TimeTableEntry.employees(@employee)

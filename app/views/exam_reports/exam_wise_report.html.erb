@@ -19,9 +19,9 @@
 <%= form_for :batch_select, :url=>{:action=>'select_batch'},html:{id: 'form_batch'},remote:true,method: :get do |f| %>
   
 
-<b>Select Batch:</b>
+<b>Select a Batch:</b>
      
-      <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_batch').submit();",class:"form-control",style: "width: 300px"}%>
+      <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:"Select a Batch"},{onchange:"$('#form_batch').submit();",class:"form-control",style: "width: 300px"}%>
      
   <% end %>
   </div>

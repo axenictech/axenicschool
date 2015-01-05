@@ -28,11 +28,15 @@ class AttendencesController < ApplicationController
   def display
     @subject = Subject.shod(params[:id])
     @students ||= @subject.batch.students
-    @time_table_entries ||= TimeTableEntry.attendance(@subject, @subject.batch)
     @today = params[:next].to_date
+    display2
+    authorize! :read, Attendence
+  end
+
+  def dispaly2
+    @time_table_entries ||= TimeTableEntry.attendance(@subject, @subject.batch)
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
-    authorize! :read, Attendence
   end
 
   def new_attendence
@@ -49,6 +53,10 @@ class AttendencesController < ApplicationController
     @attendence = Attendence.new(attendence_params)
     @attendence.save
     @subject = Subject.shod(params[:subject_id])
+    create2
+  end
+
+  def create2
     @students ||= @subject.batch.students
     @time_table_entries ||= TimeTableEntry.attendance(@subject, @subject.batch)
     @start_date = @today.beginning_of_month
@@ -68,6 +76,10 @@ class AttendencesController < ApplicationController
     @attendence.update(attendence_params)
     @today = params[:date].to_date
     @subject = Subject.shod(params[:subject_id])
+    update_attendence2
+  end
+
+  def update_attendence2
     @students ||= @attendence.batch.students
     @time_table_entries ||= TimeTableEntry.attendance(@subject, @subject.batch)
     @start_date = @today.beginning_of_month
@@ -80,6 +92,10 @@ class AttendencesController < ApplicationController
     @attendence = Attendence.shod(params[:id])
     authorize! :delete, @attendence
     @today = params[:date].to_date
+    delete_attendence2
+  end
+
+  def delete_attendence2
     @attendence.destroy
     @students ||= @batch.students
     @time_table_entries ||= TimeTableEntry.attendance(@subject, @batch)
@@ -98,10 +114,14 @@ class AttendencesController < ApplicationController
     @subject = Subject.shod(params[:report][:subject_id])
     @start_date = params[:report][:start_date]
     @end_date = params[:report][:end_date]
+    generate_report2
+    authorize! :read, Attendence
+  end
+
+  def generate_report2
     @students ||= @subject.batch.students
     @batch_events ||= @subject.batch.batch_events
     @time_table_entries ||= TimeTableEntry.attendance(@subject, @subject.batch)
-    authorize! :read, Attendence
   end
 
   def attendence_report
@@ -109,6 +129,10 @@ class AttendencesController < ApplicationController
     @subject = Subject.shod(params[:subject_id])
     @start_date = params[:start_date]
     @end_date = params[:end_date]
+    attendence_report2
+  end
+
+  def attendence_report2
     @batch = @subject.batch
     @students ||= @batch.students
     @batch_events ||= @batch.batch_events

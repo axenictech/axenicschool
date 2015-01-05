@@ -13,10 +13,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
-   
-      <%= link_to 'Pdf report',archived_students_consolidated_report_exam_reports_path(id:@batch.id,format:"pdf")%>
-      
-      
+      <%= link_to 'Pdf report',archived_students_consolidated_report_exam_reports_path(id:@batch.id,format:"pdf"),class: 'btn btn-primary-link btn-xs'%>
     </div>
   </div>
 </div>
@@ -29,13 +26,9 @@
      <% end %>
     </div>
    </div>
-
   <br><br>
   <div class="row">
-  
     <div class="col-md-12">
-
       <div id="consolidated_report"></div>
   </div>
   </div>
-
