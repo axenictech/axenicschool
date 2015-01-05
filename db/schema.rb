@@ -12,7 +12,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20_141_229_062_529) do
-
   create_table 'apply_leaves', force: true do |t|
     t.integer 'employee_id'
     t.integer 'employee_leave_types_id'
@@ -1134,5 +1133,4 @@ ActiveRecord::Schema.define(version: 20_141_229_062_529) do
   end
 
   add_index 'weekdays', ['batch_id'], name: 'index_weekdays_on_batch_id', using: :btree
-
 end

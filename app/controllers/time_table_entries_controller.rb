@@ -26,26 +26,45 @@ class TimeTableEntriesController < ApplicationController
     @weekday = params[:weekday_id]
     @teacher = params[:teacher]
     @time = params[:time_table_id]
-    @subject = Subject.shod(params[:subject_id])
-    @em = Employee.shod(params[:teacher])
+    assign_time2(params[:subject_id], params[:teacher])
+    assign_time3(params[:time_table_id])
+  end
+
+  def assign_time2(subject_id, teacher)
+    @subject = Subject.shod(subject_id)
+    @em = Employee.shod(teacher)
     @batch = @subject.batch
     if TimeTableEntry.max_day(@em, @weekday, @time)
       flash[:alert] = t('max_hours_day_exceeded')
     else
-      if TimeTableEntry.max_week(@em, @time)
-        if TimeTableEntry.max_subject(@subject, @time)
-          flash[:alert] = t('subject_exceeded')
-        else
-          @assign_time = TimeTableEntry.create(batch_id: @batch.id, class_timing_id: @class_timing_id, weekday_id: @weekday, employee_id: @teacher, subject_id: @subject.id, time_table_id: @time)
-        end
-      else
-        flash[:alert] = t('max_hours_week_exceeded')
-      end
+      assign_time4
     end
-    @time = params[:time_table_id]
+  end
+
+  def assign_time3(time_table_id)
+    @time = time_table_id
     @subjects = @batch.subjects.all
     @class_timing = @batch.class_timings.is_break
     @teachers = EmployeeSubject.where(subject_id: @subject.id)
+  end
+
+  def assign_time4
+    if TimeTableEntry.max_week(@em, @time)
+      if TimeTableEntry.max_subject(@subject, @time)
+        flash[:alert] = t('subject_exceeded')
+      else
+        assign_time5
+      end
+    else
+      flash[:alert] = t('max_hours_week_exceeded')
+    end
+  end
+
+  def assign_time5
+    @assign_time = TimeTableEntry.create(batch_id: @batch.id\
+          , class_timing_id: @class_timing_id, weekday_id: @weekday\
+          , employee_id: @teacher, subject_id: @subject.id\
+          , time_table_id: @time)
   end
 
   def delete_time

@@ -53,7 +53,7 @@ class Exam < ActiveRecord::Base
     end
   end
 
-  def select_subject(s1,s2,exam)
+  def select_subject(s1, s2, exam)
     unless s2.nil?
       s2.each do |std|
         unless exam.subject.elective_group.nil?
@@ -69,7 +69,7 @@ class Exam < ActiveRecord::Base
     s1
   end
 
-  def score_exam(temps,batch,exam,exam_group,grades)
+  def score_exam(temps, batch, exam, exam_group, grades)
     temps.each_pair do |student_id, details|
       @exam_score = ExamScore.find_by_exam_id_and_student_id(exam.id, student_id)
       @grouped_exam = GroupedExamReport.find_by_batch_id_and_student_id_and_exam_group_id_and_subject_id(batch.id, student_id, exam_group.id, exam.subject_id)

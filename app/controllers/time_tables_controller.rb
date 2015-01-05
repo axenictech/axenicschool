@@ -1,8 +1,5 @@
 # Time Table Controller
 class TimeTablesController < ApplicationController
-  def index
-  end
-
   def employee_timetable
     @employee = Employee.shod(params[:format])
     @time_table_entries = TimeTableEntry.employees(@employee)
@@ -64,7 +61,7 @@ class TimeTablesController < ApplicationController
     @employees = TimeTable.employee_teacher(@timetable_entries)
     authorize! :read, @time_table
   end
-  
+
   def teachers_timetable
     @timetables ||= TimeTable.all
     authorize! :read, @timetables.first

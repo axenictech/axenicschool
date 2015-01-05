@@ -217,6 +217,5 @@ class ExamGroupsController < ApplicationController
 
   def params_exam_group
     params.require(:exam_group).permit!
-
   end
 end
