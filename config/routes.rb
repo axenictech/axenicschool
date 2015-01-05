@@ -249,7 +249,7 @@ Rails.application.routes.draw do
       get :setting
       get :settingrank
       get :editRank
-      delete :destroyRank
+      delete :destroy_rank
       get :edit
       delete :course
       get :decrease_priority
@@ -260,7 +260,7 @@ Rails.application.routes.draw do
       get :selectrank
       get :newrank
       post :createrank
-      patch :updateRank
+      patch :update_rank
     end
   end
 
@@ -372,10 +372,10 @@ Rails.application.routes.draw do
       get :select
     end
     member do
-      delete :destroyRank
+      delete :destroy_rank
       get :setting
       get :settingrank
-      get :editRank
+      get :edit_rank
     end
   end
 

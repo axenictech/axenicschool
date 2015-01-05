@@ -12,6 +12,7 @@ class Subject < ActiveRecord::Base
   { maximum: 2 }, numericality: { only_integer: \
   true, less_than: 20, greater_than: 0 }
   scope :shod, ->(id) { where(id: id).take }
+  scope :exam, -> { where(no_exams: false) }
 
   def assign_subject(students)
     batch = elective_group.batch

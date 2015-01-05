@@ -16,11 +16,11 @@
     <td class="center">
       <div class="label-success label label-default">
         <i class="glyphicon glyphicon-edit icon-white"></i>
-        <%=link_to 'Edit', editRank_exam_setting_path(r.course,course_id:r),remote: true,class: "a-action"%>
-      </div>
+        <%=link_to 'Edit', edit_rank_exam_setting_path(r.course,course_id:r),remote: true,class: "a-action"%>
+      </div>&nbsp;
       <div class="label-danger label label-default">
         <i class="glyphicon glyphicon-trash icon-white"></i> 
-        <%= link_to 'Delete',destroyRank_exam_setting_path(r),remote:true,method: :delete, data: { confirm: "Are you sure to delete"},class: "a-action"%>
+        <%= link_to 'Delete',destroy_rank_exam_setting_path(r.id),method: :delete, data: { confirm: "Are you sure to delete"},class: "a-action"%>
       </div>
   </tr>   
   <%@index+=1%>  
