@@ -88,11 +88,15 @@ class EmployeeAttendancesController < ApplicationController
     @attendance = EmployeeAttendance.new(params_attendance)
     @employee = Employee.find(params[:employee_attendance][:employee_id])
     @date = params[:employee_attendance][:attendance_date]
+    create2
+    date_operation
+  end
+
+  def create2
     @attendance.create_att(@attendance)
     @deparment = @employee.employee_department
     @employees = @deparment.employees.all
     @today = @date.to_date
-    date_operation
   end
 
   def edit_attendance

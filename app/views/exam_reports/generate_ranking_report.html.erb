@@ -1,4 +1,3 @@
-
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
@@ -10,7 +9,6 @@
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 <br/>
-
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
@@ -19,8 +17,6 @@
   </div>
 </div>
 <hr>
-
-
 <div class="row">
     <div class="col-md-12">
     <div class="box-inner">
@@ -29,14 +25,11 @@
     </h2>
     </div>
     <div class="box-content">
-    
       <table class="table table-bordered table-hover">
         <tr class="tr-head">
-
           <th>Sr.No.</th>
           <th>Admission No</th>
           <th>Student Name</th>
-
           <% ranks = [] %>
           <% rank_students=[] %>
           <% group_ranks=[] %>
@@ -65,28 +58,26 @@
             <td><%= i+1 %></td>
             <td><%= student.admission_no.present? ? student.admission_no : "-" %></td>
             <td ><%= student.first_name+" "+student.last_name %></td>
-            <td class="col-3">
               <% @exam_groups.each do |exam_group| %>
-                <%index=0%>
+              <td align="center">
                 <% group_ranks.each do |group_rank|%>
-                    <% if exam_group.id==group_rank[index]%>
-                        <% group_rank[index+1].each_with_index do |rank,i|%>
-                            <% if student.id==rank%>
-                                <%=i%>
-                            <%end%>
+                    <% if exam_group.id==group_rank[0]%>
+                      <% group_rank[1].each_with_index do |rank,ind|%>
+                        <% if student.id==rank%>
+                          <%=ind+1%>
                         <%end%>
+                      <%end%>
                     <%end%>
-                    <%index+=2%>
-                <%end%>        
+                   
+                <%end%>
+              </td>        
               <%end%>
-            </td>
             </tr>
             <%end%>
         <% end %>
       </table>
-    
     </div>
     </div>
-    </div>
-    </div>
+  </div>
+</div>
  

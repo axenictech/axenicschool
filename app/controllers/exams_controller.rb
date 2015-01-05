@@ -1,7 +1,7 @@
 # Exam Controller
 class ExamsController < ApplicationController
   def new
-    @exam_group = ExamGroup.find(params[:format])
+    @exam_group = ExamGroup.shod(params[:format])
     @batch = @exam_group.batch
     @subjects = @batch.subjects.where(no_exams: false)
     @exam = @exam_group.exams.build
@@ -9,7 +9,7 @@ class ExamsController < ApplicationController
   end
 
   def create
-    @exam_group = ExamGroup.find(params[:exam_group_id])
+    @exam_group = ExamGroup.shod(params[:exam_group_id])
     @batch = @exam_group.batch
     @subjects = @batch.subjects.where(no_exams: false)
     @exam = @exam_group.exams.new(params_exam)
@@ -26,7 +26,7 @@ class ExamsController < ApplicationController
   end
 
   def edit
-    @exam = Exam.find(params[:id])
+    @exam = Exam.shod(params[:id])
     @exam_group = @exam.exam_group
     @batch = @exam.exam_group.batch
     @subjects = @batch.subjects.where(no_exams: false)
@@ -34,7 +34,7 @@ class ExamsController < ApplicationController
   end
 
   def update
-    @exam = Exam.find(params[:id])
+    @exam = Exam.shod(params[:id])
     if @exam.update(params_exam)
       flash[:notice] = t('update_exam')
       redirect_to exams_exam_group_path(@exam.exam_group)
@@ -44,7 +44,7 @@ class ExamsController < ApplicationController
   end
 
   def exam_score
-    @exam = Exam.find(params[:id])
+    @exam = Exam.shod(params[:id])
     @students = []
     students ||= @exam.exam_group.batch.students.all
     @students = @exam.select_subject(@students, students, @exam)
@@ -53,7 +53,7 @@ class ExamsController < ApplicationController
   end
 
   def update_exam_score
-    @exam = Exam.find(params[:id])
+    @exam = Exam.shod(params[:id])
     @exam_group = @exam.exam_group
     @batch = @exam_group.batch
     grades = @exam.exam_group.batch.grading_levels.order(min_score: :asc)
@@ -75,10 +75,10 @@ class ExamsController < ApplicationController
   end
 
   def destroy
-    authorize! :delete, @exam
     @exam = Exam.find(params[:id])
+    authorize! :delete, @exam
     @exam.destroy
-    redirect_to exam_groups_exams_path(@exam.exam_group)
+    redirect_to exams_exam_group_path(@exam.exam_group)
   end
 
   private

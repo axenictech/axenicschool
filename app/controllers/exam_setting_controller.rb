@@ -55,10 +55,11 @@ class ExamSettingController < ApplicationController
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     @rank_lev1 = @course.ranking_levels.new(params_rank)
     @max_rank = RankingLevel.maximum('prioriy')
-    unless @max_rank.nil?
-      @max_rank = 0.to_i
-    end
-    @rank_lev1.prioriy = @max_rank + 1.to_i
+    @rank_lev1 = @course.max(@max_rank, @rank_lev1)
+    createrank_flash
+  end
+
+  def createrank_flash
     if @rank_lev1.save
       flash[:notice] = t('create_rank')
     else
@@ -67,87 +68,25 @@ class ExamSettingController < ApplicationController
     end
   end
 
-  # def unless_solve
-  #   return if @max_rank.nil?
-  #   @max_rank = 0.to_i
-  #   @rank_lev1.prioriy = @max_rank + 1.to_i
-  # end
-
-  # def createrank_flash(rank_lev1)
-  #   if rank_lev1.save
-  #     flash[:notice] = t('create_rank')
-  #   else
-  #     flash[:notice] = t('not_create_rank')
-  #     render 'newrank'
-  #   end
-  # end
-
-  # def increase_priority
-  #   @course = Course.shod(params[:id])
-  #   ranklevel
-  #   selected = params[:index].to_i - 1.to_i
-  #   previous = 0.to_i
-  #   temp = nil
-  #   @course.increase_order(@rank_levels, selected, previous, temp)
-  #   @rank_levels = @course.ranking_levels.order('prioriy ASC')
-  #   authorize! :create, @rank_lev1
-  # end
-
-  # def decrease_priority
-  #   @course = Course.shod(params[:id])
-  #   ranklevel
-  #   selected = params[:index].to_i + 1.to_i
-  #   next_pri = 0.to_i
-  #   temp = nil
-  #   @course.decrease_order(@rank_levels, selected, next_pri, temp)
-  #   @rank_levels = @course.ranking_levels.order('prioriy ASC')
-  #   authorize! :create, @rank_lev1
-  # end
+  def inc_dec
+    @rank_levels = @course.ranking_levels.order('prioriy ASC')
+    @rank_lev1 = @course.ranking_levels.find(params[:format])
+  end
 
   def increase_priority
     @course = Course.find(params[:id])
-    @rank_levels = @course.ranking_levels.order('prioriy ASC')
-    @rank_lev1 = @course.ranking_levels.find(params[:format])
+    inc_dec
     selected = params[:index].to_i - 1.to_i
-    previous = 0.to_i
-    temp = nil
-    @rank_levels.each do |p|
-      if (selected == previous)
-        temp = p
-      end
-      if (selected + 1.to_i == previous)
-        current = p.prioriy
-        previous_pri = temp.prioriy
-        p.update(prioriy: nil)
-        temp.update(prioriy: current)
-        p.update(prioriy: previous_pri)
-       end
-      previous = previous + 1.to_i
-    end
+    @course.increase_logic(@rank_levels, selected)
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     authorize! :create, @rank_lev1
   end
 
   def decrease_priority
     @course = Course.find(params[:id])
-    @rank_levels = @course.ranking_levels.order('prioriy ASC')
-    @rank_lev1 = @course.ranking_levels.find(params[:format])
+    inc_dec
     selected = params[:index].to_i + 1.to_i
-    next_pri = 0.to_i
-    temp = nil
-    @rank_levels.each do |p|
-      if (selected - 1.to_i == next_pri)
-        temp = p
-      end
-      if (selected == next_pri)
-        current = p.prioriy
-        next_priority = temp.prioriy
-        p.update(prioriy: nil)
-        temp.update(prioriy: current)
-        p.update(prioriy: next_priority)
-      end
-      next_pri = next_pri + 1.to_i
-    end
+    @course.decrease_logic(@rank_levels, selected)
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     authorize! :create, @rank_lev1
   end
@@ -171,7 +110,7 @@ class ExamSettingController < ApplicationController
 
   def destroy_rank
     @rank_lev1 = RankingLevel.shod(params[:id])
-    #authorize! :delete, @ranking_levels
+    authorize! :delete, @ranking_levels
     @course = @rank_lev1.course
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     destroy_rank_flash(@rank_lev1)

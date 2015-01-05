@@ -12,7 +12,7 @@
   <div class="col-md-11 col-md-offset-1">
  <%= form_for :time,url:{action:'select_time'},method: :get,remote:true,html:{id: "time_form"} do |f| %>
         <b> Select a Timetable: </b>
-      <%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:"Select a Timetable"},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
+      <%= f.select :id,collect_time_table,{prompt:"Select a Timetable"},{onchange:"time_batch_function();",class: "form-control",style:"width:250px"} %>  
 
     <%end%>
   </div>
