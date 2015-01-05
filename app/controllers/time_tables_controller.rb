@@ -64,7 +64,7 @@ class TimeTablesController < ApplicationController
     @employees = TimeTable.employee_teacher(@timetable_entries)
     authorize! :read, @time_table
   end
-  
+
   def teachers_timetable
     @timetables ||= TimeTable.all
     authorize! :read, @timetables.first

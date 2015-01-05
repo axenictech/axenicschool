@@ -75,10 +75,10 @@ class ExamsController < ApplicationController
   end
 
   def destroy
+    @exam = Exam.find(params[:id])
     authorize! :delete, @exam
-    @exam = Exam.shod(params[:id])
     @exam.destroy
-    redirect_to exam_groups_exams_path(@exam.exam_group)
+    redirect_to exams_exam_group_path(@exam.exam_group)
   end
 
   private

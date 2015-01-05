@@ -15,7 +15,7 @@
   <tbody>
   <% @exams.each do |exam| %>
       	<tr>
-      	<td><%= link_to exam.subject.name , exam_groups_previous_exam_scores_path(exam) %></td>	
+      	<td><%= link_to exam.subject.name , previous_exam_scores_exam_groups_path(exam) %></td>	
 		<td><%= exam.maximum_marks%></td>
 		<td><%= exam.minimum_marks%></td>
 		</tr>

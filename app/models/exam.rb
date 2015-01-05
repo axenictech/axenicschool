@@ -122,4 +122,39 @@ class Exam < ActiveRecord::Base
       end
     end
   end
+
+  def update_exam_scr(exam, exam_group, batch, param)
+    param.each_pair do |student_id, details|
+      exam_score = ExamScore.exrep(exam, student_id)
+      grouped_exam = GroupedExamReport.where(batch_id: batch.id, student_id: \
+                                              student_id, exam_group_id: \
+                                              exam_group.id, subject_id: \
+                                              exam.subject_id).take
+      score_grade = ''
+      fail = false
+      fail = true if details[:marks].to_f < exam.minimum_marks.to_f
+      unless exam.exam_group.exam_type == 'Marks'
+        percentage = (details[:marks].to_f * 100) / exam.maximum_marks.to_f
+        grades = exam.exam_group.batch.grading_levels.all
+        grades.each do |grade|
+          if percentage >= grade.min_score
+            score_grade = grade.id
+          end
+        end
+      end
+      if exam_score.nil?
+        ExamScore.create(exam_id: exam.id, student_id: student_id,
+                         marks: details[:marks], remarks: details[:remarks], grading_level_id: score_grade, is_failed: fail)
+      else
+        exam_score.update(marks: details[:marks], remarks: details[:remarks], grading_level_id: score_grade, is_failed: fail)
+      end
+
+      if grouped_exam.nil?
+        GroupedExamReport.create(batch_id: batch.id, student_id: student_id,
+                                 exam_group_id: exam_group.id, subject_id: exam.subject_id, marks: details[:marks])
+      else
+        grouped_exam.update(marks: details[:marks])
+      end
+    end
+  end
 end
