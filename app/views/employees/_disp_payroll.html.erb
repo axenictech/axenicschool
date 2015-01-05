@@ -1,10 +1,124 @@
-<table class="table table-hover" align="center" style="width:900px">
-<tbody>
-<tr><td colspan="4" style="background-color:white"><h3>Payroll</h3>
-</td></tr>
-<tr style="background-color:white">
-<td colspan="4" align="center">
-<%= link_to 'PDF Report','',class: "btn btn-primary" %></td>
-</tr>
-</tbody></table>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li>
+    <%= link_to 'Department Payslip',department_payslip_employees_path%>
+    </li>
+    <li>Employee Payslip</li>
+  </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<div class="row">
+  <div class="col-md-12">
+  <div class="pull-right">
+</div>
+</div>
+</div>
+<hr/>
+
+
+<% unless flash[:notice].nil? %>   <%end%>
+  <div class="row">
+  <div class="col-md-12">
+<div class="box-inner">
+    <div class="box-header">
+    <%if @payslip.nil?%>
+        <h2>No salary slip found for this employee</h2>
+    <%else%>   
+
+    
+    <%approved=MonthlyPayslip.where(employee_id:@emp.id,is_approved:true).pluck(:is_approved)%>
+    <%if approved[0]==true%>
+        <%status="(Approved)"%>
+    <%else%>
+        <%status="(Pending)"%>
+    <%end%>   
+      <h2>&nbsp;&nbsp;&nbsp;&nbsp;<%=@emp.first_name+" "+@emp.last_name%> -
+      
+    </div>
+      <div class="box-content">
+      <fieldset>
+     
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+    <div class="row">
+      <h4><font color="brown"><b>Earning:</b></font>
+      </h>
+      </div>
+       <div class="row">
+      <table class="table table-stried">
+      <tr>
+         <th>Category</th>
+         <th>Amount</th>
+      </tr>
+      <%total=0%>
+      
+        		<%is_deduction=PayrollCategory.where(is_deduction:false)%>
+        	<%is_deduction.each do |c| %>
+      <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id: c.id).pluck(:amount) %>
+
+      <tr>
+         <td><%=c.name%></td>
+        
+         <td colspan="2"><%='%.02f'%val[0]%></td>
+         <%total+=val[0].to_f%>
+      </tr>
+      <%end%>
+      <tr>
+      	<th><%="Total"%></th>
+
+      	<th><%='%.02f'%total%></th>
+      </tr>
+      	</table>
+        </div>
+    
+      <div class="row">
+      	<h4><font color="brown"><b>Deduction:</b></font></h4>
+      	</div>
+        <div class="row">
+      	<table class="table table-stried">
+      		<%tot=0%>
+      		<%is_deduction=PayrollCategory.where(is_deduction:true)%>
+           <%is_deduction.each do |d|%>
+            <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id:d.id).pluck(:amount)%>
+            
+      		<tr>
+      			<td><%=d.name%></td>
+      			<td colspan="2"><%=val[0]%></td>
+      			  <%tot+=val[0].to_f%>
+      		</tr>
+   		
+   			<%end%>
+
+      	<tr>
+		      	<th><%="Total"%></th>
+		      	<th colspan="2"><%='%.02f'%tot%></th>
+       </tr>   
+      	</table>
+        </div>
+        <hr>
+        
+        <div class="row">
+        <h3> 
+      	<table class="table table-stried">
+      		
+      	    <%last_total=total.to_f-tot.to_f%>
+           	<tr>
+		      	<th><%="Total"%>:</th>
+		      	<th><%='%.02f'% last_total %></th>
+          </tr>  
+      	</table></h3>
+     </div>
+
+</div>
+
+</fieldset>
+<%end%>
+</div>
+
+</div>
+
+</div>
+</div>
+

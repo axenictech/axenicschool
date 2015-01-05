@@ -8,7 +8,7 @@ class EmployeesController < ApplicationController
   [:edit_department, :update_department, :destroy_department]
   before_filter :position, only: \
   [:edit_position, :update_position, :destroy_position]
-  before_filter :bank_field, only: \
+  before_filter :bank_fields, only: \
   [:edit_bank_field, :update_bank_field, :destroy_bank_field]
 
   def emp_category
@@ -649,9 +649,9 @@ class EmployeesController < ApplicationController
   end
 
   def emp_payroll
-    @employee = Employee.shod(params[:format])
-    # @payroll_details = EmployeeSalaryStructure.where(employee_id:@employee)
-    authorize! :read, @employee
+    @emp = Employee.shod(params[:format])
+    @payslip = MonthlyPayslip.where(employee_id: @emp.id)
+    authorize! :read, @emp
   end
 
   def remove
@@ -760,6 +760,11 @@ class EmployeesController < ApplicationController
     authorize! :read, @employee
   end
 
+  def emp_payslip
+    @emp = Employee.shod(params[:format])
+    @payslip = MonthlyPayslip.where(employee_id: @emp.id)
+  end
+
   private
 
   def employee_params
@@ -806,7 +811,7 @@ class EmployeesController < ApplicationController
     @employee_position = EmployeePosition.shod(params[:id])
   end
 
-  def bank_field
+  def bank_fields
     @bank_field = BankField.shod(params[:id])
   end
 end

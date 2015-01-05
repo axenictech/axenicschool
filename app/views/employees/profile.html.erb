@@ -1,7 +1,7 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li><%= link_to 'Human Resources',employees_path %></li>
     <li><%= link_to 'HR Management',employee_management_employees_path %></li>
   
    <li>Employee Profile</li>
@@ -43,7 +43,7 @@
       </li>
       <li role="presentation">
          
-         <%=link_to "Payslip",personal_profile_employees_path(@employee),remote:true%>
+         <%=link_to "Payslip",emp_payslip_employees_path(@employee),remote:true%>
       </li>
       
    </ul>

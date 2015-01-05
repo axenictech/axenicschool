@@ -543,6 +543,7 @@ Rails.application.routes.draw do
       post :one_click_payslip_revert
       post :emp_search_result_pdf
       get :employee_structure
+      get :emp_payslip
 
     end
     member do
