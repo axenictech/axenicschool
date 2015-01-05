@@ -13,10 +13,11 @@
             <th>Action</th>
           </tr>
         </thead>
+           <tr>
+           <td colspan="4"><%=employee_not_found!%></td>
+          </tr>
         <tbody>
-        <% if @employees.empty? %>
-		  <tr><td>Recorde Not Found</td></tr>
-		<%else%>
+  
 		  <% @employees.each do |emp| %>
           <tr>
             <td><%=Employee.find(emp).first_name%></td>
@@ -25,7 +26,7 @@
             </td>
           </tr>
           <% end %>
-        <% end %>
+      
         </tbody>
       </table>
     </div>

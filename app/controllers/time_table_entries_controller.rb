@@ -4,21 +4,19 @@ class TimeTableEntriesController < ApplicationController
     @time = TimeTable.shod(params[:format])
     flash[:notice] = t('time_table') + "#{@time.start_date} - #{@time.end_date}"
     @batches = Batch.includes(:course).all
-    @sub = params[:sub_id]
-    @times = params[:time_id]
     authorize! :read, @time
   end
 
   def select
     @time = params[:format]
-    @batch = Batch.find(params[:batch][:id])
+    @batch = Batch.shod(params[:batch][:id])
     @class_timing = @batch.class_timings.is_break
     @subjects = @batch.subjects.all
     authorize! :read, TimeTableEntry
   end
 
   def select_subject
-    @subject = Subject.find(params[:sub][:subject_id])
+    @subject = Subject.shod(params[:sub][:subject_id])
     @teachers = EmployeeSubject.where(subject_id: @subject.id)
     authorize! :read, TimeTableEntry
   end
@@ -28,8 +26,8 @@ class TimeTableEntriesController < ApplicationController
     @weekday = params[:weekday_id]
     @teacher = params[:teacher]
     @time = params[:time_table_id]
-    @subject = Subject.find(params[:subject_id])
-    @em = Employee.find(params[:teacher])
+    @subject = Subject.shod(params[:subject_id])
+    @em = Employee.shod(params[:teacher])
     @batch = @subject.batch
     if TimeTableEntry.max_day(@em, @weekday, @time)
       flash[:alert] = t('max_hours_day_exceeded')
@@ -38,7 +36,7 @@ class TimeTableEntriesController < ApplicationController
         if TimeTableEntry.max_subject(@subject, @time)
           flash[:alert] = t('subject_exceeded')
         else
-          @assign_time = TimeTableEntry.create(batch_id: @batch.id,class_timing_id: @class_timing_id, weekday_id: @weekday, employee_id: @teacher, subject_id: @subject.id, time_table_id: @time)
+          @assign_time = TimeTableEntry.create(batch_id: @batch.id, class_timing_id: @class_timing_id, weekday_id: @weekday, employee_id: @teacher, subject_id: @subject.id, time_table_id: @time)
         end
       else
         flash[:alert] = t('max_hours_week_exceeded')
@@ -52,7 +50,7 @@ class TimeTableEntriesController < ApplicationController
 
   def delete_time
     authorize! :delete, @delete_time
-    @delete_time = TimeTableEntry.find(params[:format])
+    @delete_time = TimeTableEntry.shod(params[:format])
     @delete_time.destroy
     @batch = @delete_time.batch
     @class_timing = @batch.class_timings.is_break
@@ -62,7 +60,7 @@ class TimeTableEntriesController < ApplicationController
   end
 
   def new
-    @timetable = TimeTable.find(params[:format])
+    @timetable = TimeTable.shod(params[:format])
     @batches = Batch.all
     authorize! :create, @timetable
   end

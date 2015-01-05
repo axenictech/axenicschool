@@ -1,6 +1,7 @@
+# Finance Controller
 class FinanceController < ApplicationController
   def transaction_category
-    @transaction_categories = FinanceTransactionCategory.all
+    @transaction_categories ||= FinanceTransactionCategory.all
     authorize! :read, @transaction_categories.last
   end
 
@@ -10,33 +11,31 @@ class FinanceController < ApplicationController
   end
 
   def create_transaction_category
-    @transaction_category = FinanceTransactionCategory.new(transaction_category_params)
-    if @transaction_category.save
-      flash[:notice] = 'Transaction category successfully created...'
-    end
-    @transaction_categories = FinanceTransactionCategory.all
+    @transaction_category = FinanceTransactionCategory.new\
+    (transaction_category_params)
+    @transaction_category.save
+    flash[:notice] = t('transaction_category_create')
+    @transaction_categories ||= FinanceTransactionCategory.all
   end
 
   def edit_transaction_category
-    @transaction_category = FinanceTransactionCategory.find(params[:id])
+    @transaction_category = FinanceTransactionCategory.shod(params[:id])
     authorize! :update, @transaction_category
   end
 
   def update_transaction_category
-    @transaction_category = FinanceTransactionCategory.find(params[:id])
-    if @transaction_category.update(transaction_category_params)
-      flash[:notice] = 'Transaction category successfully updated...'
-    end
-    @transaction_categories = FinanceTransactionCategory.all
+    @transaction_category = FinanceTransactionCategory.shod(params[:id])
+    @transaction_category.update(transaction_category_params)
+    flash[:notice] = t('transaction_category_update')
+    @transaction_categories ||= FinanceTransactionCategory.all
   end
 
   def delete_transaction_category
+    @transaction_category = FinanceTransactionCategory.shod(params[:id])
     authorize! :delete, @transaction_category
-    @transaction_category = FinanceTransactionCategory.find(params[:id])
-    if @transaction_category.destroy
-      flash[:notice] = 'Transaction category successfully deleted...'
-    end
-    @transaction_categories = FinanceTransactionCategory.all
+    @transaction_category.destroy
+    flash[:notice] = t('transaction_category_delete')
+    redirect_to transaction_category_finance_index_path
   end
 
   def donation
@@ -48,7 +47,7 @@ class FinanceController < ApplicationController
     @donation = FinanceDonation.new(donation_params)
     if @donation.save
       @donation.create_transaction
-      flash[:notice] = 'Donation accepted'
+      flash[:notice] = t('donation_create')
       redirect_to donation_receipt_finance_path(@donation)
     else
       render 'donation'
@@ -56,31 +55,31 @@ class FinanceController < ApplicationController
   end
 
   def donation_receipt
-    @donation = FinanceDonation.find(params[:id])
+    @donation = FinanceDonation.shod(params[:id])
     authorize! :read, @donation
   end
 
   def finance_donation_receipt
-    @donation = FinanceDonation.find(params[:id])
+    @donation = FinanceDonation.shod(params[:id])
     @general_setting = GeneralSetting.first
     render 'finance_donation_receipt', layout: false
   end
 
   def donors
-    @donors = FinanceDonation.all
-    authorize! :read, @donors
+    @donors ||= FinanceDonation.all
+    authorize! :read, @donors.first
   end
 
   def edit_donation
-    @donation = FinanceDonation.find(params[:id])
+    @donation = FinanceDonation.shod(params[:id])
     authorize! :update, @donation
   end
 
   def update_donation
-    @donation = FinanceDonation.find(params[:id])
+    @donation = FinanceDonation.shod(params[:id])
     if @donation.update(donation_params)
       @donation.update_transaction
-      flash[:notice] = 'Donation updated'
+      flash[:notice] = t('donation_update')
       redirect_to donors_finance_index_path
     else
       render 'edit_donation'
@@ -88,11 +87,11 @@ class FinanceController < ApplicationController
   end
 
   def delete_donation
+    @donation = FinanceDonation.shod(params[:id])
     authorize! :delete, @donation
-    @donation = FinanceDonation.find(params[:id])
     @donation.destroy
-    flash[:notice] = 'Donation deleted'
-    redirect_to donors_finance_index_path(@donation)
+    flash[:notice] = t('donation_delete')
+    redirect_to donation_finance_index_path
   end
 
   def new_asset
@@ -101,48 +100,45 @@ class FinanceController < ApplicationController
   end
 
   def create_asset
-    @assets = Asset.all
+    @assets ||= Asset.all
     @asset = Asset.new(asset_params)
-    if @asset.save
-      flash[:notice] = 'Asset created successfully'
-    end
+    @asset.save
+    flash[:notice] = t('asset_create')
   end
 
   def view_asset
-    @assets = Asset.all
+    @assets ||= Asset.all
     authorize! :read, @assets.first
   end
 
   def edit_asset
-    @asset = Asset.find(params[:id])
+    @asset = Asset.shod(params[:id])
     authorize! :update, @asset
   end
 
   def update_asset
-    @assets = Asset.all
-    @asset = Asset.find(params[:id])
-    if @asset.update(asset_params)
-      flash[:notice] = 'Asset updated successfully'
-    end
+    @asset = Asset.shod(params[:id])
+    @asset.update(asset_params)
+    @assets ||= Asset.all
+    flash[:notice] = t('asset_update')
   end
 
   def delete_asset
+    @asset = Asset.shod(params[:id])
     authorize! :delete, @asset
-    @assets = Asset.all
-    @asset = Asset.find(params[:id])
-    if @asset.destroy
-      flash[:notice] = 'Asset deleted successfully'
-    end
+    @asset.destroy
+    flash[:notice] = t('asset_delete')
+    redirect_to view_asset_finance_index_path
   end
 
   def asset_list
-    @assets = Asset.all
+    @assets ||= Asset.all
     @general_setting = GeneralSetting.first
     render 'asset_list', layout: false
   end
 
   def each_asset_view
-    @asset = Asset.find(params[:id])
+    @asset = Asset.shod(params[:id])
     authorize! :read, @asset
   end
 
@@ -153,147 +149,137 @@ class FinanceController < ApplicationController
 
   def create_liability
     @liability = Liability.new(liability_params)
-    if @liability.save
-      flash[:notice] = 'Liability created successfully'
-    end
+    @liability.save
+    flash[:notice] = t('liability_create')
   end
 
   def view_liability
-    @liabilities = Liability.all
+    @liabilities ||= Liability.all
     authorize! :read, @liabilities.first
   end
 
   def edit_liability
-    @liability = Liability.find(params[:id])
+    @liability = Liability.shod(params[:id])
     authorize! :update, @liability
   end
 
   def update_liability
-    @liabilities = Liability.all
-    @liability = Liability.find(params[:id])
-    if @liability.update(liability_params)
-      flash[:notice] = 'Liability updated successfully'
-    end
+    @liabilities ||= Liability.all
+    @liability = Liability.shod(params[:id])
+    @liability.update(liability_params)
+    flash[:notice] = t('liability_update')
   end
 
   def delete_liability
+    @liability = Liability.shod(params[:id])
     authorize! :delete, @liability
-    @liabilities = Liability.all
-    @liability = Liability.find(params[:id])
-    if @liability.destroy
-      flash[:notice] = 'Liability deleted successfully'
-    end
+    @liability.destroy
+    flash[:notice] = t('liability_delete')
+    redirect_to view_liability_finance_index_path
   end
 
   def each_liability_view
-    @liability = Liability.find(params[:id])
+    @liability = Liability.shod(params[:id])
     authorize! :read, @liability
   end
 
   def liability_list
-    @liabilities = Liability.all
+    @liabilities ||= Liability.all
     @general_setting = GeneralSetting.first
     render 'liability_list', layout: false
   end
 
   def automatic_transaction
-    @automatic_transactions = FinanceTransactionTrigger.all
+    @automatic_transactions ||= FinanceTransactionTrigger.all
     authorize! :read, @automatic_transactions.first
   end
 
   def new_automatic_transaction
     @automatic_transaction = FinanceTransactionTrigger.new
-    @categories = FinanceTransactionCategory.all
+    @categories ||= FinanceTransactionCategory.all
     authorize! :create, @automatic_transaction
   end
 
   def create_automatic_transaction
-    @automatic_transaction = FinanceTransactionTrigger.new(auto_transaction_params)
-    if @automatic_transaction.save
-      flash[:notice] = 'Automatic transaction created successfully'
-    end
-    @automatic_transactions = FinanceTransactionTrigger.all
+    @automatic_transaction = FinanceTransactionTrigger.new\
+    (auto_transaction_params)
+    @automatic_transaction.save
+    flash[:notice] = t('automatic_transaction_create')
+    @automatic_transactions ||= FinanceTransactionTrigger.all
   end
 
   def edit_automatic_transaction
-    @automatic_transaction = FinanceTransactionTrigger.find(params[:id])
-    @categories = FinanceTransactionCategory.all
+    @automatic_transaction = FinanceTransactionTrigger.shod(params[:id])
+    @categories ||= FinanceTransactionCategory.all
     authorize! :update, @automatic_transaction
   end
 
   def update_automatic_transaction
-    @automatic_transaction = FinanceTransactionTrigger.find(params[:id])
-    if @automatic_transaction.update(auto_transaction_params)
-      flash[:notice] = 'Automatic transaction updated successfully'
-    end
-    @automatic_transactions = FinanceTransactionTrigger.all
+    @automatic_transaction = FinanceTransactionTrigger.shod(params[:id])
+    @automatic_transaction.update(auto_transaction_params)
+    flash[:notice] = t('automatic_transaction_update')
+    @automatic_transactions ||= FinanceTransactionTrigger.all
   end
 
   def delete_automatic_transaction
+    @automatic_transaction = FinanceTransactionTrigger.shod(params[:id])
     authorize! :delete, @automatic_transaction
-    @automatic_transaction = FinanceTransactionTrigger.find(params[:id])
-    if @automatic_transaction.destroy
-      flash[:notice] = 'Automatic transaction deleted successfully'
-    end
-    @automatic_transactions = FinanceTransactionTrigger.all
+    @automatic_transaction.destroy
+    flash[:notice] = t('automatic_transaction_delete')
+    redirect_to automatic_transaction_finance_index_path
   end
 
   def new_expense
     @transaction = FinanceTransaction.new
-    @categories = FinanceTransactionCategory.where(is_income: false)
+    @categories ||= FinanceTransactionCategory.expense
     authorize! :create, @transaction
   end
 
   def create_expense
     @transaction = FinanceTransaction.new(transaction_params)
     if @transaction.save
-      flash[:notice] = 'Expense has been added to the accounts'
+      flash[:notice] = t('expense_create')
       redirect_to new_expense_finance_index_path
     else
-      @categories = FinanceTransactionCategory.where(is_income: false)
+      @categories ||= FinanceTransactionCategory.expense
       render 'new_expense'
     end
   end
 
   def expense_list
     @start_date = params[:expense][:start_date].to_date
-    unless @start_date.nil?
-      @end_date = params[:expense][:end_date].to_date
-      unless @end_date.nil?
-        @expenses = FinanceTransaction.includes(:finance_transaction_category).where(transaction_date: @start_date..@end_date)
-      else
-        flash[:alert] = 'Please select end date'
-        render 'view_expense'
-      end
-    else
-      flash[:alert] = 'Please select start date'
+    @end_date = params[:expense][:end_date].to_date
+    if @end_date.nil? || @start_date.nil?
+      flash[:alert] = t('expense_error')
       render 'view_expense'
+    else
+      @expenses ||= FinanceTransaction.list(@start_date, @end_date)
     end
     authorize! :read, @expenses.first
   end
 
   def edit_expense
-    @transaction = FinanceTransaction.find(params[:id])
-    @categories = FinanceTransactionCategory.where(is_income: false)
+    @transaction = FinanceTransaction.shod(params[:id])
+    @categories ||= FinanceTransactionCategory.expense
     authorize! :update, @transaction
   end
 
   def update_expense
-    @transaction = FinanceTransaction.find(params[:id])
+    @transaction = FinanceTransaction.shod(params[:id])
     if @transaction.update(transaction_params)
-      flash[:notice] = 'Expense has been updated to the accounts'
+      flash[:notice] = t('expense_update')
       redirect_to view_expense_finance_index_path
     else
-      @categories = FinanceTransactionCategory.where(is_income: false)
+      @categories ||= FinanceTransactionCategory.expense
       render 'edit_expense'
     end
   end
 
   def delete_expense
+    @transaction = FinanceTransaction.shod(params[:id])
     authorize! :delete, @transaction
-    @transaction = FinanceTransaction.find(params[:id])
     @transaction.destroy
-    flash[:notice] = 'Expense has been deleted from accounts'
+    flash[:notice] = t('expense_delete')
     redirect_to view_expense_finance_index_path
   end
 
@@ -301,66 +287,61 @@ class FinanceController < ApplicationController
     @general_setting = GeneralSetting.first
     @start_date = params[:start_date].to_date
     @end_date = params[:end_date].to_date
-    @expenses = FinanceTransaction.where(transaction_date: @start_date..@end_date)
+    @expenses ||= FinanceTransaction.list(@start_date, @end_date)
     render 'finance_expense_report', layout: false
   end
 
   def new_income
     @transaction = FinanceTransaction.new
-    @categories = FinanceTransactionCategory.where(is_income: true)
+    @categories ||= FinanceTransactionCategory.income
     authorize! :create, @transaction
   end
 
   def create_income
     @transaction = FinanceTransaction.new(transaction_params)
     if @transaction.save
-      flash[:notice] = 'Income has been added to the accounts'
+      flash[:notice] = t('income_create')
       redirect_to new_income_finance_index_path
     else
-      @categories = FinanceTransactionCategory.where(is_income: true)
+      @categories ||= FinanceTransactionCategory.income
       render 'new_income'
     end
   end
 
   def income_list
     @start_date = params[:income][:start_date].to_date
-    unless @start_date.nil?
-      @end_date = params[:income][:end_date].to_date
-      unless @end_date.nil?
-        @incomes = FinanceTransaction.where(transaction_date: @start_date..@end_date)
-      else
-        flash[:alert] = 'Please select end date'
-        render 'view_income'
-      end
-    else
-      flash[:alert] = 'Please select start date'
+    @end_date = params[:income][:end_date].to_date
+    if @start_date.nil? || @end_date.nil?
+      flash[:alert] = t('income_error')
       render 'view_income'
+    else
+      @incomes ||= FinanceTransaction.list(@start_date, @end_date)
     end
     authorize! :read, @incomes.first
   end
 
   def edit_income
-    @transaction = FinanceTransaction.find(params[:id])
-    @categories = FinanceTransactionCategory.where(is_income: true)
+    @transaction = FinanceTransaction.shod(params[:id])
+    @categories ||= FinanceTransactionCategory.income
     authorize! :create, @transaction
   end
 
   def update_income
-    @transaction = FinanceTransaction.find(params[:id])
+    @transaction = FinanceTransaction.shod(params[:id])
     if @transaction.update(transaction_params)
-      flash[:notice] = 'Income has been updated to the accounts'
+      flash[:notice] = t('income_update')
       redirect_to view_income_finance_index_path
     else
-      @categories = FinanceTransactionCategory.where(is_income: true)
+      @categories ||= FinanceTransactionCategory.income
       render 'edit_income'
     end
   end
 
   def delete_income
+    @transaction = FinanceTransaction.shod(params[:id])
     authorize! :delete, @transaction
-    @transaction = FinanceTransaction.find(params[:id])
     @transaction.destroy
-    flash[:notice] = 'Income has been deleted from accounts'
+    flash[:notice] = t('income_delete')
     redirect_to view_income_finance_index_path
   end
 
@@ -368,23 +349,18 @@ class FinanceController < ApplicationController
     @general_setting = GeneralSetting.first
     @start_date = params[:start_date].to_date
     @end_date = params[:end_date].to_date
-    @incomes = FinanceTransaction.where(transaction_date: @start_date..@end_date)
+    @incomes ||= FinanceTransaction.list(@start_date, @end_date)
     render 'finance_income_report', layout: false
   end
 
   def transactions_list
     @start_date = params[:transaction][:start_date].to_date
-    unless @start_date.nil?
-      @end_date = params[:transaction][:end_date].to_date
-      unless @end_date.nil?
-        @categories = FinanceTransactionCategory.all
-      else
-        flash[:alert] = 'Please select end date'
-        render 'transaction_report'
-      end
-    else
-      flash[:alert] = 'Please select start date'
+    @end_date = params[:transaction][:end_date].to_date
+    if @start_date.nil? || @end_date.nil?
+      flash[:alert] = t('transaction_error')
       render 'transaction_report'
+    else
+      @categories ||= FinanceTransactionCategory.all
     end
     authorize! :read, @categories.first
   end
@@ -392,8 +368,8 @@ class FinanceController < ApplicationController
   def expense_details
     @start_date = params[:start_date].to_date
     @end_date = params[:end_date].to_date
-    @category = FinanceTransactionCategory.find(params[:category])
-    @expenses = @category.finance_transactions.where(transaction_date: @start_date..@end_date)
+    @category = FinanceTransactionCategory.shod(params[:category])
+    @expenses ||= @category.finance_transactions.list(@start_date, @end_date)
     render 'expense_list'
     authorize! :read, @category
   end
@@ -401,8 +377,8 @@ class FinanceController < ApplicationController
   def income_details
     @start_date = params[:start_date].to_date
     @end_date = params[:end_date].to_date
-    @category = FinanceTransactionCategory.find(params[:category])
-    @incomes = @category.finance_transactions.where(transaction_date: @start_date..@end_date)
+    @category = FinanceTransactionCategory.shod(params[:category])
+    @incomes ||= @category.finance_transactions.list(@start_date, @end_date)
     render 'income_list'
     authorize! :read, @category
   end
@@ -411,7 +387,7 @@ class FinanceController < ApplicationController
     @general_setting = GeneralSetting.first
     @start_date = params[:start_date].to_date
     @end_date = params[:end_date].to_date
-    @categories = FinanceTransactionCategory.all
+    @categories ||= FinanceTransactionCategory.all
     render 'finance_transaction_report', layout: false
   end
 
@@ -420,197 +396,156 @@ class FinanceController < ApplicationController
     @end_date1 = params[:transaction][:end_date1].to_date
     @start_date2 = params[:transaction][:start_date2].to_date
     @end_date2 = params[:transaction][:end_date2].to_date
-    unless @start_date1.nil? || @start_date2.nil?
-      unless @end_date1.nil? || @end_date2.nil?
-        @categories = FinanceTransactionCategory.all
-      else
-        flash[:alert] = 'Please select end date'
-        render 'compare_report'
-      end
+    if @start_date1.nil? || @start_date2.nil? \
+      || @end_date1.nil? || @end_date2.nil?
+      render 'compare_report', alert: t('transaction_error')
     else
-      flash[:alert] = 'Please select start date'
-      render 'compare_report'
+      @categories ||= FinanceTransactionCategory.all
     end
-    authorize! :read, @categories.first
   end
 
   def new_master_category
     @master_category = FinanceFeeCategory.new
-    @batches = Batch.all
+    @batches ||= Batch.all
     authorize! :create, @master_category
   end
 
   def assign_batch
-    @batches = Batch.all
+    @batches ||= Batch.all
   end
 
   def remove_batch
-    @batches = Batch.all
+    @batches ||= Batch.all
   end
 
   def create_master_category
     @master_category = FinanceFeeCategory.new(fee_category_params)
-    if @master_category.save
-      if params[:batches].present?
-        params[:batches].each do |batch|
-          BatchesFinanceFeeCategory.create(batch_id: batch, finance_fee_category_id: @master_category.id)
-        end
-      end
-      flash[:notice] = 'Finance fee category created successfully'
-    end
+    @master_category.save
+    @master_category.fee_category(params[:batches])
+    flash[:notice] = t('fee_category_create')
   end
 
   def fees_list
-    @batch = Batch.find(params[:batch][:id])
-    @master_categories = @batch.finance_fee_categories.all
+    @batch = Batch.shod(params[:batch][:id])
+    @master_categories ||= @batch.finance_fee_categories
     authorize! :read, @master_categories.first
   end
 
   def edit_master_category
-    @batch = Batch.find(params[:id])
-    @master_category = FinanceFeeCategory.find(params[:id])
+    @batch = Batch.shod(params[:id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
     authorize! :update, @master_category
   end
 
   def update_master_category
-    @batch = Batch.find(params[:id])
-    @master_category = @batch.finance_fee_categories.find(params[:id])
-    if @master_category.update(fee_category_params)
-      flash[:notice] = 'Finance fee category updated successfully'
-    end
-    @master_categories = @batch.finance_fee_categories.all
+    @batch = Batch.shod(params[:id])
+    @master_category = @batch.finance_fee_categories.shod(params[:id])
+    @master_category.update(fee_category_params)
+    flash[:notice] = t('fee_category_update')
+    @master_categories ||= @batch.finance_fee_categories
   end
 
   def delete_master_category
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = @batch.finance_fee_categories.shod(params[:id])
     authorize! :delete, @master_category
-    @batch = Batch.find(params[:batch_id])
-    @master_category = @batch.finance_fee_categories.find(params[:id])
-    if @master_category.destroy
-      flash[:notice] = 'Finance fee category deleted successfully'
-    end
-    @master_categories = @batch.finance_fee_categories.all
+    @master_category.destroy
+    flash[:notice] = t('fee_category_delete')
+    @master_categories ||= @batch.finance_fee_categories
   end
 
   def new_fees_particular
     @fee = FinanceFeeParticular.new
-    @categories = FinanceFeeCategory.all
+    @categories ||= FinanceFeeCategory.all
     authorize! :create, @fee
   end
 
   def category_batch
-    @master_category = FinanceFeeCategory.find(params[:id])
-    @batches = @master_category.batches
+    @master_category = FinanceFeeCategory.shod(params[:id])
+    @batches ||= @master_category.batches
     authorize! :read, @master_category
   end
 
   def create_fees_particular
-    batches = params[:batches]
-    @categories = FinanceFeeCategory.all
+    @categories ||= FinanceFeeCategory.all
     @fee = FinanceFeeParticular.new(fee_particular_params)
-    error = false
-    if batches.present?
-      batches.each do |b|
-        if params[:mode] == 'admission_no'
-          @fee.admission_no = params[:admission_no]
-          @fee.batch_id = b
-        elsif params[:mode] == 'category'
-          @fee.category_id = params[:category][:id]
-          @fee.batch_id = b
-        else
-          @fee.batch_id = b
-        end
-        unless @fee.save
-          error = true
-        end
-      end
-      unless error == true
-        flash[:notice] = 'Finance fee particular created successfully'
-        redirect_to master_fees_finance_index_path
-      else
-        render 'new_fees_particular'
-      end
-    else
-      flash[:alert] = 'Please select batch...'
+    result = FinanceFeeParticular.create_fee(fee_particular_params\
+      , params[:batches], params[:mode]\
+      , params[:admission_no], params[:category])
+    if result == 1
       render 'new_fees_particular'
+    else
+      flash[:notice] = t('fee_create')
+      redirect_to master_fees_finance_index_path
     end
   end
 
   def master_category_particular
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:id])
-    @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
+    @particular_fees ||= @master_category.particulars(@batch.id)
     authorize! :read, @master_category
   end
 
   def new_particular_fee
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:id])
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
     @fee = FinanceFeeParticular.new
     authorize! :create, @fee
   end
 
   def student_admission_no
-    @master_category = FinanceFeeCategory.find(params[:id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
     @fee = FinanceFeeParticular.new
     authorize! :read, @fee
   end
 
   def student_category
-    @master_category = FinanceFeeCategory.find(params[:id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
     @fee = FinanceFeeParticular.new
     authorize! :read, @fee
   end
 
   def create_particular_fee
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:id])
-    @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
+    @particular_fees ||= @master_category.particulars(@batch.id)
     @fee = @master_category.finance_fee_particulars.new(fee_particular_params)
-    if params[:mode] == 'admission_no'
-      @fee.admission_no = params[:admission_no]
-      @fee.batch_id = @batch.id
-    elsif params[:mode] == 'category'
-      @fee.category_id = params[:category][:id]
-      @fee.batch_id = @batch.id
-    else
-      @fee.batch_id = @batch.id
-    end
-    if @fee.save
-      flash[:notice] = 'Finance fee particulars created successfully'
-    end
+    @fee.set(params[:mode], params[:admission_no]\
+      , params[:category], @batch.id)
+    @fee.save
+    flash[:notice] = t('fee_create')
   end
 
   def edit_particular_fee
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:master_id])
-    @fee = @master_category.finance_fee_particulars.find(params[:id])
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:master_id])
+    @fee = @master_category.finance_fee_particulars.shod(params[:id])
     authorize! :update, @fee
   end
 
   def update_particular_fee
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:master_id])
-    @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
-    @fee = @master_category.finance_fee_particulars.find(params[:id])
-    if @fee.update(fee_particular_params)
-      flash[:notice] = 'Finance fee particulars updated successfully'
-    end
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:master_id])
+    @particular_fees ||= @master_category.particulars(@batch.id)
+    @fee = @master_category.finance_fee_particulars.shod(params[:id])
+    @fee.update(fee_particular_params)
+    flash[:notice] = t('fee_update')
   end
 
-  def delete_particular_fee 
+  def delete_particular_fee
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
+    @fee = @master_category.finance_fee_particulars.shod(params[:fee])
     authorize! :delete, @fee
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:id])
-    @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
-    @fee = @master_category.finance_fee_particulars.find(params[:fee])
-    if @fee.destroy
-      flash[:notice] = 'Finance fee particulars deleted successfully'
-    end
+    @particular_fees ||= @master_category.particulars(@batch.id)
+    @fee.destroy
+    flash[:notice] = t('fee_delete')
   end
 
   def new_fee_discount
     @discount = FeeDiscount.new
-    @categories = FinanceFeeCategory.all
+    @categories ||= FinanceFeeCategory.all
     authorize! :create, @discount
   end
 
@@ -619,393 +554,354 @@ class FinanceController < ApplicationController
   end
 
   def create_fee_discount
-    batches = params[:batches]
-    @categories = FinanceFeeCategory.all
+    @categories ||= FinanceFeeCategory.all
     @discount = FeeDiscount.new(fee_discount_params)
-    error = false
-    if batches.present?
-      batches.each do |b|
-        if @discount.type == 'Student'
-          @discount.admission_no = params[:admission_no]
-          @discount.batch_id = b
-        elsif @discount.type == 'Student Category'
-          @discount.category_id = params[:category][:id]
-          @discount.batch_id = b
-        else
-          @discount.batch_id = b
-        end
-        unless @discount.save
-          error = true
-        end
-      end
-      unless error == true
-        flash[:notice] = 'Finance fee discount created successfully'
-        redirect_to new_fee_discount_finance_index_path
-      else
-        render 'new_fee_discount'
-      end
-    else
-      flash[:alert] = 'Please select batch...'
+    result = FeeDiscount.create_discount(fee_discount_params\
+      , params[:batches], params[:admission_no], params[:category])
+    if result == 1
       render 'new_fee_discount'
+    else
+      flash[:notice] = t('discount_create')
+      redirect_to new_fee_discount_finance_index_path
     end
   end
 
   def fee_category
-    @batch = Batch.find(params[:id])
-    @categories = @batch.finance_fee_categories.all
+    @batch = Batch.shod(params[:id])
+    @categories ||= @batch.finance_fee_categories
     authorize! :read, @categories.first
   end
 
   def discount_view
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:id])
-    @discounts = @master_category.fee_discounts.where(batch_id: @batch.id)
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:id])
+    @discounts ||= @master_category.discounts(@batch.id)
     authorize! :read, @discounts.first
   end
 
   def edit_fee_discount
-    @batch = Batch.find(params[:id])
-    @master_category = FinanceFeeCategory.find(params[:master_id])
-    @discount = @master_category.fee_discounts.find(params[:discount_id])
+    @batch = Batch.shod(params[:id])
+    @master_category = FinanceFeeCategory.shod(params[:master_id])
+    @discount = @master_category.fee_discounts.shod(params[:discount_id])
     authorize! :update, @discount
   end
 
   def update_fee_discount
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:master_id])
-    @discount = @master_category.fee_discounts.find(params[:id])
-    if @discount.update(fee_discount_params)
-      flash[:notice] = 'Finance fee discount updated successfully'
-    end
-    @discounts = @master_category.fee_discounts.where(batch_id: @batch.id)
+    @batch = Batch.shod(params[:batch_id])
+    @master_category = FinanceFeeCategory.shod(params[:master_id])
+    @discount = @master_category.fee_discounts.shod(params[:id])
+    @discount.update(fee_discount_params)
+    flash[:notice] = t('discount_update')
+    @discounts ||= @master_category.discounts(@batch.id)
   end
 
   def delete_fee_discount
+    @batch = Batch.shod(params[:id])
+    @master_category = FinanceFeeCategory.shod(params[:master_id])
+    @discount = @master_category.fee_discounts.shod(params[:discount_id])
     authorize! :delete, @discount
-    @batch = Batch.find(params[:id])
-    @master_category = FinanceFeeCategory.find(params[:master_id])
-    @discount = @master_category.fee_discounts.find(params[:discount_id])
-    if @discount.destroy
-      flash[:notice] = 'Finance fee discount deleted successfully'
-    end
-    @discounts = @master_category.fee_discounts.where(batch_id: @batch.id)
+    @discount.destroy
+    flash[:notice] = t('discount_delete')
+    @discounts ||= @master_category.discounts(@batch.id)
   end
 
   def new_fee_collection
     @collection = FinanceFeeCollection.new
-    @categories = FinanceFeeCategory.all
+    @categories ||= FinanceFeeCategory.all
     authorize! :create, @collection
   end
 
   def create_fee_collection
     @collection = FinanceFeeCollection.new(collection_params)
-    @master_category = @collection.finance_fee_category
-    batches = params[:batches]
-    error = false
-    if batches.present?
-      batches.each do |b|
-        @collection.batch_id = b
-        unless @collection.save
-          error = true
-        else
-          @collection.create_collection_particular(b, @master_category)
-          @collection.create_fee_collection_discount(b, @master_category)
-        end
-      end
-      unless error == true
-        flash[:notice] = 'Finance fee collection created successfully'
-        redirect_to new_fee_collection_finance_index_path
-      else
-        @categories = FinanceFeeCategory.all
-        render 'new_fee_collection'
-      end
-    else
-      @categories = FinanceFeeCategory.all
-      flash[:alert] = 'Please select batch...'
+    result = FinanceFeeCollection.fee(collection_params, params[:batches])
+    if result == true
+      @categories ||= FinanceFeeCategory.all
       render 'new_fee_collection'
+    else
+      flash[:notice] = t('collection_create')
+      redirect_to new_fee_collection_finance_index_path
     end
   end
 
   def view_fee_collection
-    @batch = Batch.find(params[:id])
-    @collections = @batch.finance_fee_collections.all
+    @batch = Batch.shod(params[:id])
+    @collections ||= @batch.finance_fee_collections
     authorize! :read, @collections.first
   end
 
   def edit_fee_collection
-    @batch = Batch.find(params[:id])
-    @collections = @batch.finance_fee_collections.all
-    @collection = @batch.finance_fee_collections.find(params[:collection_id])
+    @batch = Batch.shod(params[:id])
+    @collections ||= @batch.finance_fee_collections
+    @collection = @batch.finance_fee_collections.shod(params[:collection_id])
     authorize! :update, @collection
   end
 
   def update_fee_collection
-    @batch = Batch.find(params[:id])
-    @collections = @batch.finance_fee_collections.all
-    @collection = @batch.finance_fee_collections.find(params[:collection_id])
-    if @collection.update(collection_params)
-      flash[:notice] = 'Finance fee collection updated successfully'
-    end
+    @batch = Batch.shod(params[:batch_id])
+    @collections ||= @batch.finance_fee_collections
+    @collection = @batch.finance_fee_collections.shod(params[:id])
+    @collection.update(collection_params)
+    flash[:notice] = t('collection_update')
   end
 
   def delete_fee_collection
+    @batch = Batch.shod(params[:id])
+    @collection = @batch.finance_fee_collections.shod(params[:collection_id])
     authorize! :delete, @collection
-    @batch = Batch.find(params[:id])
-    @collections = @batch.finance_fee_collections.all
-    @collection = @batch.finance_fee_collections.find(params[:collection_id])
-    if @collection.destroy
-      flash[:notice] = 'Finance fee collection deleted successfully'
-    end
+    @collections ||= @batch.finance_fee_collections
+    @collection.destroy
+    flash[:notice] = t('collection_delete')
   end
 
   def collection_details_view
-    @collection = FinanceFeeCollection.find(params[:id])
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
+    @collection = FinanceFeeCollection.shod(params[:id])
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
     authorize! :read, @collection
   end
 
   def fees_submission_batch
-    @batches = Batch.includes(:course).all
-    @collections = Batch.first.finance_fee_collections if Batch.first
+    @batches ||= Batch.includes(:course).all
+    @collections ||= Batch.first.finance_fee_collections
     authorize! :read, @collections.first
   end
 
   def fee_collection_date
-    @batch = Batch.find(params[:id])
-    @collections = @batch.finance_fee_collections.all
+    @batch = Batch.shod(params[:id])
+    @collections ||= @batch.finance_fee_collections
     authorize! :read, @collections.first
   end
 
   def student_fees
-    @collection = FinanceFeeCollection.find(params[:id])
+    @collection = FinanceFeeCollection.shod(params[:id])
     @category = @collection.finance_fee_category
-    @finance_fees = @collection.finance_fees
+    @finance_fees ||= @collection.finance_fees
     @student = @finance_fees.first.student
-    @previous = @finance_fees.find_by_student_id(@student.id).id - 1
-    @next = @finance_fees.find_by_student_id(@student.id).id + 1
-    @fee = @finance_fees.find_by_student_id(@student.id)
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
-    @transactions = @fee.finance_transactions
-    @fines = @fee.finance_fines
+    @previous = @collection.previous(@student)
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
+    student_fee2
     authorize! :read, @collection
+  end
+
+  def student_fee2
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
+    @transactions ||= @fee.finance_transactions
+    @fines ||= @fee.finance_fines
   end
 
   def student_fees_details
-    @collection = FinanceFeeCollection.find(params[:id])
+    @collection = FinanceFeeCollection.shod(params[:id])
     @category = @collection.finance_fee_category
-    @finance_fees = @collection.finance_fees
-    @finance_fee = @finance_fees.find(params[:finance_fee_id])
+    @finance_fees ||= @collection.finance_fees
+    @finance_fee = @finance_fees.shod(params[:finance_fee_id])
     @student = @finance_fee.student
-    @previous = @finance_fees.find_by_student_id(@student.id).id - 1
-    if @student.id == @finance_fees.last.student.id
-      @previous -= 1
-    end
-    @next = @finance_fees.find_by_student_id(@student.id).id + 1
-    @fee = @finance_fees.find_by_student_id(@student.id)
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
-    @transactions = @fee.finance_transactions
-    @fines = @fee.finance_fines
+    @previous = @collection.previous(@student)
+    student_fees_details2
     authorize! :read, @collection
+  end
+
+  def student_fees_details2
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
+    @transactions ||= @fee.finance_transactions
+    @fines ||= @fee.finance_fines
   end
 
   def pay_fine
-    @student_fine = FinanceFee.find(params[:finance_fee_id])
+    @student_fine = FinanceFee.shod(params[:finance_fee_id])
     @student_fine.create_fine(params[:fine])
-    @collection = FinanceFeeCollection.find(params[:id])
+    @collection = FinanceFeeCollection.shod(params[:id])
     @category = @collection.finance_fee_category
-    @finance_fees = @collection.finance_fees
-    @finance_fee = @finance_fees.find(params[:finance_fee_id])
+    @finance_fees ||= @collection.finance_fees
+    @finance_fee = @finance_fees.shod(params[:finance_fee_id])
     @student = @finance_fee.student
-    @previous = @finance_fees.find_by_student_id(@student.id).id - 1
-    if @student.id == @finance_fees.last.student.id
-      @previous -= 1
-    end
-    @next = @finance_fees.find_by_student_id(@student.id).id + 1
-    @fee = @finance_fees.find_by_student_id(@student.id)
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
-    @transactions = @fee.finance_transactions
-    @fines = @fee.finance_fines
+    pay_fine2
     authorize! :read, @collection
   end
 
+  def pay_fine2
+    @previous = @collection.previous(@student)
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
+    @transactions ||= @fee.finance_transactions
+    @fines ||= @fee.finance_fines
+  end
+
   def pay_fee
-    @student_fee = FinanceFee.find(params[:finance_fee_id])
-    fine = false
-    @student_fee.create_transaction(params[:amount], fine)
-    if params[:amount] == params[:pay_amount]
-      @student_fee.update(is_paid: true)
-    end
-    @collection = FinanceFeeCollection.find(params[:id])
+    @student_fee = FinanceFee.shod(params[:finance_fee_id])
+    @student_fee.create_transaction(params[:amount], false)
+    @student_fee.update(is_paid: true) if params[:amount] \
+    == params[:pay_amount]
+    @collection = FinanceFeeCollection.shod(params[:id])
     @category = @collection.finance_fee_category
-    @finance_fees = @collection.finance_fees
-
-    @finance_fee = @finance_fees.find(params[:finance_fee_id])
-    @student = @finance_fee.student
-    @previous = @finance_fees.find_by_student_id(@student.id).id - 1
-
-    if @student.id == @finance_fees.last.student.id
-      @previous -= 1
-    end
-
-    @next = @finance_fees.find_by_student_id(@student.id).id + 1
-    @fee = @finance_fees.find_by_student_id(@student.id)
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
-    @transactions = @fee.finance_transactions
-    @fines = @fee.finance_fines
+    @finance_fees ||= @collection.finance_fees
+    @finance_fee = @finance_fees.shod(params[:finance_fee_id])
+    pay_fee2
     authorize! :read, @collection
+  end
+
+  def pay_fee2
+    @student = @finance_fee.student
+    @previous = @collection.previous(@student)
+    @next = @collection.next(@student)
+    @fee = @collection.fee(@student)
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
+    @transactions ||= @fee.finance_transactions
+    @fines ||= @fee.finance_fines
   end
 
   def student_fee_receipt
     @general_setting = GeneralSetting.first
-    @collection = FinanceFeeCollection.find(params[:id])
+    @collection = FinanceFeeCollection.shod(params[:id])
     @category = @collection.finance_fee_category
-    @finance_fees = @collection.finance_fees
-    @finance_fee = @finance_fees.find(params[:finance_fee_id])
-    @student = @finance_fee.student
-    @fee = @finance_fees.find_by_student_id(@student.id)
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
-    @fines = @fee.finance_fines
+    @finance_fees ||= @collection.finance_fees
+    @finance_fee = @finance_fees.shod(params[:finance_fee_id])
+    student_fee_receipt2
     render 'student_fee_receipt', layout: false
   end
 
+  def student_fee_receipt2
+    @student = @finance_fee.student
+    @fee = @collection.fee(@student)
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
+    @fines ||= @fee.finance_fines
+  end
+
   def search_student
-    @students = Student.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%'
-        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%' OR admission_no like '#{params[:search]}%'")
+    @students = Student.search(params[:search], 'present')
   end
 
   def fees_collection_student
-    @student = Student.find(params[:id])
-    @collections = @student.finance_fee_collections
+    @student = Student.shod(params[:id])
+    @collections ||= @student.finance_fee_collections
     authorize! :read, @collections.first
   end
 
   def student_fees_submission
-    @student = Student.find(params[:student_id])
-    @collection = FinanceFeeCollection.find(params[:collection_id])
+    @student = Student.shod(params[:student_id])
+    @collection = FinanceFeeCollection.shod(params[:collection_id])
     @category = @collection.finance_fee_category
-    @finance_fees = @collection.finance_fees
-    @fee = @finance_fees.find_by_student_id(@student.id)
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
-    @transactions = @fee.finance_transactions
-    @fines = @fee.finance_fines
+    @finance_fees ||= @collection.finance_fees
+    @fee = @collection.fee(@student)
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
+    @transactions ||= @fee.finance_transactions
+    @fines ||= @fee.finance_fines
     authorize! :read, @collection
   end
 
   def student_search
-    @students = Student.where("concat_ws(' ',first_name,last_name)like '#{params[:search]}%'
-        OR concat_ws(' ',last_name,first_name)like '#{params[:search]}%' OR admission_no like '#{params[:search]}%'")
+    @students = Student.search(params[:search], 'present')
   end
 
   def fee_collection_structure
-    @student = Student.find(params[:id])
-    @collections = @student.finance_fee_collections
+    @student = Student.shod(params[:id])
+    @collections ||= @student.finance_fee_collections
     authorize! :read, @collections.first
   end
 
   def student_fees_structure
-    @student = Student.find(params[:student_id])
-    @collection = FinanceFeeCollection.find(params[:collection_id])
+    @student = Student.shod(params[:student_id])
+    @collection = FinanceFeeCollection.shod(params[:collection_id])
     @category = @collection.finance_fee_category
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
     authorize! :read, @collection
   end
 
   def fee_structure
     @general_setting = GeneralSetting.first
-    @student = Student.find(params[:student_id])
-    @collection = FinanceFeeCollection.find(params[:collection_id])
+    @student = Student.shod(params[:student_id])
+    @collection = FinanceFeeCollection.shod(params[:collection_id])
     @category = @collection.finance_fee_category
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
     render 'fee_structure', layout: false
   end
 
   def fees_defaulters
-    @courses = Course.all
-    @batches = Course.first.batches if Course.first
-    @collections = Batch.first.finance_fee_collections if Batch.first
+    @courses ||= Course.all
+    @batches ||= Course.first.batches
+    @collections ||= Batch.first.finance_fee_collections
     authorize! :read, @collections.first
   end
 
   def batch_choice
-    @course = Course.find(params[:id])
-    @batches = @course.batches
+    @course = Course.shod(params[:id])
+    @batches ||= @course.batches
   end
 
   def collection_choice
-    @batch = Batch.find(params[:id])
-    @collections = @batch.finance_fee_collections
+    @batch = Batch.shod(params[:id])
+    @collections ||= @batch.finance_fee_collections
     authorize! :read, @collections.first
   end
 
   def defaulter_students
-    @collection = FinanceFeeCollection.find(params[:id])
-    @students = @collection.students
+    @collection = FinanceFeeCollection.shod(params[:id])
+    @students ||= @collection.students
     authorize! :read, @collection
   end
 
   def fees_defaulters_list
     @general_setting = GeneralSetting.first
-    @collection = FinanceFeeCollection.find(params[:id])
-    @students = @collection.students
+    @collection = FinanceFeeCollection.shod(params[:id])
+    @students ||= @collection.students
     render 'fees_defaulters_list', layout: false
   end
 
   def pay_fees_defaulters
-    @student = Student.find(params[:student_id])
-    @collection = FinanceFeeCollection.find(params[:collection_id])
+    @student = Student.shod(params[:student_id])
+    @collection = FinanceFeeCollection.shod(params[:collection_id])
     @category = @collection.finance_fee_category
-    @finance_fees = @collection.finance_fees
-    @fee = @finance_fees.find_by_student_id(@student.id)
-    @particulars = @collection.fee_collection_particulars
-    @discounts = @collection.fee_collection_discounts
-    @transactions = @fee.finance_transactions
-    @fines = @fee.finance_fines
+    @finance_fees ||= @collection.finance_fees
+    @fee = @collection.fee(@student)
+    @particulars ||= @collection.fee_collection_particulars
+    @discounts ||= @collection.fee_collection_discounts
+    @transactions ||= @fee.finance_transactions
+    @fines ||= @fee.finance_fines
     authorize! :read, @collection
   end
 
   def approve_monthly_payslip
-    @salary_months = MonthlyPayslip.select(:salary_date).distinct
+    @salary_months ||= MonthlyPayslip.select(:salary_date).distinct
   end
 
   def approve_salary
-    @salary_months = MonthlyPayslip.where(salary_date: params[:date])
+    @salary_months ||= MonthlyPayslip.where(salary_date: params[:date])
     @salary = @salary_months.first
     @date = params[:date]
   end
 
   def approve
-    @salary_months = MonthlyPayslip.where(salary_date: params[:date])
+    @salary_months ||= MonthlyPayslip.where(salary_date: params[:date])
     @salary_months.each(&:approve_salary)
-    flash[:notice] = 'Payslip has been approved'
+    flash[:notice] = t('payslip_approve')
     redirect_to approve_monthly_payslip_finance_index_path
   end
 
   def view_monthly_payslip
-    @departments = EmployeeDepartment.all
-    @salary_months = MonthlyPayslip.select(:salary_date).distinct
+    @departments ||= EmployeeDepartment.all
+    @salary_months ||= MonthlyPayslip.select(:salary_date).distinct
   end
 
   def view_payslip
     @payslips = []
-    @department = EmployeeDepartment.find(params[:payslip][:department])
+    @department = EmployeeDepartment.shod(params[:payslip][:department])
     @date = params[:payslip][:date]
-    @employees = @department.employees
-    unless @employees.nil?
-      @employees.each do |e|
-        salary = e.monthly_payslips.find_by_salary_date(@date)
-        unless salary.nil?
-          @payslips << salary
-        end
-      end
+    @employees ||= @department.employees
+    return if @employees.nil?
+    @employees.each do |e|
+      salary = e.salary(@date)
+      @payslips << salary unless salary.nil?
     end
   end
 
@@ -1016,20 +912,20 @@ class FinanceController < ApplicationController
   end
 
   def view_employee_payslip
-    @employee = Employee.find(params[:id])
+    @employee = Employee.shod(params[:id])
     @date = params[:date]
-    @structures = @employee.employee_salery_structures
-    @salary = @employee.monthly_payslips.find_by_salary_date(@date)
-    @individual_salary = @employee.individual_payslip_categories.find_by_salary_date(@date)
+    @structures ||= @employee.employee_salery_structures
+    @salary = @employee.salary(@date)
+    @individual_salary = @employee.personal_salary(@date)
   end
 
   def employee_payslip
     @general_setting = GeneralSetting.first
-    @employee = Employee.find(params[:id])
+    @employee = Employee.shod(params[:id])
     @date = params[:date]
-    @structures = @employee.employee_salery_structures
-    @salary = @employee.monthly_payslips.find_by_salary_date(@date)
-    @individual_salary = @employee.individual_payslip_categories.find_by_salary_date(@date)
+    @structures ||= @employee.employee_salery_structures
+    @salary = @employee.salary(@date)
+    @individual_salary = @employee.personal_salary(@date)
     render 'employee_payslip', layout: false
   end
 

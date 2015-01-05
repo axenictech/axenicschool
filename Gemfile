@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -13,10 +13,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
 gem 'paperclip'
-gem 'font-awesome-rails', '~> 4.2.0.0'
 gem 'imagemagick-binaries'
 gem 'aws-sdk'
-gem 'ckeditor'
 gem 'devise'
 gem 'cancan'
 gem 'pdfkit'
@@ -34,7 +32,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring', group: :development
 gem 'decent_exposure'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
 gem 'bullet', group: :development
 gem 'brakeman', group: :development
 

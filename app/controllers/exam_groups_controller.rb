@@ -1,3 +1,4 @@
+# ExamGroupsController
 class ExamGroupsController < ApplicationController
   def select
     @course = Course.find(params[:course][:id])
@@ -8,7 +9,6 @@ class ExamGroupsController < ApplicationController
     @batch = Batch.find(params[:format])
     @exam_group = @batch.exam_groups.build
     @course = @batch.course
-    # authroize! :create, ExamGroup
   end
 
   def create
@@ -22,7 +22,6 @@ class ExamGroupsController < ApplicationController
   def edit
     @exam_group = ExamGroup.find(params[:id])
     @batch = @exam_group.batch
-    #authroize! :update, @exam_group
   end
 
   def update
@@ -44,21 +43,18 @@ class ExamGroupsController < ApplicationController
         end
       end
     end
-    # authroize! :create, @exam_group
   end
 
   def show
     @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.all
     @course = @batch.course
-    # authroize! :read, @exam_groups.first
   end
 
   def exams
     @exam_group = ExamGroup.find(params[:id])
-    @exams = @exam_group.exams.all
+    @exams = @exam_group.exams.all.includes(:subject)
     @course = @exam_group.batch.course
-    # authroize! :read, @exam_group
   end
 
   def previous_exam
@@ -78,7 +74,6 @@ class ExamGroupsController < ApplicationController
     flag = false
     @exam_group = ExamGroup.find(params[:exam_group][:id])
     exams_data = @exam_group.exams.all
-
     exams_data.each do |exam|
       exam.exam_scores.each do |es|
         if es.is_failed?
@@ -95,19 +90,16 @@ class ExamGroupsController < ApplicationController
   def connect_exam
     @batch = Batch.find(params[:format])
     @exam_groups = @batch.exam_groups.all
-    # authroize! :read, @exam_groups.first
   end
 
   def assign_all
     @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.all
-    # authroize! :read, @exam_groups.first
   end
 
   def remove_all
     @batch = Batch.find(params[:id])
     @exam_groups = @batch.exam_groups.all
-    # authroize! :read, @exam_groups.first
   end
 
   def update_connect_exam
@@ -146,7 +138,6 @@ class ExamGroupsController < ApplicationController
     @exam_group.exams.each(&:create_exam_event)
     @batch = @exam_group.batch
     @exam_groups = @batch.exam_groups.all
-    # authroize! :read, @exam_group
   end
 
   def publish_result
@@ -170,11 +161,9 @@ class ExamGroupsController < ApplicationController
       flash[:result_error] = 'Exam scheduled not published'
     end
     redirect_to exams_exam_group_path(@exam_group)
-    # authroize! :read, @exam_group
   end
 
   def destroy
-    # authroize! :delete, @exam_group
     @exam_group = ExamGroup.find(params[:id])
     batch = @exam_group.batch
     @exam_group.destroy
@@ -198,7 +187,6 @@ class ExamGroupsController < ApplicationController
       score_grade = ''
       fail = false
       fail = true if details[:marks].to_f < @exam.minimum_marks.to_f
-
       unless @exam.exam_group.exam_type == 'Marks'
         percentage = (details[:marks].to_f * 100) / @exam.maximum_marks.to_f
         grades = @exam.exam_group.batch.grading_levels.all
@@ -208,7 +196,6 @@ class ExamGroupsController < ApplicationController
           end
         end
       end
-
       if @exam_score.nil?
         ExamScore.create(exam_id: @exam.id, student_id: student_id,
                          marks: details[:marks], remarks: details[:remarks], grading_level_id: score_grade, is_failed: fail)
@@ -229,7 +216,7 @@ class ExamGroupsController < ApplicationController
   private
 
   def params_exam_group
-    params.require(:exam_group).permit(:name, :exam_type, :exam_date,
-                                       exams_attributes: [:subject_id, :maximum_marks, :minimum_marks, :start_time, :end_time])
+    params.require(:exam_group).permit!
+
   end
 end

@@ -45,7 +45,7 @@
       <% end %>
     </tr> 
 
-        <% @batch.weekdays.reverse_each do |w|%>
+        <% @batch.weekdays.each do |w|%>
     <tr>
         <th align="left"><%=w.weekday%></th>
         <% @batch.class_timings.where(:is_break=>false).each do |c|%>

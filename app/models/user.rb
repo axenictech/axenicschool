@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   { with: /\A[a-zA-Z" "]+\Z/ }
   scope :shod, ->(id) { where(id: id).take }
   scope :role_wise_users, ->(role) { where(role: role) }
+  scope :discover, ->(i, r) { where(student_id: i, role: r).take }
   def full_name
     first_name + ' ' + last_name
   end
