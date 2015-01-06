@@ -11,13 +11,11 @@
         <th>Action</th>
       </tr>
     </thead>
-      <tr>
-           <td colspan="4"><%=assign_emp_not_found!%></td>
-      </tr>
+    <tr><td colspan="2"><%=assign_emp_not_found!%></td></tr>
     <tbody>
-  <% @assign_employees =  @batch.employee_id.split(",") unless @batch.employee_id.nil?%>
+    <% @assign_employees = emp_split(@batch) unless @batch.employee_id.nil?%>
 	  <% @assign_employees.each do |emp|%>
-		  <% @employee = Employee.find(emp) %>
+		  <% @employee = assign_emp_find(emp) %>
           <tr>
             <td><%=@employee.first_name%></td>
             <td class="center">

@@ -19,8 +19,8 @@
   <div class="col-md-1"></div>
   <div class="col-md-5">
   <%= form_for :course, url:{action:'select'},method: :get,remote:true,html:{id: "exam_form"}  do |f| %>
-   <b>Select a Course:</b>
-  <%= f.select :id, Course.all.collect {|b| [b.course_name+" "+b.section_name,b.id]}, {prompt:"Select a Course"},{onchange:"$('#exam_form').submit();",class: "form-control",style: "width:300px"}%>
+   <b>Select Course:</b>
+  <%= f.select :id, courses, {prompt:true},{onchange:"exam_group();",class: "form-control",style: "width:300px"}%>
   <% end %>
   </div>
 </div>

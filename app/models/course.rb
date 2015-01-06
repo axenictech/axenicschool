@@ -14,6 +14,10 @@ class Course < ActiveRecord::Base
   has_many :ranking_levels
   scope :shod, ->(id) { where(id: id).take }
 
+  def full_name
+    [course_name, section_name].join(' ')
+  end
+
   def max(max_rank, rank_lev1)
     max_rank = 0.to_i if max_rank.nil?
     rank_lev1.prioriy = max_rank + 1.to_i

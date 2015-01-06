@@ -26,4 +26,8 @@ class Subject < ActiveRecord::Base
       student_subject.each(&:destroy)
     end
   end
+
+  def subject_name
+    [name, code].join(' ')
+  end
 end

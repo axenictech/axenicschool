@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -37,7 +37,7 @@ gem 'decent_exposure'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bullet', group: :development
 gem 'brakeman', group: :development
-
+gem 'passenger'
 # Use unicorn as the app server
 # gem 'unicorn'
 

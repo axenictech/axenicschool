@@ -434,6 +434,10 @@ class Employee < ActiveRecord::Base
     end
   end
 
+  def self.employee_find(emp)
+    Employee.find(emp).first_name
+  end
+
   private
 
   def create_user_account

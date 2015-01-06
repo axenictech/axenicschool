@@ -1,5 +1,9 @@
 # ExamGroupsController
 class ExamGroupsController < ApplicationController
+  def index
+    @courses ||= Course.all
+  end
+
   def select
     @course = Course.shod(params[:course][:id])
     @batches ||= @course.batches.all

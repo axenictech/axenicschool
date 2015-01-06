@@ -21,4 +21,8 @@ class EmployeeDepartment < ActiveRecord::Base
       emp
     end
   end
+
+  def ass_emp(batch)
+    batch.employee_id.split(',')
+  end
 end
