@@ -10,4 +10,14 @@ module CategoriesHelper
     HTML
     html.html_safe
   end
+
+  def category_not_found!
+    return unless  @categorys.empty?
+    html = <<-HTML
+     <div>
+      <h4 align="center">No record found</h4>
+    </div>
+    HTML
+    html.html_safe
+  end
 end

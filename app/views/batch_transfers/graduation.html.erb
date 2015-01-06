@@ -12,7 +12,7 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 <br/>
 
-<h4>Graduating Batch: <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %></h4>
+<h4>Graduating Batch: <%= @batch.full_name %></h4>
   <p>These students will now be trasferred to former students database. Add the status description for the students.</p>
 <br/><br/>
 
@@ -36,11 +36,12 @@
             <th>Action</th>
           </tr>
         </thead>
+        <tr><td colspan="2"><%=graduate_not_found!%></td></tr>
         <tbody>
         <% @students.each do |student| %>
           <tr>
             <td>
-              <%= student.first_name+" "+student.last_name %>
+              <%= student.student_full_name %>
             </td>
             <td class="center">
               <%= check_box_tag "students[]", student.id,true,class: 'check_box'%>

@@ -22,12 +22,7 @@
           <%= form_for @batch_group,url:{action:'create_batch_group'} do |c| %>
 
           <fieldset>
-          <% if @batch_group.errors.any?%>
-            <div class="alert alert-danger">
-            <ul><% @batch_group.errors.full_messages.each do |msg|%>
-              <li><%= msg %></li>
-              <%end%></ul></div>
-          <%end%>
+          <%=grouped_batch_error!%>
           <%= c.hidden_field :course_id, value: @course.id%>
           <div class="col-sm-12">
             <div class="form-group">

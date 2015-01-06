@@ -15,11 +15,11 @@
 <%=form_for :transfer, :url => {:action=> 'student_transfer'},method: :get do |f| %>
 <div class="row">
     <div class="col-md-6">
-      <b>Transfering student from </b> <%= @batch.course.course_name+" "+@batch.course.section_name+"-"+@batch.name %> &nbsp;<b>To</b> 
+      <b>Transfering student from </b> <%= @batch.full_name %> &nbsp;<b>To</b> 
     </div>
     <div class="col-md-6">      
       <%= f.hidden_field :batch_id, value: @batch.id%>
-      <%= f.select :id,collect_batch,prompt:'Select a batch',class: "form-control"%>
+      <%= f.select :id,collect_batchtransfer,prompt:'Select a batch',class: "form-control"%>
     </div>
 </div>   
 <hr>
