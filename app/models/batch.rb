@@ -19,10 +19,18 @@ class Batch < ActiveRecord::Base
   has_many :finance_fee_collections
   scope :shod, ->(id) { where(id: id).take }
 
+  def exam
+    subjects.where(no_exams: false)
+  end
+
   def end_date_cannot_be_less_than_start_date
     if end_date.present? && end_date < start_date
       errors.add(:end_date, "can't be less than start date")
     end
+  end
+
+  def full_name
+    course.course_name + ' ' + course.section_name + ' - ' + name
   end
 
   def normal_subjects
@@ -38,6 +46,10 @@ class Batch < ActiveRecord::Base
     students.each  do |student|
       Student.find(student).update(batch_id: transfer_id)
     end
+  end
+
+  def result_published
+    exam_groups.where(result_published: true)
   end
 
   def graduate(students, status)

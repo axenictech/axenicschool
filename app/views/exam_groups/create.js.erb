@@ -1,5 +1,4 @@
 $('ul.errors').html("")
-
 <% if @exam_group.errors.any? %>
 		<% @exam_group.errors.full_messages.each do |message| %>
 		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))

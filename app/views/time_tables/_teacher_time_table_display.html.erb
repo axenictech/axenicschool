@@ -2,7 +2,7 @@
   <div class="box col-md-12">
   <div class="box-inner">
     <div class="box-header well">
-      <h2>Teacher Time Table</h2>
+      <h2>Teacher Timetable</h2>
     </div>
 
 <% unless @time.empty? %>
@@ -30,7 +30,7 @@
        	    <% @weekdays.each do |weekday| %>
             <% @class_timings.each do |c| %>
               <td>
-            <%t=TimeTableEntry.find_by_employee_id_and_class_timing_id_and_weekday_id_and_time_table_id(employee.id,c.id,weekday.id,@time_table)%>
+            <%t=teacher_time_table(employee,c,weekday,@time_table)%>
               <% unless t.nil?%>
               	<%= t.subject.name %><br/>
               	<%= t.batch.name %>

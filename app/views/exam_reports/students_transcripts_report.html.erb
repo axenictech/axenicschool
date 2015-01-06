@@ -31,7 +31,6 @@
       <hr>
     <br/><h3><center>Students Transcripts Report </center></h3>
     <br>
-      
 <% unless @students.empty? %>
 <% @students.each do |student|%>
   <table cellpadding="4" cellspacing="5" width="700">
@@ -87,23 +86,20 @@
               <tr class="tr-<%= cycle('odd', 'even') %>">
                 <td align="center"> <%= subject.code %></td>
                 <td> <%= subject.name %></td>
-                <% unless total=0 %>
                 <td align="center"><%=marks_total==0 ? "AB" : "%.2f" %(marks_total*100/max_total)+"%"%></td>
-                <%end%>
               </tr>
               <% max_total = 0 %>
               <% marks_total = 0 %>
             <%end%>
             <tr class="tr-head">
               <th colspan="2" align="right">Total</th>
-              <% unless total=0 %>
               <th><%="%.2f" %(@mark*100/@total)+"%"%></th>
-              <%end%>
             </tr>
           </table>
         <%else%>
           <h4>Subject Not Found</h4>
         <%end%>
+        <br/><br/>
       <%end%>
     <%end%>
   </div>

@@ -7,9 +7,6 @@
       </tr>
     </thead>
     <tbody>
-  <% if @batches.empty? %>
-    <h4 align="center">No Record Found </h4>
-  <% else %>
     <% @batches.each do |batch| %>
       <tr>
         <td>
@@ -20,7 +17,6 @@
         </td>
       </tr>
     <% end %>
-  <%end%>
     </tbody>
   </table>
 </div>

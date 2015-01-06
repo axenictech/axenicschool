@@ -1,11 +1,11 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-    <li><%= link_to 'Time Table',time_tables_path %></li>
-     <li><%= link_to 'Edit Time Table',edit_timetable_time_tables_path %></li>
+    <li><%= link_to 'Timetable',time_tables_path %></li>
+     <li><%= link_to 'Edit Timetable',edit_timetable_time_tables_path %></li>
   
     
-    <li>Update Time Table</li>
+    <li>Update Timetable</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
 
@@ -19,49 +19,38 @@
 </div>
 <br/>
 <div class="row">
-  <div class="box col-md-6">
+  <div class="box col-md-9 col-md-offset-1">
   <div class="box-inner">
     <div class="box-header well" data-original-title="">
-      <h2>Edit Time Table</h2>
+      <h2>Edit Timetable</h2>
     </div>
    <hr/>
     <div class="box-content">
      <%=form_for @time_table,url:{action:'update_timetable_values',format:@time_table} do |f| %>
        <fieldset>
-      <% if  @time_table.errors.any? %>
-              <div class="alert alert-danger alert-dismissable">
-             
-            <ul><%@time_table.errors.full_messages.each do |msg| %>
-                <li style="width:300px"><%= msg %></li>
-                <% end %>
-            </ul>
-            </div>
-        <% end %>
-  
-   <div class="col-sm-7 col-sm-offset-1">
-                  <div class="form-group">
-        <%= t('start_date') %>
-        
-          <%= f.date_select :start_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
-          </div>
+   <div class="col-md-2"></div>
+    <div class="col-md-10">
       <div class="form-group">
-
-     <%= t('end_date') %>
-        
-          <%= f.date_select :end_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
-        
+        <div class="col-md-3"> <b>Start Date:</b></div>
+              
+          <div class="col-md-7">  <%= f.date_select :start_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
+          </div>
       </div>
-
-  <div class="col-sm-7 col-sm-offset-6"> 
-                <div class="form-actions">
-      <%=f.submit :"►Update",class:"btn btn-primary" %>
-
-
+     <br>
+      <div class="form-group">
+        <div class="col-md-3"><b>End Date:</b></div>
+           
+          <div class="col-md-7"> <%= f.date_select :end_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
+          </div>
+       </div>
+       <br><br>
+          <div class="col-md-offset-4"> 
+            <div class="form-actions">
+        <%=f.submit :"Update",class:"btn btn-primary" %>
             </div>
             </div>
-                
-              </div>
-            </fieldset>
+        </div>
+      </fieldset>
   <% end %>
 </div>
 </div>

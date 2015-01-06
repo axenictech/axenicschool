@@ -12,4 +12,18 @@ class Subject < ActiveRecord::Base
   { maximum: 2 }, numericality: { only_integer: \
   true, less_than: 20, greater_than: 0 }
   scope :shod, ->(id) { where(id: id).take }
+  scope :exam, -> { where(no_exams: false) }
+
+  def assign_subject(students)
+    batch = elective_group.batch
+    student_subject = StudentSubject.where(subject_id: id)
+    if students.present?
+      student_subject.each(&:destroy) unless student_subject.empty?
+      students.each  do |s|
+        StudentSubject.create(batch_id: batch.id, subject_id: id, student_id: s)
+      end
+    else
+      student_subject.each(&:destroy)
+    end
+  end
 end

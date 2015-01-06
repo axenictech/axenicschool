@@ -14,6 +14,6 @@ class MonthlyPayslip < ActiveRecord::Base
   end
 
   def self.view(s, e)
-    find_by_salary_date_and_employee_id(s, e)
+    where(salary_date: s, employee_id: e).take
   end
 end

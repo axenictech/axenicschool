@@ -31,7 +31,7 @@
 
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
-		              <%= link_to 'Delete' ,delete_fee_collection_finance_path(@batch,collection_id:c),method: :delete, data:{confirm:"Are you sure to delete '#{c.name}'?"},remote:true, class: 'a-action'%></div>
+		              <%= link_to 'Delete' ,delete_fee_collection_finance_path(@batch,collection_id:c),method: :delete, data:{confirm:"Are you sure to delete '#{c.name}'?"}, class: 'a-action'%></div>
 		            </td>
 		          </tr>
 		        <% end %>

@@ -1,8 +1,6 @@
-<div class="col-md-3">
-<%= form_for :batch, url:{action:'select',format:@time,t:@time1},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
 
-      <%=f.select :id, @batches.uniq.collect{|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name, b.id]},{prompt:'Select a batch'},{onchange:"$('#batch_form').submit();",class: "form-control",style:"width:250px"} %>  
+<%= form_for :batch, url:{action:'select',format:@time,t:@time1},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
+		<b> Select a Batch:</b>
+      <%=f.select :id,collect_time_batch,{prompt:'Select a Batch'},{onchange:"class_batch_fun();",class: "form-control",style:"width:250px"} %>  
     <%end%>
-</div>
-</div>
-<div id="batch_div"></div>
+

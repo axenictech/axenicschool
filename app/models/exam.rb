@@ -1,14 +1,15 @@
+# Exam Active Record
 class Exam < ActiveRecord::Base
   belongs_to :exam_group
   belongs_to :subject
   belongs_to :event
   has_many :exam_scores, dependent: :destroy
 
-  validates :maximum_marks, numericality: { only_integer: true },
-                            length: { minimum: 1, maximum: 3 }, allow_blank: true
+  validates :maximum_marks, numericality: { only_integer: true }, length: \
+            { minimum: 1, maximum: 3 }, allow_blank: true
 
-  validates :minimum_marks, numericality: { only_integer: true },
-                            length: { minimum: 1, maximum: 3 }, allow_blank: true
+  validates :minimum_marks, numericality: { only_integer: true }, length: \
+            { minimum: 1, maximum: 3 }, allow_blank: true
 
   validate :end_time_cannot_be_less_than_start_time
   validate :start_time_cannot_be_less_than_past
@@ -16,7 +17,7 @@ class Exam < ActiveRecord::Base
   validate :max_marks_greater_than_min_marks
   scope :shod, ->(id) { where(id: id).take }
   def end_time_cannot_be_less_than_start_time
-    if  end_time.present? && end_time < start_time
+    if end_time.present? && end_time < start_time
       errors.add(:end_time, 'cannot be less than start time')
     end
   end
@@ -50,6 +51,110 @@ class Exam < ActiveRecord::Base
       update(event_id: event.id)
     else
       @event.update(start_date: start_time, end_date: end_time)
+    end
+  end
+
+  def select_subject(s1, s2, exam)
+    unless s2.nil?
+      s2.each do |std|
+        if exam.subject.elective_group.nil?
+          s1 << std
+        else
+          is_elective = StudentSubject.where(student_id: std.id,
+                                             subject_id: exam.subject_id).take
+          s1 << std unless is_elective.nil?
+        end
+      end
+    end
+    s1
+  end
+
+  def score_exam(temps, batch, exam, exam_group, grades)
+    temps.each_pair do |student_id, details|
+      @exam_score = ExamScore.where(exam_id: exam.id,
+                                    student_id: student_id).take
+      @grouped_exam = GroupedExamReport.where(batch_id: batch.id,
+                                              student_id: student_id,
+                                              exam_group_id: exam_group.id,
+                                              subject_id: exam.subject_id).take
+      score_grade = ''
+      fail = false
+      fail = true if details[:marks].to_f < exam.minimum_marks.to_f
+
+      next if exam.exam_group.exam_type == 'Marks'
+      if exam.exam_group.exam_type == 'Grades'
+        grades.each do |grade|
+          score_grade = grade.id if details[:marks].to_f >= grade.min_score
+        end
+      else
+        percentage = (details[:marks].to_f * 100) / exam.maximum_marks.to_f
+        grades.each do |grade|
+          score_grade = grade.id if percentage >= grade.min_score
+        end
+      end
+      
+
+      if @exam_score.nil?
+        exam_score = ExamScore.new(exam_id: exam.id, student_id: student_id,
+                                   marks: details[:marks],
+                                   remarks: details[:remarks],
+                                   grading_level_id: score_grade,
+                                   is_failed: fail)
+        @errors = exam_score.errors.full_messages unless exam_score.save
+      else
+        unless @exam_score.update(marks: details[:marks],
+                                  remarks: details[:remarks],
+                                  grading_level_id: score_grade,
+                                  is_failed: fail)
+          @errors = @exam_score.errors.full_messages
+        end
+      end
+
+      if @errors.nil?
+        if @grouped_exam.nil?
+          GroupedExamReport.create(batch_id: batch.id, student_id: student_id,
+                                   exam_group_id: exam_group.id,
+                                   subject_id: exam.subject_id,
+                                   marks: details[:marks])
+        else
+          @grouped_exam.update(marks: details[:marks])
+        end
+      end
+    end
+  end
+
+  def update_exam_scr(exam, exam_group, batch, param)
+    param.each_pair do |student_id, details|
+      exam_score = ExamScore.exrep(exam, student_id)
+      grouped_exam = GroupedExamReport.where(batch_id: batch.id, student_id: \
+                                              student_id, exam_group_id: \
+                                              exam_group.id, subject_id: \
+                                              exam.subject_id).take
+      score_grade = ''
+      fail = false
+      fail = true if details[:marks].to_f < exam.minimum_marks.to_f
+      unless exam.exam_group.exam_type == 'Marks'
+        percentage = (details[:marks].to_f * 100) / exam.maximum_marks.to_f
+        grades = exam.exam_group.batch.grading_levels.all
+        grades.each do |grade|
+          if percentage >= grade.min_score
+            score_grade = grade.id
+          end
+        end
+      end
+      if exam_score.nil?
+        ExamScore.create(exam_id: exam.id, student_id: student_id,
+                         marks: details[:marks], remarks: details[:remarks], grading_level_id: score_grade, is_failed: fail)
+      else
+        exam_score.update(marks: details[:marks], remarks: details[:remarks], grading_level_id: score_grade, is_failed: fail)
+      end
+
+      if grouped_exam.nil?
+        GroupedExamReport.create(batch_id: batch.id, student_id: student_id,
+                                 exam_group_id: exam_group.id, subject_id: exam.subject_id, marks: details[:marks])
+      else
+        grouped_exam.update(marks: details[:marks])
+      end
     end
   end
 end

@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-3">
 	<%= form_for :assign_tutor, url:{action:'assign_tutorial',format:@batch},remote:true,html:{id: "user_form"} do |f|%>
-   	  <%= f.select :id,EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:'Select a department'},{onchange:"$('#user_form').submit();",class: 'form-control'}%>
+   	  <%= f.select :id,collect_deaprtment,{prompt:'Select a department'},{onchange:"assign_fun();",class: 'form-control'}%>
    	<%end%>
   </div>
 </div>

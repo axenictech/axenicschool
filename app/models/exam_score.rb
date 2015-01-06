@@ -1,3 +1,4 @@
+# ExamScore 
 class ExamScore < ActiveRecord::Base
   belongs_to :student
   belongs_to :exam
@@ -7,10 +8,12 @@ class ExamScore < ActiveRecord::Base
   validate :marks_cant_be_greater_than_maximum_marks
   validate :marks_cant_be_negative
   scope :shod, ->(id) { where(id: id).take }
+  scope :exrep, ->(ex, st) { where(exam_id: ex.id, student_id: st).take }
+
   def marks_cant_be_negative
     if  marks.present? && marks < 0
       errors.add(:marks, 'cannot be negative')
-  end
+    end
   end
 
   def marks_cant_be_greater_than_maximum_marks

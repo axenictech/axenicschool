@@ -55,7 +55,7 @@
   </div>
   <br>
   <div class="form-group">
-    <div class="col-md-6"><b>Blood group:</b></div>
+    <div class="col-md-6"><b>Blood Group:</b></div>
     <div class="col-md-6"><%= @student.blood_group %></div>
   </div>
   <br>
@@ -65,12 +65,12 @@
   </div>
 <br>
   <div class="form-group">
-    <div class="col-md-6"><b>Nationality</b></div>
+    <div class="col-md-6"><b>Nationality:</b></div>
     <div class="col-md-6"><%= @student.nationality.name %></div>
   </div>
 <br>
   <div class="form-group">
-    <div class="col-md-6"><b>Language:</b></div>
+    <div class="col-md-6"><b>Mother Tongue:</b></div>
     <div class="col-md-6"><%= @student.language %> </div>
   </div>
 <br>
@@ -80,7 +80,7 @@
     </div>
     <br>
     <div class="form-group">
-    <div class="col-md-6"><b>Date of birth:</b></div>
+    <div class="col-md-6"><b>Date of Birth:</b></div>
     <div class="col-md-6"><%= @student.date_of_birth%></div>
   </div>
   <br>
@@ -121,11 +121,11 @@
     <br>
 
       <div class="form-group">
-    <div class="col-md-6"><b>Phone:</b></div>
+    <div class="col-md-6"><b>Phone Number:</b></div>
     <div class="col-md-6"><%= @student.phone1 %></div></div>
     <br>
      <div class="form-group">
-    <div class="col-md-6"><b>Mobile:</b></div>
+    <div class="col-md-6"><b>Mobile Number:</b></div>
     <div class="col-md-6"><%= @student.phone2 %></div></div>
     <br>
      <div class="form-group">
@@ -197,7 +197,7 @@
 </div>
 <div class="row" align="center">
   
-    <%= link_to 'Update',edit_student_path(@student),class: "btn btn-success" %>
+    <%= link_to 'Edit',edit_student_path(@student),class: "btn btn-success",style:"width:80px"%>
 
 </div><br/>
 </div>

@@ -12,4 +12,5 @@ class StudentPreviousData < ActiveRecord::Base
   validates :total_mark, numericality: { only_integer: true }
   validates_length_of :total_mark, minimum: 2, maximum: 4
   scope :shod, ->(id) { where(id: id).take }
+  scope :data, ->(id) { where(student_id: id).take }
 end

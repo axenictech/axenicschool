@@ -3,7 +3,7 @@
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
      <li><%=link_to 'Step 1',admission1_students_path%></li>
       <li><%=link_to 'Step 2',admission2_students_path(@student.id)%></li>
-     <li>Admission(Step 2.1-Parent/guardian details)</li>
+     <li>Admission(Step 2.1-Parent/Guardian Details)</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
@@ -11,16 +11,16 @@
   <div class="box col-md-12">
     <div class="box-inner">
       <div class="box-header well">
-        <h2>Step 2 - Parent/guardian details</h2>
+        <h2>Step 2 - Parent/Guardian Details</h2>
        
       </div>
         <div class="box-content">
-        <h4><b>Following guardians has been saved for <%= @student.first_name + ' ' + @student.last_name %> </b></h4>
-        <ol>
+        <h4><b>Following guardians has been saved for <%= @student.first_name + ' ' + @student.last_name %> </b></h4><br>
+        <b><ol>
         <% @student.guardians.each do |p| %>
-          <li><h5><b><%= p.first_name+' '+p.last_name %> - <%= p.relation %>M</b></h5></li>
+          <li><h5><b><%= p.first_name+' '+p.last_name %> - <%= p.relation %></b></h5></li>
         <%  end %>
-        </ol>
+        </ol></b>
         
 
         <div class="row">

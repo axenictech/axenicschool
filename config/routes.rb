@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
   root 'home#dashboard'
 
@@ -144,7 +143,6 @@ Rails.application.routes.draw do
       get :archived_profile
     end
     resources :guardians
-
   end
 
   resources :guardians do
@@ -170,14 +168,14 @@ Rails.application.routes.draw do
       get :update_timetable
       patch :update_timetable_values
       delete :time_table_delete
-      get :selectTime
+      get :select_time
       get :select
       get :time_table_pdf
       get :teachers_timetable
       get :teacher_time_table_display
       get :timetable
       get :employee_timetable
-      get :selectTimeEmployee
+      get :select_time_employee
       get :display_institutional_time_table
     end
   end
@@ -249,7 +247,7 @@ Rails.application.routes.draw do
       get :setting
       get :settingrank
       get :editRank
-      delete :destroyRank
+      delete :destroy_rank
       get :edit
       delete :course
       get :decrease_priority
@@ -260,7 +258,7 @@ Rails.application.routes.draw do
       get :selectrank
       get :newrank
       post :createrank
-      patch :updateRank
+      patch :update_rank
     end
   end
 
@@ -315,14 +313,12 @@ Rails.application.routes.draw do
 
     member do
       get :change
-
     end
   end
 
   resources :weekdays do
     collection do
       get :select
-
     end
   end
 
@@ -356,7 +352,6 @@ Rails.application.routes.draw do
       delete :delete_time
       post :create_time
     end
-
   end
 
   resources :batches do
@@ -372,15 +367,14 @@ Rails.application.routes.draw do
       get :select
     end
     member do
-      delete :destroyRank
+      delete :destroy_rank
       get :setting
       get :settingrank
-      get :editRank
+      get :edit_rank
     end
   end
 
   resources :exam_groups do
-
     collection do
       get :select
       get :previous_exam_data
@@ -390,7 +384,6 @@ Rails.application.routes.draw do
     end
     member do
       get :exams
-
     end
 
     resources :exams
@@ -543,7 +536,6 @@ Rails.application.routes.draw do
       post :one_click_payslip_revert
       post :emp_search_result_pdf
       get :employee_structure
-
     end
     member do
       get :edit_category
@@ -593,7 +585,6 @@ Rails.application.routes.draw do
       get :search_emp
       get :leave_reset_settings
       get :select_department
-
     end
     member do
       get :edit_leave_type
