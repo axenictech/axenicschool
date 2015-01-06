@@ -566,6 +566,11 @@ class EmployeesController < ApplicationController
     @employees = @department.employees
   end
 
+  def view_payslip_profile
+     @salary_dates = MonthlyPayslip.all
+     @employee = Employee.find(params[:format])
+  end
+
   def view_employee_payslip
     @payslip = MonthlyPayslip.view(params[:salary_date], params[:employee_id])
     @independent_categories = PayrollCategory.all
@@ -638,7 +643,7 @@ class EmployeesController < ApplicationController
 
   def emp_payroll
     @emp = Employee.shod(params[:format])
-    @payslip = MonthlyPayslip.where(employee_id: @emp.id)
+    @payslip = MonthlyPayslip.where(employee_id: @emp.id).take
     authorize! :read, @emp
   end
 
@@ -660,7 +665,7 @@ class EmployeesController < ApplicationController
   end
 
   def create_archived_employee2
-    @archived_employee = @employee.archived_employee
+    @archived_empsloyee = @employee.archived_employee
     @employee.destroy
     flash[:notice] = 'Employee' + "#{@employee.first_name}" + "#{t('archived')}"
     redirect_to archived_employee_profile_employees_path(@employee)
@@ -757,8 +762,9 @@ class EmployeesController < ApplicationController
   end
 
   def emp_payslip
+    @salary_dates = MonthlyPayslip.all
     @emp = Employee.shod(params[:format])
-    @payslip = MonthlyPayslip.where(employee_id: @emp.id)
+    @payslip = MonthlyPayslip.where(employee_id: @emp.id).take
   end
 
   private
