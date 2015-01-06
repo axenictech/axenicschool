@@ -8,6 +8,8 @@ class StudentsController < ApplicationController
     @student = Student.new
     @student.admission_no = Student.set_admission_no
     @batches ||= Batch.all.includes(:course)
+    @countries ||= Country.all
+    @categories ||= Category.all
     authorize! :create, @student
   end
 
@@ -18,6 +20,8 @@ class StudentsController < ApplicationController
       flash[:notice] = t('student_admission1')
       redirect_to admission2_students_path(@student)
     else
+      @countries ||= Country.all
+      @categories ||= Category.all
       render 'admission1'
     end
   end
@@ -30,6 +34,7 @@ class StudentsController < ApplicationController
   def admission2
     @student = Student.shod(params[:format])
     @guardian = @student.guardians.build
+    @countries ||= Country.all
     authorize! :create, @student
   end
 
@@ -55,6 +60,7 @@ class StudentsController < ApplicationController
       flash[:notice] = t('student_update')
       redirect_to profile_student_path(@student)
     else
+      @batches ||= Batch.includes(:course).all
       render 'edit'
     end
   end

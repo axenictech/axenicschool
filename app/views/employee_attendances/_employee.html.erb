@@ -1,30 +1,34 @@
-<br/>
+<br/><br>
 <div class="row">
   <div class="box-inner" style="width: 150%;">
     <div class="box-header well">
       <h2>Employee Attendance</h2>
     </div>
 <div class="box-content">
-<table class="fc-header" style="width:100%">
-      <tbody>
-        <tr>
-          <td class="fc-header-left">
-            <%= link_to "◄ prev",display_employee_attendance_path(@deparment.id,nextdate:(@today-1.month)),remote:true, class: "fc-button fc-button-prev fc-state-default fc-corner-left"%>
-            <%= link_to "Next ►", display_employee_attendance_path(@deparment.id,nextdate:(@today+1.month)),remote:true,class: "fc-button fc-button-next fc-state-default fc-corner-right"%>
-            <span class="fc-header-space"></span>
-          </td>
-          <td class="fc-header-center">
-            <span class="fc-header-title"><h2><%=@today.strftime("%B %Y") %></h2></span>
-          </td>
-          <td class="fc-header-right">
-            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">month view</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+ <div id="calendar" class="fc fc-ltr">
+
+ <div class="row">
+        <div class="col-md-12">
+          <div align="center">
+         
+           <h3> <%= link_to "◄ Previous", display_employee_attendance_path(@deparment.id,nextdate:(@today-1.month)),remote:true,class: "fc-button fc-button-prev fc-state-default"%>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span align="center"><%=@today.strftime("%B %Y") %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to "Next ► ", display_employee_attendance_path(@deparment.id,nextdate:(@today+1.month)),remote:true  ,class: "fc-button fc-button-prev fc-state-default"%>
+         
+          <div class="pull-right">
+            <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">Month View</span>
+          </div>
+          </h3>
+          </div>
+           </div>
+</div>
+
+<br>
  <div class="fc-content" style="position: relative;">
       <div class="fc-view fc-view-month fc-grid" style="position:relative">
-<table class="table table-bordered" class="fc-border-separate" cellspacing="0">
+<table class="table table-bordered" class="fc-border-separate" cellspacing="0" >
 <thead>
   <tr>
     <th>Name</th>
@@ -38,6 +42,7 @@
       <% end%>
  </tr>
  </thead>
+ <tbody >
     <% @employees.each do |employee| %>
     <tr class="tr-<%= cycle('odd', 'even')  %>">
       <th class="td-name">
@@ -66,6 +71,7 @@
       <% end %>
     </tr>
 <% end %>
+</tbody>
 </table>
 </div>
 </div>
@@ -74,7 +80,6 @@
 </div>
 
  
-
 
 
 

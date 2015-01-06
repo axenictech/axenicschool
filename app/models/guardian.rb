@@ -22,6 +22,11 @@ class Guardian < ActiveRecord::Base
                         length: { in: 1..20 }, allow_blank: true
   scope :shod, ->(id) { where(id: id).take }
   scope :discover, ->(s, r) { where(student_id: s, relation: r).take }
+  
+  def student_name
+    [first_name, last_name].join(' ')
+  end
+
   def create_user_account
     user = User.new do |u|
       u.first_name = first_name

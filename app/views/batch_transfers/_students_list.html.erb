@@ -13,11 +13,12 @@
             <th>Action</th>
           </tr>
         </thead>
+          <tr><td colspan="2"><%=graduate_not_found!%></td></tr>
         <tbody>
         <%  @students.each do |student|  %>
           <tr>
             <td>
-              <%= student.first_name+" "+student.last_name  %>
+              <%= student.student_full_name %>
             </td>
             <td class="center">
               <%= check_box_tag "students[]", student.id,false,class: 'check_box'%>Assign

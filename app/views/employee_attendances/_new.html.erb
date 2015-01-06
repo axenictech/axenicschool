@@ -22,10 +22,10 @@
       <td><%= c.text_field :reason, class: 'form-control', placeholder: 'Reason for absence'%></td>
     </tr>
     <tr>        
-   <td><%= c.check_box :is_half_day,:checked => false %>
+   <td colspan="2"><%= c.check_box :is_half_day,:checked => false %>
     <b>Half Day</b></td>
     </tr>
-    
+    <tr><td colspan="2"><hr></td></tr>
     <tr>
     <td colspan="2" align="center"><%= c.submit 'Create', class: "btn btn-primary"%>
         	<%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>

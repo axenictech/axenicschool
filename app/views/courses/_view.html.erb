@@ -28,7 +28,7 @@
         <% @courses.each do |c| %>
           <tr>
             <td>
-              <%= link_to c.course_name+"  "+c.section_name,course_path(c)%>
+              <%= link_to  c.full_name,course_path(c)%>
             </td>
             <td class="center">
               <div class="label-success label label-default">

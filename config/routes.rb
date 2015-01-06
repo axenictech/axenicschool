@@ -103,6 +103,7 @@ Rails.application.routes.draw do
       get :dispguardian
       get :addguardian
       get :report
+      get :student_exam_report
       get :attendance_report
       get :genrate_report
       get :subject_wise_report
