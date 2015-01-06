@@ -1,15 +1,12 @@
-
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
       <h3>New Subject</h3>
     </div>
-
     <div class="modal-body">
-     <ul class="errors">
-     	 
-     </ul>
+      <ul class="errors"></ul>
       <%= form_for @previous_subject, url:{action:'previous_subject_create'}, method: :post,remote:true do |f| %>
+
 
       <table class="table" >
 	
@@ -32,6 +29,7 @@
 	</tr>
       </table>
       <% end %>
+
     </div>	
   </div>
 </div>

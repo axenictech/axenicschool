@@ -74,4 +74,3 @@ module TimeTablesHelper
         , weekday_id: time.weekday_id, time_table_id: time.time_table).take
   end
 end
-

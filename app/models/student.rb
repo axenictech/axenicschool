@@ -59,6 +59,26 @@ class Student < ActiveRecord::Base
   after_save :create_user_account
   scope :shod, ->(id) { where(id: id).take }
 
+  def batch_name
+    [batch.course.course_name, batch.course.section_name, batch.name].join(' ')
+  end
+
+  def student_name
+    [first_name, last_name].join(' ')
+  end
+
+  def stud_full_name
+    [first_name, middle_name, last_name].join(' ')
+  end
+
+  def address_line
+    [address_line1, address_line2].join(' ')
+  end
+
+  def guard_name(p)
+    [p.first_name, p.last_name, p.relation].join(' ')
+  end
+
   def archived_student
     student_attributes = attributes
     student_attributes['student_id'] = id
