@@ -6,14 +6,14 @@
       <li><%= link_to 'Student Profile',profile_student_path(@student.id)%></li>
 	<li><%= link_to 'Guardians Details',dispguardian_students_path(@student.id)%></li>
 
-     <li>Edit Parent/guardian details</li>
+     <li>Edit Parent/Guardian Details</li>
   </ul>
 </div>
 <font color="red">Fields Marked with * must be filled</font>
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
-  <div class="box col-md-10">
+  <div class="box col-md-12">
     <div class="box-inner">
       <div class="box-header well">
         <h2>Edit Parent details</h2>
@@ -26,11 +26,11 @@
 <%= form_for [@student,@guard] do |f|%>
  <fieldset>
 <% if @guard.errors.any? %>
-  			 <div class="alert alert-danger" style="width:500px" >
+  			 <div class="alert alert-danger">
     			<h2>Error prohibited to being saved:</h2>
     			<ul>
 					 <% @guard.errors.full_messages.each do |msg| %>
-      				<li style="width:500px" align="left"><%= msg %></li>
+      				<li><%= msg %></li>
     				<% end %>
     			</ul>
     				</div>
@@ -56,12 +56,12 @@
          <%=f.text_field :relation,placeholder: "Relation", class: "form-control"%>
        </div>
 
-         <div class="form-group">
-      <b>Email:</b>
-         <%=f.text_field :email,placeholder: "Email", class: "form-control"%>
+        <div class="form-group">
+        <b>Date of Birth:</b>
+         <%=f.date_field :dob,class: "form-control"%>
        </div>
 
-         <div class="form-group">
+       <div class="form-group">
       <b>Contact Number:</b>
        <span style="color:red">*</span>
          <%=f.text_field :office_phone1,placeholder: "Contact Number", class: "form-control"%>
@@ -71,13 +71,22 @@
         <b>Office Phone:</b>
          <%=f.text_field :office_phone2,placeholder: "Office Phone", class: "form-control"%>
        </div>
+
+         <div class="form-group">
+      <b>Email:</b>
+         <%=f.text_field :email,placeholder: "Email", class: "form-control"%>
+       </div>
+
+         
+        
+</div>
+   <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+
          <div class="form-group">
         <b>Office Address Line1:</b>
          <%=f.text_field :office_address_line1,placeholder: "Office Address Line1", class: "form-control"%>
        </div>
-</div>
-   <div class="col-sm-1"></div>
-      <div class="col-sm-4">
           <div class="form-group">
         <b>Office Address Line2:</b>
          <%=f.text_field :office_address_line2,placeholder: "Office Address Line2", class: "form-control"%>
@@ -92,10 +101,7 @@
          <%=f.select :country_id, Country.all.collect{|c| [c.name, c.id]},{prompt:true},{class: "form-control"}%>
        </div>
 
-            <div class="form-group">
-        <b>Date of Birth:</b>
-         <%=f.date_field :dob,class: "form-control"%>
-       </div>
+           
             <div class="form-group">
         <b>Occupation:</b>
          <%=f.text_field :occupation,placeholder: "Occupation", class: "form-control"%>
