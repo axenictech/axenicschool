@@ -11,7 +11,7 @@
      </ul>
       <%= form_for @previous_subject, url:{action:'previous_subject_create'}, method: :post,remote:true do |f| %>
 
-      <table class="table" style="width:500px" >
+      <table class="table" >
 	
 	<%=f.hidden_field :student_id,value: @student.id %>
 	
@@ -25,7 +25,7 @@
 	  <td><b>Mark:</b></td>
 	  <td><%= f.text_field :mark,class: "form-control",style: "width:200px"%></td>
 	</tr>
-	
+	<tr><td colspan="2"><hr></td></tr>
 	<tr>
 	  <td colspan="2" align="center"><%= f.submit 'Submit',class: "btn btn-primary"%>
 	    <%= link_to 'Cancel','#',class: "btn btn-default",data:{dismiss:"modal"}%></td>

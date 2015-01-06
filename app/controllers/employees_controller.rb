@@ -8,7 +8,7 @@ class EmployeesController < ApplicationController
   [:edit_department, :update_department, :destroy_department]
   before_filter :position, only: \
   [:edit_position, :update_position, :destroy_position]
-  before_filter :bank_field, only: \
+  before_filter :bank_fields, only: \
   [:edit_bank_field, :update_bank_field, :destroy_bank_field]
 
   def emp_category
@@ -801,7 +801,7 @@ class EmployeesController < ApplicationController
     @employee_position = EmployeePosition.shod(params[:id])
   end
 
-  def bank_field
+  def bank_fields
     @bank_field = BankField.shod(params[:id])
   end
 end

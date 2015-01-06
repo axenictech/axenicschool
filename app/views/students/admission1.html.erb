@@ -20,7 +20,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <% if @student.errors.any? %>
         <div class="alert alert-danger" >
            <h4>Errors prohibited to being Save:</h4>
-          <ul align="center">
+          <ul>
            <% @student.errors.full_messages.each do |msg| %>
                <li ><%= msg %></li>
             <% end %>
@@ -236,15 +236,15 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
     
       <div class="col-md-10 col-md-offset-2">
         <div class="form-group">
-        <div class="col-md-3"> <b> Upload Photo:</b></div>
+        <div class="col-sm-3"> <b> Upload Photo:</b></div>
      
-      <%=f.file_field :image%>
-      
+     <div class="col-sm-5"> <%=f.file_field :image,class: "form-control",style: "height: auto"%></div>
       </div>
       </div>
       </div>
 </div>
 </div>
+<br>
 <div class="col-md-6 col-md-offset-5">           
 <%= f.submit 'Save', class: "btn btn-primary",style:"width:80px"%></div>
   </fieldset>        
