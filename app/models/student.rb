@@ -65,6 +65,10 @@ class Student < ActiveRecord::Base
     archived_student = ArchivedStudent.create(student_attributes)
   end
 
+  def student_full_name
+    [first_name, last_name].join(' ')
+  end
+
   def self.set_admission_no
     date = Date.today.strftime('%Y%m%d')
     if Student.first.nil?

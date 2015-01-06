@@ -13,27 +13,22 @@
             <th>Action</th>
           </tr>
         </thead>
-           <tr>
-           <td colspan="4"><%=employee_not_found!%></td>
-          </tr>
+         <tr><td colspan="2"><%=employee_not_found!%></td></tr>
         <tbody>
-  
-		  <% @employees.each do |emp| %>
+     <% @employees.each do |emp| %>
           <tr>
-            <td><%=Employee.find(emp).first_name%></td>
+            <td><%=emp_find(emp)%></td>
             <td class="center">
               <%= link_to "Assign",assign_employee_batch_path(@batch,emp),method: :post,remote:true%>
             </td>
           </tr>
           <% end %>
-      
         </tbody>
       </table>
     </div>
     </div>
   </div>
-
-  <div class="box col-md-6">
+ <div class="box col-md-6">
 	<div id="assigned_emp">
 		<%=render 'assigned_emp_list'%>
 	</div>

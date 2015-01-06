@@ -18,7 +18,7 @@
         <% @course.batches.each do |batch| %>
           <tr>
             <td>
-              <%=link_to batch.course.code+" - "+batch.name , display_batch_path(batch) %>
+              <%=link_to batch.batch_course_code, display_batch_path(batch) %>
             </td>
             <td class="center">
               <div class="label-success label label-default">

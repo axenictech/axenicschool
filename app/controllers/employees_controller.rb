@@ -637,8 +637,9 @@ class EmployeesController < ApplicationController
   end
 
   def emp_payroll
-    @employee = Employee.shod(params[:format])
-    authorize! :read, @employee
+    @emp = Employee.shod(params[:format])
+    @payslip = MonthlyPayslip.where(employee_id: @emp.id)
+    authorize! :read, @emp
   end
 
   def remove
@@ -753,6 +754,11 @@ class EmployeesController < ApplicationController
   def update_bank_details2
     redirect_to profile_employees_path(@employee)
     flash[:notice] = "#{t('bank')}" + " #{@employee.first_name}"
+  end
+
+  def emp_payslip
+    @emp = Employee.shod(params[:format])
+    @payslip = MonthlyPayslip.where(employee_id: @emp.id)
   end
 
   private

@@ -28,12 +28,8 @@
             <th>Name</th>
             <th>Action</th>
           </thead>
-          <% if @exam_groups.empty? %>
-            <tr>
-              <th colspan="2"><center>No record found.</center></th>
-            </tr>
-          <% else %>
             <tbody>
+              <%= exam_groups_present %>
               <% @exam_groups.each do |eg|%>
                 <tr>
                   <td><%= link_to eg.name ,exams_exam_group_path(eg) %></td>
@@ -65,7 +61,6 @@
                 </tr>
               <%end%>
             </tbody>
-          <%end%>
         </table>
       </div>
     </div>

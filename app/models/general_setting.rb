@@ -3,7 +3,7 @@ class GeneralSetting < ActiveRecord::Base
                                      length: { in: 1..100 }, on: :update
   validates :school_or_college_address, presence: true,
                                         length: { in: 1..100 }, on: :update
-  validates :school_or_college_phone_no, presence: true, length: { in: 10..10 },
+  validates :school_or_college_phone_no, presence: true, length: { in: 6..11 },
                                          format: { with: /\A[0-9]+\z/ }, on: :update
 
   has_attached_file :image
