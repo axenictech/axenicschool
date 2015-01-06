@@ -32,7 +32,7 @@ class Batch < ActiveRecord::Base
   def full_name
     course.course_name + ' ' + course.section_name + ' - ' + name
   end
-
+  
   def normal_subjects
     subjects.where(elective_group_id: nil)
   end
