@@ -17,16 +17,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
         <div class="box-content">
         <%= form_for @student do |f| %>
     <fieldset>
-      <% if @student.errors.any? %>
-        <div class="alert alert-danger" >
-           <h4>Errors prohibited to being Save:</h4>
-          <ul>
-           <% @student.errors.full_messages.each do |msg| %>
-               <li style="width:400px" align="left"><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <%= admission1_error! %>
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-11">
@@ -36,9 +27,8 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
         <b>Admission Number:</b>
         <span style="color:red">*</span>
           <%=f.text_field :admission_no, :value=> @student.admission_no , readonly: true, class: "form-control"%>
-        
         </div>
-        </div>
+      </div>
      <div class="col-sm-4 col-sm-offset-1">
          <div class="form-group">
          <b>Admission Date:</b>
