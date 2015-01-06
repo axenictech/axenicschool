@@ -23,9 +23,9 @@
       <div class="col-md-1"></div>
         <div class="col-md-6">
            <div class="form-group">
-          <b>Select Batch:</b>
+          <b>Select a Batch:</b>
    
-      <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{class: "form-control",style: "width:300px"}%>
+      <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:"Select a Batch"},{class: "form-control",style: "width:300px"}%>
       </div>
         <br>
           <div class="form-group">

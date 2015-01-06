@@ -8,7 +8,6 @@
 <% week =[] %>
 <% @days.each do |dr| %>
   <% week.push dr %>
-
 <% end %>
 <%=form_for :weekday, :url => {:action=> 'create'},remote:true do |f| %>
 <%= f.hidden_field :batch_id, :value => @batch.id%>
@@ -20,8 +19,8 @@
      <tr>
         <% q = w.to_i %>
         <th><%= @day[q] %></th>
-<% @weekday= Weekday.find_by_batch_id_and_weekday(@batch.id,@day[q])%>
-    <% if @weekday.nil? %>
+<% weekday= weekday_batch(@batch,@day[q])%>
+    <% if weekday.nil? %>
         <td><%= check_box_tag "weekdays[]", w,false%></td>
     <%else%>
         <td><%= check_box_tag "weekdays[]", w,true%></td>

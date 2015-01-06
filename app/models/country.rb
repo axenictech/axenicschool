@@ -15,4 +15,6 @@ class Country < ActiveRecord::Base
   def self.findcountry(emp)
     (emp.country_id).name unless emp.country_id.nil?
   end
+
+
 end

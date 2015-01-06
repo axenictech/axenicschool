@@ -12,33 +12,33 @@ class EmployeesController < ApplicationController
   [:edit_bank_field, :update_bank_field, :destroy_bank_field]
 
   def emp_category
-    @categories1 = EmployeeCategory.is_status
-    @categories2 = EmployeeCategory.not_status
+    @categories1 ||= EmployeeCategory.is_status
+    @categories2 ||= EmployeeCategory.not_status
   end
 
   def emp_department
-    @departments1 = EmployeeDepartment.is_status
-    @departments2 = EmployeeDepartment.not_status
+    @departments1 ||= EmployeeDepartment.is_status
+    @departments2 ||= EmployeeDepartment.not_status
   end
 
   def emp_position
-    @positions1 = EmployeePosition.is_status
-    @positions2 = EmployeePosition.not_status
+    @positions1 ||= EmployeePosition.is_status
+    @positions2 ||= EmployeePosition.not_status
   end
 
   def bank_field
-    @bank_fields1 = BankField.is_status
-    @bank_fields2 = BankField.not_status
+    @bank_fields1 ||= BankField.is_status
+    @bank_fields2 ||= BankField.not_status
   end
 
   def pay_category
-    @payroll_categories1 = PayrollCategory.not_deduction
-    @payroll_categories2 = PayrollCategory.is_deduction
+    @payroll_categories1 ||= PayrollCategory.not_deduction
+    @payroll_categories2 ||= PayrollCategory.is_deduction
   end
 
   def emp_grade
-    @grade1 = EmployeeGrade.is_status
-    @grade2 = EmployeeGrade.not_status
+    @grade1 ||= EmployeeGrade.is_status
+    @grade2 ||= EmployeeGrade.not_status
   end
 
   def new_category
@@ -52,9 +52,6 @@ class EmployeesController < ApplicationController
     @employee_category = EmployeeCategory.new(category_params)
     flash[:notice] = t('emp_add_category') if @employee_category.save
     emp_category
-  end
-
-  def none_privielege
   end
 
   def edit_category
@@ -296,7 +293,6 @@ class EmployeesController < ApplicationController
   end
 
   def edit_privilege
-    # @user = User.shod(params[:format])
     @employee = Employee.shod(params[:format])
     @privilege_tags ||= PrivilegeTag.all
     authorize! :update, @employee
@@ -304,7 +300,7 @@ class EmployeesController < ApplicationController
 
   def update_privilege
     @employee = Employee.shod(params[:format])
-    @user = User.shod_by_employee_id("#{@employee.id}")
+    @user = User.find_by_employee_id("#{@employee.id}")
     privilege_tag = params[:privilege]
     PrivilegeUsers.privilege_update(privilege_tag, @user)
     redirect_to admission4_employees_path(@employee)
@@ -317,7 +313,8 @@ class EmployeesController < ApplicationController
 
   def search
     @employee = Employee.shod(params[:format])
-    @reporting_man = Employee.search2(params[:advance_search], params[:search])
+    @reporting_man ||= Employee.search2(params[:advance_search]\
+      , params[:search])
     authorize! :read, @employee
   end
 
@@ -391,9 +388,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def employee_management
-  end
-
   def subject_assignment
     @batches = Batch.includes(:course).all
   end
@@ -431,12 +425,16 @@ class EmployeesController < ApplicationController
   def remove_employee
     @department = EmployeeDepartment.shod(params[:department_id])
     @employee = Employee.shod(params[:id])
-    @employees = @department.employees.all
     @subject = Subject.shod(params[:format])
+    remove_employee2
+    authorize! :read, @employee
+  end
+
+  def remove_employee2
+    @employees = @department.employees.all
     @assigned_employee = EmployeeSubject.rem_emp(@employee, @subject)
     @assigned_employee.dest(@employee, @subject)
     @assigned_employees = EmployeeSubject.rem_emp2(@subject)
-    authorize! :read, @employee
   end
 
   def search_employee
@@ -448,15 +446,9 @@ class EmployeesController < ApplicationController
     authorize! :read, Employee
   end
 
-  def viewall_emp
-  end
-
   def allemp
     @department = EmployeeDepartment.shod(params[:viewall][:id])
     @employees ||= @department.employees.all
-  end
-
-  def advance_search
   end
 
   def advance_search_emp
@@ -470,9 +462,6 @@ class EmployeesController < ApplicationController
     @search = params[:search]
     @general_setting = GeneralSetting.first
     render 'advance_search_result_pdf', layout: false
-  end
-
-  def payslip
   end
 
   def select_employee_department
@@ -490,10 +479,6 @@ class EmployeesController < ApplicationController
     authorize! :update, @employee
   end
 
-  def one_click_payslip
-    # redirect_to employees_payslip_path
-  end
-
   def one_click_payslip_generate
     salary_date = params[:payslip][:joining_date].to_date
     @employees ||= Employee.all
@@ -505,7 +490,7 @@ class EmployeesController < ApplicationController
   def one_click_pay(salary_date)
     redirect_to payslip_employees_path
     flash[:notice] = "#{t('one')}" + \
-      ":#{salary_date.strftime('%B')}" + "#{t('one_click')}"
+                     ":#{salary_date.strftime('%B')}" + "#{t('one_click')}"
     authorize! :update, @employee
   end
 
@@ -517,15 +502,19 @@ class EmployeesController < ApplicationController
   def create_monthly_payslip
     @employee = Employee.shod(params[:format])
     @salary_date = Date.parse(params[:salery_slip][:salery_date])
-    unless @salary_date.to_date < @employee.joining_date.to_date
-      flag = @employee.create_payslip(@employee, @salary_date)
-      payslip(flag, @employee)
-    end
-    redirect_to monthly_payslip_employees_path(@employee)
+    create_monthly_payslip2
     authorize! :update, @employee
   end
 
-  def payslip(flag, employee)
+  def create_monthly_payslip2
+    unless @salary_date.to_date < @employee.joining_date.to_date
+      flag = @employee.create_payslip(@employee, @salary_date)
+      paysli(flag, @employee)
+    end
+    redirect_to monthly_payslip_employees_path(@employee)
+  end
+
+  def paysli(flag, employee)
     if flag == 0
       flash[:notice] = 'Payslip of ' + employee.first_name + "#{t('p')}"
     else
@@ -553,32 +542,28 @@ class EmployeesController < ApplicationController
     authorize! :update, @employee
   end
 
-  def department_payslip
-  end
-
   def select_month
     @salary_dates = MonthlyPayslip.all
     @department = params[:view_payslip][:id]
   end
 
-  def payslip_revert
-  end
-
   def one_click_payslip_revert
     @salary_date = params[:payslip][:joining_date].to_date
-    b = MonthlyPayslip.where(salary_date: @salary_date).pluck(:salary_date)
-    if b[0].present?
-      if b[0] == @salary_date.strftime('%b')
-        flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('pay')}"
-      end
-    end
+    @b = MonthlyPayslip.where(salary_date: @salary_date).pluck(:salary_date)
+    one_click_payslip_revert2
     redirect_to employees_payslip_path
+  end
+
+  def one_click_payslip_revert2
+    return if @b[0].present?
+    return if @b[0] == @salary_date.strftime('%b')
+    flash[:notice] = 'Payslip of ' + @employee.first_name + "#{t('pay')}"
   end
 
   def view_payslip
     @salary_dates = MonthlyPayslip.all
     @department = EmployeeDepartment.shod(params[:format])
-    @employees = @department.employees.all
+    @employees = @department.employees
   end
 
   def view_employee_payslip
@@ -653,7 +638,6 @@ class EmployeesController < ApplicationController
 
   def emp_payroll
     @employee = Employee.shod(params[:format])
-    # @payroll_details = EmployeeSalaryStructure.where(employee_id:@employee)
     authorize! :read, @employee
   end
 
@@ -671,6 +655,10 @@ class EmployeesController < ApplicationController
     @employee = Employee.shod(params[:format])
     return unless request.post?
     EmployeeSubject.destroy_all(employee_id: @employee.id)
+    create_archived_employee2
+  end
+
+  def create_archived_employee2
     @archived_employee = @employee.archived_employee
     @employee.destroy
     flash[:notice] = 'Employee' + "#{@employee.first_name}" + "#{t('archived')}"
@@ -699,7 +687,7 @@ class EmployeesController < ApplicationController
 
   def personal_profile_pdf
     @employee = ArchivedEmployee.shod(params[:employee_id])
-    @country = Country.shodcountry(@employee)
+    @country = Country.findcountry(@employee)
     @general_setting = GeneralSetting.first
     render 'personal_profile_pdf', layout: false
   end
@@ -758,9 +746,13 @@ class EmployeesController < ApplicationController
       @bank_info = EmployeeBankDetail.up(@employee, k)
       @bank_info.update(bank_info: v[:bank_info])
     end
+    update_bank_details2
+    authorize! :read, @employee
+  end
+
+  def update_bank_details2
     redirect_to profile_employees_path(@employee)
     flash[:notice] = "#{t('bank')}" + " #{@employee.first_name}"
-    authorize! :read, @employee
   end
 
   private

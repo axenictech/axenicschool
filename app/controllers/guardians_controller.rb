@@ -6,6 +6,7 @@ class GuardiansController < ApplicationController
     if @guardian.save
       redirect_to admission2_1_students_path(@student)
     else
+      @countries ||= Country.all
       render '/students/admission2'
     end
   end
@@ -44,7 +45,7 @@ class GuardiansController < ApplicationController
     if @guard.update(guardian_params)
       redirect_to dispguardian_students_path(@guard.student)
     else
-      render 'edit '
+      render 'edit'
     end
   end
 

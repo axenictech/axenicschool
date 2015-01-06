@@ -33,21 +33,15 @@
         </div>
       </div>
       <hr>
-
     <br/><h3><center>Archived Students Exam Report </center></h3>
     <br>
-
       <h4>Batch:<%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %></h4>
-  
-    
-
 <% @students.each do |student|%>
  <br>
      <b><%= "#{student.first_name+" "+student.last_name}"" - #{student.admission_no}" %>
      </b>
       <br>
   <table cellpadding="4" cellspacing="5" width="700">
-      
      <% max_total = 0 %>
         <% marks_total = 0 %>
        <tr>
@@ -87,8 +81,10 @@
             <% end %>
           </td>
           <% unless @exam.nil? %>
+          <%unless exam_group.exam_type == "Grades"%>
             <% max_total += @exam.maximum_marks.to_f %>
             <% marks_total += exam_score.marks.to_f unless exam_score.nil? %>
+          <%end%>
           <%end%>
           <% end %>
           <td><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
@@ -114,8 +110,10 @@
           <% unless is_valid_subject == 0 %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.student_id,exam.id) unless exam.nil? %>
             <% unless exam.nil? %>
+            <%unless exam_group.exam_type == "Grades"%>
               <% @max_total += exam.maximum_marks.to_f %>
               <% @marks_total += exam_score.marks.to_f unless exam_score.nil? %>
+            <%end%>
             <%end%>
           <%end%>
           <%end%>
