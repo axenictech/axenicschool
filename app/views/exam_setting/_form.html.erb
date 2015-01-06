@@ -2,12 +2,12 @@
 <ul class="errors"></ul>
 <%= form_for [@course,@class_des1],url:{:action=>'create',id:@course},remote: true do |f|%>
 	<div class="row">
-	  <div class="col-md-1"></div>
+	  
 	  <div class="col-md-3"><b>Name :</b></div>
 	  <div class="col-md-8"><%=f.text_field :name,placeholder:"Name",class: "form-control"%></div>
 	</div><br/>
 	<div class="row">
-	  <div class="col-md-1"></div>
+	 
 	  <div class="col-md-3"><b>Marks :</b></div>
 	  <div class="col-md-8"><%= f.text_field :marks,placeholder: "Marks",class: "form-control"%></div>
 	</div><br/>

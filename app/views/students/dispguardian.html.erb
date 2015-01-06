@@ -23,14 +23,14 @@
     <fieldset>
     <div class="col-md-6">
     <h3><%= @student.first_name+" "+@student.last_name %></h3>
-    <h4>Adm no : <%= @student.admission_no %></h4>
+    <h4>Admission Number: <%= @student.admission_no %></h4>
     <h4>Class : <%= @student.batch.course.course_name %></h4>
     </div>
     <div class="col-md-6">
      <ul>
-      <h3>Parents/Guardian:</h3>
-      <% @guards.each do |p| %>
-        <li><a href="#guardian-details-id-<%= p.id %>"><%= p.first_name %> <%= p.last_name %></a> (<%= p.relation %>)</li>
+      <h3>Parents/Guardian</h3>
+       <% @guards.each do |p| %>
+       <li>&nbsp;<a href="#guardian-details-id-<%= p.id %>"><%= p.first_name %> <%= p.last_name %></a> (<%= p.relation %>)</li>
       <% end %>
     </ul>
 
@@ -70,13 +70,13 @@
     </tr>
 
      <tr>
-    			<th>  DOB:</th>
+    			<th>  Date of Birth:</th>
         		<td ><%= p.dob.strftime('%d %B, %Y') unless p.dob.nil? %></td>
         
     </tr>
 
      <tr>
-    			<th> Email</th>
+    			<th> Email:</th>
         		<td > <%= p.email %></td>
         
     </tr>
@@ -95,11 +95,7 @@
     </tr>
 
 
-     <tr>
-    			<th > Mobile:</th>
-        		<td > <%= p.mobile_phone %></td>
-        
-    </tr>
+    
       
       </table>
       </div>
@@ -134,11 +130,7 @@
           <th></th>
           <td></td>
     </tr>
-     <tr>
-          <th></th>
-          <td></td>
-    </tr>
-  
+    
     <tr >
         <td></td>
     		<td><%= link_to "Edit",edit_student_guardian_path(@student,p),class: "btn btn-success"%>

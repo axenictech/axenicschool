@@ -1,6 +1,13 @@
 
+<div class="col-md-12">
 <fieldset>
+
+<div class="box-inner">
+  <div class="box-header well"><h2>Change Type</div>
+   <div class="box-content">
+ 
    <%= form_for @exam_group,url: {action: 'update'} ,method: :patch,remote: true do |f|%>
+      <div class="col-md-offset-3">
         <div class="form-group">
            <b>Name:</b>
            <%=f.text_field :name ,style: "width: 250px", class: "form-control", required: true%>
@@ -10,16 +17,21 @@
           <b>Type:</b>
            <%= f.select :exam_type,["Marks","Grades","Marks and Grades"],{prompt:true},{class: "form-control",style: "width: 250px"}%>
          </div>
+          </div>
          <br>
           <div class="form-group">
-          <div align="center">
+          <div class="col-md-offset-5">
             <%= f.submit 'Submit', class: "btn btn-primary"%>
         </div>
    </div>
+
 <% end %>
+</div>
+</div>
+
 </fieldset>
 
-
+</div>
 
 
 

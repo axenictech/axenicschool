@@ -1,7 +1,6 @@
 class CreateArchivedStudents < ActiveRecord::Migration
   def change
     create_table :archived_students do |t|
-
       t.integer :student_id
       t.string :admission_no
       t.string :class_roll_no

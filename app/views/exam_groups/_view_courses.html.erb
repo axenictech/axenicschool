@@ -1,18 +1,14 @@
-<% if @batches.empty? %>
- <h4 align="center">No Record Found </h4>
-<%else%>
-	<table align="center" class="table table-striped" >
-	<ul id="category-list">
-	<tbody>
-	<thead>
-	  
-	</thead>
-	  <tbody class="product-index">
-	      <% @batches.each do |batch| %>
-	        <tr>
-	          <td><%= link_to batch.course.code+ " " +batch.course.course_name+ " "+batch.course.section_name+" - "+batch.name,exam_group_path(batch)%>
-	        </tr>
-	      <% end %>   
-	    </tbody>
-	  </table>
-<%end%>
+<table align="center" class="table table-striped" >
+<ul id="category-list">
+<tbody>
+<thead>
+</thead>
+ <tbody class="product-index">
+      <%= batches_present%>
+      <% @batches.each do |batch| %>
+        <tr>
+          <td><%= link_to batch.full_name,exam_group_path(batch)%>
+        </tr>
+      <% end %>   
+  </tbody>
+</table>

@@ -46,5 +46,4 @@ Rails.application.configure do
     user_name: 'axenicschool@gmail.com',
     password: 'axenic@123'
   }
-
 end

@@ -12,7 +12,7 @@
 <div class="col-md-12">
 	<div class="box-inner">
 		<div class="box-header well">
-			<h2>Add Parent/guardian details</h2>
+			<h2>Add Parent/Guardian Details</h2>
 		</div>
 	
 <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
@@ -21,9 +21,9 @@
   <fieldset>
   <div class="box-content">
 <% if @guard.errors.any? %>
-  			 <div class="alert alert-danger" style="width:500px" >
+  			 <div class="alert alert-danger" >
     			<h2>Error prohibited to being saved:</h2>
-    			<ul>
+    			<ul align="center">
 					 <% @guard.errors.full_messages.each do |msg| %>
       				<li style="width:500px" align="left"><%= msg %></li>
     				<% end %>
@@ -53,11 +53,11 @@
          <%=f.text_field :relation,placeholder: "Relation", class: "form-control"%>
        </div>
 
-         <div class="form-group">
-      <b>Email:</b>
-         <%=f.text_field :email,placeholder: "Email", class: "form-control"%>
+        <div class="form-group">
+        <b>Date of Birth:</b>
+         <%=f.date_field :dob,class: "form-control"%>
        </div>
-
+        
          <div class="form-group">
       <b>Contact Number:</b>
        <span style="color:red">*</span>
@@ -68,13 +68,21 @@
         <b>Office Phone:</b>
          <%=f.text_field :office_phone2,placeholder: "Office Phone", class: "form-control"%>
        </div>
+
          <div class="form-group">
-        <b>Office Address Line1:</b>
-         <%=f.text_field :office_address_line1,placeholder: "Office Address Line1", class: "form-control"%>
+      <b>Email:</b>
+         <%=f.text_field :email,placeholder: "Email", class: "form-control"%>
        </div>
+
+        
+
 </div>
    <div class="col-sm-1"></div>
       <div class="col-sm-4">
+       <div class="form-group">
+        <b>Office Address Line1:</b>
+         <%=f.text_field :office_address_line1,placeholder: "Office Address Line1", class: "form-control"%>
+       </div>
           <div class="form-group">
         <b>Office Address Line2:</b>
          <%=f.text_field :office_address_line2,placeholder: "Office Address Line2", class: "form-control"%>
@@ -89,10 +97,7 @@
          <%=f.select :country_id, Country.all.collect{|c| [c.name, c.id]},{prompt:true},{class: "form-control"}%>
        </div>
 
-            <div class="form-group">
-        <b>Date of Birth:</b>
-         <%=f.date_field :dob,class: "form-control"%>
-       </div>
+           
             <div class="form-group">
         <b>Occupation:</b>
          <%=f.text_field :occupation,placeholder: "Occupation", class: "form-control"%>
@@ -111,9 +116,11 @@
    <div class="col-sm-5 col-sm-offset-5"> 
       <div class="form-actions">               
          <%= f.submit 'Submit', class: "btn btn-primary"%>
-         <br>
+         
       </div>
+      <br>
     </div>
+
     <br>
     </div>
 

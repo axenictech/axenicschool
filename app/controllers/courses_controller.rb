@@ -40,20 +40,27 @@ class CoursesController < ApplicationController
   def create_batch_group
     @course = Course.shod(params[:batch_group][:course_id])
     if params[:batches].present?
-      @batch_groups ||= @course.batch_groups
-      @batch_group = BatchGroup.new(name: \
-        params[:batch_group][:name], course_id: @course.id)
-      if @batch_group.save
-        @batch_group.create_group_batch(params[:batches], @batch_group)
-        flash[:notice] = t('batch_group_created')
-        redirect_to grouped_batches_course_path(@course)
-      else
-        render '/courses/grouped_batches'
-      end
+      create_batch_group2(params[:batch_group][:name], params[:batches])
     else
-      flash[:alert] = t('batch_select')
-      redirect_to grouped_batches_course_path(@course)
+      create_batch_group3
     end
+  end
+
+  def create_batch_group2(name, batches)
+    @batch_group = BatchGroup.new(name: name, course_id: @course.id)
+    if @batch_group.save
+      @batch_group.create_group_batch(batches, @batch_group)
+      flash[:notice] = t('batch_group_created')
+      redirect_to grouped_batches_course_path(@course)
+    else
+      render '/courses/grouped_batches'
+    end
+    @batch_groups ||= @course.batch_groups
+  end
+
+  def create_batch_group3
+    flash[:alert] = t('batch_select')
+    redirect_to grouped_batches_course_path(@course)
   end
 
   def edit_batch_group

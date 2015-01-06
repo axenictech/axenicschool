@@ -13,7 +13,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
   <div class="box col-md-12">
     <div class="box-inner">
       <div class="box-header well">
-        <h2>Step 1 - Personal details</h2>
+        <h2>Step 1 - Personal Details</h2>
        
       </div>
         <div class="box-content">
@@ -30,8 +30,8 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
         </div>
       <% end %>
     <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-11">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
       <div class="row">
       <div class="col-sm-4 ">
         <div class="form-group">
@@ -81,7 +81,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       </div>
       <div class="col-md-4 col-sm-offset-1">
        <div class="form-group">
-       <b>Date Of Birth:</b>
+       <b>Date of Birth:</b>
        <span style="color:red">*</span>
           <%=f.date_field :date_of_birth , class: "form-control"%>
       
@@ -93,9 +93,9 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="col-md-4">
        <div class="form-group">
        <b>Gender:</b>
-        <span style="color:red">*</span>&nbsp;&nbsp;&nbsp;
-       <b>Male</b>&nbsp;&nbsp;<%= f.radio_button  "gender","Male", :checked => "checked" %>
-          &nbsp;&nbsp;&nbsp;<b>Female</b>&nbsp;&nbsp;<%= f.radio_button  "gender","Female"%>
+        <span style="color:red">*</span>&nbsp;&nbsp;
+       <%= f.radio_button  "gender","Male", :checked => "checked" %>&nbsp;&nbsp;<b>Male</b>&nbsp;&nbsp;
+         &nbsp;<%= f.radio_button  "gender","Female"%>&nbsp;&nbsp;<b>Female</b>
        </div>
        </div>
        <div class="col-md-4 col-sm-offset-1">
@@ -208,9 +208,9 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       </div>
       <div class="col-md-4 col-sm-offset-1">
         <div class="form-group">
-       <b>Phone:</b>
+       <b>Phone Number:</b>
      
-      <%=f.text_field :phone1,placeholder: "Phone",class: "form-control"%>
+      <%=f.text_field :phone1,placeholder: "Phone Number",class: "form-control"%>
       
       </div>
       </div>
@@ -219,9 +219,9 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-       <b>Mobile:</b>
+       <b>Mobile Number:</b>
      
-      <%=f.text_field :phone2,placeholder: "Mobile",class: "form-control"%>
+      <%=f.text_field :phone2,placeholder: "Mobile Number",class: "form-control"%>
       
       </div>
       </div>
@@ -235,23 +235,23 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       </div>
       </div>
       <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
+    
+      <div class="col-md-10 col-md-offset-2">
         <div class="form-group">
-        <b> Upload Photo:</b>
+        <div class="col-md-3"> <b> Upload Photo:</b></div>
      
-      <%=f.file_field :image,class: "form-control"%>
+      <%=f.file_field :image%>
       
       </div>
       </div>
       </div>
 </div>
 </div>
-<div class="col-md-6 col-md-offset-4">           
+<div class="col-md-6 col-md-offset-5">           
 <%= f.submit 'Update', class: "btn btn-success"%></div>
   </fieldset>        
  <% end %>
-</div>
+</div> 
 </div>
 </div>
 </div>

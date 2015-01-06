@@ -20,16 +20,16 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <% if @student.errors.any? %>
         <div class="alert alert-danger" >
            <h4>Errors prohibited to being Save:</h4>
-          <ul>
+          <ul align="center">
            <% @student.errors.full_messages.each do |msg| %>
-               <li style="width:400px" align="left"><%= msg %></li>
+               <li ><%= msg %></li>
             <% end %>
           </ul>
         </div>
       <% end %>
     <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-11">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
       <div class="row">
       <div class="col-sm-4 ">
         <div class="form-group">
@@ -206,9 +206,9 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       </div>
       <div class="col-md-4 col-sm-offset-1">
         <div class="form-group">
-       <b>Phone:</b>
+       <b>Phone Number:</b>
      
-      <%=f.text_field :phone1,placeholder: "Phone",class: "form-control"%>
+      <%=f.text_field :phone1,placeholder: "Phone Number",class: "form-control"%>
       
       </div>
       </div>
@@ -217,9 +217,9 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-       <b>Mobile:</b>
+       <b>Mobile Number:</b>
      
-      <%=f.text_field :phone2,placeholder: "Mobile",class: "form-control"%>
+      <%=f.text_field :phone2,placeholder: "Mobile Number",class: "form-control"%>
       
       </div>
       </div>
@@ -233,20 +233,20 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       </div>
       </div>
       <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
+    
+      <div class="col-md-10 col-md-offset-2">
         <div class="form-group">
-        <b> Upload Photo:</b>
+        <div class="col-md-3"> <b> Upload Photo:</b></div>
      
-      <%=f.file_field :image,class: "form-control"%>
+      <%=f.file_field :image%>
       
       </div>
       </div>
       </div>
 </div>
 </div>
-<div class="col-md-6 col-md-offset-4">           
-<%= f.submit 'Save', class: "btn btn-primary"%></div>
+<div class="col-md-6 col-md-offset-5">           
+<%= f.submit 'Save', class: "btn btn-primary",style:"width:80px"%></div>
   </fieldset>        
  <% end %>
 </div>
