@@ -5,7 +5,12 @@ module ExamGroupsHelper
   end
 
   def batches_present
-    return if @batches.empty?
+    return if @batches.any?
+    'No recorde found'
+  end
+
+  def exam_groups_present
+    return if @exam_groups.any?
     'No recorde found'
   end
 end
