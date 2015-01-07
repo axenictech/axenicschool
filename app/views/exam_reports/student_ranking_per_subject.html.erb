@@ -17,7 +17,7 @@
 <%= form_for :rank_report, :url=>{:action=>'rank_report_batch'},html:{id: 'form_rank_report_batch'},remote:true,method: :get do |f| %>
   
  
-  <b>Select Batch:</b>
+  <b>Select a Batch:</b>
       <%= f.select :batch_id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_rank_report_batch').submit();",class:"form-control",style: "width: 300px"}%>
       
   <% end %>

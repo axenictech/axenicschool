@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20141229062529) do
 
+<<<<<<< HEAD
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+=======
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
     t.integer  "employee_leave_types_id"
@@ -135,9 +141,15 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "assets", force: true do |t|
     t.string   "title"
     t.text     "description"
+<<<<<<< HEAD
+    t.decimal  "amount"
+    t.boolean  "is_inactive", default: false
+    t.boolean  "is_deleted",  default: false
+=======
     t.decimal  "amount",      precision: 10, scale: 0
     t.boolean  "is_inactive",                          default: false
     t.boolean  "is_deleted",                           default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -231,8 +243,13 @@ ActiveRecord::Schema.define(version: 20141229062529) do
 
   create_table "class_designations", force: true do |t|
     t.string   "name"
+<<<<<<< HEAD
+    t.decimal  "cgpa"
+    t.decimal  "marks"
+=======
     t.decimal  "cgpa",       precision: 10, scale: 0
     t.decimal  "marks",      precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -362,7 +379,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "employee_leaves", force: true do |t|
     t.integer  "employee_id"
     t.integer  "employee_leave_type_id"
+<<<<<<< HEAD
+    t.decimal  "leave_count"
+=======
     t.decimal  "leave_count",            precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.decimal  "leave_taken",            precision: 10, scale: 2
     t.date     "reset_date"
     t.datetime "created_at"
@@ -502,7 +523,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "exam_scores", force: true do |t|
     t.integer  "student_id"
     t.integer  "exam_id"
+<<<<<<< HEAD
+    t.decimal  "marks"
+=======
     t.decimal  "marks",            precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "grading_level_id"
     t.string   "remarks"
     t.boolean  "is_failed"
@@ -536,12 +561,20 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "fee_collection_discounts", force: true do |t|
     t.string   "type"
     t.string   "name"
+<<<<<<< HEAD
+    t.decimal  "discount"
+=======
     t.decimal  "discount",                  precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "finance_fee_collection_id"
     t.integer  "category_id"
     t.string   "admission_no"
     t.integer  "batch_id"
+<<<<<<< HEAD
+    t.boolean  "is_deleted",                default: false
+=======
     t.boolean  "is_deleted",                                         default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -563,12 +596,20 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "fee_collection_particulars", force: true do |t|
     t.string   "name"
     t.text     "description"
+<<<<<<< HEAD
+    t.decimal  "amount"
+=======
     t.decimal  "amount",                    precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "finance_fee_collection_id"
     t.integer  "category_id"
     t.string   "admission_no"
     t.integer  "batch_id"
+<<<<<<< HEAD
+    t.boolean  "is_deleted",                default: false
+=======
     t.boolean  "is_deleted",                                         default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -590,12 +631,20 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "fee_discounts", force: true do |t|
     t.string   "type"
     t.string   "name"
+<<<<<<< HEAD
+    t.decimal  "discount"
+=======
     t.decimal  "discount",                precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "finance_fee_category_id"
     t.integer  "category_id"
     t.string   "admission_no"
     t.integer  "batch_id"
+<<<<<<< HEAD
+    t.boolean  "is_deleted",              default: false
+=======
     t.boolean  "is_deleted",                                       default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -607,7 +656,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "finance_donations", force: true do |t|
     t.string   "donor"
     t.string   "description"
+<<<<<<< HEAD
+    t.decimal  "amount"
+=======
     t.decimal  "amount",                 precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.date     "transaction_date"
     t.integer  "finance_transaction_id"
     t.datetime "created_at"
@@ -643,12 +696,20 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "finance_fee_particulars", force: true do |t|
     t.string   "name"
     t.text     "description"
+<<<<<<< HEAD
+    t.decimal  "amount"
+=======
     t.decimal  "amount",                  precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "finance_fee_category_id"
     t.integer  "category_id"
     t.string   "admission_no"
     t.integer  "batch_id"
+<<<<<<< HEAD
+    t.boolean  "is_deleted",              default: false
+=======
     t.boolean  "is_deleted",                                       default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -658,14 +719,22 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   add_index "finance_fee_particulars", ["finance_fee_category_id"], name: "index_finance_fee_particulars_on_finance_fee_category_id", using: :btree
 
   create_table "finance_fee_structure_elements", force: true do |t|
+<<<<<<< HEAD
+    t.decimal  "amount"
+=======
     t.decimal  "amount",            precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.string   "label"
     t.integer  "batch_id"
     t.integer  "category_id"
     t.integer  "student_id"
     t.integer  "guardian_id"
     t.integer  "fee_collection_id"
+<<<<<<< HEAD
+    t.boolean  "is_deleted",        default: false
+=======
     t.boolean  "is_deleted",                                 default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -691,7 +760,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "finance_fines", force: true do |t|
     t.integer  "finance_fee_id"
     t.date     "fine_date"
+<<<<<<< HEAD
+    t.decimal  "fine"
+=======
     t.decimal  "fine",           precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -710,7 +783,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "finance_transaction_triggers", force: true do |t|
     t.string   "title"
     t.string   "description"
+<<<<<<< HEAD
+    t.decimal  "percentage"
+=======
     t.decimal  "percentage",  precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -721,9 +798,15 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "finance_transactions", force: true do |t|
     t.string   "title"
     t.string   "description"
+<<<<<<< HEAD
+    t.decimal  "amount"
+    t.date     "transaction_date"
+    t.boolean  "fine_included",                   default: false
+=======
     t.decimal  "amount",                          precision: 10, scale: 0
     t.date     "transaction_date"
     t.boolean  "fine_included",                                            default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "student_id"
     t.integer  "finance_fee_id"
     t.integer  "finance_transaction_category_id"
@@ -783,7 +866,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
     t.integer  "batch_id"
     t.integer  "student_id"
     t.integer  "exam_group_id"
+<<<<<<< HEAD
+    t.decimal  "marks"
+=======
     t.decimal  "marks",         precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.string   "score_type"
     t.integer  "subject_id"
     t.datetime "created_at"
@@ -842,9 +929,15 @@ ActiveRecord::Schema.define(version: 20141229062529) do
   create_table "liabilities", force: true do |t|
     t.string   "title"
     t.text     "description"
+<<<<<<< HEAD
+    t.decimal  "amount"
+    t.boolean  "is_solved",   default: false
+    t.boolean  "is_deleted",  default: false
+=======
     t.decimal  "amount",      precision: 10, scale: 0
     t.boolean  "is_solved",                            default: false
     t.boolean  "is_deleted",                           default: false
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -879,7 +972,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
     t.string   "question"
     t.integer  "marks"
     t.integer  "is_answer"
+<<<<<<< HEAD
+    t.string   "option_group",   array: true
+=======
     t.string   "option_group"
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -891,7 +988,11 @@ ActiveRecord::Schema.define(version: 20141229062529) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.time     "maximum_time"
+<<<<<<< HEAD
+    t.decimal  "percentage"
+=======
     t.decimal  "percentage",          precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "option_per_question"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -938,8 +1039,13 @@ ActiveRecord::Schema.define(version: 20141229062529) do
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"
+<<<<<<< HEAD
+    t.decimal  "gpa"
+    t.decimal  "marks"
+=======
     t.decimal  "gpa",                precision: 10, scale: 0
     t.decimal  "marks",              precision: 10, scale: 0
+>>>>>>> 38131257b5dd84d86127b8cfafeeb3c5580a85b6
     t.integer  "subject_count"
     t.integer  "prioriy"
     t.boolean  "full_course"

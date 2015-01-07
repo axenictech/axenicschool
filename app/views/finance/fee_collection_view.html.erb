@@ -21,7 +21,7 @@
   <div class="col-sm-1"></div>
   <div class="col-sm-4">
     <div class="form-group">
-     <b>Select Batch:</b>
+     <b>Select a Batch:</b>
       <%= select :batch,:id, Batch.includes(:course).all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('view_fee_collection',a,function(response){});",class: "form-control"}%>
     </div>
   </div>

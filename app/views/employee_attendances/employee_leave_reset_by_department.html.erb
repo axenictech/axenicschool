@@ -11,9 +11,10 @@
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-11 col-md-offset-1">
 <%= form_for :department,url:{action:'select_department'},method: :get,remote:true,html:{id: "dep_form"}  do |f| %>
-      <%= f.select :id,@departments.collect {|d| [d.name,d.id]},{prompt:"Select Department"},{onchange:"$('#dep_form').submit();",class: "form-control",style:"width:350px"} %>  
+        <b>Select a Department:</b>
+      <%= f.select :id,@departments.collect {|d| [d.name,d.id]},{prompt:true},{onchange:"$('#dep_form').submit();",class: "form-control",style:"width:300px"} %>  
     <%end%>
   </div>
 </div>
