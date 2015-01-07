@@ -7,20 +7,23 @@
 			<ul class="errors"></ul>
 		    <%= form_for @master_category,url:{action:'update_master_category',batch_id:@batch.id,id:@master_category.id},method: :patch,remote: true do |f|%>
 		    <div class="row">
-					<div class="col-md-1"></div>
-			    <div class="col-md-4"><b>Name :</b></div>
+					
+			    <div class="col-md-4 col-md-offset-1">
+			    <b>Name :</b></div>
 			    <div class="col-md-7"><%= f.text_field :name,class: "form-control"%></div>
 			  </div><br/>
 			  <div class="row">
-			    <div class="col-md-1"></div>
-			    <div class="col-md-4"><b>Description :</b></div>
+			   
+			    <div class="col-md-4 col-md-offset-1">
+			    <b>Description :</b></div>
 			    <div class="col-md-7"><%= f.text_field :description,class: "form-control"%></div>
 			  </div><br/>
 			  <div class="row">
-			    <div class="col-md-1"></div>
-			    <div class="col-md-4"><b>Batch :</div>
+			    
+			  <div class="col-md-4 col-md-offset-1">
+			    <b>Batch :</div>
 			    <div class="col-md-7"><%= text_field_tag :batch,@batch.course.course_name+" "+@batch.name,readonly:true,class: "form-control"%></div>
-			  </div><br/>
+			  </div><hr/>
 		    <div class="row">
 		      <div class="col-md-12">
 		      	<center>
