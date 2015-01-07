@@ -92,7 +92,6 @@ class Exam < ActiveRecord::Base
           score_grade = grade.id if percentage >= grade.min_score
         end
       end
-      
 
       if @exam_score.nil?
         exam_score = ExamScore.new(exam_id: exam.id, student_id: student_id,
@@ -156,5 +155,9 @@ class Exam < ActiveRecord::Base
         grouped_exam.update(marks: details[:marks])
       end
     end
+  end
+
+  def is_failed
+    exam_scores.where(is_failed: true).includes(:student, :grading_level)
   end
 end

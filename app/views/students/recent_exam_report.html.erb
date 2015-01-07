@@ -10,11 +10,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
-  <% if @exam_group.result_published? %>
-  <%= link_to 'Pdf Report',{action:'student_exam_report',format:"pdf",exam_group_id:@exam_group.id,student_id:@student.id},class: "btn btn-primary-link btn-sm" %>
-  <%end%>
-</div>
-</div>
+      <% if @exam_group.result_published? %>
+      <%= link_to 'Pdf Report',{action:'student_exam_report',format:"pdf",exam_group_id:@exam_group.id,student_id:@student.id},class: "btn btn-primary-link btn-sm" %>
+      <%end%>
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="box col-md-1"></div>
@@ -24,9 +24,9 @@
         <h2></h2>
       </div>
       <div class="box-content">
-      <fieldset>
+<fieldset>
 <% if @exam_group.result_published? %>
-<h4><%= @batch.course.course_name+" "+ @batch.course.section_name%>|<%= @batch.name %>|</h4>
+<h4><%= @batch.course.course_name+" "+ @batch.course.section_name%>|<%= @batch.name %></h4>
     <% exam_score = [] %>
 <% @exam_group.exams.each do |exam| %>
   <% exam_score.push exam.exam_scores.find_by_student_id(@student.id) unless exam.exam_scores.find_by_student_id(@student.id).nil?  %>

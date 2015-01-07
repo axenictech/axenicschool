@@ -130,6 +130,7 @@ class StudentsController < ApplicationController
   end
 
   def profile
+    puts params[:id]
     @student = Student.shod(params[:id])
     @immediate_contact = Guardian.shod(@student.immediate_contact)
     authorize! :read, @student

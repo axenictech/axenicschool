@@ -37,13 +37,37 @@
          <b>Subject Name:</b>
        </div>
        <div class="col-md-3">  
-         <%= @exam.subject.name %>
-       </div>
-     </div>
-   </div>
-   <br>
-   <hr>
-   <div class="row">
+
+           <%= @exam.subject.name %>
+        </div>
+        </div>
+      </div>
+<br>
+
+
+<br>
+ <div class="row">
+  
+<div class="col-md-12">
+ <table class="table table-striped">   
+ <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>       
+ <thead>
+  <tr >
+    <th >Student name</th>
+    <th >Marks</th>
+    <th >Remarks</th>
+    <th ><%= 'Grades' unless @exam.exam_group.exam_type=="Marks"%></th>
+  </tr> 
+  </thead>
+<tbody>
+<% @exam_scores.each do |es| %>
+<tr>
+<% student=es.student%>
+    <% unless es.nil? %>
+    
+     
+      <td class="col-2"><font color="red"><%= f.label "#{student.first_name+" "+student.last_name}" %></font></td>
+
     
     <div class="col-md-12">
      <table class="table table-striped">   

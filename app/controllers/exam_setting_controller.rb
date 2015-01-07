@@ -68,24 +68,23 @@ class ExamSettingController < ApplicationController
     end
   end
 
+  def inc_dec
+    @rank_levels = @course.ranking_levels.order('prioriy ASC')
+    @rank_lev1 = @course.ranking_levels.find(params[:format])
+  end
 
- def increase_priority
+  def increase_priority
     @course = Course.find(params[:id])
     inc_dec
     selected = params[:index].to_i - 1.to_i
     @course.increase_logic(@rank_levels, selected)
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     authorize! :create, @rank_lev1
-  end
+   end
 
   def decrease_priority
-    @course = Course.find(params[:id])
-
-    @rank_levels = @course.ranking_levels.order('prioriy ASC')
-    @rank_lev1 = @course.ranking_levels.find(params[:id])
-
+    @course = Course.shod(params[:id])
     inc_dec
-
     selected = params[:index].to_i + 1.to_i
     @course.decrease_logic(@rank_levels, selected)
     @rank_levels = @course.ranking_levels.order('prioriy ASC')

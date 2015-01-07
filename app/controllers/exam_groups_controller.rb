@@ -59,6 +59,10 @@ class ExamGroupsController < ApplicationController
     @batches = @course.batches.all
   end
 
+  def previous_exam_data
+    @courses ||= Course.all
+  end
+
   def previous_exam_group
     @batch = Batch.shod(params[:batch][:id])
     @exam_groups = @batch.exam_groups.where(result_published: true)
@@ -125,7 +129,7 @@ class ExamGroupsController < ApplicationController
 
   def previous_exam_scores
     @exam = Exam.shod(params[:format])
-    @exam_scores = @exam.exam_scores.where(is_failed: true)
+    @exam_scores = @exam.is_failed
     # authroize! :update, @exam
   end
 

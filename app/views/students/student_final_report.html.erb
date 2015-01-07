@@ -6,7 +6,6 @@
         width:100%;
         margin: 0 auto;
       }
-
       #head {
         height: 100px;
         width: 700px;
@@ -30,7 +29,6 @@
         </div>
       </div>
       <hr>
-
       <br/>
       <h3>
         <center>
@@ -47,7 +45,6 @@
         <% end %>
           <th bgcolor="99CCFF">Total</th>
       </tr>
-
       <% @subjects.each do |subject| %>
       <% is_valid_subject=1 %>
           <% unless subject.elective_group_id.nil? %>
@@ -57,7 +54,6 @@
           <% unless is_valid_subject == 0 %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
           <td align="center"><%= subject.name %></td>
-
           <% @exam_groups.each do |exam_group| %>
           <% unless exam_group.result_published? %>
           <td>Exam Result Not Published</td>
@@ -77,7 +73,7 @@
                NA
             <% end %>
           </td>
-           <% max_total += @exam.maximum_marks %>
+           <% max_total += @exam.maximum_marks unless @exam.maximum_marks.nil?%>
         <% marks_total += exam_score.marks unless exam_score.nil?%>
           <% end %>
           <% end %>
@@ -86,8 +82,12 @@
         <% max_total = 0 %>
         <% marks_total = 0 %>
         <%end%>
+<<<<<<< HEAD
+      <% end %>    
+=======
       <% end %>
       <tr> <td colspan="3"><hr></td></tr>
+>>>>>>> f90272fd0824207f25f456c4b22099bc0fdbd7a4
       <tr>
         <th>Total</th>
         <% @max_total = 0 %>
@@ -104,7 +104,7 @@
           <% end %>
           <% unless is_valid_subject == 0 %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
-             <% @max_total += exam.maximum_marks %>
+             <% @max_total += exam.maximum_marks unless @exam.maximum_marks.nil?%>
               <% @marks_total += exam_score.marks unless exam_score.nil?%>
           <%end%>
           <%end%>

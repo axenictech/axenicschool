@@ -67,4 +67,8 @@ class TimeTableEntry < ActiveRecord::Base
     end
     timetables
   end
+
+  def self.entries(subject, batch)
+    where(subject_id: subject, batch_id: batch)
+  end
 end
