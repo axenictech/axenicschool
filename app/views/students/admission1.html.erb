@@ -76,7 +76,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
                     </div>
                   </div>
                 </div>
->>>>>>> 19b247f34c60897684a03a44cc30611d035c432f
+
 
                 <div class="row">
                   <div class="col-md-4">
@@ -205,14 +205,14 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
                   <div class="col-md-4">
                     <div class="form-group">
                       <b> Upload Photo:</b>
-                      <%=f.file_field :image,class: "form-control"%>
+                      <%=f.file_field :image,class: "form-control",style: "height:auto"%>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6 col-md-offset-4">           
-            <%= f.submit 'Save', class: "btn btn-primary"%></div>
+            <%= f.submit 'Save', class: "btn btn-primary",style:"width:80px"%></div>
           </fieldset>        
         <%end%>
       </div>
