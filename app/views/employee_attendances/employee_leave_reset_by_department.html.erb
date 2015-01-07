@@ -1,20 +1,20 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-     <li><%= link_to 'Human Resources',employees_path %></li>
-     <li><%= link_to 'Employee Attendance', employee_attendances_path %></li>
-      <li><%= link_to 'Manual Leave Reset', manual_reset_employee_attendances_path %></li>
- 
-     <li>Department Wise Leave Reset</li>
+    <li><%= link_to 'Human Resources',employees_path %></li>
+    <li><%= link_to 'Employee Attendance', employee_attendances_path %></li>
+    <li><%= link_to 'Manual Leave Reset', manual_reset_employee_attendances_path %></li>
+    
+    <li>Department Wise Leave Reset</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
 
 <div class="row">
   <div class="col-md-11 col-md-offset-1">
-<%= form_for :department,url:{action:'select_department'},method: :get,remote:true,html:{id: "dep_form"}  do |f| %>
-        <b>Select a Department:</b>
-      <%= f.select :id,@departments.collect {|d| [d.name,d.id]},{prompt:true},{onchange:"$('#dep_form').submit();",class: "form-control",style:"width:300px"} %>  
+    <%= form_for :department,url:{action:'select_department'},method: :get,remote:true,html:{id: "dep_form"}  do |f| %>
+    <b>Select a Department:</b>
+    <%= f.select :id,@departments.collect {|d| [d.name,d.id]},{prompt:true},{onchange:"$('#dep_form').submit();",class: "form-control",style:"width:300px"} %>  
     <%end%>
   </div>
 </div>

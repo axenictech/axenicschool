@@ -1,4 +1,4 @@
-<% @class_timings.order('start_time ASC').each do |c| %>
+<% @class_timings.each do |c| %>
           <tr>
             <td><%= c.name %></td>
             <td><%= c.start_time.strftime("%I:%M %p")%></td>

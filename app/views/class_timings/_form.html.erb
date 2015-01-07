@@ -1,7 +1,7 @@
 <div class="modal-body">
-        <ul class="errors"></ul>
-<%= form_for [@batch,@class_timing1],remote: true do |f|%>
- <table class="table">
+    <ul class="errors"></ul>
+    <%= form_for [@batch,@class_timing1],remote: true do |f|%>
+    <table class="table">
         <tr>
             <td ><b>Name:</b></td>
             <td><%=f.text_field :name ,:style =>"width: 200px", class: "form-control"%></td>
@@ -10,7 +10,7 @@
         <tr>
             <td ><b>Start Time:</b> </td>
 
-        
+            
             <td><%=f.time_select :start_time,:style =>"width: 250px", class: "form-control" %></td>
         </tr>
         
@@ -19,7 +19,7 @@
             <td><%=f.time_select :end_time ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
         
-          
+        
         <tr>
             
             <td colspan="2">&nbsp;&nbsp;&nbsp;<%= f.check_box :is_break, :checked => false %> <b>Is a break</b></td>
@@ -27,12 +27,12 @@
 
 
         <tr>
-        <td colspan="2" align="center"><%= f.submit 'Submit', class: "btn btn-primary"%>
-        <%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
-        </tr>
-    </table>
-<% end %>
-</div>
+            <td colspan="2" align="center"><%= f.submit 'Submit', class: "btn btn-primary"%>
+                <%= link_to 'Cancel', '#', class: "btn btn-default",data:{dismiss:"modal"}%></td>
+            </tr>
+        </table>
+        <% end %>
+    </div>
 
 
 

@@ -92,7 +92,6 @@ class Exam < ActiveRecord::Base
           score_grade = grade.id if percentage >= grade.min_score
         end
       end
-      
 
       if @exam_score.nil?
         exam_score = ExamScore.new(exam_id: exam.id, student_id: student_id,
