@@ -118,7 +118,8 @@
             <% unless @immediate_contact.nil? %>
               <div class="form-group">
                 <div class="col-md-6"><b>Immediate Contact:</b></div>
-                <div class="col-md-6"><%= @immediate_contact.student_name %></div>
+                <div class="col-md-6">
+                <%= @immediate_contact.student_name %></div>
               </div>&nbsp;&nbsp;&nbsp;&nbsp;
               <%= link_to 'Change Immediate Contact',edit_immediate_contact_students_path(@student),style: 'color:green' %>
             <%end%>
