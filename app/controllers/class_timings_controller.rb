@@ -45,7 +45,7 @@ class ClassTimingsController < ApplicationController
 
   def select
     @batch = Batch.shod(params[:batch][:id])
-    @class_timings ||= @batch.class_timings
+    @class_timings ||= @batch.class_timings.order('start_time ASC')
     authorize! :read, @class_timings.first
   end
 
