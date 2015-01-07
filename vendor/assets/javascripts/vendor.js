@@ -13,10 +13,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-
-
-document.oncontextmenu = function(){return true;};
-
-$(document).ready(function(){
-    $('#datatable').DataTable();
-});

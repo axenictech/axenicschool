@@ -46,7 +46,7 @@
         <% @students.each_with_index do |student,i| %>
           <tr>
             <td><%= i+1 %></td>
-            <td><%= student.first_name+" "+student.last_name %></td>
+            <td><%= student.student_name%></td>
             <td><%= student.admission_no %></td>
             <td class="center">
             <div class="label-primary label label-default">

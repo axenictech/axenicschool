@@ -1,78 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Educulture</title>
-  <%= stylesheet_link_tag 'vendor'%>
-</head>
-<body>
-<div class="ch-container">
+<div class="intro-signup-header">
+  <div class="container">
     <div class="row">
-    <div class="row">
-      <div class="col-md-12 center login-header">
-        <h2>Signup for Free Account</h2>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="well col-md-5 center login-box">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
+        <div class="col-lg-4" align="left">
+        <h3>Sign-up for Free Account</h3>
+        <hr class="intro-divider">
+        <div id="flash"><%= render 'layouts/messages'%></div> 
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
        <fieldset>
         <%= devise_error_messages! %>
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
-          
+        <div class="form-group">
           <%= f.text_field :username, autofocus: true, placeholder:"Username", class: "form-control" %>
         </div>
         <div class="clearfix"></div><br>
-        
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-edit red"></i></span>
-          
+        <div class="form-group">
           <%= f.text_field :first_name, placeholder:"First Name", class: "form-control"%>
         </div>
         <div class="clearfix"></div><br>
-        
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-edit red"></i></span>
-          
+        <div class="form-group">
           <%= f.text_field :last_name, placeholder:"Last Name", class: "form-control" %>
         </div>
         <div class="clearfix"></div><br>
-
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope red"></i></span>
-          
+        <div class="form-group">
           <%= f.email_field :email, placeholder:"Email", class: "form-control" %>
         </div>
         <div class="clearfix"></div><br>
-        
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
-          
+        <div class="form-group">
           <%= f.password_field :password, autocomplete: "off", placeholder:"Password (#{@minimum_password_length} characters minimum)", class: "form-control" %>
         </div>
-        <div class="clearfix"></div><br>
-        
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
-          
+        <div class="clearfix"></div><br/>
+        <div class="form-group">
           <%= f.password_field :password_confirmation, autocomplete: "off", placeholder:"Confirm Password", class: "form-control" %>
         </div>
-        <div class="clearfix"></div><br>
-        
-        <p class="center col-md-5">
+        <div class="clearfix"></div>
+        <div class="form-group">
           <%= f.submit "Sign Up", class: "btn btn-primary"%>
-        </p>
+        </div>
       </fieldset>
-    <% end %>
-        <%= render "devise/shared/links" %>
+      <% end %>
+    </div>
     </div>
   </div>
-  </div>
-</div>      
-</body>
-</html>
+</div>

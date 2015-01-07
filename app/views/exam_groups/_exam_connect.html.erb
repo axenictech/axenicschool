@@ -1,24 +1,18 @@
 <table class="table table-striped">
-   <thead>
+    <thead>
       <th>Exam Group</th>
       <th>Weightage</th>
       <th></th>
       <th></th>
     </thead>
-    <tbody>
-
-<% @exam_groups.each do |exam_group| %>
-<% weightage=exam_group.exams.first.weightage unless exam_group.exams.first.nil? %>
-   
-   <tr>
-		
-	
-	<td>	<%= exam_group.name%>	</td>
-	
-    <td>	<%= text_field_tag "exam_group[#{exam_group.id}][weightage]",weightage,class: "form-control",placeholder:"Weightage"%></td>
-    <td></td>
-    <td><%= check_box_tag "exam_groups[]",exam_group.id,false,class: "exam_check_box" %></td>
-    </tr>
+  <tbody>
+    <% @exam_groups.each do |exam_group| %> 
+      <tr>
+      	<td><%= exam_group.name %></td>
+        <td><%= text_field_tag "exam_group[#{exam_group.id}][weightage]",exam_group.weightage,class: "form-control",placeholder:"Weightage"%></td>
+        <td></td>
+        <td><%= check_box_tag "exam_groups[]",exam_group.id,false,class: "exam_check_box" %></td>
+      </tr>
     <%end%>
-   </tbody>
+  </tbody>
 </table>
