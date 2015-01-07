@@ -30,26 +30,23 @@
         </ul> 
             </div>  
           <%end%>
-        <div class="col-sm-7 col-sm-offset-1">
 
+            <div class="col-sm-7 col-sm-offset-1">
             <div class="form-group">
-              <b>Title:</b>
-              <%=f.text_field :title, class: "form-control", style: "width: 350px", placeholder: "News Title"%>
+              <%=f.label :Title %>
+              <%=f.text_field :title, class: "form-control", style: "width: 350px", placeholder: "Batch Name"%>
             </div>
               
-              <div class="form-group">
+            <div class="form-group">
+              <%=f.label :Content %>
+              <%=f.text_area :content,style: 'width:350px;height:200px', placeholder: "News Content", class: "form-control"%>
+            </div>
 
-               <b>Content:</b>
-               <%=f.text_area :content,style: 'width:350px;height:200px', placeholder: "News Content", class: "form-control col-sm-7"%>
-              </div> 
-
-              <div class="row">
-              <div class="col-sm-offset-6"> 
-                <div class="form-group">  
-                   <br>
+            <div class="col-sm-7 col-sm-offset-6"> 
+              <div class="form-actions">               
                 <%= f.submit 'Publish News', class: "btn btn-primary"%>
                 </div>
-            </div></div>
+            </div>
                 
               </div>
             </fieldset>

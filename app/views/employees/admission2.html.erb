@@ -57,6 +57,7 @@ Note:<font color="red">Fields Marked with * must be filled</font>
 
         <div class="form-group">
         <b> Country:</b>
+        <span style="color:red">*</span>
      <%= f.select :home_country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
         </div>
     </div>

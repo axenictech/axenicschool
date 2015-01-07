@@ -41,11 +41,11 @@
      <% max_total = 0 %>
         <% marks_total = 0 %>
       <tr>
-        <th>Subject</th>
+        <th bgcolor="99CCFF">Subject</th>
         <% @exam_groups.each do |exam_group| %>
-          <td><%= exam_group.name %></t>
+          <td align="center"><%= exam_group.name %></td>
         <% end %>
-          <th>Total</th>
+          <th bgcolor="99CCFF">Total</th>
       </tr>
 
       <% @subjects.each do |subject| %>
@@ -56,7 +56,7 @@
           <% end %>
           <% unless is_valid_subject == 0 %>
         <tr class="tr-<%= cycle('odd', 'even') %>">
-          <td><%= subject.name %></td>
+          <td align="center"><%= subject.name %></td>
 
           <% @exam_groups.each do |exam_group| %>
           <% unless exam_group.result_published? %>
@@ -64,7 +64,7 @@
           <%else%>
             <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
-            <td>
+            <td align="center">
               <% unless @exam.nil? %>
                 <% if exam_group.exam_type == "Marks and Grades" %>
                   <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "-")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level.name || "-")}]" %>
@@ -78,16 +78,16 @@
             <% end %>
           </td>
            <% max_total += @exam.maximum_marks %>
-        <% marks_total += exam_score.marks%>
+        <% marks_total += exam_score.marks unless exam_score.nil?%>
           <% end %>
           <% end %>
-          <td><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
+          <td align="center"><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
           </tr>
         <% max_total = 0 %>
         <% marks_total = 0 %>
         <%end%>
       <% end %>
-    
+      <tr> <td colspan="3"><hr></td></tr>
       <tr>
         <th>Total</th>
         <% @max_total = 0 %>
@@ -105,7 +105,7 @@
           <% unless is_valid_subject == 0 %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
              <% @max_total += exam.maximum_marks %>
-              <% @marks_total += exam_score.marks %>
+              <% @marks_total += exam_score.marks unless exam_score.nil?%>
           <%end%>
           <%end%>
           <%end%>

@@ -30,7 +30,6 @@
         </div>
         </div>
         </div>
-
           <% general_subjects = @batch.subjects.where(elective_group_id:nil) %>
           <% student_electives = StudentSubject.where(student_id: @student.id,batch_id: @batch.id) %>
           <% elective_subjects = [] %>
@@ -41,9 +40,6 @@
           <% unless @subjects.empty? %>
            
             <% total_credits=0 %>
-
-
-
       <div class="row">
         <div class="box col-md-12">
             <div class="box-inner">
@@ -86,7 +82,7 @@
                 <% end %>
                 <tr class="tr-blank"></tr>
                 <tr class="tr-head">
-                  <td colspan="2" align="right"><font color="blue">Total</font></td>
+                  <td colspan="2" align="right"><b>Total</b></td>
                   <td><%="%.2f" %(@mark*100/@total)+"%" unless @total==0 %></td>
                 </tr>
                 </tbody>

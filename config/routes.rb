@@ -539,7 +539,7 @@ Rails.application.routes.draw do
       post :emp_search_result_pdf
       get :employee_structure
       get :emp_payslip
-
+      post :view_payslip_profile
 
     end
     member do
@@ -567,6 +567,7 @@ Rails.application.routes.draw do
       post :assign_employee
       get :update_reporting_manager_name
       patch :update_reporting_manager
+      get :emp_payslip
     end
   end
 

@@ -8,18 +8,18 @@
 <ul class="errors"></ul>
 <%= form_for @liability,url:{action: 'create_liability'},remote: true do |f|%>
  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4"><b>Title :</b></div>
+    
+   <div class="col-md-4 col-md-offset-1"><b>Title :</b></div>
     <div class="col-md-7"><%=f.text_field :title,placeholder:"Title",class: "form-control"%></div>
   </div><br/>
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4"><b>Description :</b></div>
+    
+   <div class="col-md-4 col-md-offset-1"><b>Description :</b></div>
     <div class="col-md-7"><%= f.text_field :description,placeholder: "Description",class: "form-control"%></div>
   </div><br/>
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4"><b>Amount :</b></div>
+    
+   <div class="col-md-4 col-md-offset-1"><b>Amount :</b></div>
     <div class="col-md-7"><%=f.text_field :amount,placeholder: "Amount",class: "form-control"%></div>
   </div><hr>
   <div class="row">
