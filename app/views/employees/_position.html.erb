@@ -13,18 +13,18 @@
    <div class="col-md-offset-1">
    <br>
 	 <div class="form-group">
-       <div class="col-md-3"><b>Name :</b></div>
+       <div class="col-md-3"><b>Name:</b></div>
          <%=c.text_field :name, placeholder: "Employee Position Name", class: "form-control",style:"width:250px"%>
       </div>
 
    
         <div class="form-group">
-         <div class="col-md-3"><b>Select :</b></div>
+         <div class="col-md-3"><b>Employee Category:</b></div>
        <%= c.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control",style:"width:250px"%>
        </div>
        <br>
       <div class="form-group">
-         <div class="col-md-3"> <b>Status :</b></div>
+         <div class="col-md-3"> <b>Status:</b></div>
         <%= c.radio_button "status", "true", checked: "checked" %>&nbsp; <b>Active</b>&nbsp;&nbsp;
         <%= c.radio_button "status", "false"%> &nbsp;<b>Inactive</b> 
        </div>
