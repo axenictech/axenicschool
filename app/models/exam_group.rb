@@ -39,4 +39,9 @@ class ExamGroup < ActiveRecord::Base
     end
     flag
   end
+
+  def weightage
+    return unless exams.first.nil?
+    exams.first.weightage
+  end 
 end

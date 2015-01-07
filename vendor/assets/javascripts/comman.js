@@ -34,3 +34,7 @@ function time_batch_function(){
 function exam_group(){
 	$('#exam_form').submit();
 }
+
+function batchevent(){
+	$('#batch_form').submit();
+}

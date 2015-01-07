@@ -26,7 +26,7 @@
       <div class="box-content">
       <fieldset>
 <% if @exam_group.result_published? %>
-<h4><%= @batch.course.course_name+" "+ @batch.course.section_name%>|<%= @batch.name %>|<%= @subject.name %></h4>
+<h4><%= @batch.course.course_name+" "+ @batch.course.section_name%>|<%= @batch.name %></h4>
     <% exam_score = [] %>
 <% @exam_group.exams.each do |exam| %>
   <% exam_score.push exam.exam_scores.find_by_student_id(@student.id) unless exam.exam_scores.find_by_student_id(@student.id).nil?  %>
