@@ -1,7 +1,5 @@
 # Registrations Controller
 class RegistrationsController < Devise::RegistrationsController
-  layout false
-
   def create
     super
     @user.create_general_setting

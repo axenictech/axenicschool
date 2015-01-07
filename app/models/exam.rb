@@ -156,4 +156,8 @@ class Exam < ActiveRecord::Base
       end
     end
   end
+
+  def is_failed
+    exam_scores.where(is_failed: true).includes(:student, :grading_level)
+  end
 end

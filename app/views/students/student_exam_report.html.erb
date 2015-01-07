@@ -1,92 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style type="text/css">
-.page {
-    width:100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
+
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+
+     
 
 
-
-.hor_line{
-    width:100%;
-    background: #ADACAB;
-    height: 1px;
-}
-
-#title h1{
-    margin-bottom: 2px;
-    font-weight: normal;
-
-}
-
-#student_main_info h4{
-    color: #555555;
-    margin-top: 2px;
-    font-weight: normal;
-}
-
-#student_main_info h2{
-    margin-bottom: 2px;
-    font-weight: normal;
-
-}
-
-
-.odd{
-    height:auto;
-    background: #EEEEEE;
-    
-}
-
-.even{
-    
-    height:auto;
-    background: #fff;
-    
-    
-}
-
-.even td{
-   
-   padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-}
-
-.odd td{
-  padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-
-}
-
-table#pdf-table{
-   border: 1px solid #ADACAB;
-   border-left: 0px solid #ADACAB;
-}
-
-</style>
-</head>
-<body>
-<div class="hor_line"></div>
-<div id="title">
-<h1 align="center"><%= @general_setting.school_or_college_name%></h1>
-<h4><small><%= @general_setting.school_or_college_address%><br/>
-  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
-<div class="page-yield" class="available_sections">
-  <div class="hor_line"></div>
-  <div id="student_profile_heading" class="section">
-    <div id ="student_main_info">
-      <h2><%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %> - <%= @exam_group.name.capitalize %></h2>
+      <h3>
+        <center>
+         <%= @batch.course.course_name.capitalize+" "+@batch.course.section_name.capitalize+" "+@batch.name.capitalize %> - <%= @exam_group.name.capitalize %>
+        </center>
+      </h3><br/>
       <span><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></span>
       <h4><%= t('student_exam_report') %></h4>
-    </div>
-  </div>
+  
 
    <% exam_score = [] %>
 <% @exam_group.exams.each do |exam| %>
@@ -94,20 +49,20 @@ table#pdf-table{
 <% end%>
   <% total_marks_attained = 0 %>
   <% total_max_marks = 0 %>
-    <table id="pdf-table" width="100%" cellpadding="1" cellspacing="1" border="1">
+    <table cellpadding="5" cellspacing="5" width="700">
       <tr class="tr-head">
-        <td class="col-3"><font color="blue">Subject</font></td>
+        <th bgcolor="99CCFF">Subject</th>
         <% if @exam_group.exam_type == 'Marks' %>
-          <td><font color="blue">Marks obtained</font></td>
-          <td><font color="blue">Max</font></td>
-          <td><font color="blue">Percentage(%)</font></td>
+          <th bgcolor="99CCFF">Marks obtained</th>
+          <th bgcolor="99CCFF">Max</th>
+          <th bgcolor="99CCFF">Percentage(%)</th>
         <% elsif @exam_group.exam_type == 'Grades' %>
-          <td><font color="blue">Grades</font></td>
+          <th bgcolor="99CCFF">Grades</th>
         <% else %>
-          <td><font color="blue">Marks obtained</font></td>
-          <td><font color="blue">Max</font></td>
-          <td><font color="blue">Grades</font></td>
-          <td><font color="blue">Percentage(%)</font></td>
+          <th bgcolor="99CCFF">Marks obtained</th>
+          <th bgcolor="99CCFF">Max</th>
+          <th bgcolor="99CCFF">Grades</th>
+          <th bgcolor="99CCFF">Percentage(%)</th>
         <% end %>
       </tr>
       <% exam_score.each do |es| %>
@@ -120,38 +75,39 @@ table#pdf-table{
         <tr class="tr-<%= cycle('odd', 'even') %>">
           <td class="col-2"> <%= es.exam.subject.name %></td>
           <% if @exam_group.exam_type == 'Marks' %>
-            <td class="col-1"><%= es.marks || '-' %></td>
+            <td align="center"><%= es.marks || '-' %></td>
             <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
-            <td class="col-1"><%= es.exam.maximum_marks %></td>
+            <td align="center"><%= es.exam.maximum_marks %></td>
             <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
-            <td class="col-1"><%= es.calculate_percentage %></td>
+            <td align="center"><%= es.calculate_percentage %></td>
           <% elsif @exam_group.exam_type == 'Grades' %>
-            <td class="col-1"><%= es.grading_level.name || "-" %></td>
+            <td align="center"><%= es.grading_level.name || "-" %></td>
           <% else %>
-            <td class="col-1"><%= es.marks || "-" %></td>
+            <td align="center"><%= es.marks || "-" %></td>
             <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
-            <td class="col-1"><%= es.exam.maximum_marks %></td>
+            <td align="center"><%= es.exam.maximum_marks %></td>
             <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
-            <td class="col-1"><%= es.grading_level.name || "-" %></td>
-            <td class="col-1"><%= es.calculate_percentage %></td>
+            <td align="center"><%= es.grading_level.name || "-" %></td>
+            <td align="center"><%= es.calculate_percentage %></td>
           <% end %>
         </tr>
       <% end %>
       <%end%>
+      <tr><td colspan="4"><hr></td></tr>
       <tr class="tr-blank"></tr>
       <% unless @exam_group.exam_type == 'Grades'%>
         <tr class="tr-head">
-          <td><font color="blue">Total marks:</font></td>
-          <td><font color="blue"><%= total_marks_attained %></font></td>
-          <td><font color="blue"><%= total_max_marks %></font></td>
+          <th>Total marks:</th>
+          <td align="center"><%= total_marks_attained %></td>
+          <td align="center"><%= total_max_marks %></td>
           <%if @exam_group.exam_type=="Marks and Grades"%>
           <td>-</td>
           <%end%>
-          <td><font color="blue"><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></font></td>
+          <td><%= "%.2f" %(total_marks_attained*100/total_max_marks)+"%" unless total_max_marks == 0 %></td>
         </tr>
       <%else%>
         <tr class="tr-head">
-          <td><font color="blue">Final Grade:</font></td>
+          <td>Final Grade:</td>
           <td>-</td>
         </tr>
       <% end %>
