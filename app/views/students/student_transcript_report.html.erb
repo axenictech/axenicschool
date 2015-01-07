@@ -42,13 +42,13 @@
       <table cellpadding="5" cellspacing="5" width="700">
         <tr>
           <th colspan="3" bgcolor="99CCFF" align="left">
-            (Student Transcript Report)
+            Student Transcript Report
           </th>
         </tr>
         
         <tr>
-          <td>Name</td>
-          <td>:</td>
+          <th>Name</th>
+          <th>:</th>
           <td><%= @student.first_name.capitalize %> <%= @student.middle_name.capitalize %> <%= @student.last_name.capitalize %>
           </td>
         </tr>
@@ -85,15 +85,18 @@
                 <% end %>
               <% end %>
               <tr>
-                <td> <%= subject.code %></td>
-                <td> <%= subject.name %></td>
-                <td><%= "%.2f" %(marks_total*100/max_total)+"%" unless max_total==0%></td>
+                <td align="center"> <%= subject.code %></td>
+                <td align="center"> <%= subject.name %></td>
+                <td align="center"><%= "%.2f" %(marks_total*100/max_total)+"%" unless max_total==0%></td>
               </tr>
+
               <% max_total = 0 %>
               <% marks_total = 0 %>
             <% end %>
+             <tr><td colspan="3"><hr></td></tr>
             <tr>
-              <td><font color="blue">Total</font></td>
+            <td></td>
+              <td align="center"><b>Total</b></td>
               <td><%="%.2f" %(@mark*100/@total)+"%" unless @total==0%></td>
             </tr> 
           <%else%>
