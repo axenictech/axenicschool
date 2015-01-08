@@ -1,7 +1,8 @@
 $("ul.errors").html("")
 <% if @asset.errors.any? %>
 		<% @asset.errors.full_messages.each do |message| %>
-		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+		$("ul.errors").addClass("alert alert-danger alert-dismissable")  
+		$("ul.errors").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>
   $("#myModal").modal("hide")
