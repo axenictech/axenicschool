@@ -2,7 +2,7 @@
 
 <div class="box-inner">
   <div class="box-header well">
-      <h2></h2>
+      <h2>New Category</h2>
   </div>
 <div class="box-content">
 <%= form_for :payslip,url:{action:'create_payslip_category',format:@employee}  do |f| %>
@@ -12,7 +12,7 @@
         <div class="col-md-1"></div>
           <div class="col-md-3">
               <b>Name:</b>
-              <span class="necessary-field">*</span></h4>
+              <span style="color:red">*</span></h4>
           </div>
         <div class="col-md-6">
           <%=f.text_field :name,class: "form-control",style:"width:250"%>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-
+<br>
 
     <div class="row">
       <div class="col-md-12">
@@ -34,12 +34,12 @@
       </div>
     </div>
 
-
+<br>
     <div class="row">
       <div class="col-md-12">
         <div class="col-md-4"></div>
          <div class="col-md-8">
-           <h4><%=f.check_box :is_deduction %> 
+           <%=f.check_box :is_deduction %> 
             &nbsp;&nbsp;
          <b>Is Deduction</b>
         </div>

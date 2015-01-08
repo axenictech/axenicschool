@@ -18,6 +18,7 @@ class TimeTableEntriesController < ApplicationController
   def select_subject
     @subject = Subject.shod(params[:sub][:subject_id])
     @teachers = EmployeeSubject.where(subject_id: @subject.id)
+    @emp = EmployeeSubject.where(subject_id: @subject.id, employee_id: nil)
     authorize! :read, TimeTableEntry
   end
 

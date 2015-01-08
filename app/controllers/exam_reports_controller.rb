@@ -234,7 +234,7 @@ class ExamReportsController < ApplicationController
 
   def student_ranking_per_subject
     @batches ||= Batch.includes(:course).all
-   
+
     @subjects ||= Batch.last.subjects
     authorize! :read, ExamGroup
   end
