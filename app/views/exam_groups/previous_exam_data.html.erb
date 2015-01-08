@@ -13,7 +13,7 @@
   <%= form_for :course, url:{action:'previous_exam'},method: :get,remote:true,html:{id: "course_form"}  do |f| %>
 
   <b>Select a Course:</b>
-  <%= f.select :id, Course.all.collect {|b| [b.course_name+" "+b.section_name,b.id]}, {prompt:true},{onchange:"$('#course_form').submit();",class: "form-control",style:"width:250px"}%>
+  <%= f.select :id, courses, {prompt:true},{onchange:"$('#course_form').submit();",class: "form-control",style:"width:250px"}%>
 
   <% end %>
   </div>

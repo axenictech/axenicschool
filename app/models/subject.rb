@@ -30,4 +30,12 @@ class Subject < ActiveRecord::Base
   def subject_name
     [name, code].join(' ')
   end
+
+  def exam_scores(exam)
+    ExamScore.where(exam_id: exam, student_id: id).take
+  end
+
+  def full_name
+    [first_name, last_name].join(' ')
+  end
 end

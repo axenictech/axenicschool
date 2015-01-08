@@ -26,4 +26,12 @@ module ExamsHelper
 
     html.html_safe
   end
+
+  def students_present
+    return if @students.any?
+    html = <<-HTML
+    <h4 align="center">No students Found </h4>
+    HTML
+    html.html_safe
+  end
 end

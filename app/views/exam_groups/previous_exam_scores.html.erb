@@ -7,14 +7,12 @@
     <li> Previous Exam Score</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
-
 <div class="row">
   <div class="col-md-12"> 
     <div class="box-inner"> 
       <div class="box-header well">
         <h2>Previous Exam Score</h2>
       </div>
-
       <div class="box-content">
         <fieldset>
          <div class="row">
@@ -23,7 +21,6 @@
             <div class="col-md-2">  
              <b>Exam Name:</b>
            </div>
-           
            <div class="col-md-2">  
             <%= @exam.exam_group.name %>
           </div>
@@ -36,18 +33,14 @@
         <div class="col-md-2">  
          <b>Subject Name:</b>
        </div>
-       <div class="col-md-3">  
-
+       <div class="col-md-3">
            <%= @exam.subject.name %>
         </div>
         </div>
       </div>
 <br>
-
-
 <br>
  <div class="row">
-  
 <div class="col-md-12">
  <table class="table table-striped">   
  <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>       
@@ -64,11 +57,7 @@
 <tr>
 <% student=es.student%>
     <% unless es.nil? %>
-    
-     
-      <td class="col-2"><font color="red"><%= f.label "#{student.first_name+" "+student.last_name}" %></font></td>
-
-    
+      <td class="col-2"><font color="red"><%= f.label "#{student.full_name}" %></font></td>
     <div class="col-md-12">
      <table class="table table-striped">   
        <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>       
@@ -77,7 +66,7 @@
           <th >Student name</th>
           <th >Marks</th>
           <th >Remarks</th>
-          <th ><%= 'Grades' unless @exam.exam_group.exam_type=="Marks"%></th>
+          <th><%= 'Grades' unless @exam.exam_group.exam_type=="Marks"%></th>
         </tr> 
       </thead>
       <tbody>
@@ -85,12 +74,10 @@
         <tr>
           <% student=es.student%>
           <% unless es.nil? %>
-          
-          
-          <td class="col-2"><font color="red"><%= f.label "#{student.first_name+" "+student.last_name}" %></font></td>
+          <td class="col-2"><font color="red"><%= f.label "#{student.full_name}" %></font></td>
           
           <%else%>
-          <td class="col-2"><%= f.label "#{student.first_name+" "+student.last_name}" %></td>
+          <td class="col-2"><%= f.label "#{student.full_name}" %></td>
           <%end%>
           <% unless es.nil? %>
           <td><%= f.text_field "exam[#{student.id}][marks]",value:es.marks,class: "form-control"%></td>
