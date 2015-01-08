@@ -41,11 +41,10 @@
         <tr>
     <td class="col-4"></td>
   <% @batch.class_timings.where(is_break: false).each do |c|%>
-     <th align="left"><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></th>
+     <th align="left"><%=c.full_time%></th>
       <% end %>
     </tr> 
-
-        <% @batch.weekdays.each do |w|%>
+       <% @batch.weekdays.each do |w|%>
     <tr>
         <th align="left"><%=w.weekday%></th>
         <% @batch.class_timings.where(is_break: false).each do |c|%>
@@ -53,7 +52,7 @@
         <td>
         <%unless present.nil? %>
          <font color="red"><%= present.subject.name %></font><br/>
-       <font color="blue"><%= present.employee.first_name+" "+present.employee.last_name%></font><br/>
+       <font color="blue"><%= present.employee.full_name%></font><br/>
        
         <%else%>
      <%="-"%></td>

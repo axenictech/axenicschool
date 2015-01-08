@@ -73,4 +73,16 @@ module TimeTablesHelper
     TimeTableEntry.where(class_timing_id: time.class_timing_id\
         , weekday_id: time.weekday_id, time_table_id: time.time_table).take
   end
+
+  def teacher_timetable_not_found!
+    return unless @time.empty?
+    html = <<-HTML
+      <h4 align="center">No timetable entries found</h4>
+    HTML
+    html.html_safe
+  end
+
+  def timetable_collect
+    @timetables.uniq.collect { |t| [t.full_time, t.id] }
+  end
 end
