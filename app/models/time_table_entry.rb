@@ -35,7 +35,6 @@ class TimeTableEntry < ActiveRecord::Base
     end
   end
 
-
   def self.select_employee(e)
     weekdays, class_timings, employees = [], [], []
     unless e.nil?

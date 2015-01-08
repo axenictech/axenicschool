@@ -59,7 +59,7 @@
   </tr> 
   </thead>
 <tbody>
-<% @exam_scores.each do |es| %>
+<% @exam_scores.includes(:student, :grading_level).each do |es| %>
 <tr>
 <% student=es.student%>
     <% unless es.nil? %>
@@ -84,7 +84,7 @@
 
  <tr><td>
 <%= f.submit 'Submit', class: "btn btn-primary"%>
-<%= link_to 'Finish',exam_groups_previous_exam_data_path, class: "btn btn-primary"%></td>
+<%= link_to 'Finish',previous_exam_data_exam_groups_path, class: "btn btn-primary"%></td>
 </tr>
 <%end%>
 </tbody>
