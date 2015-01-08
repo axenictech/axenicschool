@@ -14,7 +14,7 @@
     <%= form_for :select_department,url:{action:'department_employee_list'},remote:true,html:{id: "user_form2"} do |f|%>
 
 
-    <b>Select Department:</b>
+    <b>Select a Department:</b>
     
     <%= f.select :id,@department.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form2').submit();",class: "form-control",style:"width:250px"}%>
 

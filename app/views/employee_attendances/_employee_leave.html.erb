@@ -1,9 +1,9 @@
 
-<!-- <div align="center">
+ <div align="center">
 <ul class="errors"></ul></div>
 <div class="row">
 
-<div class="box col-md-8 col-md-offset-2">
+<div class="box col-md-9 col-md-offset-1">
   <div class="box-inner">
     <div class="box-header well">
       <h2>Add new leave types</h2>
@@ -14,32 +14,32 @@
   
  <br>
    <div class="form-group">
-        <div class="col-md-3"><b>Leave Name:</b></div>
+        <div class="col-md-3 col-md-offset-1"><b>Leave Name:</b></div>
         <div class="col-md-6"><%=c.text_field :name, placeholder: "Leave Name", class: "form-control"%></div>
       </div>
       <br><br>
       <div class="form-group">
-        <div class="col-md-3"><b>Leave Code:</b></div>
+        <div class="col-md-3 col-md-offset-1"><b>Leave Code:</b></div>
         <div class="col-md-6"><%=c.text_field :code, placeholder: "Leave Code", class: "form-control"%></div>
       </div>
       <br><br>
        <div class="form-group">
-        <div class="col-md-3"><b>Maximum Leave Count:</b></div>
+        <div class="col-md-3 col-md-offset-1"><b>Maximum Leave Count:</b></div>
         <div class="col-md-6"><%=c.text_field :max_leave_count, placeholder: "Max Leave Count", class: "form-control"%></div>
       </div>
       <br><br>
       <div class="form-group">
-        <div class="col-md-6"><%=c.check_box :enable_carry_forward, :checked => false%>&nbsp;&nbsp;<b>Enable Carry Forward</b></div></div>
+        <div class="col-md-6 col-md-offset-1"><%=c.check_box :enable_carry_forward, :checked => false%>&nbsp;&nbsp;<b>Enable Carry Forward</b></div></div>
          
     
         <br>
       <div class="form-group">
-          <div class="col-md-3"><b>Status:</b></div>
+          <div class="col-md-3 col-md-offset-1"><b>Status:</b></div>
         <div class="col-md-6"> <%= c.radio_button "status", "true", checked: "checked" %>&nbsp; <b>Active</b>&nbsp;&nbsp;
         <%= c.radio_button "status", "false"%>&nbsp; <b>Inactive</b></div>
        </div>
    <br><br>
-      <div class="col-sm-4 col-sm-offset-4"> 
+      <div class="col-sm-4 col-sm-offset-5"> 
        <div class="form-actions">               
         <%= c.submit 'Create', class: "btn btn-primary"%>
       </div>
@@ -48,7 +48,7 @@
   </div>
   </div>
   </div>
-  </div> -->
+  </div>
 
 <% if @active_leaves.empty? and  @inactive_leaves.empty?%>
 <h4 align="center">No records found</h4>
@@ -132,12 +132,13 @@
         <%end%>
        </tbody>
     </table>
-    <%end%>
+   
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+  <%end%>
  <%end%>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
