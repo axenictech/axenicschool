@@ -17,3 +17,16 @@ function subject_fun(){
 function assign_fun(){
 	$('#user_form').submit();
 }
+
+function class_batch_fun(){
+	$('#batch_form').submit();
+}
+
+function time_subject_fun(){
+	$('#em').submit();
+}
+
+function time_batch_function(){
+	$('#time_form').submit();
+
+}

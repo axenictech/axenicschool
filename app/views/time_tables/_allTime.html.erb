@@ -17,11 +17,11 @@
       <tr>
         <th><%=w.weekday%></th>
         <% @class_timing.each do |c|%>
-        <% @present=TimeTableEntry.find_by_class_timing_id_and_weekday_id_and_time_table_id(c.id,w.id,@time1) %>
+        <% present=present_time_table_entry(c,w,@time1) %>
         <td>
-        <%unless @present.nil? %>
-         <font color="red"><%= @present.subject.name %></font><br/>
-       <font color="blue"><%= @present.employee.first_name+" "+@present.employee.last_name%></font><br/>
+        <%unless present.nil? %>
+         <font color="red"><%= present.subject.name %></font><br/>
+       <font color="blue"><%= present.employee.first_name+" "+present.employee.last_name%></font><br/>
     
   <%else%>
      <%="-"%></td>

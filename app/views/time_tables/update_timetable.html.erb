@@ -28,19 +28,7 @@
     <div class="box-content">
      <%=form_for @time_table,url:{action:'update_timetable_values',format:@time_table} do |f| %>
        <fieldset>
-      <% if  @time_table.errors.any? %>
-              <div class="alert alert-danger alert-dismissable">
-             
-            <ul><%@time_table.errors.full_messages.each do |msg| %>
-                <li style="width:300px"><%= msg %></li>
-                <% end %>
-            </ul>
-            </div>
-        <% end %>
-
-
-
-  <div class="col-md-2"></div>
+   <div class="col-md-2"></div>
     <div class="col-md-10">
       <div class="form-group">
         <div class="col-md-3"> <b>Start Date:</b></div>
