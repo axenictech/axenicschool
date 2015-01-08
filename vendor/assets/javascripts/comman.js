@@ -38,3 +38,7 @@ function exam_group(){
 function batchevent(){
 	$('#batch_form').submit();
 }
+
+function class_fun(){
+	$('#class_form').submit();
+}
