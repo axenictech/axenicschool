@@ -8,14 +8,7 @@
  </div>
 <%= form_for [@exam_group,@exam] do |f| %>
 <fieldset>
-<% if @exam.errors.any?%>
-    <div class="alert alert-danger">
-    <h4>Errors prohibited to being saved:</h4>
-    <ul><% @exam.errors.full_messages.each do |msg|%>
-      <li style="width:800px"><%= msg %></li>
-      <%end%></ul>
-    </div>  
-<%end%>
+<%= exam_error_messages! %>
 <div class="box-content">
 <div class="row">
 <div class="col-md-2"></div>

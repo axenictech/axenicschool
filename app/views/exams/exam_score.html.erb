@@ -18,14 +18,7 @@
       <% if @students.empty? %>
         <h4 align="center">No students Found </h4>
       <% else %>
-        <% unless @errors.nil? %>
-          <div class="alert alert-danger">
-            <h4>Errors prohibited to being saved:</h4>
-            <ul><% @errors.each do |msg|%>
-              <li style="width:800px"><%= msg %></li>
-            <%end%></ul>
-          </div>  
-        <%end%>
+        <%= errors_messages! %>
         <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>  
           <br><br>
           <div class="box-content">
