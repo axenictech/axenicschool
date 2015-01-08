@@ -45,8 +45,8 @@
           <th bgcolor="99CCFF">Maximum Marks</th>
           <th bgcolor="99CCFF">Grades</th>
         </tr>
-            <tr class="tr-<%= cycle('odd', 'even') %>">
               <% @exam_groups.each do |exam_group| %>
+              <tr class="tr-<%= cycle('odd', 'even') %>">
                 <td><%= exam_group.name %></td>
                   <% exam = Exam.find_by_subject_id_and_exam_group_id(@subject.id,exam_group.id) %>
                   <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
@@ -74,10 +74,8 @@
                     <td> <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || '-') %></td>
                     <% end %>
                   <% end %>
-
+                    </tr>
                 <% end %>
-              
-          </tr>
         </table>
       </div>
     </body>
