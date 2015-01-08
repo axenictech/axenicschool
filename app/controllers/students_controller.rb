@@ -323,10 +323,19 @@ class StudentsController < ApplicationController
   end
 
   def send_email
-    @student = Student.shod(params[:student_id])
-    recipient, message = params[:email][:recipient], params[:message]
-    @student.mail(params[:subject], recipient, message)
-    redirect_to email_students_path(@student)
+    subject = params[:subject]
+    recipient = params[:email][:recipient]
+    message = params[:message]
+    if subject.empty? || recipient.empty? || message.empty?
+      flash[:alert] = t('email_invalid')
+      @student = Student.shod(params[:student_id])
+      redirect_to email_students_path(@student)
+    else
+      @student = Student.shod(params[:student_id])
+      @student.mail(subject, recipient, message)
+      flash[:notice] = t('sent_email')
+      redirect_to email_students_path(@student)
+    end
   end
 
   def report_email

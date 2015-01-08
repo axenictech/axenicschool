@@ -150,3 +150,5 @@ en:
   batch_rank_error: 'Please select batch'
   course_rank_error: 'Please select course'
   attendance_error: 'End date cannot be less than start date'
+  sent_email: 'Email sent successfully'
+  email_invalid: 'All fields are mandatory'
