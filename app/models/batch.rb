@@ -29,6 +29,10 @@ class Batch < ActiveRecord::Base
     end
   end
 
+  def full_name
+    course.course_name + ' ' + course.section_name + ' - ' + name
+  end
+
   def normal_subjects
     subjects.where(elective_group_id: nil)
   end
@@ -42,6 +46,10 @@ class Batch < ActiveRecord::Base
     students.each  do |student|
       Student.find(student).update(batch_id: transfer_id)
     end
+  end
+
+  def result_published
+    exam_groups.where(result_published: true)
   end
 
   def graduate(students, status)

@@ -18,18 +18,8 @@
       <%= form_for @general_setting,method: :patch do |f| %>
 
     <fieldset>
-      <% if @general_setting.errors.any?%>
-        <div class="alert alert-danger" style="width:500px" >
-        <h4>Errors prohibited to being update:</h4>
-          <ul>
-            <% @general_setting.errors.full_messages.each do |msg| %>
-            <li style="width:500px" align="left"><%= msg%></li>
-            <% end %>
-          </ul> 
-        </div>
-      <% end %>
-
-    <div class="row">
+    <%=general_setting_error!%>   
+   <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
@@ -73,7 +63,7 @@
          
           <b>Language :</b>
 
-          <%= f.select :language,Language.all.collect{|l| [l.name,l.id]}, {prompt:true}, {class: "form-control"} %>
+          <%= f.select :language,set_language,{prompt:true}, {class: "form-control"} %>
         </div>
       </div>
 
@@ -90,7 +80,7 @@
 
           <b>Country :</b>
 
-          <%= f.select :country, Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
+          <%= f.select :country,set_country,{prompt:true},{class: "form-control"}%>
         </div>
 
         <div class="form-group">

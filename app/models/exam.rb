@@ -1,14 +1,15 @@
+# Exam Active Record
 class Exam < ActiveRecord::Base
   belongs_to :exam_group
   belongs_to :subject
   belongs_to :event
   has_many :exam_scores, dependent: :destroy
 
-  validates :maximum_marks, numericality: { only_integer: true },
-                            length: { minimum: 1, maximum: 3 }, allow_blank: true
+  validates :maximum_marks, numericality: { only_integer: true }, length: \
+            { minimum: 1, maximum: 3 }, allow_blank: true
 
-  validates :minimum_marks, numericality: { only_integer: true },
-                            length: { minimum: 1, maximum: 3 }, allow_blank: true
+  validates :minimum_marks, numericality: { only_integer: true }, length: \
+            { minimum: 1, maximum: 3 }, allow_blank: true
 
   validate :end_time_cannot_be_less_than_start_time
   validate :start_time_cannot_be_less_than_past
@@ -16,7 +17,7 @@ class Exam < ActiveRecord::Base
   validate :max_marks_greater_than_min_marks
   scope :shod, ->(id) { where(id: id).take }
   def end_time_cannot_be_less_than_start_time
-    if  end_time.present? && end_time < start_time
+    if end_time.present? && end_time < start_time
       errors.add(:end_time, 'cannot be less than start time')
     end
   end

@@ -55,11 +55,11 @@
                   <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.id,exam.id) unless exam.nil? %>
                   <% unless exam.nil? %>
                     <% if exam_group.exam_type == 'Marks' %>
-                      <%= exam_score.nil? ? '-' : "#{exam_score.marks || "AB"} | "+exam.maximum_marks.to_s %>
+                      <%= exam_score.nil? ? '-' : "#{exam_score.marks || "AB"} / "+exam.maximum_marks.to_s %>
                        <% elsif exam_group.exam_type == 'Grades'%>
                       <%= exam_score.nil? ? '-' : (exam_score.grading_level.name || 'AB') %>
                     <% else %>
-                      <%= exam_score.nil? ? '-' : "#{(exam_score.marks || "AB")}" +" | "+exam.maximum_marks.to_s+" | Grade-#{(exam_score.grading_level.name || "AB")}" %>
+                      <%= exam_score.nil? ? '-' : "#{(exam_score.marks || "AB")}" +" / "+exam.maximum_marks.to_s+" | #{(exam_score.grading_level.name || "AB")}" %>
                   
                     <% end %>
                   <% else %>

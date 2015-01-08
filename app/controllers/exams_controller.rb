@@ -46,9 +46,9 @@ class ExamsController < ApplicationController
   def exam_score
     @exam = Exam.find(params[:id])
     @students = []
-    students = @exam.exam_group.batch.students.all
+    students ||= @exam.exam_group.batch.students.all
     @students = @exam.select_subject(@students, students, @exam)
-    @exam_grade = @exam.exam_group.batch.grading_levels.all
+    @exam_grade ||= @exam.exam_group.batch.grading_levels.all
     authorize! :update, @exam
   end
 
@@ -67,9 +67,9 @@ class ExamsController < ApplicationController
       redirect_to exam_score_exam_path(@exam)
     else
       @students = []
-      students = @exam.exam_group.batch.students.all
+      students ||= @exam.exam_group.batch.students.all
       @students = @exam.select_subject(@students, students, @exam)
-      @exam_grade = @exam.exam_group.batch.grading_levels.all
+      @exam_grade ||= @exam.exam_group.batch.grading_levels.all
       render 'exam_score'
     end
   end

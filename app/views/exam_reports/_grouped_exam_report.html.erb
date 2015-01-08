@@ -54,8 +54,10 @@
             <% end %>
           </td>
           <% unless @exam.nil? %>
+          <% unless exam_group.exam_type == "Grades"%>
             <% max_total += @exam.maximum_marks.to_f %>
             <% marks_total += exam_score.marks.to_f %>
+          <%end%>
           <%end%>
           <% end %>
           <td class="col-1"><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
@@ -80,8 +82,10 @@
           <% end %>
           <% unless is_valid_subject == 0 %>
             <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
+            <%unless exam_group.exam_type == "Grades"%>
              <% @max_total += exam.maximum_marks.to_f %>
               <% @marks_total += exam_score.marks.to_f %>
+            <%end%>
           <%end%>
           <%end%>
           <% if exam_group.exam_type == "Marks and Grades" %>
