@@ -472,9 +472,6 @@ class EmployeesController < ApplicationController
     render 'advance_search_result_pdf', layout: false
   end
 
-  def payslip
-  end
-
   def select_employee_department
     @department ||= EmployeeDepartment.all
   end
@@ -519,13 +516,13 @@ class EmployeesController < ApplicationController
     @salary_date = Date.parse(params[:salery_slip][:salery_date])
     unless @salary_date.to_date < @employee.joining_date.to_date
       flag = @employee.create_payslip(@employee, @salary_date)
-      payslip(flag, @employee)
+      paysli(flag, @employee)
     end
     redirect_to monthly_payslip_employees_path(@employee)
     authorize! :update, @employee
   end
 
-  def payslip(flag, employee)
+  def paysli(flag, employee)
     if flag == 0
       flash[:notice] = 'Payslip of ' + employee.first_name + "#{t('p')}"
     else
@@ -578,7 +575,7 @@ class EmployeesController < ApplicationController
   def view_payslip
     @salary_dates = MonthlyPayslip.all
     @department = EmployeeDepartment.shod(params[:format])
-    @employees = @department.employees.all
+    @employees = @department.employees
   end
 
   def view_employee_payslip

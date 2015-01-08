@@ -171,7 +171,7 @@ class ExamSettingController < ApplicationController
 
   def destroy_rank
     @rank_lev1 = RankingLevel.shod(params[:id])
-    #authorize! :delete, @ranking_levels
+    # authorize! :delete, @ranking_levels
     @course = @rank_lev1.course
     @rank_levels = @course.ranking_levels.order('prioriy ASC')
     destroy_rank_flash(@rank_lev1)

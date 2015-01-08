@@ -37,7 +37,7 @@ class ExamGroup < ActiveRecord::Base
         flag = true if exam.end_time >= Date.today
       end
     end
-    p "================================================================="
+    p '================================================================='
     p flag
     flag
   end
