@@ -150,3 +150,4 @@ en:
   batch_rank_error: 'Please select batch'
   course_rank_error: 'Please select course'
   attendance_error: 'End date cannot be less than start date'
+  emp_add_category:  'Employee category created successfully'
