@@ -10,4 +10,16 @@ module ExamReportsHelper
     HTML
     html.html_safe
   end
+
+  def students_present
+    return if @students.any?
+    html = <<-HTML
+    <div id="score-table">
+        <div class="custom_header" align="left">
+            <h4>Students not found</h4>
+        </div>
+    </div>
+    HTML
+    html.html_safe
+  end
 end
