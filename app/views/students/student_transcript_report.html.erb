@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style type="text/css">
-      #heading {
-        width:100%;
-        margin: 0 auto;
-      }
-
-      #head {
-        height: 100px;
-        width: 700px;
-        text-align: center;
-        font-size: 40px;
-        border-color: black;
-      }
-      #head_info {
-        text-align: center;
-        font-size: 15px;
-      }
-
-
-    </style>
-  </head>
-  <body>
-    <div id="heading">
-      <div id="head">
-        <%= @general_setting.school_or_college_name%><br/>
-        <div id="head_info">
-          <%= @general_setting.school_or_college_address%><br/><br/>
-          <%= @general_setting.school_or_college_phone_no%>
-        </div>
+<head>
+  <style type="text/css">
+    #heading {
+      width:100%;
+      margin: 0 auto;
+    }
+    #head {
+      height: 100px;
+      width: 700px;
+      text-align: center;
+      font-size: 40px;
+      border-color: black;
+    }
+    #head_info {
+      text-align: center;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="heading">
+    <div id="head">
+      <%= @general_setting.school_or_college_name%><br/>
+      <div id="head_info">
+        <%= @general_setting.school_or_college_address%><br/><br/>
+        <%= @general_setting.school_or_college_phone_no%>
       </div>
+
       <hr>
 
       <br/>
@@ -78,10 +75,12 @@
                 <% if exam_group.result_published? %>
                   <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
                   <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
-                  <% max_total += @exam.maximum_marks %>
+                  <%unless exam_group.exam_type == "Grades"%>
+                  <% max_total += @exam.maximum_marks.to_f %>
                   <% marks_total += exam_score.marks unless exam_score.nil?%>
                   <% @mark += exam_score.marks unless exam_score.nil?%>
                   <% @total += @exam.maximum_marks %>
+                  <%end%>
                 <% end %>
               <% end %>
               <tr>

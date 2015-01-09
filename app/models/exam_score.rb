@@ -25,6 +25,6 @@ class ExamScore < ActiveRecord::Base
   end
 
   def calculate_percentage
-    percentage = marks.to_f * 100 / exam.maximum_marks.to_f
+    '%0.2f'%(marks.to_f * 100 / exam.maximum_marks.to_f)
   end
 end

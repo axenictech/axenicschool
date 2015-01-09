@@ -25,8 +25,8 @@ Note:<font color="red">Fields Marked with * must be filled</font>
 <%= form_for @employee,url:{action: 'admission2_create',format: @employee.id},method: :patch do |f| %>
     <fieldset>
     <% if @employee.errors.any? %>
-        <div class="alert alert-danger" style="width:500px" >
-          <h3>Error prohibited to from being saved:</h3>
+        <div class="alert alert-danger"  >
+         
           <ul>
            <% @employee.errors.full_messages.each do |msg| %>
               <li style="width:500px" align="left"><%= msg %></li>

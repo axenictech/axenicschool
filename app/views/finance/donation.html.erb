@@ -23,8 +23,8 @@
       <%= form_for @donation, url:{action: 'create_donation'} do |f| %>
     <fieldset>
       <% if @donation.errors.any?%>
-        <div class="alert alert-danger" style="width:500px" >
-        <h4><%= t('Errors prohibited to being update:')%></h4>
+        <div class="alert alert-danger" >
+        
           <ul>
             <% @donation.errors.full_messages.each do |msg| %>
             <li style="width:500px" align="left"><%= msg%></li>

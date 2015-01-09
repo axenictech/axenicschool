@@ -4,7 +4,6 @@
     <li>Student Details</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
-
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
@@ -14,25 +13,19 @@
   </div>
 </div>
 <hr>
-
-
 <div class="row">
   <div class="col-md-2"></div>
-    <div class="box col-md-10">
-  
-  <%= form_for :student, url:{action:'search_ajax'}, method: :get,remote:true,
-					html:{id: "student_form"} do |f|%>
-        <fieldset>
-
-            <%= text_field_tag :search,"",{oninput:"$('#student_form').submit();",placeholder:'Search Student',class:"form-control",style: "width: 300px"}%>
-          <br>
-			   	<%= f.radio_button  "status","present", :checked => "checked" %> &nbsp;<b>Present Students</b>
-			   	&nbsp;&nbsp;&nbsp;
-			   	<%= f.radio_button  "status","former"%>  &nbsp;<b>Former Students</b>
-			 	
-
- 	</fieldset>
-  <% end %>
-</div>
+  <div class="box col-md-10">  
+    <%= form_for :student, url:{action:'search_ajax'}, method: :get,remote:true,
+    html:{id: "student_form"} do |f|%>
+    <fieldset>
+      <%= text_field_tag :search,"",{oninput:"$('#student_form').submit();",placeholder:'Search Student',class:"form-control",style: "width: 300px"}%>
+      <br>
+      <%= f.radio_button  "status","present", :checked => "checked" %> &nbsp;<b>Present Students</b>
+      &nbsp;&nbsp;&nbsp;
+      <%= f.radio_button  "status","former"%>  &nbsp;<b>Former Students</b>
+    </fieldset>
+    <% end %>
+  </div>
 </div>
 <div id="student_search"></div>
