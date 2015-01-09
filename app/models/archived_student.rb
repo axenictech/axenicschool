@@ -15,4 +15,8 @@ class ArchivedStudent < ActiveRecord::Base
     user = User.discover(student_id, recipient)
     UserMailer.student_email(user, subject, message).deliver
   end
+
+  def full_name
+    [first_name, last_name].join(' ')
+  end
 end
