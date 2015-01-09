@@ -19,50 +19,51 @@
 </div>
 <hr>
 <% end %> 
- <div class="col-md-6">
+<div class="col-md-6">
  <div class="box-inner">
-    <div class="box-header well" data-original-title="">
-          <h2><%= @newscast.title %></h2>
-    </div>
-    <div class="box-content">
-     <b> Posted by</b>&nbsp;&nbsp;<%= @newscast.user.full_name %>
-      <br>
-      <b> Posted on</b>&nbsp;&nbsp;<%= @newscast.created_at.strftime("%A, %d %B, %Y") %>
-      <br>
-      <h4> <%= sanitize @newscast.content , :tags => %w[b i a h1 h2 h3 u strike p], :attributes => %w[href]%></h4>
-      <hr>
- <%= form_for([@newscast, @newscast.comments.build]) do |f| %>
-      <% if @comment.errors.any?%>
-          <div class="alert alert-danger">
-            <ul>
-              <% @comment.errors.full_messages.each do |msg| %>
-              <li><%= msg%></li>
-              <% end %>
-            </ul> 
-          </div>
-      <% end %><br/>
+  <div class="box-header well" data-original-title="">
+    <h2><%= @newscast.title %></h2>
+  </div>
+  <div class="box-content">
+   <b> Posted by</b>&nbsp;&nbsp;<%= @newscast.user.full_name %>
+   <br>
+   <b> Posted on</b>&nbsp;&nbsp;<%= @newscast.created_at.strftime("%A, %d %B, %Y") %>
+   <br>
+   <h4> <%= sanitize @newscast.content , :tags => %w[b i a h1 h2 h3 u strike p], :attributes => %w[href]%></h4>
+   <hr>
+   <%= form_for([@newscast, @newscast.comments.build]) do |f| %>
+   <% if @comment.errors.any?%>
+   <div class="alert alert-danger">
+    <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+      <li><%= msg%></li>
+      <% end %>
+    </ul> 
+  </div>
+  <% end %><br/>
 
-        <%= f.text_field :statement,class: "form-control",placeholder: "Leave a comment"%><br/>
-        <div align="center">
-        <%= f.submit 'Comment', class: "btn btn-success" %></div>
+  <%= f.text_field :statement,class: "form-control",placeholder: "Leave a comment"%><br/>
+  <div align="center">
+    <%= f.submit 'Comment', class: "btn btn-success" %></div>
     <% end %>
     
   </div>
-  </div>
-  </div>
+</div>
+</div>
 
-<div class="col-md-6">
-  <div class="box-inner">
-  <div class="box-header well" data-original-title="">
-   <h2>Comments</h2>
-  </div>
-  <div class="box-content">
+<div class="col-md-6" style="overflow-y: scroll; height:500px">
+  <div class="box-inner" >
+    <div class="box-header well">
+     <h2>Comments</h2>
+   </div>
+   <div class="box-content">
     <ul id="comments-list">
       <%= render @newscast.comments.includes(:user).order(created_at: :desc) %>
       <h3 id="comments-heading"></h3>
     </ul>    
   </div>
-  </div>
 </div>
-		  
+</div>
+
+
 

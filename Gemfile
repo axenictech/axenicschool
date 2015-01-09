@@ -37,7 +37,6 @@ gem 'decent_exposure'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bullet', group: :development
 gem 'brakeman', group: :development
-gem 'passenger'
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -1,16 +1,11 @@
-<% if @student.nil? %>
-<div id="score-table" style="width:80%">
-    <div class="custom_header" align="left">
-      <h4>Students not found</h4>
-     </div></div>
-<%else%>
-  <div class="box-inner">
-    <div class="box-header well">
-      <h2><%= "#{@student.first_name+" "+@student.last_name}"" - #{@student.admission_no}" %></h2>
-     </div>
-     <div class="box-content">
+<%= student_present%>
+<div class="box-inner">
+  <div class="box-header well">
+    <h2><%= "#{@student.full_name}"" - #{@student.admission_no}" %></h2>
+   </div>
+   <div class="box-content">
     <table class="table table-bordered">
-    
+
      <% max_total = 0 %>
         <% marks_total = 0 %>
        <tr> 
@@ -107,6 +102,4 @@
       </div>
       </h4>
   </div>
-<%end%>
 </div>
-

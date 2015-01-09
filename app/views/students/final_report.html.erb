@@ -6,8 +6,7 @@
     <li><%= link_to 'Reports Center',report_students_path(@student.id)%></li>
     <li>Final Report</li>
   </ul>
-</div>
-<div id="flash"><%= render 'layouts/messages'%></div>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
@@ -68,10 +67,11 @@
             NA
             <% end %>
           </td>
-<% max_total += @exam.maximum_marks.to_f %>
-        <% marks_total += exam_score.marks%>
-        <% end %>
-
+          <% unless exam_group.exam_type=="Grades"%>
+          <% max_total += @exam.maximum_marks.to_f %>
+          <% marks_total += exam_score.marks%>
+          <%end%>
+          <% end %>
           <% end %>
           <td class="col-1"><%= "#{marks_total || "-"}/"+max_total.to_s %></td>  
         </tr>
@@ -95,15 +95,11 @@
           <% is_valid_subject = 0 if is_student_elective.nil? %>
           <% end %>
           <% unless is_valid_subject == 0 %>
-
-            <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
-
-             <% @max_total += exam.maximum_marks.to_f%>
-              <% @marks_total += exam_score.marks %>
-
-             <% @max_total += exam.maximum_marks %>
-              <% @marks_total += exam_score.marks unless exam_score.nil?%>
-
+          <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,exam.id) unless exam.nil? %>
+          <% unless exam_group.exam_type == "Grades"%>
+          <% @max_total += exam.maximum_marks.to_f%>
+          <% @marks_total += exam_score.marks %>
+          <%end%>
           <%end%>
           <%end%>
           <%end%>

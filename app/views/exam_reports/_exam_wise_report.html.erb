@@ -10,11 +10,10 @@
 <% end%>
   <% total_marks_attained = 0 %>
   <% total_max_marks = 0 %>
-<% if @student.nil? %>
-<div id="score-table"> 
-    <div class="custom_header">
+<% if @student.nil? %> 
+
       <span class="student">Student recorde not found</span>
-    </div>
+   
 <%else%>
   <div class="box-inner">
     <div class="box-header well">
@@ -79,7 +78,9 @@
       <% end %>
     </table>
 </div>
-<%end%>
-<%end%>
 </div>
-</div>
+<%end%>
+
+<%end%>
+
+

@@ -23,18 +23,19 @@
 <hr>
 
 
- <div class="col-md-2"></div>
+ <div class="col-md-10 col-md-offset-2">
   <h3><%= @batch.course.course_name+" "+@batch.course.section_name+" "+@batch.name %> - <%= @exam_group.name %></h3>
+
+</div>
 <br>
 <div class="row">
   <div class="box col-md-3">
-   <div>
+
     <%= render 'exam_wise_student_list' %>
-    </div>
+ 
   </div>
   <div class="box col-md-9">
-  <div id="exam_wise_report">
+  
     <%= render 'exam_wise_report' %>
   </div>
-  </div>
-</div>
+</div> 

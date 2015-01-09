@@ -15,7 +15,7 @@
 
 	
 	    <b>Select a Deparyment:</b>
-		    <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:"Select a Department"},{onchange:"$('#user_form2').submit();",class:"form-control",style: "width:250px"}%>
+		    <%= f.select :id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#user_form2').submit();",class:"form-control",style: "width:250px"}%>
 
 	 <%end%>
 </div>

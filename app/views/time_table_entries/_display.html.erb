@@ -11,7 +11,7 @@
         <tr>
           <td class="col-4"></td>
           <%  @class_timing.each do |c|%>
-          <th><%=c.start_time.strftime("%I:%M %p")+"-"+c.end_time.strftime("%I:%M %p")%></th>
+          <th><%=c.full_time%></th>
           <% end %>
         </tr> 
         

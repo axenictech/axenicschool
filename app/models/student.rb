@@ -232,7 +232,6 @@ class Student < ActiveRecord::Base
 
   def mail(subject, recipient, message)
     user = User.discover(id, recipient).take
-    p user
     UserMailer.student_email(user, subject, message).deliver
   end
 

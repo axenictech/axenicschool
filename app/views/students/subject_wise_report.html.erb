@@ -39,8 +39,8 @@
               </tr>
             </thead>
             <tbody>
-            <tr class="tr-<%= cycle('odd', 'even') %>">
               <% @exam_groups.each do |exam_group| %>
+                <tr class="tr-<%= cycle('odd', 'even') %>">
                 <td class="col-3"><%= exam_group.name %></td>
                 <% unless exam_group.result_published?%>
                   <td colspan="3">Exam Result Not Published</td>
@@ -72,8 +72,8 @@
                     <% end %>
                   <% end %>
                   <%end%>
+                    </tr>
                 <% end %>
-            </tr>
           </tbody>
         </table>
       </div>

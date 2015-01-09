@@ -75,10 +75,12 @@
                 <% if exam_group.result_published? %>
                   <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
                   <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
-                  <% max_total += @exam.maximum_marks %>
+                  <%unless exam_group.exam_type == "Grades"%>
+                  <% max_total += @exam.maximum_marks.to_f %>
                   <% marks_total += exam_score.marks unless exam_score.nil?%>
                   <% @mark += exam_score.marks unless exam_score.nil?%>
                   <% @total += @exam.maximum_marks %>
+                  <%end%>
                 <% end %>
               <% end %>
               <tr>

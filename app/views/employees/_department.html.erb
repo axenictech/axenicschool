@@ -1,5 +1,4 @@
-<div align="center">
-<ul class="errors2"></ul></div>
+
 <div class="row">
 <div class="col-md-3"></div>
 <div class="box col-md-6">
@@ -9,6 +8,8 @@
     </div>
   <div class="box-content">
  <%= form_for @employee_department_new, url:{action:'add_department'},remote:true do |c|%>
+ <div align="center">
+<ul class="errors"></ul></div>
    <fieldset>
 	 <div class="form-group">
           <div class="col-md-3"><b>Name:</b></div>

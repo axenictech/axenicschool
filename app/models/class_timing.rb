@@ -17,6 +17,10 @@ class ClassTiming < ActiveRecord::Base
     end
   end
 
+  def full_time
+    [start_time.strftime('%I:%M %p'), end_time.strftime('%I:%M %p')].join('-')
+  end
+
   # def validate_class_timing
   #   unless self.start_time.nil? or self.end_time.nil?
   #   self_check= self.new_record? ? "" : "id != #{self.id} and "
