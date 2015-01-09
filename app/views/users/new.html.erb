@@ -11,22 +11,14 @@
   <div class="box col-md-6">
   <div class="box-inner">
     <div class="box-header well">
-      <h2>New Course / Batch</h2>
+      <h2>New User</h2>
     </div>
 
     <div class="box-content">
 
 <%= form_for @user do |f| %>
 <fieldset>
-  <% if @user.errors.any? %>
-    <div class="alert alert-danger">
-    <h2>Errors prohibited to being saved:</h2>
-    <h3>User account not created</h3>
-    <ul><% @user.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %></ul>
-    </div>
-  <% end %>
+  <%= user_error! %>
   <div class="col-sm-7 col-sm-offset-1">
         <div class="form-group">
          
@@ -52,7 +44,7 @@
                <%= f.hidden_field :role, value: 'Admin' %>
                </div>
         <div class="form-group">  
-         <div align="center">    
+         <div class="col-md-offset-6">    
             <%= f.submit "Create",class: "btn btn-primary" %>
             </div>
         </div>
