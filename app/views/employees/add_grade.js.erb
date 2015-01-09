@@ -1,7 +1,7 @@
 $("ul.errors6").html("")
 <% if  @employee_grade.errors.any? %>
 		<%  @employee_grade.errors.full_messages.each do |message| %>
-		$("ul.errors6").addClass("alert alert-danger alert-dismissable")  
+		$("div.errors6").addClass("alert alert-danger alert-dismissable")  
 		$("ul.errors6").append($("<li align ='left' style = 'width:300px'/>").html("<%= message.html_safe %>"))
 		<% end %>
 <% else %>
