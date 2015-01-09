@@ -23,9 +23,10 @@
 <%= form_for @employee  do |f| %>
     <fieldset>
     <% if @employee.errors.any? %>
-        <div class="alert alert-danger" style="width:500px" >
-          <h3>Error prohibited to from being saved:</h3>
+        <div class="alert alert-danger">
+         
           <ul>
+
            <% @employee.errors.full_messages.each do |msg| %>
               <li style="width:500px" align="left"><%= msg %></li>
             <% end %>
