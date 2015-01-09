@@ -2,13 +2,10 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home', dashboard_home_index_path %></li>
     <li><%= link_to 'News', newscasts_path %></li>
-    
     <li>View all</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%>
 </div>
-
-
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
@@ -17,14 +14,12 @@
   </div>
 </div>
 <br/>
-
 <div class="row">
   <div class="box col-md-12">
   <div class="box-inner">
     <div class="box-header well">
       <h2>View all News</h2>
     </div>
-
     <div class="box-content">
     <% if @newscasts.empty? %>
  <h4 align="center">No Record Found </h4>
@@ -53,31 +48,12 @@
           <td>
             <%= time_ago_in_words(n.created_at) %> ago
           </td>
-           
-          </tr>
+        </tr>
         <% end %>
         </tbody>
       </table>
       <%end%>
     </div>
-
   </div>
   </div>
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

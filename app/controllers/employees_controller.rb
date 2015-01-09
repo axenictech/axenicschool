@@ -50,7 +50,7 @@ class EmployeesController < ApplicationController
   def add_category
     @employee_category_new = EmployeeCategory.new
     @employee_category = EmployeeCategory.new(category_params)
-    flash[:notice] = t('emp_add_category') if @employee_category.save
+    flash[:notice] = t('emp_category') if @employee_category.save
     emp_category
   end
 
@@ -245,6 +245,7 @@ class EmployeesController < ApplicationController
 
   def admission1
     @employee = Employee.new
+    @empdept = EmployeeDepartment.all
     @date = Date.today.strftime('%Y%m%d')
     @employee.emp_no
     authorize! :create, @employee
@@ -811,6 +812,7 @@ class EmployeesController < ApplicationController
 
   def position
     @employee_position = EmployeePosition.shod(params[:id])
+    @employees = EmployeeCategory.all
   end
 
   def bank_fields
