@@ -7,7 +7,8 @@
         <h2>Add Position</h2>
       </div>
       <div class="box-content">
-        <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%><div align="center">
+        <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%>
+        <div class="errors3">
         <ul class="errors3"></ul></div>
         <fieldset>
          <div class="col-md-offset-1">

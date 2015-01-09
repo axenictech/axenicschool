@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <b>Name:</b>
                   <span style="color:red">*</span>
-                  <%= f.text_field :name, placeholder: "Name", class: "form-control"%>
+                  <%= f.text_field :name, placeholder: "Name", class: "form-control",required:true%>
                 </div>
 
                 <div id="hidden"></div>
@@ -55,7 +55,7 @@
               <div class="form-group">
                 <b>Discount(%):</b>
                   <span style="color:red">*</span>
-                  <%= f.text_field :discount, placeholder: "Discount",class: "form-control" %>
+                  <%= f.text_field :discount, placeholder: "Discount",class: "form-control",required:true %>
                 </div>
  
               </div>
