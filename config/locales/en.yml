@@ -152,3 +152,4 @@ en:
   attendance_error: 'End date cannot be less than start date'
   sent_email: 'Email sent successfully'
   email_invalid: 'All fields are mandatory'
+  emp_add_category:  'Employee category created successfully'
