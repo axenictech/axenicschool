@@ -18,18 +18,8 @@
       <div class="box-content">
       <%= form_for @fee, url:{action: 'create_fees_particular'} do |f| %>
     <fieldset>
-      <% if @fee.errors.any?%>
-        <div class="alert alert-danger" style="width:500px" >
-        <h4>Errors prohibited to being update:</h4>
-          <ul>
-            <% @fee.errors.full_messages.each do |msg| %>
-            <li style="width:500px" align="left"><%= msg%></li>
-            <% end %>
-          </ul> 
-        </div>
-      <% end %>
-
-    <div class="row">
+      <%=fee_errors!%>
+       <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
