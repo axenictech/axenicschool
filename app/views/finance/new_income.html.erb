@@ -25,18 +25,8 @@
       <div class="box-content">
       <%= form_for @transaction, url:{action: 'create_income'} do |f| %>
     <fieldset>
-      <% if @transaction.errors.any?%>
-        <div class="alert alert-danger" >
-        <h4>Errors prohibited to being update:</h4>
-          <ul>
-            <% @transaction.errors.full_messages.each do |msg| %>
-            <li style="width:500px" align="left"><%= msg%></li>
-            <% end %>
-          </ul> 
-        </div>
-      <% end %>
-
-      <div class="row">
+      <%= income_errors! %>
+         <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-5 ">
           <div class="form-group">
