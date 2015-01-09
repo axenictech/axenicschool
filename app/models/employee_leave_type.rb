@@ -12,9 +12,8 @@ class EmployeeLeaveType < ActiveRecord::Base
   scope :dest_leave, ->(leave) { where(employee_leave_type_id: leave.id) }
 
   def add_leave(new_leave, emp)
-    return if new_leave.save
     emp.each do |e|
-      EmployeeLeave.leave(new_leave, e)
+      EmployeeLeave.create(employee_id: e.id, employee_leave_type_id: new_leave.id, leave_count: new_leave.max_leave_count)
     end
   end
 
@@ -29,3 +28,6 @@ class EmployeeLeaveType < ActiveRecord::Base
     find_by_id(att.employee_leave_type_id)
   end
 end
+
+
+ 
