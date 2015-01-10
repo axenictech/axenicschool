@@ -26,20 +26,18 @@
        <tr>
         <td class="col-4" colspan="4">
         <b>Search by Name:</b>
-        <%= text_field_tag :search,"",{oninput:"$('#user_form').submit();", class: 'form-control', placeholder: 'Search by name', style: 'width:250px'}%></td>
+        <%= text_field_tag :search,"",{oninput:"assign_fun();", class: 'form-control', placeholder: 'Search by name', style: 'width:250px'}%></td>
      </tr>
 
    <tr>
-         <td class="col-3"><%= f.select :employee_department_id, EmployeeDepartment.all.collect {|b| [b.name,b.id]},{prompt:"select department"},{onchange:"$('#user_form').submit();", class: 'form-control'}%></td>
+         <td class="col-3"><%= f.select :employee_department_id, emp_department_collect,{prompt:"select department"},{onchange:"assign_fun();", class: 'form-control'}%></td>
   
-         <td class="col-3"><%= f.select :employee_category_id, EmployeeCategory.all.collect {|b| [b.name,b.id]},{prompt:"Select Category"},{onchange:"$('#user_form').submit();", class: 'form-control'}%></td>
+         <td class="col-3"><%= f.select :employee_category_id, emp_category_collect,{prompt:"Select Category"},{onchange:"assign_fun();", class: 'form-control'}%></td>
     
-         <td class="col-3"><%= f.select :employee_position_id,EmployeePosition.all.collect {|b| [b.name,b.id]},{prompt:"Select Position"},{onchange:"$('#user_form').submit();", class: 'form-control'}%></td>
+         <td class="col-3"><%= f.select :employee_position_id,emp_position_collect,{prompt:"Select Position"},{onchange:"assign_fun();", class: 'form-control'}%></td>
     
-         <td class="col-3"><%= f.select :employee_grade_id, EmployeeGrade.all.collect {|b| [b.name,b.id]},{prompt:"Select Grade"},{onchange:"$('#user_form').submit();", class: 'form-control'}%></td>
+         <td class="col-3"><%= f.select :employee_grade_id, emp_grade_collect,{prompt:"Select Grade"},{onchange:"assign_fun();", class: 'form-control'}%></td>
      </tr>
-
-   
   </div>
   
 <%end%>

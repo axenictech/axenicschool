@@ -19,7 +19,7 @@
            </div>
           <div class="form-group">
              <div class="col-md-3"><b>Employee Category:</b></div>
-             <%= c.select :employee_category_id, select_position,{prompt:true},class: "form-control",style:"width:250px"%>
+             <%= c.select :employee_category_id, emp_category_collect,{prompt:true},class: "form-control",style:"width:250px"%>
            </div>
            <br>
            <div class="form-group">
@@ -38,9 +38,7 @@
   </div>
 </div>
 </div>
-<% if @positions1.empty? and @positions2.empty?%>
-<h3 align="center">No records</h3>
-<%else%>
+
 <div class="row">
   <div class="col-sm-6">
    <div class="form-group">
@@ -60,6 +58,7 @@
              </tr>
 
            </thead>
+            <tr><td colspan="2"><%=positions1_not_found!%></td></tr>
            <tbody>
              <%@positions1.each do |c| %>
              <tr>
@@ -102,6 +101,7 @@
                
              </tr>
            </thead>
+            <tr><td colspan="2"><%=positions2_not_found!%></td></tr>
            <tbody>
              <%@positions2.each do |c| %>
              <tr>
@@ -120,7 +120,6 @@
                 <%end%>
               </tbody>
             </table>
-            <%end%>
             <%end%>
           </div>
         </div>

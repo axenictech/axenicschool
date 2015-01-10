@@ -178,12 +178,12 @@ class EmployeeAttendancesController < ApplicationController
   end
 
   def employee_leave_reset_by_department
-    @departments ||= EmployeeDepartment.all
+    @deparments ||= EmployeeDepartment.all
   end
 
   def select_department
-    @department = EmployeeDepartment.find(params[:department][:id])
-    @employees ||= @department.employees.all
+    @deparments = EmployeeDepartment.find(params[:department][:id])
+    @employees ||= @deparments.employees.all
   end
 
   def assign_all
