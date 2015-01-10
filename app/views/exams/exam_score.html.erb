@@ -16,7 +16,7 @@
         <h2>Exam Score</h2>
       </div>
       <%= students_present %>
-      <%= errors_messages! %>
+     
       <%=form_for :exams,url:{action:'update_exam_score',id:@exam.id},method: :patch do |f| %>  
       <br><br>
       <div class="box-content">
@@ -103,7 +103,6 @@
                     <%= link_to 'Finish',exams_exam_group_path(@exam.exam_group), class: "btn btn-default"%>
                   </td>
                 </tr>
-                <%end%>
               </table>
             </div>
           </div>

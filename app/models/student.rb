@@ -85,7 +85,7 @@ class Student < ActiveRecord::Base
     archived_student = ArchivedStudent.create(student_attributes)
   end
 
-  def student_full_name
+  def full_name
     [first_name, last_name].join(' ')
   end
 
@@ -233,6 +233,10 @@ class Student < ActiveRecord::Base
   def mail(subject, recipient, message)
     user = User.discover(id, recipient).take
     UserMailer.student_email(user, subject, message).deliver
+  end
+
+  def exam_scores(exam)
+    ExamScore.where(exam_id: exam, student_id: id).take
   end
 
   private

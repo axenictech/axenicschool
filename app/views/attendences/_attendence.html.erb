@@ -46,15 +46,10 @@
             </tr>
           </thead>
           <% @students.each do |student| %>
-          <% is_valid_subject=1 %>
-            <%unless @subject.elective_group.nil?%>
-              <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(student.id,@subject.id) %>
-                <% is_valid_subject = 0 if is_student_elective.nil? %>
-            <%end%>
-          <% unless is_valid_subject == 0 %>
+          <% if @subject.valid?(student)%>
             <tr class="fc-week">
               <th class="fc-day fc-widget-content" style="height:40px;padding:10px">
-                  <%= student.first_name %>&nbsp;&nbsp;<%= student.last_name %>
+                  <%= student.full_name %>
               </th>
 
               <% (@start_date..@end_date).each do |date| %>
