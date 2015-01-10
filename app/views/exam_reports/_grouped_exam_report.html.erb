@@ -1,13 +1,8 @@
  <% if @student.nil? %>
-
-
  <h4 class="col-md-offset-2">Student not found</h4>
-
  <%else%>
  <% if @subjects.nil? %>
-
  <h4 class="col-md-offset-2">Subjects not found</h4>
-
  <%else%>
  <div class="box-inner">
   <div class="box-header well">
@@ -27,16 +22,10 @@
 
     <% @subjects.each do |subject| %>
     <% is_valid_subject=1 %>
-    <% unless subject.elective_group_id.nil? %>
-    <% is_student_elective = StudentSubject.find_by_student_id_and_subject_id(@student.id,subject.id) %>
-    <% is_valid_subject = 0 if is_student_elective.nil? %>
-    <% end %>
-    <% unless is_valid_subject == 0 %>
+    <% if subject.valid?(@student)%>
     <tr class="tr-<%= cycle('odd', 'even') %>">
       <td class="col-3" ><%= subject.name %></td>
-
       <% @exam_groups.each do |exam_group| %>
-
       <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
       <% exam_score = ExamScore.find_by_student_id_and_exam_id(@student.id,@exam.id) unless @exam.nil? %>
       <td class="col-3">

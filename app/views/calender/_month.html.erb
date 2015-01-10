@@ -37,13 +37,12 @@
             &nbsp;&nbsp;&nbsp;&nbsp;
             <span align="center"><%= @show_month.strftime('%B %Y') %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <%= link_to "Next ► ", change_calender_path(@show_month+1.month),remote:true  ,class: "fc-button fc-button-prev fc-state-default"%>
-         
           <div class="pull-right">
             <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active" unselectable="on">Month View</span>
           </div>
           </h3>
           </div>
-           </div>
+        </div>
 </div>
 
 <br>

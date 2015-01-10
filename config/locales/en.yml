@@ -132,6 +132,7 @@ en:
   fee_create: 'Finance fee particular created successfully'
   fee_update: 'Finance fee particulars updated successfully'
   fee_delete: 'Finance fee particulars deleted successfully'
+  fee_alert: 'Please fill all fields'
   discount_create: 'Finance fee discount created successfully'
   discount_update: 'Finance fee discount updated successfully'
   discount_delete: 'Finance fee discount deleted successfully'

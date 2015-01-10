@@ -38,4 +38,13 @@ class Subject < ActiveRecord::Base
   def full_name
     [first_name, last_name].join(' ')
   end
+
+  def valid?(student)
+    result = true
+    unless elective_group_id.nil?
+      result = false if StudentSubject.where(student_id: student.student_id\
+      , subject_id: id).take.nil?
+    end
+    result
+  end
 end
