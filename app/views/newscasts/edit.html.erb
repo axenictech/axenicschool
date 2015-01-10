@@ -18,18 +18,9 @@
         </div>
       <div class="box-content">
         <%= form_for @newscast,url:{action: 'update'},method: :patch do |f| %>
-
         <fieldset>
-          <% if @newscast.errors.any?%>
-            <div class="alert alert-danger alert-dismissable">
-             <h4>Errors prohibited to being Save:</h4>
-           <ul>
-          <% @newscast.errors.full_messages.each do |msg| %>
-          <li style="width:300px"><%= msg%></li>
-          <% end %>
-        </ul> 
-            </div>  
-          <%end%>
+          <%= news_error! %>
+            
         <div class="col-sm-7 col-sm-offset-1">
             <div class="form-group">
               <%=f.label :Title %>
@@ -54,29 +45,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-

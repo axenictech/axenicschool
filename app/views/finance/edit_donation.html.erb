@@ -26,17 +26,7 @@
       <div class="box-content">
       <%= form_for @donation, url:{action: 'update_donation',id:@donation.id},method: :patch do |f| %>
     <fieldset>
-      <% if @donation.errors.any?%>
-        <div class="alert alert-danger" style="width:500px" >
-        <h4>Errors prohibited to being update:</h4>
-          <ul>
-            <% @donation.errors.full_messages.each do |msg| %>
-            <li style="width:500px" align="left"><%= msg%></li>
-            <% end %>
-          </ul> 
-        </div>
-      <% end %>
-
+      <%= donation_errors!%>
       <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-5">

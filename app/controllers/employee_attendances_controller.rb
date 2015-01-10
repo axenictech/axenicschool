@@ -21,8 +21,10 @@ class EmployeeAttendancesController < ApplicationController
     @new_leave_type = EmployeeLeaveType.new
     @new_leave_type1 = EmployeeLeaveType.new(params_leave)
     @employee ||= Employee.all
-    @new_leave_type1.add_leave(@new_leave_type1, @employee)
-    flash[:notice] = 'Employee Leave type created successfully!'
+    if @new_leave_type1.save
+      @new_leave_type1.add_leave(@new_leave_type1, @employee)
+      flash[:notice] = 'Employee Leave type created successfully!'
+    end
     checkstatus
   end
 

@@ -12,7 +12,7 @@
     <tbody>
     
    	<tr>     
-          <td><b>Salery Date:</b>
+          <td><b>Salary Date:</b>
           <span style="color:red">*</span></td>
           <td ><%=f.date_field :salery_date,:value => Time.now.strftime('%Y-%m-%d'),class: "form-control",style: "width:250px"%></td>
      </tr>
@@ -21,7 +21,7 @@
       <% val = EmployeeSaleryStructure.find_by_employee_id_and_payroll_category_id(@employee, c) -%>
         
           <% if c.payroll_category_id.nil? %>
-          <tr style="background-color:green">
+          <tr style="background-color:rgb(187, 249, 187)">
             <td ><b><%=c.name%>:</b></td>
             <td ><%= text_field_tag "amounts[#{val.nil? ? 0.00 : val.amount.to_f}]",val.nil? ? 0.00 : val.amount,onblur:"var a={amount:$(this).val(),employee_id:#{@employee.id},id:#{c.id}}; $.get('employee_structure',a,function(response){});",class: "form-control",style: "width:250px"%></td>
             </tr>

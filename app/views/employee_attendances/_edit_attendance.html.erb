@@ -6,8 +6,9 @@
   <h3><%= "Edit attendance for #{@employee.first_name}" %></h3>
 </div>
 <div class="modal-body">
+<div class="errors2">
 	<ul class="errors2"></ul>
-
+</div>
 <%= form_for  @attendance,url:{:action=>'update_att'},method: :patch ,remote:true do |c|%>
   <table class="table" align="center">  
 
@@ -19,19 +20,18 @@
       <td><b>Reason for Absence:</b></td>
       <td><%= c.text_field :reason, class: 'form-control', placeholder: 'Reason for absence'%></td>
     </tr>
-    <tr>        
-    <td><b>Half Day:</b></td>
-    <td><%= c.check_box :is_half_day%> </td>
+     <tr>        
+   <td colspan="2"><%= c.check_box :is_half_day,:checked => false %>
+    <b>Half Day</b></td>
     </tr>
     <tr>
 <%if @reset_count.leave_taken.to_f==0.0%>
     <td>  <%= link_to 'Delete', destroy_attendance_employee_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-danger"%></td>
   <%else%>
-       <td colspan="2"><%= c.submit 'Update', class: "btn btn-primary"%>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', destroy_attendance_employee_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
+       <td colspan="2" align="center"><%= c.submit 'Update', class: "btn btn-primary"%>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', destroy_attendance_employee_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
       <%end%>
         </tr>
 
 </table>
-
 <%end%>
 </div></div></div>

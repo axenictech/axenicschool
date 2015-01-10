@@ -24,18 +24,8 @@
       <div class="box-content">
         <%= form_for @discount,url:{action: 'create_fee_discount'} do |f| %>
           <fieldset>
-            <% if @discount.errors.any?%>
-              <div class="alert alert-danger" style="width:500px" >
-                <h4><%= t('Errors prohibited to being update:')%></h4>
-                <ul>
-                  <% @discount.errors.full_messages.each do |msg| %>
-                    <li><%= msg%></li>
-                  <% end %>
-                </ul> 
-              </div>
-            <% end %>
-
-            <div class="row">
+            <%= discount_error! %>
+             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-4">
                 <div class="form-group">
@@ -47,7 +37,7 @@
                 <div class="form-group">
                     <b>Name:</b>
                   <span style="color:red">*</span>
-                  <%= f.text_field :name, placeholder: "Name", class: "form-control"%>
+                  <%= f.text_field :name, placeholder: "Name", class: "form-control",required:true%>
                 </div>
 
                 <div id="hidden"></div>
@@ -55,7 +45,7 @@
               <div class="form-group">
                 <b>Discount(%):</b>
                   <span style="color:red">*</span>
-                  <%= f.text_field :discount, placeholder: "Discount",class: "form-control" %>
+                  <%= f.text_field :discount, placeholder: "Discount",class: "form-control",required:true %>
                 </div>
  
               </div>
@@ -63,7 +53,7 @@
                 <div class="form-group">
                  <b>Finance Fee Category:</b>
                   <span style="color:red">*</span>
-                  <%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#fee_discount_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",class: "form-control"}%>
+                  <%= f.select :finance_fee_category_id,collect_category1,{prompt:true},{onclick:"var a={id:$('#fee_discount_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",class: "form-control"}%>
                 </div>
 
                 <div class="form-group">

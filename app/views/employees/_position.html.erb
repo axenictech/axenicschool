@@ -7,7 +7,8 @@
         <h2>Add Position</h2>
       </div>
       <div class="box-content">
-        <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%><div align="center">
+        <%= form_for @employee_position_new, url:{action:'add_position'}, remote:true do |c|%>
+        <div class="errors3">
         <ul class="errors3"></ul></div>
         <fieldset>
          <div class="col-md-offset-1">
@@ -16,11 +17,9 @@
              <div class="col-md-3"><b>Name:</b></div>
              <%=c.text_field :name, placeholder: "Employee Position Name", class: "form-control",style:"width:250px"%>
            </div>
-
-           
-           <div class="form-group">
+          <div class="form-group">
              <div class="col-md-3"><b>Employee Category:</b></div>
-             <%= c.select :employee_category_id, EmployeeCategory.all.collect {|e| [e.name,e.id]},{prompt:true},class: "form-control",style:"width:250px"%>
+             <%= c.select :employee_category_id, select_position,{prompt:true},class: "form-control",style:"width:250px"%>
            </div>
            <br>
            <div class="form-group">
@@ -28,9 +27,7 @@
              <%= c.radio_button "status", "true", checked: "checked" %>&nbsp; <b>Active</b>&nbsp;&nbsp;
              <%= c.radio_button "status", "false"%> &nbsp;<b>Inactive</b> 
            </div>
-           
-
-           <div class="col-sm-4 col-sm-offset-4"> 
+          <div class="col-sm-4 col-sm-offset-4"> 
              <div class="form-actions">               
               <%= c.submit 'Create', class: "btn btn-primary"%>
             </div>

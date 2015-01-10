@@ -18,30 +18,20 @@
       <div class="box-content">
       <%= form_for @fee, url:{action: 'create_fees_particular'} do |f| %>
     <fieldset>
-      <% if @fee.errors.any?%>
-        <div class="alert alert-danger" style="width:500px" >
-        <h4>Errors prohibited to being update:</h4>
-          <ul>
-            <% @fee.errors.full_messages.each do |msg| %>
-            <li style="width:500px" align="left"><%= msg%></li>
-            <% end %>
-          </ul> 
-        </div>
-      <% end %>
-
-    <div class="row">
+      <%=fee_errors!%>
+       <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-4">
         <div class="form-group">
           <b>Name:</b>
           <span style="color:red">*</span>
-          <%= f.text_field :name, placeholder: "Particular Name", class: "form-control" %>
+          <%= f.text_field :name, placeholder: "Particular Name", class: "form-control",required:true %>
         </div>
 
         <div class="form-group">
           <b>Description:</b>
           <span style="color:red">*</span>
-          <%= f.text_field :description, placeholder: "Description", class: "form-control"%>
+          <%= f.text_field :description, placeholder: "Description", class: "form-control",required:true%>
         </div>
         
         <div class="form-group">
@@ -73,7 +63,7 @@
 
           <b>Finance Fee Category:</b>
           <span style="color:red">*</span>
-          <%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#finance_fee_particular_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",:style =>"width: 300px",class: "form-control"}%>
+          <%= f.select :finance_fee_category_id,collect_category,{prompt:true},{onclick:"var a={id:$('#finance_fee_particular_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",:style =>"width: 300px",class: "form-control"}%>
         </div>
         
         <div class="form-group">

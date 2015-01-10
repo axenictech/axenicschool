@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
-<style type="text/css">
-
-table#pdf-table{
-   border: 1px solid #ADACAB;
-   border-left: 0px solid #ADACAB;
-}
-
-</style>
-<body>
-<div align="center">
-<font color="purple"><b><i><h3>Axenic School</h3>
-<h4></h4></i></b></font>
-</div>
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+      <br/>
 
 <table align="center" width="100%",border="1px">
 
@@ -27,12 +42,12 @@ table#pdf-table{
     <%end%>   
       <%=@emp.first_name%><br>
       <%="Payslip generated on "+ @payslip.salary_date.to_s+" status "+status%>
-      
-      <h2>Salary</h2>
+
+      <h3 style="color:brown">Salary:</h3>
       
       <tr>
-         <th>Category</th>
-         <th>Amount</th>
+         <td bgcolor="99CCFF" colspan="2"><b>Category</b></td>
+         <td bgcolor="99CCFF"><b>Amount</b></td>
       </tr>
       <%total=0%>
       
@@ -41,46 +56,45 @@ table#pdf-table{
       <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id: c.id).pluck(:amount) %>
 
       <tr>
-         <td><%=c.name%></td>
-         <td><%='%.02f'%val[0]%></td>
+         <td colspan="2"><%=c.name%></td>
+         <td ><%='%.02f'%val[0]%></td>
          <%total+=val[0].to_f%>
       </tr>
       <%end%>
       <tr>
-        <td><%="Total"%></td>
-        <td><%='%.02f'%total%></td>
+        <td colspan="2"><%="Total"%></td>
+        <td ><%='%.02f'%total%></td>
       </tr>
         </table>
-        <h2>Deduction</h2>
+        <h3 style="color:brown">Deduction:</h3>
         
        <table align="center" width="100%",border="1px">
           <%tot=0%>
           <%is_deduction=PayrollCategory.where(is_deduction:true)%>
            <%is_deduction.each do |d|%>
             <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id:d.id).pluck(:amount)%>
-            
+
           <tr>
             <td><%=d.name%></td>
-            <td><%=val[0]%></td>
+            <td ><%=val[0]%></td>
               <%tot+=val[0].to_f%>
           </tr>
       
         <%end%>
 
         <tr>
-            <td><%="Total"%></td>
-            <td><%='%.02f'%tot%></td>
+            <td ><%="Total"%></td>
+            <td ><%='%.02f'%tot%></td>
        </tr>   
-        </table>
-
-      <h2>Total</h2>
-        
+        </table><br>
+<hr>
+       <br> 
         <table align="center" width="100%",border="1px">
           
             <%last_total=total.to_f-tot.to_f%>
             <tr>
-            <td><%="Total"%></td>
-            <td><%='%.02f'% last_total %></td>
+            <th colspan="2"><%="Total"%></th>
+            <th ><%='%.02f'% last_total %></th>
        </tr>   
         </table>
   
