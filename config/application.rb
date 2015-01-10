@@ -13,7 +13,5 @@ module Educulture
     config.middleware.use 'PDFKit::Middleware', print_media_type: true
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
     config.assets.paths << Rails.root.join('vendor', 'assets', 'images')
-    config.assets.precompile += %w(vendor.css vendor.js)
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end
