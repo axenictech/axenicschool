@@ -24,17 +24,7 @@
       <div class="box-content">
         <%= form_for @discount,url:{action: 'create_fee_discount'} do |f| %>
           <fieldset>
-            <% if @discount.errors.any?%>
-              <div class="alert alert-danger" style="width:500px" >
-                <h4><%= t('Errors prohibited to being update:')%></h4>
-                <ul>
-                  <% @discount.errors.full_messages.each do |msg| %>
-                    <li><%= msg%></li>
-                  <% end %>
-                </ul> 
-              </div>
-            <% end %>
-
+            <%= discount_error! %>
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-4">
@@ -43,33 +33,27 @@
                   <span style="color:red">*</span>
                   <%= f.select :type,['Batch','Student Category','Student'],{prompt:true},{onchange:"var a={type:$('#fee_discount_type').val()};$.get('discount_type',a,function(response){});",class: "form-control"}%>
                 </div>
-
                 <div class="form-group">
                     <b>Name:</b>
                   <span style="color:red">*</span>
                   <%= f.text_field :name, placeholder: "Name", class: "form-control",required:true%>
                 </div>
-
                 <div id="hidden"></div>
-
               <div class="form-group">
                 <b>Discount(%):</b>
                   <span style="color:red">*</span>
                   <%= f.text_field :discount, placeholder: "Discount",class: "form-control",required:true %>
                 </div>
- 
               </div>
                 <div class="col-sm-4 col-sm-offset-1">
                 <div class="form-group">
                  <b>Finance Fee Category:</b>
                   <span style="color:red">*</span>
-                  <%= f.select :finance_fee_category_id,@categories.collect{|c| [c.name,c.id]},{prompt:true},{onclick:"var a={id:$('#fee_discount_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",class: "form-control"}%>
+                  <%= f.select :finance_fee_category_id,collect_catagory,{prompt:true},{onclick:"var a={id:$('#fee_discount_finance_fee_category_id').val()};$.get('category_batch',a,function(response){});",class: "form-control"}%>
                 </div>
-
                 <div class="form-group">
                 <br>
                   <b>Select:</b>&nbsp;&nbsp; &nbsp;&nbsp;
-                  
                   <%= link_to "All",select_all_finance_index_path,{onclick:"$('.check_box').prop('checked',true);",remote:true,class: "btn btn-primary-link btn-xs"}%>&nbsp;&nbsp;
                   <%= link_to  "None",select_none_finance_index_path,{onclick:"$('.check_box').prop('checked',false);",remote:true,class: "btn btn-primary-link btn-xs"}%>
                   <div id="fee_category"><%= render 'category_batches_list'%>
@@ -77,7 +61,6 @@
                 </div>
               </div>
             </div>
-
             <div class="col-sm-5 col-sm-offset-5"> 
               <div class="form-actions">               
                 <%= f.submit 'Submit', class: "btn btn-primary"%>

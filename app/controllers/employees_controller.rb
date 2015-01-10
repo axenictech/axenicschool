@@ -812,7 +812,6 @@ class EmployeesController < ApplicationController
 
   def position
     @employee_position = EmployeePosition.shod(params[:id])
-    @employees = EmployeeCategory.all
   end
 
   def bank_fields

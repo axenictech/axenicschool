@@ -8,21 +8,18 @@
 	    <%= form_for @master_category,url:{action:'create_master_category'},remote: true do |f|%>
 		    <%= f.hidden_field :is_master,value:true%>
 				<div class="row">
-					
-			    <div class="col-sm-4 col-md-offset-1"><b>Name :</b></div>
+				<div class="col-sm-4 col-md-offset-1"><b>Name :</b></div>
 			    <div class="col-sm-7"><%= f.text_field :name,class: "form-control", placeholder: 'Name'%>
 			  	</div>
 			  </div><br/>
 			  <div class="row">
-			    
 			    <div class="col-sm-4 col-md-offset-1"><b>Description :</b></div>
 			    <div class="col-sm-7">
 			      <%= f.text_field :description,class: "form-control", placeholder: 'Description'%>
 			    </div>
 			  </div><br/>
 			  <div class="row">
-				  
-			    <div class="col-sm-5 col-md-offset-1"><b>Select Batch :</b></div>
+				<div class="col-sm-5 col-md-offset-1"><b>Select Batch :</b></div>
 		      <div class="col-sm-6">
 		        <%=link_to 'All',assign_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
 		        <%=link_to 'None',remove_batch_finance_index_path,remote:true,class: "btn btn-primary-link btn-xs"%>
@@ -41,4 +38,3 @@
 		</div>    
 	</div>
 </div>
-

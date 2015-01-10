@@ -13,11 +13,11 @@
     <%= form_for :payslip,url:{action:"view_payslip"},remote:true do |f|%>
     <div class="form-group">
       <b>Select Department:</b>
-      <%= f.select :department, @departments.map {|d| [d.name,d.id]},{prompt:true},class: "form-control"%>
+      <%= f.select :department,collect_department,{prompt:true},class: "form-control"%>
     </div>
     <div class="form-group">
       <b>Select Month:</b>
-      <%= f.select :date, @salary_months.map {|c| [c.salary_date.strftime("%B %Y"),c.salary_date.strftime("%Y-%m-%d")]},{prompt:true},class: "form-control"%>
+      <%= f.select :date,collect_salary_month,{prompt:true},class: "form-control"%>
     </div>
     <div align="center"><%= f.submit "View",class: "btn btn-default"%>
     </div>

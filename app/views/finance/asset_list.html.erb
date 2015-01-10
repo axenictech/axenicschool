@@ -6,8 +6,7 @@
         width:100%;
         margin: 0 auto;
       }
-
-      
+   
       #head {
         height: 100px;
         width: 700px;
@@ -20,7 +19,6 @@
         text-align: center;
         font-size: 15px;
       }
-
     </style>
   </head>
   <body>
@@ -34,16 +32,13 @@
       </div>
       <hr>
       <br/><h3><center>Asset List</center></h3><br/>
-     
       <table cellpadding="5" cellspacing="5" width="700">
-     <tr bgcolor="99CCFF"><th align="left">Sl No</th>
+          <tr bgcolor="99CCFF"><th align="left">Sl No</th>
             <th align="left">Asset</th>
             <th align="left">Created At</th>
             <th align="left">Total Amount</th>
-        </tr>
-
+          </tr>
         <% i = 0  %>
-      
         <%total_amount=0%>
         <% @assets.each do |a| %>
           <% if a.is_inactive? %>

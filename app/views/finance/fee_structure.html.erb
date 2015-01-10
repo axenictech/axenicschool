@@ -81,18 +81,18 @@
           <th>Particular</th>
           <th>Amount</th>
         </tr>
-        <tr>
-          <% unless @particulars.nil?%>
-            <% @particulars.each_with_index do |p,i|%>
+        <% unless @particulars.nil?%>
+          <% @particulars.each_with_index do |p,i|%>
+            <tr>
               <td><%= i+1%></td>
               <td><%= p.name%></td>
               <td align="right"><%= amt=p.amount%></td>
-              <%total+=amt%>
-            <%end%>
-          <%else%>
-            <h5>No fee collection particulars found</h5>
+            </tr>
+            <%total+=amt%>
           <%end%>
-        </tr>
+        <%else%>
+          <h5>No fee collection particulars found</h5>
+        <%end%>
       </table>
       <br/><br/>
       <table cellpadding="5" cellspacing="5" width="700">
