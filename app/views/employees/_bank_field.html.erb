@@ -32,9 +32,7 @@
   </div>
  </div>
 </div>
-<% if @bank_fields1.empty? and @bank_fields2.empty?%>
-<h3 align="center">Bank Details record not found</h3>
-<%else%>
+
 <div class="row">
   <div class="col-sm-6">
      <div class="form-group">
@@ -56,6 +54,7 @@
                </tr>
 
              </thead>
+        <tr><td colspan="2"><%=bank_fields1_not_found!%></td></tr>
           <tbody>
            <%@bank_fields1.each do |c| %>
             <tr>
@@ -100,6 +99,7 @@
                </tr>
 
              </thead>
+              <tr><td colspan="2"><%=bank_fields2_not_found!%></td></tr>
           <tbody>
            <% @bank_fields2.each do |c| %>
             <tr>
@@ -121,7 +121,6 @@
           </tbody>
        </table>
     <%end%>
- <%end%>
  </div>
  </div>
  </div>

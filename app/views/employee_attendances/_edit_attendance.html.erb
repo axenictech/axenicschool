@@ -14,14 +14,15 @@
 
     <tr>
        <td><b>Leave Type:</b></td>
-         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:true).collect {|b| [b.name,b.id]},{prompt:'Select leave type'},{class: 'form-control'}%></td>
+         <td><%= c.select :employee_leave_type_id,emp_leave_type,{prompt:'Select leave type'},{class: 'form-control'}%></td>
+         
      </tr>
     <tr>
       <td><b>Reason for Absence:</b></td>
       <td><%= c.text_field :reason, class: 'form-control', placeholder: 'Reason for absence'%></td>
     </tr>
      <tr>        
-   <td colspan="2"><%= c.check_box :is_half_day,:checked => false %>
+   <td colspan="2"><%= c.check_box :is_half_day %>
     <b>Half Day</b></td>
     </tr>
     <tr>

@@ -42,3 +42,7 @@ function batchevent(){
 function class_fun(){
 	$('#class_form').submit();
 }
+
+function department_event(){
+	$('#department_form').submit();
+}

@@ -49,9 +49,7 @@
   </div>
  </div>
 </div>
-   <% if @payroll_categories1.empty? and @payroll_categories2.empty?%>
-<h3 align="center">No records</h3>
-<%else%>
+
 <div class="row">
   <div class="col-sm-6">
      <div class="form-group">
@@ -73,6 +71,7 @@
                </tr>
 
              </thead>
+           <tr><td colspan="3"><%=payroll_categories1_not_found!%></td></tr>
           <tbody>
            <%@payroll_categories1.each do |c| %>
 			<tr>
@@ -129,6 +128,7 @@
                </tr>
 
              </thead>
+        <tr><td colspan="3"><%=payroll_categories2_not_found!%></td></tr>
           <tbody>
            <% @payroll_categories2.each do |c| %>
 			<tr>
@@ -157,7 +157,6 @@
           </tbody>
        </table>
     <%end%>
- <%end%>
  </div>
  </div>
  </div>

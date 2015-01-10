@@ -28,9 +28,8 @@
           </thead>
           <tbody>
             <% @leave_count.each do |e| %>
-            <%  leave_type =EmployeeLeaveType.find_by_id(e.employee_leave_type_id)%>
-            
-            <tr>
+            <%  leave_type = emp_leave_type_id(e)%>
+           <tr>
               <td class="col-3"><%=leave_type.name %></td>
               <td class="col-3"><%=e.leave_count %></td>
               <td class="col-3"><%=e.leave_taken %></td>
@@ -39,9 +38,7 @@
               <%else%>
               <td class="col-3">-</td>
               <%end%>
-
-            </tr>
-            
+          </tr>
             <%end%>
           </tbody>
         </table>

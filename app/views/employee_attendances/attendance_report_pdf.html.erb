@@ -64,9 +64,9 @@
        </td>
        <% total=0 %>
        <% @leave_types.each do |lt1| %>
-       <% leave_count = EmployeeLeave.where(employee_leave_type_id:lt1.id,employee_id:e.id)%>
+       <% leave_count = emp_leave_count(lt1,e)%>
        <td class="col-5">
-         <% report = EmployeeAttendance.where(employee_id:e.id, employee_leave_type_id:lt1.id) %>
+         <% report = emp_report(e,lt1) %>
          <% count = 0 %>
          <% unless report.nil? %>
          <% report.each do |d| %>
