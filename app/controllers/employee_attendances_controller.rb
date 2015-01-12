@@ -105,9 +105,6 @@ class EmployeeAttendancesController < ApplicationController
     @attendance = EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @reset_count = EmployeeLeave.edit_att(@attendance)
-    # reset_count=EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id, @attendance.employee_leave_type_id)
-    p "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-    p @reset_count
     authorize! :update, @attendance
   end
 
@@ -181,12 +178,12 @@ class EmployeeAttendancesController < ApplicationController
   end
 
   def employee_leave_reset_by_department
-    @departments ||= EmployeeDepartment.all
+    @deparments ||= EmployeeDepartment.all
   end
 
   def select_department
-    @department = EmployeeDepartment.find(params[:department][:id])
-    @employees ||= @department.employees.all
+    @deparments = EmployeeDepartment.find(params[:department][:id])
+    @employees ||= @deparments.employees.all
   end
 
   def assign_all

@@ -578,6 +578,7 @@ class EmployeesController < ApplicationController
   end
 
   def employee_individual_payslip_pdf
+    @general_setting = current_user.general_setting
     @payslip = MonthlyPayslip.shod(params[:payslip])
     @independent_categories = PayrollCategory.all
     render 'employee_individual_payslip_pdf', layout: false

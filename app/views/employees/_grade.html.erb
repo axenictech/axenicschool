@@ -50,9 +50,7 @@
   </div>
  </div>
 </div>
-      <%if @grade1.empty? and @grade2.empty?%>
-<h4><div align="center">No records</div></h4>
-<%else%>
+
 <div class="row">
   <div class="col-sm-6">
      <div class="form-group">
@@ -72,6 +70,7 @@
                </tr>
 
              </thead>
+           <tr><td colspan="2"><%=grade1_not_found!%></td></tr>
           <tbody>
            <%@grade1.each do |c| %>
             <tr>
@@ -116,6 +115,7 @@
                </tr>
 
              </thead>
+              <tr><td colspan="2"><%=grade2_not_found!%></td></tr>
           <tbody>
            <% @grade2.each do |c| %>
             <tr>
@@ -137,7 +137,6 @@
           </tbody>
        </table>
     <%end%>
- <%end%>
  </div>
  </div>
  </div>

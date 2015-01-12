@@ -22,6 +22,7 @@
       <div class="box-content">
       <%= form_for @donation, url:{action: 'create_donation'} do |f| %>
     <fieldset>
+<<<<<<< HEAD
       <% if @donation.errors.any?%>
         <div class="alert alert-danger" >
           <ul>
@@ -31,6 +32,9 @@
           </ul> 
         </div>
       <% end %>
+=======
+      <%= donation_errors!%>
+>>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-5">

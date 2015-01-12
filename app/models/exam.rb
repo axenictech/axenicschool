@@ -16,6 +16,7 @@ class Exam < ActiveRecord::Base
   validate :end_time_cannot_be_less_than_past
   validate :max_marks_greater_than_min_marks
   scope :shod, ->(id) { where(id: id).take }
+  scope :result, ->(s, e) { where(subject_id: s, exam_group_id: e).take }
   def end_time_cannot_be_less_than_start_time
     if end_time.present? && end_time < start_time
       errors.add(:end_time, 'cannot be less than start time')
@@ -157,5 +158,18 @@ class Exam < ActiveRecord::Base
 
   def is_failed
     exam_scores.where(is_failed: true).includes(:student, :grading_level)
+  end
+
+  def scores(student)
+    ExamScore.score(student.id, id)
+  end
+
+  def exam_total(total)
+    total.to_f + maximum_marks.to_f
+  end
+
+  def exam_mar(student, marks)
+    exam_score = scores(student)
+    marks.to_f + exam_score.marks.to_f
   end
 end

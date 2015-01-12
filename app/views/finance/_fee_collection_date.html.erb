@@ -4,7 +4,11 @@
   	<div class="col-sm-4">
     	<div class="form-group">
       	<b>Select Fee Collection Date:</b>
+<<<<<<< HEAD
       	<%= select :collection,:id,collect_collection,{prompt:true},{onchange:"var a={id: $('#collection_id').val()};$.get('student_fees',a,function(response){});",class: "form-control"}%>
+=======
+      	<%= select :collection,:id,collect_fee_date,{prompt:true},{onchange:"var a={id: $('#collection_id').val()};$.get('student_fees',a,function(response){});",class: "form-control"}%>
+>>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
     	</div>
   	</div>
 	</div>

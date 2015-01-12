@@ -13,7 +13,11 @@
     <%= form_for :payslip,url:{action:"view_payslip"},remote:true do |f|%>
     <div class="form-group">
       <b>Select Department:</b>
+<<<<<<< HEAD
       <%= f.select :department,collect_department,{prompt:true},class: "form-control"%>
+=======
+      <%= f.select :department,map_department,{prompt:true},class: "form-control"%>
+>>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
     </div>
     <div class="form-group">
       <b>Select Month:</b>

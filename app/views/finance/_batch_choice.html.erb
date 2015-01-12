@@ -1,4 +1,8 @@
 <% unless @batches.nil? %>
   <b>Select Batch:</b>
+<<<<<<< HEAD
   <%= select :batch,:id, collect_batch,{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('collection_choice',a,function(response){});",class: "form-control"}%>
+=======
+  <%= select :batch,:id,collect_batch_choice,{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('collection_choice',a,function(response){});",class: "form-control"}%>
+>>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
 <%end%>

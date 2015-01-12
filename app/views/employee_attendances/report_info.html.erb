@@ -21,11 +21,11 @@
   
    <hr/>
       <% @leave_types.each do |lt| %>
-        <% leave_count = EmployeeLeave.where(employee_leave_type_id:lt.id,employee_id:@employee.id) %>
+        <% leave_count = emp_leave_count(lt,@employee) %>
 
         <tr><td><%= lt.name  %></td><td></td></tr>
      
-          <% @report = EmployeeAttendance.where(employee_id:@employee.id, employee_leave_type_id:lt.id) %>
+          <% @report = emp_report(@employee,lt) %>
        
         <% if @report == [] %>
           <tr style="background-color:lightblue"><td></td>
@@ -48,7 +48,7 @@
         <%  unless @leave_types.nil? %>
           <%total_leave = 0 %>
           <% @leave_count.each do |e| %>
-            <% leave_type = EmployeeLeaveType.find_by_id(e.employee_leave_type_id)%>
+            <% leave_type = emp_leave_type_id(e)%>
               <tr><td>Total <%= leave_type.name %></td>
               <td><%= e.leave_taken.to_f %>/<%= e.leave_count %></td>
             </tr>
