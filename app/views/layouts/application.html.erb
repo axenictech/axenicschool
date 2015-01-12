@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Educulture</title>
   <% if user_signed_in? %>
-	<%= stylesheet_link_tag 'vendor', media: 'all',debug:false, cache: 'vendor'%>
+	<%= stylesheet_link_tag 'vendor', media: 'all', 'data-turbolinks-track' => true,debug:false%>
   <%else%>
-    <%= stylesheet_link_tag 'application', media: 'all',debug:false, cache: 'application'%>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true,debug:false%>
   <%end%>
-  <%= javascript_include_tag 'vendor', media: 'all', cache: 'vendor'%>
+  <%= javascript_include_tag 'vendor', media: 'all', 'data-turbolinks-track' => true%>
   <%= csrf_meta_tags %>
 </head>
 
