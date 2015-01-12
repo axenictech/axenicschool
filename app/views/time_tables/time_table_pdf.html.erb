@@ -37,7 +37,20 @@
       
       <br/>
       <table cellpadding="5" cellspacing="5" width="700">
-        <tr><th colspan="6" bgcolor="99CCFF" align="left">Timetable Details</th></tr>
+      <tr><th colspan="2" bgcolor="99CCFF" align="left">Timetable Details</th></tr>
+      <tr>
+        <td>Timetable : </td>
+        <td><%=@time1.full_time%>
+        </td>
+      </tr>
+      <tr>
+        <td>Batch Name : </td>
+        <td><%=@batch.full_name %></td>
+      </tr>
+    </table>
+    <br/><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr><th colspan="6" bgcolor="99CCFF" align="left">Timetable</th></tr>
         <tr>
     <td class="col-4"></td>
   <% @batch.class_timings.where(is_break: false).each do |c|%>
