@@ -1,5 +1,6 @@
 <div class="modal-body">
-<ul class="errors"></ul>
+<div class="errors">
+<ul class="errors"></ul></div>
 <%= form_for [@course,@rank_lev1],url:{:action=>'createrank',course_id: @course.id},method: :post,remote: true do |f|%>
 <div class="form-group">
   <b>Name:</b>

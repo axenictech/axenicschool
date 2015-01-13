@@ -1,4 +1,3 @@
-
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
@@ -9,7 +8,6 @@
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
-
 <div class="box-content">
   <fieldset>
     <div class="row">
@@ -17,11 +15,10 @@
       <div class="col-sm-4">
         <div class="form-group">
           <b>Fee collection date:</b><span style="color:red">*</span>
-          <%= select :collection,:id,collection_structure,{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_structure',a,function(response){});",class: "form-control"}%>
+          <%= select :collection,:id,collect_unique,{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_structure',a,function(response){});",class: "form-control"}%>
         </div>
       </div>
     </div>
   </fieldset>        
 </div>
-    
 <div id="fees_structure"></div>

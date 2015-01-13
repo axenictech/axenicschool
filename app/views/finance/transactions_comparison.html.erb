@@ -8,14 +8,12 @@
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
-
 <div class="row">
   <div class="box col-md-12">
 	  <div class="box-inner">
 	    <div class="box-header well">
 	      <h2>Report for the period from <%=@start_date1%> to <%=@end_date1%></h2>
 	    </div>
-
 	    <div class="box-content">
 		    <% unless @categories.nil? %><%total1=0%>
 		      <table id="datatable" class="table table-striped table-bordered responsive">
@@ -50,7 +48,6 @@
 						</tr>
 		        </tbody>
 		      </table>
-		      
 		    <%else%>
 					<center><h5>No transaction found</h5></center>
 				<%end%>
@@ -58,14 +55,12 @@
 	  </div>
   </div>
 </div>
-
 <div class="row">
   <div class="box col-md-12">
 	  <div class="box-inner">
 	    <div class="box-header well">
 	      <h2>Report for the period from <%=@start_date2%> to <%=@end_date2%></h2>
 	    </div>
-
 	    <div class="box-content">
 		    <% unless @categories.nil? %><%total2=0%>
 		      <table id="datatable" class="table table-striped table-bordered responsive">
@@ -100,7 +95,6 @@
 						</tr>
 		        </tbody>
 		      </table>
-		      
 		    <%else%>
 					<center><h5>No transaction found</h5></center>
 				<%end%>
@@ -108,9 +102,3 @@
 	  </div>
   </div>
 </div>
-
-
-
-
-
-

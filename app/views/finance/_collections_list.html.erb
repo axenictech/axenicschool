@@ -10,10 +10,10 @@
 		        <thead>
 		          <tr>
 		            <th>Name</th>
-					<th>Start Date</th>
-					<th>End Date</th>
-					<th>Due Date</th>
-					<th>Action</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Due Date</th>
+								<th>Action</th>
 		          </tr>
 		        </thead>
 		        <tbody>
@@ -28,7 +28,6 @@
 		              <div class="label-success label label-default">
 		              <i class="glyphicon glyphicon-edit icon-white"></i> 
 		              <%= link_to 'Edit',edit_fee_collection_finance_path(@batch,collection_id:c),remote:true, class: 'a-action'%></div>
-
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
 		              <%= link_to 'Delete' ,delete_fee_collection_finance_path(@batch,collection_id:c),method: :delete, data:{confirm:"Are you sure to delete '#{c.name}'?"}, class: 'a-action'%></div>

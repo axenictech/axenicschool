@@ -82,44 +82,42 @@ class Exam < ActiveRecord::Base
       fail = false
       fail = true if details[:marks].to_f < exam.minimum_marks.to_f
 
-      next if exam.exam_group.exam_type == 'Marks'
-      if exam.exam_group.exam_type == 'Grades'
-        grades.each do |grade|
-          score_grade = grade.id if details[:marks].to_f >= grade.min_score
-        end
-      else
-        percentage = (details[:marks].to_f * 100) / exam.maximum_marks.to_f
-        grades.each do |grade|
-          score_grade = grade.id if percentage >= grade.min_score
+      unless exam.exam_group.exam_type == 'Marks'
+        unless exam.exam_group.exam_type == 'Grades'
+          percentage = (details[:marks].to_f * 100) / exam.maximum_marks.to_f
+          grades.each do |grade|
+            if percentage >= grade.min_score
+              score_grade = grade.id
+            end
+          end
+        else
+          grades.each do |grade|
+            if details[:marks].to_f >= grade.min_score
+              score_grade = grade.id
+            end
+          end
         end
       end
 
       if @exam_score.nil?
         exam_score = ExamScore.new(exam_id: exam.id, student_id: student_id,
-                                   marks: details[:marks],
-                                   remarks: details[:remarks],
-                                   grading_level_id: score_grade,
-                                   is_failed: fail)
-        @errors = exam_score.errors.full_messages unless exam_score.save
+                                   marks: details[:marks], remarks: details[:remarks], grading_level_id: score_grade, is_failed: fail)
+        unless exam_score.save
+          @errors = exam_score.errors.full_messages
+      end
       else
-        unless @exam_score.update(marks: details[:marks],
-                                  remarks: details[:remarks],
-                                  grading_level_id: score_grade,
-                                  is_failed: fail)
+        unless @exam_score.update(marks: details[:marks], remarks: details[:remarks], grading_level_id: score_grade, is_failed: fail)
           @errors = @exam_score.errors.full_messages
         end
-      end
-
+          end
       if @errors.nil?
         if @grouped_exam.nil?
           GroupedExamReport.create(batch_id: batch.id, student_id: student_id,
-                                   exam_group_id: exam_group.id,
-                                   subject_id: exam.subject_id,
-                                   marks: details[:marks])
+                                   exam_group_id: exam_group.id, subject_id: exam.subject_id, marks: details[:marks])
         else
           @grouped_exam.update(marks: details[:marks])
         end
-      end
+    end
     end
   end
 

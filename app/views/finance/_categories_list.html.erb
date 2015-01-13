@@ -3,7 +3,7 @@
   <div class="col-sm-4">
     <div class="form-group">
       <b>Select Fees Category:</b>
-      <%= select :category,:id,  @categories.collect {|c| [c.name,c.id]},{prompt:true},{onchange:"var a={id: $('#category_id').val(),batch_id:#{@batch.id}};$.get('discount_view',a,function(response){});",class: "form-control"}%>
+      <%= select :category,:id,collect_catagory,{prompt:true},{onchange:"var a={id: $('#category_id').val(),batch_id:#{@batch.id}};$.get('discount_view',a,function(response){});",class: "form-control"}%>
     </div>
   </div>
 </div>

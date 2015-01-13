@@ -487,6 +487,10 @@ class FinanceController < ApplicationController
     authorize! :read, @master_category
   end
 
+  def master_fees
+    @batches ||= Batch.includes(:course).all
+  end
+
   def new_particular_fee
     @batch = Batch.shod(params[:batch_id])
     @master_category = FinanceFeeCategory.shod(params[:id])
@@ -927,6 +931,14 @@ class FinanceController < ApplicationController
     @salary = @employee.salary(@date)
     @individual_salary = @employee.personal_salary(@date)
     render 'employee_payslip', layout: false
+  end
+
+  def fee_discounts
+    @batches ||= Batch.includes(:course).all
+  end
+
+  def fee_collection_view
+    @batches ||= Batch.includes(:course).all
   end
 
   private
