@@ -18,16 +18,7 @@
 <div class="box-content">
 <%= form_for [@student,@guard] do |f|%>
  <fieldset>
-<% if @guard.errors.any? %>
-  			 <div class="alert alert-danger">
-    			<h2>Error prohibited to being saved:</h2>
-    			<ul>
-					 <% @guard.errors.full_messages.each do |msg| %>
-      				<li><%= msg %></li>
-    				<% end %>
-    			</ul>
-    				</div>
-    			<% end %>
+<%= guard_error! %>
 <div class="row">
       <div class="col-sm-1"></div>
         <div class="col-sm-4">
