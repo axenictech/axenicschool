@@ -85,11 +85,19 @@
                       <% unless @exam.exam_group.result_published? %>
                       <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks,class: "form-control",placeholder:"Marks"%></td>
                       <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks,class: "form-control",placeholder:"Remark"%></td>
+                      <% if exam_score.grading_level.nil? %>
+                      <td><%= f.text_field "exam[#{student.id}][grades]",readonly:true,style:"width:50px",class: "form-control" unless @exam.exam_group.exam_type=="Marks"%></td>
+                      <%else%>
                       <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px",class: "form-control" unless @exam.exam_group.exam_type=="Marks"%></td>
+                      <%end%>
                       <%else%>
                       <td><%= f.text_field "exam[#{student.id}][marks]",value:exam_score.marks,readonly:true,class: "form-control",placeholder:"Marks"%></td>
                       <td><%= f.text_field "exam[#{student.id}][remarks]",value:exam_score.remarks,readonly:true,class: "form-control",placeholder:"Remark"%></td>
+                      <% if exam_score.grading_level.nil? %>
+                      <td><%= f.text_field "exam[#{student.id}][grades]",readonly:true,style:"width:50px",class: "form-control" unless @exam.exam_group.exam_type=="Marks"%></td>
+                      <%else%>
                       <td><%= f.text_field "exam[#{student.id}][grades]",value:exam_score.grading_level.name,readonly:true,style:"width:50px",class: "form-control" unless @exam.exam_group.exam_type=="Marks"%></td>
+                      <%end%>
                       <%end%>
                       <%else%>
                       <td><%= f.text_field "exam[#{student.id}][marks]",class: "form-control",placeholder:"Marks"%></td>

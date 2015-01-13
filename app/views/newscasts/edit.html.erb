@@ -23,12 +23,12 @@
             
         <div class="col-sm-7 col-sm-offset-1">
             <div class="form-group">
-              <%=f.label :Title %>
+              <b>Title:<span style="color:red">*</span></b>
               <%=f.text_field :title, class: "form-control", style: "width: 350px", placeholder: "Batch Name"%>
             </div>
               
             <div class="form-group">
-              <%=f.label :Content %>
+              <b>Content:<span style="color:red">*</span></b>
               <%=f.text_area :content,style: 'width:350px;height:200px', placeholder: "News Content", class: "form-control"%>
             </div>
 

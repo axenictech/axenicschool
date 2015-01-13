@@ -1,7 +1,6 @@
 # TimeTable Entries Helper
 module TimeTableEntriesHelper
   def collect_batch
-    return if @batches.empty?
     @batches.collect { |b| [b.full_name, b.id] }
   end
 

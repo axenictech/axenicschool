@@ -12,7 +12,6 @@
 	    <div class="box-header well">
 	      <h2>Liability Details</h2>
 	    </div>
-
 	    <div class="box-content">
 		    <% unless @liabilities.empty?%>
 		      <table id="datatable" class="table table-striped table-bordered responsive">
@@ -41,7 +40,6 @@
 		              <div class="label-success label label-default">
 		              <i class="glyphicon glyphicon-edit icon-white"></i> 
 		              <%= link_to 'Edit',edit_liability_finance_path(l), class: 'a-action', remote:true %></div>
-
 		              <div class="label-danger label label-default">
 		              <i class="glyphicon glyphicon-trash icon-white"></i> 
 		              <%= link_to 'Delete' ,delete_liability_finance_path(l),method: :delete, data:{confirm:"Are You sure to delete Liability #{l.title}?"}, class: 'a-action'%></div>

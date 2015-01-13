@@ -163,12 +163,12 @@
       <% unless @student_previous_subject_marks.nil? %>
       <tr bgcolor="99CCFF">
         <th align="left">Subject Name</th>
-        <th align="right">Marks</th>
+        <th align="left">Marks</th>
       </tr>
       <% @student_previous_subject_marks.each do |psm| %>
       <tr>
         <td><%= psm.subject %></td>
-        <td align="right"><%= psm.mark %></td>
+        <td><%= psm.mark %></td>
       </tr>
       <%end%>
       <%end%>  
