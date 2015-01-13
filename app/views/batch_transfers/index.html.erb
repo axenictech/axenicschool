@@ -14,7 +14,7 @@
   <div class="col-md-12">
     <%= form_for :batch_transfer,url:{action:'select'},method: :get,remote:true,html:{id: "transfer"} do |f| %>
 
-    <%= f.select :id,collect_course,{prompt:'Select a course'},{onchange:"batch_transfer_fun()",class: "form-control",style: "width:350px"}%>
+    <%= f.select :id,collect_course_setting,{prompt:'Select a course'},{onchange:"batch_transfer_fun()",class: "form-control",style: "width:350px"}%>
     <% end %>
   </div>
 </div>
