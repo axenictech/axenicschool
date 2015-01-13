@@ -1,7 +1,7 @@
 # Exam Groups Helper
 module ExamGroupsHelper
   def courses
-    return if @courses.empty?
+   
     @courses.collect { |b| [b.full_name, b.id] }
   end
 

@@ -255,7 +255,7 @@ class FinanceController < ApplicationController
     else
       @expenses ||= FinanceTransaction.list(@start_date, @end_date)
     end
-    authorize! :read, @expenses.first
+    authorize! :read, @expenses.first unless @expenses.nil?
   end
 
   def edit_expense
@@ -362,7 +362,7 @@ class FinanceController < ApplicationController
     else
       @categories ||= FinanceTransactionCategory.all
     end
-    authorize! :read, @categories.first
+    authorize! :read, @categories.first unless @categories.nil?
   end
 
   def expense_details
@@ -666,8 +666,8 @@ class FinanceController < ApplicationController
 
   def fees_submission_batch
     @batches ||= Batch.includes(:course).all
-    @collections ||= Batch.first.finance_fee_collections
-    authorize! :read, @collections.first
+    @collections ||= Batch.first.finance_fee_collections unless Batch.first.nil?
+    authorize! :read, @collections.first unless @collections.nil?
   end
 
   def fee_collection_date
@@ -833,10 +833,10 @@ class FinanceController < ApplicationController
 
   def fees_defaulters
     @courses ||= Course.all
-    @batches ||= Course.first.batches
-    @collections ||= Batch.first.finance_fee_collections
-    authorize! :read, @collections.first
-  end
+    @batches ||= Course.first.batches unless Course.first.nil?
+    @collections ||= Batch.first.finance_fee_collections unless Batch.first.nil?
+    authorize! :read, @collections.first unless @collections.nil?
+  end 
 
   def batch_choice
     @course = Course.shod(params[:id])
