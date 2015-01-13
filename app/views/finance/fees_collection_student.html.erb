@@ -16,11 +16,7 @@
       <div class="col-sm-4">
         <div class="form-group">
           <b>Fee collection date:</b><span style="color:red">*</span>
-<<<<<<< HEAD
           <%= select :collection,:id,collect_unique,{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_submission',a,function(response){});",class: "form-control"}%>
-=======
-          <%= select :collection,:id, collection_date,{prompt:true},{onchange:"var a={collection_id: $('#collection_id').val(),student_id:#{@student.id}};$.get('student_fees_submission',a,function(response){});",class: "form-control"}%>
->>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
         </div>
       </div>
     </div>

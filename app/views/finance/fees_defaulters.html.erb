@@ -13,11 +13,7 @@
   <div class="col-sm-4">
     <div class="form-group">
       <b>Select Course:</b>
-<<<<<<< HEAD
       <%= select :course,:id,collect_only_course,{prompt:true},{onchange:"var a={id: $('#course_id').val()};$.get('batch_choice',a,function(response){});",class: "form-control"}%>
-=======
-      <%= select :course,:id,collect_fee_course,{prompt:true},{onchange:"var a={id: $('#course_id').val()};$.get('batch_choice',a,function(response){});",class: "form-control"}%>
->>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
     </div>
     <div class="form-group">
       <div id="batch"><%= render 'batch_choice'%></div>

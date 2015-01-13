@@ -21,7 +21,6 @@
         <h2>Add Income </h2>
       </div>
       <div class="box-content">
-<<<<<<< HEAD
         <%= form_for @transaction, url:{action: 'create_income'} do |f| %>
         <fieldset>
           <%= income_error! %>
@@ -53,18 +52,6 @@
                 <%= f.select :finance_transaction_category_id,collect_catagory,{prompt:true},:style =>"width: 300px", class: "form-control"%>
               </div>
             </div>
-=======
-      <%= form_for @transaction, url:{action: 'create_income'} do |f| %>
-    <fieldset>
-      <%= income_errors! %>
-         <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5 ">
-          <div class="form-group">
-            <b>Title:</b>
-            <span style="color:red">*</span>
-            <%= f.text_field :title,:style =>"width: 300px",placeholder: "Title", class: "form-control"%>
->>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
           </div>
           <div> 
             <center>
