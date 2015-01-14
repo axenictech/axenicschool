@@ -551,7 +551,7 @@ class EmployeesController < ApplicationController
 
   def one_click_payslip_revert
     @salary_date = params[:payslip][:joining_date].to_date
-    @b = MonthlyPayslip.where(salary_date: @salary_date).pluck(:salary_date)
+    @b = MonthlyPayslip.where(salary_date: @salary_dates).pluck(:salary_date)
     one_click_payslip_revert2
     redirect_to employees_payslip_path
   end

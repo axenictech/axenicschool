@@ -95,7 +95,7 @@ class Employee < ActiveRecord::Base
   scope :shod, ->(id) { where(id: id).take }
   scope :not_status, -> { where(status: false).order(:name) }
   scope :search1, ->(other_conditions, param)\
-   { where('first_name like ?' + other_conditions, param + '%') }
+   { where('first_name ilike ?' + other_conditions, param + '%') }
   scope :att_reg, -> { where.not(id: EmployeeLeave.all.pluck(:employee_id)) }
 
   def archived_employee
@@ -163,7 +163,7 @@ class Employee < ActiveRecord::Base
       other_conditions += " AND employee_category_id = '#{cat_id}'" unless cat_id == ''
       other_conditions += " AND employee_position_id = '#{pos_id}'" unless pos_id == ''
       other_conditions += " AND employee_grade_id = '#{grd_id}'" unless grd_id == ''
-      Employee.search1(other_conditions, s)
+      Employee.search1(other_conditions, s).order("id ASC")
   end
   end
 

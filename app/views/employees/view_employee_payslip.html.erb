@@ -50,8 +50,8 @@
        <div class="row">
       <table class="table table-stried">
       <tr>
-         <th>Category</th>
-         <th>Amount</th>
+         <td width="400px"><b>Category</b></td>
+         <td><b>Amount</b></td>
       </tr>
       <%total=0%>
       
@@ -78,14 +78,14 @@
       	<h4><font color="brown"><b>Deduction:</b></font></h4>
       	</div>
         <div class="row">
-      	<table class="table table-stried">
+      	<table class="table table-stried pull-right">
       		<%tot=0%>
       		<%is_deduction=PayrollCategory.where(is_deduction:true)%>
            <%is_deduction.each do |d|%>
             <% val = EmployeeSaleryStructure.where(employee_id:@emp.id,payroll_category_id:d.id).pluck(:amount)%>
             
       		<tr>
-      			<td><%=d.name%></td>
+      			<td width="400px"><%=d.name%></td>
       			<td><%=val[0]%></td>
       			  <%tot+=val[0].to_f%>
       		</tr>
