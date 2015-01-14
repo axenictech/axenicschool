@@ -1,3 +1,4 @@
+# ArchivedEmployee
 class ArchivedEmployee < ActiveRecord::Base
   belongs_to :employee_category
   belongs_to :employee_position

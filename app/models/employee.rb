@@ -24,8 +24,7 @@ class Employee < ActiveRecord::Base
   has_many :individual_payslip_categories
   after_save :create_user_account
 
-  validates :email, presence: true, uniqueness: true, format: \
-  { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
+ 
   validates :first_name, presence: true, length: \
   { minimum: 1, maximum: 20 }, format: \
   { with: /\A[a-zA-Z_" "-]+\Z/, message: 'allows only letters' }
@@ -35,9 +34,8 @@ class Employee < ActiveRecord::Base
   validates :last_name, presence: true, length: \
   { minimum: 1, maximum: 20 }, format: \
   { with: /\A[a-zA-Z_" "-]+\Z/, message: 'allows only letters' }
-  validates :email, format: \
-  { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ \
-   }, allow_blank: true
+  validates :email, presence: true, uniqueness: true, format: \
+  { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
 
   validates :date_of_birth, presence: true
   validates :employee_department, presence: true
@@ -151,7 +149,7 @@ class Employee < ActiveRecord::Base
     date = Date.today.strftime('%Y%m%d')
     self.employee_number = date.to_s + '1' if Employee.first.nil?
     self.employee_number = date.to_s + \
-      Employee.last.employee_number.next.to_s unless Employee.first.nil?
+      Employee.last.id.next.to_s unless Employee.first.nil?
   end
 
   def self.search2(a, s)
