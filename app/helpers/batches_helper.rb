@@ -1,7 +1,6 @@
 # Batch Helper
 module BatchesHelper
   def collect_course_batch
-    
     @courses.collect { |c| [c.course_name, c.id] }
   end
 

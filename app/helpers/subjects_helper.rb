@@ -1,7 +1,7 @@
 # Subject Helper
 module SubjectsHelper
   def collect_batch
-   @batches.collect { |b| [b.full_name, b.id] }
+    @batches.collect { |b| [b.full_name, b.id] }
   end
 
   def normal_subject_not_found!
