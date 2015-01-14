@@ -43,12 +43,9 @@
              <% end %>
            </div>
          </table>
-         <%if @batches.nil? %>
          <p align="center"><%= f.submit 'update',class: "btn btn-success"%></p>
        </div>
-       <%else%>
-        <h4 align="center">Record Not Found</h4>
-       <%end%>
+
      </fieldset>
      <% end %>
  </div>
