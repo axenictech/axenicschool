@@ -7,4 +7,5 @@ $("ul.errors").html("")
 <% else %>
 $('#add_position').html("<%= j render 'position'%>");
 $("#myModal").modal("hide")
+$('#flash').html("<%= j render 'layouts/messages'%>")
 <%end%>
