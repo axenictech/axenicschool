@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :privileges
   belongs_to :general_setting
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :validatable, :timeoutable
+         :validatable, :timeoutable, :confirmable
 
   validates :username, presence: true, uniqueness: true, length: \
   { in: 1..50 }, format: { with: /\A[a-zA-Z0-9]+\Z/ }

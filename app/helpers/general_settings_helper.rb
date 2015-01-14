@@ -13,12 +13,10 @@ module GeneralSettingsHelper
   end
 
   def set_language
-    return if Language.all.empty?
     Language.all.collect { |l| [l.name, l.id] }
   end
 
   def set_country
-    return if Country.all.empty?
     Country.all.collect { |c| [c.name, c.id] }
   end
 end

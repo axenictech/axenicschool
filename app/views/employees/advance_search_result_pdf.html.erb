@@ -74,7 +74,8 @@ table#pdf-table{
 </head>
 <body>
 <% index = 0 %>
-<% @employees.in_groups_of(25,false).each do |emp| %>
+<%unless @employees.nil?%>
+<% @employees.in_groups_of(25,false).each do |emp| %> 
   <div class="page">
     <div class="hor_line"></div>
     <div id="title">
@@ -107,5 +108,5 @@ table#pdf-table{
 <% end %>
 </body>
 </html>
-
+<%end%>
 

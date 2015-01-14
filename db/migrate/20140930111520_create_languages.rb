@@ -5,14 +5,5 @@ class CreateLanguages < ActiveRecord::Migration
 
       t.timestamps
     end
-    create_default
-  end
-
-  def create_default
-    language_list = %w(English Spanish Marathi hindi Arebian)
-
-    language_list.each do |l|
-      Language.create(name: l)
-    end
   end
 end

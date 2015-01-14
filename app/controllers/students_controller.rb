@@ -268,7 +268,7 @@ class StudentsController < ApplicationController
 
   def advanced_search
     @courses ||= Course.all
-    @batches ||= Course.first.batches
+    @batches ||= Course.first.batches unless Course.first.nil?
     authorize! :read, @student
   end
 

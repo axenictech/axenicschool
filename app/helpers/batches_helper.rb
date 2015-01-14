@@ -1,7 +1,7 @@
 # Batch Helper
 module BatchesHelper
   def collect_course_batch
-    return if @courses.empty?
+    
     @courses.collect { |c| [c.course_name, c.id] }
   end
 
