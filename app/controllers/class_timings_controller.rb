@@ -14,7 +14,7 @@ class ClassTimingsController < ApplicationController
 
   def create
     @batch = Batch.shod(params[:batch_id])
-    @class_timings ||= @batch.class_timings
+    @class_timings ||= @batch.class_timings.order('start_time ASC')
     @class_timing1 = @batch.class_timings.new(params_class)
     @class_timing1.save
     flash[:notice] = t('class_timing_create')
@@ -37,7 +37,7 @@ class ClassTimingsController < ApplicationController
 
   def update
     @batch = Batch.shod(params[:batch_id])
-    @class_timings ||= @batch.class_timings
+    @class_timings ||= @batch.class_timings.order('start_time ASC')
     @class_timing1 = @batch.class_timings.shod(params[:id])
     @class_timing1.update(params_class)
     flash[:notice] = t('class_timing_update')
@@ -45,7 +45,7 @@ class ClassTimingsController < ApplicationController
 
   def select
     @batch = Batch.shod(params[:batch][:id])
-    @class_timings ||= @batch.class_timings.order('start_time DESC')
+    @class_timings ||= @batch.class_timings.order('start_time ASC')
     authorize! :read, @class_timings.first
   end
 
