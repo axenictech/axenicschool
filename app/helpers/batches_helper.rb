@@ -47,7 +47,6 @@ module BatchesHelper
   end
 
   def collect_deaprtment
-    return if @departments.empty?
     @departments.collect { |b| [b.name, b.id] }
   end
 
@@ -59,7 +58,7 @@ module BatchesHelper
     Employee.find(e)
   end
 
-  def emp_split(b)
+  def emp_split(b)  
     b.employee_id.split(',')
   end
 end

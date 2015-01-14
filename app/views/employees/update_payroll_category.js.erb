@@ -6,5 +6,6 @@ $("ul.errors8").html("")
 		<% end %>
 <% else %>
 $('#add_payroll_category').html("<%= j render 'payroll_category'%>")
+$('#flash').html("<%= j render 'layouts/messages'%>")
 $('#myModal').modal('hide')
 <%end%>

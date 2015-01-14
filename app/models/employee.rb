@@ -24,7 +24,7 @@ class Employee < ActiveRecord::Base
   has_many :individual_payslip_categories
   after_save :create_user_account
 
-  validates :email, presence: true, format: \
+  validates :email, presence: true, uniqueness: true, format: \
   { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
   validates :first_name, presence: true, length: \
   { minimum: 1, maximum: 20 }, format: \

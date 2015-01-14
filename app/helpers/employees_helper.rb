@@ -1,6 +1,6 @@
 # employe helper
 module EmployeesHelper
-  def collect_department
+  def collect_department_emp
     @empdept.collect { |b| [b.name, b.id] }
   end
 
