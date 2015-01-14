@@ -37,7 +37,7 @@ module ExamGroupsHelper
     return if @exams.any?
     html = <<-HTML
     <tr><th colspan="3">
-    <h4 align="center">NO Record Found</h4></th></tr>
+    <h4 align="center">No Record Found</h4></th></tr>
     HTML
     html.html_safe
   end

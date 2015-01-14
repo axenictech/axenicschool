@@ -6,5 +6,6 @@ $("ul.errors").html("")
 		<% end %>
 <% else %>
 $('#add_bank_field').html("<%= j render 'bank_field'%>");
+$('#flash').html("<%= j render 'layouts/messages'%>")
 $("#myModal").modal("hide")
 <%end%>
