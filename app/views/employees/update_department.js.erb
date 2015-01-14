@@ -6,5 +6,6 @@ $("ul.errors").html("")
 		<% end %>
 <% else %>
 $('#add_department').html("<%= j render 'department'%>");
+$('#flash').html("<%= j render 'layouts/messages'%>")
 $("#myModal").modal("hide")
 <%end%>

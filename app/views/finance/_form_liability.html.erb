@@ -5,7 +5,8 @@
 </div>
 
 <div class="modal-body">
-<ul class="errors"></ul>
+<div class="errors">
+<ul class="errors"></ul></div>
 <%= form_for @liability,url:{action: 'create_liability'},remote: true do |f|%>
  <div class="row">
     <div class="col-md-4 col-md-offset-1"><b>Title :</b></div>
