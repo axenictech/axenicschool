@@ -13,9 +13,9 @@
 <ul class="errors4"></ul></div>
      <div class="form-group">
        <div class="col-md-3"> <b>Name:</b></div>
-         <div class="col-md-9"> <%=c.text_field :name, placeholder: "Name", class: "form-control"%></div>
+         <div class="col-md-9"> <%=c.text_field :name, placeholder: "", class: "form-control"%></div>
       </div>
-     <br><br>
+     <br><br><br>
       <div class="form-group">
           <div class="col-md-3"><b>Status:</b></div>
         <div class="col-md-9"><%= c.radio_button "status", "true", checked: "checked" %> &nbsp;<b>Active</b>&nbsp;&nbsp;
@@ -42,7 +42,7 @@
           <div class="box-header well">
             <h2>Active Bank fields</h2>
           </div>
-         <div class="box-content">
+         <div class="box-content" style="overflow-y: scroll; height:280px">
 
       
        <table id="datatable" class="table table-striped table-bordered responsive">
@@ -89,7 +89,7 @@
             <div class="box-header well">
               <h2>Inactive Bank fields</h2>
              </div>
-          <div class="box-content">
+          <div class="box-content" style="overflow-y: scroll; height:280px">
              <table id="datatable" class="table table-striped table-bordered responsive">
          <thead>
                <tr>
