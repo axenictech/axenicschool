@@ -36,7 +36,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
                    <%=f.date_field :admission_date ,:value => Time.now.strftime('%Y-%m-%d'),class: "form-control"%>
                  </div>
                </div>
-             </div>
+              </div>
              <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
@@ -195,8 +195,8 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
 <div class="row">
   <div class="col-md-10 col-md-offset-2">
     <div class="form-group">
-      <div class="col-md-3"> <b> Upload Photo:</b></div>
-      <%=f.file_field :image%>
+      <div class="col-md-4"> <b> Upload Photo:</b>
+     <%=f.file_field :image,class: "form-control",style: "height:auto"%></div>
     </div>
   </div>
 </div>

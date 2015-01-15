@@ -4,6 +4,7 @@
       <h3><%= "Edit Liability" %></h3>
     </div>
     <div class="modal-body">
+    
       <ul class="errors"></ul>
       <%= form_for @liability,url:{action: 'update_liability',id:@liability.id},method: :patch,remote: true do |f|%>
         <div class="row">
@@ -23,8 +24,8 @@
         </div><br/>
         <div class="row">
           <div class="col-md-1"></div>
-          <div class="col-md-4"></div>
-          <div class="col-md-7"><%=f.check_box :is_solved%>&nbsp;&nbsp;<b>Make Liability Solved</b></div>
+           <div class="col-md-7"><%=f.check_box :is_solved%>&nbsp;&nbsp;<b>Make Liability Solved</b></div>
+         
         </div><hr/>
         <div class="row">
           <div class="col-md-12">

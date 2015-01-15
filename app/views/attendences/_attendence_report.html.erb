@@ -1,4 +1,5 @@
-<table class="table table-striped responsive">
+
+<div style="overflow-x: scroll"><table class="table table-striped responsive" >
 		<thead>
 		<tr>
 		<th align="center">Name</th>
@@ -45,3 +46,4 @@
 	<tr><td colspan="4"></td></tr>
 	<tr><td colspan="4"><%= link_to 'Pdf report',attendence_report_attendences_path(subject_id:@subject.id,start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-success"%></td></tr>
 </table>
+</div>
