@@ -1,7 +1,7 @@
 # Batch Helper
 module BatchesHelper
   def collect_course_batch
-    @courses.collect { |c| [c.course_name, c.id] }
+    @courses.collect { |c| [[c.course_name, c.section_name].join(' '), c.id] }
   end
 
   def batch_error!
