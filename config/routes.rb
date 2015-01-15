@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
-
-  devise_for :users, controllers: { registrations: 'registrations'}
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :home do
     collection { get :dashboard }
