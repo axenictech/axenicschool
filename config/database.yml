@@ -15,9 +15,11 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-
+  adapter: mysql2
+  encoding: utf8
+  username: awsaxenicuser
+  password: axenicschool123
+  password: root
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
