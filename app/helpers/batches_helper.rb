@@ -1,8 +1,7 @@
 # Batch Helper
 module BatchesHelper
   def collect_course_batch
-    return if @courses.empty?
-    @courses.collect { |c| [c.course_name, c.id] }
+    @courses.collect { |c| [[c.course_name, c.section_name].join(' '), c.id] }
   end
 
   def batch_error!
@@ -47,7 +46,6 @@ module BatchesHelper
   end
 
   def collect_deaprtment
-    return if @departments.empty?
     @departments.collect { |b| [b.name, b.id] }
   end
 
@@ -59,7 +57,7 @@ module BatchesHelper
     Employee.find(e)
   end
 
-  def emp_split(b)
+  def emp_split(b)  
     b.employee_id.split(',')
   end
 end

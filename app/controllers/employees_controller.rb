@@ -252,6 +252,7 @@ class EmployeesController < ApplicationController
   end
 
   def create
+    @empdept = EmployeeDepartment.all
     @employee = Employee.new(employee_params)
     if @employee.save
       flash[:notice] = "Employee details added for #{@employee.first_name}"
@@ -550,7 +551,7 @@ class EmployeesController < ApplicationController
 
   def one_click_payslip_revert
     @salary_date = params[:payslip][:joining_date].to_date
-    @b = MonthlyPayslip.where(salary_date: @salary_date).pluck(:salary_date)
+    @b = MonthlyPayslip.where(salary_date: @salary_dates).pluck(:salary_date)
     one_click_payslip_revert2
     redirect_to employees_payslip_path
   end
@@ -687,21 +688,27 @@ class EmployeesController < ApplicationController
   end
 
   def employee_profile
-    @employee = ArchivedEmployee.shod(params[:employee_id])
+    @employee = Employee.where(id: params[:employee_id]).take
+    @employee = ArchivedEmployee.where(id: params[:employee_id]).take \
+    if @employee.nil?
     @reporting_manager = Employee.report(@employee)
     @general_setting = GeneralSetting.first
     render 'employee_profile', layout: false
   end
 
   def personal_profile_pdf
-    @employee = ArchivedEmployee.shod(params[:employee_id])
-    @country = Country.findcountry(@employee)
+    @employee = Employee.where(id: params[:employee_id]).take
+    @employee = ArchivedEmployee.where(id: params[:employee_id]).take\
+    if @employee.nil?
+    @country = Country.per(@employee)
     @general_setting = GeneralSetting.first
     render 'personal_profile_pdf', layout: false
   end
 
   def address_profile_pdf
-    @employee = ArchivedEmployee.shod(params[:employee_id])
+    @employee = Employee.where(id: params[:employee_id]).take
+    @employee = ArchivedEmployee.where(id: params[:employee_id]).take \
+    if @employee.nil?
     @home_country = Country.home_country(@employee)
     @office_country = Country.office_country(@employee)
     @general_setting = GeneralSetting.first
@@ -709,13 +716,17 @@ class EmployeesController < ApplicationController
   end
 
   def contact_profile_pdf
-    @employee = ArchivedEmployee.shod(params[:employee_id])
+    @employee = Employee.where(id: params[:employee_id]).take
+    @employee = ArchivedEmployee.where(id: params[:employee_id]).take \
+    if @employee.nil?
     @general_setting = GeneralSetting.first
     render 'contact_profile_pdf', layout: false
   end
 
   def bank_info_pdf
-    @employee = ArchivedEmployee.shod(params[:employee_id])
+    @employee = Employee.where(id: params[:employee_id]).take
+    @employee = ArchivedEmployee.where(id: params[:employee_id]).take \
+    if @employee.nil?
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
     @general_setting = GeneralSetting.first
     render 'bank_info_pdf', layout: false

@@ -6,16 +6,16 @@
       </div>
       
       <% if @class_timing.present? %>
-      <div class="box-content">
+      <div class="box-content" style="overflow-y: scroll; height:auto">
        <table id="datatable" class="table table-striped table-bordered responsive">
         <tr>
           <td class="col-4"></td>
-          <%  @class_timing.each do |c|%>
+          <%  @class_timing.order('start_time ASC').each do |c|%>
           <th><%=c.full_time%></th>
           <% end %>
         </tr> 
         
-        <% @batch.weekdays.each do |w|%>
+        <% @batch.weekdays.order('weekday DESC').each do |w|%>
         <tr>
           <th><%=w.weekday%></th>
           <% @class_timing.each do |c|%>

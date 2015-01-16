@@ -20,7 +20,7 @@
         <h2>Work Allotment</h2>
       </div>
       
-      <div class="box-content">
+      <div class="box-content" style="overflow-y:scroll; height:550px">
         <%=form_for :employees_subjects,:html=>{:id=>'work_allotment_form'} do |f| %>
         <fieldset>
 
@@ -45,10 +45,10 @@
          </table>
          <p align="center"><%= f.submit 'update',class: "btn btn-success"%></p>
        </div>
+
      </fieldset>
      <% end %>
-
-   </div>
+ </div>
  </div>
 </div>
 

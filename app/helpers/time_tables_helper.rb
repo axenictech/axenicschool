@@ -1,8 +1,11 @@
 # TimeTable Helper
 module TimeTablesHelper
   def collect_batch
-    return if @batches.empty?
     @batches.collect { |b| [b.full_name, b.id] }
+  end
+
+  def collect_week_batch
+    @weekdays.collect { |b| [b.full_name, b.id] }
   end
 
   def classtiming_not_found!
@@ -13,11 +16,6 @@ module TimeTablesHelper
     </div>
     HTML
     html.html_safe
-  end
-
-  def collect_week_batch
-    return if  @weekdays.empty?
-    @weekdays.collect { |b| [b.full_name, b.id] }
   end
 
   def weekday_batch(batch, day)

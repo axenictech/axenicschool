@@ -19,11 +19,9 @@
            </div>
           <div class="form-group">
              <div class="col-md-3"><b>Employee Category:</b></div>
-<<<<<<< HEAD
-             <%= c.select :employee_category_id,EmployeeCategory.all.collect { |e| [e.name, e.id] },{prompt:true},class: "form-control",style:"width:250px"%>
-=======
+
+
              <%= c.select :employee_category_id, emp_category_collect,{prompt:true},class: "form-control",style:"width:250px"%>
->>>>>>> b96094dbbc906571a04744ef07e3a0a833e26c5e
            </div>
            <br>
            <div class="form-group">
@@ -44,7 +42,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-6" >
    <div class="form-group">
      <div class="row">
       <div class="box col-md-12">
@@ -52,7 +50,7 @@
         <div class="box-header well">
           <h2>Active Position</h2>
         </div>
-        <div class="box-content">
+        <div class="box-content" style="overflow-y: scroll; height:280px">
          <table id="datatable" class="table table-striped table-bordered responsive">
            <thead>
              <tr>
@@ -88,7 +86,7 @@
     </div>
   </div>
 </div>
-<div class="col-sm-6">
+<div class="col-sm-6" >
  <div class="form-group">
    <div class="row">
      <div class="box col-md-12">
@@ -96,7 +94,7 @@
         <div class="box-header well">
           <h2>Inactive Position</h2>
         </div>
-        <div class="box-content">
+        <div class="box-content" style="overflow-y: scroll; height:280px">
          <table id="datatable" class="table table-striped table-bordered responsive">
            <thead>
              <tr>
