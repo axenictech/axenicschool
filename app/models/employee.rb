@@ -303,7 +303,7 @@ class Employee < ActiveRecord::Base
       search += ' Grade: ' + EmployeeGrade.find(p[:employee_grade_id]).name + ', '
      end
 
-    search += ' Date of birth: ' +  p[:date_of_birth].to_s + ', ' unless  p[:date_of_birth].empty?
+    searchs += ' Date of birth: ' +  p[:date_of_birth].to_s + ', ' unless  p[:date_of_birth].empty?
 
     if p[:status] == 'present'
       search += 'Staus: Present student'
