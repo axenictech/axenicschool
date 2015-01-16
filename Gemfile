@@ -35,7 +35,7 @@ gem 'bullet', group: :development
 gem 'brakeman', group: :development
 # Use unicorn as the app server
 # gem 'unicorn'
-
+gem 'roo', group: :development
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
