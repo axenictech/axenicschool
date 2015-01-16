@@ -17,8 +17,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  username: awsaxenicuser
-  password: axenicschool123
+  username: root
   password: root
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
@@ -84,5 +83,7 @@ test:
 production:
   <<: *default
   database: educulture_production
-  username: educulture
-  password: <%= ENV['EDUCULTURE_DATABASE_PASSWORD'] %>
+  username: awsaxenicuser
+  host: 54.68.34.130
+  password: axenicschool123
+  port: 3306
