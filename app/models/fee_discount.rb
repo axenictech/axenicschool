@@ -8,7 +8,7 @@ class FeeDiscount < ActiveRecord::Base
   { minimum: 1, maximum: 30 }, format: { with: /\A[a-z A-Z 0-9_.-\/]+\z/ }
   validates :admission_no, length: { minimum: 1, maximum: 30 }\
   , numericality: { only_integer: true }, allow_blank: true
-  validates :discount, presence: true, length: { minimum: 1, maximum: 20 }\
+  validates :discount, presence: true, length: { minimum: 1, maximum: 2 }\
   , numericality: true
   scope :shod, ->(id) { where(id: id).take }
 

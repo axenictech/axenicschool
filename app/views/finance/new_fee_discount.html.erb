@@ -25,6 +25,16 @@
         <%= form_for @discount,url:{action: 'create_fee_discount'} do |f| %>
           <fieldset>
             <%= discount_error! %>
+            <% if @discount.errors.any? %>
+              <div>hgjhg
+                <h5><%= pluralize(@discount.errors.count, "error") %> prohibited this form from being saved: </h5>
+                <ul>
+                  <% @discount.errors.full_messages.each do |msg| %>
+                    <li><font color="red"><%= msg %></font></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
              <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-4">
@@ -42,7 +52,7 @@
               <div class="form-group">
                 <b>Discount(%):</b>
                   <span style="color:red">*</span>
-                  <%= f.text_field :discount, placeholder: "Discount",class: "form-control",required:true %>
+                  <%= f.text_field :discount, placeholder: "Discount",class: "form-control",required:true%>
                 </div>
               </div>
                 <div class="col-sm-4 col-sm-offset-1">
