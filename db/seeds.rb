@@ -39,7 +39,7 @@ ex.default_sheet = ex.sheets[3]
 	e = ex.cell(line, 'E')
 	f = ex.cell(line, 'F')
 	Subject.create(name: a.to_s, code: b.to_i, batch_id: c\
-	, max_weekly_classes: d.to_i, elective_group_id: e, no_exams: f)
+		, max_weekly_classes: d.to_i, elective_group_id: e, no_exams: f)
 	p "Record created....#{line}"
 end
 p 'Subject database created suceessfully...'
@@ -264,3 +264,29 @@ ex.default_sheet = ex.sheets[15]
 	p "Record created....#{line}"
 end
 p 'Student previous data database created suceessfully...'
+PrivilegeTag.create(name_tag: 'Basic Control')
+PrivilegeTag.create(name_tag: 'Advance Control')
+Privilege.create(name: 'Basic Control', privilege_tag_id: 1)
+Privilege.create(name: 'Advance Control', privilege_tag_id: 2)
+p 'Grading level database being created.... Wait'
+ex.default_sheet = ex.sheets[16]
+3.upto(1000) do |line|
+	a = ex.cell(line, 'A')
+	b = ex.cell(line, 'B')
+	c = ex.cell(line, 'C')
+	d = ex.cell(line, 'D')
+	GradingLevel.create(name: a, batch_id: b\
+		, min_score: c.to_i, description: d)
+	p "Record created....#{line}"
+end
+p 'GradingLevel database created suceessfully...'
+p 'Class designation database being created.... Wait'
+ex.default_sheet = ex.sheets[17]
+3.upto(300) do |line|
+	a = ex.cell(line, 'A')
+	b = ex.cell(line, 'B')
+	c = ex.cell(line, 'C')
+	ClassDesignation.create(name: a, marks: b, course_id: c)
+	p "Record created....#{line}"
+end
+p 'Class designation database created suceessfully...'
