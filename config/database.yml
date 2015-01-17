@@ -87,4 +87,3 @@ production:
   password: axenicschool123
   host: axenicschool.cytjoowm1x25.us-west-2.rds.amazonaws.com
   port: 3306
-  socket: /tmp/mysql.sock
