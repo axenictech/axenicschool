@@ -209,8 +209,8 @@ class CreateBasicDatabase < ActiveRecord::Migration
 			FinanceTransactionCategory.create(name: 'Fees', description: 'Fees for instituation', is_income: true)
 			FinanceTransactionCategory.create(name: 'Salary', description: 'Salary for employees', is_income: false)
 
-			PrivilegeTag.create(name: 'Basic Control')
-			PrivilegeTag.create(name: 'Advance Control')
+			PrivilegeTag.create(name_tag: 'Basic Control')
+			PrivilegeTag.create(name_tag: 'Advance Control')
 			Privilege.create(name: 'Basic Control', privilege_tag_id: 1)
 			Privilege.create(name: 'Advance Control', privilege_tag_id: 2)
 		end
