@@ -84,6 +84,6 @@ production:
   <<: *default
   database: educulture_production
   username: awsaxenicuser
-  host: axenicschool.cytjoowm1x25.us-west-2.rds.amazonaws.com
+  host: axenicschool.cytjoowm1x25.us-west-2.rds.amazonaws.com:3306
   password: axenicschool123
   port: 3306
