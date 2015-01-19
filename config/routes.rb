@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
+  
+  resources :placement_news
+
   root 'home#index'
+  resources :placement_exams do
+    collection do
+      get :setting_index
+    end
+  end
+  resources :options
+
+  resources :qusetions
+
+  resources :qusetion_types
+
+  
   devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :home do

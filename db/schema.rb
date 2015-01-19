@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114080124) do
+ActiveRecord::Schema.define(version: 20150119214528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -900,6 +900,16 @@ ActiveRecord::Schema.define(version: 20150114080124) do
     t.datetime "updated_at"
   end
 
+  create_table "options", force: true do |t|
+    t.string   "option"
+    t.boolean  "is_answer"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "options", ["question_id"], name: "index_options_on_question_id", using: :btree
+
   create_table "payroll_categories", force: true do |t|
     t.string   "name"
     t.float    "percentage"
@@ -911,6 +921,26 @@ ActiveRecord::Schema.define(version: 20150114080124) do
   end
 
   add_index "payroll_categories", ["payroll_category_id"], name: "index_payroll_categories_on_payroll_category_id", using: :btree
+
+  create_table "placement_exams", force: true do |t|
+    t.integer  "question_type_id"
+    t.time     "timeperiod"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "placement_exams", ["company_id"], name: "index_placement_exams_on_company_id", using: :btree
+  add_index "placement_exams", ["question_type_id"], name: "index_placement_exams_on_question_type_id", using: :btree
+
+  create_table "placement_news", force: true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "privilege_tags", force: true do |t|
     t.string   "name_tag"
@@ -938,6 +968,22 @@ ActiveRecord::Schema.define(version: 20150114080124) do
   end
 
   add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
+
+  create_table "qusetion_types", force: true do |t|
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "qusetions", force: true do |t|
+    t.string   "question"
+    t.integer  "question_type_id"
+    t.integer  "question_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "qusetions", ["question_type_id"], name: "index_qusetions_on_question_type_id", using: :btree
 
   create_table "ranking_levels", force: true do |t|
     t.string   "name"

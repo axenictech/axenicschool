@@ -1,0 +1,27 @@
+<h1>Listing placement_news</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @placement_news.each do |placement_news| %>
+      <tr>
+        <td><%= placement_news.title %></td>
+        <td><%= placement_news.content %></td>
+        <td><%= link_to 'Show', placement_news %></td>
+        <td><%= link_to 'Edit', edit_placement_news_path(placement_news) %></td>
+        <td><%= link_to 'Destroy', placement_news, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Placement news', new_placement_news_path %>
