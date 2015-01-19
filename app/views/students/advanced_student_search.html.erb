@@ -9,7 +9,7 @@
   <div class="col-md-12">
     <div class="pull-right">
      <%= link_to "Search Again", 'advanced_search',class: "btn btn-primary-link btn-xs"%>
-     <% unless @students.empty? %>
+     <% unless @students.nil? %>
      <%students=[]%>
      <% @students.each do |s|%>
      <% students<< s%>
