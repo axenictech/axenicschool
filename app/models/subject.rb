@@ -5,8 +5,8 @@ class Subject < ActiveRecord::Base
   has_many :employee_subjects
   has_many :employees, through: :employee_subjects
   validates :name, presence: true, length: \
-  { minimum: 1, maximum: 30 }, format: { with: /\A[a-zA-Z0-9#+_" "-]+\Z/ }
-  validates :code, uniqueness: true, presence: true, length: \
+  { minimum: 1, maximum: 100 }, format: { with: /\A[a-zA-Z0-9#+_" "-]+\Z/ }
+  validates :code, presence: true, length: \
   { minimum: 1, maximum: 10 }, format: { with: /\A[a-zA-Z0-9_" "-]+\Z/ }
   validates :max_weekly_classes, presence: true, length: \
   { maximum: 2 }, numericality: { only_integer: \
@@ -39,12 +39,13 @@ class Subject < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
 
-  def valid?(student)
-    result = true
-    unless elective_group_id.nil?
-      result = false if StudentSubject.where(student_id: student.student_id\
-      , subject_id: id).take.nil?
-    end
-    result
-  end
+  # def valid?(student)
+  #   student ? id2 = student.student_id : id2 = 1
+  #   result = true
+  #   unless elective_group_id.nil?
+  #     result = false if StudentSubject.where(student_id: id2\
+  #     , subject_id: id).take.nil?
+  #   end
+  #   result
+  # end
 end

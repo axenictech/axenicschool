@@ -67,18 +67,17 @@
 </div>
 <br>
 	<div class="form-group">
-	<div class="col-md-6"><%= link_to 'Cancel',calender_index_path,class: "btn btn-default"%></div>
+	
 	  
-	  <div class="col-md-6">
- 		<%=f.submit 'Confirm',class: "btn btn-primary"%>
-	  </div>
+	  <div class="col-md-offset-4">
+ 		<%=f.submit 'Confirm',class: "btn btn-primary"%>&nbsp;&nbsp;
+	  <%= link_to 'Cancel',calender_index_path,class: "btn btn-default"%></div>
   </div>
 
 
 <%end%>
 </div>
 </fieldset>
-</div>
 </div>
 </div>
 </div>

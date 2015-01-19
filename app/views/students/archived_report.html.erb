@@ -38,7 +38,7 @@
           <% unless @subjects.empty? %>
           <div class="batch-name" style="color:blue"><h4><%= "(Code -"+@batch.course.code+") "+@batch.name.capitalize %></h4></div></h2>
         </div>
-        <div class="box-content">
+        <div class="box-content" style="overflow-y: scroll; height:auto">
           <fieldset>
             <% total_credits=0 %>
             <div id="score-table" >

@@ -55,7 +55,7 @@ module FinanceHelper
     html.html_safe
   end
 
-  def collect_catagory
+  def collect_category
     @categories.collect { |c| [c.name, c.id] }
   end
 

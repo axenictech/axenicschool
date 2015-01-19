@@ -38,10 +38,10 @@ class Employee < ActiveRecord::Base
   { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }
 
   validates :date_of_birth, presence: true
-  validates :employee_department, presence: true
-  validates :employee_category, presence: true
-  validates :employee_position, presence: true
-  validates :employee_grade, presence: true
+  validates :employee_department_id, presence: true
+  validates :employee_category_id, presence: true
+  validates :employee_position_id, presence: true
+  validates :employee_grade_id, presence: true
   validates :qualification, length: \
   { minimum: 1, maximum: 30 }, allow_blank: true
   validates :experience_detail, length: \
@@ -69,8 +69,8 @@ class Employee < ActiveRecord::Base
   { only_integer: true }, length: \
   { minimum: 6, maximum: 6 }, on: :update
   validates :office_address_line1, length: \
-  { in: 1..30 }, allow_blank: true
-  validates :office_address_line2, length: { in: 1..30 }, allow_blank: true
+  { in: 1..100 }, allow_blank: true
+  validates :office_address_line2, length: { in: 1..100 }, allow_blank: true
   validates :office_city, format: \
   { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' },
                           length: { in: 1..30 }, allow_blank: true
@@ -447,7 +447,11 @@ class Employee < ActiveRecord::Base
       u.password = employee_number
       u.role = 'Employee'
       u.email = email
-      u.general_setting_id = User.current.general_setting.id
+      if User.current
+        u.general_setting_id = User.current.general_setting.id
+      else
+        u.general_setting_id = 1
+      end
     end
     user.save
   end

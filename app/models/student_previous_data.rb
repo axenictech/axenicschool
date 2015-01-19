@@ -1,6 +1,6 @@
 class StudentPreviousData < ActiveRecord::Base
   belongs_to :student
-  validates :institution, presence: true, format: { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' }
+  validates :institution, presence: true
   validates_length_of :institution, minimum: 1, maximum: 100
 
   validates :year, numericality: { only_integer: true }
