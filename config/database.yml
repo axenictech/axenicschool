@@ -83,7 +83,3 @@ test:
 production:
   <<: *default
   database: educulture_production
-  username: awsaxenicuser
-  password: axenicschool123
-  host: axenicschool.cytjoowm1x25.us-west-2.rds.amazonaws.com
-  port: 3306
