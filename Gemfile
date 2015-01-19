@@ -33,7 +33,7 @@ gem 'spring', group: :development
 gem 'brakeman', group: :development
 # Use unicorn as the app server
 # gem 'unicorn'
-gem 'roo', group: :development
+gem 'roo'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'passenger'
