@@ -264,10 +264,6 @@ ex.default_sheet = ex.sheets[15]
 	p "Record created....#{line}"
 end
 p 'Student previous data database created suceessfully...'
-PrivilegeTag.create(name_tag: 'Basic Control')
-PrivilegeTag.create(name_tag: 'Advance Control')
-Privilege.create(name: 'Basic Control', privilege_tag_id: 1)
-Privilege.create(name: 'Advance Control', privilege_tag_id: 2)
 p 'Grading level database being created.... Wait'
 ex.default_sheet = ex.sheets[16]
 3.upto(1000) do |line|
