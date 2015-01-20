@@ -56,7 +56,7 @@ module EmployeeAttendancesHelper
   def emp_position_collect
     EmployeePosition.all.collect { |b| [b.name, b.id] }
   end
-  
+
   def emp_grade_collect
     EmployeeGrade.all.collect { |b| [b.name, b.id] }
   end

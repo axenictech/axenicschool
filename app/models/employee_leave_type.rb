@@ -28,6 +28,3 @@ class EmployeeLeaveType < ActiveRecord::Base
     find_by_id(att.employee_leave_type_id)
   end
 end
-
-
- 

@@ -57,7 +57,7 @@ module BatchesHelper
     Employee.find(e)
   end
 
-  def emp_split(b)  
+  def emp_split(b)
     b.employee_id.split(',')
   end
 end

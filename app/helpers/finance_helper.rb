@@ -64,11 +64,11 @@ module FinanceHelper
   end
 
   def collect_unique
-  	@collections.uniq.collect {|c| [[c.name, c.created_at.to_date.to_s].join(' '),c.id]}
+    @collections.uniq.collect { |c| [[c.name, c.created_at.to_date.to_s].join(' '), c.id] }
   end
 
   def collect_only_course
-  	@courses.collect {|c| [c.course_name, c.id] }
+    @courses.collect { |c| [c.course_name, c.id] }
   end
 
   def collect_department
@@ -76,7 +76,7 @@ module FinanceHelper
   end
 
   def collect_salary_month
-    @salary_months.map {|c| [c.salary_date.strftime("%B %Y"),c.salary_date.strftime("%Y-%m-%d")]}
+    @salary_months.map { |c| [c.salary_date.strftime('%B %Y'), c.salary_date.strftime('%Y-%m-%d')] }
   end
 
   def donation_errors!

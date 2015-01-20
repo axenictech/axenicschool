@@ -539,7 +539,6 @@ Rails.application.routes.draw do
       get :employee_structure
       get :emp_payslip
       post :view_payslip_profile
-
     end
     member do
       get :edit_category

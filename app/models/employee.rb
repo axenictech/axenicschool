@@ -24,7 +24,6 @@ class Employee < ActiveRecord::Base
   has_many :individual_payslip_categories
   after_save :create_user_account
 
- 
   validates :first_name, presence: true, length: \
   { minimum: 1, maximum: 20 }, format: \
   { with: /\A[a-zA-Z_" "-]+\Z/, message: 'allows only letters' }
@@ -163,7 +162,7 @@ class Employee < ActiveRecord::Base
       other_conditions += " AND employee_category_id = '#{cat_id}'" unless cat_id == ''
       other_conditions += " AND employee_position_id = '#{pos_id}'" unless pos_id == ''
       other_conditions += " AND employee_grade_id = '#{grd_id}'" unless grd_id == ''
-      Employee.search1(other_conditions, s).order("id ASC")
+      Employee.search1(other_conditions, s).order('id ASC')
   end
   end
 
