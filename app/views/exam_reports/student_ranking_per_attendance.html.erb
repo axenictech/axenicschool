@@ -16,7 +16,7 @@
   <%= form_for :rank_report, :url=>{:action=>'generate_student_ranking_report3'},method: :get do |f|%>
   
  
-  <b>Select Batch:</b>
+  <b>Select a Batch:</b>
       
       <%= f.select :batch_id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{class:"form-control",style: "width: 320px", required: true}%>
      
@@ -28,7 +28,7 @@
      
 <br>
  
-       <%= f.label :select_end_date %>
+       <b>Select End Date:</b>
       
       <%= f.date_field :end_date,class: "form-control",style: "width: 300px ,height: 30px", required: true%>
      <br/>

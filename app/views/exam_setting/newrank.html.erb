@@ -11,7 +11,7 @@
 <div class="row">
   <div class="col-md-11 col-md-offset-1">
     <%= form_for :course, url:{action:'selectrank'},method: :get,remote:true, html:{id:"class_form"} do  |f| %>
-    <b>Select a Course:</b>
+      <b>Select a Course:</b>
       <%= f.select :id, collect_courses, {prompt:"Select a Course"},{onchange:"class_fun();",class: "form-control",style:"width:300px"} %>
     <%end%>
   </div>

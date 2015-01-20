@@ -14,7 +14,7 @@
     <div class="box col-md-5">
 <%= form_for :batch, :url=>{:action=>'select_batch'},html:{id: 'form_batch'},remote:true,method: :get do |f| %>
   
-  <b> Select Batch: </b>
+  <b> Select a Batch: </b>
       
       <%= f.select :id, Batch.includes(:course).all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#form_batch').submit();",class:"form-control",style: "width: 300px"}%>
      
