@@ -42,6 +42,6 @@ module ExamGroupsHelper
   end
 
   def collect_courses
-    @courses.collect { |b| [b.course_name + '' + b.section_name, b.id] }
+    @courses.collect { |b| [b.course_name, b.section_name, b.id] }
   end
 end

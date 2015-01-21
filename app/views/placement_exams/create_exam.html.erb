@@ -1,0 +1,59 @@
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
+    <li><%= link_to 'Placement' %></li>
+    <li>Create Exam</li>
+  </ul>
+</div>
+Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Create Exam</h2>
+      </div>
+      <div class="box-content">
+        <%= form_for :exam, url:{action:'insert_exam'},remote:true,html:{id: "user_form"} do |f|%>
+          <fieldset>
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-sm-4 ">
+                    <div class="form-group">
+                      <b>Number of Question:</b>
+                      <span style="color:red">*</span>
+                      <%= f.text_field :no_of_question,class: "form-control"%>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 ">
+                    <div class="form-group">
+                      <b>Times in Minutes:</b>
+                      <span style="color:red">*</span>
+                      <%= f.text_field :times_in_minutes,class: "form-control"%>
+                    </div>
+                  </div>
+                </div>
+                <div class="technical"></div>
+                
+                <div class="row">
+                  <div class="col-sm-4 ">
+                    <div class="form-group">
+                      <%= button_tag "Add Question",{onclick:"$.get('exam',function(response){
+              });", :class => "btn btn-small btn-inverse", :type => "button"} %>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>  
+            <div class="col-md-6 col-md-offset-5">           
+            <%= f.submit 'Save', class: "btn btn-primary",style:"width:80px"%></div>
+          </fieldset>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

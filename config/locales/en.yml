@@ -154,3 +154,6 @@ en:
   sent_email: 'Email sent successfully'
   email_invalid: 'All fields are mandatory'
   emp_add_category:  'Employee category created successfully'
+  placement_news_update: 'Placement news was successfully updated.'
+  placement_news_created: 'Placement news was successfully created.'
+  placement_news_destroyed: 'Placement news was successfully destroyed.'

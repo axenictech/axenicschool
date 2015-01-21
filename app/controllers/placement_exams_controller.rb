@@ -5,6 +5,13 @@ class PlacementExamsController < ApplicationController
   # GET /placement_exams
   # GET /placement_exams.json
   def index
+     @companies = Company.all
+     @placement_news  =PlacementNews.all
+  end
+
+  def insert
+     @companies = Company.all
+     @placement_news  =PlacementNews.all
   end
 
   def placement_tpo
@@ -31,16 +38,7 @@ class PlacementExamsController < ApplicationController
   # POST /placement_exams.json
   def create
     @placement_exam = PlacementExam.new(placement_exam_params)
-
-    respond_to do |format|
-      if @placement_exam.save
-        format.html { redirect_to @placement_exam, notice: 'Placement exam was successfully created.' }
-        format.json { render :show, status: :created, location: @placement_exam }
-      else
-        format.html { render :new }
-        format.json { render json: @placement_exam.errors, status: :unprocessable_entity }
-      end
-    end
+    @placement_exam.save
   end
 
   # PATCH/PUT /placement_exams/1
@@ -67,13 +65,27 @@ class PlacementExamsController < ApplicationController
     end
   end
 
+  def question_type
+    @type = params[:type]
+  end
+
+
+
   private
+<<<<<<< HEAD
 
   # Use callbacks to share common setup or constraints between actions.
   def set_placement_exam
     @placement_exam = PlacementExam.find(params[:id])
   end
 
+=======
+  # Use callbacks to share common setup or constraints between actions.
+  def set_placement_exam
+    @placement_exam = PlacementExam.find(params[:id])
+  end
+
+>>>>>>> 6d0bdbb9ea5a9e68e16c39d28787f061222acd5a
   # Never trust parameters from the scary internet, only allow the white list through.
   def placement_exam_params
     params.require(:placement_exam).permit(:question_type_id, :timeperiod, :start_date, :end_date, :company_id)

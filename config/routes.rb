@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   resources :placement_exams do
     collection do
       get :setting_index
+      get :create_exam
+      post :insert_exam
+      get :insert_mark
+      get :insert
+      get :exam
     end
   end
   resources :options
@@ -18,6 +23,10 @@ Rails.application.routes.draw do
       get :option
     end
   end
+  resources :qusetion_types
+   
+  resources :companies
+
 
   devise_for :users, controllers: { registrations: 'registrations' }
 

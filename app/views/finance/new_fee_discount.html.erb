@@ -1,4 +1,3 @@
-
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
@@ -36,7 +35,7 @@
                 </ul>
               </div>
             <% end %>
-             <div class="row">
+            <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-4">
                 <div class="form-group">
@@ -50,10 +49,10 @@
                   <%= f.text_field :name, placeholder: "Name", class: "form-control",required:true%>
                 </div>
                 <div id="hidden"></div>
-              <div class="form-group">
-                <b>Discount(%):</b>
-                  <span style="color:red">*</span>
-                  <%= f.text_field :discount, placeholder: "Discount",class: "form-control",required:true%>
+                <div class="form-group">
+                  <b>Discount(%):</b>
+                    <span style="color:red">*</span>
+                    <%= f.text_field :discount, placeholder: "Discount",class: "form-control",required:true%>
                 </div>
               </div>
                 <div class="col-sm-4 col-sm-offset-1">

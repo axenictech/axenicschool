@@ -27,7 +27,7 @@
         <%= @general_setting.school_or_college_address%><br/><br/>
         <%= @general_setting.school_or_college_phone_no%>
       </div>
-
+    </div>  
       <hr>
 
       <br/>
@@ -85,7 +85,7 @@
               <% end %>
               <tr>
                 <td align="center"> <%= subject.code %></td>
-                <td align="center"> <%= subject.name %></td>
+                <td> <%= subject.name %></td>
                 <td align="center"><%= "%.2f" %(marks_total*100/max_total)+"%" unless max_total==0%></td>
               </tr>
 
@@ -95,7 +95,7 @@
              <tr><td colspan="3"><hr></td></tr>
             <tr>
             <td></td>
-              <td align="center"><b>Total</b></td>
+              <td align="right"><b>Total</b></td>
               <td><%="%.2f" %(@mark*100/@total)+"%" unless @total==0%></td>
             </tr> 
           <%else%>
