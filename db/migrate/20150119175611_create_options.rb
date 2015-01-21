@@ -3,7 +3,7 @@ class CreateOptions < ActiveRecord::Migration
     create_table :options do |t|
       t.string :option
       t.boolean :is_answer
-      t.references :question, index: true
+      t.references :question_database, index: true
 
       t.timestamps
     end
