@@ -17,8 +17,9 @@ Rails.application.routes.draw do
   resources :qusetions
 
   resources :qusetion_types
+   
+  resources :companies
 
-  
   devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :home do

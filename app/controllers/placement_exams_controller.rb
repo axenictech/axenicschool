@@ -4,12 +4,17 @@ class PlacementExamsController < ApplicationController
   # GET /placement_exams
   # GET /placement_exams.json
   def index
+
   end
 
   def insert_exam
   end
 
   def insert
+
+    @companies = Company.all
+     @placement_news  =PlacementNews.all
+
   end
   
   def placement_tpo

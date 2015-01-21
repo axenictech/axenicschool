@@ -1,2 +1,4 @@
+# PlacementNewsHelper
 module PlacementNewsHelper
+  
 end
