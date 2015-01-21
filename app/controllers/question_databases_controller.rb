@@ -9,8 +9,8 @@ class QuestionDatabasesController < ApplicationController
   end
 
   def create
-    @ques = QuestionType.all
-    @que = QuestionType.new(question_type_params)
+    @ques = QuestionDatabase.all
+    @que = QuestionDatabase.new(question_type_params)
     if @que.save
       redirect_to new_question_database_path
       flash[:notice] =  'question was successfully created.'
