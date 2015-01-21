@@ -72,20 +72,11 @@ class PlacementExamsController < ApplicationController
 
 
   private
-<<<<<<< HEAD
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_placement_exam
     @placement_exam = PlacementExam.find(params[:id])
   end
 
-=======
-  # Use callbacks to share common setup or constraints between actions.
-  def set_placement_exam
-    @placement_exam = PlacementExam.find(params[:id])
-  end
-
->>>>>>> 6d0bdbb9ea5a9e68e16c39d28787f061222acd5a
   # Never trust parameters from the scary internet, only allow the white list through.
   def placement_exam_params
     params.require(:placement_exam).permit(:question_type_id, :timeperiod, :start_date, :end_date, :company_id)
