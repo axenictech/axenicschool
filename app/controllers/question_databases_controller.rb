@@ -9,20 +9,20 @@ class QuestionDatabasesController < ApplicationController
   end
 
   def create
-    @ques = QusetionType.all
-    @que = QusetionType.new(params[:qusetion_database])
+    @ques = QuestionType.all
+    @que = QuestionType.new(question_type_params)
     if @que.save
-      redirect_to new_qusetion_database_path
-      flash[:notice] =  'Qusetion was successfully created.'
+      redirect_to new_question_database_path
+      flash[:notice] =  'question was successfully created.'
     else
       render 'new'
     end
   end
 
   def update
-    if @que.update(qusetion_type_params)
-      redirect_to new_qusetion_database_path
-      flash[:notice] =  'Qusetion was successfully updated.'
+    if @que.update(question_type_params)
+      redirect_to new_question_database_path
+      flash[:notice] =  'question was successfully updated.'
     else
       render 'new'
     end
@@ -30,8 +30,8 @@ class QuestionDatabasesController < ApplicationController
 
   def destroy
     @que.destroy
-    redirect_to new_qusetion_database_path
-    flash[:notice] =  'Qusetion was successfully destroyed.'
+    redirect_to new_question_database_path
+    flash[:notice] =  'question was successfully destroyed.'
   end
 
   def option
@@ -40,11 +40,11 @@ class QuestionDatabasesController < ApplicationController
 
   private
 
-  def set_qusetion_type
-    @que = QusetionDatabase.find(params[:id])
+  def set_question_type
+    @que = questionDatabase.find(params[:id])
   end
 
-  def qusetion_type_params
-    params.require(:qusetion_database).permit!
+  def question_type_params
+    params.require(:question_database).permit!
   end
 end

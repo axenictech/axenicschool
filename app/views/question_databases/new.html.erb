@@ -34,7 +34,7 @@
          <div class="form-group">
         <b>Question Type:</b>
        <span style="color:red">*</span>
-         <%=f.select :question_type_id,QusetionType.all.collect{|b|[b.que_type,b.id]},{prompt:true},{class: "form-control"}%>
+         <%=f.select :question_type_id,QuestionType.all.collect{|b|[b.que_type,b.id]},{prompt:true},{class: "form-control"}%>
        </div>
 
          <div class="form-group">
