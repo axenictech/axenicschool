@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119214528) do
+ActiveRecord::Schema.define(version: 20150121012532) do
 
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
@@ -514,25 +514,6 @@ ActiveRecord::Schema.define(version: 20150119214528) do
   add_index "exam_scores", ["grading_level_id"], name: "index_exam_scores_on_grading_level_id", using: :btree
   add_index "exam_scores", ["student_id"], name: "index_exam_scores_on_student_id", using: :btree
 
-  create_table "exams", force: true do |t|
-    t.integer  "exam_group_id"
-    t.integer  "subject_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer  "maximum_marks"
-    t.integer  "minimum_marks"
-    t.integer  "grading_level_id"
-    t.integer  "weightage",        default: 0
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "exams", ["event_id"], name: "index_exams_on_event_id", using: :btree
-  add_index "exams", ["exam_group_id"], name: "index_exams_on_exam_group_id", using: :btree
-  add_index "exams", ["grading_level_id"], name: "index_exams_on_grading_level_id", using: :btree
-  add_index "exams", ["subject_id"], name: "index_exams_on_subject_id", using: :btree
-
   create_table "fee_collection_discounts", force: true do |t|
     t.string   "type"
     t.string   "name"
@@ -966,8 +947,26 @@ ActiveRecord::Schema.define(version: 20150119214528) do
 
   add_index "privileges", ["privilege_tag_id"], name: "index_privileges_on_privilege_tag_id", using: :btree
 
+  create_table "question_databases", force: true do |t|
+    t.integer  "question_type_id"
+    t.string   "question"
+    t.integer  "no_of_option"
+    t.string   "option"
+    t.string   "is_answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_databases", ["question_type_id"], name: "index_question_databases_on_question_type_id", using: :btree
+
+  create_table "question_types", force: true do |t|
+    t.string   "que_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "qusetion_types", force: true do |t|
-    t.string   "type"
+    t.string   "que_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

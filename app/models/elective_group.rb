@@ -1,4 +1,4 @@
-# elective group 
+# elective group
 class ElectiveGroup < ActiveRecord::Base
   belongs_to :batch
   has_many :subjects

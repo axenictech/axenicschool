@@ -1,5 +1,5 @@
 module NewscastsHelper
-	def news_error!
+  def news_error!
     return if @newscast.errors.empty?
     messages = @newscast.errors.full_messages.map { |m| content_tag(:li, m) }.join
     html = <<-HTML

@@ -836,7 +836,7 @@ class FinanceController < ApplicationController
     @batches ||= Course.first.batches unless Course.first.nil?
     @collections ||= Batch.first.finance_fee_collections unless Batch.first.nil?
     authorize! :read, @collections.first unless @collections.nil?
-  end 
+  end
 
   def batch_choice
     @course = Course.shod(params[:id])

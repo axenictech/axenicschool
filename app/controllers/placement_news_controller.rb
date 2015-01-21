@@ -62,13 +62,14 @@ class PlacementNewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_placement_news
-      @placement_news = PlacementNews.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def placement_news_params
-      params.require(:placement_news).permit(:title, :content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_placement_news
+    @placement_news = PlacementNews.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def placement_news_params
+    params.require(:placement_news).permit(:title, :content)
+  end
 end

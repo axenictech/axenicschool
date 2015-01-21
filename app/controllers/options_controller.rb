@@ -62,13 +62,14 @@ class OptionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_option
-      @option = Option.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def option_params
-      params.require(:option).permit(:option, :is_answer, :question_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_option
+    @option = Option.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def option_params
+    params.require(:option).permit(:option, :is_answer, :question_id)
+  end
 end
