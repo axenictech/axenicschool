@@ -4,12 +4,16 @@ class PlacementExamsController < ApplicationController
   # GET /placement_exams
   # GET /placement_exams.json
   def index
-    
+  end
+
+  def insert_exam
+  end
+
+  def insert
   end
   
   def placement_tpo
-   
-     @placement_exams = PlacementExam.all
+    @placement_exams = PlacementExam.all
   end
   # GET /placement_exams/1
   # GET /placement_exams/1.json
@@ -17,7 +21,6 @@ class PlacementExamsController < ApplicationController
   end
 
   def setting_index
-    
   end
 
   # GET /placement_exams/new
@@ -69,14 +72,18 @@ class PlacementExamsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_placement_exam
-      @placement_exam = PlacementExam.find(params[:id])
-    end
+  def question_type
+    @type = params[:type]
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def placement_exam_params
-      params.require(:placement_exam).permit(:question_type_id, :timeperiod, :start_date, :end_date, :company_id)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_placement_exam
+    @placement_exam = PlacementExam.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def placement_exam_params
+    params.require(:placement_exam).permit(:question_type_id, :timeperiod, :start_date, :end_date, :company_id)
+  end
 end

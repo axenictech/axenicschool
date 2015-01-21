@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :placement_exams do
     collection do
       get :setting_index
+      get :create_exam
+      post :insert_exam
+      get :insert_mark
+      get :insert
     end
   end
   resources :options

@@ -95,7 +95,7 @@ class Employee < ActiveRecord::Base
   scope :shod, ->(id) { where(id: id).take }
   scope :not_status, -> { where(status: false).order(:name) }
   scope :search1, ->(other_conditions, param)\
-   { where('first_name ilike ?' + other_conditions, param + '%') }
+   { where('first_name like ?' + other_conditions, param + '%') }
   scope :att_reg, -> { where.not(id: EmployeeLeave.all.pluck(:employee_id)) }
 
   def archived_employee
