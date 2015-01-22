@@ -14,6 +14,19 @@ class PlacementExamsController < ApplicationController
     @placement_news = PlacementNews.all
   end
 
+  def create_exam
+    @exam = PlacementExam.new
+    @company = Company.all
+  end
+
+  def insert_exam
+    
+  end
+
+  def exam
+      
+  end
+  
   def placement_tpo
     @placement_exams = PlacementExam.all
   end

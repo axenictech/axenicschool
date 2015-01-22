@@ -3,7 +3,7 @@ class CreateQuestionDatabases < ActiveRecord::Migration
     create_table :question_databases do |t|
       t.references :question_type, index: true
       t.string :question
-
+ 
       t.timestamps
     end
   end
