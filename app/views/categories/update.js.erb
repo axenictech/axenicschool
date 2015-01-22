@@ -1,9 +1,9 @@
 $("ul.errors").html("")
-<% if @qusetion_type.errors.any? %>
-  <%  @qusetion_type.errors.full_messages.each do |message| %>
+<% if @category.errors.any? %>
+  <%  @category.errors.full_messages.each do |message| %>
   $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
   <% end %>
 <% else %>
-  $(".modal").modal("hide");
-  window.location.replace('/new');
+  $("#modal").modal("hide");
+  window.location.replace('/categories');
 <% end %>

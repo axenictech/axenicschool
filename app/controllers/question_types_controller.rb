@@ -1,18 +1,12 @@
 class QuestionTypesController < ApplicationController
-  before_action :set_question_type, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @question_types = QuestionType.all
-  end
-
-  def show
-  end
-
+  before_action :set_question_type, only: [:edit, :update, :destroy]
+  
   def new
     @question_type = QuestionType.new
     @question_types = QuestionType.all
   end
-
+  
+  
   def edit
   end
 
