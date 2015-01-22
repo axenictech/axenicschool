@@ -7,7 +7,7 @@ class PlacementNewsController < ApplicationController
     @placement_new = PlacementNews.new
     @placement_news = PlacementNews.all
   end
-  
+
   def edit
   end
 
@@ -21,7 +21,7 @@ class PlacementNewsController < ApplicationController
       render 'index'
     end
   end
-  
+
   def update
     @placement_news.update(placement_news_params)
     flash[:notice] = t('placement_news_update')
@@ -32,7 +32,7 @@ class PlacementNewsController < ApplicationController
     redirect_to placement_news_index_path
     flash[:notice] = t('placement_news_destroyed')
   end
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

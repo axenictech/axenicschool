@@ -131,13 +131,13 @@ class EmployeesController < ApplicationController
     @employee_position_new = EmployeePosition.new
     flash[:notice] = t('dest_pos') if @employee_position.destroy
     emp_position
-  end
+  end -
 
-  def new_bank_field
-    @bank_field_new = BankField.new
-    bank_field
-    authorize! :create, @bank_field_new
-  end
+    def new_bank_field
+      @bank_field_new = BankField.new
+      bank_field
+      authorize! :create, @bank_field_new
+    end
 
   def add_bank_field
     @bank_field_new = BankField.new

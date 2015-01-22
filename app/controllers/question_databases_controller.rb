@@ -10,10 +10,11 @@ class QuestionDatabasesController < ApplicationController
 
   def create
     @ques = QuestionDatabase.all
-    @options = params[:question_database][:option]
-    p @options
+    options = params[:question][:option]
+    answer = params[:is_answer]
     @que = QuestionDatabase.new(question_type_params)
     if @que.save
+      QuestionDatabase.create_que(options, @que, answer)
       redirect_to new_question_database_path
       flash[:notice] =  'question was successfully created.'
     else
@@ -47,6 +48,7 @@ class QuestionDatabasesController < ApplicationController
   end
 
   def question_type_params
-    params.require(:question_database).permit(:question_type_id,:question,:no_of_option,:is_answer)
+    params.require(:question_database).permit(:question_type_id, \
+                                              :question, :no_of_option)
   end
 end

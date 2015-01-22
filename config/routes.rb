@@ -24,9 +24,8 @@ Rails.application.routes.draw do
     end
   end
   resources :qusetion_types
-   
-  resources :companies
 
+  resources :companies
 
   devise_for :users, controllers: { registrations: 'registrations' }
 

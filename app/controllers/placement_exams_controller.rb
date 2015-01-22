@@ -5,13 +5,13 @@ class PlacementExamsController < ApplicationController
   # GET /placement_exams
   # GET /placement_exams.json
   def index
-     @companies = Company.all
-     @placement_news  =PlacementNews.all
+    @companies = Company.all
+    @placement_news = PlacementNews.all
   end
 
   def insert
-     @companies = Company.all
-     @placement_news  =PlacementNews.all
+    @companies = Company.all
+    @placement_news = PlacementNews.all
   end
 
   def placement_tpo
@@ -68,8 +68,6 @@ class PlacementExamsController < ApplicationController
   def question_type
     @type = params[:type]
   end
-
-
 
   private
 
