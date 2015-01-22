@@ -4,7 +4,7 @@ class CreateQuestionDatabases < ActiveRecord::Migration
       t.references :question_type, index: true
       t.string :question
       t.integer :no_of_option
-      t.string :option, array: true
+      t.string :option, array: true ,default: []
       t.boolean :is_answer
 
       t.timestamps
