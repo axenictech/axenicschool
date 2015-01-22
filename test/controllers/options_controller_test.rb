@@ -5,18 +5,18 @@ class OptionsControllerTest < ActionController::TestCase
     @option = options(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:options)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create option" do
+  test 'should create option' do
     assert_difference('Option.count') do
       post :create, option: { is_answer: @option.is_answer, option: @option.option, question_id: @option.question_id }
     end
@@ -24,22 +24,22 @@ class OptionsControllerTest < ActionController::TestCase
     assert_redirected_to option_path(assigns(:option))
   end
 
-  test "should show option" do
+  test 'should show option' do
     get :show, id: @option
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @option
     assert_response :success
   end
 
-  test "should update option" do
+  test 'should update option' do
     patch :update, id: @option, option: { is_answer: @option.is_answer, option: @option.option, question_id: @option.question_id }
     assert_redirected_to option_path(assigns(:option))
   end
 
-  test "should destroy option" do
+  test 'should destroy option' do
     assert_difference('Option.count', -1) do
       delete :destroy, id: @option
     end

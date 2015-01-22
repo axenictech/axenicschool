@@ -1,7 +1,7 @@
 # Grading Level Helper
 module GradingLevelsHelper
   def collect_batch
-   @batches.collect { |b| [b.full_name, b.id] }
+    @batches.collect { |b| [b.full_name, b.id] }
   end
 
   def grading_not_found!

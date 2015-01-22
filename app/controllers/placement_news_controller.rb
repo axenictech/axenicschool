@@ -35,10 +35,11 @@ class PlacementNewsController < ApplicationController
   
   private
 
+  # Use callbacks to share common setup or constraints between actions.
   def set_placement_news
     @placement_news = PlacementNews.find(params[:id])
   end
-  
+
   def placement_news_params
     params.require(:placement_news).permit(:title, :content)
   end

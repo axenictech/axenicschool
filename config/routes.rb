@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   resources :placement_news
 
   root 'home#index'
@@ -17,9 +17,16 @@ Rails.application.routes.draw do
 
   resources :qusetions
 
+  resources :question_types
+  resources :question_databases do
+    collection do
+      get :option
+    end
+  end
   resources :qusetion_types
    
   resources :companies
+
 
   devise_for :users, controllers: { registrations: 'registrations' }
 

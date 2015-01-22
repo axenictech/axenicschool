@@ -1,0 +1,6 @@
+<% @option.times do |opt|%>
+<%= label_tag "option#{opt+1}"%>
+<%= text_field :question_database, "option[#{opt+1}]", {class: "form-control", placeholder:"option#{opt+1}"} %>
+<%=radio_button  :question_database,"is_answer[#{opt+1}]","true"%>
+<br/>
+<%end%>

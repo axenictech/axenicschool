@@ -1,3 +1,4 @@
+# PlacementExamsController
 class PlacementExamsController < ApplicationController
   before_action :set_placement_exam, only: [:show, :edit, :update, :destroy]
 
@@ -22,7 +23,7 @@ class PlacementExamsController < ApplicationController
   end
 
   def exam
-    #@i++
+    
   end
   
   def placement_tpo
@@ -81,7 +82,7 @@ class PlacementExamsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_placement_exam
     @placement_exam = PlacementExam.find(params[:id])
   end

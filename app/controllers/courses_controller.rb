@@ -119,6 +119,6 @@ class CoursesController < ApplicationController
   end
 
   def postparam
-    params.require(:course).permit(:course_name,:section_name,:code,:grading_type,batches_attributes: [:name,:start_date,:end_date] )
+    params.require(:course).permit(:course_name, :section_name, :code, :grading_type, batches_attributes: [:name, :start_date, :end_date])
   end
 end

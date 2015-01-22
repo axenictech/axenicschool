@@ -70,7 +70,7 @@ class TimeTablesController < ApplicationController
   def work_allotment
     @employees ||= Employee.all
     if request.post?
-      @error_obj = EmployeeSubject.allot_work(params[:employee_subjects]) 
+      @error_obj = EmployeeSubject.allot_work(params[:employee_subjects])
       flash[:notice] = t('work_allotment_update')
     end
     @batches ||= Batch.all

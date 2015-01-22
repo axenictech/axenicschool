@@ -3,10 +3,10 @@ class ExamReportsController < ApplicationController
   def exam_wise_report
     @batches ||= Batch.includes(:course).all
     unless Batch.first.nil?
-    @exam_groups ||= Batch.first.exam_groups
-    @batches ||= Batch.includes(:course).all
-    @exam_groups ||= Batch.first.exam_groups
-    authorize! :read, @exam_groups.first
+      @exam_groups ||= Batch.first.exam_groups
+      @batches ||= Batch.includes(:course).all
+      @exam_groups ||= Batch.first.exam_groups
+      authorize! :read, @exam_groups.first
    end
   end
 
@@ -238,7 +238,7 @@ class ExamReportsController < ApplicationController
     @batches ||= Batch.includes(:course).all
 
     @subjects ||= Batch.last.subjects unless @subjects.nil?
-    authorize! :read, ExamGroup 
+    authorize! :read, ExamGroup
   end
 
   def rank_report_batch
