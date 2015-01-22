@@ -4,17 +4,13 @@ class PlacementExamsController < ApplicationController
   # GET /placement_exams
   # GET /placement_exams.json
   def index
-
-  end
-
-  def insert_exam
+     @companies = Company.all
+     @placement_news  =PlacementNews.all
   end
 
   def insert
-
-    @companies = Company.all
+     @companies = Company.all
      @placement_news  =PlacementNews.all
-
   end
   
   def placement_tpo
@@ -41,16 +37,7 @@ class PlacementExamsController < ApplicationController
   # POST /placement_exams.json
   def create
     @placement_exam = PlacementExam.new(placement_exam_params)
-
-    respond_to do |format|
-      if @placement_exam.save
-        format.html { redirect_to @placement_exam, notice: 'Placement exam was successfully created.' }
-        format.json { render :show, status: :created, location: @placement_exam }
-      else
-        format.html { render :new }
-        format.json { render json: @placement_exam.errors, status: :unprocessable_entity }
-      end
-    end
+    @placement_exam.save
   end
 
   # PATCH/PUT /placement_exams/1
@@ -80,6 +67,8 @@ class PlacementExamsController < ApplicationController
   def question_type
     @type = params[:type]
   end
+
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

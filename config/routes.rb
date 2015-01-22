@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post :insert_exam
       get :insert_mark
       get :insert
+      get :exam
     end
   end
   resources :options

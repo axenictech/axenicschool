@@ -42,7 +42,8 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
                 <div class="row">
                   <div class="col-sm-4 ">
                     <div class="form-group">
-                      <%= button_tag "Add Question",{onclick:"$('#user_form').submit();", :class => "btn btn-small btn-inverse", :type => "button"} %>
+                      <%= button_tag "Add Question",{onclick:"$.get('exam',function(response){
+              });", :class => "btn btn-small btn-inverse", :type => "button"} %>
                     </div>
                   </div>
                 </div>
