@@ -2,10 +2,10 @@
 
 one:
   percentage: 1
-  PlacementExam_id: 
-  QuestionType_id: 
+  placement_exam_id: 
+  question_type_id: 
 
 two:
   percentage: 1
-  PlacementExam_id: 
-  QuestionType_id: 
+  placement_exam_id: 
+  question_type_id: 
