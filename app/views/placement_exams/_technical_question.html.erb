@@ -3,14 +3,14 @@
     <div class="form-group">
       <b>Select Question Type:</b>
       <span style="color:red">*</span>
-      <%= select_tag(:option,options_for_select([['Technical', 1], ['Arithmetic', 2], ['Reasoning', 3],]),class: "form-control" ) %>
+      <%= select_tag("option[]",options_for_select([['Technical'],['Arithmetic'],['Reasoning']]),class: "form-control" )%>
     </div>
   </div>
   <div class="col-sm-4 ">
     <div class="form-group">
       <b>Percentage:</b>
       <span style="color:red">*</span>
-      <%= text_field_tag :percent,"",class: "form-control"%>
+      <%= text_field_tag "user[]","",class: "form-control"%>
     </div>
   </div>
 </div>
