@@ -3,13 +3,13 @@ class PlacementExamsController < ApplicationController
   before_action :set_placement_exam, only: [:show, :edit, :update, :destroy]
 
   def index
-     @companies = Company.all
-     @placement_news  =PlacementNews.all
+    @companies = Company.all
+    @placement_news = PlacementNews.all
   end
 
   def insert
-     @companies = Company.all
-     @placement_news  =PlacementNews.all
+    @companies = Company.all
+    @placement_news = PlacementNews.all
   end
 
   def create_exam

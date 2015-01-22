@@ -1,4 +1,3 @@
 # PlacementNewsHelper
 module PlacementNewsHelper
-  
 end

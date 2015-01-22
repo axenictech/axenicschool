@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
       render 'index'
     end
   end
-  
+
   def edit
   end
 
@@ -29,9 +29,9 @@ class CompaniesController < ApplicationController
     redirect_to companies_path
     flash[:notice] = t('placement_news_destroyed')
   end
-  
+
   private
-  
+
   def set_companies
     @companies = Company.find(params[:id])
   end
