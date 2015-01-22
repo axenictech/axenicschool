@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122064106) do
+ActiveRecord::Schema.define(version: 20150122122040) do
 
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
@@ -927,7 +927,7 @@ ActiveRecord::Schema.define(version: 20150122064106) do
   add_index "payroll_categories", ["payroll_category_id"], name: "index_payroll_categories_on_payroll_category_id", using: :btree
 
   create_table "placement_exams", force: true do |t|
-    t.integer  "question_type_id"
+    t.integer  "question_count"
     t.time     "timeperiod"
     t.date     "start_date"
     t.date     "end_date"
@@ -937,7 +937,6 @@ ActiveRecord::Schema.define(version: 20150122064106) do
   end
 
   add_index "placement_exams", ["company_id"], name: "index_placement_exams_on_company_id", using: :btree
-  add_index "placement_exams", ["question_type_id"], name: "index_placement_exams_on_question_type_id", using: :btree
 
   create_table "placement_news", force: true do |t|
     t.string   "title"
@@ -978,6 +977,7 @@ ActiveRecord::Schema.define(version: 20150122064106) do
     t.string   "question"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "no_of_option"
   end
 
   add_index "question_databases", ["question_type_id"], name: "index_question_databases_on_question_type_id", using: :btree
@@ -1202,5 +1202,16 @@ ActiveRecord::Schema.define(version: 20150122064106) do
   end
 
   add_index "weekdays", ["batch_id"], name: "index_weekdays_on_batch_id", using: :btree
+
+  create_table "weights", force: true do |t|
+    t.integer  "percentage"
+    t.integer  "PlacementExam_id"
+    t.integer  "QuestionType_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "weights", ["PlacementExam_id"], name: "index_weights_on_PlacementExam_id", using: :btree
+  add_index "weights", ["QuestionType_id"], name: "index_weights_on_QuestionType_id", using: :btree
 
 end
