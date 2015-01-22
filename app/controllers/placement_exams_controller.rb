@@ -16,6 +16,7 @@ class PlacementExamsController < ApplicationController
 
   def create_exam
     @exam = PlacementExam.new
+    @company = Company.all
   end
 
   def insert_exam
@@ -23,7 +24,7 @@ class PlacementExamsController < ApplicationController
   end
 
   def exam
-    
+      
   end
   
   def placement_tpo
