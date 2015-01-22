@@ -12,6 +12,18 @@ class PlacementExamsController < ApplicationController
      @companies = Company.all
      @placement_news  =PlacementNews.all
   end
+
+  def create_exam
+    @exam = PlacementExam.new
+  end
+
+  def insert_exam
+    
+  end
+
+  def exam
+    #@i++
+  end
   
   def placement_tpo
     @placement_exams = PlacementExam.all
@@ -67,8 +79,6 @@ class PlacementExamsController < ApplicationController
   def question_type
     @type = params[:type]
   end
-
-
 
   private
   # Use callbacks to share common setup or constraints between actions.
