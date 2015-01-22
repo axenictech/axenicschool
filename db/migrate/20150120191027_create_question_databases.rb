@@ -3,10 +3,6 @@ class CreateQuestionDatabases < ActiveRecord::Migration
     create_table :question_databases do |t|
       t.references :question_type, index: true
       t.string :question
-      t.integer :no_of_option
-      t.string :option, array: true
-      t.boolean :is_answer
-
       t.timestamps
     end
   end
