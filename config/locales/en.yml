@@ -157,3 +157,5 @@ en:
   placement_news_update: 'Placement news was successfully updated.'
   placement_news_created: 'Placement news was successfully created.'
   placement_news_destroyed: 'Placement news was successfully destroyed.'
+  placement_exam_error: 'Total percentages should be 100'
+  placement_exam_created: 'Placement Exam created successfully'

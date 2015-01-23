@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :insert_mark
       get :insert
       get :exam
+      get :set_question_paper
     end
   end
   resources :options
