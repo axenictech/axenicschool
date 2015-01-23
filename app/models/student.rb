@@ -104,18 +104,18 @@ class Student < ActiveRecord::Base
     if status.eql? 'present'
       Student.where("concat_ws(' ',first_name,last_name)like '#{input}%' \
         OR concat_ws(' ',last_name,first_name)like '#{input}%' \
-        OR admission_no like '#{input}%'")
+        OR admission_no like '#{input}%' COLLATE utf8_bin")
     else
       ArchivedStudent.where("concat_ws(' ',first_name,last_name)like \
         '#{input}%' OR concat_ws(' ',last_name,first_name)like '#{input}%' \
-        OR admission_no like '#{input}%'")
+        OR admission_no like '#{input}%' COLLATE utf8_bin")
     end
   end
 
   def self.advance_search(search, batch)
     conditions = ''
     conditions += "concat_ws(' ',first_name,last_name) \
-    like '#{search[:name]}%'" unless search[:name] == ''
+    like '#{search[:name]}%' COLLATE utf8_bin" unless search[:name] == ''
     if batch[:id]
       if conditions == ''
         conditions += "batch_id = #{batch[:id]}" unless batch[:id] == ''

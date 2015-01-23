@@ -8,6 +8,6 @@ class Newscast < ActiveRecord::Base
 
   def self.news(title)
     return if title.empty?
-    Newscast.where('title like ?', "#{title}%")
+    Newscast.where('title like ?', title + '%')
   end
 end

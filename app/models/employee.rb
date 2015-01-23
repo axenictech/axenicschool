@@ -152,7 +152,7 @@ class Employee < ActiveRecord::Base
   end
 
   def self.search2(a, s)
-    unless s.empty?
+    if s.present?
       dep_id = a[:employee_department_id]
       cat_id = a[:employee_category_id]
       pos_id = a[:employee_position_id]
@@ -163,12 +163,12 @@ class Employee < ActiveRecord::Base
       other_conditions += " AND employee_position_id = '#{pos_id}'" unless pos_id == ''
       other_conditions += " AND employee_grade_id = '#{grd_id}'" unless grd_id == ''
       Employee.search1(other_conditions, s).order('id ASC')
-  end
+    end
   end
 
   def self.adv_search(p)
     conditions = ''
-    conditions += "concat_ws(' ',first_name,last_name) like '#{p[:name]}%'" unless p[:name] == ''
+    conditions += "concat_ws(' ',first_name,last_name) like '#{p[:name]}%' COLLATE utf8_bin" unless p[:name] == ''
 
     if p[:gender]
       unless p[:gender].eql? 'All'
