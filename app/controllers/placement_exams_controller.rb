@@ -18,18 +18,30 @@ class PlacementExamsController < ApplicationController
   end
 
   def insert_exam
-    
+    @question_type = params[:question_type]
+    p "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+    p @question_type
+    @percentage = params[:percentages]
+    p "ppppppppppppppppppppppppppppppp"
+    p @percentage
+    @wat = Weightage.new
+    @placement_exam = PlacementExam.new(placement_exam_params)
+    if @placement_exam.save
+      @question_type.each do |q|
+        @wat.save(question_type_id: q, placement_exam_id: @placement_exam.id)
+      end
+      @percentage.each do |p|
+        @wat.update(placement_exam_id: @placement_exam.id, percentage: p)
+      end
+   end
   end
 
   def exam
-      
   end
-  
+
   def placement_tpo
     @placement_exams = PlacementExam.all
   end
-
-  
 
   def setting_index
   end
@@ -38,10 +50,8 @@ class PlacementExamsController < ApplicationController
     @placement_exam = PlacementExam.new
   end
 
-
   def edit
   end
-
 
   def create
     @placement_exam = PlacementExam.new(placement_exam_params)
@@ -59,7 +69,6 @@ class PlacementExamsController < ApplicationController
       end
     end
   end
-
 
   def destroy
     @placement_exam.destroy
@@ -79,8 +88,7 @@ class PlacementExamsController < ApplicationController
     @placement_exam = PlacementExam.find(params[:id])
   end
 
- 
   def placement_exam_params
-    params.require(:placement_exam).permit(:question_type_id, :timeperiod, :start_date, :end_date, :company_id)
+    params.require(:exam).permit(:question_count, :timeperiod, :timeperiod, :start_date, :end_date, :company_id)
   end
 end

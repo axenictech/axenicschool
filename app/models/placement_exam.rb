@@ -1,3 +1,3 @@
 class PlacementExam < ActiveRecord::Base
-  has_many :weights
+  has_many :weightages
 end
