@@ -50,8 +50,8 @@ class User < ActiveRecord::Base
 
   def self.search_user(search)
     return if search.empty?
-    where("concat_ws(' ',first_name,last_name)ilike ? \
-      OR concat_ws(' ',last_name,first_name)ilike ? \
-      OR username ilike ?", "#{search}%", "#{search}%", "#{search}%")
+    where("concat_ws(' ',first_name,last_name)like ? \
+      OR concat_ws(' ',last_name,first_name)like ? \
+      OR username like ?", "#{search}%", "#{search}%", "#{search}%")
   end
 end
