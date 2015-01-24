@@ -16,24 +16,28 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
+        <%= form_for :question,url: start_test_placement_exams_path do |f| %>
         <table cellpadding="5" cellspacing="5">
           <% @questions.each_with_index do |q,j| %>
             <tr><th><%j=j+1%><%= j%>: <%= q.question %></th></tr>
             <% @options = Option.where(question_database_id: q.id) %>
-            <% @options.each_with_index do |o,i| %>
+            <% @options.each_with_index do |opt,i| %>
               <tr>
                 <td>
-                  <%=check_box_tag "is_answer[]"%> 
+                  <%= f.radio_button q.id, opt.id %>
                   <%i=i+1%>
-                   <%= i%> : <%= o.option %>
+                  <%= i%> : <%= opt.option %>
                 </td>
               </tr>
             <%end%>
             <td><%172.times do |n|%>-<%end%></td>
           <%end%>
         </table>
+        <%= f.submit "submit"%>
+        <%end%>
         </div>
       </div>
+
     </div>
   </div>
 </div>
