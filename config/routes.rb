@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get :exam
       get :set_question_paper
       post :start_test
+      get :disp_time
+      get :start_test
     end
   end
   resources :options

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20170122215036) do
+=======
 ActiveRecord::Schema.define(version: 20150122133355) do
+>>>>>>> a682735a2a99c35bf54cce0bbc9bc1ce960216e2
 
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
@@ -425,7 +429,11 @@ ActiveRecord::Schema.define(version: 20150122133355) do
     t.integer  "employee_category_id"
     t.string   "employee_number"
     t.date     "joining_date"
+<<<<<<< HEAD
+    t.binary   "first_name"
+=======
     t.string   "first_name"
+>>>>>>> a682735a2a99c35bf54cce0bbc9bc1ce960216e2
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "gender"
@@ -1184,15 +1192,27 @@ ActiveRecord::Schema.define(version: 20150122133355) do
 
   add_index "weekdays", ["batch_id"], name: "index_weekdays_on_batch_id", using: :btree
 
+<<<<<<< HEAD
+  create_table "weights", force: true do |t|
+    t.integer  "percentage"
+    t.integer  "PlacementExam_id"
+    t.integer  "QuestionType_id"
+=======
   create_table "weightages", force: true do |t|
     t.integer  "percentage"
     t.integer  "placement_exam_id"
     t.integer  "question_type_id"
+>>>>>>> a682735a2a99c35bf54cce0bbc9bc1ce960216e2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
+  add_index "weights", ["PlacementExam_id"], name: "index_weights_on_PlacementExam_id", using: :btree
+  add_index "weights", ["QuestionType_id"], name: "index_weights_on_QuestionType_id", using: :btree
+=======
   add_index "weightages", ["placement_exam_id"], name: "index_weightages_on_placement_exam_id", using: :btree
   add_index "weightages", ["question_type_id"], name: "index_weightages_on_question_type_id", using: :btree
+>>>>>>> a682735a2a99c35bf54cce0bbc9bc1ce960216e2
 
 end

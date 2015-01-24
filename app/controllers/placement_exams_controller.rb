@@ -18,25 +18,26 @@ class PlacementExamsController < ApplicationController
   end
 
   def insert_exam
-    @question_type = params[:question_type]
-    @percentage = params[:percentages]
-    if @percentage.map(&:to_i).sum == 100
+    question_type = params[:question_type]
+    percentage = params[:percentages]
+    if percentage.map(&:to_i).sum == 100
       @placement_exam = PlacementExam.new(placement_exam_params)
       @placement_exam.save
       i = 0
-      @question_type.each do |q|
-        Weightage.create(question_type_id: q,placement_exam_id: @placement_exam.id, percentage: @percentage[i])
+      question_type.each do |q|
+        Weightage.create(question_type_id: q,placement_exam_id: @placement_exam.id, percentage: percentage[i])
         i += 1
       end
       redirect_to create_exam_placement_exams_path
       flash[:notice] = t('placement_exam_created')
     else
-      redirect_to create_exam_placement_exams_path
+      render 'create_exam'
       flash[:alert] = t('placement_exam_error')
     end
   end
 
   def set_question_paper
+
    @company=Company.first
    @placement_exam=PlacementExam.all
    @questions=QuestionDatabase.all
@@ -92,6 +93,11 @@ class PlacementExamsController < ApplicationController
     @type = params[:type]
   end
 
+  def disp_time
+    @placement_exam = PlacementExam.first
+    @time = @placement_exam.timeperiod.strftime("%M").to_i
+  end
+
   private
 
   def set_placement_exam
@@ -99,6 +105,6 @@ class PlacementExamsController < ApplicationController
   end
 
   def placement_exam_params
-    params.require(:exam).permit(:question_count,:timeperiod,:start_date, :end_date, :company_id)
+    params.require(:exam).permit!
   end
 end

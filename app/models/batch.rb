@@ -24,7 +24,7 @@ class Batch < ActiveRecord::Base
   end
 
   def end_date_cannot_be_less_than_start_date
-    if end_date.nil? && end_date < start_date
+    if end_date.present? && end_date < start_date
       errors.add(:end_date, "can't be less than start date")
     end
   end
