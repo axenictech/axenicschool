@@ -4,7 +4,6 @@ class CreateOptions < ActiveRecord::Migration
       t.string :option
       t.boolean :is_answer
       t.references :question_database, index: true
-
       t.timestamps
     end
   end

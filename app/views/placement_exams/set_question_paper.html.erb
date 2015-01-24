@@ -1,0 +1,49 @@
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
+    <li>Set Question Paper</li>
+  </ul>
+</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/>
+
+<div class="row">
+<div class="col-sm-2"></div>
+  <div class="col-sm-8">
+     <div class="form-group">
+       <div class="row">
+        <div class="box col-md-12">
+         <div class="box-inner">
+          <div class="box-header well">
+            <h2>Question paper</h2>
+          </div>
+           <div class="box-content">
+           <table id="datatable" class="table table-striped table-bordered responsive">
+           	<tr><td>Name Of Company</td>
+                <td><%=@company.first.name%></td></tr>
+            <%@que = PlacementExam.where(company_id: @company.first.id) %>
+            <%@wt = Weightage.where(placement_exam_id: @que)%>
+            <%@wt.each do |w|%>
+            <%@que=QuestionDatabase.where(question_type_id:w.question_type_id)%>
+                 <%end%>
+         <%@que.each do |q|%>
+           <tr><td> <%=q.question%> </td> 
+           <%@option=Option.where(question_database_id:@que)%>
+          <tr>
+            <%@option.each do |o|%>
+            <td><%=o.option%></td>
+            <td><%=check_box_tag "is_answer[]"%>
+             </td>
+          </tr>
+     
+           <%end%>
+        
+          <%end%>
+           </table>
+           </div>
+         </div>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>
