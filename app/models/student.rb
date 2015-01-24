@@ -58,6 +58,7 @@ class Student < ActiveRecord::Base
                      length: { minimum: 6, maximum: 11 }, allow_blank: true
   after_save :create_user_account
   scope :shod, ->(id) { where(id: id).take }
+  scope :list, -> { all + ArchivedStudent.all }
 
   def batch_name
     [batch.course.course_name, batch.course.section_name, batch.name].join(' ')

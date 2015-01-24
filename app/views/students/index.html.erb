@@ -12,20 +12,43 @@
     </div>
   </div>
 </div>
-<hr>
+   <hr>
 <div class="row">
-  <div class="col-md-2"></div>
-  <div class="box col-md-10">  
-    <%= form_for :student, url:{action:'search_ajax'}, method: :get,remote:true,
-    html:{id: "student_form"} do |f|%>
-    <fieldset>
-      <%= text_field_tag :search,"",{oninput:"$('#student_form').submit();",placeholder:'Search Student',class:"form-control",style: "width: 300px"}%>
-      <br>
-      <%= f.radio_button  "status","present", :checked => "checked" %> &nbsp;<b>Present Students</b>
-      &nbsp;&nbsp;&nbsp;
-      <%= f.radio_button  "status","former"%>  &nbsp;<b>Former Students</b>
-    </fieldset>
-    <% end %>
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>Student Details</h2>
+    </div>
+  <div class="box-content" style="overflow-y: scroll; height:auto">
+  <% if @students.empty? %>
+ <h4 align="center">No Record Found </h4>
+   <% else %>
+      <table class="table table-striped table-bordered responsive">
+        <thead>
+       <tr>
+        <th>Sr. No.</th>
+        <th>Student Name</th>
+        <th>Admission No.</th>
+        <th></th>
+      </tr>
+    </thead>
+  <tbody>  
+      <% @students.each_with_index do |student,i| %>
+        <tr>
+          <td><%= i+1 %></td>
+          <td><%= student.first_name+' '+student.last_name  %></td>
+          <td><%= student.admission_no %></td>
+          <% if student.status_description %>
+          <td><%= link_to 'View Profile', archived_profile_student_path(student) %></td>
+          <% else %>
+          <td><%= link_to 'View Profile',profile_student_path(student) %></td>
+          <% end %>
+        </tr>      
+      <% end %>     
+   </tbody>
+      </table>
+    </div>
+  </div>
   </div>
 </div>
-<div id="student_search"></div>
+<% end %>

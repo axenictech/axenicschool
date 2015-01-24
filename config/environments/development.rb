@@ -39,11 +39,11 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
-    address: 'smtp.sendgrid.net',
+    address: 'smtp.gmail.com',
     port: 587,
-    domain: 'sendgrid.com',
+    domain: 'gmail.com',
     authentication: :login,
-    user_name: 'nf_gK419269cic',
-    password: 'qlpgckfe'
+    user_name: 'axenicschool@gmail.com',
+    password: 'axenic@123'
   }
 end
