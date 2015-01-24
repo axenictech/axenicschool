@@ -1,53 +1,11 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
+    <li><%= link_to 'Placement',placement_exams_path %></li>
     <li>Set Question Paper</li>
   </ul>
 </div>
-Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
-<div id="flash"><%= render 'layouts/messages'%></div>
-
-<<<<<<< HEAD
-<div class="row">
-<div class="col-sm-2"></div>
-  <div class="col-sm-8">
-     <div class="form-group">
-       <div class="row">
-        <div class="box col-md-12">
-         <div class="box-inner">
-         <%=link_to :"Start Exam",disp_time_placement_exams_path(exam_id:@placement_exam),remote:true,class: "btn btn-primary"%>
-
-<div id="timer">
-  Exam Remaining Time: <input id="minutes" type="text" style="width: 14px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 26px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
-</div>
-          <div class="box-header well">
-
-            <h2>Question paper</h2>
-          </div>
-           <div class="box-content">
-           <table id="datatable" class="table table-striped table-bordered responsive">
-           	<tr><td>Name Of Company</td>
-            <p id="demo"></p>
-                <td><%=@company.first.name%></td></tr>
-            <%@que = PlacementExam.where(company_id: @company.first.id) %>
-            <%@wt = Weightage.where(placement_exam_id: @que)%>
-            <%@wt.each do |w|%>
-            <%@que=QuestionDatabase.where(question_type_id:w.question_type_id)%>
-                 <%end%>
-         <%@que.each do |q|%>
-           <tr><td> <%=q.question%> </td> 
-           <%@option=Option.where(question_database_id:@que)%>
-          <tr>
-            <%@option.each do |o|%>
-            <td><%=o.option%></td>
-            <td><%=check_box_tag "is_answer[]"%>
-             </td>
-          </tr>
-          
-     
-           <%end%>
-
-=======
+                    
 <div class="box col-md-12">
   <div class="box-inner">
     <div class="box-header well">
@@ -57,6 +15,11 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
+        <%=link_to :"Start Exam",disp_time_placement_exams_path(exam_id:@placement_exam),remote:true,class: "btn btn-primary"%>
+
+        <div id="timer">
+          Exam Remaining Time: <input id="minutes" type="text" style="width: 20px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> : <input id="seconds" type="text" style="width: 26px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
+        </div>
         <%= form_for :question,url: start_test_placement_exams_path do |f| %>
         <table cellpadding="5" cellspacing="5">
           <% @questions.each_with_index do |q,j| %>
@@ -72,27 +35,20 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
               </tr>
             <%end%>
             <td><%172.times do |n|%>-<%end%></td>
->>>>>>> 54f8e49a53800163c2065e534ad0ef16b1631cd3
           <%end%>
         </table>
         <%= f.submit "submit"%>
         <%end%>
         </div>
       </div>
-
     </div>
   </div>
-<<<<<<< HEAD
 </div>
 <script>
 var myVar=setInterval(function(){myTimer()},1000);
-
 function myTimer() {
-    var d = new Date();
-    document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+  var d = new Date();
+  document.getElementById("demo").innerHTML = d.toLocaleTimeString();
 }
 </script>
-
-=======
 </div>
->>>>>>> 54f8e49a53800163c2065e534ad0ef16b1631cd3
