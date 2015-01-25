@@ -37,5 +37,6 @@ gem 'roo', group: :development
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'passenger'
+gem 'table_print'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
