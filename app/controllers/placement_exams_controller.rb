@@ -37,8 +37,7 @@ class PlacementExamsController < ApplicationController
   end
 
   def set_question_paper
-
-   @company=Company.first
+   @company=Company.all
    @placement_exam=PlacementExam.all
    @questions=QuestionDatabase.all
   end

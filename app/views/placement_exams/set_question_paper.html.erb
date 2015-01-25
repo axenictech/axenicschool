@@ -7,7 +7,6 @@
 Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
 <div id="flash"><%= render 'layouts/messages'%></div>
 
-<<<<<<< HEAD
 <div class="row">
 <div class="col-sm-2"></div>
   <div class="col-sm-8">
@@ -18,7 +17,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
          <%=link_to :"Start Exam",disp_time_placement_exams_path(exam_id:@placement_exam),remote:true,class: "btn btn-primary"%>
 
 <div id="timer">
-  Exam Remaining Time: <input id="minutes" type="text" style="width: 14px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 26px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
+  Exam Remaining Time :  <input id="minutes" type="text" style="width: 20px; border: none; background-color:none; font-size: 16px; font-weight: bold;">  minutes    and <input id="seconds" type="text" style="width: 30px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
 </div>
           <div class="box-header well">
 
@@ -47,7 +46,6 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
      
            <%end%>
 
-=======
 <div class="box col-md-12">
   <div class="box-inner">
     <div class="box-header well">
@@ -71,16 +69,16 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
               </tr>
             <%end%>
             <td><%172.times do |n|%>-<%end%></td>
->>>>>>> 54f8e49a53800163c2065e534ad0ef16b1631cd3
+          <%end%>
           <%end%>
         </table>
         </div>
       </div>
     </div>
   </div>
-<<<<<<< HEAD
 </div>
 <script>
+
 var myVar=setInterval(function(){myTimer()},1000);
 
 function myTimer() {
@@ -88,7 +86,5 @@ function myTimer() {
     document.getElementById("demo").innerHTML = d.toLocaleTimeString();
 }
 </script>
-
-=======
 </div>
->>>>>>> 54f8e49a53800163c2065e534ad0ef16b1631cd3
+
