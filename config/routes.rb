@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       get :insert
       get :exam
       get :set_question_paper
+<<<<<<< HEAD
       get :disp_time
+=======
+      get :start_test
+>>>>>>> 54f8e49a53800163c2065e534ad0ef16b1631cd3
     end
   end
   resources :options

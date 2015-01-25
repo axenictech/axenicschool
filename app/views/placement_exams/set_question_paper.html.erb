@@ -4,9 +4,10 @@
     <li>Set Question Paper</li>
   </ul>
 </div>
+Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
 <div id="flash"><%= render 'layouts/messages'%></div>
-<br/>
 
+<<<<<<< HEAD
 <div class="row">
 <div class="col-sm-2"></div>
   <div class="col-sm-8">
@@ -46,14 +47,38 @@
      
            <%end%>
 
+=======
+<div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2><%=@company.name%></h2>
+    </div>
+    <div class="box-content">
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+        <table cellpadding="5" cellspacing="5">
+          <% @questions.each_with_index do |q,j| %>
+            <tr><th><%j=j+1%><%= j%>: <%= q.question %></th></tr>
+            <% @options = Option.where(question_database_id: q.id) %>
+            <% @options.each_with_index do |o,i| %>
+              <tr>
+                <td>
+                  <%=check_box_tag "is_answer[]"%> 
+                  <%i=i+1%>
+                   <%= i%> : <%= o.option %>
+                </td>
+              </tr>
+            <%end%>
+            <td><%172.times do |n|%>-<%end%></td>
+>>>>>>> 54f8e49a53800163c2065e534ad0ef16b1631cd3
           <%end%>
-           </table>
-           </div>
-         </div>
+        </table>
+        </div>
       </div>
-     </div>
     </div>
   </div>
+<<<<<<< HEAD
 </div>
 <script>
 var myVar=setInterval(function(){myTimer()},1000);
@@ -64,3 +89,6 @@ function myTimer() {
 }
 </script>
 
+=======
+</div>
+>>>>>>> 54f8e49a53800163c2065e534ad0ef16b1631cd3
