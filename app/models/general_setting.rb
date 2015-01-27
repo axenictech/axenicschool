@@ -10,6 +10,7 @@ class GeneralSetting < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
   validate :finance_end_date_cannot_be_less_than_finance_start_date
   scope :shod, ->(id) { where(id: id).take }
+
   def finance_end_date_cannot_be_less_than_finance_start_date
     if finance_end_year_date.present? && finance_end_year_date < finance_start_year_date
       errors.add(:finance_end_year_date, "can't be less than finance start year date")

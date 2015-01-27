@@ -3,7 +3,6 @@ class FeeDiscount < ActiveRecord::Base
   belongs_to :finance_fee_category
   belongs_to :batch
   belongs_to :category
-
   validates :name, presence: true, length: \
   { minimum: 1, maximum: 30 }, format: { with: /\A[a-z A-Z 0-9_.-\/]+\z/ }
   validates :admission_no, length: { minimum: 1, maximum: 30 }\

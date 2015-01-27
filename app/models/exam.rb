@@ -17,6 +17,7 @@ class Exam < ActiveRecord::Base
   validate :max_marks_greater_than_min_marks
   scope :shod, ->(id) { where(id: id).take }
   scope :result, ->(s, e) { where(subject_id: s, exam_group_id: e).take }
+
   def end_time_cannot_be_less_than_start_time
     if end_time.present? && end_time < start_time
       errors.add(:end_time, 'cannot be less than start time')

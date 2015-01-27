@@ -5,7 +5,6 @@ class FinanceFeeCollection < ActiveRecord::Base
   has_many :fee_collection_discounts
   has_many :finance_fees
   has_many :students, through: :finance_fees
-
   validates :name, presence: true, length: { minimum: 1, maximum: 30 }, format: { with: /\A[a-z A-Z 0-9_.-\/]+\z/ }
   validates :start_date, presence: true
   validates :end_date, presence: true

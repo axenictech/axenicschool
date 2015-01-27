@@ -1,5 +1,6 @@
 # User
 class User < ActiveRecord::Base
+  authenticates_with_sorcery!
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_and_belongs_to_many :privileges
@@ -16,13 +17,19 @@ class User < ActiveRecord::Base
   scope :shod, ->(id) { where(id: id).take }
   scope :role_wise_users, ->(role) { where(role: role) }
   scope :discover, ->(i, r) { where(student_id: i, role: r).take }
+
   def full_name
     first_name + ' ' + last_name
   end
 
   def create_general_setting
+    if id == 1
+      role == 'SuperAdmin'
+    else
+      role == 'Admin'
+    end
     gs = GeneralSetting.create(school_or_college_name: 'Axenic School')
-    update(general_setting_id: gs.id, role: 'Admin')
+    update(general_setting_id: gs.id, role: role)
   end
 
   def institute_name

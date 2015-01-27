@@ -4,6 +4,7 @@ class FeeCollectionParticular < ActiveRecord::Base
   belongs_to :batch
   has_and_belongs_to_many :students
   scope :shod, ->(id) { where(id: id).take }
+
   def student_fee_collection
     students = []
     @batch = batch

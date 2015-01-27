@@ -1,7 +1,6 @@
 class FinanceFee < ActiveRecord::Base
   belongs_to :finance_fee_collection
   belongs_to :student
-
   has_many :finance_transactions
   has_many :finance_fines
   scope :shod, ->(id) { where(id: id).take }
