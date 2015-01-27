@@ -1,0 +1,51 @@
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',dashboard_home_index_path %></li>
+    <li><%= link_to 'Placement',placement_exams_path %></li>
+    <li><%= link_to 'Apply Exam',apply_exam_placement_exams_path %></li>
+    <li>Question Paper</li>
+  </ul>
+</div>
+
+<div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2><%=@company.name%></h2>
+      <div class="pull-right">
+        <div id="timer" >
+          Exam Remaining Time:
+          <input id="minutes" type="label" readonly="true" style="width: 26px;font-size: 16px; font-weight: bold;"> : 
+          <input id="seconds" type="label" readonly="true" style="width: 26px;font-size: 16px; font-weight: bold;">
+        </div>
+      </div>
+    </div>  
+
+    <div class="box-content">
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <%=link_to :"Start Exam",disp_time_placement_exams_path(exam_id:@placement_exam),remote:true,class: "btn btn-primary"%>
+          <%= form_for :question,url: start_test_placement_exams_path do |f| %>
+          <table cellpadding="5" cellspacing="5">
+            <% @questions.each_with_index do |q,j| %>
+            <tr><th><%j=j+1%><%= j%>: <%= q.question %></th></tr>
+            <% @options = Option.where(question_database_id: q.id) %>
+            <% @options.each_with_index do |opt,i| %>
+            <tr>
+              <td>
+                <%= f.radio_button q.id, opt.id %>
+                <%i=i+1%>
+                <font color="#00BFFF"><%= i%></font> : <%= opt.option %>
+              </td>
+            </tr>
+            <%end%>
+            <td><%172.times do |n|%>-<%end%></td>
+            <%end%>
+          </table>
+          <%= f.submit "submit",class: "btn btn-primary"%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
