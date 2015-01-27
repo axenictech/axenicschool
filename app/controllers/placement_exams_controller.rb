@@ -12,6 +12,11 @@ class PlacementExamsController < ApplicationController
     @placement_news = PlacementNews.all
   end
 
+  def apply_exam
+    @companies = Company.all
+    @placement_news = PlacementNews.all
+  end
+
   def create_exam
     @exam = PlacementExam.new
     @company = Company.all
@@ -36,8 +41,8 @@ class PlacementExamsController < ApplicationController
     end
   end
 
-  def set_question_paper
-   @company=Company.all
+  def question_paper
+   @company=Company.find(params[:format])
    @placement_exam=PlacementExam.all
    @questions=QuestionDatabase.all
   end

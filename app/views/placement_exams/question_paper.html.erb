@@ -2,7 +2,8 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Placement',placement_exams_path %></li>
-    <li>Set Question Paper</li>
+    <li><%= link_to 'Apply Exam',apply_exam_placement_exams_path %></li>
+    <li>Question Paper</li>
   </ul>
 </div>
 
@@ -11,8 +12,10 @@
     <div class="box-header well">
       <h2><%=@company.name%></h2>
       <div class="pull-right">
-        <div id="timer">
-          Exam Remaining Time: <input id="minutes" type="text" style="width: 20px; border: none; font-size: 16px; font-weight: bold;"> : <input id="seconds" type="text" style="width: 26px; border: none; font-size: 16px; font-weight: bold;">
+        <div id="timer" >
+          Exam Remaining Time:
+          <input id="minutes" type="label" readonly="true" style="width: 26px;font-size: 16px; font-weight: bold;"> : 
+          <input id="seconds" type="label" readonly="true" style="width: 26px;font-size: 16px; font-weight: bold;">
         </div>
       </div>
     </div>  
@@ -25,14 +28,14 @@
           <%= form_for :question,url: start_test_placement_exams_path do |f| %>
           <table cellpadding="5" cellspacing="5">
             <% @questions.each_with_index do |q,j| %>
-            <tr><th><%j+=1%><%= j%>: <%= q.question %></th></tr>
+            <tr><th><%j=j+1%><%= j%>: <%= q.question %></th></tr>
             <% @options = Option.where(question_database_id: q.id) %>
             <% @options.each_with_index do |opt,i| %>
             <tr>
               <td>
                 <%= f.radio_button q.id, opt.id %>
                 <%i=i+1%>
-                <%= i%> : <%= opt.option %>
+                <font color="#00BFFF"><%= i%></font> : <%= opt.option %>
               </td>
             </tr>
             <%end%>

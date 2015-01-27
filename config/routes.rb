@@ -11,9 +11,10 @@ Rails.application.routes.draw do
       get :insert_mark
       get :insert
       get :exam
-      get :set_question_paper
+      get :question_paper
       get :disp_time
-      get :start_test
+      post :start_test
+      get :apply_exam
     end
   end
   resources :options
