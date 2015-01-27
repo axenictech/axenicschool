@@ -52,9 +52,17 @@ class PlacementExamsController < ApplicationController
     @test = params[:question]
     StudentExam.create(placement_exams_id: params["placement_exam_id"], students_id: params["student_id"])
     @student_exam = StudentExam.last
+    i=0
     @test.each do |t|
       StudentAnswerSheet.create(student_exams_id: @student_exam.id ,question_databases_id: t[0],options_id: t[1])
+      @ans = Option.where(question_database_id: t[0].to_i,id: t[1].to_i).take
+      if @ans.is_answer==true
+        i+=1
+      else  
+      end
     end
+    StudentScore.create(placement_exams_id: params["placement_exam_id"], students_id: params["student_id"],score: i.to_f)
+    @score = StudentScore.last
   end
 
   def exam
