@@ -3,7 +3,7 @@ class PlacementExamsController < ApplicationController
   before_action :set_placement_exam, only: [:show, :edit, :update, :destroy]
 
   def index
-    @companies = Company.all
+    @placement_exam = PlacementExam.all
     @placement_news = PlacementNews.all
   end
 
@@ -30,7 +30,7 @@ class PlacementExamsController < ApplicationController
       @placement_exam.save
       i = 0
       question_type.each do |q|
-        Weightage.create(question_type_id: q,placement_exam_id: @placement_exam.id, percentage: percentage[i])
+        Weightage.create(question_type_id: q, placement_exam_id: @placement_exam.id, percentage: percentage[i])
         i += 1
       end
       redirect_to create_exam_placement_exams_path
@@ -42,13 +42,11 @@ class PlacementExamsController < ApplicationController
   end
 
   def question_paper
-   @company=Company.find(params[:format])
-   @placement_exam=PlacementExam.all
-   @questions=QuestionDatabase.all
+    @company = Company.find(params[:format])
+    @questions = Company.take_exam(@company)
   end
 
   def start_test
-    
   end
 
   def exam
@@ -99,7 +97,7 @@ class PlacementExamsController < ApplicationController
 
   def disp_time
     @placement_exam = PlacementExam.first
-    @time = @placement_exam.timeperiod.strftime("%M").to_i
+    @time = @placement_exam.timeperiod.strftime('%M').to_i
   end
 
   private

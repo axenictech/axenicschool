@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-#gem 'hirb', :require => nil
+# gem 'hirb', :require => nil
 gem 'table_print'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
