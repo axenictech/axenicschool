@@ -1,7 +1,8 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-    <li>Placement</li>
+    <li><%= link_to 'Placement',placement_exams_path %></li>
+    <li>Apply Exam</li>
   </ul>
 </div>
 <div id="flash"><%= render 'layouts/messages'%></div>
@@ -30,7 +31,7 @@
                     <tr>
                       <td><%= c.name %></td>
                       <td><%= c.criteria %></td>
-                      <td><%=  link_to 'Apply',set_question_paper_placement_exams_path class: "a-action"%></td>
+                      <td><%=  link_to 'Apply',question_paper_placement_exams_path(c.id) %></td>
                     </tr>
                   <%end%>
                 </tbody>
