@@ -1,6 +1,6 @@
 <%=if current_user.role == 'Admin'
-      render 'placement_student'
-    else
-      render 'placement_student'
-    end
+	render 'placement_admin'  
+  else
+    render 'placement_student'
+  end
 %>
