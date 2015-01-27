@@ -133,11 +133,11 @@ class EmployeesController < ApplicationController
     emp_position
   end
 
-    def new_bank_field
-      @bank_field_new = BankField.new
-      bank_field
-      authorize! :create, @bank_field_new
-    end
+  def new_bank_field
+    @bank_field_new = BankField.new
+    bank_field
+    authorize! :create, @bank_field_new
+  end
 
   def add_bank_field
     @bank_field_new = BankField.new

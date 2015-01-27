@@ -27,12 +27,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @placement_exams.each do |p| %>
+                  <% @placement_exam.each do |c| %>
                     <tr>
-                      <% company = Company.find(p.company_id) %>
-                      <td><%= company.name %></td>
-                      <td><%= company.criteria %></td>
-                      <td><%=  link_to 'Apply',question_paper_placement_exams_path(p)%></td>
+                      <td><%= c.company.name%></td>
+                      <td><%= c.company.criteria %></td>
+                      <td><%=  link_to 'Apply',question_paper_placement_exams_path(c.company.id) %></td>
+
                     </tr>
                   <%end%>
                 </tbody>

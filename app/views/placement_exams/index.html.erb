@@ -1,6 +1,13 @@
 <%=if current_user.role == 'Admin'
+<<<<<<< HEAD
+      render 'placement_student'
+    else
+      render 'placement_student'
+    end
+=======
 	render 'placement_admin'  
   else
     render 'placement_student'
   end
+>>>>>>> 908809073e4cdf8f436d314aebc64c73ef51bff2
 %>
