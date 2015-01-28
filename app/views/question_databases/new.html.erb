@@ -18,16 +18,15 @@
     <fieldset>
     <% if @que.errors.any? %>
         <div class="alert alert-danger">
-         
-          <ul>
-
-           <% @que.errors.full_messages.each do |msg| %>
+      <ul>
+      <% @que.errors.full_messages.each do |msg| %>
               <li style="width:500px" align="left"><%= msg %></li>
             <% end %>
           </ul>
       
       </div>
           <% end %>
+          
       <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-4">

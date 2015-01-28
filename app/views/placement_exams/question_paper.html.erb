@@ -2,8 +2,7 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
     <li><%= link_to 'Placement',placement_exams_path %></li>
-    <li><%= link_to 'Apply Exam',apply_exam_placement_exams_path %></li>
-    <li>Question Paper</li>
+    <li> Question Paper </li>
   </ul>
 </div>
 
@@ -18,14 +17,15 @@
           <input id="seconds" type="text" readonly="true" style="width: 26px;font-size: 16px; font-weight: bold; background-color:transparent">sec
         </div>
       </div>
-    </div>  
+    </div>
 
     <div class="box-content">
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
           <%=link_to :"Start Exam",disp_time_placement_exams_path(exam_id:@placement_exam),remote:true,class: "btn btn-primary"%>
-          <%= form_for :question,url: start_test_placement_exams_path, html:{id: "user_form"} do |f| %>
+
+          <%= form_for :question,url: {action: 'save_test',placement_exam_id: @placement_exam.id,student_id:current_user.student_id}, html:{id: "user_form"} do |f| %>
           <table cellpadding="5" cellspacing="5">
             <% @questions.each_with_index do |q,j| %>
             <tr><th><%j=j+1%><%= j%>: <%= q.question %></th></tr>
@@ -35,7 +35,7 @@
               <td>
                 <%= f.radio_button q.id, opt.id %>
                 <%i=i+1%>
-                <font color="#00BFFF"><%= i%></font> : <%= opt.option %>
+                <%= i%> : <%= opt.option %>
               </td>
             </tr>
             <%end%>

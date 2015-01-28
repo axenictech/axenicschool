@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 20150127070021) do
 
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
@@ -424,11 +425,7 @@
     t.integer  "employee_category_id"
     t.string   "employee_number"
     t.date     "joining_date"
-<<<<<<< HEAD
-    t.binary   "first_name"
-=======
     t.string   "first_name"
->>>>>>> a682735a2a99c35bf54cce0bbc9bc1ce960216e2
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "gender"
@@ -1004,6 +1001,18 @@
 
   add_index "ranking_levels", ["course_id"], name: "index_ranking_levels_on_course_id", using: :btree
 
+  create_table "student_answer_sheets", force: true do |t|
+    t.integer  "student_exams_id"
+    t.integer  "question_databases_id"
+    t.integer  "options_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "student_answer_sheets", ["options_id"], name: "index_student_answer_sheets_on_options_id", using: :btree
+  add_index "student_answer_sheets", ["question_databases_id"], name: "index_student_answer_sheets_on_question_databases_id", using: :btree
+  add_index "student_answer_sheets", ["student_exams_id"], name: "index_student_answer_sheets_on_student_exams_id", using: :btree
+
   create_table "student_category_fee_collection_discounts", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1013,6 +1022,16 @@
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "student_exams", force: true do |t|
+    t.integer  "placement_exams_id"
+    t.integer  "students_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "student_exams", ["placement_exams_id"], name: "index_student_exams_on_placement_exams_id", using: :btree
+  add_index "student_exams", ["students_id"], name: "index_student_exams_on_students_id", using: :btree
 
   create_table "student_fee_collection_discounts", force: true do |t|
     t.datetime "created_at"
@@ -1045,6 +1064,17 @@
   end
 
   add_index "student_previous_subject_marks", ["student_id"], name: "index_student_previous_subject_marks_on_student_id", using: :btree
+
+  create_table "student_scores", force: true do |t|
+    t.integer  "placement_exams_id"
+    t.integer  "students_id"
+    t.float    "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "student_scores", ["placement_exams_id"], name: "index_student_scores_on_placement_exams_id", using: :btree
+  add_index "student_scores", ["students_id"], name: "index_student_scores_on_students_id", using: :btree
 
   create_table "student_subjects", force: true do |t|
     t.integer  "student_id"
@@ -1187,27 +1217,15 @@
 
   add_index "weekdays", ["batch_id"], name: "index_weekdays_on_batch_id", using: :btree
 
-<<<<<<< HEAD
-  create_table "weights", force: true do |t|
-    t.integer  "percentage"
-    t.integer  "PlacementExam_id"
-    t.integer  "QuestionType_id"
-=======
   create_table "weightages", force: true do |t|
     t.integer  "percentage"
     t.integer  "placement_exam_id"
     t.integer  "question_type_id"
->>>>>>> a682735a2a99c35bf54cce0bbc9bc1ce960216e2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
-  add_index "weights", ["PlacementExam_id"], name: "index_weights_on_PlacementExam_id", using: :btree
-  add_index "weights", ["QuestionType_id"], name: "index_weights_on_QuestionType_id", using: :btree
-=======
   add_index "weightages", ["placement_exam_id"], name: "index_weightages_on_placement_exam_id", using: :btree
   add_index "weightages", ["question_type_id"], name: "index_weightages_on_question_type_id", using: :btree
->>>>>>> a682735a2a99c35bf54cce0bbc9bc1ce960216e2
 
 end
