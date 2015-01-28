@@ -27,11 +27,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @placement_exam.each do |c| %>
+                  <% @placement_exam.each do |p| %>
                     <tr>
-                      <td><%= c.company.name%></td>
-                      <td><%= c.company.criteria %></td>
-                      <td><%=  link_to 'Apply',question_paper_placement_exams_path(c.company.id) %></td>
+                      <td><%= p.company.name%></td>
+                      <td><%= p.company.criteria %></td>
+                      <td><%=  link_to 'Apply',question_paper_placement_exams_path(id: p.company_id, p_id: p.id) %></td>
 
                     </tr>
                   <%end%>

@@ -1,4 +1,5 @@
-var mins = <%= @time%>;
+// var mins = <%= @time%>;
+var mins = 1
 var secs = mins * 60;
 function countdown() {
   setTimeout('Decrement()',1000);
@@ -15,8 +16,7 @@ function Decrement() {
       seconds.value = getseconds();
     }
     if (secs == 0){
-    alert('exam finished...!!!');
-    window.location.replace('/placement_exams/set_question_paper');
+      $('#user_form').submit();
     }
     secs--;
     setTimeout('Decrement()',1000);

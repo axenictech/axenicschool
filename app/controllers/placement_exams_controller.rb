@@ -3,12 +3,8 @@ class PlacementExamsController < ApplicationController
   before_action :set_placement_exam, only: [:show, :edit, :update, :destroy]
 
   def index
-<<<<<<< HEAD
     @placement_exam = PlacementExam.all
-=======
->>>>>>> 908809073e4cdf8f436d314aebc64c73ef51bff2
     @placement_news = PlacementNews.all
-    @placement_exams = PlacementExam.all
   end
 
   def insert
@@ -47,8 +43,9 @@ class PlacementExamsController < ApplicationController
   end
 
   def question_paper
-    @company = Company.find(params[:format])
+    @company = Company.find(params[:id])
     @questions = Company.take_exam(@company)
+    @placement_exam = PlacementExam.find(params[:p_id])
   end
 
   def start_test
@@ -61,8 +58,10 @@ class PlacementExamsController < ApplicationController
     @test = params[:question]
     StudentExam.create(placement_exams_id: params["placement_exam_id"], students_id: params["student_id"])
     @student_exam = StudentExam.last
-    @test.each do |t|
-      StudentAnswerSheet.create(student_exams_id: @student_exam.id ,question_databases_id: t[0],options_id: t[1])
+    unless @test.nil?
+      @test.each do |t|
+        StudentAnswerSheet.create(student_exams_id: @student_exam.id ,question_databases_id: t[0],options_id: t[1])
+      end
     end
   end
 

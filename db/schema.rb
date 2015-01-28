@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127070021) do
+ActiveRecord::Schema.define(version: 20170122215036) do
 
   create_table "apply_leaves", force: true do |t|
     t.integer  "employee_id"
@@ -425,7 +425,7 @@ ActiveRecord::Schema.define(version: 20150127070021) do
     t.integer  "employee_category_id"
     t.string   "employee_number"
     t.date     "joining_date"
-    t.string   "first_name"
+    t.binary   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "gender"
@@ -1227,5 +1227,16 @@ ActiveRecord::Schema.define(version: 20150127070021) do
 
   add_index "weightages", ["placement_exam_id"], name: "index_weightages_on_placement_exam_id", using: :btree
   add_index "weightages", ["question_type_id"], name: "index_weightages_on_question_type_id", using: :btree
+
+  create_table "weights", force: true do |t|
+    t.integer  "percentage"
+    t.integer  "PlacementExam_id"
+    t.integer  "QuestionType_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "weights", ["PlacementExam_id"], name: "index_weights_on_PlacementExam_id", using: :btree
+  add_index "weights", ["QuestionType_id"], name: "index_weights_on_QuestionType_id", using: :btree
 
 end
