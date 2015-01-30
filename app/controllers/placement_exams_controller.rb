@@ -44,25 +44,15 @@ class PlacementExamsController < ApplicationController
 
   def question_paper
     @company = Company.find(params[:id])
-    @questions = Company.take_exam(@company)
+    @questions = Company.conduct_exam(@company)
     @placement_exam = PlacementExam.find(params[:p_id])
   end
 
   def save_test
     @test = params[:question]
-    StudentExam.create(placement_exams_id: params["placement_exam_id"], students_id: params["student_id"])
-    @student_exam = StudentExam.last
-    i=0
-    @test.each do |t|
-      StudentAnswerSheet.create(student_exams_id: @student_exam.id ,question_databases_id: t[0],options_id: t[1])
-      @ans = Option.where(question_database_id: t[0].to_i,id: t[1].to_i).take
-      if @ans.is_answer==true
-        i+=1
-      else  
-      end
-    end
-    StudentScore.create(placement_exams_id: params["placement_exam_id"], students_id: params["student_id"],score: i.to_f)
-    @score = StudentScore.last
+    @placement_exam = params['placement_exam_id']
+    @student = Student.find(params[:student_id])
+    @score = PlacementExam.calculateres(@test, @placement_exam, @student)
   end
 
   def exam
@@ -88,23 +78,18 @@ class PlacementExamsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @placement_exam.update(placement_exam_params)
-        format.html { redirect_to @placement_exam, notice: 'Placement exam was successfully updated.' }
-        format.json { render :show, status: :ok, location: @placement_exam }
-      else
-        format.html { render :edit }
-        format.json { render json: @placement_exam.errors, status: :unprocessable_entity }
-      end
+    if @placement_exam.update(placement_exam_params)
+      redirect_to @placement_exam
+      flash[:notice] = 'Placement exam was successfully updated.'
+    else
+      render 'edit'
     end
   end
 
   def destroy
     @placement_exam.destroy
-    respond_to do |format|
-      format.html { redirect_to placement_exams_url, notice: 'Placement exam was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to placement_exams_path
+    flash[:notice] = 'Placement exam was successfully destroyed.'
   end
 
   def question_type
