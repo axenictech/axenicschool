@@ -39,5 +39,6 @@ gem 'roo', group: :development
 # gem 'capistrano-rails', group: :development
 gem 'passenger'
 gem 'table_print'
+gem 'chartkick'
 # Use debugger
 # gem 'debugger', group: [:development, :test]

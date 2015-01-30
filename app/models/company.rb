@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
     minimum: 1, maximum: 20 }, format: { with: /\A[a-zA-Z0-9" "-]+\Z/ }
   validates :criteria, presence: true, length: { minimum: 1, maximum: 9000 }
 
-  def self.take_exam(company)
+  def self.conduct_exam(company)
     questions = []
     @questions = []
     exam = PlacementExam.where(company_id: company.id).take
