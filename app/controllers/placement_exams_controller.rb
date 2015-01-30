@@ -44,7 +44,6 @@ class PlacementExamsController < ApplicationController
 
   def question_paper
     @company = Company.find(params[:id])
-    @questions = Company.conduct_exam(@company)
     @placement_exam = PlacementExam.find(params[:p_id])
   end
 
@@ -98,6 +97,8 @@ class PlacementExamsController < ApplicationController
 
   def disp_time
     @placement_exam = PlacementExam.first
+    @company = Company.find(params[:company_id])
+    @questions = Company.conduct_exam(@company)
     @time = @placement_exam.timeperiod.strftime('%M').to_i
   end
 
