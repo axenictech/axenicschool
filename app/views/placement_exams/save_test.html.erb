@@ -1,5 +1,5 @@
 your score is : <%= @score.score %>
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-<%= pie_chart Weightage.group(:question_type_id).count %>
+<%=# pie_chart Weightage.group(:question_type_id).count %>
 <%= line_chart Weightage.group(:question_type_id).group(:percentage).count %>
-<%= pie_chart({"Technical" => 10, "Non-Technical" => 5}) %>
+<%= pie_chart({"Technical" => 5, "Non-Technical" => 5}) %>
