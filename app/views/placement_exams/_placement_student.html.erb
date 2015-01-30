@@ -1,7 +1,6 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',dashboard_home_index_path %></li>
-    <li><%= link_to 'Placement',placement_exams_path %></li>
     <li>Apply Exam</li>
   </ul>
 </div>
@@ -27,12 +26,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @placement_exam.each do |c| %>
-                    <tr>
-                      <td><%= c.company.name%></td>
-                      <td><%= c.company.criteria %></td>
-                      <td><%=  link_to 'Apply',question_paper_placement_exams_path(c.company.id) %></td>
-
+                  <% @placement_exam.each do |p| %>
+                    <tr><%%>
+                      <td><%= p.company.name%></td>
+                      <td><%= p.company.criteria %></td>
+                      <td>
+                        <%=  link_to 'Apply',question_paper_placement_exams_path(id: p.company.id,p_id: p.id) %>
+                      </td>
                     </tr>
                   <%end%>
                 </tbody>
@@ -55,9 +55,8 @@
                 <h2>Placement News</h2>
               </div>
               <div class="box-content" style="overflow-y: scroll; height:280px">
-       
               <table id="datatable" class="table table-striped table-bordered responsive">
-                <thead>
+               <thead>
                   <tr>
                     <th>Title</th>
                     <th>Content</th>
@@ -78,4 +77,4 @@
       </div>
     </div>
   </div>
-</div>  
+</div>

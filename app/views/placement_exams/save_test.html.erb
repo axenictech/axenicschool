@@ -1,1 +1,29 @@
-your score is : <%= @score.score %>
+<hr>
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-content">
+        <div class="row">
+          <div class="col-md-8">
+            
+          </div><br>
+          
+        </div><hr>
+        <div class="form-group">
+          <h4 align="center">
+            <font color="brown">Exam Details:</font>
+          </h4>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="col-md-6">
+              <b>your score is : <%= @score.score %></b></div>
+            </div><br>
+          </div>
+          <%=link_to 'Finish',dashboard_home_index_path,class: "btn btn-primary" %>
+        </div><hr>
+      </div>
+    </div>
+  </div>
+</div>
