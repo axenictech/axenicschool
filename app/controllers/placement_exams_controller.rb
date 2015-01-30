@@ -111,8 +111,4 @@ class PlacementExamsController < ApplicationController
   def placement_exam_params
     params.require(:exam).permit!
   end
-
-  def save_test_params
-    params.require(:question).permit!
-  end
 end
