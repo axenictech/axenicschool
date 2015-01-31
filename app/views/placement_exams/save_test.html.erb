@@ -1,4 +1,17 @@
 
+<script type="text/javascript">
+  $(function() {
+  	new Highcharts.Charts({
+  		chart:{renderTo: "oredrs_charts"}
+  	});
+  });	
+
+</script>
+
+<div id="oredrs_charts" style="width:560px;height:300px;"></div>
+
+
+
 <hr>
 <div class="row">
   <div class="box col-md-12">
@@ -19,18 +32,22 @@
           <div class="col-md-6">
             <div class="form-group">
               <div class="col-md-6">
-              <b>your score is : <%= @score.score %></b></div>
+              <b>your total score is : <%= @score[1] %></b></div>
             </div><br>
           </div>
+        </div>
+        <% @score[0].each do |s|%>
+                <p><b>your <%= s[0]%> score is : <%= s[1] %></b></p>
+              <%end%>
           <%=link_to 'Finish',dashboard_home_index_path,class: "btn btn-primary" %>
-        </div><hr>
+        <hr>
       </div>
     </div>
   </div>
 </div>
 
-your score is : <%= @score.score %>
+
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-<%=# pie_chart Weightage.group(:question_type_id).count %>
+<%= pie_chart Weightage.group(:question_type_id).count %>
 <%= line_chart Weightage.group(:question_type_id).group(:percentage).count %>
-<%= pie_chart({"Technical" => 5, "Non-Technical" => 5}) %>
+<%= pie_chart(@score[0].collect{|c| [:"c[0]" => c[1]]}) %>
