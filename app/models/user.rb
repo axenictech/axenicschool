@@ -1,6 +1,5 @@
 # User
 class User < ActiveRecord::Base
-  authenticates_with_sorcery!
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_and_belongs_to_many :privileges
