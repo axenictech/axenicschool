@@ -1,6 +1,7 @@
 # Students Controller
 class StudentsController < ApplicationController
   def index
+    @students ||= Student.list
     authorize! :create, Student
   end
 
@@ -114,10 +115,6 @@ class StudentsController < ApplicationController
     @previous_subjects ||= StudentPreviousSubjectMark.where(student_id: student)
   end
 
-  def search_ajax
-    @students ||= Student.search(params[:search], params[:student][:status])
-  end
-
   def view_all
     @batches ||= Batch.includes(:course).all
     authorize! :read, @batches.first
@@ -130,7 +127,6 @@ class StudentsController < ApplicationController
   end
 
   def profile
-    puts params[:id]
     @student = Student.shod(params[:id])
     @immediate_contact = Guardian.shod(@student.immediate_contact)
     authorize! :read, @student

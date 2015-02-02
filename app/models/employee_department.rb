@@ -7,6 +7,7 @@ class EmployeeDepartment < ActiveRecord::Base
   scope :shod, ->(id) { where(id: id).take }
   scope :is_status, -> { where(status: true).order(:name) }
   scope :not_status, -> { where(status: false).order(:name) }
+
   def assign_employee(batch)
     emp = []
     employees = self.employees.pluck(:id)

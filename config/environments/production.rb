@@ -81,7 +81,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'axenicschoolfeae.ninefold-apps.com' }
+  config.action_mailer.default_url_options = { host: 'axenictech.com:8085' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = true
@@ -89,11 +89,11 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
-    address: 'smtp.sendgrid.net',
+    address: 'smtp.gmail.com',
     port: 587,
-    domain: 'sendgrid.com',
+    domain: 'gmail.com',
     authentication: :login,
-    user_name: 'nf_gK419269cic',
-    password: 'qlpgckfe'
+    user_name: 'axenicschool@gmail.com',
+    password: 'axenic@123'
   }
 end

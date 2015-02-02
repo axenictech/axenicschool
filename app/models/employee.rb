@@ -10,7 +10,6 @@ class Employee < ActiveRecord::Base
   has_attached_file :image
   validates_attachment_content_type \
   :image, content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
-
   has_many :employees_subjects
   has_many :subjects, through: :employees_subjects
   has_many :timetable_entries
@@ -168,7 +167,7 @@ class Employee < ActiveRecord::Base
 
   def self.adv_search(p)
     conditions = ''
-    conditions += "concat_ws(' ',first_name,last_name) like '#{p[:name]}%'" unless p[:name] == ''
+    conditions += "concat_ws(' ',first_name,last_name) like '#{p[:name]}%' COLLATE utf8_bin" unless p[:name] == ''
 
     if p[:gender]
       unless p[:gender].eql? 'All'

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :privileges
   belongs_to :general_setting
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :validatable, :timeoutable
+         :validatable, :timeoutable, :confirmable
 
   validates :username, presence: true, uniqueness: true, length: \
   { in: 1..50 }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
@@ -16,13 +16,19 @@ class User < ActiveRecord::Base
   scope :shod, ->(id) { where(id: id).take }
   scope :role_wise_users, ->(role) { where(role: role) }
   scope :discover, ->(i, r) { where(student_id: i, role: r).take }
+
   def full_name
     first_name + ' ' + last_name
   end
 
   def create_general_setting
+    if id == 1
+      role == 'SuperAdmin'
+    else
+      role == 'Admin'
+    end
     gs = GeneralSetting.create(school_or_college_name: 'Axenic School')
-    update(general_setting_id: gs.id, role: 'Admin')
+    update(general_setting_id: gs.id, role: role)
   end
 
   def institute_name
@@ -50,8 +56,8 @@ class User < ActiveRecord::Base
 
   def self.search_user(search)
     return if search.empty?
-    where("concat_ws(' ',first_name,last_name)ilike ? \
-      OR concat_ws(' ',last_name,first_name)ilike ? \
-      OR username ilike ?", "#{search}%", "#{search}%", "#{search}%")
+    where("concat_ws(' ',first_name,last_name)like ? \
+      OR concat_ws(' ',last_name,first_name)like ? \
+      OR username like ?", "#{search}%", "#{search}%", "#{search}%")
   end
 end

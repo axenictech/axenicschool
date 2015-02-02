@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def show
     @user = User.shod(params[:id])
     @student = @user.student
-    @employee = User.where(role: 'Employee')
+    @employee = User.where(role: 'Employee').take
     authorize! :read, @user
   end
 

@@ -1,5 +1,5 @@
 require 'roo'
-ex = Roo::Excelx.new("#{Rails.root}/public/database.xlsx")
+ex = Roo::Spreadsheet.open("#{Rails.root}/public/database.xlsx")
 p 'Course database being created.... Wait'
 ex.default_sheet = ex.sheets[0]
 3.upto(50) do |line|

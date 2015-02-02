@@ -4,7 +4,6 @@ class Batch < ActiveRecord::Base
   validates :end_date, presence: true
   validate :end_date_cannot_be_less_than_start_date
   belongs_to :course
-
   has_many :students
   has_many :class_timings
   has_many :archived_students

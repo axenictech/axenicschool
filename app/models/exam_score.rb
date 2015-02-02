@@ -11,6 +11,7 @@ class ExamScore < ActiveRecord::Base
   scope :shod, ->(id) { where(id: id).take }
   scope :exrep, ->(ex, st) { where(exam_id: ex.id, student_id: st).take }
   scope :score, ->(s, e) { where(student_id: s, exam_id: e).take }
+
   def marks_cant_be_negative
     if  marks.present? && marks < 0
       errors.add(:marks, 'cannot be negative')

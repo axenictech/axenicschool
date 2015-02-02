@@ -58,6 +58,7 @@ class Student < ActiveRecord::Base
                      length: { minimum: 6, maximum: 11 }, allow_blank: true
   after_save :create_user_account
   scope :shod, ->(id) { where(id: id).take }
+  scope :list, -> { all + ArchivedStudent.all }
 
   def batch_name
     [batch.course.course_name, batch.course.section_name, batch.name].join(' ')
@@ -102,20 +103,20 @@ class Student < ActiveRecord::Base
   def self.search(input, status)
     return if input.empty?
     if status.eql? 'present'
-      Student.where("concat_ws(' ',first_name,last_name)ilike '#{input}%' \
-        OR concat_ws(' ',last_name,first_name)ilike '#{input}%' \
-        OR admission_no ilike '#{input}%'")
+      Student.where("concat_ws(' ',first_name,last_name)like '#{input}%' \
+        OR concat_ws(' ',last_name,first_name)like '#{input}%' \
+        OR admission_no like '#{input}%' COLLATE utf8_bin")
     else
-      ArchivedStudent.where("concat_ws(' ',first_name,last_name)ilike \
-        '#{input}%' OR concat_ws(' ',last_name,first_name)ilike '#{input}%' \
-        OR admission_no ilike '#{input}%'")
+      ArchivedStudent.where("concat_ws(' ',first_name,last_name)like \
+        '#{input}%' OR concat_ws(' ',last_name,first_name)like '#{input}%' \
+        OR admission_no like '#{input}%' COLLATE utf8_bin")
     end
   end
 
   def self.advance_search(search, batch)
     conditions = ''
     conditions += "concat_ws(' ',first_name,last_name) \
-    ilike '#{search[:name]}%'" unless search[:name] == ''
+    like '#{search[:name]}%' COLLATE utf8_bin" unless search[:name] == ''
     if batch[:id]
       if conditions == ''
         conditions += "batch_id = #{batch[:id]}" unless batch[:id] == ''
@@ -135,18 +136,18 @@ class Student < ActiveRecord::Base
     if search[:gender]
       unless search[:gender].eql? 'All'
         if conditions == ''
-          conditions += "gender ilike '#{search[:gender]}'"
+          conditions += "gender like '#{search[:gender]}'"
         else
-          conditions += " AND gender ilike '#{search[:gender]}'"
+          conditions += " AND gender like '#{search[:gender]}'"
         end
       end
     end
     if search[:blood_group]
       if conditions == ''
-        conditions += "blood_group ilike '#{search[:blood_group]}'" \
+        conditions += "blood_group like '#{search[:blood_group]}'" \
         unless search[:blood_group] == ''
       else
-        conditions += " AND blood_group ilike '#{search[:blood_group]}'" \
+        conditions += " AND blood_group like '#{search[:blood_group]}'" \
         unless search[:blood_group] == ''
       end
     end

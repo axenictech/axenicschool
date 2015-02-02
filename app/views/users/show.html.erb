@@ -20,12 +20,18 @@
         <% end %>
       <% elsif @user.role.eql? "Employee"%>
         <% unless @employee.nil? %>
-         <%= link_to "View Profile",profile_employees_path(@employee.id), class: "btn btn-primary-link btn-xs"%>
+         <%= link_to "View Profile",profile_employees_path(@employee.employee_id), class: "btn btn-primary-link btn-xs"%>
         <%end%>  
       <% end %>
-      
-      <%= link_to "Change Password", change_password_user_path(@user), class: "btn btn-primary-link btn-xs"%>
-        <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary-link btn-xs"%>
+      <%unless @user.role.eql? "Admin"%>
+        <%= link_to "Change Password", change_password_user_path(@user), class: "btn btn-primary-link btn-xs"%>
+         <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary-link btn-xs"%>
+      <%else%>
+        <% if current_user.id == @user.id %>
+          <%= link_to "Change Password", change_password_user_path(@user), class: "btn btn-primary-link btn-xs"%>
+            <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary-link btn-xs"%>
+        <%end%>
+      <%end%>
         <%= link_to "Delete",@user,method: :delete,data:{confirm:"Are you sure to delete User: '#{@user.first_name+" "+@user.last_name}'?"}, class: "btn btn-primary-link btn-xs" %>
     </div>
   </div>

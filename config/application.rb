@@ -13,5 +13,6 @@ module Educulture
     config.middleware.use 'PDFKit::Middleware', print_media_type: true
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
     config.assets.paths << Rails.root.join('vendor', 'assets', 'images')
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
