@@ -39,4 +39,6 @@
 <%= pie_chart @score[0]%>
 
 <%= line_chart Result.group(:name,:percentage).count %>
- 
+<%= column_chart Result.group(:name,:percentage).count %>
+<%= bar_chart Result.group(:name).group(:percentage).count %>
+<%= line_chart Result.group_by_hour(:created_at).count %>
