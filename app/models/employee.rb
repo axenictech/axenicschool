@@ -411,7 +411,7 @@ class Employee < ActiveRecord::Base
 
   def personal_salary(date)
     individual_payslip_categories.where(salary_date: date).take
-
+  end
   def self.att_leave(emp)
     emp.each do |e|
       EmployeeLeaveType.all.each do |l|

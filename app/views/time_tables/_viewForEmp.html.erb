@@ -15,7 +15,7 @@
       <% end %>
     </tr> 
  
-<% @weekdays.each do |w|%>
+<% @weekdays.reverse_each do |w|%>
       <tr>
         <td class="td"><div class="name"><%=w.weekday%></div></td>
         <% @class_timings.each do |c|%>
