@@ -317,7 +317,7 @@ class FinanceController < ApplicationController
     else
       @incomes ||= FinanceTransaction.list(@start_date, @end_date)
     end
-    authorize! :read, @incomes.first
+    authorize! :read, @incomes.first unless @incomes.nil?
   end
 
   def edit_income

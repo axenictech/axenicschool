@@ -275,8 +275,8 @@ class StudentsController < ApplicationController
   end
 
   def advanced_student_search
-    @students ||= Student.advance_search(params[:search], params[:batch])
-    @search ||= Student.search_script(params[:search], params[:batch])
+    @students ||= Student.advance_search(params[:search], params[:batch]) unless params[:batch].nil?
+    @search ||= Student.search_script(params[:search], params[:batch]) unless params[:batch].nil?
     authorize! :read, @student
   end
 

@@ -19,7 +19,7 @@
 <%= form_for :course_select, :url=>{:action=>'select_course'},html:{id: 'form_course'},remote:true,method: :get do |f| %>
 
 
-<b>Select Course:</b>
+<b>Select a Course:</b>
       <%= f.select :id, @courses.collect {|c| [c.course_name,c.id]},{prompt:true},{onchange:"$('#form_course').submit();",class:"form-control",style: "width: 300px"}%>
 
   <% end %>

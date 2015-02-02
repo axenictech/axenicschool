@@ -1,0 +1,42 @@
+
+<hr>
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-content">
+        <div class="row">
+          <div class="col-md-8">
+            
+          </div><br>
+          
+        </div><hr>
+        <div class="form-group">
+          <h4 align="center">
+            <font color="brown">Exam Details:</font>
+          </h4>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="col-md-6">
+              <b>your total score is : <%= @score[1] %> out of <%=@placement_exam.question_count%></b></div>
+            </div><br>
+          </div>
+        </div>
+        <% @score[0].each do |s|%>
+                <p><b>your <%= s[0]%> score is : <%= '%.2f'%(s[1])%></b></p>
+                <%Result.create(name:s[0],percentage:s[1])%>
+              <%end%>
+          <%=link_to 'Finish',dashboard_home_index_path,class: "btn btn-primary" %>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= javascript_include_tag "path/to/highcharts.js", "chartkick" %>
+<%= pie_chart @score[0]%>
+
+<%= line_chart Result.group(:name,:percentage).count %>
+ 

@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def update
     @user = User.shod(params[:id])
     if @user.update(user_params)
-      flash[:user] = t('user_update')
+      flash[:notice] = t('user_update')
       redirect_to user_path(@user)
     else
       render 'edit'

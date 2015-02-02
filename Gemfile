@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+# gem 'hirb', :require => nil
+gem 'table_print'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use postgresql as the database for Active Record
@@ -37,6 +38,8 @@ gem 'roo'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'passenger'
+gem 'table_print'
+gem 'chartkick'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'yaml_db'
@@ -46,3 +49,5 @@ gem 'will_paginate'
 gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-passenger'
+gem 'groupdate', '~> 2.1.1'
+gem 'active_median', '~> 0.1.0'

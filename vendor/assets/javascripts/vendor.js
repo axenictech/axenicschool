@@ -73,3 +73,9 @@ function class_fun(){
 function department_event(){
 	$('#department_form').submit();
 }
+
+function my(){
+	$('#p').click(function(){
+  alert("The paragraph was clicked.");
+});
+}
