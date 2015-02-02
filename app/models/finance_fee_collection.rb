@@ -91,4 +91,16 @@ class FinanceFeeCollection < ActiveRecord::Base
       create_fee_collection_discount(batch, category)
     end
   end
+
+  def previous(student)
+    finance_fees.where(student_id: student.id).take.id - 1
+  end
+
+  def next(student)
+    finance_fees.where(student_id: student.id).take.id + 1
+  end
+
+  def fee(student)
+    finance_fees.where(student_id: student.id).take
+  end
 end

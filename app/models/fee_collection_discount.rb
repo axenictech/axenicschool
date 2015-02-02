@@ -26,7 +26,7 @@ class FeeCollectionDiscount < ActiveRecord::Base
   end
 
   def collection_discount(total)
-    (total * discount) / 100
+    (discount * total) / 100
   end
 
   def student_name
