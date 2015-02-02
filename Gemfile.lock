@@ -14,6 +14,8 @@ GEM
       activesupport (= 4.1.1)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_median (0.1.2)
+      activerecord
     activemodel (4.1.1)
       activesupport (= 4.1.1)
       builder (~> 3.1)
@@ -68,6 +70,8 @@ GEM
     execjs (2.2.1)
     fastercsv (1.5.5)
     ffi (1.9.3)
+    groupdate (2.1.1)
+      activerecord (>= 3.0.0)
     haml (4.0.5)
       tilt
     highline (1.6.21)
@@ -192,12 +196,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_median (~> 0.1.0)
   aws-sdk
   brakeman
   cancan
   chartkick
   coffee-rails (~> 4.0.0)
   devise
+  groupdate (~> 2.1.1)
   imagemagick-binaries
   jbuilder (~> 2.0)
   jquery-rails

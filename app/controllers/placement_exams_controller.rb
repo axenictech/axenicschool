@@ -49,9 +49,9 @@ class PlacementExamsController < ApplicationController
 
   def save_test
     @test = params[:question]
-    @placement_exam = params['placement_exam_id']
+    @placement_exam = PlacementExam.find(params[:placement_exam_id])
     @student = Student.find(params[:student_id])
-    @score = PlacementExam.calculateres(@test, @placement_exam, @student)
+    @score = PlacementExam.calculateres(@test, @placement_exam.id, @student)
   end
 
   def exam

@@ -1,17 +1,4 @@
 
-<script type="text/javascript">
-  $(function() {
-  	new Highcharts.Charts({
-  		chart:{renderTo: "oredrs_charts"}
-  	});
-  });	
-
-</script>
-
-<div id="oredrs_charts" style="width:560px;height:300px;"></div>
-
-
-
 <hr>
 <div class="row">
   <div class="box col-md-12">
@@ -32,12 +19,13 @@
           <div class="col-md-6">
             <div class="form-group">
               <div class="col-md-6">
-              <b>your total score is : <%= @score[1] %></b></div>
+              <b>your total score is : <%= @score[1] %> out of <%=@placement_exam.question_count%></b></div>
             </div><br>
           </div>
         </div>
         <% @score[0].each do |s|%>
-                <p><b>your <%= s[0]%> score is : <%= s[1] %></b></p>
+                <p><b>your <%= s[0]%> score is : <%= '%.2f'%(s[1])%></b></p>
+                <%Result.create(name:s[0],percentage:s[1])%>
               <%end%>
           <%=link_to 'Finish',dashboard_home_index_path,class: "btn btn-primary" %>
         <hr>
@@ -47,7 +35,8 @@
 </div>
 
 
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-<%= pie_chart Weightage.group(:question_type_id).count %>
-<%= line_chart Weightage.group(:question_type_id).group(:percentage).count %>
-<%= pie_chart(@score[0].collect{|c| [:"c[0]" => c[1]]}) %>
+<%= javascript_include_tag "path/to/highcharts.js", "chartkick" %>
+<%= pie_chart @score[0]%>
+
+<%= line_chart Result.group(:name,:percentage).count %>
+ 

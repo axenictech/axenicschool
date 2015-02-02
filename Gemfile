@@ -42,3 +42,5 @@ gem 'table_print'
 gem 'chartkick'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'groupdate', '~> 2.1.1'
+gem 'active_median', '~> 0.1.0'
