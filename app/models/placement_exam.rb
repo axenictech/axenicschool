@@ -48,7 +48,7 @@ class PlacementExam < ActiveRecord::Base
       if total == 0
       	per = 0
       else
-       per = ans * 100 / total
+       per = (ans * 100 / total)
       end
       result << [i.question_type.que_type, per]
     end

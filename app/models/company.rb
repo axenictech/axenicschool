@@ -11,7 +11,7 @@ class Company < ActiveRecord::Base
     exam.weightages.each do |i|
       pr = Weightage.where(question_type_id: i.question_type_id,
                            placement_exam_id: exam.id).take.percentage
-      quest = (tot_que * pr / 100)
+      quest = (tot_que.to_i * pr.to_i)/100
       questions << [i.question_type_id, quest]
     end
     questions.each do |q|

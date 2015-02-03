@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202173013) do
+ActiveRecord::Schema.define(version: 20170122215036) do
 
   create_table "apply_leaves", force: :cascade do |t|
     t.integer  "employee_id",             limit: 4
@@ -425,7 +425,7 @@ ActiveRecord::Schema.define(version: 20150202173013) do
     t.integer  "employee_category_id",   limit: 4
     t.string   "employee_number",        limit: 255
     t.date     "joining_date"
-    t.string   "first_name",             limit: 255
+    t.binary   "first_name",             limit: 65535
     t.string   "middle_name",            limit: 255
     t.string   "last_name",              limit: 255
     t.string   "gender",                 limit: 255
@@ -973,9 +973,9 @@ ActiveRecord::Schema.define(version: 20150202173013) do
   create_table "question_databases", force: :cascade do |t|
     t.integer  "question_type_id", limit: 4
     t.string   "question",         limit: 255
-    t.integer  "no_of_option",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "no_of_option",     limit: 4
   end
 
   add_index "question_databases", ["question_type_id"], name: "index_question_databases_on_question_type_id", using: :btree
@@ -1231,17 +1231,6 @@ ActiveRecord::Schema.define(version: 20150202173013) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
-  create_table "versions", force: :cascade do |t|
-    t.string   "item_type",  limit: 255,   null: false
-    t.integer  "item_id",    limit: 4,     null: false
-    t.string   "event",      limit: 255,   null: false
-    t.string   "whodunnit",  limit: 255
-    t.text     "object",     limit: 65535
-    t.datetime "created_at"
-  end
-
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
-
   create_table "weekdays", force: :cascade do |t|
     t.integer  "batch_id",    limit: 4
     t.string   "weekday",     limit: 255
@@ -1262,5 +1251,16 @@ ActiveRecord::Schema.define(version: 20150202173013) do
 
   add_index "weightages", ["placement_exam_id"], name: "index_weightages_on_placement_exam_id", using: :btree
   add_index "weightages", ["question_type_id"], name: "index_weightages_on_question_type_id", using: :btree
+
+  create_table "weights", force: :cascade do |t|
+    t.integer  "percentage",       limit: 4
+    t.integer  "PlacementExam_id", limit: 4
+    t.integer  "QuestionType_id",  limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "weights", ["PlacementExam_id"], name: "index_weights_on_PlacementExam_id", using: :btree
+  add_index "weights", ["QuestionType_id"], name: "index_weights_on_QuestionType_id", using: :btree
 
 end
