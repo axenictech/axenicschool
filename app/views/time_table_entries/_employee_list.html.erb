@@ -8,7 +8,7 @@
  <% @teachers.each do |e| unless e.employee.nil?
  	 %>
      <%=radio_button_tag "teacher",e.employee.id,:checked=>"unchecked" %>
-      <div class="btn btn-primary" ><%= e.employee.first_name %></div>&nbsp;&nbsp;&nbsp;
+      <div class="btn btn-primary" ><%= e.employee.full_name %></div>&nbsp;&nbsp;&nbsp;
          <% end %>
       <%end%>
      <%end%>

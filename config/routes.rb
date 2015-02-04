@@ -151,6 +151,7 @@ Rails.application.routes.draw do
       get :edit_immediate_contact
       patch :update_immediate_contact
       patch :update_immediatecontact
+      get :search_ajax
       get :archived_report
       get :archived_student_guardian
       get :report_email
@@ -208,6 +209,7 @@ Rails.application.routes.draw do
       get :employee_timetable
       get :select_time_employee
       get :display_institutional_time_table
+      get :teacher_timetable_pdf
     end
   end
 
@@ -569,6 +571,7 @@ Rails.application.routes.draw do
       get :employee_structure
       get :emp_payslip
       post :view_payslip_profile
+
     end
     member do
       get :edit_category
