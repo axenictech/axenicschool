@@ -47,3 +47,4 @@
     {name: "Study", data: {Time.new => 30} },
     {name: "Conversation", data: {Time.new => 50} } ],
     {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>
+<%= line_chart Product.group("purchased").maximum(:price), {library: {hAxis: {title: "X"}, vAxis: {title: "Y"}}} %>

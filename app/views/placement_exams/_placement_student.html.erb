@@ -63,8 +63,12 @@
                 <tbody>
                   <% @placement_news.each do |placement_news|%>
                     <tr>
-                      <td><%= placement_news.title %></td>
-                      <td><%= placement_news.content %></td>
+                    <%if placement_news.islink?%>
+                        <td><%=link_to placement_news.title,qualified_student_placement_exams_path %></td>
+                     <%else%>
+                       <td><%= placement_news.title %></td>
+                      <%end%>
+                  <td><%= placement_news.content %></td>
                     </tr>
                   <%end%>
                 </tbody>

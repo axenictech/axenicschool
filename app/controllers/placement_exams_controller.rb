@@ -102,6 +102,10 @@ class PlacementExamsController < ApplicationController
     @time = @placement_exam.timeperiod.strftime('%M').to_i
   end
 
+  def qualified_student
+    
+  end
+
   private
 
   def set_placement_exam
