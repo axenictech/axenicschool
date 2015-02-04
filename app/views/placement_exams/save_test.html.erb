@@ -42,3 +42,8 @@
 <%= column_chart Result.group(:name,:percentage).count %>
 <%= bar_chart Result.group(:name).group(:percentage).count %>
 <%= line_chart Result.group_by_hour(:created_at).count %>
+<%= line_chart [
+    {name: "Cantidad de voluntarios en estado activo", data: {Time.new => 20} },
+    {name: "Study", data: {Time.new => 30} },
+    {name: "Conversation", data: {Time.new => 50} } ],
+    {library: {hAxis: {title: "Tiempo", format: 'MMM y'}, vAxis: {title: "Valores"}}} %>

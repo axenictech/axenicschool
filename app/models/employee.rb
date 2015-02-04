@@ -54,18 +54,18 @@ class Employee < ActiveRecord::Base
     }, allow_blank: true
 
   validates :home_address_line1, presence: true, length: \
-   { in: 1..30 }, on: :update
+   { in: 1..30 }, allow_blank: true
   validates :home_address_line2, length: \
   { in: 1..30 }, allow_blank: true
   validates :home_city, presence: true, format: \
    { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' \
-   }, length: { in: 1..30 }, on: :update
+   }, length: { in: 1..30 }, allow_blank: true
   validates :home_state, presence: true, format: \
    { with: /\A[a-z A-Z]+\z/, message: 'only allows letters' \
-    }, length: { in: 1..30 }, on: :update
+    }, length: { in: 1..30 }, allow_blank: true
   validates :home_pin_code, presence: true, numericality: \
   { only_integer: true }, length: \
-  { minimum: 6, maximum: 6 }, on: :update
+  { minimum: 6, maximum: 6 }, allow_blank: true
   validates :office_address_line1, length: \
   { in: 1..100 }, allow_blank: true
   validates :office_address_line2, length: { in: 1..100 }, allow_blank: true
@@ -89,7 +89,7 @@ class Employee < ActiveRecord::Base
   validates :home_phone, numericality: { only_integer: true }, length: \
   { minimum: 6, maximum: 11 }, allow_blank: true
 
-  validates :home_country_id, presence: true, on: :update
+  validates :home_country_id, presence: true, allow_blank: true
   scope :shod, ->(id) { where(id: id).take }
   scope :not_status, -> { where(status: false).order(:name) }
   scope :search1, ->(other_conditions, param)\
