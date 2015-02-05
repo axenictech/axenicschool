@@ -125,6 +125,9 @@ class PlacementExamsController < ApplicationController
     flash[:notice] = 'Student short-listed successfully'
     redirect_to placement_exams_path
   end
+  def qualified_student
+    
+  end
 
   private
 

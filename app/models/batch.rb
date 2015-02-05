@@ -16,6 +16,7 @@ class Batch < ActiveRecord::Base
   has_and_belongs_to_many :finance_fee_categories
   has_and_belongs_to_many :online_exams
   has_many :finance_fee_collections
+  has_many :student_informations
   scope :shod, ->(id) { where(id: id).take }
 
   def exam

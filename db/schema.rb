@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122215036) do
+ActiveRecord::Schema.define(version: 20170206092330) do
 
   create_table "apply_leaves", force: :cascade do |t|
     t.integer  "employee_id",             limit: 4
@@ -941,6 +941,7 @@ ActiveRecord::Schema.define(version: 20170122215036) do
     t.string   "content",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "islink",     limit: 1
   end
 
   create_table "privilege_tags", force: :cascade do |t|
@@ -1066,6 +1067,18 @@ ActiveRecord::Schema.define(version: 20170122215036) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "student_informations", force: :cascade do |t|
+    t.string   "year",       limit: 255
+    t.decimal  "marks",                  precision: 10
+    t.integer  "student_id", limit: 4
+    t.integer  "batch_id",   limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "student_informations", ["batch_id"], name: "index_student_informations_on_batch_id", using: :btree
+  add_index "student_informations", ["student_id"], name: "index_student_informations_on_student_id", using: :btree
 
   create_table "student_previous_data", force: :cascade do |t|
     t.integer  "student_id",  limit: 4
@@ -1264,4 +1277,6 @@ ActiveRecord::Schema.define(version: 20170122215036) do
   add_index "weights", ["PlacementExam_id"], name: "index_weights_on_PlacementExam_id", using: :btree
   add_index "weights", ["QuestionType_id"], name: "index_weights_on_QuestionType_id", using: :btree
 
+  add_foreign_key "student_informations", "batches"
+  add_foreign_key "student_informations", "students"
 end

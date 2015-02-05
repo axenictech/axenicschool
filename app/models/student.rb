@@ -12,6 +12,7 @@ class Student < ActiveRecord::Base
   has_many :finance_fees
   has_many :student_scores
   has_many :finance_fee_collections, through: :finance_fees
+  has_many :student_informations
   has_attached_file :image
   validates_attachment_content_type :image, content_type: \
   ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
