@@ -9,7 +9,7 @@
             
           </div><br>
           
-        </div><hr>
+        </div><hr>q
         <div class="form-group">
           <h4 align="center">
             <font color="brown">Exam Details:</font>
@@ -39,7 +39,7 @@
 <%= pie_chart @score[0]%>
 
 <%= line_chart Result.group(:name,:percentage).count %>
-<%= column_chart Result.group(:name,:percentage).count %>
+<%= column_chart Result.group(:name,:percentage).count%>
 <%= bar_chart Result.group(:name).group(:percentage).count %>
 <%= line_chart Result.group_by_hour(:created_at).count %>
 <%= line_chart [

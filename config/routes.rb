@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       get :disp_time
       post :save_test
       get :apply_exam
+      get :publish_result
+      get :display_result
+      post :qualify_student
     end
   end
   resources :options

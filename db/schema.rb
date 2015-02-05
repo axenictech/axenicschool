@@ -1091,14 +1091,15 @@ ActiveRecord::Schema.define(version: 20170122215036) do
 
   create_table "student_scores", force: :cascade do |t|
     t.integer  "placement_exams_id", limit: 4
-    t.integer  "students_id",        limit: 4
     t.float    "score",              limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_id",         limit: 4
+    t.boolean  "is_qualify",         limit: 1
   end
 
   add_index "student_scores", ["placement_exams_id"], name: "index_student_scores_on_placement_exams_id", using: :btree
-  add_index "student_scores", ["students_id"], name: "index_student_scores_on_students_id", using: :btree
+  add_index "student_scores", ["student_id"], name: "index_student_scores_on_student_id", using: :btree
 
   create_table "student_subjects", force: :cascade do |t|
     t.integer  "student_id", limit: 4
