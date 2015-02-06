@@ -1,4 +1,5 @@
 class Guardian < ActiveRecord::Base
+  include Activity
   belongs_to :country
   belongs_to :student
   validates :email, presence: true, format: { with: /\A[a-zA-Z0-9._-]+@([a-zA-Z0-9]+\.)+[a-zA-Z]{2,4}+\z/ }, allow_blank: true

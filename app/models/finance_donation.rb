@@ -1,4 +1,5 @@
 class FinanceDonation < ActiveRecord::Base
+  include Activity
   belongs_to :finance_transaction
   validates :donor, presence: true, length: \
   { minimum: 1, maximum: 30 }, format: { with: /\A[a-z A-Z 0-9_.-\/]+\z/ }

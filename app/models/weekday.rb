@@ -1,5 +1,6 @@
 # Weekday model
 class Weekday < ActiveRecord::Base
+  include Activity
   belongs_to :batch
   scope :shod, ->(id) { where(id: id).take }
   scope :day, -> \

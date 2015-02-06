@@ -1,4 +1,5 @@
 class StudentSubject < ActiveRecord::Base
+  include Activity
   belongs_to :student
   belongs_to :subject
   scope :shod, ->(id) { where(id: id).take }

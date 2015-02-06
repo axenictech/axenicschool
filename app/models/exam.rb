@@ -1,5 +1,6 @@
 # Exam Active Record
 class Exam < ActiveRecord::Base
+  include Activity
   belongs_to :exam_group
   belongs_to :subject
   belongs_to :event

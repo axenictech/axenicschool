@@ -1,4 +1,5 @@
 class FinanceFeeCollection < ActiveRecord::Base
+  include Activity
   belongs_to :batch
   belongs_to :finance_fee_category
   has_many :fee_collection_particulars

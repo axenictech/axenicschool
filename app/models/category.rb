@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+  include Activity
   has_many :students
   # has_many :fee_category ,:class_name =>"FinanceFeeCategory"
 

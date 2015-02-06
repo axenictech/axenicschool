@@ -1,5 +1,6 @@
 # Time Table Model
 class TimeTable < ActiveRecord::Base
+  include Activity
   has_many :time_table_entries, dependent: :destroy
   scope :shod, ->(id) { where(id: id).take }
 

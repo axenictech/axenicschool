@@ -1,5 +1,6 @@
 # PlacementExam
 class PlacementExam < ActiveRecord::Base
+  include Activity
   belongs_to :company
   has_many :weightages
   has_many :student_scores

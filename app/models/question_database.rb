@@ -1,5 +1,6 @@
 # QuestionDatabase
 class QuestionDatabase < ActiveRecord::Base
+  include Activity
   belongs_to :question_type
   has_many :options
 

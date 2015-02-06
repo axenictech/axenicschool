@@ -1,5 +1,6 @@
 # EmployeeDepartment model
 class EmployeeDepartment < ActiveRecord::Base
+  include Activity
   has_many :employees
   validates :name, presence: true, length: \
   { minimum: 1, maximum: 50 }, format: { with: /\A[a-zA-Z0-9#+_" "-]+\Z/ }

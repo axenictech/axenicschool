@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :placement_news
-
   root 'home#index'
   resources :placement_exams do
     collection do
@@ -22,6 +20,8 @@ Rails.application.routes.draw do
 
     end
   end
+  resources :placement_news
+
   resources :options
 
   resources :qusetions
@@ -39,7 +39,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :home do
-    collection { get :dashboard }
+    collection do
+      get :dashboard
+    end
+    member do
+      get :user_activity
+    end
   end
 
   resources :categories

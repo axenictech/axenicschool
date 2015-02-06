@@ -1,4 +1,5 @@
 class FinanceFee < ActiveRecord::Base
+  include Activity
   belongs_to :finance_fee_collection
   belongs_to :student
   has_many :finance_transactions

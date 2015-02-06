@@ -1,4 +1,5 @@
 class MonthlyPayslip < ActiveRecord::Base
+  include Activity
   belongs_to :employee
   scope :shod, ->(id) { where(id: id).take }
   def approve_salary

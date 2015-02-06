@@ -1,5 +1,6 @@
 # course model
 class Course < ActiveRecord::Base
+  include Activity
   validates :course_name, presence: true, length: \
   { minimum: 1, maximum: 60 }, format: { with: /\A[a-zA-Z0-9._" "-\/]+\Z/ }
   validates :section_name, presence: true, length: \

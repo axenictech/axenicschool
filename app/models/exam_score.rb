@@ -1,5 +1,6 @@
 # ExamScore
 class ExamScore < ActiveRecord::Base
+  include Activity
   belongs_to :student
   belongs_to :exam
   belongs_to :grading_level

@@ -1,4 +1,5 @@
 class FinanceTransaction < ActiveRecord::Base
+  include Activity
   belongs_to :finance_transaction_category
   has_one :finance_donation
   belongs_to :finance_fee

@@ -1,5 +1,6 @@
 # Time Table Entry Model
 class TimeTableEntry < ActiveRecord::Base
+  include Activity
   belongs_to :course
   belongs_to :batch
   belongs_to :class_timing

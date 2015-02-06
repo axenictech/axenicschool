@@ -1,4 +1,5 @@
 class Batch < ActiveRecord::Base
+  include Activity
   validates :name, presence: true, length: { minimum: 1, maximum: 20 }, format: { with: /\A[a-zA-Z0-9.\/_" "-]+\Z/ }
   validates :start_date, presence: true
   validates :end_date, presence: true

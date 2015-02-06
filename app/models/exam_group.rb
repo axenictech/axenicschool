@@ -1,5 +1,6 @@
 # ExamGroup
 class ExamGroup < ActiveRecord::Base
+  include Activity
   belongs_to :batch
   has_many :exams, dependent: :destroy
   accepts_nested_attributes_for :exams
