@@ -1,4 +1,5 @@
 class FinanceTransactionCategory < ActiveRecord::Base
+  include Activity
   has_many :finance_transactions
   has_one :finance_transaction_trigger
   validates :name, presence: true, length: \

@@ -1,5 +1,6 @@
 # ArchivedEmployee
 class ArchivedEmployee < ActiveRecord::Base
+  include Activity
   belongs_to :employee_category
   belongs_to :employee_position
   belongs_to :employee_grade

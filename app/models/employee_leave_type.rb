@@ -1,5 +1,6 @@
 # EmployeeLeaveType
 class EmployeeLeaveType < ActiveRecord::Base
+  include Activity
   validates :name, presence: true, length: \
    { minimum: 1, maximum: 50 }, format: { with: /\A[a-zA-Z_" "-]+\Z/ }
   validates :code, presence: true, uniqueness: true, length: \

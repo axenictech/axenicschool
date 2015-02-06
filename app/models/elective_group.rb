@@ -1,5 +1,6 @@
 # elective group
 class ElectiveGroup < ActiveRecord::Base
+  include Activity
   belongs_to :batch
   has_many :subjects
   validates :name, presence: true, length: { minimum: 1, maximum: 20 }, format: \

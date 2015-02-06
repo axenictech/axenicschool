@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202173013) do
+ActiveRecord::Schema.define(version: 20150203072939) do
 
   create_table "apply_leaves", force: :cascade do |t|
     t.integer  "employee_id",             limit: 4
@@ -1193,6 +1193,17 @@ ActiveRecord::Schema.define(version: 20150202173013) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_activities", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "modelname",  limit: 255
+    t.integer  "model_id",   limit: 4
+    t.string   "action",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "user_activities", ["user_id"], name: "index_user_activities_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               limit: 255

@@ -35,7 +35,9 @@
 <div class="ch-container">
   <div class="row">  
   <!-- left menu starts -->
-  <% if current_user.role == 'Admin' %>
+  <% if current_user.role == 'SuperAdmin' %>
+      <%= render 'layouts/menu1' %>
+  <% elsif current_user.role == 'Admin' %>
       <%= render 'layouts/menu1' %>
   <% elsif current_user.role == 'Employee' %>
       <%= render 'layouts/menu2' %>

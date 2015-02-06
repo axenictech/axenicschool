@@ -1,5 +1,6 @@
 # Event model
 class Event < ActiveRecord::Base
+  include Activity
   has_many :batch_events
   scope :shod, ->(id) { where(id: id).take }
 

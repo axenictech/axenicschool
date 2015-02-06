@@ -1,5 +1,6 @@
 # bank details
 class EmployeeBankDetail < ActiveRecord::Base
+  include Activity
   belongs_to :employee
   belongs_to :bank_field
   def self.bankdetails(emp, details)

@@ -1,4 +1,5 @@
 class FinanceFeeParticular < ActiveRecord::Base
+  include Activity
   belongs_to :finance_fee_category
   belongs_to :category
   validates :name, presence: true, length: { minimum: 1, maximum: 30 }\

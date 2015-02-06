@@ -1,4 +1,5 @@
 class FinanceFeeCategory < ActiveRecord::Base
+  include Activity
   has_and_belongs_to_many :batches
   has_many :finance_fee_particulars
   has_many :fee_discounts

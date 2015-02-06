@@ -1,4 +1,5 @@
 class FeeDiscount < ActiveRecord::Base
+  include Activity
   self.inheritance_column = nil
   belongs_to :finance_fee_category
   belongs_to :batch

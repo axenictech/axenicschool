@@ -1,5 +1,6 @@
 # Attendence model
 class Attendence < ActiveRecord::Base
+  include Activity
   belongs_to :subject
   belongs_to :batch
   validates :reason, presence: true, length: \

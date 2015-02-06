@@ -1,4 +1,5 @@
 class StudentPreviousData < ActiveRecord::Base
+  include Activity
   belongs_to :student
   validates :institution, presence: true
   validates_length_of :institution, minimum: 1, maximum: 100

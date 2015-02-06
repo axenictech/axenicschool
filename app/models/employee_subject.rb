@@ -1,5 +1,6 @@
 # EmployeeSubject
 class EmployeeSubject < ActiveRecord::Base
+  include Activity
   belongs_to :employee
   belongs_to :subject
   has_one :batch, through: :subject

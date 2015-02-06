@@ -1,4 +1,5 @@
 class Subject < ActiveRecord::Base
+  include Activity
   belongs_to :batch
   belongs_to :elective_group
   has_many :timetable_entries, foreign_key: 'subject_id'

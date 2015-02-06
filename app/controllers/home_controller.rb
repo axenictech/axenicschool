@@ -8,5 +8,11 @@ class HomeController < ApplicationController
 
   def dashboard
     @student = current_user.student
+    @acts ||= UserActivity.order(created_at: :desc) if current_user.id == 1
+  end
+
+  def user_activity
+    @activity = UserActivity.shod(params[:id])
+    @model ||= @activity.activity_model
   end
 end

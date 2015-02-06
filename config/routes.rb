@@ -34,7 +34,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :home do
-    collection { get :dashboard }
+    collection do
+      get :dashboard
+    end
+    member do
+      get :user_activity
+    end
   end
 
   resources :categories

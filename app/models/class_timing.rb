@@ -1,5 +1,6 @@
 # Class Timing Model
 class ClassTiming < ActiveRecord::Base
+  include Activity
   has_many :timetable_entries
   belongs_to :batch
   validates :name, presence: true, length: { \

@@ -1,5 +1,6 @@
 # Newscast model
 class Newscast < ActiveRecord::Base
+  include Activity
   has_many :comments, counter_cache: true
   belongs_to :user
   validates :title, presence: true, length: { minimum: 1, maximum: 100 }

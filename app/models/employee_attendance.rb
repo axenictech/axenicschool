@@ -1,5 +1,6 @@
 # EmployeeAttendance
 class EmployeeAttendance < ActiveRecord::Base
+  include Activity
   belongs_to :employee
   belongs_to :employee_leave_type
   belongs_to :EmployeeDepartment

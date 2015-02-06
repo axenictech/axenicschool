@@ -1,4 +1,5 @@
 class FeeCollectionParticularsStudent < ActiveRecord::Base
+  include Activity
   belongs_to :student
   belongs_to :fee_collection_particular
   scope :shod, ->(id) { where(id: id).take }
