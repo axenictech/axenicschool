@@ -65,7 +65,7 @@ en:
   elective_group_create: 'Elective group Created Successfully'
   elective_group_update: 'Elective group updated Successfully'
   elective_group_delete: 'Elective group deleted Successfully'
-  weekday_create: 'Weekday created successfully'
+  weekday_create: 'Weekdays created successfully'
   user_create: 'User created successfully'
   user_update: 'User updated successfully'
   pass_change: 'Password changed successfully'

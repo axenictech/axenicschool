@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   belongs_to :general_setting
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :validatable, :timeoutable, :trackable
-
   validates :username, presence: true, uniqueness: true, length: \
   { in: 1..50 }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
   validates :first_name, presence: true, length: { in: 1..25 }, format: \

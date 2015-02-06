@@ -67,6 +67,16 @@ class TimeTablesController < ApplicationController
     authorize! :read, @timetables.first
   end
 
+  def teacher_timetable_pdf
+    @time_table = TimeTable.shod(params[:time])
+    @timetable_entries = @time_table.time_table_entries
+    @weekdays = TimeTable.weekday_teacher(@timetable_entries)
+    @class_timings = TimeTable.class_teacher(@timetable_entries)
+    @employees = TimeTable.employee_teacher(@timetable_entries)
+    @general_setting = GeneralSetting.first
+    render 'teacher_timetable_pdf', layout: false
+  end
+
   def work_allotment
     @employees ||= Employee.all
     if request.post?

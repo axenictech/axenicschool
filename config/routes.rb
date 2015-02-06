@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :placement_news
-
   root 'home#index'
   resources :placement_exams do
     collection do
@@ -15,8 +13,15 @@ Rails.application.routes.draw do
       get :disp_time
       post :save_test
       get :apply_exam
+      get :publish_result
+      get :display_result
+      post :qualify_student
+      get :qualified_student
+
     end
   end
+  resources :placement_news
+
   resources :options
 
   resources :qusetions
@@ -156,6 +161,7 @@ Rails.application.routes.draw do
       get :edit_immediate_contact
       patch :update_immediate_contact
       patch :update_immediatecontact
+      get :search_ajax
       get :archived_report
       get :archived_student_guardian
       get :report_email
@@ -213,6 +219,7 @@ Rails.application.routes.draw do
       get :employee_timetable
       get :select_time_employee
       get :display_institutional_time_table
+      get :teacher_timetable_pdf
     end
   end
 
@@ -574,6 +581,7 @@ Rails.application.routes.draw do
       get :employee_structure
       get :emp_payslip
       post :view_payslip_profile
+
     end
     member do
       get :edit_category
