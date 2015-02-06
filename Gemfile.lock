@@ -56,6 +56,8 @@ GEM
       sass (~> 3.0)
       terminal-table (~> 1.4)
     builder (3.2.2)
+    calendar_date_select (2.0.0)
+      rails (>= 3.1)
     cancan (1.6.10)
     capistrano (3.3.5)
       capistrano-stats (~> 1.1.0)
@@ -246,6 +248,7 @@ DEPENDENCIES
   active_median (~> 0.1.0)
   aws-sdk
   brakeman
+  calendar_date_select
   cancan
   capistrano
   capistrano-passenger

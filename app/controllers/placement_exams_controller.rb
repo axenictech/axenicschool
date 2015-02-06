@@ -114,19 +114,24 @@ class PlacementExamsController < ApplicationController
 
   def qualify_student
     @company = Company.find(params[:id])
+    @placement_exam = PlacementExam.find(params[:exam_id])
     qualify_student = params[:qualify]
     title = "congratulations you are  short \
               listed for next round of " + @company.name
     qualify_student.each do |i|
-      @student = StudentScore.where(student_id: i).take.update(is_qualify: true)
+      @student = StudentScore.where(student_id: i,placement_exams_id: @placement_exam).take.update(is_qualify: true)
       content = Student.find(i).full_name
       PlacementNews.create(title: title, content: content)
     end
     flash[:notice] = 'Student short-listed successfully'
     redirect_to placement_exams_path
   end
+
   def qualified_student
-    
+    @company = Company.find(params[:id])
+    @placement_exam = PlacementExam.find(params[:exam_id])
+    @score = StudentScore.where(placement_exams_id: @placement_exam)
+    @student_score = @score.where(is_qualify: true)
   end
 
   private
