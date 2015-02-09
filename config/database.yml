@@ -15,9 +15,10 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password: root
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -59,8 +60,6 @@ development:
 test:
   <<: *default
   database: educulture_test
-  username: amar
-  password: 129129129
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,5 +83,3 @@ test:
 production:
   <<: *default
   database: educulture_production
-  username: educulture
-  password: <%= ENV['EDUCULTURE_DATABASE_PASSWORD'] %>
