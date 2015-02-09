@@ -6,6 +6,7 @@ class CreatePlacementExam < ActiveRecord::Migration
 			t.date :start_date
 			t.date :end_date
 			t.references :company, index: :true
+			t.timestamps
 		end
 	end
 end

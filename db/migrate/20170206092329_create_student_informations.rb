@@ -6,9 +6,7 @@ class CreateStudentInformations < ActiveRecord::Migration
       t.references :student, index: true
       t.references :batch, index: true
 
-      t.timestamps null: false
+      t.timestamps
     end
-    add_foreign_key :student_informations, :students
-    add_foreign_key :student_informations, :batches
   end
 end

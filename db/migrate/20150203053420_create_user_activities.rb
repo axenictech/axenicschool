@@ -6,7 +6,7 @@ class CreateUserActivities < ActiveRecord::Migration
       t.integer :model_id
       t.string :action
 
-      t.timestamps null: false
+      t.timestamps
     end
   end
 end
