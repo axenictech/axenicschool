@@ -34,8 +34,6 @@
   </div>
 </div>
 
-
-<%= javascript_include_tag "path/to/highcharts.js", "chartkick" %>
 <%= pie_chart @score[0]%>
 
 <%= line_chart Result.group(:name,:percentage).count %>

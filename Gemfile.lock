@@ -130,7 +130,6 @@ GEM
     mini_portile (0.6.2)
     minitest (5.5.1)
     multi_json (1.10.1)
-    mysql2 (0.3.17)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -147,6 +146,7 @@ GEM
       rack
       rake (>= 0.8.1)
     pdfkit (0.6.2)
+    pg (0.18.1)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -262,10 +262,10 @@ DEPENDENCIES
   jbuilder
   jquery-datatables-rails (~> 2.2.3)
   jquery-rails
-  mysql2
   paperclip
   passenger
   pdfkit
+  pg
   rails
   roo
   sass-rails
