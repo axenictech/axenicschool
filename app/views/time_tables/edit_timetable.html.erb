@@ -26,7 +26,7 @@
       <% @timetables.each_with_index do |tt,i| %>
       <tr>
           <td class="col-1"><b> <%= i+1 %></b></td>
-          <td class="col-3"> <b><%=link_to "#{I18n.l(tt.start_date,:format=>"%d %b %Y")}  -  #{I18n.l(tt.end_date,:format=>"%d %b %Y")}",time_tables_update_timetable_path(tt.id)%></b></td>
+          <td class="col-3"> <b><%=link_to "#{I18n.l(tt.start_date,:format=>"%d %b %Y")}  -  #{I18n.l(tt.end_date,:format=>"%d %b %Y")}",update_timetable_time_tables_path(tt.id)%></b></td>
       </tr>   
       <%end%>  
      <%end%>  

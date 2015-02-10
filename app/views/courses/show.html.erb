@@ -9,7 +9,7 @@
 <div id="inner-tab-menu">
   <ul>
     <li><%= link_to 'New', new_course_batch_path(@course) %> </li>
-    <li style="width:150px" ><%= link_to 'Grouped Batches', courses_grouped_batches_path(@course) %> </li>
+    <li style="width:150px" ><%= link_to 'Grouped Batches', grouped_batches_course_path(@course) %> </li>
   </ul>
 </div>
 
@@ -32,7 +32,7 @@
 <% @batches.each do |batch|%>
 	
 			<tr>
-			<td class="col-2"><%=link_to batch.course.code+" - "+batch.name , batches_display_path(batch) %>
+			<td class="col-2"><%=link_to batch.course.code+" - "+batch.name , display_batch_path(batch) %>
       </td>
 			<td><%= link_to 'Edit', edit_batch_path(batch) %></td>
  			<td><%= link_to 'Delete',batch,

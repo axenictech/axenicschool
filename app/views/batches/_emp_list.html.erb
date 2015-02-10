@@ -1,18 +1,40 @@
-<% if @employees.nil? %>
-<h4>Employee not assigned</h4>
-<%else%>
-<h2>Assign New</h2>
-<table class="tabel"  align="center" style="width:400px">
+<div class="row">
+  <div class="box col-md-6">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Employees List</h2>
+      </div>
+      
+    <div class="box-content">
+      <table id="datatable" class="table table-striped table-bordered responsive">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% if @employees.empty? %>
+		  <tr><td>Recorde Not Found</td></tr>
+		<%else%>
+		  <% @employees.each do |emp| %>
+          <tr>
+            <td><%=Employee.find(emp).first_name%></td>
+            <td class="center">
+              <%= link_to "Assign",assign_employee_batch_path(@batch,emp),method: :post,remote:true%>
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
 
-
-	<%@employees.each do |emp|%>
-	<tr>
-		<td><%=Employee.find(emp).first_name%></td>
-		<td><%= link_to "Assign",batches_assign_employee_path(@batch,emp),method: :post,remote:true%></td>
-	</tr>
-	<%end%>
-
-</table>
-
-<div id="assigned_emp"><%=render 'assigned_emp_list'%></div>
-<%end%>
+  <div class="box col-md-6">
+	<div id="assigned_emp">
+		<%=render 'assigned_emp_list'%>
+	</div>
+  </div>
+</div>

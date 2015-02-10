@@ -3,7 +3,7 @@ class GuardiansController < ApplicationController
     @student = Student.find(params[:student_id])
     @guardian = @student.guardians.create(guardian_params)
     if @guardian.save
-      redirect_to students_admission2_1_path(@student)
+      redirect_to admission2_1_students_path(@student)
     else
       render template: 'students/admission2'
    end
@@ -17,7 +17,7 @@ class GuardiansController < ApplicationController
     @student = Student.find(params[:format])
     @guard = @student.guardians.create(guardian_params)
     if @guard.save
-      redirect_to students_dispguardian_path(@student)
+      redirect_to dispguardian_students_path(@student)
     else
       render template: 'students/addguardian'
    end

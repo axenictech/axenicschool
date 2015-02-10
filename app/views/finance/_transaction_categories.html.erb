@@ -11,8 +11,8 @@
 				<td class="col-2" colspan="3"><%= tc.name%></td>
 			<%else%>
 				<td class="col-2"><%= tc.name%></td>
-				<td><%= link_to 'Edit',finance_edit_transaction_category_path(tc),remote:true%></td>
-				<td><%= link_to 'Delete' ,finance_delete_transaction_category_path(tc),method: :delete, data:{confirm:"Are You sure to delete Category '#{tc.name}'?"},remote:true%></td>	
+				<td><%= link_to 'Edit',edit_transaction_category_finance_path(tc),remote:true%></td>
+				<td><%= link_to 'Delete' ,delete_transaction_category_finance_path(tc),method: :delete, data:{confirm:"Are You sure to delete Category '#{tc.name}'?"},remote:true%></td>	
 			<%end%>	
 				</tr>
 			<%end%>

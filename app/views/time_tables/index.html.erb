@@ -14,7 +14,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-            <%= link_to "Create weekdays",'/weekdays',style: 'color:black' %>
+            <%= link_to "Create weekdays",weekdays_path,style: 'color:black' %>
           </div>
           <div class="panel-body" style="height:70px">
         Create weekdays
@@ -25,7 +25,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-         <%= link_to "Set class timings",'/class_timings',style: 'color:black' %>
+         <%= link_to "Set class timings",class_timings_path,style: 'color:black' %>
           </div>
           <div class="panel-body" style="height:70px">
           Select a class and edit the timetable for that class
@@ -41,7 +41,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-          <%= link_to " Work Allotment",'/time_tables/work_allotment',style: 'color:black' %>     
+          <%= link_to " Work Allotment",work_allotment_time_tables_path,style: 'color:black' %>     
          </div>
           <div class="panel-body" style="height:70px">
           Assign subjects to teachers.
@@ -52,7 +52,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-        <%= link_to "Create Timetable",'/time_tables/new_timetable',style: 'color:black'%>
+        <%= link_to "Create Timetable",new_timetable_time_tables_path,style: 'color:black'%>
           </div>
           <div class="panel-body" style="height:70px">
          Create timetable for all the classes.
@@ -68,7 +68,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-            <%= link_to "Edit Timetable",time_tables_edit_timetable_path,style: 'color:black' %>     
+            <%= link_to "Edit Timetable",edit_timetable_time_tables_path,style: 'color:black' %>     
          </div>
           <div class="panel-body" style="height:70px">
           Select a class and edit the timetable for that class.
@@ -93,7 +93,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-           <%= link_to " Teacher Timetable", '/time_tables/teachers_timetable',style: 'color:black' %>    
+           <%= link_to " Teacher Timetable", teachers_timetable_time_tables_path,style: 'color:black' %>    
          </div>
           <div class="panel-body" style="height:70px">
            View timetable for teachers.
@@ -104,7 +104,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-          <%= link_to "Institutional Timetable",'/time_tables/timetable',style: 'color:black' %> 
+          <%= link_to "Institutional Timetable",timetable_time_tables_path,style: 'color:black' %> 
           </div>
           <div class="panel-body" style="height:70px">
          View the entire timetable for a day

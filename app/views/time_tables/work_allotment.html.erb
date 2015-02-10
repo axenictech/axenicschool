@@ -14,7 +14,7 @@
  <div><%= image_tag("underline.jpg",width: "100%")%></div>
 </div>
 <div id="page-yield">
-<%=link_to 'Assign Multiple Teacher',employees_subject_assignment_path %>
+
 <%=form_for :employees_subjects,:html=>{:id=>'work_allotment_form'} do |f| %>
    <table align="center" class="table table-hover" style="width:80%">
     <% @batches.each do |batch| %>

@@ -1,17 +1,33 @@
-
-<h2>Assigned Employee</h2>
-<% if @assign_employees.nil? %>
-<h4>Employee not assigned</h4>
-<%else%>
-<table class="tabel" style="width:400px">
-  <% @assign_employees =  @batch.employee_id.split(",") unless @batch.employee_id.nil?%>
-	<% @assign_employees.each do |emp|%>
-	<% @employee = Employee.find(emp) %>
-	<tr>
-		<td><%=@employee.first_name%></td>
-		<td><%= link_to "Remove",batches_remove_employee_path(@batch,@employee),method: :delete,remote:true%></td>
-	</tr>
-	<%end%>
-</table>
-<%end%>
+<div class="box-inner">
+  <div class="box-header well">
+    <h2>Assigned Employees</h2>
+  </div>
+  
+<div class="box-content">
+  <table id="datatable" class="table table-striped table-bordered responsive">
+    <thead>
+      <tr>
+        <th>Employee Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if @assign_employees.nil? %>
+	  <tr><td>Employee not assigned</td></tr>
+	<%else%>
+	  <% @assign_employees =  @batch.employee_id.split(",") unless @batch.employee_id.nil?%>
+	  <% @assign_employees.each do |emp|%>
+		  <% @employee = Employee.find(emp) %>
+          <tr>
+            <td><%=@employee.first_name%></td>
+            <td class="center">
+              <%= link_to "Remove",remove_employee_batch_path(@batch,@employee),method: :delete,remote:true%>
+            </td>
+          </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
 

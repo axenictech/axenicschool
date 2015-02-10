@@ -16,20 +16,20 @@
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
-         <%=link_to "General",employees_genral_profile_path(@employee),remote:true%>
+         <%=link_to "General",genral_profile_employees_path(@employee),remote:true%>
       </li>
       <li role="presentation">
          
-         <%=link_to "Personal",employees_personal_profile_path(@employee),remote:true%>
+         <%=link_to "Personal",personal_profile_employees_path(@employee),remote:true%>
       </li>
       <li role="presentation">
-        <%=link_to "Address",employees_address_profile_path(@employee),remote:true%>
+        <%=link_to "Address",address_profile_employees_path(@employee),remote:true%>
       </li>
        <li role="presentation">
-        <%=link_to "Contact",employees_contact_profile_path(@employee),remote:true%>
+        <%=link_to "Contact",contact_profile_employees_path(@employee),remote:true%>
       </li>
        <li role="presentation">
-        <%=link_to "Bank_Info",employees_bank_info_path(@employee),remote:true%>
+        <%=link_to "Bank_Info",bank_info_employees_path(@employee),remote:true%>
       </li>
       
    </ul>
@@ -44,11 +44,11 @@
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
-         <%=link_to "Payroll",employees_emp_payroll_path(@employee),remote:true%>
+         <%=link_to "Payroll",emp_payroll_employees_path(@employee),remote:true%>
       </li>
       <li role="presentation">
          
-         <%=link_to "Payslip",employees_personal_profile_path(@employee),remote:true%>
+         <%=link_to "Payslip",personal_profile_employees_path(@employee),remote:true%>
       </li>
       
    </ul>
@@ -57,7 +57,7 @@
 <div class="dropdown pull-right">
    <button type="button" class="btn btn-primary" 
        style="margin-right:20px;">
-      <%= link_to "Delete",employees_remove_path(@employee),style:"color:white"%>
+      <%= link_to "Delete",remove_employees_path(@employee),style:"color:white"%>
 </button></div>
 
 <div class="dropdown pull-right">

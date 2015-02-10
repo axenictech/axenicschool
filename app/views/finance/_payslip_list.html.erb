@@ -18,7 +18,7 @@
 			<td class="col-3"><%= p.employee.employee_number%></td>
 			<td class="col-3"><%= p.amount%></td>
 			<td class="col-3"><%= p.is_approved? ? "Approved" : "Pending" %></td>
-			<td class="col-3"><%= link_to 'View',finance_view_employee_payslip_path(id:p.employee.id,date:@date)%></td>	
+			<td class="col-3"><%= link_to 'View',view_employee_payslip_finance_index_path(id:p.employee.id,date:@date)%></td>	
 		</tr>
 		<%employees+=i%>
 		<%total_salary+=p.amount.to_f%>
@@ -34,7 +34,7 @@
 	</tr>
 </table>
 <br/>
-<div align="center"><%= link_to 'Pdf Report',finance_employee_monthly_payslip_path(payslips:@payslips,format: "pdf"),class: "btn btn-success"%></div>
+<div align="center"><%= link_to 'Pdf Report',employee_monthly_payslip_finance_index_path(payslips:@payslips,format: "pdf"),class: "btn btn-success"%></div>
 <%else%>
 <h5>Payslip not found</h5>
 <%end%>

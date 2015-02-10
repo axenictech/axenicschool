@@ -41,7 +41,7 @@
       <tbody role="alert" aria-live="polite" aria-relevant="all">
     	<% @course.batches.each do |batch|%>
       	<tr class="<%= cycle('odd', 'even')%>">
-        <td class=" sorting_1"><%=link_to batch.course.code+" "+batch.course.section_name+" - "+batch.name , batches_display_path(batch) %></td>
+        <td class=" sorting_1"><%=link_to batch.course.code+" "+batch.course.section_name+" - "+batch.name , display_batch_path(batch) %></td>
      	</tr>
     	<%end%>
       </tbody>

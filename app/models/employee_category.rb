@@ -5,4 +5,7 @@ class EmployeeCategory < ActiveRecord::Base
 
   validates :prefix, presence: true,
                      length: { minimum: 1, maximum: 20 }, format: { with: /\A[a-z A-Z.\/]+\z/, message: ' allows Alphanumeric with . ,  / ' }
+
+  scope :is_status, -> { where(status: true).order(:name) }
+  scope :not_status, -> { where(status: false).order(:name) }
 end

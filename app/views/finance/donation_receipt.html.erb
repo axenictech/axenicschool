@@ -23,7 +23,7 @@
         <td class="col-2">Transcation Id</td>
         <td class="col-2"><%= @donation.finance_transaction.id%></td></tr>
       <tr class="tr-head">
-        <td colspan="2" align="center"><%= link_to 'Print receipt',donation_receipt_path(@donation,format:"pdf"),class: "btn btn-primary"%></td></tr>
+        <td colspan="2" align="center"><%= link_to 'Print receipt',finance_donation_receipt_finance_path(@donation,format:"pdf"),class: "btn btn-primary"%></td></tr>
       <tr class="tr-blank"></tr>
   </tbody>
   </table> 

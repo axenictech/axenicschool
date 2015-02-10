@@ -13,8 +13,8 @@
 		<td class="col-3"><%= d.category.nil? ? "-": d.category.name%></td>
 		<td class="col-3"><%= d.admission_no.nil? ? "-": d.admission_no%></td>
 		<td class="col-3"><%= d.discount%></td>
-		<td class="col-3"><%= link_to 'Edit',finance_edit_fee_discount_path(@batch,@master_category,id:d.id),remote:true %>&nbsp;&nbsp;
-			<%= link_to 'Delete' ,finance_delete_fee_discount_path(@batch,@master_category,id:d.id),method: :delete, data:{confirm:"Are you sure to delete '#{d.name}'?"},remote:true%></td>	
+		<td class="col-3"><%= link_to 'Edit',edit_fee_discount_finance_path(@batch,master_id:@master_category,discount_id:d.id),remote:true %>&nbsp;&nbsp;
+			<%= link_to 'Delete' ,delete_fee_discount_finance_path(@batch,master_id:@master_category,discount_id:d.id),method: :delete, data:{confirm:"Are you sure to delete '#{d.name}'?"},remote:true%></td>	
 		
 		</tr>
 	<%end%>

@@ -7,7 +7,7 @@ class CreateRankingLevels < ActiveRecord::Migration
       t.integer :subject_count
       t.integer :prioriy
       t.boolean :full_course
-      t.references :course,index: true 
+      t.references :course, index: true
       t.string :subject_limit_type
       t.string :marks_limit_type
 

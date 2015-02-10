@@ -10,12 +10,12 @@
 	<%@payroll_categories1.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'Edit',employees_edit_payroll_category_path(c),remote:true%></td>
-			<td><%= link_to 'Delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
+			<td><%= link_to 'Edit',edit_payroll_category_employee_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,destroy_payroll_category_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			<% if c.status? %>
-			<td><%= link_to 'Active',employees_active_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to activate this Category?"} %></td>	
+			<td><%= link_to 'Active',active_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to activate this Category?"} %></td>	
 			<% else %>
-			<td><%=link_to 'Inactive',employees_inactive_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
+			<td><%=link_to 'Inactive',inactive_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
 			<%end%>
 			</tr>
 		<%end%>
@@ -30,12 +30,12 @@
 	<%@payroll_categories2.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%></td>
-			<td><%= link_to 'Edit',employees_edit_payroll_category_path(c),remote:true%></td>
-			<td><%= link_to 'Delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	
+			<td><%= link_to 'Edit',edit_payroll_category_employee_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,destroy_payroll_category_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	
 			 <% if c.status? %>
-			<td><%= link_to 'Active',employees_active_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"} %></td>	
+			<td><%= link_to 'Active',active_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"} %></td>	
 			<% else %>
-			<td><%=link_to 'Inactive',employees_inactive_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
+			<td><%=link_to 'Inactive',inactive_payroll_category_employee_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
 			<%end%>
 			</tr>
 		<%end%>

@@ -29,7 +29,7 @@
     <td>  <%= link_to 'Delete', employee_attendances_destroy_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
   <%else%>
        <td colspan="2"><%= c.submit 'Submit', class: "btn btn-primary"%></td>
-       <td> 	<%= link_to 'Delete', employee_attendances_destroy_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
+       <td> 	<%= link_to 'Delete', destroy_attendance_employee_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
       <%end%>
         </tr>
   

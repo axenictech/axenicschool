@@ -9,7 +9,7 @@
 		<% @students.each_with_index do |s,i|%>
 			<tr>
 				<td class="col-3"><%= i+1 %></td>
-				<td class="col-3"><%= link_to s.first_name+" "+s.last_name,finance_fees_collection_student_path(id:s.id)%></td>
+				<td class="col-3"><%= link_to s.first_name+" "+s.last_name,fees_collection_student_finance_index_path(id:s.id)%></td>
 				<td class="col-3"><%= s.batch.course.course_name+" - "+s.batch.name%></td>
 				<td class="col-3"><%= s.admission_no%></td>
 			</tr>

@@ -51,8 +51,8 @@
         
       <tbody role="alert" aria-live="polite" aria-relevant="all">
    <% @course.batches.each do |batch|%>
-        <td class=" sorting_1"><%= link_to batch.course.code+" "+batch.course.section_name+" - "+batch.name , batch_transfers_transfer_path(batch) %></td>
-        <td class=""><%= link_to 'Graduation',batch_transfers_graduation_path(batch) %></td>
+        <td class=" sorting_1"><%= link_to batch.course.code+" "+batch.course.section_name+" - "+batch.name ,transfer_batch_transfer_path(batch) %></td>
+        <td class=""><%= link_to 'Graduation',graduation_batch_transfer_path(batch) %></td>
               </tr>
     <%end%>
           </tbody>

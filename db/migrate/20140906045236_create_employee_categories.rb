@@ -4,7 +4,7 @@ class CreateEmployeeCategories < ActiveRecord::Migration
       t.string :name
       t.string :prefix
       t.boolean :status
-      
+
       t.timestamps
     end
   end

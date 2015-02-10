@@ -73,7 +73,7 @@ class FinanceController < ApplicationController
     if @donation.update(donation_params)
       @donation.update_transaction
       flash[:notice] = 'Donation updated'
-      redirect_to finance_donors_path
+      redirect_to donors_finance_index_path
     else
       render 'edit_donation'
     end
@@ -83,7 +83,7 @@ class FinanceController < ApplicationController
     @donation = FinanceDonation.find(params[:id])
     @donation.destroy
     flash[:notice] = 'Donation deleted'
-    redirect_to finance_donors_path(@donation)
+    redirect_to donors_finance_index_path(@donation)
   end
 
   def new_asset
@@ -224,7 +224,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.new(transaction_params)
     if @transaction.save
       flash[:notice] = 'Expense has been added to the accounts'
-      redirect_to finance_new_expense_path
+      redirect_to new_expense_finance_index_path
     else
       @categories = FinanceTransactionCategory.where(is_income: false)
       render 'new_expense'
@@ -256,7 +256,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.find(params[:id])
     if @transaction.update(transaction_params)
       flash[:notice] = 'Expense has been updated to the accounts'
-      redirect_to finance_view_expense_path
+      redirect_to view_expense_finance_index_path
     else
       @categories = FinanceTransactionCategory.where(is_income: false)
       render 'edit_expense'
@@ -267,7 +267,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.find(params[:id])
     @transaction.destroy
     flash[:notice] = 'Expense has been deleted from accounts'
-    redirect_to finance_view_expense_path
+    redirect_to view_expense_finance_index_path
   end
 
   def finance_expense_report
@@ -287,7 +287,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.new(transaction_params)
     if @transaction.save
       flash[:notice] = 'Income has been added to the accounts'
-      redirect_to finance_new_income_path
+      redirect_to new_income_finance_index_path
     else
       @categories = FinanceTransactionCategory.where(is_income: true)
       render 'new_income'
@@ -319,7 +319,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.find(params[:id])
     if @transaction.update(transaction_params)
       flash[:notice] = 'Income has been updated to the accounts'
-      redirect_to finance_view_income_path
+      redirect_to view_income_finance_index_path
     else
       @categories = FinanceTransactionCategory.where(is_income: true)
       render 'edit_income'
@@ -330,7 +330,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.find(params[:id])
     @transaction.destroy
     flash[:notice] = 'Income has been deleted from accounts'
-    redirect_to finance_view_income_path
+    redirect_to view_income_finance_index_path
   end
 
   def finance_income_report
@@ -430,13 +430,13 @@ class FinanceController < ApplicationController
   end
 
   def edit_master_category
-    @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:id])
+    @batch = Batch.find(params[:id])
+    @master_category = FinanceFeeCategory.find(params[:finance_id])
   end
 
   def update_master_category
-    @batch = Batch.find(params[:batch_id])
-    @master_category = @batch.finance_fee_categories.find(params[:id])
+    @batch = Batch.find(params[:id])
+    @master_category = @batch.finance_fee_categories.find(params[:finance_id])
     if @master_category.update(fee_category_params)
       flash[:notice] = 'Finance fee category updated successfully'
     end
@@ -444,8 +444,8 @@ class FinanceController < ApplicationController
   end
 
   def delete_master_category
-    @batch = Batch.find(params[:batch_id])
-    @master_category = @batch.finance_fee_categories.find(params[:id])
+    @batch = Batch.find(params[:id])
+    @master_category = @batch.finance_fee_categories.find(params[:finance_id])
     if @master_category.destroy
       flash[:notice] = 'Finance fee category deleted successfully'
     end
@@ -484,7 +484,7 @@ class FinanceController < ApplicationController
       end
       unless error == true
         flash[:notice] = 'Finance fee particular created successfully'
-        redirect_to finance_master_fees_path
+        redirect_to master_fees_finance_index_path
       else
         render 'new_fees_particular'
       end
@@ -537,15 +537,15 @@ class FinanceController < ApplicationController
 
   def edit_particular_fee
     @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:master_id])
-    @fee = @master_category.finance_fee_particulars.find(params[:id])
+    @master_category = FinanceFeeCategory.find(params[:id])
+    @fee = @master_category.finance_fee_particulars.find(params[:fee])
   end
 
   def update_particular_fee
     @batch = Batch.find(params[:batch_id])
     @master_category = FinanceFeeCategory.find(params[:master_id])
     @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
-    @fee = @master_category.finance_fee_particulars.find(params[:id])
+    @fee = @master_category.finance_fee_particulars.find(params[:fee])
     if @fee.update(fee_particular_params)
       flash[:notice] = 'Finance fee particulars updated successfully'
     end
@@ -553,9 +553,9 @@ class FinanceController < ApplicationController
 
   def delete_particular_fee
     @batch = Batch.find(params[:batch_id])
-    @master_category = FinanceFeeCategory.find(params[:master_id])
+    @master_category = FinanceFeeCategory.find(params[:id])
     @particular_fees = @master_category.finance_fee_particulars.where(batch_id: @batch.id)
-    @fee = @master_category.finance_fee_particulars.find(params[:id])
+    @fee = @master_category.finance_fee_particulars.find(params[:fee])
     if @fee.destroy
       flash[:notice] = 'Finance fee particulars deleted successfully'
     end
@@ -592,7 +592,7 @@ class FinanceController < ApplicationController
       end
       unless error == true
         flash[:notice] = 'Finance fee discount created successfully'
-        redirect_to finance_new_fee_discount_path
+        redirect_to new_fee_discount_finance_index_path
       else
         render 'new_fee_discount'
       end
@@ -614,9 +614,9 @@ class FinanceController < ApplicationController
   end
 
   def edit_fee_discount
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @master_category = FinanceFeeCategory.find(params[:master_id])
-    @discount = @master_category.fee_discounts.find(params[:id])
+    @discount = @master_category.fee_discounts.find(params[:discount_id])
   end
 
   def update_fee_discount
@@ -630,9 +630,9 @@ class FinanceController < ApplicationController
   end
 
   def delete_fee_discount
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @master_category = FinanceFeeCategory.find(params[:master_id])
-    @discount = @master_category.fee_discounts.find(params[:id])
+    @discount = @master_category.fee_discounts.find(params[:discount_id])
     if @discount.destroy
       flash[:notice] = 'Finance fee discount deleted successfully'
     end
@@ -661,7 +661,7 @@ class FinanceController < ApplicationController
       end
       unless error == true
         flash[:notice] = 'Finance fee collection created successfully'
-        redirect_to finance_new_fee_collection_path
+        redirect_to new_fee_collection_finance_index_path
       else
         @categories = FinanceFeeCategory.all
         render 'new_fee_collection'
@@ -679,24 +679,24 @@ class FinanceController < ApplicationController
   end
 
   def edit_fee_collection
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @collections = @batch.finance_fee_collections.all
-    @collection = @batch.finance_fee_collections.find(params[:id])
+    @collection = @batch.finance_fee_collections.find(params[:collection_id])
   end
 
   def update_fee_collection
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @collections = @batch.finance_fee_collections.all
-    @collection = @batch.finance_fee_collections.find(params[:id])
+    @collection = @batch.finance_fee_collections.find(params[:collection_id])
     if @collection.update(collection_params)
       flash[:notice] = 'Finance fee collection updated successfully'
     end
   end
 
   def delete_fee_collection
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @collections = @batch.finance_fee_collections.all
-    @collection = @batch.finance_fee_collections.find(params[:id])
+    @collection = @batch.finance_fee_collections.find(params[:collection_id])
     if @collection.destroy
       flash[:notice] = 'Finance fee collection deleted successfully'
     end
@@ -709,8 +709,8 @@ class FinanceController < ApplicationController
   end
 
   def fees_submission_batch
-    @batches=Batch.all
-    @collections=Batch.first.finance_fee_collections if Batch.first
+    @batches = Batch.all
+    @collections = Batch.first.finance_fee_collections if Batch.first
   end
 
   def fee_collection_date
@@ -862,9 +862,9 @@ class FinanceController < ApplicationController
   end
 
   def fees_defaulters
-    @courses=Course.all
-    @batches=Course.first.batches if Course.first
-    @collections=Batch.first.finance_fee_collections if Batch.first 
+    @courses = Course.all
+    @batches = Course.first.batches if Course.first
+    @collections = Batch.first.finance_fee_collections if Batch.first
   end
 
   def batch_choice
@@ -915,7 +915,7 @@ class FinanceController < ApplicationController
     @salary_months = MonthlyPayslip.where(salary_date: params[:date])
     @salary_months.each(&:approve_salary)
     flash[:notice] = 'Payslip has been approved'
-    redirect_to finance_approve_monthly_payslip_path
+    redirect_to approve_monthly_payslip_finance_index_path
   end
 
   def view_monthly_payslip

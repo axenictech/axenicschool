@@ -7,6 +7,7 @@ class StudentsController < ApplicationController
       @last_student = Student.last
       @student.admission_no = @last_student.admission_no.next
     end
+    @batches = Batch.all
   end
 
   def create
@@ -14,7 +15,7 @@ class StudentsController < ApplicationController
     if @student.save
       flash[:notice] = 'Student Reord saved successfully please fill the parent detail'
 
-      redirect_to students_admission2_path(@student)
+      redirect_to admission2_students_path(@student)
     else
       render 'admission1'
     end
@@ -46,7 +47,7 @@ class StudentsController < ApplicationController
     if @student.update(student_params)
       flash[:notice] = 'Student Reord updated successfully '
 
-      redirect_to students_profile_path(@student)
+      redirect_to profile_students_path(@student)
     else
       render 'edit'
     end
@@ -57,7 +58,7 @@ class StudentsController < ApplicationController
     @student.update(student_params)
     @guardian = Guardian.find(@student.immediate_contact)
     @guardian.create_user_account
-    redirect_to students_previous_data_path(@student)
+    redirect_to previous_data_students_path(@student)
   end
 
   def edit_immediate_contact
@@ -69,7 +70,7 @@ class StudentsController < ApplicationController
     @student.update(student_params)
     @guardian = Guardian.find(@student.immediate_contact)
     @guardian.create_user_account
-    redirect_to students_profile_path(@student)
+    redirect_to profile_student_path(@student)
   end
 
   def previous_data
@@ -82,7 +83,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:student_previous_data][:student_id])
 
     if @previous_data.save
-      redirect_to students_profile_path(@student)
+      redirect_to profile_students_path(@student)
     else
       render template: 'students/previous_data', object: '@student'
     end
@@ -246,8 +247,8 @@ class StudentsController < ApplicationController
    end
 
   def advanced_search
-    @courses=Course.all
-    @batches=Course.first.batches.all if Course.first
+    @courses = Course.all
+    @batches = Course.first.batches.all if Course.first
   end
 
   def batch_details
@@ -362,17 +363,17 @@ class StudentsController < ApplicationController
   end
 
   def elective
-    @subject = Subject.find(params[:subject_id])
+    @subject = Subject.find(params[:id])
     @students = @subject.elective_group.batch.students.all
   end
 
   def assign_all
-    @subject = Subject.find(params[:subject_id])
+    @subject = Subject.find(params[:id])
     @students = @subject.elective_group.batch.students.all
   end
 
   def remove_all
-    @subject = Subject.find(params[:subject_id])
+    @subject = Subject.find(params[:id])
     @students = @subject.elective_group.batch.students.all
   end
 
@@ -413,7 +414,7 @@ class StudentsController < ApplicationController
       @user = User.find_by_student_id_and_role("#{@student.id}", 'Parent')
     end
     UserMailer.student_email(@user, subject, message).deliver
-    redirect_to students_email_path(@student)
+    redirect_to email_students_path(@student)
   end
 
   def report_email
@@ -431,7 +432,7 @@ class StudentsController < ApplicationController
       @user = User.find_by_student_id_and_role("#{@student.student_id}", 'Parent')
     end
     UserMailer.student_email(@user, subject, message).deliver
-    redirect_to students_report_email_path(@student)
+    redirect_to report_email_students_path(@student)
   end
 
   def generate_tc

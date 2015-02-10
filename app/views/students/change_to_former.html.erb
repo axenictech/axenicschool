@@ -22,7 +22,7 @@
     <p>For students leaving the school, use this option to remove them from the list of active students and place them in the former students list.</p>
     </div><br><br><br><br><br>
 
-<%= form_for @archived_student,url:{action: 'archived_student_create',format: @student.id} do |f| %>
+<%= form_for @archived_student,url:{action:'archived_student_create',format: @student.id} do |f| %>
    <div><%=f.label :reason_for_leaving %>
         <%=f.text_field :status_description %>
         <%=f.submit "Remove",class: "btn btn-danger" %></div>

@@ -912,11 +912,8 @@ ActiveRecord::Schema.define(version: 20141223103416) do
     t.string   "name_tag"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
   end
 
-=======
-  end
 
   create_table "privilege_users", force: true do |t|
     t.integer  "privilege_tag_id"

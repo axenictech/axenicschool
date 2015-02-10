@@ -15,7 +15,7 @@
     <%@employees.each do |e| %>
   <tr>
     <td class="col-2">
-       <%=link_to e.first_name, employee_attendances_report_info_path(e) %>
+       <%=link_to e.first_name, report_info_employee_attendance_path(e) %>
     </td>
     <% total=0 %>
     <% @leave_types.each do |lt1| %>
@@ -41,4 +41,4 @@
   </tr>
   <%end%>
 </table>
-<div><%=link_to 'PDF Report',employee_attendances_attendance_report_pdf_path(department_id:@deparment.id,format:"pdf"),class: "btn btn-primary"%></div>
+<div><%=link_to 'PDF Report',attendance_report_pdf_employee_attendance_path(id:@deparment.id,format:"pdf"),class: "btn btn-primary"%></div>

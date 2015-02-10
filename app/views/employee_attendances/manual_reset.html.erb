@@ -13,7 +13,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-           <%= link_to "Reset All",'leave_reset_all',style: 'color:black' %>
+           <%= link_to "Reset All",leave_reset_all_employee_attendances_path,style: 'color:black' %>
           </div>
           <div class="panel-body" style="height:70px">
          Reset Leave Count For All Employees.
@@ -24,7 +24,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-          <%= link_to "Department Reset",'employee_leave_reset_by_department',style: 'color:black' %>
+          <%= link_to "Department Reset",employee_leave_reset_by_department_employee_attendances_path,style: 'color:black' %>
           </div>
           <div class="panel-body" style="height:70px">
           Reset employee leave count by department.
@@ -40,7 +40,7 @@
       <div class="col-md-4">
         <div class="panel panel-warning " style="width:250px;">
           <div class="panel-heading">
-           <%= link_to "Individual Reset",employee_attendances_employee_leave_reset_by_employee_path,style: 'color:black' %>   
+           <%= link_to "Individual Reset",employee_leave_reset_by_employee_employee_attendances_path,style: 'color:black' %>   
           </div>
           <div class="panel-body" style="height:70px">
             Attendance report

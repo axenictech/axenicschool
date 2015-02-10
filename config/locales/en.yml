@@ -28,5 +28,10 @@ en:
   date_of_birth: "Birth Date "
   gender: "Gender"
   submit: "Submit"
+  first_emp: "Employee number of first employee is"
+  last_emp: "Employee number of last employee is"
+  Personal_details: " Personal details updated successfully for"
+  Address_details: "Address_details updated successfully for"
+  Contact_details: "Contact details updated successfully for"
 
 

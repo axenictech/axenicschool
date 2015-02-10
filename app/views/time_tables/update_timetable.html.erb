@@ -13,7 +13,7 @@
     <li><%= link_to 'Edit entries',time_table_entries_path(@time_table) %></li>
    </ul>
    <ul>
-   <li><%=link_to 'Delete',time_tables_time_table_delete_path(@time_table), method: :delete, data:{ confirm: "Are you sure to delete"}%></li>
+   <li><%=link_to 'Delete',time_table_delete_time_tables_path(@time_table), method: :delete, data:{ confirm: "Are you sure to delete"}%></li>
    </ul>
 
 </div>

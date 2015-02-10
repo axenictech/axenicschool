@@ -6,7 +6,7 @@
 
 <div class="modal-body">
 <ul class="errors"></ul>
-    <%= form_for @collection,url:{action:'update_fee_collection',batch_id:@batch.id,id:@collection.id},method: :patch,remote: true do |f|%>
+    <%= form_for @collection,url:{action:'update_fee_collection',id:@batch.id,collection_id:@collection.id},method: :patch,remote: true do |f|%>
 
         <div class="row">
             <div class="col-md-1"></div>

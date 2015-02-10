@@ -37,8 +37,8 @@
 
 
 <tr style="background-color:white">
-<td colspan="4"><%= link_to 'Edit',employees_edit_contact_profile_path(@employee),class: "btn btn-primary" %>
-<%= link_to 'PDF Report',employees_contact_profile_pdf_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %></td>
+<td colspan="4"><%= link_to 'Edit',edit_contact_profile_employees_path(@employee),class: "btn btn-primary" %>
+<%= link_to 'PDF Report',contact_profile_pdf_employees_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %></td>
 </tr>
 </tbody></table>
 </div>

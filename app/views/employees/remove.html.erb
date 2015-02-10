@@ -18,13 +18,13 @@
   <div class="extender"> </div>
   <div id="box">
   <div class="link-box">
-    <div class="link-heading"> <%= link_to "Employee leaving Institution",employees_change_to_former_path(@employee)%></div>
+    <div class="link-heading"> <%= link_to "Employee leaving Institution",change_to_former_employees_path(@employee)%></div>
     <div class="link-descr">For employee leaving the Institution, use this option to remove them from the list of active employees and place them in the former employees list.</div>
   </div>
   </div>
     <div class="link-box">
 
-    <div class="link-heading"> <%= link_to'Remove Employee Record',employees_delete_employee_path(@employee),data:{:confirm=>"Are u sure"}%></div>
+    <div class="link-heading"> <%= link_to'Remove Employee Record',delete_employee_employees_path(@employee),data:{:confirm=>"Are u sure"}%></div>
     <div class="link-descr">Completely delete employees records from the Institution's databases. Use this option only if you created the employee record by accident and want to remove it completely.</div>
   </div>
 </div>

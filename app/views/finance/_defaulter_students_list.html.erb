@@ -13,12 +13,12 @@
 				<td class="col-3"><%= i+1 %></td>
 				<td class="col-3"><%= s.admission_no%></td>
 				<td class="col-3"><%= s.first_name+" "+s.last_name %></td>
-				<td class="col-3"><%= link_to 'Pay Fees',finance_pay_fees_defaulters_path(student_id:s.id,collection_id:@collection.id)%></td>
+				<td class="col-3"><%= link_to 'Pay Fees',pay_fees_defaulters_finance_index_path(student_id:s.id,collection_id:@collection.id)%></td>
 			</tr>
 		<%end%>
 		<%end%>
 </table>
 <div align="center">
-    <%= link_to 'Pdf Report',finance_fees_defaulters_list_path(id:@collection.id,format:"pdf"),class: "btn btn-success"%>
+    <%= link_to 'Pdf Report',fees_defaulters_list_finance_index_path(id:@collection.id,format:"pdf"),class: "btn btn-success"%>
 </div>
 <%end%>

@@ -14,7 +14,7 @@
 	<div class="label-field-pair">
 		<%=f. label :'Select Course'%>
 		<div  class="text-input-bg">
-   		 <%= f.select :id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#user_form').submit();"}%></div></div>
+   		 <%= f.select :id, @batches.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"$('#user_form').submit();"}%></div></div>
 
    		<%end%>
 

@@ -1,7 +1,7 @@
 class CreateGeneralSettings < ActiveRecord::Migration
   def change
     create_table :general_settings do |t|
-    	 t.string :school_or_college_name
+      t.string :school_or_college_name
       t.string :school_or_college_address
       t.string :school_or_college_phone_no
       t.string :student_attendance_type
@@ -15,13 +15,13 @@ class CreateGeneralSettings < ActiveRecord::Migration
       t.integer :employee_number_auto_increament
       t.string :enable_news_comment_moderation
       t.attachment :image
-      
+
       t.timestamps
     end
     create_default
   end
-  def create_default
-   GeneralSetting.create :school_or_college_name=>"Axenic School"
-  end
 
+  def create_default
+    GeneralSetting.create school_or_college_name: 'Axenic School'
+  end
 end

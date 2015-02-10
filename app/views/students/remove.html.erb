@@ -17,12 +17,12 @@
   <div class="extender"> </div>
   <div id="box">
   <div class="link-box">
-    <div class="link-heading"> <%= link_to "Student leaving Institution",students_change_to_former_path(@student) %></div>
+    <div class="link-heading"> <%= link_to "Student leaving Institution",change_to_former_students_path(@student) %></div>
     <div class="link-descr">For students leaving the Institution, use this option to remove them from the list of active students and place them in the former students list.</div>
   </div>
   </div>
     <div class="link-box">
-    <div class="link-heading"> <%= link_to "Remove student records",students_delete_path(@student) %></div>
+    <div class="link-heading"> <%= link_to "Remove student records",delete_students_path(@student) %></div>
     <div class="link-descr">Completely delete student's records from the Institution's databases. Use this option only if you created the student record by accident and want to remove it completely.</div>
   </div>
 </div>

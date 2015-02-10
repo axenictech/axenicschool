@@ -55,18 +55,18 @@ class CoursesController < ApplicationController
           @group_batch.save
         end
         flash[:notice_batch_group] = 'Batch group created successfully'
-        redirect_to courses_grouped_batches_path(@course)
+        redirect_to grouped_batches_course_path(@course)
       else
         render template: 'courses/grouped_batches'
     end
     else
       flash[:notice_batch_group] = 'Please Select batches'
-      redirect_to courses_grouped_batches_path(@course)
+      redirect_to grouped_batches_course_path(@course)
       end
   end
 
   def edit_batch_group
-    @batch_group = BatchGroup.find(params[:format])
+    @batch_group = BatchGroup.find(params[:id])
     @course = @batch_group.course
     @batches = @course.batches.all
   end
@@ -84,25 +84,25 @@ class CoursesController < ApplicationController
           @group_batch.save
         end
         flash[:notice_batch_group] = 'Batch group updated successfully'
-        redirect_to courses_grouped_batches_path(@batch_group.course)
+        redirect_to grouped_batches_course_path(@batch_group.course)
       else
         render template: 'courses/grouped_batches'
         end
     else
       flash[:notice_batch_group] = 'Please Select batches'
-      redirect_to courses_grouped_batches_path(@batch_group.course)
+      redirect_to grouped_batches_course_path(@batch_group.course)
       end
   end
 
   def delete_batch_group
-    @batch_group = BatchGroup.find(params[:format])
+    @batch_group = BatchGroup.find(params[:id])
     @course = @batch_group.course
     @group_batches = GroupBatch.where(batch_group_id: @batch_group.id)
 
     @group_batches.each(&:destroy)
     @batch_group.destroy
     flash[:notice_batch_group] = 'Batch group deleted successfully'
-    redirect_to courses_grouped_batches_path(@course)
+    redirect_to grouped_batches_course_path(@course)
   end
 
   def assign_all
@@ -116,7 +116,7 @@ class CoursesController < ApplicationController
   end
   # deleting the course
   def destroy
-    @course = Course.find(params[:id])
+    @course = Course.find(params[:format])
     if @course.destroy
       flash[:notice] = 'Course deleted successfully!'
       redirect_to courses_path

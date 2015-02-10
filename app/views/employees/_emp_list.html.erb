@@ -6,12 +6,11 @@
 	<%if is_assigned.nil?%>
 		<tr>
 			<td><%=emp.first_name%></td>
-			<td><%= link_to "Assign",employees_assign_employee_path(emp,@subject,department_id:@department.id),method: :post,remote:true%></td>
+			<td><%= link_to "Assign",assign_employee_employee_path(emp,@subject,department_id:@department.id),method: :post,remote:true%></td>
 		</tr>
 	<%end%>
 	<%end%>
 
 </table>
-
 <div id="assigned_emp"></div>
 <div id="emp_list"></div>

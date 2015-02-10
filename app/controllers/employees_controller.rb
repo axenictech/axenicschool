@@ -2,8 +2,8 @@
 class EmployeesController < ApplicationController
   def new_category
     @employee_category_new = EmployeeCategory.new
-    @categories1 = EmployeeCategory.where(status: true).order(:name)
-    @categories2 = EmployeeCategory.where(status: false).order(:name)
+    @categories1 = EmployeeCategory.is_status
+    @categories2 = EmployeeCategory.not_status
   end
 
   def add_category
@@ -14,25 +14,25 @@ class EmployeesController < ApplicationController
       flash[:notice] = 'Employee category created Successfully'
     end
 
-    @categories1 = EmployeeCategory.where(status: true).order(:name)
-    @categories2 = EmployeeCategory.where(status: false).order(:name)
+    @categories1 = EmployeeCategory.is_status
+    @categories2 = EmployeeCategory.not_status
   end
 
   def none_privielege
   end
 
   def edit_category
-    @employee_category = EmployeeCategory.find(params[:category_id])
+    @employee_category = EmployeeCategory.find(params[:id])
   end
 
   def update_category
     @employee_category_new = EmployeeCategory.new
-    @employee_category = EmployeeCategory.find(params[:category_id])
+    @employee_category = EmployeeCategory.find(params[:id])
     if @employee_category.update(category_params)
       flash[:notice] = 'Employee category Updated Successfully'
     end
-    @categories1 = EmployeeCategory.where(status: true).order(:name)
-    @categories2 = EmployeeCategory.where(status: false).order(:name)
+    @categories1 = EmployeeCategory.is_status
+    @categories2 = EmployeeCategory.not_status
   end
 
   def destroy_category
@@ -41,14 +41,14 @@ class EmployeesController < ApplicationController
     if @employee_category.destroy
       flash[:notice] = 'Employee category deleted Successfully'
     end
-    @categories1 = EmployeeCategory.where(status: true).order(:name)
-    @categories2 = EmployeeCategory.where(status: false).order(:name)
+    @categories1 = EmployeeCategory.is_status
+    @categories2 = EmployeeCategory.not_status
   end
 
   def new_department
     @employee_department_new = EmployeeDepartment.new
-    @departments1 = EmployeeDepartment.where(status: true).order(:name)
-    @departments2 = EmployeeDepartment.where(status: false).order(:name)
+    @departments1 = EmployeeDepartment.is_status
+    @departments2 = EmployeeDepartment.not_status
   end
 
   def add_department
@@ -57,22 +57,22 @@ class EmployeesController < ApplicationController
     if @employee_department.save
       flash[:notice] = 'Employee department created Successfully'
     end
-    @departments1 = EmployeeDepartment.where(status: true).order(:name)
-    @departments2 = EmployeeDepartment.where(status: false).order(:name)
+    @departments1 = EmployeeDepartment.is_status
+    @departments2 = EmployeeDepartment.not_status
   end
 
   def edit_department
-    @employee_department = EmployeeDepartment.find(params[:department_id])
+    @employee_department = EmployeeDepartment.find(params[:id])
   end
 
   def update_department
     @employee_department_new = EmployeeDepartment.new
-    @employee_department = EmployeeDepartment.find(params[:department_id])
+    @employee_department = EmployeeDepartment.find(params[:id])
     if @employee_department.update(department_params)
       flash[:notice] = 'Employee department updated Successfully'
     end
-    @departments1 = EmployeeDepartment.where(status: true).order(:name)
-    @departments2 = EmployeeDepartment.where(status: false).order(:name)
+    @departments1 = EmployeeDepartment.is_status
+    @departments2 = EmployeeDepartment.not_status
   end
 
   def destroy_department
@@ -81,14 +81,14 @@ class EmployeesController < ApplicationController
     if @employee_department.destroy
       flash[:notice] = 'Employee department deleted Successfully'
     end
-    @departments1 = EmployeeDepartment.where(status: true).order(:name)
-    @departments2 = EmployeeDepartment.where(status: false).order(:name)
+    @departments1 = EmployeeDepartment.is_status
+    @departments2 = EmployeeDepartment.not_status
   end
 
   def new_position
     @employee_position_new = EmployeePosition.new
-    @positions1 = EmployeePosition.where(status: true).order(:name)
-    @positions2 = EmployeePosition.where(status: false).order(:name)
+    @positions1 = EmployeePosition.is_status
+    @positions2 = EmployeePosition.not_status
   end
 
   def add_position
@@ -97,22 +97,22 @@ class EmployeesController < ApplicationController
     if @employee_position.save
       flash[:notice] = 'Employee position created Successfully'
     end
-    @positions1 = EmployeePosition.where(status: true).order(:name)
-    @positions2 = EmployeePosition.where(status: false).order(:name)
+    @positions1 = EmployeePosition.is_status
+    @positions2 = EmployeePosition.not_status
   end
 
   def edit_position
-    @employee_position = EmployeePosition.find(params[:position_id])
+    @employee_position = EmployeePosition.find(params[:id])
   end
 
   def update_position
     @employee_position_new = EmployeePosition.new
-    @employee_position = EmployeePosition.find(params[:position_id])
+    @employee_position = EmployeePosition.find(params[:id])
     if @employee_position.update(position_params)
       flash[:notice] = 'Employee position updated Successfully'
     end
-    @positions1 = EmployeePosition.where(status: true).order(:name)
-    @positions2 = EmployeePosition.where(status: false).order(:name)
+    @positions1 = EmployeePosition.is_status
+    @positions2 = EmployeePosition.not_status
   end
 
   def destroy_position
@@ -121,50 +121,50 @@ class EmployeesController < ApplicationController
     if @employee_position.destroy
       flash[:notice] = 'Employee position deleted Successfully'
     end
-    @positions1 = EmployeePosition.where(status: true).order(:name)
-    @positions2 = EmployeePosition.where(status: false).order(:name)
+    @positions1 = EmployeePosition.is_status
+    @positions2 = EmployeePosition.not_status
   end
 
   def new_bank_field
     @bank_field_new = BankField.new
-    @bank_fields1 = BankField.where(status: true).order(:name)
-    @bank_fields2 = BankField.where(status: false).order(:name)
+    @bank_fields1 = BankField.is_status
+    @bank_fields2 = BankField.not_status
   end
 
   def add_bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.new(bank_field_params)
     flash[:notice] = 'Bank field created Successfully' if @bank_field.save
-    @bank_fields1 = BankField.where(status: true).order(:name)
-    @bank_fields2 = BankField.where(status: false).order(:name)
+    @bank_fields1 = BankField.is_status
+    @bank_fields2 = BankField.not_status
   end
 
   def edit_bank_field
-    @bank_field = BankField.find(params[:bank_field_id])
+    @bank_field = BankField.find(params[:id])
   end
 
   def update_bank_field
     @bank_field_new = BankField.new
-    @bank_field = BankField.find(params[:bank_field_id])
+    @bank_field = BankField.find(params[:id])
     if @bank_field.update(bank_field_params)
       flash[:notice] = 'Bank field updated Successfully'
     end
-    @bank_fields1 = BankField.where(status: true).order(:name)
-    @bank_fields2 = BankField.where(status: false).order(:name)
+    @bank_fields1 = BankField.is_status
+    @bank_fields2 = BankField.not_status
   end
 
   def destroy_bank_field
     @bank_field_new = BankField.new
     @bank_field = BankField.find(params[:id])
     flash[:notice] = 'Bank field deleted Successfully' if @bank_field.destroy
-    @bank_fields1 = BankField.where(status: true).order(:name)
-    @bank_fields2 = BankField.where(status: false).order(:name)
+    @bank_fields1 = BankField.is_status
+    @bank_fields2 = BankField.not_status
   end
 
   def new_payroll_category
     @payroll_category_new = PayrollCategory.new
-    @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
+    @payroll_categories1 = PayrollCategory.not_deduction
+    @payroll_categories2 = PayrollCategory.is_deduction
   end
 
   def add_payroll_category
@@ -173,23 +173,23 @@ class EmployeesController < ApplicationController
     if @payroll_category.save
       flash[:notice] = 'Payroll catagory created Successfully'
     end
-    @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
+    @payroll_categories1 = PayrollCategory.not_deduction
+    @payroll_categories2 = PayrollCategory.is_deduction
   end
 
   def edit_payroll_category
-    @payroll_category = PayrollCategory.find(params[:payroll_category_id])
+    @payroll_category = PayrollCategory.find(params[:id])
   end
 
   def update_payroll_category
     @payroll_category_new = PayrollCategory.new
-    @payroll_category = PayrollCategory.find(params[:payroll_category_id])
+    @payroll_category = PayrollCategory.find(params[:id])
     if @payroll_category.update(payroll_category_params)
       flash[:notice] = 'Employee payroll category updated Successfully'
     end
-    @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
- end
+    @payroll_categories1 = PayrollCategory.not_deduction
+    @payroll_categories2 = PayrollCategory.is_deduction
+  end
 
   def destroy_payroll_category
     @payroll_category_new = PayrollCategory.new
@@ -197,30 +197,30 @@ class EmployeesController < ApplicationController
     if @payroll_category.destroy
       flash[:notice] = 'Employee payroll category deleted Successfully'
     end
-    @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
- end
+    @payroll_categories1 = PayrollCategory.not_deduction
+    @payroll_categories2 = PayrollCategory.is_deduction
+  end
 
   def active_payroll_category
     @payroll_category_new = PayrollCategory.new
-    @payroll_category = PayrollCategory.find(params[:format])
+    @payroll_category = PayrollCategory.find(params[:id])
     @payroll_category.update(status: false)
-    @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
+    @payroll_categories1 = PayrollCategory.not_deduction
+    @payroll_categories2 = PayrollCategory.is_deduction
   end
 
   def inactive_payroll_category
     @payroll_category_new = PayrollCategory.new
-    @payroll_category = PayrollCategory.find(params[:format])
+    @payroll_category = PayrollCategory.find(params[:id])
     @payroll_category.update(status: true)
-    @payroll_categories1 = PayrollCategory.where(is_deduction: false).order(:name)
-    @payroll_categories2 = PayrollCategory.where(is_deduction: true).order(:name)
+    @payroll_categories1 = PayrollCategory.not_deduction
+    @payroll_categories2 = PayrollCategory.is_deduction
   end
 
   def new_grade
     @employee_grade_new = EmployeeGrade.new
-    @grade1 = EmployeeGrade.where(status: true).order(:name)
-    @grade2 = EmployeeGrade.where(status: false).order(:name)
+    @grade1 = EmployeeGrade.is_status
+    @grade2 = EmployeeGrade.not_status
   end
 
   def add_grade
@@ -228,23 +228,23 @@ class EmployeesController < ApplicationController
     @employee_grade = EmployeeGrade.new(grade_params)
     if @employee_grade.save
       flash[:notice] = 'Employee Grade created Successfully'
-   end
-    @grade1 = EmployeeGrade.where(status: true).order(:name)
-    @grade2 = EmployeeGrade.where(status: false).order(:name)
-   end
+    end
+    @grade1 = EmployeeGrade.is_status
+    @grade2 = EmployeeGrade.not_status
+  end
 
   def edit_grade
-    @employee_grade = EmployeeGrade.find(params[:grade_id])
+    @employee_grade = EmployeeGrade.find(params[:id])
   end
 
   def update_grade
     @employee_grade_new = EmployeeGrade.new
-    @employee_grade = EmployeeGrade.find(params[:grade_id])
+    @employee_grade = EmployeeGrade.find(params[:id])
     if @employee_grade.update(grade_params)
       flash[:notice] = 'Employee Grade updated Successfully'
     end
-    @grade1 = EmployeeGrade.where(status: true).order(:name)
-    @grade2 = EmployeeGrade.where(status: false) .order(:name)
+    @grade1 = EmployeeGrade.is_status
+    @grade2 = EmployeeGrade.not_status
   end
 
   def destroy_grade
@@ -252,20 +252,20 @@ class EmployeesController < ApplicationController
     @employee_grade = EmployeeGrade.find(params[:id])
     if @employee_grade.destroy
       flash[:notice] = 'Employee Grade deleted Successfully'
-   end
-    @grade1 = EmployeeGrade.where(status: true).order(:name)
-    @grade2 = EmployeeGrade.where(status: false).order(:name)
+    end
+    @grade1 = EmployeeGrade.is_status
+    @grade2 = EmployeeGrade.not_status
   end
 
   def admission1
     @employee = Employee.new
     if Employee.first.nil?
       @employee.employee_number = 1
-      flash[:notice] = "Employee number of first employee is #{@employee.employee_number}"
+      flash[:notice] = t('first_emp') + ' ' + @employee.employee_number
     else
       @last_employee = Employee.last
       @employee.employee_number = @last_employee.employee_number.next
-      flash[:notice] = "Employee number of last employee is #{@last_employee.employee_number}"
+      flash[:notice] = t('last_emp') + ' ' + @last_employee.employee_number
     end
   end
 
@@ -273,7 +273,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     if @employee.save
       flash[:notice] = "Employee details added for #{@employee.first_name}"
-      redirect_to employees_admission2_path(@employee)
+      redirect_to admission2_employees_path(@employee)
     else
       render 'admission1'
     end
@@ -287,7 +287,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:format])
     if @employee.update(employee_params)
       flash[:notice] = "Additional details added for #{@employee.first_name}"
-      redirect_to employees_admission3_path(@employee)
+      redirect_to admission3_employees_path(@employee)
     else
       render 'admission2'
     end
@@ -301,13 +301,12 @@ class EmployeesController < ApplicationController
   def admission3_create
     @employee = Employee.find(params[:format])
     @bank_fields = BankField.all
-
-   if request.post?
-    params[:bank_details].each_pair do |k, v|
-    EmployeeBankDetail.create(employee_id: @employee.id,bank_field_id: k,bank_info: v['bank_info'])
-  end
+    if request.post?
+      params[:bank_details].each_pair do |k, v|
+        EmployeeBankDetail.create(employee_id: @employee.id, bank_field_id: k, bank_info: v['bank_info'])
+      end
     end
-    redirect_to employees_edit_privilege_path(@employee)
+    redirect_to edit_privilege_employees_path(@employee)
   end
 
   def edit_privilege
@@ -331,10 +330,10 @@ class EmployeesController < ApplicationController
           privileges.each do |p|
             PrivilegeUsers.create(user_id: @user.id, privilege_id: p.id)
           end
-        end 
+        end
       end
     end
-    redirect_to employees_admission4_path(@employee)
+    redirect_to admission4_employees_path(@employee)
   end
 
   def admission4
@@ -343,9 +342,9 @@ class EmployeesController < ApplicationController
 
   def search
     @employee = Employee.find(params[:format])
-     unless params[:search].empty?
-    other_conditions = ''
-
+    unless params[:search].empty?
+      other_conditions = ''
+      [] << 
       other_conditions += " AND employee_department_id = '#{params[:advance_search][:employee_department_id]}'" unless params[:advance_search][:employee_department_id] == ''
       other_conditions += " AND employee_category_id = '#{params[:advance_search][:employee_category_id]}'" unless params[:advance_search][:employee_category_id] == ''
       other_conditions += " AND employee_position_id = '#{params[:advance_search][:employee_position_id]}'" unless params[:advance_search][:employee_position_id] == ''
@@ -363,7 +362,7 @@ class EmployeesController < ApplicationController
   def update_reporting_manager
     @employee = Employee.find(params[:id])
     @employee.update(employee_params)
-    redirect_to employees_profile_path(@employee)
+    redirect_to profile_employees_path(@employee)
   end
 
   def change_reporting_manager
@@ -383,7 +382,7 @@ class EmployeesController < ApplicationController
   def update_profile
     @employee = Employee.find(params[:format])
     if @employee.update(employee_params)
-      redirect_to employees_profile_path(@employee)
+      redirect_to profile_employees_path(@employee)
     else
       render 'edit_profile'
     end
@@ -392,8 +391,8 @@ class EmployeesController < ApplicationController
   def update_edit_profile
     @employee = Employee.find(params[:format])
     if @employee.update(employee_params)
-      redirect_to employees_profile_path(@employee)
-      flash[:notice] = "Personal details updated successfully for #{@employee.first_name}"
+      redirect_to profile_employees_path(@employee)
+      flash[:notice] = t('Personal_details') + ' ' + @employee.first_name
     else
       render 'edit_personal_profile'
     end
@@ -402,8 +401,8 @@ class EmployeesController < ApplicationController
   def  update_edit_address_profile
     @employee = Employee.find(params[:format])
     if @employee.update(employee_params)
-      redirect_to employees_profile_path(@employee)
-      flash[:notice] = "Address details updated successfully for #{@employee.first_name}"
+      redirect_to profile_employees_path(@employee)
+      flash[:notice] = t('Address_details') + ' ' + @employee.first_name
 
     else
       render 'edit_address_profile'
@@ -413,8 +412,8 @@ class EmployeesController < ApplicationController
   def  update_edit_contact_profile
     @employee = Employee.find(params[:format])
     if @employee.update(employee_params)
-      redirect_to employees_profile_path(@employee)
-      flash[:notice] = "Contact details updated successfully for #{@employee.first_name}"
+      redirect_to profile_employees_path(@employee)
+      flash[:notice] = t('Contact_details') + ' ' + @employee.first_name
 
     else
       render 'edit_contact_profile'
@@ -425,6 +424,7 @@ class EmployeesController < ApplicationController
   end
 
   def subject_assignment
+    @batches = Batch.includes(:course).all
   end
 
   def assign_subject
@@ -450,7 +450,7 @@ class EmployeesController < ApplicationController
     @subject = Subject.find(params[:format])
     @assigned_employee = EmployeeSubject.create(employee_id: @employee.id, subject_id: @subject.id)
     @assigned_employees = EmployeeSubject.where(subject_id: @subject.id)
- end
+  end
 
   def remove_employee
     @department = EmployeeDepartment.find(params[:department_id])
@@ -476,11 +476,8 @@ class EmployeesController < ApplicationController
       other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ''
 
       @employee = Employee.where('first_name LIKE ?' + other_conditions, "#{params[:search]}%")
-  # @employee = Employee.where("concat_ws(' ',first_name,last_name) like '#{params[:search]}%' OR concat_ws(' ',last_name,first_name) like '#{params[:search]}%'"+other_conditions)
-
-  # names=params[:search].split(" ")
-  # @employee = Employee.where("first_name LIKE ? OR last_name LIKE ? "+other_conditions,names.first+"%",names.last+"%")
-end
+    
+    end
   end
 
   def viewall_emp
@@ -578,7 +575,7 @@ end
       else
         conditions += " AND date_of_birth ='#{params[:search][:date_of_birth]}'" unless params[:search][:date_of_birth] == ''
       end
-   end
+    end
 
     if @status = params[:search][:status]
 
@@ -587,7 +584,7 @@ end
         @employee2 = ArchivedEmployee.where(conditions)
         @employees = @employee1 + @employee2
       elsif params[:search][:status] == 'present'
-        @employees = Employee.where(conditions)
+        @employees = Employee.includes(:employee_department).where(conditions)
       else
         @employees = ArchivedEmployee.where(conditions)
       end
@@ -636,7 +633,7 @@ end
     else
       @search += ' Status: All student'
     end
-   end
+  end
 
   def advance_search_result_pdf
     @employees = params[:employees]
@@ -694,10 +691,10 @@ end
             grand_tot = tot - tot_deduction
             MonthlyPayslip.create(employee_id: emp.id, amount: grand_tot, is_approved: false, salary_date: salary_date)
             counter += 1
-       end
+        end
     end
 
-    redirect_to employees_payslip_path
+    redirect_to payslip_employees_path
     flash[:notice] = "salery slip Generated for the :#{salary_date.strftime('%B')} 'note' : 'employees whose salary generated manually,their salery slip was not generated by this proce'"
    end
 
@@ -740,7 +737,7 @@ end
          end
 
      end
-    redirect_to employees_monthly_payslip_path(@employee)
+    redirect_to monthly_payslip_employees_path(@employee)
   end
 
   def employee_structure
@@ -762,7 +759,7 @@ end
     @salary_date = (params[:salary_date])
     @created_category = IndividualPayslipCategory.new(employee_id: @employee.id, name: params[:payslip][:name], amount: params[:payslip][:amount], is_deduction: params[:payslip][:is_deduction])
     @created_category.save
-    redirect_to employees_monthly_payslip_path(@employee)
+    redirect_to monthly_payslip_employees_path(@employee)
   end
 
   def department_payslip
@@ -782,8 +779,8 @@ end
     if b[0].present?
       if b[0] == @salary_date.strftime('%b')
         flash[:notice] = 'Payslip of ' + @employee.first_name + ' is already generated'
+      end
     end
-   end
     redirect_to employees_payslip_path
   end
 
@@ -827,13 +824,13 @@ end
   def address_profile
     @employee = Employee.find(params[:format])
     @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
-    @office_country = Country.find(@employee.office_country_id).name unless @employee.home_country_id.nil?
+    @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
   end
 
   def address_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
     @home_country = Country.find(@employee.home_country_id).name unless @employee.home_country_id.nil?
-    @office_country = Country.find(@employee.office_country_id).name unless @employee.home_country_id.nil?
+    @office_country = Country.find(@employee.office_country_id).name unless @employee.office_country_id.nil?
   end
 
   def contact_profile
@@ -842,7 +839,7 @@ end
 
   def contact_profile_archived
     @employee = ArchivedEmployee.find(params[:format])
- end
+  end
 
   def bank_info
     @employee = Employee.find(params[:format])
@@ -852,7 +849,7 @@ end
   def bank_info_archived
     @employee = ArchivedEmployee.find(params[:format])
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
- end
+  end
 
   def emp_payroll
     @employee = Employee.find(params[:format])
@@ -878,9 +875,8 @@ end
       @employee.destroy
       flash[:notice] = 'Employee #{@employee.first_name} is Archived Successfully'
       redirect_to employees_archived_employee_profile_path(@employee)
-
+    end
   end
- end
 
   def archived_employee_profile
     @employee = ArchivedEmployee.find(params[:format])
@@ -923,7 +919,7 @@ end
     @employee = Employee.find(params[:employee_id])
     @bank_details = EmployeeBankDetail.where(employee_id: @employee.id)
     render 'bank_info_pdf', layout: false
- end
+  end
 
   def emp_search_result_pdf
     @employees = params[:employees]
@@ -945,7 +941,7 @@ end
 
   def edit_bank_info
     @employee = Employee.find(params[:format])
-    @bank_info = @employee.employee_bank_details.all
+    @bank_info = @employee.employee_bank_details.includes(:bank_field).all
   end
 
   def update_bank_details
@@ -954,7 +950,7 @@ end
       @bank_info = EmployeeBankDetail.find_by_id_and_employee_id(k, @employee.id)
       @bank_info.update(bank_info: v[:bank_info])
     end
-    redirect_to employees_profile_path(@employee)
+    redirect_to profile_employees_path(@employee)
     flash[:notice] = "Bank details updated successfully for #{@employee.first_name}"
   end
 

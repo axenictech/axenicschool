@@ -9,7 +9,7 @@
       <%@employees.each do |emp|%>
           <tr>
                 <td col-md-1><%=link_to "#{emp.first_name} #{emp.last_name} (#{emp.employee_number})",
-                employees_monthly_payslip_path(emp)%></td>
+               monthly_payslip_employees_path(emp)%></td>
          </tr>
       <%end%>  
       </table>

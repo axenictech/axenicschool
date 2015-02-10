@@ -45,7 +45,7 @@
                <td><%= salary_ststus%></td>
 
                <%salary_date=MonthlyPayslip.where(employee_id:1).pluck(:salary_date)%>
-               <td><%= link_to'View',employees_view_employee_payslip_path(employee_id:emp.id,salary_date:salary_date)%></td> 
+               <td><%= link_to'View',view_employee_payslip_employees_path(employee_id:emp.id,salary_date:salary_date)%></td> 
           </tr>
            <%count+=1%>
           <%end%>

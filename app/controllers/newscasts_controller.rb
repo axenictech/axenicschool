@@ -5,7 +5,7 @@ class NewscastsController < ApplicationController
 
   def select
     unless params[:newscast][:title].empty?
-      @newscasts = Newscast.where("title like '#{params[:newscast][:title]}%'")
+      @newscasts = Newscast.where("title like ?","#{params[:newscast][:title]}%")
     end
   end
 

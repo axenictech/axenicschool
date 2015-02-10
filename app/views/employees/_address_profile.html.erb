@@ -26,7 +26,7 @@
     <td colspan="2"></td>
 </tr>
 <tr>
-    <td class="col-2">Country</td><td class="col-2"><%=@home_country%></td>
+    <td class="col-2">Country</td><td class="col-2"><%=@home_country unless @home_country.nil?%></td>
     <td class="col-2"></td>
 </tr>
 <tr>
@@ -49,7 +49,7 @@
 </tr>
 
 <tr>
-    <td class="col-2">Country</td><td class="col-2"><%=@office_country%></td>
+    <td class="col-2">Country</td><td class="col-2"><%=@office_country unless @office_country.nil?%></td>
     <td class="col-2"></td>
 </tr>
 
@@ -59,8 +59,8 @@
 </tr>
 
 <tr style="background-color:white">
-<td colspan="4"><%= link_to 'Edit',employees_edit_address_profile_path(@employee),class: "btn btn-primary" %>
-<%= link_to 'PDF Report',employees_address_profile_pdf_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %></td>
+<td colspan="4"><%= link_to 'Edit',edit_address_profile_employees_path(@employee),class: "btn btn-primary" %>
+<%= link_to 'PDF Report',address_profile_pdf_employees_path(employee_id:@employee.id,format:"pdf"),class: "btn btn-success" %></td>
 </tr>
 </tbody></table>
 </div>

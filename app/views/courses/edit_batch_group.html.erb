@@ -14,7 +14,7 @@
         <div class="bread_crumb">
         <%= link_to 'Courses', courses_path %> &raquo;
         <%=link_to @course.course_name, course_path(@course) %>&raquo;
-        <%=link_to @batch_group.name, courses_grouped_batches_path(@course)  %>&raquo;
+        <%=link_to @batch_group.name, grouped_batches_course_path(@course)  %>&raquo;
         Edit
         </div>
 <%= form_for @batch_group,url:{action:'update_batch_group'},method: :patch do |c| %>

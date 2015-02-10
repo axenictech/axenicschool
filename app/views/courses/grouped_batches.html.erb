@@ -32,8 +32,8 @@
             <td><%=c.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
         </tr>
         <tr><td colspan="2">
-				Select: <%= link_to "All",courses_assign_all_path(@course),remote:true%>
-				  <%= link_to "None",courses_remove_all_path(@course),remote:true %>
+				Select: <%= link_to "All",assign_all_course_path(@course),remote:true%>
+				  <%= link_to "None",remove_all_course_path(@course),remote:true %>
 			<p id="batch_view"><%= render 'all_batch' %></p>
         </td></tr>
         <tr>

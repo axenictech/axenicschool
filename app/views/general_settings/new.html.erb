@@ -84,8 +84,8 @@
     <td class="col-2"><%= t('Include Grading Systems') %></td> 
     <td class="col-2">
     Select: &nbsp;&nbsp;
-    <%= link_to "All",general_settings_all_path,remote:true%>&nbsp;&nbsp;
-        <%= link_to  "None",general_settings_none_path,remote:true%>
+    <%= link_to "All",all_general_settings_path,remote:true%>&nbsp;&nbsp;
+        <%= link_to  "None",none_general_settings_path,remote:true%>
         <p id="grading_system"><%= render 'grading_type'%></p>
       </td>
   </tr>

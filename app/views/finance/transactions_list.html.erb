@@ -8,7 +8,7 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Pdf Report',finance_finance_transaction_report_path(start_date:@start_date,end_date:@end_date,format:"pdf")%></li>
+    <li><%= link_to 'Pdf Report',finance_transaction_report_finance_index_path(start_date:@start_date,end_date:@end_date,format:"pdf")%></li>
   </ul>
 </div>
 <div id="page-yield">
@@ -26,9 +26,9 @@
 	<tr>
 		<td><%= i+1 %></td>
 	<% unless c.is_income?%>
-		<td><%=link_to c.name,finance_expense_details_path(start_date:@start_date,end_date:@end_date,category:c.id)%></td>
+		<td><%=link_to c.name,expense_details_finance_index_path(start_date:@start_date,end_date:@end_date,category:c.id)%></td>
 	<%else%>
-		<td><%=link_to c.name,finance_income_details_path(start_date:@start_date,end_date:@end_date,category:c.id)%></td>
+		<td><%=link_to c.name,income_details_finance_index_path(start_date:@start_date,end_date:@end_date,category:c.id)%></td>
 	<%end%>
 		<td><%= expense=c.category_amount(@start_date,@end_date) unless c.is_income? %></td>
 		<td><%= income=c.category_amount(@start_date,@end_date) if c.is_income? %></td>

@@ -9,7 +9,7 @@
 
       <%@employees.each do |emp|%>
           <tr>
-                <td col-md-1><%= link_to emp.first_name,employees_profile_path(emp)%></td>
+                <td col-md-1><%= link_to emp.first_name,profile_employees_path(emp)%></td>
                 <td col-md-1><%= emp.id%></td>
                 <td col-md-1><%= emp.employee_department.name%></td>
          </tr>

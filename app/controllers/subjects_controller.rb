@@ -2,7 +2,7 @@ class SubjectsController < ApplicationController
   before_action :set_subject, only: [:edit, :update, :destroy]
 
   def index
-    @batches = Batch.all
+    @batches = Batch.includes(:course).all
    end
 
   def select

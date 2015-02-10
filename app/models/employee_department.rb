@@ -5,4 +5,6 @@ class EmployeeDepartment < ActiveRecord::Base
 
   validates :code, presence: true,
                    length: { minimum: 1, maximum: 10 }
+  scope :is_status, -> { where(status: true).order(:name) }
+  scope :not_status, -> { where(status: false).order(:name) }
 end

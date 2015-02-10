@@ -1,4 +1,27 @@
 class BatchesController < ApplicationController
+  
+   def edit_master_category
+    @batch = Batch.find(params[:id])
+    @master_category = FinanceFeeCategory.find(params[:id])
+  end
+
+  def update_master_category
+    @batch = Batch.find(params[:id])
+    @master_category = @batch.finance_fee_categories.find(params[:id])
+    if @master_category.update(fee_category_params)
+      flash[:notice] = 'Finance fee category updated successfully'
+    end
+    @master_categories = @batch.finance_fee_categories.all
+  end
+
+  def delete_master_category
+    @batch = Batch.find(params[:id])
+    @master_category = @batch.finance_fee_categories.find(params[:id])
+    if @master_category.destroy
+      flash[:notice] = 'Finance fee category deleted successfully'
+    end
+    @master_categories = @batch.finance_fee_categories.all
+  end
   def index
     @courses = Course.all
    end
@@ -58,7 +81,7 @@ class BatchesController < ApplicationController
     @batch = Batch.find(params[:format])
   end
 
-  def assign_tutorial
+ def assign_tutorial
     @emp = []
     @batch = Batch.find(params[:format])
     @department = EmployeeDepartment.find(params[:assign_tutor][:id])
@@ -69,7 +92,7 @@ class BatchesController < ApplicationController
    end
 
   def assign_employee
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @employee = Employee.find(params[:format])
     unless @batch.employee_id.blank?
       @assigned_emps = @batch.employee_id.split(',')
@@ -89,7 +112,7 @@ class BatchesController < ApplicationController
  end
 
   def remove_employee
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @employee = Employee.find(params[:format])
 
     @assigned_emps = @batch.employee_id.split(',')

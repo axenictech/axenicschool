@@ -40,8 +40,8 @@
 		<%@departments1.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.code%>)</td>
-			<td><%= link_to 'Edit',employees_edit_department_path(c),remote:true%></td>
-			<td><%= link_to 'Delete' ,employees_destroy_department_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
+			<td><%= link_to 'Edit',edit_department_employee_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,destroy_department_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
 			</tr>
 		<%end%>
 	 </tbody>
@@ -55,8 +55,8 @@
 		<%@departments2.each do |c| %>
 			<tr>
 			<td class="col-3"><%=c.name%> (<%=c.code%>)</td>
-			<td><%= link_to 'Edit',employees_edit_department_path(c),remote:true%></td>
-			<td><%= link_to 'Delete' ,employees_destroy_department_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	
+			<td><%= link_to 'Edit',edit_department_employee_path(c),remote:true%></td>
+			<td><%= link_to 'Delete',destroy_department_employee_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	
 			</tr>
 		<%end%>
 	 </tbody>

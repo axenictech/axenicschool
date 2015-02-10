@@ -22,9 +22,9 @@
 	<tr>
 		<td><%= i+1 %></td>
 	<% unless c.is_income?%>
-		<td><%=link_to c.name,finance_expense_details_path(start_date:@start_date1,end_date:@end_date1,category:c.id)%></td>
+		<td><%=link_to c.name,expense_details_finance_index_path(start_date:@start_date1,end_date:@end_date1,category:c.id)%></td>
 	<%else%>
-		<td><%=link_to c.name,finance_income_details_path(start_date:@start_date1,end_date:@end_date1,category:c.id)%></td>
+		<td><%=link_to c.name,income_details_finance_index_path(start_date:@start_date1,end_date:@end_date1,category:c.id)%></td>
 	<%end%>
 		<td><%= expense=c.category_amount(@start_date1,@end_date1) unless c.is_income? %></td>
 		<td><%= income=c.category_amount(@start_date1,@end_date1) if c.is_income? %></td>
@@ -54,9 +54,9 @@
 	<tr>
 		<td><%= i+1 %></td>
 	<% unless c.is_income?%>
-		<td><%=link_to c.name,finance_expense_details_path(start_date:@start_date2,end_date:@end_date2,category:c.id)%></td>
+		<td><%=link_to c.name,expense_details_finance_index_path(start_date:@start_date2,end_date:@end_date2,category:c.id)%></td>
 	<%else%>
-		<td><%=link_to c.name,finance_income_details_path(start_date:@start_date2,end_date:@end_date2,category:c.id)%></td>
+		<td><%=link_to c.name,income_details_finance_index_path(start_date:@start_date2,end_date:@end_date2,category:c.id)%></td>
 	<%end%>
 		<td><%= expense=c.category_amount(@start_date2,@end_date2) unless c.is_income? %></td>
 		<td><%= income=c.category_amount(@start_date2,@end_date2) if c.is_income? %></td>

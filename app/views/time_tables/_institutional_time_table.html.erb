@@ -1,11 +1,11 @@
   <table  align="center" class="table table-hover table-bordered" style="width:800px">
      <tr>
-     <td> <%= link_to "◄",time_tables_display_institutional_time_table_path(:next=>(@today-1.day)),remote:true %></td>
+     <td> <%= link_to "◄",display_institutional_time_table_time_tables_path(:next=>(@today-1.day)),remote:true %></td>
   <td>
       <%= I18n.l(@today,:format=>" %d %B %Y") %>
     </td>
     <td>
-      <%= link_to "►",time_tables_display_institutional_time_table_path(:next=>(@today+1.day)),remote:true %>
+      <%= link_to "►",display_institutional_time_table_time_tables_path(:next=>(@today+1.day)),remote:true %>
     </td>
 </tr>
 </table>

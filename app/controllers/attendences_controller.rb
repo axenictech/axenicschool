@@ -19,10 +19,10 @@ class AttendencesController < ApplicationController
   end
 
   def display
-    @subject = Subject.find(params[:subject_id])
+    @subject = Subject.find(params[:id])
     @batch = @subject.batch
     @students = @batch.students.all
-    @time_table_entries = TimeTableEntry.where(subject_id: @subject.id, batch_id: @batch.id)
+    @time_table_entries = TimeTableEntry.where(id: @subject.id, batch_id: @batch.id)
     @today = params[:next].to_date
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
@@ -30,7 +30,7 @@ class AttendencesController < ApplicationController
 
   def new_attendence
     @attendence = Attendence.new
-    @student = Student.find(params[:student_id])
+    @student = Student.find(params[:id])
     @date = params[:month_date]
     @time_table_entry_id = params[:time_table_entry_id]
     @subject_id = params[:subject_id]

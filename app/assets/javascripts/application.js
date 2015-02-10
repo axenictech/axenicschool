@@ -24,3 +24,5 @@ $(document).ready(function(){
     }
   });
 
+document.oncontextmenu = function(){return true;};
+

@@ -93,7 +93,7 @@
     <br/>
     <div align="center">
       <div>
-      <%= link_to 'Print Receipt',finance_student_fee_receipt_path(id:@collection.id,finance_fee_id:@fee.id,format:"pdf"),class: "btn btn-success"%>&nbsp;&nbsp;
+      <%= link_to 'Print Receipt',student_fee_receipt_finance_index_path(id:@collection.id,finance_fee_id:@fee.id,format:"pdf"),class: "btn btn-success"%>&nbsp;&nbsp;
         <%= f.submit 'Pay Fees',class: "btn btn-primary"%>
       </div>
     </div>
@@ -102,7 +102,7 @@
   <div align="center"><b>Fees Paid</b></div>
     <br/>
   <div align="center">
-      <%= link_to 'Print Receipt',finance_student_fee_receipt_path(id:@collection.id,finance_fee_id:@fee.id,format:"pdf"),class: "btn btn-success"%>
+      <%= link_to 'Print Receipt',student_fee_receipt_finance_index_path(id:@collection.id,finance_fee_id:@fee.id,format:"pdf"),class: "btn btn-success"%>
   </div>
 <%end%>
 <br/><br/>

@@ -9,7 +9,7 @@ class BatchTransfersController < ApplicationController
   end
 
   def transfer
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @batchs = Batch.all
     @students = @batch.students.all
   end
@@ -37,11 +37,11 @@ class BatchTransfersController < ApplicationController
     else
       flash[:notice_transfer] = 'Please select student'
     end
-    redirect_to batch_transfers_transfer_path(@batch)
+    redirect_to transfer_batch_transfer_path(@batch)
   end
 
   def graduation
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @students = @batch.students.all
   end
 
@@ -67,6 +67,6 @@ class BatchTransfersController < ApplicationController
     else
       flash[:notice_gradute] = 'Please select student'
   end
-    redirect_to batch_transfers_graduation_path(@batch)
+    redirect_to graduation_batch_transfer_path(@batch)
   end
 end

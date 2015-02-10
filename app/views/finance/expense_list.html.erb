@@ -8,7 +8,7 @@
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'Pdf Report',finance_finance_expense_report_path(start_date:@start_date,end_date:@end_date,format:"pdf")%></li>
+    <li><%= link_to 'Pdf Report',finance_expense_report_finance_index_path(start_date:@start_date,end_date:@end_date,format:"pdf")%></li>
   </ul>
 </div>
 <div id="page-yield">
@@ -29,8 +29,8 @@
 		<td><%= expense.description%></td>
 		<td><%= expense.amount%></td>
 		<td><%= expense.transaction_date%></td>
-		<td><%= link_to 'Edit',finance_edit_expense_path(expense)%>&nbsp;&nbsp;
-		<%= link_to 'Delete',finance_delete_expense_path(expense),method: :delete, data:{confirm:"Are you sure to delete Expense '#{expense.title}'?"}%>
+		<td><%= link_to 'Edit',edit_expense_finance_path(expense)%>&nbsp;&nbsp;
+		<%= link_to 'Delete',delete_expense_finance_path(expense),method: :delete, data:{confirm:"Are you sure to delete Expense '#{expense.title}'?"}%>
 		</td>
 	</tr>
 	<%end%>

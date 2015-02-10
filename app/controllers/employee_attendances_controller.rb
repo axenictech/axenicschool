@@ -57,7 +57,7 @@ class EmployeeAttendancesController < ApplicationController
     @inactive_leaves = EmployeeLeaveType.where(status: false).order(:name)
   end
 
-  def attendance_register
+  def attendence_register
     @deparments = EmployeeDepartment.all
     @emp = Employee.where.not(id: EmployeeLeave.all.pluck(:employee_id))
     @emp.each do |e|
@@ -78,14 +78,14 @@ class EmployeeAttendancesController < ApplicationController
   def display
     @deparment = EmployeeDepartment.find(params[:department_id])
     @employees = @deparment.employees.all
-    @today = params[:next].to_date
+    @today = params[:nextdate].to_date
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
   end
 
   def new_attendance
     @attendance = EmployeeAttendance.new
-    @employee = Employee.find(params[:employee_id])
+    @employee = Employee.find(params[:id])
     @date = params[:attendance_date]
     @leave_types = EmployeeLeaveType.all
   end
@@ -214,14 +214,14 @@ class EmployeeAttendancesController < ApplicationController
   end
 
   def attendance_report_pdf
-    @deparment = EmployeeDepartment.find(params[:department_id])
+    @deparment = EmployeeDepartment.find(params[:id])
     @leave_types = EmployeeLeaveType.all
     @employees = @deparment.employees.all
     render 'attendance_report_pdf', layout: false
   end
 
   def report_info
-    @employee = Employee.find(params[:employee_id])
+    @employee = Employee.find(params[:id])
     @attendance_report = EmployeeAttendance.find_by_employee_id(@employee.id)
     @leave_types = EmployeeLeaveType.all
     @leave_count = EmployeeLeave.where(employee_id: @employee)
@@ -278,7 +278,7 @@ class EmployeeAttendancesController < ApplicationController
         e.update(leave_taken: leave_taken, leave_count: available_leave)
       end
     end
-    redirect_to employee_attendances_employee_leave_reset_by_department_path
+    redirect_to employee_leave_reset_by_department_employee_attendances_path
     flash[:notice] = 'Department Wise Leave Reset Successfull'
   end
 
@@ -308,7 +308,7 @@ class EmployeeAttendancesController < ApplicationController
       leave_taken = 0
       e.update(leave_taken: leave_taken, leave_count: available_leave, reset_date: Date.today)
     end
-    redirect_to employee_attendances_employee_leave_detail_path
+    redirect_to employee_leave_detail_employee_attendance_path
   end
 
   private

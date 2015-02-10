@@ -16,20 +16,20 @@
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
-         <%=link_to "Genral",employees_genral_profile_archived_path(@employee),remote:true%>
+         <%=link_to "Genral",genral_profile_archived_employees_path(@employee),remote:true%>
       </li>
       <li role="presentation">
          
-         <%=link_to "Personal",employees_personal_profile_archived_path(@employee),remote:true%>
+         <%=link_to "Personal",personal_profile_archived_employees_path(@employee),remote:true%>
       </li>
       <li role="presentation">
-        <%=link_to "Address",employees_address_profile_archived_path(@employee),remote:true%>
+        <%=link_to "Address",address_profile_archived_employees_path(@employee),remote:true%>
       </li>
        <li role="presentation">
-        <%=link_to "Contact",employees_contact_profile_archived_path(@employee),remote:true%>
+        <%=link_to "Contact",contact_profile_archived_employees_path(@employee),remote:true%>
       </li>
        <li role="presentation">
-        <%=link_to "Bank_Info",employees_bank_info_archived_path(@employee),remote:true%>
+        <%=link_to "Bank_Info",bank_info_archived_employees_path(@employee),remote:true%>
       </li>
       
    </ul>
@@ -46,7 +46,7 @@
 
 <div id="page-yield">
 
-  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+  
 
 
 <div id="profile"><%=render'disp_genral_profile_archived'%></div>

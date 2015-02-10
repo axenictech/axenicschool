@@ -65,7 +65,7 @@ end
 
   def time_table_pdf
     @time1 = TimeTable.find(params[:t])
-    @time = TimeTableEntry.where(params[:time_id])
+    @time = TimeTableEntry.where('batch_id like ?',params[:time_id])
     @batch = Batch.find(params[:batch_id])
     @subjects = @batch.subjects.all
     render 'time_table_pdf', layout: false

@@ -10,16 +10,16 @@
 
  <div class="box">
    <div class="bread_crumb">
-    <%= link_to "Batch "+@subject.elective_group.batch.name, batches_display_path(@subject.elective_group.batch)%> &raquo;
- 	<%= link_to "Elective Group "+@subject.elective_group.name ,batches_subjects_subject_path(@subject.elective_group.batch)%> &raquo;
- 	<%= link_to "Elective Subject "+@subject.name,elective_groups_elective_subject_path(@subject.elective_group)%> &raquo; Assign Students
+    <%= link_to "Batch "+@subject.elective_group.batch.name,display_batch_path(@subject.elective_group.batch)%> &raquo;
+ 	<%= link_to "Elective Group "+@subject.elective_group.name ,subject_batch_subjects_path(@subject.elective_group.batch)%> &raquo;
+ 	<%= link_to "Elective Subject "+@subject.name,elective_subject_elective_group_path(@subject.elective_group)%> &raquo; Assign Students
         </div>
  <% unless flash[:notice_ele].nil? %>
     <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:notice_ele] %> </div>
   <% end %></div><br/>
 <div class="linker" align="right" style="margin-right:20px">
-<%= link_to "Assign All",students_assign_all_path(@subject),remote:true, class: 'btn btn-primary'%>
-  <%= link_to "Remove All",students_remove_all_path(@subject),remote:true,class: 'btn btn-primary' %></div>
+<%= link_to "Assign All",assign_all_student_path(@subject),remote:true, class: 'btn btn-primary'%>
+  <%= link_to "Remove All",remove_all_student_path(@subject),remote:true,class: 'btn btn-primary' %></div>
 <br/><br/>
   <div id="elective_subject">
     <%= render 'elective_subject' %>

@@ -6,7 +6,6 @@ class CreateClassDesignations < ActiveRecord::Migration
       t.decimal :marks
       t.references :course, index: true
 
-   
       t.timestamps
     end
   end

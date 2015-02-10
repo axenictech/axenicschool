@@ -33,7 +33,7 @@ class ElectiveGroupsController < ApplicationController
   end
 
   def elective_subject
-    @elective_group = ElectiveGroup.find(params[:elective_group_id])
+    @elective_group = ElectiveGroup.find(params[:id])
     @elective_subjects = @elective_group.subjects.all
   end
 

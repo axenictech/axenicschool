@@ -14,7 +14,7 @@
 
       <%@reporting_manager.each do |emp|%>
           <tr>
-                <td col-md-1><%= link_to emp.first_name,employees_update_reporting_manager_name_path(@employee,emp),remote:true%></td>
+                <td col-md-1><%= link_to emp.first_name,update_reporting_manager_name_employee_path(@employee,reporting_manager_id:emp),remote:true%></td>
                 <td col-md-1><%= emp.id%></td>
                 <td col-md-1><%= emp.employee_department.name%></td>
          </tr>

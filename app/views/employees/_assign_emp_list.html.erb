@@ -8,7 +8,7 @@
 	<% @employee = Employee.find(emp.employee_id) %>
 	<tr>
 		<td><%=@employee.first_name%></td>
-		<td><%= link_to "Remove",employees_remove_employee_path(@employee,@subject,department_id:@department.id),method: :delete,data: { confirm: 'Are you sure?' } ,remote:true%></td>
+		<td><%= link_to "Remove",remove_employee_employee_path(@employee,@subject,department_id:@department.id),method: :delete,data: { confirm: 'Are you sure?' } ,remote:true%></td>
 	</tr>
 	<%end%>
 	<%end%>

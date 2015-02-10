@@ -38,5 +38,5 @@
 	</tr>
 	<%end%>
 	<tr><td colspan="4"></td></tr>
-	<tr><td colspan="4"><%= link_to 'Pdf report',attendences_attendence_report_path(subject_id:@subject.id,start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-success"%></td></tr>
+	<tr><td colspan="4"><%= link_to 'Pdf report',attendence_report_attendences_path(subject_id:@subject.id,start_date:@start_date,end_date:@end_date,format:"pdf"),class: "btn btn-success"%></td></tr>
 </table>

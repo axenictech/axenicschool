@@ -9,10 +9,10 @@ class CreateLanguages < ActiveRecord::Migration
   end
 
   def create_default
-    language_list =['English','Spanish','Marathi','hindi','Arebian']
+    language_list = %w(English Spanish Marathi hindi Arebian)
 
     language_list.each do |l|
-      Language.create(name:l)
+      Language.create(name: l)
     end
   end
 end

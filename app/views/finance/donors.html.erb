@@ -21,12 +21,12 @@
 		<% @donors.each do |d|%>
 
 		<tr>
-		<td class="col-3"><%= link_to d.donor,finance_donation_receipt_path(d)%></td>
+		<td class="col-3"><%= link_to d.donor,donation_receipt_finance_path(d)%></td>
 		<td class="col-3"><%= d.description%></td>
 		<td class="col-3"><%= d.amount%></td>
 		<td class="col-3"><%= d.created_at.to_date%></td>
-		<td class="col-3"><%= link_to 'Edit',finance_edit_donation_path(d)%>&nbsp;&nbsp;
-			<%= link_to 'Delete' ,finance_delete_donation_path(d),method: :delete, data:{confirm:"Are You sure to delete donor '#{d.donor}'?"}%></td>	
+		<td class="col-3"><%= link_to 'Edit',edit_donation_finance_path(d)%>&nbsp;&nbsp;
+			<%= link_to 'Delete' ,delete_donation_finance_path(d),method: :delete, data:{confirm:"Are You sure to delete donor '#{d.donor}'?"}%></td>	
 		
 		</tr>
 		<%end%>

@@ -10,11 +10,11 @@
 	<% @master_categories.each_with_index do |m,i|%>
 		<tr>
 			<td class="col-3"><%= i+1 %></td>
-			<td class="col-3"><%= link_to m.name,finance_master_category_particular_path(m,batch_id:@batch.id)%></td>
+			<td class="col-3"><%= link_to m.name,master_category_particular_finance_path(m,batch_id:@batch.id)%></td>
 			<td class="col-3"><%= @batch.name %></td>
 			<td class="col-3"><%= m.created_at.to_date%></td>
-			<td class="col-3"><%= link_to 'Edit',finance_edit_master_category_path(@batch,m),remote:true %>&nbsp;&nbsp;
-				<%= link_to 'Delete',finance_delete_master_category_path(@batch,m),method: :delete, data:{confirm:"Are You sure to delete Asset '#{m.name}'?"},remote:true%></td>	
+			<td class="col-3"><%= link_to 'Edit',edit_master_category_finance_path(@batch,finance_id:m),remote:true %>&nbsp;&nbsp;
+				<%= link_to 'Delete',delete_master_category_finance_path(@batch,finance_id:m),method: :delete, data:{confirm:"Are You sure to delete Asset '#{m.name}'?"},remote:true %></td>	
 			
 		</tr>
 	<%end%>

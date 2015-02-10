@@ -13,7 +13,7 @@
    <div class="bread_crumb">
     <%= link_to 'Courses', courses_path %> &raquo;
     <%= link_to @batch.course.course_name, course_path(@batch.course) %> &raquo;
-    Batch <%= link_to @batch.name, batches_display_path(@batch) %> &raquo;Subjects
+    Batch <%= link_to @batch.name, display_batch_path(@batch) %> &raquo;Subjects
         </div></div><br/>
 <div id="subject_div">
 	 <%= render 'subject' %>

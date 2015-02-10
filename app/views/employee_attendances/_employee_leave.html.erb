@@ -56,8 +56,8 @@
   <% @active_leaves.each do |e| %>
       <tr>
       <td class="col-2"><%=e.name%>-<%=e.code%></td>
-      <td><%= link_to 'Edit',employee_attendances_edit_leave_type_path(e),remote:true%></td>
-      <td><%= link_to 'Delete',employee_attendances_destroy_leave_type_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{e.name}?"}%></td>  
+      <td><%= link_to 'Edit',edit_leave_type_employee_attendance_path(e),remote:true%></td>
+      <td><%= link_to 'Delete',destroy_leave_type_employee_attendance_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{e.name}?"}%></td>  
       </tr>
     <%end%>
 
@@ -74,8 +74,8 @@
   <%@inactive_leaves.each do |e| %>
       <tr>
       <td class="col-2"><%=e.name%>-<%=e.code%></td>
-      <td><%= link_to 'Edit',employee_attendances_edit_leave_type_path(e),remote:true%></td>
-      <td><%= link_to 'Delete', employee_attendances_destroy_leave_type_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{e.name}?"}%></td>  
+      <td><%= link_to 'Edit',edit_leave_type_employee_attendance_path(e),remote:true%></td>
+      <td><%= link_to 'Delete', destroy_leave_type_employee_attendance_path(e),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{e.name}?"}%></td>  
       </tr>
     <%end%>
 

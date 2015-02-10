@@ -31,7 +31,7 @@
       </div><br/>
        <div class="row">
         <div class="col-md-3"><%= label_tag :select_batch %></div>
-        <div class="col-md-3"> Select:&nbsp;&nbsp;<%= link_to "All",finance_select_all_path,{onclick:"$('.check_box').prop('checked',true);",remote:true}%>&nbsp;&nbsp;<%= link_to "None",finance_select_none_path,{onclick:"$('.check_box').prop('checked',false);",remote:true}%>
+        <div class="col-md-3"> Select:&nbsp;&nbsp;<%= link_to "All",select_all_finance_index_path,{onclick:"$('.check_box').prop('checked',true);",remote:true}%>&nbsp;&nbsp;<%= link_to "None",select_none_finance_index_path,{onclick:"$('.check_box').prop('checked',false);",remote:true}%>
         <div id="fee_category"><%= render 'category_batches_list'%></div>
         </div>
       </div><br/>

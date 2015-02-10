@@ -21,7 +21,7 @@
       <% @batch.subjects.all.each do |s|%>
       <% is_elective=StudentSubject.find_by_subject_id_and_student_id(s.id,@student.id)%>
         <% if s.elective_group.nil?%>
-        <p><%=link_to s.name,students_subject_wise_report_path(subject_id:s.id,student_id:@student.id)%></p>
+        <p><%=link_to s.name,subject_wise_report_students_path(subject_id:s.id,student_id:@student.id)%></p>
         <%else%>
           <% unless is_elective.nil?%>
             <p><%=link_to s.name,students_subject_wise_report_path(subject_id:s.id,student_id:@student.id)%></p>
@@ -32,8 +32,8 @@
     
     <div class="exam-results-reports-col">
       <h4>Detailed reports</h4>
-      <p><%= link_to 'Final Report(Exam Grouped)',students_final_report_path(@student.id)%></p>
-      <p><%= link_to 'Transcript Report',students_transcript_report_path(@student.id)%></p>
+      <p><%= link_to 'Final Report(Exam Grouped)',final_report_students_path(@student.id)%></p>
+      <p><%= link_to 'Transcript Report',transcript_report_students_path(@student.id)%></p>
     </div>
 <div class="extender"> </div>
 </div>
@@ -41,7 +41,7 @@
 
     <h3>Attendance</h3>
     <h4>Detailed Reports</h4>
-    <p><%=link_to 'Current year report',students_attendance_report_path(@student.id)%></p>
+    <p><%=link_to 'Current year report',attendance_report_students_path(@student.id)%></p>
   </div>
 
 </div>
