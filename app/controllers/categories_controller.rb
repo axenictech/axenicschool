@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
   def index
     @category = Category.new
     @categorys = Category.all
+    authorize! :create, @category
   end
 
   def create
@@ -17,20 +18,17 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
+    authorize! :update, @category
   end
 
   def update
     @category = Category.find(params[:id])
-
-    if @category.update(category_params)
-      flash[:notice] = 'Student category updated successfully'
-      redirect_to categories_path(@category)
-    else
-      render 'edit'
-    end
+    @category.update(category_params)
+    flash[:notice] = 'Student category updated successfully'
   end
 
   def destroy
+    authorize! :delete, @category
     @category = Category.find(params[:id])
     if @category.destroy
       flash[:notice] = 'Student category deleted successfully  '

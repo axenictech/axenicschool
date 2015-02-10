@@ -14,11 +14,59 @@
 		<tr><td><%= c.label :Status%></td><td> <%= c.radio_button "status", "true", checked: "checked" %> <%=c.label :Active%> 
 		<%= c.radio_button "status", "false"%> <%=c.label :Inactive%></td></tr>
 
-		<tr><td colspan="3"><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></td></tr>	
+		<tr><td colspan="3" align="center"><%= c.check_box :is_deduction%>  <%= c.label :'is_deduction?'%></td></tr>	
 
 		<tr>
-			<td colspan="3"><%= c.submit 'Create'%></td>
+			<td colspan="3" align="center"><%= c.submit 'Create', class: "btn btn-primary"%></td>
 		</tr>
 </tbody>
 </table>
 <%end%>
+
+<% if @payroll_categories1.empty? and @payroll_categories2.empty?%>
+<h3 align="center">No records</h3>
+<%else%>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="4">Earnings</th>
+    </tr>
+	<tbody class="product-index">
+
+	<%@payroll_categories1.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%></td>
+			<td><%= link_to 'Edit',employees_edit_payroll_category_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	 
+			<% if c.status? %>
+			<td><%= link_to 'Active',employees_active_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to activate this Category?"} %></td>	
+			<% else %>
+			<td><%=link_to 'Inactive',employees_inactive_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
+			<%end%>
+			</tr>
+		<%end%>
+		
+	 </tbody>
+</table>
+<table align="center" class="table table-hover table-bordered" style="width:800px">
+
+	<tr class="tr-head"><th colspan="4">Deductions</th>
+    </tr>
+	<tbody class="product-index">
+	<%@payroll_categories2.each do |c| %>
+			<tr>
+			<td class="col-3"><%=c.name%></td>
+			<td><%= link_to 'Edit',employees_edit_payroll_category_path(c),remote:true%></td>
+			<td><%= link_to 'Delete' ,employees_destroy_payroll_category_path(c),remote:true,method: :delete, data: { confirm: "Are you sure to delete #{c.name}?"}%></td>	
+			 <% if c.status? %>
+			<td><%= link_to 'Active',employees_active_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"} %></td>	
+			<% else %>
+			<td><%=link_to 'Inactive',employees_inactive_payroll_category_path(c),remote:true, data:{confirm: "Are you sure you want to inactivate?"}%></td>
+			<%end%>
+			</tr>
+		<%end%>
+		
+	 </tbody>
+</table>
+<%end%>
+
+

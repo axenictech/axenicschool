@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
+  def index
+    authorize! :read, User
+  end
+
   def new
     @user = User.new
+    authorize! :create, @user
   end
 
   def create
@@ -30,6 +35,7 @@ class UsersController < ApplicationController
         @student = Student.find(@user.student_id)
       end
     end
+    authorize! :read, @user
   end
 
   def search
@@ -39,13 +45,12 @@ class UsersController < ApplicationController
         OR concat_ws(' ',last_name,first_name)like ?
         OR username like ?","#{params[:search]}%","#{params[:search]}%","#{params[:search]}%")
     end
-    
-    # @id=params[:search]
-    #  @users = User.where("id=" + @id+"")
+    authorize! :read, @user
   end
 
   def edit
     @user = User.find(params[:id])
+    authorize! :update, @user
   end
 
   def update
@@ -61,38 +66,26 @@ class UsersController < ApplicationController
 
   def change_password
     @user = User.find(params[:id])
+    authorize! :update, @user
   end
 
   def update_password
     @user = User.find(params[:id])
-    if User.authenticate?(@user.username, params[:user][:old_password])
-      if params[:user][:new_password].length >= 6 && params[:user][:new_password].length <= 20
-        if params[:user][:new_password] == params[:user][:confirm_password]
-          @user.password = params[:user][:new_password]
-          if @user.update(user_params)
-            flash[:user] = 'Password updated successfully'
-            redirect_to user_path(@user)
-          else
-            render 'change_password'
-          end
-        else
-          flash[:notice] = 'New password and confirm password not matches'
-          render 'change_password'	     	        	end
-      else
-        flash[:notice] = 'Password length between 6 to 20 characters'
-        render 'change_password'
-           end
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+      flash[:notice] = 'Password changed successfully!'
     else
-      flash[:notice] = 'Please Enter correct old password'
       render 'change_password'
-      end
+    end
   end
 
   def select
-    @users = User.where('role Like ?',"params[:user][:role]}")
+    @users = User.where("role Like '#{params[:user][:role]}'")
+    authorize! :read, @user
   end
 
   def destroy
+    authorize! :delete, @user
     @user = User.find(params[:id])
     @user.destroy
     flash[:user_delete] = 'User deleted successfully!'
@@ -102,6 +95,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :first_name, :last_name, :password, :email, :role, :hashed_password)
+    params.require(:user).permit!
   end
 end

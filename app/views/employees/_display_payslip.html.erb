@@ -1,15 +1,22 @@
 
-<div id="payslip">
+     <div class="box-inner">
+       <div class="box-header well">
+          <h2></h2>
+      </div>
         <%if @employees.present? %>
-        <table border="1" style="width:80%">
-          <tr class="tr-head">
-            <td><%= 'Sr.no' %></td>
-            <td><%= 'Employee' %></td>
-            <td><%= 'Employee no'%></td>
-            <td><%= 'Net salary'%></td>
-            <td><%= 'Payslip_status'%></td>
-            <td></td>
+
+      <div class="box-content">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th><%= 'Sr.no' %></th>
+            <th><%= 'Employee' %></th>
+            <th><%= 'Employee no'%></th>
+            <th><%= 'Net salary'%></th>
+            <th><%= 'Payslip_status'%></th>
+            <th></th>
           </tr>
+          </thead>
           <%count=0%>
           <%tot_amount=0%>
          

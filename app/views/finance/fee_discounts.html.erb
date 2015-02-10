@@ -1,26 +1,32 @@
-<div id="content-header">
-  <h1>Fee Discounts</h1>
-  <h3>Finance Management</h3>
-    <div id="app-back-button">
-  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-<div id="inner-tab-menu">
-  <ul>
-    <li style="width:150px"><%= link_to 'Create Discount','new_fee_discount'%> </li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Finance',finance_index_path %></li>
+    <li><%= link_to 'Manage Fees',finance_fees_path %></li>
+    <li><%= link_to 'Create Fees',finance_master_fees_path%></li>
+    <li><%= link_to 'Create Discount',finance_new_fee_discount_path %></li>
+    <li>View Discount</li>
   </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Create Discount', 'new_fee_discount', class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-4">
+    
+    <div class="form-group">
+      <%= t('Select batch') %>
+      <%= select :batch,:id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('fee_category',a,function(response){});",class: "form-control"}%>
+    </div>
+  </div>
+</div>
+<div id="category"></div>
+<div id='modal' class="modal fade"></div>
 
-<div id="page-yield">
-<div id="box">
- <div class="label-field-pair">
-  <%= label_tag :select_batch %>
-      <div class="text-input-bg">
-      <%= select :batch,:id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('fee_category',a,function(response){});"}%>
-      </div></div><br/>
-<div id="category"></div><br/><br/>
-</div>
-<div id="modal" class="modal fade"></div>
-</div>

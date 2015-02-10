@@ -1,17 +1,26 @@
- <% if @batches.empty? %>
-  <h4 align="center">No Record Found </h4>
-   <% else %>
-  <% @batches.each do |batch| %> 
-      <%= batch.name%>&nbsp;&nbsp;&nbsp;
-    <%if @batch_group.nil? %>
-    	<%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%><br/>
-	  <%else%>
-       <%group_batch=GroupBatch.find_by_batch_group_id_and_batch_id(@batch_group.id,batch)%>
-	      <%if group_batch.nil?%>
-	      	<%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%><br/>
-	      <%else%>
-	      	<%= check_box_tag "batches[]", batch.id,true,class: 'check_box'%><br/>
-	      <%end%>
-      <%end%>
+<div class="box-content">
+  <table id="datatable" class="table table-striped table-bordered responsive">
+    <thead>
+      <tr>
+        <th>Batch Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+  <% if @batches.empty? %>
+    <h4 align="center">No Record Found </h4>
+  <% else %>
+    <% @batches.each do |batch| %>
+      <tr>
+        <td>
+          <%= batch.name%>
+        </td>
+        <td class="center">
+          <%= check_box_tag "batches[]", batch.id,false,class: 'check_box'%>
+        </td>
+      </tr>
+    <% end %>
   <%end%>
-  <%end%>
+    </tbody>
+  </table>
+</div>

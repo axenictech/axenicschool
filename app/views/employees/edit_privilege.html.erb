@@ -1,27 +1,20 @@
-<div id="content-header">
-   <hr class="fancy-line"></hr>
-  <h1>Admission</h1>
-  <h3>Edit Privileges<br />
-  
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
 
-<div id="page-yield">
- 
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li><%= link_to 'HR Management',employees_employee_management_path %></li>
+    <li>Edit Privileges</li>
+ </ul>
+ </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+
 
 <%= form_for :edit_privilege ,url:{action:'update_privilege',format: @employee.id} do |f| %>
 <table align="center" class="table table-hover" style="width:100%">
-
-    <tbody>
-    
-   	<tr>
-   			 <td class="col-4"><%= "Set Privilege for "+@employee.first_name%></td>
- 
-   	</tr>
-     <tr><td colspan="4"><%=f.submit "Update",class: "btn btn-primary" %></td></tr>
+<tbody>    
+   	<tr><td class="col-4"><%= "Set Privilege for "+@employee.first_name%></td></tr>
+     <tr class="tr-head"><td colspan="4"><%=f.submit "Update",class: "btn btn-primary" %></td></tr>
 </tbody>
 </table>
 

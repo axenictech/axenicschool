@@ -1,190 +1,57 @@
-<header>
-      <nav class="navbar navbar-default">
-        <a class="navbar-brand" href="#">
-            <label>Axenic School</label>
-        </a>
-        <a class="toggle-nav btn pull-left">
-          <i class="icon-reorder"></i>
-        </a>
-    <% if user_signed_in? %>
-        <ul class="nav">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" >
-              <i class="fa fa-cogs"></i>
-            </a>
+<div class="navbar navbar-default" role="navigation">
+  <div class="navbar-inner">
+      <button type="button" class="navbar-toggle pull-left animated flip">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+      <% unless current_user.general_setting.image.blank? %>
+        <%= image_tag(current_user.general_setting.image,class: "hidden-xs") %>
+      <% end %>
+        <span><%= current_user.institute_name%></span>
+      </a>
+    <div class="btn-group pull-right">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <i class="glyphicon glyphicon-user"></i>
+          <span class="hidden-sm hidden-xs">
+            <%= current_user.first_name+" "+current_user.last_name %>
+          </span>
+          <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to "Profile (#{current_user.role})", edit_user_registration_path %>
         </li>
-        <li class="dropdown medium only-icon widget">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="">
-              <i class="icon-rss"></i>
-              <div class="label">5</div>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="">
-                  <div class="widget-body">
-                    <div class="pull-left icon">
-                      <i class="icon-user text-success"></i>
-                    </div>
-                    <div class="pull-left text">
-                      John Doe signed up
-                      <small class="text-muted">just now</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="">
-                  <div class="widget-body">
-                    <div class="pull-left icon">
-                      <i class="icon-inbox text-error"></i>
-                    </div>
-                    <div class="pull-left text">
-                      New Order #002
-                      <small class="text-muted">3 minutes ago</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown dark user-menu">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              <span class="user-name"><%= current_user.username %></span>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="/users/edit">
-                  <i class="icon-user"></i>
-                  Profile
-                </a>
-              </li>
-               <li class="divider"></li>
-              <li>
-                <a href="/users/sign_out" data-method="delete">
-                  <i class="icon-signout"></i>
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-  <%end%>
-      </nav>
-</header>
+        <li class="divider"></li>
+        <li><%= link_to 'Sign Out',destroy_user_session_path, method: :delete %>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+</div>
+<div class="ch-container">
+  <div class="row">  
+  <!-- left menu starts -->
+  <% if current_user.role == 'Admin' %>
+      <%= render 'layouts/menu1' %>
+  <% elsif current_user.role == 'Employee' %>
+      <%= render 'layouts/menu2' %>
+  <% else %>
+      <%= render 'layouts/menu3' %>
+  <% end %>
 
-    <div id="wrapper">
-      <div id="main-nav-bg"></div>
-      <nav id="main-nav">
-        <div class="navigation">
-          <ul class="nav nav-stacked">
-            <li class="active">
-               <a href="http://localhost:3000/home/dashboard">
-               <i class="icon-dashboard"></i>
-                <span>Dashboard</span>
-               </a>
-            </li>
-            <li class="">
-              <a href="http://localhost:3000/students/admission1">
-              <i class="icon-edit"></i>
-                <span>Admission</span>
-              </a>      
-            </li>
-            <li class="">
-              <a href="http://localhost:3000/students">
-                <i class="icon-star"></i>
-                <span>Student details</span>
-              </a>
-            </li>
-            <li class="">
-              <a href="http://localhost:3000/users">
-                <i class="icon-user"></i>
-                <span>Manage Users</span>
-              </a>
-            </li>
-            <li class="">
-              <a href="http://localhost:3000/exams">
-                <i class="icon-bar-chart"></i>
-                <span>Examinations</span>
-              </a>
-            </li>
-            <li class="">
-              <a href="http://localhost:3000/setting">
-                <i class="icon-cogs"></i>
-                <span>Settings</span>
-              </a>
-            </li>
-            <li class="">
-              <a href="http://localhost:3000/employees">
-                <i class="icon-link"></i>
-                <span>Human Resources</span>
-              </a>
-            </li>
-            <li class="">
-              <a href="http://localhost:3000/finance">
-                <i class="icon-rupee"></i>
-                <span>Finance</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-collapse" href="./Educulture_files/Educulture.html">
-                <i class="icon-folder-open-alt"></i>
-                <span>More</span>
-                <i class="icon-angle-down angle-down"></i>
-              </a>
-              <ul class="nav nav-stacked">
-                <li>
-                 <a href="http://localhost:3000/time_tables">
-                    <i class="icon-caret-right"></i>
-                    <span>Timetable</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="http://localhost:3000/attendences">
-                    <i class="icon-caret-right"></i>
-                    <span>Attendance</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="http://localhost:3000/calender">
-                    <i class="icon-caret-right"></i>
-                    <span>Calender</span>
-                  </a>
-                </li>               
-                <li>
-                  <a href="http://localhost:3000/newscasts">
-                    <i class="icon-caret-right"></i>
-                    <span>Manage News</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <section id="content">
-        <div class="container">
-          <div class="row" id="content-wrapper">
-          <div class="col-xs-12">
-          <div id="flash"><%= render 'layouts/flash_messages'%></div>
-
-                <%= yield %>
-          </div>   
-          </div>
-          
-        </div>
-    </section>
+      <div id="content" class="col-lg-10 col-sm-10">
+        <%= yield %>
+      </div>
+    </div>
+  <hr>
+  <footer class="row">
+    <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="#" target="_blank">Axenic School</a> 2014 - 2015</p>
+    <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
+            href="#">Axenic Technology</a></p>
+  </footer>
 
 </div>
-
-
-   <!--  <footer id="footer">
-            <div class="footer-wrapper">
-              <div class="row">
-                <div class="col-sm-6 text">
-                  Copyright © 2014 Axenic School
-                </div>
-              </div>
-            </div>
-    </footer> -->

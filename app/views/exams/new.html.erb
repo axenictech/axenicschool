@@ -1,16 +1,15 @@
-
-<div id="content-header">
-  <h1>Exams</h1>
-  <h3>New Exams</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Examination','/exams'%></li>
+    <li><%= link_to 'Exam Management','/exam_groups'%> </li>
+    <li><%= link_to 'Exam Group', exam_group_path(@exam_group.batch)%> </li>
+    <li><%= link_to 'Exam',exam_groups_exams_path(@exam_group.id)%></li>
+    <li>New Exam Create</li>
+  </ul>
 </div>
-
-
-<div class="box">
-  <div class="bread_crumb">
-    <%= link_to 'add  links pk' %> &raquo;
+<div id="flash"><%= render 'layouts/messages'%></div>
+  
+<div class="row">
     <%= render 'form'%>
-  </div></div><br/>
+</div>

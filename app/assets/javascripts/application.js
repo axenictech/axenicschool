@@ -12,17 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//# require turbolinks
-//= require jquery.datetimepicker
 //= require_tree .
-$(document).ready(function(){
-	 if ($('textarea').length > 0) {
-        var data = $('textarea');
-        $.each(data, function(i) {
-            CKEDITOR.replace(data[i].id);
-        });
-    }
-  });
+
 
 document.oncontextmenu = function(){return true;};
 
+$(document).ready(function(){
+    $('#datatable').DataTable();
+});

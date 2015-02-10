@@ -1,8 +1,13 @@
 <%= form_for :batch_select,url:{action: 'generate_archived_report'},method: :get do |f| %>
- <div class="label-field-pair">
-  <%= f.label :select_batch %>
-      <div class="text-input-bg">
-      <%= f.select :id, @batches.collect {|b| [b.name,b.id]}, {prompt:true}%>
-      </div></div>
+<div class="row">
+
+    <div class="box col-md-6">
+
+    <b>Select Batch:</b>
+  
+      <%= f.select :id, @batches.collect {|b| [b.name,b.id]}, {prompt:true},{class:"form-control",style: "width: 300px"}%>
+  <br>
  <%= f.submit "View", class: "btn btn-default" %>
   <% end %>
+  </div>
+  </div>

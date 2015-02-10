@@ -1,65 +1,59 @@
-<div id="content-header">
-  <h1>Employee Attendance</h1>
-  <h3>Home</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-    <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li>Employee Attendance</li>
+  </ul>
 </div>
-
- <div class="container">
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Add Leave Types",new_leave_type_employee_attendances_path,style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-            Add and edit employee leave types
-          </div>
-        </div>
-       
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%=link_to "Add Leave Types",'employee_attendances/new_leave_type'%></h2>
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Attendance Register",attendence_register_employee_attendances_path,style: 'color:black' %>
-          </div>
-          <div class="panel-body" style="height:70px">
-           Register attendance
-          </div>
-        </div>
-
+      <div class="box-content">
+       Add and edit employee leave types.
       </div>
-       
-      <div class="col-md-2"></div>
     </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-            <%= link_to "Attendance Report",attendance_report_employee_attendances_path,style: 'color:black' %>   
-          </div>
-          <div class="panel-body" style="height:70px">
-            Attendance report
-          </div>
-        </div>
-       
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Attendance Register",'employee_attendances/attendance_register'%>
+        </h2>
       </div>
-      <div class="col-md-4">
-        <div class="panel panel-warning " style="width:250px;">
-          <div class="panel-heading">
-          <%= link_to "Reset Leave",manual_reset_employee_attendances_path,style: 'color:black'%></div>
-          <div class="panel-body" style="height:70px">
-           Reset employee leaves
-          </div>
-        </div>
-
+      <div class="box-content">
+        Register attendance.
       </div>
-       
-      <div class="col-md-2"></div>
     </div>
- </div>
-  
+  </div>
+</div>
+<br/><br/><br/>
+<div class="row">
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%= link_to "Attendance Report",'employee_attendances/attendance_report' %></h2> 
+      </div>
+      <div class="box-content">
+      Attendance report.
+      </div>
+    </div>
+  </div>
+  <div class="box col-md-1"></div>
+  <div class="box col-md-4">
+    <div class="box-inner2">
+      <div class="box-header well" data-original-title="">
+        <h2><%=link_to "Reset Leave",'employee_attendances/manual_reset'%></h2>
+      </div>
+      <div class="box-content">
+         Reset employee leaves.
+      </div>
+    </div>
+  </div>
+</div>

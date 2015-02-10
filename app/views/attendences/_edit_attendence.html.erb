@@ -6,21 +6,24 @@
 <div class="modal-body">
 <ul class="errors"></ul>
 <%= form_for  @attendence,url:{:action=>'update_attendence',id:@attendence.id,subject_id:@subject_id,date:@today},method: :patch ,remote:true do |f|%>
-  <table class="table" style="width:500px" align="center">
-
-    <tr>
-      <td><%= f.label :reason_for_absence%></td>
-      <td><%= f.text_field :reason%></td>
-    </tr>
-       
-    <tr>
-    <td colspan="2"><%= f.submit 'Update', class: "btn btn-primary"%></td>
-       <td><%= link_to 'Delete',delete_attendence_attendence_path(@attendence,subject_id:@subject_id,date:@today,batch:@attendence.batch.id),method: :delete, data:{confirm:"Are you sure to delete?"},remote:true,class: "btn btn-danger"%></td>
-        </tr>
-
-</table>
+   <div class="row">
+    <div class="col-md-1"></div>
+      <div class="col-md-6">
+      <div class="form-group">
+        <b>Reason for Absence:</b>
+        <%= f.text_field :reason, class: 'form-control', placeholder: 'Reason for Absence'%>
+      </div>
+    
+       <div class="form-group">
+        <%= f.submit 'Update', class: "btn btn-primary"%>
+         &nbsp;&nbsp;
+        <%= link_to 'Delete',delete_attendence_attendence_path(@attendence,subject_id:@subject_id,date:@today,batch:@attendence.batch.id),method: :delete, data:{confirm:"Are you sure to delete?"},remote:true,class: "btn btn-danger"%>
+        </div>
+        </div>
+        </div>
 <% end %>
 
 </div>
 </div>
 </div>
+

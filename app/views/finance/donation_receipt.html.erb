@@ -1,30 +1,55 @@
-<div id="content-header">
-  <h1>Donations</h1>
-  <h3>Donation receipt</h3>
-    <div id="app-back-button">
-  <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Finance',finance_index_path %></li>
+    <li><%= link_to 'Add Donation',finance_donation_path %></li>
+    <li>Donation Reciept</li>
+  </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
-<div id="page-yield">
-<table align="center" class="table" style="width:500px">
-  <tbody><tr class="tr-blank"></tr>
-      <tr class="tr-head">
-        <td class="col-2">Donor</td>
-        <td class="col-2"><%= @donation.donor %></td></tr>
-      <tr class="tr-head">
-        <td class="col-2">Description</td>
-        <td class="col-2"><%= @donation.description %></td></tr>
-      <tr class="tr-head">
-        <td class="col-2">Amount</td>
-        <td class="col-2"><%= @donation.amount %></td></tr>
-      <tr class="tr-head">
-        <td class="col-2">Transcation Id</td>
-        <td class="col-2"><%= @donation.finance_transaction.id%></td></tr>
-      <tr class="tr-head">
-        <td colspan="2" align="center"><%= link_to 'Print receipt',finance_donation_receipt_finance_path(@donation,format:"pdf"),class: "btn btn-primary"%></td></tr>
-      <tr class="tr-blank"></tr>
-  </tbody>
-  </table> 
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Donors', donors_finance_index_path, class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Donation Recipt</h2>
+      </div>
+
+      <div class="box-content">
+        <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <table align="center" class="table" style="width:500px">
+                <tbody><tr class="tr-blank"></tr>
+                  <tr class="tr-head">
+                    <td class="col-2">Donor</td><td>:</td>
+                    <td class="col-2"><%= @donation.donor %></td></tr>
+                  <tr class="tr-head">
+                    <td class="col-2">Description</td><td>:</td>
+                    <td class="col-2"><%= @donation.description %></td></tr>
+                  <tr class="tr-head">
+                    <td class="col-2">Amount</td><td>:</td>
+                    <td class="col-2"><%= @donation.amount %></td></tr>
+                  <tr class="tr-head">
+                    <td class="col-2">Transcation Id</td><td>:</td>
+                    <td class="col-2"><%= @donation.finance_transaction.id%></td></tr>
+                  <tr class="tr-head">
+                    <td colspan="3" align="center"><%= link_to 'Print receipt',donation_receipt_path(@donation,format:"pdf"),class: "btn btn-primary"%></td></tr>
+                  <tr class="tr-blank"></tr>
+                </tbody>
+                </table> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -4,7 +4,6 @@ class CreateGeneralSettings < ActiveRecord::Migration
       t.string :school_or_college_name
       t.string :school_or_college_address
       t.string :school_or_college_phone_no
-      t.string :student_attendance_type
       t.date :finance_start_year_date
       t.date :finance_end_year_date
       t.string :language
@@ -18,10 +17,5 @@ class CreateGeneralSettings < ActiveRecord::Migration
 
       t.timestamps
     end
-    create_default
-  end
-
-  def create_default
-    GeneralSetting.create school_or_college_name: 'Axenic School'
   end
 end

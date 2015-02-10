@@ -1,166 +1,99 @@
-
-<div class="page-header page-header-with-buttons">
-	<h1 class="pull-left">
-	  <i class="icon-book"></i>
-	  <span>Manage Courses </span>
-	</h1>
-<div class="pull-right">
-  <ol class="breadcrumb">
-      <li class="active">
-        <i class="fa fa-gears"></i> 
-        <a href="">Settings</a>
-      </li>
-  </ol>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Course',courses_path %></li>
+    <li>New</li>
+  </ul>
 </div>
-</div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/>
 
-<%= form_for @course  do |c| %>
-<div class="col-sm-12">
-  <div class="box bordered-box blue-border">
-    <div class="box-header blue-background">
-      <div class="title">
-        <i class="icon-book"></i>
-                        Courses and Batches
-      </div>
-      <div class="actions">
-                        
-                        <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
-                        </a>
-      </div>
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>New Course / Batch</h2>
     </div>
-    <div class="box-content box-double-padding">
-      <form class="form" style="margin-bottom: 0;">
-        <fieldset>
+
+    <div class="box-content">
+    
+    <%= form_for @course  do |c| %>
+        
+      <fieldset>
         <% if @course.errors.any?%>
-        <div class="alert alert-danger">
-        <h4>Errors prohibited to being saved:</h4>
-        <ul><% @course.errors.full_messages.each do |msg|%>
-          <li style="width:800px"><%= msg %></li>
-          <%end%></ul>
+          <div class="alert alert-danger alert-dismissable">
+            <ul><% @course.errors.full_messages.each do |msg|%>
+              <li><%= msg %></li>
+              <%end%></ul>
           </div>  
         <%end%>
         
           <div class="col-sm-4">
             <div class="box">
               <div class="lead">
-              <i class="icon-book text-contrast"></i>
-                                Courses
-              </div>
-            <small class="text-muted">Courses are thise which a particular institution provides.</small>
+              <i class="icon-book text-contrast"></i>Courses</div>
+              <small class="text-muted">Courses are thise which a particular institution provides.</small>
             </div>
           </div>
           <div class="col-sm-7 col-sm-offset-1">
             <div class="form-group">
-              <label>Name</label>
-                <%= c.text_field :course_name,
-				onfocus:"$(this).popover('show');" ,
-        :style=>"width:250px",
-					class: "form-control input-group",placeholder: "Course name",required: true,
-						:"data-content"=>"Special characters not allowed",
-						:"data-placement"=>"right",
-						:"data-toggle"=>"popover",:"data-trigger"=>"focus"
-            %>       
-                            <p class="help-block">
-                                <small class="text-muted">eg. BE Engineering</small>
-                              </p>
-                              </div>
-                            <div class="form-group">
-                              <label>Section</label>
-                              <%= c.text_field :section_name,
-                              onfocus:"$(this).popover('show');",
-                              :style =>"width: 250px",
-									class: "form-control input-group",
-								 	placeholder: "Section name",required: true,:style=>"width:250px",
-									:"data-content"=>"Special characters not allowed",
-									:"data-placement"=>"right",
-									:"data-toggle"=>"popover",:"data-trigger"=>"focus" 
-                  %>
-                              <p class="help-block">
-                                <small class="text-muted">eg.Computer</small>
-                              </p>
-                            </div>
-                            <div class="form-group">
-                              <label>Code</label>
-                              <%= c.text_field :code ,
-                              onfocus:"$(this).popover('show');",
-                              :style =>"width: 250px",
-								class: "form-control input-group",placeholder: "Code",required: true,
-									:"data-content"=>"Special characters not allowed",
-									:"data-placement"=>"right",
-									:"data-toggle"=>"popover",:"data-trigger"=>"focus"
-                  %><p class="help-block">
-                                <small class="text-muted">eg.BE-Comp</small>
-                              </p>
-                          </div>
-                        </fieldset>
-                        <hr class="hr-normal">
-                        <fieldset>
-                          <div class="col-sm-4">
-                            <div class="box">
-                              <div class="lead">
-                                <i class="icon-tags contrast"></i>
-                                Batches
-                              </div>
-                              <small class="text-muted">A student enrolling in the insitution opts a course and respective batch gets assigned. They are for particular courses. eg Computer Engg- 2014-2015.</small>
-                            </div>
-                          </div>
-                          <%= c.fields_for :batches do |batch_form|%>
-                          <div class="col-sm-7 col-sm-offset-1">
-                          <div class="form-group">
-                            <label>Name</label>
-                              <%= batch_form.text_field :name,
-				                      onfocus:"$(this).popover('show');" ,
-					       class: "form-control input-group",placeholder: "batch name",
-                required: true,:style=>"width:250px",
-						:"data-content"=>"Special characters not allowed",
-						:"data-placement"=>"right",
-						:"data-toggle"=>"popover",:"data-trigger"=>"focus"
-            %>
+              <%= c.label :course_name %>
+              <%= c.text_field :course_name, :style=>"width:350px", class: "form-control", placeholder: "Course name"%>
+            </div>       
+            <div class="form-group">
+              <%= c.label :section_name %>
+              <%= c.text_field :section_name, :style =>"width: 350px", class: "form-control", placeholder: "Section name"%>
+            </div>
+            <div class="form-group">
+              <%= c.label :code %>
+              <%= c.text_field :code , :style =>"width: 350px", class: "form-control", placeholder: "Code"%>
+            </div>
+          </div>
+      </fieldset>
 
-                              <p class="help-block">
-                               <small class="text-muted">BE 2014-2015</small>
-                              </p>
-                           </div>
+      <hr class="hr-normal">
 
-                           <div class="form-group">
-                           <label>Start Date</label>
-                        <div class="input-group" id="datetimepicker2"style="width:250px">
-                          <%=batch_form.text_field :start_date,class: "form-control",placeholder:"date",:required=>"true"%>
-                          <span class="input-group-addon">
-                            <span data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar">  	
-                            </span>
-                          </span>
+      <%= c.fields_for :batches do |b|%>
 
-                        </div>
-                        <p class="help-block"><small class="text-muted">eg. 01/10/2014</small> </p>
-                      </div>
+      <fieldset>
+        <div class="col-sm-4">
+          <div class="box">
+            <div class="lead">
+              <i class="icon-tags contrast"></i>Batches</div>
+              <small class="text-muted">A student enrolling in the insitution opts a course and respective batch gets assigned. They are for particular courses. eg Computer Engg- 2014-2015.</small>
+          </div>
+        </div>
 
-                      <div class="form-group">
-                           <label>End Date</label>
-                        <div class="input-group" id="datetimepicker2" style="width:250px">
-                         <%=batch_form.text_field :end_date,class: "form-control",placeholder:"date",:required=>"true"%>
-                          <span class="input-group-addon">
-                            <span data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar">  	
-                            </span>
-                          </span>
-                        </div>
-                        <p class="help-block"><small class="text-muted">eg. 01/10/2014</small> </p>
-                      </div>
-                            
-                        </fieldset>
-                        <div class="form-actions">
-                          <div class="row">
-                          <div class="col-sm-7 col-sm-offset-5">                
-                           <i class="icon-ok-circle "></i>
-                                <%= c.submit 'Create', class: "btn btn-group btn-primary btn-lg"%>
-                                
-                              </div>
-                            
-                          </div>
-                        </div>
-                        <%end%>
-                        <%end%>
-                      </form>
-                    </div>
-                  </div>
-                </div>
+        <div class="col-sm-7 col-sm-offset-1">
+          <div class="form-group">
+            <%= b.label :batch_name %>
+            <%= b.text_field :name, class: "form-control",  placeholder: "Batch name", :style=>"width:350px"%>
+          </div>
+          <div class="form-group">
+            <%= b.label :start_date %>
+            <%= b.date_field :start_date, class: "form-control",  placeholder: "Start date", :style=>"width:350px"%>
+          </div>
+          <div class="form-group">
+            <%= b.label :end_date %>
+            <%= b.date_field :end_date, class: "form-control",  placeholder: "End date", :style=>"width:350px"%>
+          </div>
+        </div>
+      </fieldset>
+      
+      <div class="form-actions">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-4">                
+            <%= c.submit 'Create', class: "btn btn-primary btn-lg", style: "width:20%"%> 
+          </div>
+        </div>
+      </div>
+                        
+      <%end%>
+    <%end%>
+                    
+    </div>
+  </div>
+  </div>
+</div>

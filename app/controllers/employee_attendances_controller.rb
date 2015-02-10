@@ -4,6 +4,7 @@ class EmployeeAttendancesController < ApplicationController
     @employee = Employee.all
     @active_leaves = EmployeeLeaveType.where(status: true).order(:name)
     @inactive_leaves = EmployeeLeaveType.where(status: false).order(:name)
+    authorize!  :create, @new_leave_type
   end
 
   def	add_leave_type
@@ -23,6 +24,7 @@ class EmployeeAttendancesController < ApplicationController
   end
 
   def destroy_leave_type
+    authorize!  :delete, @new_leave_type
     @new_leave_type = EmployeeLeaveType.new
     @leave_type = EmployeeLeaveType.find(params[:id])
     @attendance = EmployeeAttendance.where(employee_leave_type_id: @leave_type.id)
@@ -40,6 +42,7 @@ class EmployeeAttendancesController < ApplicationController
 
   def edit_leave_type
     @edit_leave_type = EmployeeLeaveType.find(params[:id])
+    authorize!  :update, @edit_leave_type
   end
 
   def update_leave_type
@@ -62,9 +65,10 @@ class EmployeeAttendancesController < ApplicationController
     @emp = Employee.where.not(id: EmployeeLeave.all.pluck(:employee_id))
     @emp.each do |e|
       EmployeeLeaveType.all.each do |l|
-        EmployeeLeave.create(employee_id: e.id, employee_leave_type_id: l.id, leave_count: l.max_leave_count)
+        @leave = EmployeeLeave.create(employee_id: e.id, employee_leave_type_id: l.id, leave_count: l.max_leave_count)
       end
     end
+    authorize!  :create, @leave
   end
 
   def select
@@ -73,6 +77,7 @@ class EmployeeAttendancesController < ApplicationController
     @today = Date.today
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
+    authorize!  :read, EmployeeAttendance
   end
 
   def display
@@ -81,6 +86,7 @@ class EmployeeAttendancesController < ApplicationController
     @today = params[:nextdate].to_date
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
+    authorize!  :read, EmployeeAttendance
   end
 
   def new_attendance
@@ -88,6 +94,7 @@ class EmployeeAttendancesController < ApplicationController
     @employee = Employee.find(params[:id])
     @date = params[:attendance_date]
     @leave_types = EmployeeLeaveType.all
+    authorize!  :create, @attendance
   end
 
   def create
@@ -117,6 +124,7 @@ class EmployeeAttendancesController < ApplicationController
     @attendance = EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id, @attendance.employee_leave_type_id)
+    authorize!  :update, @attendance
  end
 
   def update_att
@@ -175,6 +183,7 @@ class EmployeeAttendancesController < ApplicationController
  end
 
   def destroy_attendance
+    authorize!  :destroy, @attendance
     @attendance = EmployeeAttendance.find(params[:id])
     @employee = Employee.find(@attendance.employee_id)
     @reset_count = EmployeeLeave.find_by_employee_id_and_employee_leave_type_id(@attendance.employee_id, @attendance.employee_leave_type_id)
@@ -205,12 +214,14 @@ class EmployeeAttendancesController < ApplicationController
 
   def attendance_report
     @deparments = EmployeeDepartment.all
+    authorize!  :read, EmployeeAttendance
   end
 
   def select_report
     @deparment = EmployeeDepartment.find(params[:department][:id])
     @leave_types = EmployeeLeaveType.all
     @employees = @deparment.employees.all
+    authorize!  :read, EmployeeAttendance
   end
 
   def attendance_report_pdf
@@ -230,7 +241,8 @@ class EmployeeAttendancesController < ApplicationController
       leave_count = EmployeeAttendance.where(employee_id: @employee.id, employee_leave_type_id: lt.id).size
       @total_leaves = @total_leaves + leave_count
     end
- end
+    authorize!  :create, @attendance_report
+  end
 
   def update_employee_leave_reset_all
     @leave_count = EmployeeLeave.all
@@ -291,7 +303,8 @@ class EmployeeAttendancesController < ApplicationController
       other_conditions += " AND employee_grade_id = '#{params[:advance_search][:employee_grade_id]}'" unless params[:advance_search][:employee_grade_id] == ''
       @employee = Employee.where('first_name LIKE ?' + other_conditions, "#{params[:search]}%")
    end
- end
+   authorize!  :read, Employee
+  end
 
   def employee_leave_detail
     @employee = Employee.find_by_id(params[:id])

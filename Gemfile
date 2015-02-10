@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use postgresql as the database for Active Record
-gem 'jquery-datetimepicker-rails', '~> 2.3.7.0'
-
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -20,6 +18,7 @@ gem 'imagemagick-binaries'
 gem 'aws-sdk'
 gem 'ckeditor'
 gem 'devise'
+gem 'cancan'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 # Use jquery as the JavaScript library

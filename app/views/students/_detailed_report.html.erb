@@ -22,4 +22,24 @@
 	<%end%>
 	<%end%>
 <% present_days=total_days-absent_days unless total_days==0 %>
-<h4 align="center">Total working days: <%= total_days %> | Total present days: <%= present_days %> | Percentage: <%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %></h4>
+ <div class="box-inner">
+            <div class="box-content">
+ <table>
+ <tr>
+<td>Total working days: </td>
+<td><%= total_days %></td> 
+</tr>
+<tr>
+<td> Total present days:</td><td> <%= present_days %></td>
+</tr>
+<tr>
+ <td> Percentage:</td>
+ <td>
+  <%= "%.2f" %(present_days*100/total_days)+"%" unless total_days==0 %>
+  </td>
+  </tr>
+  </table>
+  </div>
+  </div>
+ 
+  

@@ -1,62 +1,76 @@
-
-<div id="content-header">
-  <h1>Exams</h1>
-  <h3>Exams Group</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'New', new_exam_group_path(@batch) %> </li>
-    <li><%= link_to 'Connect Exams', exam_groups_connect_exam_path(@batch) %> </li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Exams','/exams'%></li>
+    <li><%= link_to 'Exam Management','/exam_groups'%></li>
+    <li> Exam Group</li>
   </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'New', new_exam_group_path(@batch), class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Connect Exams', exam_groups_connect_exam_path(@batch), class: "btn btn-primary-link btn-xs" %>
+      
+    </div>
+  </div>
+</div>
+<hr>
 
-
-<div class="box">
-  <div class="bread_crumb">
-      <%= link_to 'Course' ,courses_path%> &raquo;
-    <%= link_to @course.course_name,course_path(@course)%>  &raquo;
-    Batch&raquo;
-    <%= link_to @batch.name,batches_display_path(@batch)%>
-    &raquo;
-    Exams
-  </div></div><br/>
-
+<div class="row">
+<div class="col-md-1"></div>
 <% if @exam_groups.empty? %>
  <h4 align="center">No Record Found </h4>
    <% else %>
-<table align="center" class="table table-hover" style="width:800px">
-        <tr class="tr-head"><th colspan="4">Name</th>
-        </tr>
+   <div class="col-md-12">
+   <div class="box-inner">
+   <div class="box-header well">
+   <h2>Exams</h2>
+   </div>
+   <div class="box-content">
+    <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>Action</th><th></th>
+        </thead>
         
       <tbody>
         <% @exam_groups.each do |eg|%>
 
         <tr>
-        <td class="col-2"><%= link_to eg.name ,exam_groups_exams_path(eg) %></td>
-        <% unless eg.result_published? %>
-        <td><%= link_to 'Delete',eg,method: :delete,
-        data:{confirm:"Are you sure to delete ExamGroup: #{eg.name}"}%></td>
-        <%else%>
-        <td>delete</td>
-        <%end%>
-        <% if eg.result_published? %>
-        <td class="col-4"><%= 'Result published'%></td>
-        <%else%>
-        <% if eg.is_published? %>
-        <td class="col-4"><%= link_to 'Update exam schedule',exam_groups_publish_exam_path(eg), remote:true %>
-        </td>
-          <%else%>
-        <td class="col-4"><%= link_to 'Publish exam schedule',exam_groups_publish_exam_path(eg), remote:true %></td>
-        <%end%>
-        <%end%>
+          <td><%= link_to eg.name ,exam_groups_exams_path(eg) %></td>
+          <td>
+            <% unless eg.result_published? %>
+              <div class="label-danger label label-default">
+              <i class="glyphicon glyphicon-trash icon-white"></i>
+                <%= link_to 'Delete',eg,method: :delete,
+                data:{confirm:"Are you sure to delete ExamGroup: #{eg.name}"},class: "a-action"%>
+              </div>
+            <%end%>&nbsp;&nbsp;&nbsp;
+            <% if eg.result_published? %>
+              <div class="label-success label label-default">
+              <i class="glyphicon glyphicon-saved icon-white"></i>
+                <%= link_to 'Result published','#',class: "a-action"%>
+              </div>
+            <%else%>
+              <div class="label-primary label label-default">
+              <i class="glyphicon glyphicon-check icon-white"></i>
+                <% if eg.is_published? %>
+                <%= link_to 'Update exam schedule',exam_groups_publish_exam_path(eg), remote:true, class: "a-action" %>
+                <%else%>
+                <%= link_to 'Publish exam schedule',exam_groups_publish_exam_path(eg), remote:true, class: "a-action" %>
+                <%end%>
+              </div>
+            <%end%>
+          </td>
         <td id="publish_exam<%=eg.id%>"%></td>
        </tr>
         <%end%>
       </tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
 <%end%>

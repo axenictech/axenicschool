@@ -4,14 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_filter :set_user_language
-  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
-  private
-
-  def set_user_language
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, alert: 'You are not Authorized'
   end
 
-  def record_not_found
-    render '/public/404.html', layout: false
+  def set_current_user
+    User.current = current_user
   end
 end

@@ -1,18 +1,17 @@
-<div id="content-header">
-  <h1>Employee Info</h1>
-  <h3>Employee profile</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li><%= link_to 'HR Management',employees_employee_management_path %></li>
+  
+   <li>Employee Profile</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
 
+<div class="row">
+  
 <div class="dropdown pull-right">
-   <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
-      data-toggle="dropdown">
-      Profile
-      <span class="caret"></span>
-   </button>
+   <%= link_to 'Profile','#',class: "btn dropdown-toggle btn-primary-link btn-xs", id: "dropdownMenu1", :"data-toggle"=>"dropdown"%>
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
@@ -36,11 +35,7 @@
 </div>
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn dropdown-toggle btn-primary" id="dropdownMenu1" 
-      data-toggle="dropdown" style="margin-right:20px">
-      Salary
-      <span class="caret"></span>
-   </button>
+    <%= link_to 'Salary','#',class: "btn dropdown-toggle btn-primary-link btn-xs", id: "dropdownMenu1", :"data-toggle"=>"dropdown", style: "margin-right:5px"%>
    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li role="presentation">
          
@@ -55,34 +50,43 @@
 </div>
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn btn-primary" 
-       style="margin-right:20px;">
-      <%= link_to "Delete",remove_employees_path(@employee),style:"color:white"%>
-</button></div>
+      <%= link_to "Delete",remove_employees_path(@employee), class: "btn btn-primary-link btn-xs", style: "margin-right:5px;"%>
+</div>
 
 <div class="dropdown pull-right">
-   <button type="button" class="btn btn-primary" 
-       style="margin-right:20px;">
-       
-      <%= link_to "Timetable",time_tables_employee_timetable_path(@employee),style:"color:white"%>
-     
-</button></div>
+      <%= link_to "Timetable",time_tables_employee_timetable_path(@employee),class: "btn btn-primary-link btn-xs", style:"margin-right:5px;"%>
+</div>
+</div>
+<hr>
 
-<div id="profile_picture_display">
-          <% unless @employee.image.blank? %>
-            <%= image_tag @employee.image%>
-          <% else %>
-            <%= image_tag "default_employee.png" %>
-          <% end %>
-      </div>
 
-              <div id ="student_main_info">
+
+<div class="row">
+        <div class="box col-md-12">
+        <div class="box-inner">
+      <div class="box-content">
+
+    <div class="row">
+    <div class="col-md-8">
+   <div id ="student_main_info">
       <h3 align="left"> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
-      <h4 align="left"> Employee Id : <%=@employee.id%> </h4></div>
-
-<div id="page-yield">
-
-  <% unless flash[:notice].nil? %> <% end %>
-
-
+      <h4 align="left"> Employee Id : <%=@employee.id%> </h4>
+    </div>
+    </div>
+<br>
+    <div class="col-md-3">
+    <div id="profile_picture_display">
+    <% unless @employee.image.blank? %>
+      <%= image_tag @employee.image%>
+    <% else %>
+      <%= image_tag "employee.png" %>
+    <% end %>
+    </div>
+    </div>
+    </div>
+   <hr>
 <div id="profile"><%=render'disp_genral_profile'%></div>
+</div>
+</div>
+</div>
+</div>

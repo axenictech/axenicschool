@@ -1,43 +1,37 @@
-<div id="content-header">
-  <h1>News</h1>
-  <h3>Read news</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
-  </div>
-<div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'Edit News', edit_newscast_path(@newscast)%></li>
-    <li><%= link_to 'Delete News',newscast_path(@newscast),method: :delete, data: { confirm: "Are you sure delete New: #{@newscast.title}?" } %></li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'News', newscasts_path %></li>
+    <li><%= @newscast.title %></li>
   </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/>
 
-
-
-<div id="page-yield">
-<div id="box"%>
-
-  <% unless flash[:notice].nil? %>
-  <div class="alert alert-success"> <%= flash[:notice] %> </div><% end %>
-<div class="bread_crumb">
-<%= link_to 'Home', home_dashboard_path %> &raquo;
-        <%= link_to 'News', newscasts_path %> &raquo;
-        <%= @newscast.title %>
-        </div></div><br/>
-
-    <div id="news_title">
-      <%= @newscast.title %>
+<% if current_user.id == @newscast.user.id %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Edit News', edit_newscast_path(@newscast), class: "btn btn-primary-link btn-xs"%>
+      <%= link_to 'Delete News',newscast_path(@newscast),method: :delete, class: "btn btn-primary-link btn-xs", data: { confirm: "Are you sure delete New: #{@newscast.title}?" } %>
     </div>
-    <div id="create_date">
-      Posted on <%= @newscast.created_at.strftime("%A, %d %B, %Y") %>
+  </div>
+</div>
+<hr>
+<% end %>
+ <div class="col-md-6">
+ <div class="box-inner">
+    <div class="box-header well" data-original-title="">
+          <h2><%= @newscast.title %></h2>
     </div>
-    <div id="news_content">
-      <%= sanitize @newscast.content , :tags => %w[b i a h1 h2 h3 u strike p], :attributes => %w[href]%>
-    </div>
-      <ul id="comments-list"> <h3 id="comments-heading"></h3></ul>
-  <%= form_for([@newscast, @newscast.comments.build]) do |f| %>
+    <div class="box-content">
+     <b> Posted by</b>&nbsp;&nbsp;<%= @newscast.user.full_name %>
+      <br>
+      <b> Posted on</b>&nbsp;&nbsp;<%= @newscast.created_at.strftime("%A, %d %B, %Y") %>
+      <br>
+      <h4> <%= sanitize @newscast.content , :tags => %w[b i a h1 h2 h3 u strike p], :attributes => %w[href]%></h4>
+      <hr>
+ <%= form_for([@newscast, @newscast.comments.build]) do |f| %>
       <% if @comment.errors.any?%>
           <div class ="errorExplanation" id="error_explanation">
             <ul>
@@ -47,17 +41,28 @@
             </ul> 
           </div>
       <% end %><br/>
-        <%= f.label :leave_a_comment %>
-        <div><%= f.text_field :statement, style:'width:50%'%></div><br/>
-        <div><%= f.submit 'Submit', class: "btn btn-success" %></div>
 
+        <%= f.text_field :statement,class: "form-control",placeholder: "Leave a comment"%><br/>
+        <div align="center">
+        <%= f.submit 'Comment', class: "btn btn-success" %></div>
     <% end %>
-  <ul id="comments-list">
-  <h3 id="comments-heading">Comments</h3>
+    
+  </div>
+  </div>
+  </div>
+
+<div class="col-md-6">
+  <div class="box-inner">
+  <div class="box-header well" data-original-title="">
+   <h2>Comments</h2>
+  </div>
+  <div class="box-content">
+    <ul id="comments-list">
       <%= render @newscast.comments.order(created_at: :desc) %>
-  </ul>
-		
-</div>
+      <h3 id="comments-heading"></h3>
+    </ul>    
+  </div>
+  </div>
 </div>
 		  
 

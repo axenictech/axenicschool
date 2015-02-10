@@ -1,12 +1,37 @@
-<% if @employees.empty? %>
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2><%= t('Employee list')%></h2>
+    </div>
+
+    <div class="box-content">
+      <% if @employees.empty? %>
   <h4 align="center">No Record Found </h4>
    <% else %>
-  <table align="center" class="table table-hover" style="width:500px">
-  <tr class="tr-head"><td colspan="2" class="col-2"></td></tr>
-  <% @employees.each do |employee| %> 
-     <tr>
-      <td class="col-2"><%= employee.first_name+" "+employee.last_name  %></td>
-      <td class="col-3"><%= check_box_tag "employees[]", employee.id,false,class: 'check_box'%></td>
-    <% end %>
-    </table>
-  <% end %>
+      <table id="datatable" class="table table-striped table-bordered responsive">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @employees.each do |employee| %> 
+          <tr>
+            <td>
+              <%=  employee.first_name+" "+employee.last_name  %>
+            </td>
+            <td class="center">
+              <%= check_box_tag "employees[]", employee.id,false,class: 'check_box'%>Assign
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  </div>
+<%end%>
+</div>

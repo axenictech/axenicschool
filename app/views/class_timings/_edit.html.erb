@@ -6,7 +6,7 @@
 <div class="modal-body">
         <ul class="errors"></ul>
 <%= form_for [@batch,@class_timing1],remote: true do |f|%>
- <table class="table" style="width:85%">
+ <table class="table">
         <tr>
             <td class="col-2"><%= f.label :name , class: "control-label"%></td>
             <td><%=f.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
@@ -26,7 +26,7 @@
         
           
         <tr>
-            
+            <td></td>
             <td><%= f.check_box :is_break %> Is a break</td>
         </tr>
 

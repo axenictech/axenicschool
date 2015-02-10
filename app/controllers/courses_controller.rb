@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   # index method for application
   def index
     @courses = Course.all
+    authorize! :read, @courses.first
   end
 
   # new method for  a new course
@@ -9,6 +10,7 @@ class CoursesController < ApplicationController
     @course = Course.new
     @batch = Batch.new
     @course.batches.build
+    authorize! :create, @course
   end
 
   def create
@@ -30,6 +32,7 @@ class CoursesController < ApplicationController
     # used find_by_course_id finds a particular batch using course
 
     @batches = @course.batches.all
+    authorize! :read, @course
   end
 
   def grouped_batches
@@ -37,6 +40,7 @@ class CoursesController < ApplicationController
     @batches = @course.batches.all
     @batch_groups = @course.batch_groups.all
     @batch_group = BatchGroup.new
+    authorize! :create, @course
   end
 
   def create_batch_group
@@ -69,33 +73,19 @@ class CoursesController < ApplicationController
     @batch_group = BatchGroup.find(params[:id])
     @course = @batch_group.course
     @batches = @course.batches.all
+    authorize! :update, @course
   end
 
   def update_batch_group
     @batch_group = BatchGroup.find(params[:batch_group][:batch_group_id])
-    batches = params[:batches]
-    group_batch_delete = GroupBatch.where(batch_group_id: @batch_group.id)
-    unless batches.nil?
-      if @batch_group.update(name: params[:batch_group][:name])
-
-        group_batch_delete.each(&:destroy)
-        batches.each  do |batch|
-          @group_batch = GroupBatch.new(batch_group_id: @batch_group.id, batch_id: batch)
-          @group_batch.save
-        end
-        flash[:notice_batch_group] = 'Batch group updated successfully'
-        redirect_to grouped_batches_course_path(@batch_group.course)
-      else
-        render template: 'courses/grouped_batches'
-        end
-    else
-      flash[:notice_batch_group] = 'Please Select batches'
-      redirect_to grouped_batches_course_path(@batch_group.course)
-      end
+    @batch_group.update(name: params[:batch_group][:name])
+    @course = @batch_group.course
+    flash[:notice_batch_group] = 'Batch group updated successfully'
   end
 
   def delete_batch_group
-    @batch_group = BatchGroup.find(params[:id])
+    authorize! :delete, @course
+    @batch_group = BatchGroup.find(params[:format])
     @course = @batch_group.course
     @group_batches = GroupBatch.where(batch_group_id: @batch_group.id)
 
@@ -108,14 +98,17 @@ class CoursesController < ApplicationController
   def assign_all
     @course = Course.find(params[:id])
     @batches = @course.batches.all
+    authorize! :read, @course
   end
 
   def remove_all
     @course = Course.find(params[:id])
     @batches = @course.batches.all
+    authorize! :read, @course
   end
   # deleting the course
   def destroy
+    authorize! :delete, @course
     @course = Course.find(params[:format])
     if @course.destroy
       flash[:notice] = 'Course deleted successfully!'
@@ -129,6 +122,7 @@ class CoursesController < ApplicationController
   # edting the course
   def edit
     @course = Course.find(params[:id])
+    authorize! :update, @course
   end
 
   # updating the course

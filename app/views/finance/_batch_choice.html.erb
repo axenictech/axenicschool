@@ -1,7 +1,4 @@
 <% unless @batches.nil? %>
-<div class="label-field-pair">
-  <%= label_tag :select_batch %>
-      <div class="text-input-bg">
-      <%= select :batch,:id, @batches.collect {|b| [b.course.course_name+" "+b.name,b.id]},{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('collection_choice',a,function(response){});"}%>
-      </div></div>
-      <%end%>
+  <%= t('Select Batch') %>
+  <%= select :batch,:id, @batches.collect {|b| [b.course.course_name+" "+b.name,b.id]},{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('collection_choice',a,function(response){});",class: "form-control"}%>
+<%end%>

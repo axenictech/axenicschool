@@ -1,35 +1,35 @@
-<div id="content-header">
-  <h1>School News</h1>
-  <h3>Latest announcements</h3>
-  <div id="app-back-button">
-  <%= link_to image_tag("buttons/back.png",:border => 0), :back  %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to "View all", display_newscasts_path %></li>
-    <li><%= link_to 'Add', new_newscast_path %></li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+   <li>News</li>
   </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
 
-<div id="box">  
-<div id="content_wrapper">
-
-<div class="bread_crumb">
-<%= link_to 'Home', home_dashboard_path %> &raquo;
-<%= 'News' %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to "View all", display_newscasts_path , class: "btn btn-primary-link btn-xs" %>
+      <%= link_to 'Add News', new_newscast_path, class: "btn btn-primary-link btn-xs" %>
+    </div>
+  </div>
 </div>
+<hr>
 
-<% unless flash[:notice].nil? %>
-  <div class="alert alert-success"> <%= flash[:notice] %> </div><% end %> 
-<div align="center">
-	<%= form_for :newscast, url:{action:'select'},method: :get,html:{id: 'newscast_form'},remote:true do |f| %>
-	<%= f.label :Search_news %>
-  <%= f.text_field :title,{oninput:"$('#newscast_form').submit();"}%>
-<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for :newscast, url:{action:'select'},method: :get,html:{id: 'newscast_form'},remote:true do |f| %>
+
+      <%= f.label :search_news ,class: "label-control"%>
+      <%= f.text_field :title,{oninput:"$('#newscast_form').submit();",class: "form-control",placeholder:'Enter News Title',style:"width:300px"}%>
+      <% end %>
+  </div>
 </div>
-
 
 <div id="newscast_div"></div></div>
+
+
+
+
+
+

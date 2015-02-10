@@ -1,20 +1,29 @@
-<div id="content-header">
-   <hr class="fancy-line"></hr>
-  <h1>Admission</h1>
-  <h3>Step 2 - Employee Details<br />
-   <small><font color="red">Fields Marked with * must be filled</font></small></h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), "" %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div><br/><br/>
 
-<div id="page-yield">
-  
 
-<table align="center" class="table table-hover" style="width:1000px">
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+     <li><%= link_to 'Human Resources',employees_path %></li>
+    <li><%= link_to 'HR Management',employees_employee_management_path %></li>
+     
+      <li><%= link_to 'Employee admission(Step 1)',employees_admission1_path %></li>
+      <li>Step 2</li>
+  </ul>
+</div>
+Note:<font color="red">Fields Marked with * must be filled</font>
+<div id="flash"><%= render 'layouts/messages'%></div>
+
+
+<div class="row">
+  <div class="box col-md-12">
+    <div class="box-inner">
+      <div class="box-header well">
+        <h2>Step 2 - Employee details</h2>
+       
+      </div>
+        <div class="box-content">
 <%= form_for @employee,url:{action: 'admission2_create',format: @employee.id},method: :patch do |f| %>
-<div align="center">
+    <fieldset>
     <% if @employee.errors.any? %>
         <div class="alert alert-danger" style="width:500px" >
           <h3>Error prohibited to from being saved:</h3>
@@ -23,119 +32,143 @@
               <li style="width:500px" align="left"><%= msg %></li>
             <% end %>
           </ul>
-          <% end %>
-      </div>
- </div>
-
-    <tbody>
-
-    <tr><td colspan="2" class="col-2" style="background-color:white">Home Address</span>
-        <hr class="sub-heading"></hr>
-      </td>
-      </tr>
-
-    <tr>  
-         <td class="col-2"><%=f.label :Line1%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.text_field :home_address_line1%></td>
-     </tr>
-    
-     <tr>
-     	 <td class="col-2"><%=f.label :Line2%></td>
-          <td class="col-2"> <%=f.text_field :home_address_line2%></td>
-     </tr>
-
-     <tr>
-     	 <td class="col-2"><%=f.label :City%><span class="necessary-field">*</span></td>
-        <td class="col-2"><%=f.text_field :home_city, :required=>false%></td>
-     </tr>
-
-     <tr>
-     	 <td class="col-2"><%=f.label :State%><span class="necessary-field">*</span></td>
-         <td class="col-2">  <%=f.text_field :home_state%></td>
-     </tr>
-
-      <tr>
-
-       <tr>
-       <td class="col-2"><%=f.label :Country%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.select :home_country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true}%></td>
-     </tr>
-
-      <tr>
-     	 <td class="col-2"><%=f.label :"PIN code"%><span class="necessary-field">*</span></td>
-           <td class="col-2"><%=f.text_field :home_pin_code%></td>
-     </tr>
-
-      <tr><td colspan="2" class="col-2" style="background-color:white">Office Address</span>
-        <hr class="sub-heading"></hr>
-      </td>
-      </tr>
-
-     <tr>
-         <td class="col-2"><%=f.label :Line1%></td>
-          <td class="col-2"><%=f.text_field :office_address_line1%></td>
-     </tr>
-    
-     <tr>
-       <td class="col-2"><%=f.label :Line2%></td>
-          <td class="col-2"> <%=f.text_field :office_address_line2%></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :City%></td>
-        <td class="col-2"><%=f.text_field :office_city, :required=>false%></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :State%></td>
-         <td class="col-2">  <%=f.text_field :office_state%></td>
-     </tr>
-
-
-       <tr>
-       <td class="col-2"><%=f.label :Country%></td>
-          <td class="col-2"><%=f.select :office_country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true}%></td>
-     </tr>
       
+      </div>
+          <% end %>
+            <b><u>Home Address</u></b>
+          <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+         <div class="form-group">
+     
+         </div>
 
-      <tr>
-       <td class="col-2"><%=f.label :"PIN Code"%></td>
-           <td class="col-2"><%=f.text_field :office_pin_code%></td>
-     </tr>
-<tr><td colspan="2" class="col-2" style="background-color:white">Contact Details</span>
-        <hr class="sub-heading"></hr>
-      </td>
-      </tr>
+         <div class="form-group">
+       <%= t('Line1')%><span class="necessary-field">*</span>
+         <%=f.text_field :home_address_line1,placeholder: "Line1", class: "form-control"%>
+       </div>
+
+        <div class="form-group">
+       <%= t('City')%><span class="necessary-field">*</span>
+         <%=f.text_field :home_city, :required=>false,placeholder: "City", class: "form-control"%>
+       </div>
+
+        <div class="form-group">
+       <%= t('Country')%>
+     <%= f.select :home_country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true},{class: "form-control"}%>
+        </div>
+    </div>
+     
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+           <div class="form-group">
+           </div>
+        <div class="form-group">
+       <%= t('Line2')%>
+         <%=f.text_field :home_address_line2,placeholder: "Line2", class: "form-control"%>
+       </div>
+ 
+       <div class="form-group">
+       <%= t('State')%><span class="necessary-field">*</span>
+         <%=f.text_field :home_state,placeholder: "State", class: "form-control"%>
+       </div>
+
+       <div class="form-group">
+       <%= t('Pin Code')%><span class="necessary-field">*</span>
+         <%=f.text_field :home_pin_code,placeholder: "Pin Code", class: "form-control"%>
+       </div>
+</div>
+</div>
+<hr/>
+   <b><u>Office Address</u></b>
+
+       <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+          <div class="form-group">
+       <%= t('Line1')%>
+         <%=f.text_field :office_address_line1,placeholder: "Line1", class: "form-control"%>
+       </div>
+
+         <div class="form-group">
+       <%= t('City')%>
+         <%=f.text_field :office_city, :required=>false,placeholder: "City", class: "form-control"%>
+       </div>
+
+         <div class="form-group">
+       <%= t('Country')%>
+         <%=f.select :office_country_id,Country.all.collect{|c| [c.name,c.id]},{prompt:true}, {class: "form-control"}%>
+       </div>
+       </div>
+         <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+           <div class="form-group">
+       <%= t('Line2')%>
+         <%=f.text_field :office_address_line2,placeholder: "Line2", class: "form-control"%>
+       </div>
+
+          <div class="form-group">
+       <%= t('State')%>
+         <%=f.text_field :office_state,placeholder: "State", class: "form-control"%>
+       </div>
+
+          <div class="form-group">
+       <%= t('Pin Code')%>
+         <%=f.text_field :office_pin_code,placeholder: "Pin Code", class: "form-control"%>
+       </div>
+   </div>
+   </div>
+  <hr/> <b><u>Contact Details</u></b>
+      <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+       
+            <div class="form-group">
+       <%= t('Office Phone1')%>
+         <%=f.text_field :office_phone1, placeholder: "Office Phone1", class: "form-control"%>
+       </div>
+          <div class="form-group">
+       <%= t('Mobile Phone')%>
+         <%=f.text_field :mobile_phone,placeholder: "Mobile Phone", class: "form-control"%>
+       </div>
+            <div class="form-group">
+       <%= t('Fax')%>
+         <%=f.text_field :fax,placeholder: "Fax", class: "form-control"%>
+       </div>
+       </div>
+
+           <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+
+      <div class="form-group">
+       <%= t('Office Phone2')%>
+         <%=f.text_field :office_phone2, :required=>false,placeholder: "Office Phone2", class: "form-control"%>
+       </div>
+
+            <div class="form-group">
+       <%= t('Home Phone')%>
+         <%=f.text_field :home_phone,placeholder: "Home Phone", class: "form-control"%>
+       </div>
+       </div>
+
+<div class="col-sm-5 col-sm-offset-5"> 
+      <div class="form-actions">               
+        <%= f.submit 'Save', class: "btn btn-primary"%>
+      </div>
+    </div>
+  </fieldset>        
+ <% end %>
+</div>
+</div>
+</div>
+</div>
 
 
-      <tr>
-       <td class="col-2"><%=f.label :"office phone1"%></td>
-          <td class="col-2"> <%=f.text_field :office_phone1%></td>
-     </tr>
 
-     <tr>
-       <td class="col-2"><%=f.label :"office_phone2"%></td>
-        <td class="col-2"><%=f.text_field :office_phone2, :required=>false%></td>
-     </tr>
 
-     <tr>
-       <td class="col-2"><%=f.label :mobile%></td>
-         <td class="col-2">  <%=f.text_field :mobile_phone%></td>
-     </tr>
 
-      <tr>
-       <td class="col-2"><%=f.label :"Home phone"%></td>
-          <td class="col-2"> <%=f.text_field :home_phone%></td>
-     </tr>
 
-     <tr>
-       <td class="col-2"><%=f.label :Fax%></td>
-          <td class="col-2"> <%=f.text_field :fax%></td>
-     </tr>
+
+    
    
-     <tr><td colspan="4"><%=f.submit "Save",class: "btn btn-primary" %></td></tr>
-
-<%end%>
-</tbody>
-</table>
-  </div>
+ 

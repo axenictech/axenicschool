@@ -1,45 +1,61 @@
-<div id="content-header">
-  <h1>Courses</h1>
-  <h3>Grouped Batches</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0), courses_path %>
-  </div>
-  <div><%= image_tag("underline.jpg",width: "100%")%></div>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Course',courses_path %></li>
+    <li><%= link_to 'Batches',course_path(@course)%></li>
+    <li>Batch Group</li>
+  </ul>
 </div>
+<div id="flash"><%= render 'layouts/messages'%></div>
+<br/>
 
-<div id="page-yield">
+<div class="row">
+    <div class="box col-md-6">
+      <div class="box-inner">
+          <div class="box-header well" data-original-title="">
+            <h2>Batch Group</h2>
+          </div>
+
+          <div class="box-content">
+          <%= form_for @batch_group,url:{action:'create_batch_group'} do |c| %>
+
+          <fieldset>
+          <% if @batch_group.errors.any?%>
+            <div class="alert alert-danger">
+            <ul><% @batch_group.errors.full_messages.each do |msg|%>
+              <li><%= msg %></li>
+              <%end%></ul></div>
+          <%end%>
+          <%= c.hidden_field :course_id, value: @course.id%>
+          <div class="col-sm-7 col-sm-offset-1">
+            <div class="form-group">
+              <%=c.label :name %>
+              <%=c.text_field :name ,:style =>"width: 350px", class: "form-control", placeholder: "Batch Group Name"%>
+            </div>
+            <div class="pull-right">
+            Select:&nbsp;&nbsp;&nbsp;&nbsp;
+            <%= link_to "All",assign_all_course_path(@course),remote:true%>&nbsp;&nbsp;
+            <%= link_to "None",remove_all_course_path(@course),remote:true %></div>
+            <div id="batch_view"><%= render 'all_batch' %></div>
+          <div class="col-sm-7 col-sm-offset-6"> 
+            <div class="form-actions">               
+              <%=c.submit 'Submit', class: "btn btn-primary"%>
+            </div>
+          </div>
+          
+          </div>
+          </fieldset>
+          <% end %>
+          </div>
+      </div>
+    </div>
   
-  <div class="box">
-
-        <div class="bread_crumb">
-        <%= link_to 'Courses', courses_path %> &raquo;
-        <%=link_to @course.course_name, course_path(@course) %>&raquo;
-        Grouped Batches
-        </div>
-<%= form_for @batch_group,url:{action:'create_batch_group'} do |c| %>
-	<% if @batch_group.errors.any?%>
-		<div class="alert alert-danger">
-		<h4>Errors prohibited to being saved:</h4>
-		<ul><% @batch_group.errors.full_messages.each do |msg|%>
-			<li style="width:800px"><%= msg %></li>
-		<%end%></ul>
-		</div>	
-	<%end%>
-    <table class="table" style="width:80%">
-    	<%= c.hidden_field :course_id, value: @course.id%>
-        <tr>
-            <td><%=c.label :name %></td>
-            <td><%=c.text_field :name ,:style =>"width: 250px", class: "form-control"%></td>
-        </tr>
-        <tr><td colspan="2">
-				Select: <%= link_to "All",assign_all_course_path(@course),remote:true%>
-				  <%= link_to "None",remove_all_course_path(@course),remote:true %>
-			<p id="batch_view"><%= render 'all_batch' %></p>
-        </td></tr>
-        <tr>
-        <td colspan="2"><%=c.submit 'Submit', class: "btn btn-primary"%></td>
-        </tr>
-    </table>
-<div id="batch_group_details"><%= render 'batch_group'%></div>
-<% end %>
-</div></div>
+  <div class="box col-md-6">  
+    <div id="batch_group_details">
+      <%= render 'batch_group'%>
+    </div>
+  </div>
+</div>
+<div id="Modal" class="modal fade"></div>

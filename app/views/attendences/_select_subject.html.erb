@@ -1,10 +1,19 @@
+<div class="row">
+  <div class="col-md-1"></div>
+    <div class="box col-md-8">
 
-<div class="text-input-bg">
 <%= form_for :subject, url:{action:'select'},method: :get,remote:true ,html:{id: "form"} do |f| %>
 
-<%= f.label :select_subject %>
-<%= f.select :id, @subjects.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#form').submit();"}%>
+<b>Select Subject:</b>
+
+<%= f.select :id, @subjects.collect {|b| [b.name,b.id]},{prompt:true},{onchange:"$('#form').submit();",class:"form-control",style: "width: 300px"}%>
 <%end%>
-</div><br/><br/><br/>
-<div id="attendence"></div>
+</div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+	<div id="attendence"></div>
+  </div>
+</div>
 

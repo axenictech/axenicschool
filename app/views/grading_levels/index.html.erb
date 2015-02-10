@@ -1,48 +1,24 @@
-<div class="page-header">
-  <h1 class="pull-left">
-    <i class="icon-chart"></i>
-      <span>Exams</span>
-      <small>Grading levels</small>
-  </h1>
-  <div class="pull-right">
-    <ul class="breadcrumb">
-      <li>
-        <a href="setting">
-        <i class="icon-gears"></i>
-        Settings
-        </a>
-      </li>
-        
-          
-      <li class="separator">
-        <i class="icon-angle-right"></i>
-      </li>
-      <li class="active"><i class="icon-book"></i>
-          Grades
-      </li>
-    </ul>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Settings',setting_index_path %></li>
+    <li><%= link_to 'Manage Course / Batch',setting_course_batch_path %></li>
+    <li><%= link_to 'Course',courses_path %></li>
+    <li><%= link_to 'Batch',batches_path%></li>
+    <li>Grading System</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
+      <%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name, b.id]},{prompt:'Select a batch'},{onchange:"$('#batch_form').submit();",class: "form-control",style:"width:350px"} %>  
+    <%end%>
   </div>
 </div>
+<div id="batch_div"></div>
 
-
-<% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-<div class="row">
-<div class="col-sm-6">
-<%= form_for :batch, url:{action:'select'},method: :get,remote:true,html:{id: "batch_form"} do |f| %>
-<%= f.select :id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name, b.id]},{prompt:true},{onchange:"$('#batch_form').submit();",class: "select2 form-control select2-offscreen"} %>  
-<%end%>
-</div><br/><br/><br/>
-<div class="col-sm-10" id="batch_div">
-	
-</div>
-
-</div>
-
-<div id="myModal" class="modal fade">
- </div>
-</div></div>
+<div id="myModal" class="modal fade"></div>
 
 
 

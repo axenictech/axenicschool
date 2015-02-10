@@ -1,19 +1,23 @@
-<div id="page-yield">
-  <% unless flash[:notice].nil? %>
-    <p class="flash-msg"> <%= flash[:notice] %> </p>
-  <% end %>
-
-<div class="box">
 <%unless @timetables.empty? %>
-<div class="text-input-bg">
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li>Employee Time Table</li>
+  </ul>
+</div><div id="flash"><%= render 'layouts/messages'%></div>
+<br/><br/>
+<div class="row">
+  <div class="col-md-12">
 <%= form_for :time,url:{action:'selectTimeEmployee',format:@employee.id},method: :get,remote:true,html:{id: "time_form"} do |f| %>
-<%= f.label :select_a_time %>
-<%= f.select :id, @timetables.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:true},{onchange:"$('#time_form').submit();"}%> 
-<%end%>
-</div> 
+
+
+      <%= f.select :id, @timetables.uniq.collect {|t| [t.start_date.strftime("%d %b %Y")+"-"+t.end_date.strftime("%d %b %Y"),t.id]},{prompt:'Select Timetable'},{onchange:"$('#time_form').submit();",class: "form-control",style:"width:250px"} %>  
+    <%end%>
+  </div>
+</div>
 <%else%>
 <h4>Time table not assigned to this employee</h4>
 <%end%>
-<br/><br/><br/>
 <div id="time_div"></div>
-</div></div>
+
+<br/><br/>

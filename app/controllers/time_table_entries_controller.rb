@@ -5,6 +5,7 @@ class TimeTableEntriesController < ApplicationController
     @batches = Batch.all
     @sub = params[:sub_id]
     @times = params[:time_id]
+    authorize! :read, @time
   end
 
   def select
@@ -12,22 +13,20 @@ class TimeTableEntriesController < ApplicationController
     @batch = Batch.find(params[:batch][:id])
     @class_timing = @batch.class_timings.where(is_break: false)
     @subjects = @batch.subjects.all
+    authorize! :read, TimeTableEntry
   end
 
   def select_subject
     @subject = Subject.find(params[:sub][:subject_id])
     @teachers = EmployeeSubject.where(subject_id: @subject.id)
-   end
+    authorize! :read, TimeTableEntry
+  end
 
   def assign_time
     @class_timing_id = params[:timing_id]
-
     @weekday = params[:weekday_id]
-
     @teacher = params[:teacher]
-
     @time = params[:time_table_id]
-
     @subject = Subject.find(params[:subject_id])
     @em = Employee.find(params[:teacher])
     @batch = @subject.batch
@@ -54,17 +53,21 @@ class TimeTableEntriesController < ApplicationController
   end
 
   def delete_time
+    authorize! :delete, @delete_time
     @delete_time = TimeTableEntry.find(params[:format])
     @delete_time.destroy
     @batch = @delete_time.batch
     @class_timing = @batch.class_timings.where(is_break: false)
     @subjects = @batch.subjects.all
+    unless @delete_time.nil?
     @time = @delete_time.time_table.id
+  end
   end
 
   def new
     @timetable = TimeTable.find(params[:format])
     @batches = Batch.all
+    authorize! :create, @timetable
   end
 
   private

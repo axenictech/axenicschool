@@ -1,11 +1,17 @@
 class AttendencesController < ApplicationController
+  def index
+   authorize! :read, Attendence
+  end
+
   def attendence_register
     @batches = Batch.all
+    authorize! :read, Attendence
   end
 
   def select_subject
     @batch = Batch.find(params[:batch][:id])
     @subjects = @batch.subjects.all
+    authorize! :read, Attendence
   end
 
   def select
@@ -16,6 +22,7 @@ class AttendencesController < ApplicationController
     @today = Date.today
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
+    authorize! :read, Attendence
   end
 
   def display
@@ -26,6 +33,7 @@ class AttendencesController < ApplicationController
     @today = params[:next].to_date
     @start_date = @today.beginning_of_month
     @end_date = @today.end_of_month
+    authorize! :read, Attendence
   end
 
   def new_attendence
@@ -34,6 +42,7 @@ class AttendencesController < ApplicationController
     @date = params[:month_date]
     @time_table_entry_id = params[:time_table_entry_id]
     @subject_id = params[:subject_id]
+    authorize! :create, @attendence
   end
 
   def create
@@ -54,6 +63,7 @@ class AttendencesController < ApplicationController
     @student = Student.find(@attendence.student_id)
     @subject_id = params[:subject_id]
     @today = params[:date]
+    authorize! :update, @attendence
   end
 
   def update_attendence
@@ -69,6 +79,7 @@ class AttendencesController < ApplicationController
   end
 
   def delete_attendence
+    authorize! :delete, @attendence
     @today = params[:date].to_date
     @subject = Subject.find(params[:subject_id])
     @batch = Batch.find(params[:batch])
@@ -85,6 +96,7 @@ class AttendencesController < ApplicationController
   def select_batch
     @batch = Batch.find(params[:batch][:id])
     @subjects = @batch.subjects.all
+    authorize! :read, Attendence
   end
 
   def generate_report
@@ -94,6 +106,7 @@ class AttendencesController < ApplicationController
     @students = @subject.batch.students.all
     @batch_events = @subject.batch.batch_events.all
     @time_table_entries = TimeTableEntry.where(subject_id: @subject.id, batch_id: @subject.batch.id)
+    authorize! :read, Attendence
   end
 
   def attendence_report

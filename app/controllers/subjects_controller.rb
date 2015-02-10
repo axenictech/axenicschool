@@ -3,18 +3,21 @@ class SubjectsController < ApplicationController
 
   def index
     @batches = Batch.includes(:course).all
-   end
+    authorize! :read, @batches.first
+  end
 
   def select
     @batch = Batch.find(params[:batch][:id])
     @subjects = @batch.subjects.where(elective_group_id: nil)
     @elective_groups = @batch.elective_groups.all
+    authorize! :read, @batch
   end
 
   def subject
     @batch = Batch.find(params[:batch_id])
     @subjects = @batch.subjects.where(elective_group_id: nil)
     @elective_groups = @batch.elective_groups.all
+    authorize! :read, @batch
   end
 
   def new
@@ -23,6 +26,7 @@ class SubjectsController < ApplicationController
 
     @elective_group = ElectiveGroup.find(params[:elective_group_id]) if params[:elective_group_id]
     @subject = @elective_group.subjects.build if params[:elective_group_id]
+    authorize! :create, @subject    
    end
 
   def create
@@ -41,6 +45,7 @@ class SubjectsController < ApplicationController
    end
 
   def edit
+    authorize! :update, @subject
   end
 
   def update
@@ -54,6 +59,7 @@ class SubjectsController < ApplicationController
   end
 
   def destroy
+    authorize! :delete, @subject
     @subjects = @batch.subjects.where(elective_group_id: nil)
     @elective_groups = @batch.elective_groups.all
 

@@ -1,47 +1,44 @@
-
-<div id="content-header">
-  <h1>Exams</h1>
-  <h3>Exams Group</h3>
-  <div id="app-back-button">
-    <%= link_to image_tag("buttons/back.png",:border => 0),:back %>
-  </div>
- <div><%= image_tag("underline.jpg",width: "100%")%></div>
-</div>
-<% unless @exam_group.result_published? %>
-<div id="inner-tab-menu">
-  <ul>
-    <li><%= link_to 'Publish Results',exam_groups_publish_result_path(@exam_group)%> </li>
-    <li><%= link_to 'New', new_exam_path(@exam_group) %> </li>
+<div>
+  <ul class="breadcrumb">
+    <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Examination','/exams'%></li>
+    <li><%= link_to 'Exam Management','/exam_groups'%> </li>
+    <li><%= link_to 'Exam Group', exam_group_path(@exam_group.batch)%> </li>
+    <li>Exam</li>
   </ul>
 </div>
-<% end %>
-<div class="box">
-  
-    <div class="bread_crumb">
-    <%= link_to 'Course' ,courses_path%> &raquo;
-    <%= link_to @course.course_name,course_path(@course)%>  &raquo;
-    Batch&raquo;
-    <%= link_to @exam_group.batch.name,batches_display_path(@exam_group.batch)%>&raquo;
-    Exams&raquo;
-    <%= link_to @exam_group.name,exam_group_path(@exam_group.batch)%> &raquo;
+<div id="flash"><%= render 'layouts/messages'%></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+    <% unless @exam_group.result_published? %>
+      <%= link_to 'Publish Results',exam_groups_publish_result_path(@exam_group), class: "btn btn-primary-link btn-sm" %>
+      <%= link_to 'New', new_exam_path(@exam_group), class: "btn btn-primary-link btn-sm" %>
+      <% end %>
+    </div>
   </div>
-  </div><br/>
-<% unless flash[:result].nil? %>
-    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:result] %> </div>
-  <% end %>        
-<% unless flash[:result_error].nil? %>
-    <div align="center" class="alert alert-danger" style="width:100%"> <%= flash[:result_error] %> </div>
-  <% end %>        
-<table align="center" class="table table-hover table-bordered" style="width:800px">
-        <tr class="tr-head">
+</div>
+<hr>
+
+<div class="row">
+<div class="col-md-12">
+<div class="box-inner">
+<div class="box-header well">
+  <h2>Subject Wise Exam</h2>
+</div>
+<div class="box-content">
+
+<table class="table table-striped">
+    <thead>
+      <tr>
         <th>Subject Name</th>
-        <%unless @exam_group.exam_type=="Grades"%>
+      <%unless @exam_group.exam_type=="Grades"%>
         <th>Maximum Marks</th>
         <th>Minimum Marks</th>
-        <%end%>
-        <th>Manage</th>
+      <%end%>
+        <th colspan="2">Action</th>
         </tr>
-        
+     </thead>   
       <tbody>
         <% @exams.each do |exam| %>
         <tr>
@@ -51,15 +48,26 @@
         <td><%= exam.maximum_marks %></td>  
         <td><%= exam.minimum_marks %></td>
         <% end %>
-        <% unless @exam_group.result_published? %>
-        <td><%= link_to 'Edit',edit_exam_path(exam)%>&nbsp;&nbsp;
-        <%= link_to 'Delete',exam,method: :delete,
-        data:{confirm:"Are you sure to delete Exam: #{exam.subject.name}"}%></td>
-        <%else%>
-        <td>Edit&nbsp;&nbsp;Delete</td>
-        <%end%>
+        <td>
+          <% unless @exam_group.result_published? %>
+          <div class="label-success label label-default">
+          <i class="glyphicon glyphicon-edit icon-white"></i> 
+          <%= link_to 'Edit',edit_exam_path(exam),class: "a-action"%>
+          </div>&nbsp;&nbsp;&nbsp;
+          <div class="label-danger label label-default">
+            <i class="glyphicon glyphicon-trash icon-white"></i>
+          <%= link_to 'Delete',exam,method: :delete,
+          data:{confirm:"Are you sure to delete Exam: #{exam.subject.name}"},class: "a-action"%></div>
+          <%else%>
+          <td>Result Published</td>
+          <%end%>
+        </td>
         </tr>
-         <%end%>
-         
+        <%end%>  
       </tbody>
 </table>
+
+</div>
+</div>
+</div>
+</div>

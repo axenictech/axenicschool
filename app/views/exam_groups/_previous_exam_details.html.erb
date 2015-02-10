@@ -1,18 +1,29 @@
-<table align="center" class="table table-hover" style="width:800px">
+<div class="box-inner">
+  <div class="box-header well">
+    <h2>Previous Details</h2>
+  </div>
+<div class="box-content">
+<table class="table table-striped" >
 <% unless @exams.empty?%>
-  <tr class="tr-head">
-    <td>Subject Name</td>
-	  <td>Maximum Marks</td>
-	  <td>Minimum Marks</td>
+<thead>
+  <tr>
+    <th>Subject Name</th>
+	  <th>Maximum Marks</th>
+	  <th>Minimum Marks</th>
   </tr>
+  </thead>
+  <tbody>
   <% @exams.each do |exam| %>
       	<tr>
       	<td><%= link_to exam.subject.name , exam_groups_previous_exam_scores_path(exam) %></td>	
-		<td><%= exam.maximum_marks%><td>
-		<td><%= exam.minimum_marks%><td>
+		<td><%= exam.maximum_marks%></td>
+		<td><%= exam.minimum_marks%></td>
 		</tr>
   <%end%>
+  </tbody>
 <%else%>
 <tr><th colspan="3"><h4 align="center">NO Record Found</h4></th></tr>
 <%end%>
 </table>
+</div>
+</div>

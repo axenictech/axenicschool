@@ -1,16 +1,25 @@
 
-
-<% unless flash[:class_designation_notice].nil? %>
-    <div align="center" class="alert alert-success" style="width:100%"> <%= flash[:class_designation_notice] %> </div>
-  <%end%>
-
-<div class="add_sub",style="margin-top:200px">
- <%= link_to 'Add',course_class_designations_path(@course),remote: true%>
+<div class="row">
+  <div class="col-md-11">
+    <div class="pull-right">
+<%= link_to 'Add',course_class_designations_path(@course),remote: true,class: "btn btn-primary"%>
 </div> 
-   <table align="center" class="table table-hover" style="width:800px">
+</div>
+</div>
+<div class="row">
+  <div class="box col-md-12">
+  <div class="box-inner">
+    <div class="box-header well">
+      <h2>Class Designations Details</h2>
+    </div>
+
+    <div class="box-content">
+   <table id="datatable" class="table table-striped table-bordered responsive">
   <thead>
-  	<tr class="tr-head">
-        <th colspan="4">Class Designations</th>
+  	<tr>
+        <th>Name</th>
+        <th>Marks</th>
+        <th>Action</th>
      </tr>
   </thead>
     <tbody class="product-index">

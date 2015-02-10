@@ -5,6 +5,8 @@ $("ul.errors").html("")
 		<% end %>
 <% else %>
   $("#myModal").modal("hide")
-  $('#subject_div').html("<%= j render 'subject'%>");  
+  $('#subject_div').html("<%= j render 'subject'%>");
+  <% if @elective_subjects.present? %>  
   $('#elective_div').html("<%= j render 'elective_groups/view_elective_subjects'%>");
+  <% end %>
 <% end %>

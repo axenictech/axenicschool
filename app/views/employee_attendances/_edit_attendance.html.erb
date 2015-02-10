@@ -9,15 +9,15 @@
 	<ul class="errors2"></ul>
 
 <%= form_for  @attendance,url:{:action=>'update_att'},method: :patch ,remote:true do |c|%>
-  <table class="table" style="width:500px" align="center">  
+  <table class="table" align="center">  
 
     <tr>
        <td><%=c.label :Leave_Type %></td>
-         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:'t').collect {|b| [b.name,b.id]},prompt:true%></td>
+         <td><%= c.select :employee_leave_type_id, EmployeeLeaveType.where(status:'t').collect {|b| [b.name,b.id]},{prompt:'Select leave type'},{class: 'form-control'}%></td>
      </tr>
     <tr>
       <td><%= c.label :Reason_for_absence%></td>
-      <td><%= c.text_field :reason%></td>
+      <td><%= c.text_field :reason, class: 'form-control', placeholder: 'Reason for absence'%></td>
     </tr>
     <tr>        
     <td><%=c.label :Half_Day%></td>
@@ -28,8 +28,7 @@
 <%if @reset_count.leave_taken.to_f==0.0 %>
     <td>  <%= link_to 'Delete', employee_attendances_destroy_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
   <%else%>
-       <td colspan="2"><%= c.submit 'Submit', class: "btn btn-primary"%></td>
-       <td> 	<%= link_to 'Delete', destroy_attendance_employee_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
+       <td colspan="2"><%= c.submit 'Submit', class: "btn btn-primary"%>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', destroy_attendance_employee_attendance_path( @attendance),method: :delete, data: { confirm: "Are you sure to delete"},remote:true,class: "btn btn-success"%></td>
       <%end%>
         </tr>
   
