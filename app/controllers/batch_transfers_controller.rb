@@ -12,7 +12,7 @@ class BatchTransfersController < ApplicationController
 
   def transfer
     @batch = Batch.find(params[:id])
-    @batchs = Batch.all
+    @batchs = Batch.includes(:course).all
     @students = @batch.students.all
     authorize! :read, @batch
   end

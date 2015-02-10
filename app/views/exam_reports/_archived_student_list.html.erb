@@ -9,7 +9,7 @@
  
     <% @students.each do |s| %>
       <li>
-        <%=link_to s.first_name+" "+s.last_name,exam_reports_archived_student_path(s),remote:true%>
+        <%=link_to s.first_name+" "+s.last_name,archived_student_exam_report_path(s),remote:true%>
       </li>
     <% end %>
   </ul>

@@ -33,8 +33,7 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     collection do
       get :select
     end
-  end
- 
+  end 
   resources :batches do
     collection do
       get :select
@@ -244,16 +243,72 @@ devise_for :users, controllers: { registrations: 'registrations', sessions: 'ses
     resources :time_table_entries
   end
 
-  resources :exam_setting
-  resources :exam_groups do
-    resources :exams
+resources :exam_setting do
+   collection do
+     get :newrank
+     get :selectrank
+     post :createrank
+     patch :updateRank
+     get :select
+   end
+   member do
+     delete :destroyRank
+     get :setting
+     get :settingrank
+     get :editRank
   end
-  resources :exams do
+end
+
+resources :exam_groups do
+
+	collection do 
+		get :select
+		get :previous_exam_data
+		get :publish_exam
+		get :connect_exam
+		get :publish_result
+	end
+	member do
+		get :exams
+
+	end
+
+  resources :exams 
+end
+
+resources :exams do
+	member do 
+		get :exam_score
+	end
     resources :exam_scores
   end
 
-  resources :online_exam_groups
-  resources :exam_reports
+resources :online_exam_groups
+
+resources :exam_reports do
+  collection do
+    get :report_center
+    get :exam_wise_report
+    get :select_batch
+    get :generate_exam_report
+    get :subject_wise_report
+    get :choose_batch
+    get :generate_subject_report
+    get :subject_wise_students_report
+    get :grouped_exam_report
+    get :generate_grouped_report
+    get :archived_student_report
+    get :select_course
+    get :generate_archived_report
+    get :archived_students_consolidated_report
+    get :exam_group_wise_report
+    get :archived_students_exam_report
+  end
+  member do
+    get :archived_student
+    get :consolidated_archived_report
+  end
+end
 
   resources :courses do
     resources :exam_setting

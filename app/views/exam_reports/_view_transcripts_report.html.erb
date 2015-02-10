@@ -57,7 +57,7 @@
                     <td class="col-1"> <%= subject.code %></td>
                     <td class="col-3"> <%= subject.name %></td>
                     <td class="col-3"><%=marks_total==0 ? "AB" : "%.2f" %(marks_total*100/max_total)+"%"%></td>
-                  </tr>
+                    </tr>
           <% max_total = 0 %>
           <% marks_total = 0 %>
         
@@ -69,7 +69,16 @@
                 <div class="col-md-12">
                 <div class="col-md-6"></div>
                 <div class="col-md-6">
-                <h4><b> Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%="%.2f" %(@mark*100/@total)+"%"%></b></h4></div>
+                  <h4>
+                    <b> 
+                      <%unless @total==0%>
+                      Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%="%.2f" %(@mark*100/@total)+"%"%>
+                      <%else%>
+                      Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=" "%>
+                      <%end%>
+                    </b>
+                  </h4>
+                </div>
                 </div>
                 </div>
                 

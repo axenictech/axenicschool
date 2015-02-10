@@ -69,89 +69,7 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       <div class="col-md-5">
        <div class="form-group">
        <%= t('Course and Batch')%><span class="necessary-field">*</span>
-    
-<<<<<<< HEAD
-     <tr>
-       <td class="col-2"><%=f.label :"First Name"%><span class="necessary-field">*</span></td>
-          <td class="col-2"> <%=f.text_field :first_name%></td>
-          <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Middle Name"%></td>
-        <td class="col-2"><%=f.text_field :middle_name, :required=>false%></td>
-        <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Last Name"%><span class="necessary-field">*</span></td>
-         <td class="col-2">  <%=f.text_field :last_name%></td>
-         <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Course and Batch"%><span class="necessary-field">*</span></td>
-         <td class="col-2"><%= f.select :batch_id, @batches.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]},prompt:true%></td>
-         <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Date Of Birth"%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.date_field :date_of_birth%></td>
-          <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Gender%></td>
-         <td class="col-2"> Male<%= f.radio_button  "gender","Male", :checked => "checked" %>
-          &nbsp;&nbsp;&nbsp;Female <%= f.radio_button  "gender","Female"%></td>
-       <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Blood Group"%></td>
-          <td class="col-2"><%=f.select :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],prompt:true %></td>
-          <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Birth Place"%></td>
-           <td class="col-2"><%=f.text_field :birth_place%></td>
-           <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Nationality%><span class="necessary-field">*</span></td>
-          <td class="col-2"><%=f.select :nationality_id,Country.all.collect{|c| [c.name,c.id]},prompt:true%></td>
-        <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Mother Tongue"%></td>
-        <td class="col-2"><%=f.text_field :language%></td>
-        <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Category%><span class="necessary-field">*</span></td>
-          <td class="col-2"> <%=f.select :category_id, Category.all.collect{|c| [c.name,c.id]},prompt:true%></td>
-          <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :Religion%></td>
-        <td class="col-2"><%=f.text_field :religion%></td>
-        <td colspan="2"></td>
-     </tr>
-
-     <tr>
-       <td class="col-2"><%=f.label :"Address Line1"%></td>
-          <td class="col-2"> <%=f.text_field :address_line1%></td>
-          <td colspan="2"></td>
-     </tr>
-=======
-      <%=f.select :batch_id, Batch.all.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}, {class: "form-control"}%>
-      
+          <%=f.select :batch_id, @batches.collect {|b| [b.course.course_name+" "+b.course.section_name+" - "+b.name,b.id]}, {prompt:true}, {class: "form-control"}%>
       </div>
       </div>
       <div class="col-md-5">
@@ -162,7 +80,6 @@ Note:&nbsp;&nbsp;<font color="red">Fields marked with * must be filled</font>
       </div>
       </div>
       </div>
->>>>>>> 30b37f8622618e877160a9b4e8070be9f6230080
 
       <div class="row">
       <div class="col-md-5">

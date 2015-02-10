@@ -1,131 +1,101 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style type="text/css">
-.page {
-    width:100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
+      
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
 
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
 
-
-.hor_line{
-    width:100%;
-    background: #ADACAB;
-    height: 1px;
-}
-
-#title h1{
-    margin-bottom: 2px;
-    font-weight: normal;
-
-}
-
-#student_main_info h4{
-    color: #555555;
-    margin-top: 2px;
-    font-weight: normal;
-}
-
-#student_main_info h2{
-    margin-bottom: 2px;
-    font-weight: normal;
-
-}
-
-
-.odd{
-    height:auto;
-    background: #EEEEEE;
-    
-}
-
-.even{
-    
-    height:auto;
-    background: #fff;
-    
-    
-}
-
-.even td{
-   
-   padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-}
-
-.odd td{
-  padding: 12px 12px 12px 15px;
-  border-left:  1px solid #ADACAB;
-  border-bottom: 1px solid #ADACAB;
-  width: 150px;
-
-}
-
-table#pdf-table{
-   border: 1px solid #ADACAB;
-   border-left: 0px solid #ADACAB;
-}
-
-</style>
-</head>
-<body>
-<div class="hor_line"></div>
-<div id="title">
-<h1><%= @general_setting.school_or_college_name%></h1>
-<h4><small><%= @general_setting.school_or_college_address%><br/>
-  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></div>
-  <h2 align="center"><%= t('employee_payslip') %></h2>
-  <div class="hor_line"></div>
-  <div class="extender"> </div>
-  <div class="report">
-
-<table align="center" id="pdf-table" width="100%" cellspacing="5" cellpadding="5" border="1">
-<tr class="tr-head">
-  <th colspan="2"><%=  @employee.first_name+" "+@employee.last_name%></th>
-</tr>
-<tr class="tr-head">
-  <th colspan="2"><%= t('payslip_generated_on') %><%= @salary.salary_date%><% %><span class="themed_text">(<%= t('status') %>: <%=@salary.is_approved? ? "Approved" : "Pending"%>)</span></th>
-</tr>
-<tr><td colspan="2"></td></tr>
-  <tr class="tr-head"><th colspan="2"><%= t('earnings') %></th></tr>
-    <% @structures.each do |mp| %>
-      <% unless mp.payroll_category.blank? %>
-        <% unless mp.payroll_category.is_deduction == true %>
-      <tr>
-        <td class="col-3"><%= mp.payroll_category.name  %></td>
-        <td><%="%.2f" %mp.amount.to_f %><%= " Rs"%></td>
-      </tr>
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+      <br/><h3><center>Employee Payslip</center></h3><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr  bgcolor="99CCFF" align="left">
+          <th colspan="2">Employee Details</th>
+        </tr>
+        <tr>
+          <th align="left">Name :</th>
+          <td><%=  @employee.first_name+" "+@employee.last_name%></td>
+        </tr>
+        <tr>
+          <th align="left">Payslip Generated On :</th>
+          <td><%= @salary.salary_date%><% %>(<%= t('status') %>: <%=@salary.is_approved? ? "Approved" : "Pending"%>)</td>
+        </tr>
+      </table>
+      <br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr  bgcolor="99CCFF" align="left">
+          <th colspan="2">Earnings</th>
+        </tr>
+        <% @structures.each do |mp| %>
+          <% unless mp.payroll_category.blank? %>
+            <% unless mp.payroll_category.is_deduction == true %>
+              <tr>
+                <td><%= mp.payroll_category.name  %></td>
+                <td align="right"><%="%.2f" %mp.amount.to_f %><%= " Rs"%></td>
+              </tr>
+            <% end %>
+          <% end %>
         <% end %>
-      <% end %>
-    <% end %>
-<tr><td colspan="2"></td></tr>
-    <tr class="tr-head"><th colspan="2"><%= t('deductions') %></th></tr>
-    <% @structures.each do |mp| %>
-      <% unless mp.payroll_category.blank? %>
-        <% unless mp.payroll_category.is_deduction == false %>
-      <tr>
-        <td class="col-3"><%= mp.payroll_category.name  %></td>
-        <td><%="%.2f" %mp.amount.to_f %><%= " Rs"%></td>
-      </tr>
-        <% end %>
-      <% end %>
-    <% end %>
-<tr><td colspan="2"></td></tr>
-    <tr class="tr-head"><th colspan="2"><%= t('total') %></th></tr>
-    <tr>
-      <td class="col-3">Net Salary</td>
-      <td class="col-3"><%="%.2f" %(@salary.amount.to_f) %><%= " Rs"%></td>
-    </tr>
-    <tr>
-      <td class="col-3">Remark</td>
-      <td class="col-3"><%=@salary.is_approved? ? "Approved" : "Pending"%></td>
-    </tr>
-<tr><td colspan="2"></td></tr>
-  </table>
-</div>
-</body>
+      </table>
+      <br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr  bgcolor="99CCFF" align="left">
+          <th colspan="2">Deduction</th>
+        </tr>
+        <% unless @structures.empty?%>
+          <% @structures.each do |mp| %>
+            <% unless mp.payroll_category.blank? %>
+              <% unless mp.payroll_category.is_deduction == false %>
+                <tr>
+                  <td><%= mp.payroll_category.name  %></td>
+                  <td align="right"><%="%.2f" %mp.amount.to_f %><%= " Rs"%></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        <%else%>
+          <h3><center>No deduction found</center></h3>
+        <%end%>  
+      </table>
+      <br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr  bgcolor="99CCFF" align="left">
+          <th colspan="2">Total</th>
+        </tr>
+        <tr>
+          <th align="left">Net Salary :</th>
+          <th align="right"><%="%.2f" %(@salary.amount.to_f) %><%= " Rs"%></th>
+        </tr>
+        <tr>
+          <th align="left">Remark :</th>
+          <th align="right"><%=@salary.is_approved? ? "Approved" : "Pending"%></th>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>

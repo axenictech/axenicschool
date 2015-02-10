@@ -29,18 +29,19 @@
             </ul>
             </div>
         <% end %>
-     <div class="col-sm-7 col-sm-offset-1">
+        <div class="col-md-2"></div>
+     <div class="col-md-7">
                   <div class="form-group">
-                  <%=f.label :start_date%>
-        
+                  <b>Start Date:</b>
+                &nbsp;
           <%= f.date_select :start_date,:use_month_numbers=>true,:start_year => Date.current.year-1, :end_year => Date.current.year+1,:order=>[:day,:month,:year]%></div>
        <div>
-          <%=f.label :end_date%>
-      
+         <b>End Date:</b>
+            &nbsp;&nbsp;&nbsp;
         
           <%= f.date_select :end_date,:use_month_numbers=>true,:start_year => Date.current.year-1,:end_year => Date.current.year+1,:order=>[:day,:month,:year]%>
        </div>
-
+          <br>
               <div class="col-sm-7 col-sm-offset-6"> 
                 <div class="form-actions">
         <%= f.submit 'Create', class: "btn btn-primary"%>

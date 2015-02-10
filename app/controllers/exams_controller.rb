@@ -109,7 +109,7 @@ class ExamsController < ApplicationController
     end
     end
     if @errors.nil?
-      redirect_to exam_exam_score_path(@exam)
+      redirect_to exam_score_exam_path(@exam)
     else
       @students = []
       students = @exam.exam_group.batch.students.all

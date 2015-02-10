@@ -38,6 +38,7 @@
 		          </tr>
 		        </thead>
 		        <tbody>
+		      
 		        <% @expenses.each do |expense|%>
 		        	<%unless expense.finance_transaction_category.is_income? %>
 			          <tr>

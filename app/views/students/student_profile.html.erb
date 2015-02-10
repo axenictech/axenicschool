@@ -1,121 +1,316 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
-<body>
-<div align="center">
-<font color="purple"><h1><%= @general_setting.school_or_college_name%></h1>
-<h4><small><%= @general_setting.school_or_college_address%><br/>
-  Contact- <%= @general_setting.school_or_college_phone_no%></small></h4></font>
-</div>
+  <head>
+    <style type="text/css">
+      #heading {
+        width:100%;
+        margin: 0 auto;
+      }
+<<<<<<< HEAD
+      
+=======
 
-<table class="table" align="center" style="width:900px">
-<thead>
+       
+>>>>>>> 255009e2b68685ed8b5d4f9bac53475cea93015d
+      #head {
+        height: 100px;
+        width: 700px;
+        text-align: center;
+        font-size: 40px;
+        border-color: black;
+<<<<<<< HEAD
+
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
+
+=======
+
+      }
+      #head_info {
+        text-align: center;
+        font-size: 15px;
+      }
+
+>>>>>>> 255009e2b68685ed8b5d4f9bac53475cea93015d
+    </style>
+  </head>
+  <body>
+    <div id="heading">
+      <div id="head">
+        <%= @general_setting.school_or_college_name%><br/>
+        <div id="head_info">
+          <%= @general_setting.school_or_college_address%><br/><br/>
+          <%= @general_setting.school_or_college_phone_no%>
+        </div>
+      </div>
+      <hr>
+<<<<<<< HEAD
+      <br/><h3><center>Student Profile</center></h3><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr><th colspan="3" bgcolor="99CCFF" align="left">Admission Details</th></tr>
+
+        <tr>
+          <td>Name</td>
+          <td>:</td>
+          <td><%= @student.first_name.capitalize %> <%= @student.middle_name.capitalize %> <%= @student.last_name.capitalize %>
+          </td>
+        </tr>
+        <tr>
+          <td>Course</td>
+          <td>:</td>
+          <td><%= @student.batch.course.course_name %></td>
+        </tr>
+        <tr>  
+          <td>Batch</td>
+          <td>:</td>
+          <td><%= @student.batch.name %></td>
+        </tr>
+        <tr>
+          <td>Admission No</td>
+          <td>:</td>
+          <td><%= @student.admission_no %></td>
+        </tr>
+      </table>
+      <br/><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr><th colspan="3" bgcolor="99CCFF" align="left">Student Personnel Details</th></tr>
+        <tr>
+          <td>Admission Date</td>
+          <td>:</td>
+          <td><%= @student.admission_date %></td>
+        </tr>
+        <tr>
+          <td>Date of Birth</td>
+          <td>:</td>
+          <td><%= @student.date_of_birth %></td>
+        </tr>
+        <tr>  
+          <td>Blood Group</td>
+          <td>:</td>
+          <td><%= @student.blood_group %></td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>:</td>
+          <td><%= @student.gender %></td>
+        </tr>
+        <tr>
+          <td>Nationality</td>
+          <td>:</td>
+          <td><%= @student.nationality.name %></td>
+        </tr>
+        <tr>
+          <td>Catagory</td>
+          <td>:</td>
+          <td><%= @student.category.name %></td>
+        </tr>
+        <tr>
+          <td>Religion</td>
+          <td>:</td>
+          <td><%= @student.address_line1+" "+@student.address_line2 %>
+          </td>
+        </tr>
+      </table>
+      <br/><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr><th colspan="3" bgcolor="99CCFF" align="left">Contact Details</th></tr>
+        <tr>
+          <td>Address</td>
+          <td>:</td>
+          <td><%= @student.address_line1+" "+@student.address_line2 %>
+          </td>
+        </tr>
+        <tr>
+          <td>City</td>
+          <td>:</td>
+          <td><%= @student.city %></td>
+        </tr>
+        <tr>  
+          <td>State</td>
+          <td>:</td>
+          <td><%= @student.state %></td>
+        </tr>
+        <tr>
+          <td>Country</td>
+          <td>:</td>
+          <td><%= @student.country.name %></td>
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td>:</td>
+          <td><%= @student.phone1 %></td>
+        </tr>
+        <tr>
+          <td>Mobile</td>
+          <td>:</td>
+          <td><%= @student.phone2 %></td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>:</td>
+          <td><%= @student.email %></td>
+        </tr>
+      </table><br/>
+      <table cellpadding="5" cellspacing="5" width="700">
+        <tr><th colspan="3" bgcolor="99CCFF" align="left">Student Previous Institution Details</th></tr>
+        <% unless @student_previous_data.nil? %>
+          <tr>
+            <td>Institure Name</td>
+            <td>:</td>
+            <td><%= @student_previous_data.institution %></td>
+          </tr>
+          <tr>
+            <td>Year</td>
+            <td>:</td>
+            <td><%= @student_previous_data.year %></td>
+          </tr>
+          <tr>  
+            <td>Course</td>
+            <td>:</td>
+            <td><%= @student_previous_data.course %></td>
+          </tr>
+          <tr>
+            <td>Total Marks</td>
+            <td>:</td>
+            <td><%= @student_previous_data.total_mark %></td>
+          </tr>
+          </table><br/>
+          <table cellpadding="5" cellspacing="5" width="700">
+            <tr><th colspan="3" bgcolor="99CCFF" align="left">Student Previous Institution Details</th></tr>
+            <% unless @student_previous_subject_marks.nil? %>
+              <tr>
+                <td align="center">Subject Name</td>
+                <td></td>
+                <td align="center">Marks</td>
+              </tr>
+              <% @student_previous_subject_marks.each do |psm| %>
+                <tr>
+                  <td><%= psm.subject %></td>
+                  <td>:</td>
+                  <td><%= psm.mark %></td>
+                </tr>
+              <%end%>
+            <%end%>  
+          </table>
+        <%end%>  
+    </div>
+  </body>
+=======
+
+
+<table cellpadding="4" cellspacing="5" width="700">
 <tr>
-    <th colspan="4">
-    <div id ="student_main_info">
+    <th colspan="5">
+
       <h3 align="left"> <%= @student.first_name.capitalize %> <%= @student.middle_name.capitalize %> <%= @student.last_name.capitalize %>  </h3>
       <h4 align="left"> Course : <%= @student.batch.course.course_name %> </h4>
       <h4 align="left"> Batch : <%= @student.batch.name %> </h4>
-      <h4 align="left"> Admission no. : <%= @student.admission_no %> </h4></div>
+      <h4 align="left"> Admission no. : <%= @student.admission_no %> </h4>
    </th>
   </tr>
-</thead>
-<tbody>
-<tr><td colspan="4"></td></tr>
+
 <tr>
-    <td class="col-2" colspan="4"><font color="brown">Student Personal Details</font></td>
+    <th colspan="4" bgcolor="99CCFF" align="left">Student Personal Details</th>
 </tr>
 <tr>
-    <td class="col-2"><font color="grey">Admission Date</font> </td><td class="col-2" colspan="3"><%= @student.admission_date %></td>
+    <td>Admission Date </td><td><%= @student.admission_date %></td>
+     <td >Mobile</td><td ><%= @student.phone2 %> </td>
 </tr>
 <tr>
-    <td class="col-2"><font color="grey">Date of birth</font></td><td class="col-2" colspan="3"><%= @student.date_of_birth%></td>
+    <td >Date of birth</td><td  ><%= @student.date_of_birth%></td>
+     <td >Email</td><td > <%= @student.email %> </td>
+</tr>
+
+<tr>
+    <td >Blood group</td><td  ><%= @student.blood_group %>
+    </td>
+    <td >Phone</td><td >  <%= @student.phone1 %>  </td>
 </tr>
 <tr>
-    <td class="col-2"><font color="grey">Blood group</font></td><td class="col-2" colspan="3"><%= @student.blood_group %></td>
+    <td >Gender</td><td ><%= @student.gender %></td>
+    <td >Nationality</td><td ><%= @student.nationality.name %></td>
 </tr>
 <tr>
-    <td class="col-2"><font color="grey">Gender</font></td><td class="col-2"><%= @student.gender %></td>
-    <td class="col-2"><font color="grey">Nationality</font></td><td class="col-2"><%= @student.nationality.name %></td>
+    <td >Language</td><td > <%= @student.language %> </td>
+    <td >Category</td><td > <%= @student.category.name %> </td>
 </tr>
 <tr>
-    <td class="col-2"><font color="grey">Language</font></td><td class="col-2"> <%= @student.language %> </td>
-    <td class="col-2"><font color="grey">Category</font></td><td class="col-2"> <%= @student.category.name %> </td>
+    <td >Religion</td><td > <%= @student.religion %> </td>
+    <td >Address</td><td > <%= @student.address_line1+" "+@student.address_line2 %> </td>
 </tr>
 <tr>
-    <td class="col-2"><font color="grey">Religion</font></td><td class="col-2"> <%= @student.religion %> </td>
-    <td class="col-2"><font color="grey">Address</font></td><td class="col-2"> <%= @student.address_line1+" "+@student.address_line2 %> </td>
+    <td >City</td><td ><%= @student.city %> </td>
+    <td >State</td><td > <%= @student.state %> </td>
 </tr>
 <tr>
-    <td class="col-2"><font color="grey">City</font></td><td class="col-2"><%= @student.city %> </td>
-    <td class="col-2"><font color="grey">State</font></td><td class="col-2"> <%= @student.state %> </td>
+    <td >Country</td><td > <%= @student.country.name %></td>
+    
 </tr>
-<tr>
-    <td class="col-2"><font color="grey">Country</font></td><td class="col-2"> <%= @student.country.name %></td>
-    <td class="col-2"><font color="grey">Phone</font></td><td class="col-2">  <%= @student.phone1 %>  </td>
-</tr>
-<tr>
-    <td class="col-2"><font color="grey">Mobile</font></td><td class="col-2"><%= @student.phone2 %> </td>
-    <td class="col-2"><font color="grey">Email</font></td><td class="col-2"> <%= @student.email %> </td>
-</tr>
+
+   
+   
 <% unless @immediate_contact.nil? %>
 <tr>
-    <td class="col-2" colspan="1"><font color="grey">Immediate Contact</font></td>
-    <td class="col-2" colspan="3"><font color="blue"><%= @immediate_contact.first_name+" "+@immediate_contact.last_name %></font></td>
+    <td  colspan="1">Immediate Contact</td>
+    <td  ><font color="blue"><%= @immediate_contact.first_name+" "+@immediate_contact.last_name %></font></td>
 </tr>
 <%end%>
-<tr><td colspan="4"></td></tr>
+<br/``>
 <tr>
-    <td class="col-2" colspan="4"><font color="brown">Student Previous Institution Details</font></td>
+    <th colspan="4" bgcolor="99CCFF" align="left">Student Previous Institution Details</th>
 </tr>
+<br/>
 <% unless @student_previous_data.nil? %>
 <tr>
-  <td class="col-2"><font color="grey">Institution Name</font></td>
-  <td class="col-2" colspan="3">
+  <td >Institution Name</td>
+  <td  >
   <%= @student_previous_data.institution %>
   </td>
 </tr>
 <tr>
-  <td class="col-2"><font color="grey">Year</font></td>
-  <td class="col-2" colspan="3">
+  <td >Year</td>
+  <td  >
   <%= @student_previous_data.year %>
   </td>
 </tr>
 <tr>
-  <td class="col-2"><font color="grey">Course</font></td>
-  <td class="col-2" colspan="3">
+  <td >Course</td>
+  <td  >
   <%= @student_previous_data.course %>
   </td>
 </tr>
 <tr>
-  <td class="col-2"><font color="grey">Total Marks</font></td>
-  <td class="col-2" colspan="3">
+  <td >Total Marks</td>
+  <td  >
   <%= @student_previous_data.total_mark %>
   </td>
 </tr>
-<tr><td colspan="4"></td></tr>
+
 <tr>
-    <td class="col-2" colspan="4"><font color="brown">Student Previous Subject Marks</font></td>
+    <th colspan="4" bgcolor="99CCFF" align="left">Student Previous Subject Marks</th>
 </tr>
 <% unless @student_previous_subject_marks.nil? %>
 <tr>
-  <td class="col-2"><font color="green">Subject Name</font></td>
-  <td class="col-2" colspan="3"><font color="green">Marks</font></td>
+  <td ><font color="green">Subject Name</font></td>
+  <td  ><font color="green">Marks</font></td>
 </tr>
 <% @student_previous_subject_marks.each do |psm| %>
 <tr>
-  <td class="col-2"><%= psm.subject %></td>
-  <td class="col-2" colspan="3"><%= psm.mark %></td>
+  <td ><%= psm.subject %></td>
+  <td  ><%= psm.mark %></td>
 </tr>
 <%end%>
 <%end%>
 <%end%>
 <tr>
-  <td class="col-2" colspan="4"></td>
+  <td  colspan="4"></td>
 </tr>
 </tbody>
 </table>
 </div>
 </body>
+>>>>>>> 255009e2b68685ed8b5d4f9bac53475cea93015d
 </html>

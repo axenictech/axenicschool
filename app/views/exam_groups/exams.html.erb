@@ -12,7 +12,7 @@
   <div class="col-md-12">
     <div class="pull-right">
     <% unless @exam_group.result_published? %>
-      <%= link_to 'Publish Results',exam_groups_publish_result_path(@exam_group), class: "btn btn-primary-link btn-sm" %>
+      <%= link_to 'Publish Results',publish_result_exam_groups_path(@exam_group), class: "btn btn-primary-link btn-sm" %>
       <%= link_to 'New', new_exam_path(@exam_group), class: "btn btn-primary-link btn-sm" %>
       <% end %>
     </div>
@@ -43,7 +43,7 @@
         <% @exams.each do |exam| %>
         <tr>
         
-        <td class="col-2"><%= link_to exam.subject.name, exam_exam_score_path(exam) %></td>
+        <td class="col-2"><%= link_to exam.subject.name, exam_score_exam_path(exam) %></td>
         <%unless @exam_group.exam_type=="Grades"%>
         <td><%= exam.maximum_marks %></td>  
         <td><%= exam.minimum_marks %></td>
