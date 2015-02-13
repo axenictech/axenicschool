@@ -1,4 +1,0 @@
-<% unless @batches.nil? %>
-  <b>Select Batch:</b>
-  <%= select :batch,:id,collect_batch_choice,{prompt:true},{onchange:"var a={id: $('#batch_id').val()};$.get('collection_choice',a,function(response){});",class: "form-control"}%>
-<%end%>
