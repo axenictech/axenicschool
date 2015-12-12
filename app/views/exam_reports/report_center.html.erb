@@ -2,6 +2,7 @@
 <div>
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
+    <li><%= link_to 'Examination','/exams'%></li>
     <li>Report Center</li>
   </ul>
 </div>
@@ -128,35 +129,12 @@
 <div class="row">
   <div class="box col-md-1"></div>
   <div class="box col-md-3">
-    <div class="box-inner2">
-      <div class="box-header well" data-original-title="">
-        <h2><%= link_to 'Ranking Level Report' ,'ranking_level_report'%></h2>
-      </div>
-      <div class="box-content">
-       Generates reports based on different Ranking Levels
-      </div>
-    </div>
-  </div>
-
-  <div class="box col-md-3">
   <div class="box-inner2">
       <div class="box-header well" data-original-title="">
         <h2><%= link_to 'View Transcripts' , 'view_transcripts'%></h2>
       </div>
       <div class="box-content">
        Generates Student Transcripts
-      </div>
-    </div>
-  </div>
- 
-  <div class="box col-md-3">
-    <div class="box-inner2">
-      <div class="box-header well" data-original-title="">
-        <h2> <%= link_to 'Combined Reports' ,'combined_report' %>
-        </h2>
-      </div>
-      <div class="box-content">
-          Generates Combined Student Reports
       </div>
     </div>
   </div>
