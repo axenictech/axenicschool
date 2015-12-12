@@ -1,11 +1,13 @@
 class BatchesController < ApplicationController
   def index
     @courses = Course.all
+    authorize! :read, @courses.first
    end
 
   def new
     @course = Course.find(params[:course_id])
     @batch = @course.batches.build
+    authorize! :create, @batch
   end
 
   def create
@@ -16,20 +18,23 @@ class BatchesController < ApplicationController
       redirect_to course_path(@course)
     else
       render 'new'
- end
- end
+    end
+  end
 
   def display
     @batch = Batch.find(params[:id])
     @students = @batch.students.all
+    authorize! :read, @batch
   end
 
   def select
     @course = Course.find(params[:course][:id])
+    authorize! :read, @batch
   end
 
   def edit
     @batch = Batch.find(params[:id])
+    authorize! :update, @batch    
   end
 
   def update
@@ -44,6 +49,7 @@ class BatchesController < ApplicationController
     end
 
   def destroy
+    authorize! :delete, @batch
     @batch = Batch.find(params[:id])
     if @batch.destroy
       flash[:notice] = 'Batch deleted successfully!'
@@ -51,11 +57,12 @@ class BatchesController < ApplicationController
     else
       flash[:notice] = 'Batch unable to delete!'
       redirect_to course_path(@batch.course)
-    end
+    end   
   end
 
   def assign_tutor
     @batch = Batch.find(params[:format])
+    authorize! :read, @batch
   end
 
   def assign_tutorial
@@ -70,6 +77,7 @@ class BatchesController < ApplicationController
     else
       @employees = @emp
     end
+    authorize! :read, @batch
   end
 
   def assign_employee
@@ -90,6 +98,7 @@ class BatchesController < ApplicationController
     @emp1.each { |e| @emp << e.to_s }
     @assign_emp = @batch.employee_id.split(',')
     @employees = @emp - @assign_emp
+    authorize! :read, @batch
  end
 
   def remove_employee
@@ -106,6 +115,7 @@ class BatchesController < ApplicationController
     @emp1.each { |e| @emp << e.to_s }
     @assign_emp = @batch.employee_id.split(',')
     @employees = @emp - @assign_emp
+    authorize! :read, @batch
   end
 
   private

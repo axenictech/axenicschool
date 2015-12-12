@@ -33,6 +33,7 @@ class NewscastsController < ApplicationController
   end
 
   def destroy
+    authorize! :delete, @newscast
     @newscast = Newscast.find(params[:id])
     @newscast.destroy
     redirect_to newscasts_path(@newscast), notice: 'News deleted succefully!'

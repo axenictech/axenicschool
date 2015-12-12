@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-    <% if @assign_employees.empty? %>
+    <% if @assign_employees.nil? %>
 	  <tr><td>Employee not assigned</td></tr>
 	<%else%>
 	  <% @assign_employees =  @batch.employee_id.split(",") unless @batch.employee_id.nil?%>

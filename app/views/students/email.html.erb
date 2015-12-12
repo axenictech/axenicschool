@@ -2,12 +2,11 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Home',home_dashboard_path %></li>
      <li><%= link_to 'Student Details','/students' %></li>
-     <li><%= link_to 'Student Profile',students_profile_path(@student.id)%></li>
+     <li><%= link_to 'Profile',students_profile_path(@student.id)%></li>
     <li>Send Mail</li>
   </ul>
 </div><div id="flash"><%= render 'layouts/messages'%></div>
-<div class="box col-md-1"></div>
-<div class="box col-md-6">
+<div class="box col-md-12">
         <div class="box-inner">
       <div class="box-content">
       <fieldset>
@@ -33,7 +32,7 @@
     <%= f.select :recipient,["Student","Guardian"],{prompt:true},class: "form-control",style: "width: 60% " %></div>
    <br/>
     <div class="form-group"><b class="col-md-3">Message:</b>
-    <%= text_area_tag :message,"",class: "form-control",style: "width: 60%" %></div>
+    <%= text_area_tag :message,"",class: "form-control",style: "width: 60%;height:200px" %></div>
     <br/>
     <div class="col-md-3"></div>
     <div class="form-group"><%= f.submit 'Send',class: "btn btn-success"%></div>

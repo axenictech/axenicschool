@@ -11,6 +11,7 @@ class GuardiansController < ApplicationController
 
   def addguardian
     @student = Student.find(params[:student_id])
+    authorize! :read, @student
   end
 
   def addguardian_create
@@ -24,6 +25,7 @@ class GuardiansController < ApplicationController
   end
 
   def destroy
+    authorize! :delete, @guard
     @guard = Guardian.find(params[:id])
     @guard.destroy
     redirect_to students_dispguardian_path(@guard.student)
@@ -32,6 +34,7 @@ class GuardiansController < ApplicationController
   def edit
     @student = Student.find(params[:student_id])
     @guard = @student.guardians.find(params[:id])
+    authorize! :update, @student
   end
 
   def update
@@ -47,8 +50,6 @@ class GuardiansController < ApplicationController
   private
 
   def guardian_params
-    params.require(:guardian).permit(:first_name, :last_name, :relation, :dob, :email, :office_phone1,
-                                     :office_phone2, :mobile_phone, :office_address_line1,
-                                     :office_address_line2, :city, :country_id, :state, :occupation, :income, :education)
+    params.require(:guardian).permit!
   end
 end
