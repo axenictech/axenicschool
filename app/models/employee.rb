@@ -152,7 +152,7 @@ class Employee < ActiveRecord::Base
   end
 
   def self.search2(a, s)
-    unless s.empty?
+    if s.present?
       dep_id = a[:employee_department_id]
       cat_id = a[:employee_category_id]
       pos_id = a[:employee_position_id]
